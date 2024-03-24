@@ -7,7 +7,7 @@ export const metadata = {
 
 const page = () => {
   return (
-    <LayoutCRUD title="Juan">
+    <LayoutCRUD title="Ventas">
       <h1>hola</h1>
     </LayoutCRUD>
   )

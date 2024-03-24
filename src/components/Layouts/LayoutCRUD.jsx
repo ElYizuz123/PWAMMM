@@ -6,11 +6,16 @@ const LayoutCRUD = ({ children, title }) => {
 
             </div>
             <div className="w-full">
-                <div className="w-full h-16 bg-[#D9D9D9]">
+                <div className="w-full h-16 bg-[#D9D9D9] flex justify-around items-center">
                     <div>
-
+                        <div className="flex justify-center">
+                            <p>Tu perfil {'>'}</p>
+                            <p className="ml-1 text-[#C71E78] font-bold">Ventas</p>
+                        </div>
                     </div>
-                    <h1 className="size-20">{title}</h1>
+                    <div>
+                        <p className="font-bold">Administrador</p>
+                    </div>
                 </div>
                 {children}
             </div>
