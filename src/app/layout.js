@@ -1,7 +1,4 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +8,67 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="font-k2d">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+          rel="stylesheet"
+        ></link>
+        <nav className="bg-black fixed w-full z-20 top-0 start-0">
+          <div className="container">
+            <img className="h-8 w-full" src="\navbar\banner.jpg" />
+          </div>
+          <nav className="bg-[#F5F5F5] border-[#1E1E1E] border-opacity-50 dark:border-gray-600 font-bold">
+            <div className="container mx-auto flex">
+              <div>
+                <img className="h-28 w-28" src="\navbar\logo.png" />
+              </div>
+              <div className="text-black absolute w-full flex lg:hidden py-8 px-4 justify-center">
+                <p1>
+                  MUJERES MEZCALERAS DE <br></br>MICHOACÁN
+                </p1>
+              </div>
+              <div className="absolute right-0 flex lg:hidden py-8 px-4">
+                <img className="h-12 w-12" src="\navbar\menu.png" />
+              </div>
+              <div className="text-black lg:flex hidden flex-grow justify-between py-8">
+                <div>
+                  <p1>
+                    MUJERES MEZCALERAS DE <br></br>MICHOACÁN
+                  </p1>
+                </div>
+                <div className="flex">
+                  <a href="#" className="lg:mr-16 hover:text-[#F70073]">
+                    <img src="\navbar\inicio.png" className="pl-2" />
+                    INICIO
+                  </a>
+                  <a
+                    href="\auth\tienda"
+                    className="lg:mr-16 hover:text-[#F70073]"
+                  >
+                    <img src="\navbar\tienda.png" className="pl-3" />
+                    TIENDA
+                  </a>
+                  <a href="#" className="lg:mr-16 hover:text-[#F70073]">
+                    <img src="\navbar\nosotras.png" className="pl-7" />
+                    NOSOTRAS
+                  </a>
+                  <a href="#" className="lg:mr-16 hover:text-[#F70073]">
+                    <img src="\navbar\galeria.png" className="pl-4" />
+                    GALERIA
+                  </a>
+                  <a href="#" className="lg:pr-16 hover:text-[#F70073]">
+                    <img src="\navbar\contacto.png" className="pl-6" />
+                    CONTACTO
+                  </a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }
