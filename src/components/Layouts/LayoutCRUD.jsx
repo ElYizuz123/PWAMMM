@@ -8,7 +8,7 @@ const LayoutCRUD = ({ children, title }) => {
                 <img className=" w-full h-full" src="/color_banner.png"/>
             </div>
             <div className="flex justify-start">
-                <Barra_Lateral title={title}/>
+                <Barra_Lateral/>
                 <div className="w-full">
                     <Barra_Superior title={title}/>
                     {children}
