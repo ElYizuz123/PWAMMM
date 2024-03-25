@@ -55,11 +55,11 @@ export default function RootLayout({ children }) {
                     NOSOTRAS
                   </a>
                   <a href="#" className="lg:mr-16 hover:text-[#F70073]">
-                    <img src="\navbar\galeria.png" className="pl-4" />
+                    <img src="\navbar\galeria.png" className="pl-5" />
                     GALERIA
                   </a>
                   <a href="#" className="lg:pr-16 hover:text-[#F70073]">
-                    <img src="\navbar\contacto.png" className="pl-6" />
+                    <img src="\navbar\contacto.png" className="pl-7" />
                     CONTACTO
                   </a>
                 </div>
