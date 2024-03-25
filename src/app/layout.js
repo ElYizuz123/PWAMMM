@@ -4,6 +4,8 @@ import IconoTienda from "@/components/navbar/iconoTienda";
 import IconoNosotras from "@/components/navbar/iconoNosotras";
 import IconoContacto from "@/components/navbar/iconoContacto";
 import IconoGaleria from "@/components/navbar/iconoGaleria";
+import Link from 'next/link';
+import logo from "@/components/navbar/logo";
 
 export const metadata = {
   title: "Mujeres Mezcaleras",
@@ -24,10 +26,11 @@ export default function RootLayout({ children }) {
           <div className="container">
             <img className="h-8 w-full" src="\navbar\banner.jpg" />
           </div>
-          <nav className="bg-[#F5F5F5] border-[#1E1E1E] border-opacity-50 dark:border-gray-600 font-bold">
+          <nav className="bg-[#F5F5F5] border-[#1E1E1E] border-opacity-50 dark:border-gray-600 font-bold shadow-md">
             <div className="container mx-auto flex">
+              
               <div>
-                <img className="h-28 w-28" src="\navbar\logo.png" />
+                {logo} 
               </div>
               <div className="text-black absolute w-full flex lg:hidden py-8 px-4 justify-center">
                 <p1>
@@ -35,7 +38,7 @@ export default function RootLayout({ children }) {
                 </p1>
               </div>
               <div className="absolute right-0 flex lg:hidden py-8 px-4">
-                <img className="h-12 w-12" src="\navbar\menu.png" />
+                <img className="h-12 w-12" src="\components\navbar\menu.png" />
               </div>
               <div className="text-black lg:flex hidden flex-grow justify-between py-8">
                 <div>
@@ -43,30 +46,31 @@ export default function RootLayout({ children }) {
                     MUJERES MEZCALERAS DE <br></br>MICHOACÁN
                   </p1>
                 </div>
+                
                 <div className="flex">
                   <a href="#" className="lg:mr-16 hover:text-[#F70073]">
                     {IconoInicio}
                     INICIO
                   </a>
-                  <a
+                  <Link
                     href="\auth\tienda"
                     className="lg:mr-16 hover:text-[#F70073]"
                   >
                     {IconoTienda}
                     TIENDA
-                  </a>
-                  <a href="#" className="lg:mr-16 hover:text-[#F70073]">
+                  </Link>
+                  <Link href="#" className="lg:mr-16 hover:text-[#F70073]">
                     {IconoNosotras}
                     NOSOTRAS
-                  </a>
-                  <a href="#" className="lg:mr-16 hover:text-[#F70073]">
+                  </Link>
+                  <Link href="#" className="lg:mr-16 hover:text-[#F70073]">
                     {IconoGaleria}
                     GALERIA
-                  </a>
-                  <a href="\contacto\contacto.jsx" className="lg:pr-16 hover:text-[#F70073]">
+                  </Link>
+                  <Link href="\contacto" className="lg:pr-16 hover:text-[#F70073]">
                     {IconoContacto}
                     CONTACTO
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
