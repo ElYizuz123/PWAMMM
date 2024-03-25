@@ -6,6 +6,7 @@ import IconoContacto from "@/components/navbar/iconoContacto";
 import IconoGaleria from "@/components/navbar/iconoGaleria";
 import Link from 'next/link';
 import logo from "@/components/navbar/logo";
+import IconoMenu from "@/components/navbar/iconoMenu";
 
 export const metadata = {
   title: "Mujeres Mezcaleras",
@@ -22,6 +23,8 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
           rel="stylesheet"
         ></link>
+        <div>
+        <div>
         <nav className="bg-black fixed w-full z-20 top-0 start-0">
           <div className="container">
             <img className="h-8 w-full" src="\navbar\banner.jpg" />
@@ -37,8 +40,8 @@ export default function RootLayout({ children }) {
                   MUJERES MEZCALERAS DE <br></br>MICHOACÁN
                 </p1>
               </div>
-              <div className="absolute right-0 flex lg:hidden py-8 px-4">
-                <img className="h-12 w-12" src="\components\navbar\menu.png" />
+              <div className="absolute right-0 flex lg:hidden">
+                {IconoMenu}
               </div>
               <div className="text-black lg:flex hidden flex-grow justify-between py-8">
                 <div>
@@ -53,7 +56,7 @@ export default function RootLayout({ children }) {
                     INICIO
                   </a>
                   <Link
-                    href="\auth\tienda"
+                    href="\tienda"
                     className="lg:mr-16 hover:text-[#F70073]"
                   >
                     {IconoTienda}
@@ -76,7 +79,12 @@ export default function RootLayout({ children }) {
             </div>
           </nav>
         </nav>
+        </div>
+        <div>
         {children}
+        </div>
+        </div>
+
       </body>
     </html>
   );

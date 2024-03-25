@@ -1,3 +1,4 @@
+import Contacto from '@/components/contactoForm/ContactoForm';
 import React from 'react';
 
 function page() {
@@ -13,6 +14,9 @@ function page() {
       <br></br>
       <br></br>
 
+      
+      
+
       <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
       <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
       <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
@@ -30,6 +34,8 @@ function page() {
       <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
       <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
       <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
+
+      <Contacto></Contacto>
 
     </div>
   )
