@@ -1,11 +1,29 @@
-import React from 'react'
+"use client"
 import { League_Gothic } from "next/font/google"
 import Link from "next/link"
+import { useEffect } from "react"
 
 const league_gothic = League_Gothic({ subsets: ['latin'] })
 
-const Barra_Lateral = () => {
-    
+
+const buttonMap = {
+    "Ventas":'#00000000',
+    "Productos":'#00000000',
+    "Asociadas":'#00000000',
+    "Eventos":'#00000000',
+    "Galería":'#00000000',
+}
+
+
+const Barra_Lateral = ({title}) => {
+    useEffect(() =>{
+        for (const key in buttonMap) {
+            buttonMap[key] = '#00000000';
+        }
+        buttonMap[title]='#F70073';
+        console.log(buttonMap["Ventas"])
+    });
+
     return (
         <div className="h-screen w-52 bg-[#FF533A] bg-opacity-25 rounded-tl-3xl rounded-br-3xl flex flex-col">
             <div className={league_gothic.className}>
