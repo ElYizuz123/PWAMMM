@@ -1,5 +1,5 @@
-import Barra_Lateral from "./Administrador/Barra_Lateral"
-import Barra_Superior from "./Administrador/Barra_Superior"
+import Barra_Lateral from "../Administrador/Barra_Lateral"
+import Barra_Superior from "../Administrador/Barra_Superior"
 
 const LayoutCRUD = ({ children, title }) => {
     return (
