@@ -5,19 +5,28 @@ import { usePathname } from "next/navigation"
 
 const league_gothic = League_Gothic({ subsets: ['latin'] })
 
-const buttonMap={
+const buttonMapBG={
     "/administrador/ventas":"#00000000",
     "/administrador/productos":"#00000000",
     "/administrador/asociadas":"#00000000",
     "/administrador/eventos":"#00000000",
     "/administrador/galeria":"#00000000",
 }
+const buttonMapTC={
+    "/administrador/ventas":"text-black",
+    "/administrador/productos":"text-black",
+    "/administrador/asociadas":"text-black",
+    "/administrador/eventos":"text-black",
+    "/administrador/galeria":"text-black",
+}
 const changeColor = () =>{
-    for (const key in buttonMap) {
-        buttonMap[key] = '#00000000';
+    for (const key in buttonMapBG) {
+        buttonMapBG[key] = '#00000000';
+        buttonMapTC[key] = 'text-black';
     }
     const pathName = usePathname();
-    buttonMap[pathName] = '#F70073';
+    buttonMapBG[pathName] = '#F70073';
+    buttonMapTC[pathName] = 'text-white';
 }
 
 const Barra_Lateral = () => {
@@ -31,19 +40,19 @@ const Barra_Lateral = () => {
                 <img src="/mezcaleras_logo.png" className="w-12" />
             </div>
             <div className="w-full flex flex-col justify-end items-end pt-8">
-                <Link href="/administrador/ventas" className={`w-11/12 bg-[${buttonMap["/administrador/ventas"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full`}>
+                <Link href="/administrador/ventas" className={`w-11/12 ${buttonMapTC["/administrador/ventas"]} bg-[${buttonMapBG["/administrador/ventas"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full`}>
                     <p className="font-bold text-xl pr-3 pt-1 pb-1">VENTAS</p>
                 </Link>
-                <Link href="/administrador/productos" className={`w-11/12 bg-[${buttonMap["/administrador/productos"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-5`}>
+                <Link href="/administrador/productos" className={`w-11/12 ${buttonMapTC["/administrador/productos"]} bg-[${buttonMapBG["/administrador/productos"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-5`}>
                     <p className="font-bold text-xl pr-3 pt-1 pb-1">PRODUCTOS</p>
                 </Link>
-                <Link href="/administrador/asociadas" className={`w-11/12 bg-[${buttonMap["/administrador/asociadas"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-5`}>
+                <Link href="/administrador/asociadas" className={`w-11/12 ${buttonMapTC["/administrador/asociadas"]} bg-[${buttonMapBG["/administrador/asociadas"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-5`}>
                     <p className="font-bold text-xl  pr-3 pt-1 pb-1">ASOCIADAS</p>
                 </Link>
-                <Link href="/administrador/eventos" className={`w-11/12 bg-[${buttonMap["/administrador/eventos"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-5`}>
+                <Link href="/administrador/eventos" className={`w-11/12 ${buttonMapTC["/administrador/eventos"]} bg-[${buttonMapBG["/administrador/eventos"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-5`}>
                     <p className="font-bold text-xl pr-3 pt-1 pb-1">EVENTOS</p>
                 </Link>
-                <Link href="/administrador/galeria" className={`w-11/12 bg-[${buttonMap["/administrador/galeria"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-5`}>
+                <Link href="/administrador/galeria" className={`w-11/12 ${buttonMapTC["/administrador/galeria"]} bg-[${buttonMapBG["/administrador/galeria"]}] hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-5`}>
                     <p className="font-bold text-xl pr-3 pt-1 pb-1">GALERÍA</p>
                 </Link>
                 <button className="w-11/12 hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-5">
