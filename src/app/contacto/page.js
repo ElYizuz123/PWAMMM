@@ -1,41 +1,23 @@
-import Contacto from '@/components/contactoForm/ContactoForm';
+import ContactoForm from '@/components/contactoForm/ContactoForm';
 import React from 'react';
-
+// Página de contacto
 function page() {
   return(
-    <div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+    <div className="bg-[#F5F5F5] h-max">
 
-      
-      
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
 
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
-      <p>asdhjksadjksñladjiñsdfjjdsklahjdska</p>
 
-      <Contacto></Contacto>
+
+      <ContactoForm></ContactoForm>
 
     </div>
   )
