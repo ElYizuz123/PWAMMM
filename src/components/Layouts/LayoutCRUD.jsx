@@ -3,15 +3,17 @@ import Barra_Superior from "../Administrador/Barra_Superior"
 
 const LayoutCRUD = ({ children, title }) => {
     return (
-        <div>
+        <div className="h-full w-full">
             <div className="w-full h-5">
                 <img className=" w-full h-full" src="/color_banner.png"/>
             </div>
-            <div className="flex justify-start">
+            <div className="w-full h-full flex justify-start">
                 <Barra_Lateral/>
-                <div className="w-full">
+                <div className="w-full h-full">
                     <Barra_Superior title={title}/>
-                    {children}
+                    <div className="h-full">
+                        {children}
+                    </div>
                 </div>
             </div>
             <div className="w-full h-9">
