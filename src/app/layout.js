@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
                     {IconoNosotras}
                     NOSOTRAS
                   </Link>
-                  <Link href="#" className="lg:mr-16 hover:text-[#F70073]">
+                  <Link href="\galeria" className="lg:mr-16 hover:text-[#F70073]">
                     {IconoGaleria}
                     GALERIA
                   </Link>
