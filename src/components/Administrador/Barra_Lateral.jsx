@@ -35,22 +35,22 @@ const Barra_Lateral = () => {
                 <img src="/mezcaleras_logo.png" className="w-20" />
             </div>
             <div className="w-full flex flex-col justify-end items-end pt-8">
-                <Link href="/administrador/ventas" className={`w-11/12 ${buttonMap["/administrador/ventas"]} hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full`}>
+                <Link href="/administrador/ventas" className={`w-11/12 ${buttonMap["/administrador/ventas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">VENTAS</p>
                 </Link>
-                <Link href="/administrador/productos" className={`w-11/12 ${buttonMap["/administrador/productos"]} hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-8`}>
+                <Link href="/administrador/productos" className={`w-11/12 ${buttonMap["/administrador/productos"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">PRODUCTOS</p>
                 </Link>
-                <Link href="/administrador/asociadas" className={`w-11/12 ${buttonMap["/administrador/asociadas"]} hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-8`}>
+                <Link href="/administrador/asociadas" className={`w-11/12 ${buttonMap["/administrador/asociadas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl  pr-3 pt-1 pb-1">ASOCIADAS</p>
                 </Link>
-                <Link href="/administrador/eventos" className={`w-11/12 ${buttonMap["/administrador/eventos"]} hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-8`}>
+                <Link href="/administrador/eventos" className={`w-11/12 ${buttonMap["/administrador/eventos"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">EVENTOS</p>
                 </Link>
-                <Link href="/administrador/galeria" className={`w-11/12 ${buttonMap["/administrador/galeria"]} hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-8`}>
+                <Link href="/administrador/galeria" className={`w-11/12 ${buttonMap["/administrador/galeria"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">GALERÍA</p>
                 </Link>
-                <button className="w-11/12 hover:bg-[#F70073] hover:text-white flex justify-end rounded-l-full mt-8">
+                <button className="w-11/12 hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8">
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">AYUDA</p>
                 </button>
             </div>
