@@ -44,12 +44,12 @@ const page = () => {
               <div className='w-10/12 h-[0.3%] bg-[#F70073] ' />
               <div className='w-10/12'>
                 {ventas &&
-                  ventas.map((venta) => (<div key={venta.id_venta} className='flex justify-between w-full mt-0.5'>
-                    <p className='ml-12 font-bold'>{venta.id_venta}</p>
-                    <p className='ml-14 font-bold'>{venta.fecha_venta.slice(0,10)+" "+venta.fecha_venta.slice(11,16)}</p>
-                    <p className='mr-4 font-bold'>{"$ "+venta.total}</p>
-                    <button className='w-12 h-6 font-bold mr-4 flex justify-center items-center bg-white text-[#F70073] border border-black hover:border-[#F70073] py-2 px-4 rounded'>Ver</button>
-                    <p className='mr-12 font-bold'>{venta.status}</p>
+                  ventas.map((venta) => (<div key={venta.id_venta} className='flex justify-between w-full mt-0.5 pl-12 pr-12'>
+                    <p className='font-bold w-6 text-center'>{venta.id_venta}</p>
+                    <p className='font-bold ml-12 text-left w-40'>{venta.fecha_venta.slice(0,10)+" "+venta.fecha_venta.slice(11,16)}</p>
+                    <p className='font-bold w-16 text-left mr-4'>{"$ "+venta.total}</p>
+                    <button className='w-12 h-6 mr-8 font-bold flex justify-center items-center bg-white text-[#F70073] border border-black hover:border-[#F70073] py-2 px-4 rounded'>Ver</button>
+                    <p className='font-bold'>{venta.status}</p>
                   </div>))}
               </div>
             </div>
