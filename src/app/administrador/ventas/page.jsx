@@ -18,8 +18,16 @@ const page = () => {
               <p className='mt-6 text-3xl font-bold'>Bienvenido,</p>
               <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Ventas</p>
             </div>
-            <div className='w-full h-full flex grid-flow-row justify-center'>
-              <div className='w-9/12 h-[0.3%] bg-black mt-10'/>
+            <div className='w-full h-full flex flex-col items-center'>
+              <div className='w-10/12 h-[0.3%] bg-black mt-10'/>
+              <div className='flex justify-between w-10/12'>
+                <p className='ml-5 font-bold'>N° de venta</p>
+                <p className='font-bold'>Fecha de venta</p>
+                <p className='font-bold'>Total</p>
+                <p className='font-bold'>Detalles</p>
+                <p className='mr-16 font-bold'>Status</p>
+              </div>
+              <div className='w-10/12 h-[0.3%] bg-[#F70073] '/>
             </div>
           </div>
         </div>
