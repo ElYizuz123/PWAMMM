@@ -31,7 +31,6 @@ export default function RootLayout({ children }) {
           </div>
           <nav className="bg-[#F5F5F5] border-[#1E1E1E] border-opacity-50 dark:border-gray-600 font-bold shadow-md">
             <div className="container mx-auto flex">
-              
               <div>
                 {logo} 
               </div>
