@@ -3,7 +3,7 @@ import React from 'react'
 const ContactoForm = () => {
   return (
 
-    <div className="h-screen flex justify-center items-start mb-32">
+    <div className="flex justify-center items-start mb-32">
       
       <div className="bg-[#F3E8E8] w-11/12 h-[1000px] rounded-3xl">
       <div className="bg-[#D60064] w-full h-48 rounded-t-3xl rounded mb-10 flex justify-center items-center">
