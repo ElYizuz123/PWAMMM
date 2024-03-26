@@ -1,5 +1,6 @@
 import React from 'react'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
+import Image from 'next/image';
 
 export const metadata = {
   title: "Ventas",
@@ -9,8 +10,8 @@ const page = () => {
     <LayoutCRUD title="Ventas">
       <main className='flex flex-col items-center justify-between w-full h-full'>
         <div className='relative w-full h-full overflow-hidden'>
-          <div className='absolute w-full z-0'>
-          <div className="bg-cover bg-center opacity-60 w-full h-screen" style={{ backgroundImage: "url('/mezcal_background.png')" }}/>
+          <div className='absolute -top-96 w-full z-0'>
+            <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-50' />
           </div>
           <div className='relative w-full h-screen'>
             <div className='w-full flex justify-center'>
