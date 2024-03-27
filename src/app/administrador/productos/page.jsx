@@ -25,6 +25,10 @@ const page = () => {
             <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />
           </div>
           <div className='w-full h-auto relative'>
+          <div className='w-full flex justify-center'>
+              <p className='mt-6 text-3xl font-bold'>Bienvenido,</p>
+              <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Productos</p>
+            </div>
             <form onSubmit={handleSubmit}>
               <div className="flex justify-center items-center">
                 <input
