@@ -3,9 +3,12 @@ import React from 'react'
 
 const Tarjeta_Producto_Admin = () => {
     return (
-        <div className="card relative rounded-5 overflow-hidden">
+        <div className="relative rounded-5 overflow-hidden card-reduced">
             <button className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
-                <img src="\emoticons\ojo.png" alt="Icono" width="32" height="32" />
+                <img src="\emoticons\editar.png" alt="Icono" width="32" height="32" />
+            </button>
+            <button className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
+                <img src="\emoticons\eliminar.png" alt="Icono" width="32" height="32" />
             </button>
             <figure>
                 <img
@@ -14,44 +17,15 @@ const Tarjeta_Producto_Admin = () => {
                     alt="t-shirt"
                 />
             </figure>
-            <section className="details">
-                <div className="min-details">
+            <div className='w-full flex justify-center'>
+                <div className="min-details text-center">
                     <h1 className="text-xl font-semibold">
                         Don Mateo 750ml <span className="text-">Don Mateo</span>
                     </h1>
                     <h1 className="price font-semibold">$350.00</h1>
                 </div>
+            </div>
 
-                <div className="options">
-                    <div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="col-span-1 flex items-center justify-center">
-                                <ul class="list-disc">
-                                    <li>400 ml</li>
-                                    <li>Agave Cupeatra</li>
-                                </ul>
-                            </div>
-                            <div class="col-span-1 flex items-center justify-center">
-                                <ul class="list-disc ">
-                                    <li>42% Alcohol</li>
-                                    <li>Origen México</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <Link href="#" className="btn font-semibold">
-                    Añadir a carrito
-                </Link>
-                <button className="btn2 mt-1 flex items-center justify-center">
-                    <span className="font-semibold">Comprar en mercado libre</span>
-                    <img
-                        className="w-8 h-8"
-                        src="\emoticons\mercado_libre_logo.webp"
-                        alt="Mercado Libre"
-                    />
-                </button>
-            </section>
         </div>
     )
 }

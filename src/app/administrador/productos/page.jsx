@@ -43,6 +43,16 @@ const page = () => {
                 </button>
               </div>
             </form>
+            <div className='w-full flex justify-start ml-[10%] mt-5'>
+              <button className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
+                <img src='/emoticons/plus.png' className='w-8 ml-2'/>
+                <p className='mr-3'>Agregar producto</p>
+              </button>
+              <button className='bg-[#98E47D] w-44 h-10 font-bold rounded-lg flex justify-between items-center ml-4 hover:bg-[#98e47dab]'>
+                <img src='/emoticons/plus.png' className='w-8 ml-2'/>
+                <p className='mr-3'>Agregar marca</p>
+              </button>
+            </div>
             <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
               <Tarjeta_Producto_Admin />
               <Tarjeta_Producto_Admin />
