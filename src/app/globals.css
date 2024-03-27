@@ -23,6 +23,16 @@ h1 {
   margin: 20px auto 0 auto;
 }
 
+.card-reduced-as {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  height: 370px;
+  width: 350px;
+}
+.card-reduced-as > figure {
+  width: 90%;
+  margin: 20px auto 0 auto;
+}
+
 .card > figure {
   width: 90%;
   margin: 20px auto 0 auto;
