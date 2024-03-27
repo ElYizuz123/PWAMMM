@@ -6,25 +6,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className><h1> Punto TLC</h1>
-     
-   
-    <Main/>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    
-  
-    
-    
-   
-    
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <Main/> 
     </main>
   );
 }
