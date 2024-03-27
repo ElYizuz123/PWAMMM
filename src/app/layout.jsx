@@ -54,7 +54,7 @@ export default function RootLayout({ children }) {
                 </div>
                 
                 <div className="flex">
-                  <a href="#" className="lg:mr-16 hover:text-[#F70073]">
+                  <a href="\" className="lg:mr-16 hover:text-[#F70073]">
                     {IconoInicio}
                     INICIO
                   </a>
@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
                     {IconoTienda}
                     TIENDA
                   </Link>
-                  <Link href="#" className="lg:mr-16 hover:text-[#F70073]">
+                  <Link href="\nosotras" className="lg:mr-16 hover:text-[#F70073]">
                     {IconoNosotras}
                     NOSOTRAS
                   </Link>
