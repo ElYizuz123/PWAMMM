@@ -1,4 +1,5 @@
 import "./globals.css";
+import { K2D } from "next/font/google";
 import IconoInicio from "@/components/navbar/iconoInicio";
 import IconoTienda from "@/components/navbar/iconoTienda";
 import IconoNosotras from "@/components/navbar/iconoNosotras";
@@ -13,7 +14,7 @@ export const metadata = {
   description: "Asociación de Mujeres Mezcaleras de Michoacán",
 };
 
-
+const k2d = K2D({ subsets: ['latin'], weight: '400'})
 
 
 export default function RootLayout({ children }) {
@@ -83,7 +84,7 @@ export default function RootLayout({ children }) {
           </nav>
         </nav>
         </div>
-        <div>
+        <div className={k2d.className}>
         {children}
         </div>
         </div>
@@ -92,4 +93,3 @@ export default function RootLayout({ children }) {
   
   );
 }
-
