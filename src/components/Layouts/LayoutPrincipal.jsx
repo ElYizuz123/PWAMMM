@@ -1,4 +1,3 @@
-import "./globals.css";
 import IconoInicio from "@/components/navbar/iconoInicio";
 import IconoTienda from "@/components/navbar/iconoTienda";
 import IconoNosotras from "@/components/navbar/iconoNosotras";
