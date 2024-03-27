@@ -1,4 +1,3 @@
-
 import Main from "@/components/Video/Main";
 import Carrusel from "@/components/carrusel/Carrusel";
 import Image from "next/image";
