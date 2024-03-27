@@ -1,12 +1,16 @@
-import Ficha from "@/app/components/Ficha";
+import Ficha from "@/components/tienda/Ficha";
+import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
 import React from "react";
 
 
 const abrir_producto = () => {
   return (
-    <div >
-    <Ficha></Ficha>
-    </div>
+    <LayoutPrincipal>
+        <div >
+        <Ficha></Ficha>
+        </div>
+    </LayoutPrincipal>
+    
   );
 };
 
