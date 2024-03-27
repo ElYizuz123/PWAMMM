@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
 
 const Page = () => {
 
@@ -42,8 +43,8 @@ const Page = () => {
         return () => clearInterval(interval);
     }, []);
     return (
-
-        <div className="bg-cover bg-center w-full h-max" style={{ backgroundImage: "url('/multimedia/RECOLECCION.jpg')" }}>
+        <LayoutPrincipal>
+            <div className="bg-cover bg-center w-full h-max" style={{ backgroundImage: "url('/multimedia/RECOLECCION.jpg')" }}>
             <div className="w-3/4 m-auto">
                 <br></br>
                 <br></br>
@@ -109,10 +110,8 @@ const Page = () => {
                 </div>
             </div>
 
-
-
-
         </div>
+        </LayoutPrincipal>
     );
 }
 
