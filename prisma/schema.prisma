@@ -88,3 +88,19 @@ model venta_total {
   status           String             @default("Pendiente") @db.VarChar(45)
   venta_individual venta_individual[]
 }
+
+model galeria_categoria {
+  id_categoria     Int                @id @unique(map: "idcategoria_UNIQUE") @default(autoincrement())
+  categoria        String             @unique(map: "categoria_UNIQUE") @default("*Categoría*") @db.VarChar(30)
+  galeria_fotos galeria_fotos[]
+}
+
+model galeria_fotos {
+  id_foto           Int               @id @unique(map: "id_foto_UNIQUE") @default(autoincrement())
+  foto              String            @default("/fotoDefault.jpg") @db.VarChar(45)
+  descripcion       String?           @default("*sin descripción*") @db.VarChar(45)
+  fk_id_categoria   Int
+  galeria_categoria galeria_categoria @relation(fields: [fk_id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_galeria_fotos_galeria_categoria")
+
+  @@index([fk_id_categoria], map: "fk_galeria_fotos_galeria_categoria_idx")
+}

@@ -19,13 +19,15 @@ const Ubicaciones = () => {
 
       {/* mapa */}
       <div className="ml-20 flex">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d469.5637050631848!2d-101.17452976773575!3d19.690914973081252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842d0df8a232cf1f%3A0x6d7ea21f1cf37cfb!2sMantra!5e0!3m2!1ses!2smx!4v1711421238899!5m2!1ses!2smx" 
-        width="800" height="650" style={{ border: '0' }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+        <div className="border-1 border-black">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d469.5637050631848!2d-101.17452976773575!3d19.690914973081252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842d0df8a232cf1f%3A0x6d7ea21f1cf37cfb!2sMantra!5e0!3m2!1ses!2smx!4v1711421238899!5m2!1ses!2smx" 
+          width="800" height="650" style={{ border: '0' }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
 
       <div>
 
-        <div className="flex ml-14 mt-14">
+        <div className="flex ml-14 mt-14"> 
           {IconoUbicacion}
           
           <p className="ml-5 text-3xl">Blvd. García de León 531-B, Chapultepec Sur, 58260 Morelia, Mich.</p>
