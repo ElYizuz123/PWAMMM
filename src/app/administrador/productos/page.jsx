@@ -1,10 +1,22 @@
 "use client"
+import Crear_Producto from '@/components/Administrador/Crear_Producto'
 import Tarjeta_Producto_Admin from '@/components/Administrador/Tarjeta_Producto_Admin'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
+  const [cProductIsOpen, setCProductIsOpen] = useState(false);
+
+  const [productos, setProductos] = useState(null);
+
+  const openCProduct = () => {
+    setCProductIsOpen(true);
+  };
+
+  const closeCProduct = () => {
+    setCProductIsOpen(false);
+  };
 
   const readData = async () => {
     const res = await fetch('/api/read_productos');
@@ -16,6 +28,12 @@ const page = () => {
   useEffect(() => {
     readData();
   }, []);
+
+  useEffect(() => {
+    if (cProductIsOpen) {
+      window.scrollTo({ top: 250, behavior: 'smooth' });
+    }
+  }, [cProductIsOpen]);
 
   const [busqueda, setBusqueda] = useState('');
 
@@ -30,6 +48,9 @@ const page = () => {
 
   return (
     <LayoutCRUD title="Productos">
+      <div className='absolute top-1/2 left-[40%] z-10 w-5/12 h-5/6'>
+        <Crear_Producto isOpen={cProductIsOpen} onClose={closeCProduct}/>
+      </div>
       <main className='flex flex-col items-center justify-between w-full h-auto'>
         <div className='relative w-full h-auto overflow-hidden'>
           <div className='absolute bottom-0 w-full'>
@@ -59,7 +80,7 @@ const page = () => {
               </div>
             </form>
             <div className='w-full flex justify-start ml-[10%] mt-5'>
-              <button className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
+              <button onClick={openCProduct} className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
                 <img src='/emoticons/plus.png' className='w-8 ml-2'/>
                 <p className='mr-3'>Agregar producto</p>
               </button>
@@ -69,6 +90,7 @@ const page = () => {
               </button>
             </div>
             <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
+              <Tarjeta_Producto_Admin />
               <Tarjeta_Producto_Admin />
               <Tarjeta_Producto_Admin />
               <Tarjeta_Producto_Admin />

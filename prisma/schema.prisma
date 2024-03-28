@@ -11,7 +11,7 @@ model asociada {
   id_asociada Int     @id @default(autoincrement())
   nombre      String  @db.VarChar(45)
   historia    String  @db.LongText
-  foto        Bytes
+  foto        String  @db.VarChar(45)
   marca       marca[]
 }
 
@@ -23,14 +23,14 @@ model categoria {
 
 model evento {
   id_evento    Int      @id @default(autoincrement())
-  foto         Bytes
+  foto         String   @db.VarChar(45)
   fecha_inicio DateTime @db.Date
   fecha_fin    DateTime @db.Date
 }
 
 model foto {
   id_foto                Int       @default(autoincrement())
-  foto                   Bytes
+  foto                   String    @db.VarChar(45)
   titulo                 String    @db.VarChar(45)
   categoria_id_categoria Int
   categoria              categoria @relation(fields: [categoria_id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_foto_categoria1")
@@ -55,7 +55,7 @@ model producto {
   ml               Int
   precio           Decimal            @db.Decimal(10, 2)
   descripcion      String             @db.LongText
-  foto             Bytes
+  foto             String             @db.VarChar(45)
   marca_id_marca   Int
   marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_producto_marca1")
   venta_individual venta_individual[]
@@ -82,7 +82,7 @@ model venta_individual {
 }
 
 model venta_total {
-  id_venta         Int                @id
+  id_venta         Int                @id @default(autoincrement())
   fecha_venta      DateTime           @default(now()) @db.DateTime(0)
   total            Decimal            @db.Decimal(10, 2)
   status           String             @default("Pendiente") @db.VarChar(45)
