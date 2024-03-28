@@ -31,7 +31,7 @@ const page = () => {
 
   useEffect(() => {
     if (cProductIsOpen) {
-      window.scrollTo({ top: 250, behavior: 'smooth' });
+      window.scrollTo({ top: 230, behavior: 'smooth' });
     }
   }, [cProductIsOpen]);
 
@@ -48,7 +48,7 @@ const page = () => {
 
   return (
     <LayoutCRUD title="Productos">
-      <div className='absolute top-1/2 left-[40%] z-10 w-5/12 h-5/6'>
+      <div className='absolute top-1/2 left-[40%] z-10 w-5/12 h-4/6'>
         <Crear_Producto isOpen={cProductIsOpen} onClose={closeCProduct}/>
       </div>
       <main className='flex flex-col items-center justify-between w-full h-auto'>
