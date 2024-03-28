@@ -11,7 +11,7 @@ model marca {
   idMarca     Int        @id
   Nombre      String     @unique(map: "Nombre_UNIQUE") @db.VarChar(45)
   idMezcalera String?    @db.VarChar(45)
-  Tipo        String     @db.VarChar(45)
+  Tipo        Int    
   producto    producto[]
 }
 

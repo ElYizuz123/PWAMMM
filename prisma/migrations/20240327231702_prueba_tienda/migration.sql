@@ -3,7 +3,7 @@ CREATE TABLE `marca` (
     `idMarca` INTEGER NOT NULL,
     `Nombre` VARCHAR(45) NOT NULL,
     `idMezcalera` VARCHAR(45) NULL,
-    `Tipo` VARCHAR(45) NOT NULL,
+    `Tipo` INTEGER NOT NULL,
 
     UNIQUE INDEX `Nombre_UNIQUE`(`Nombre`),
     PRIMARY KEY (`idMarca`)

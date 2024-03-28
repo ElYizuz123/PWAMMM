@@ -1,15 +1,15 @@
 import Link from "next/link";
 import React from "react";
-import {K2D} from "next/font/google";
+import { K2D } from "next/font/google";
 import Tarjeta from "./Tarjeta";
 import Contador from "./Contador";
 import Image from "next/image";
 
 const k2d = K2D({
-    weight: ["400"],
-    styles: ["normal"],
-    subsets: ["latin"],
-})
+  weight: ["400"],
+  styles: ["normal"],
+  subsets: ["latin"],
+});
 
 const Ficha = () => {
   return (
@@ -72,17 +72,21 @@ const Ficha = () => {
                   <li>Origen México</li>
                 </ul>
               </div>
-              {/*Botón mercado libre, solo aparece si existe link en las caracteristicas de la botella*/}
-              <button className="bg-[#EEF220] text-black font-bold object-cover py-2 px-28 rounded-full mt-3 flex items-center">
-                Comprar en
-                <img className="ml-7 h-10 w-10 " src="\mercadoLibre.png" />
-              </button>
-              <div className="flex items-center ml-3">
-                <button className="bg-[#F70073] text-white font-bold object-cover py-2 px-20 rounded-full mt-2 flex items-center">
-                  Agregar al carrito
-                </button>
-                <div>
-                  <Contador></Contador>
+              <div className=" justify-center items-center">
+                {/*Botón mercado libre, solo aparece si existe link en las caracteristicas de la botella*/}
+                <div className="relative">
+                  <button className="bg-[#EEF220] text-black font-bold object-cover py-2 px-28 rounded-full mt-2 flex items-center">
+                    Comprar en
+                    <img className="ml-7 h-10 w-10 " src="\mercadoLibre.png" />
+                  </button>
+                </div>
+                <div className=" relative flex items-center ">
+                  <button className="bg-[#F70073] text-white font-bold object-cover py-2 px-20 rounded-full mt-2 flex items-center">
+                    Agregar al carrito
+                  </button>
+                  <div>
+                    <Contador></Contador>
+                  </div>
                 </div>
               </div>
             </div>
@@ -102,7 +106,6 @@ const Ficha = () => {
           <Tarjeta></Tarjeta>
         </div>
       </div>
-      
     </div>
   );
 };

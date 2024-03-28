@@ -1,7 +1,10 @@
-import React from "react";
-import Tarjeta from "@/components/tienda/Tarjeta";
-import { K2D } from "next/font/google";
+"use client"
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
+import Tarjeta from "@/components/tienda/Tarjeta";
+import Categoria from "@/components/tienda/Categoria";
+import { K2D } from "next/font/google";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const k2d = K2D({
   weight: ["400"],
@@ -10,56 +13,78 @@ const k2d = K2D({
 });
 
 const page = () => {
+
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      const response = await fetch("/api/read_producto");
+      const data = await response.json();
+      setProductos(data);
+    };
+
+    fetchProductos();
+  }, []);
   return (
-    <LayoutPrincipal>
-      <div className={k2d.className}>
-        <div className="relative bg-[#F5F5F5FD] min-h-screen ">
-          <div className="flex justify-center absolute w-[300px] h-screen bg-white text-black ml-9 mt-[264px] pt-8">
-            <div className="border border-b[#F70073]">Nuestras marcas</div>
+    <div className="bg-[#F5F5F5FD]">
+      <LayoutPrincipal></LayoutPrincipal>
+      <div className="relative bg-[#F5F5F5FD] min-h-screen my-4">
+        <div className=" fixed z-0 inset-0">
+          <Image
+            src="/backgroundImage.jpg"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            alt="Fondo"
+          />
+        </div>
+        <form className="max-w-md mx-auto z-10">
+          <div className="relative">
+            <input
+              className="block bg-white w-full pl-4 pr-12 py-2 text-sm border border-gray-300 text-black rounded-full focus:outline-none focus:border-pink-300 transition duration-300 ease-in-out"
+              placeholder="Buscar productos..."
+              type="search"
+              name="search"
+              id="search"
+            />
+            <button
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#F70073] hover:bg-pink-600 transition duration-300 ease-in-out p-2 rounded-r-full"
+              type="submit"
+            >
+              <img className="h-5 w-5" src="\emoticons\lupa.png" alt="Buscar" />
+            </button>
           </div>
+        </form>
 
-          <div>
+        <div className="flex">
+          <div className="w-[600px] text-black mx-9 mt-2 z-10">
+            <Categoria />
           </div>
-          <form>
-            <div className="flex justify-center items-center">
-              <input
-                className="bg-white w-screen h-[55px] mt-8 mx-36 px-7 border-2 border-gray-300 text-black outline-none rounded-full"
-                placeholder="Buscar productos..."
-                type="search"
-                name="search"
-                id="search"
+          <div className="flex flex-wrap gap-8 pt-8 justify-end pr-8">
+            {productos.map((producto) => (
+              <Tarjeta
+                key={producto.idProducto}
+                nombre={producto.nombre}
+                marca={producto.marca.Nombre}
+                precio={producto.precio}
+                ml={
+                  producto.producto_informacion?.contenido || "no especificado"
+                }
+                agave={
+                  producto.producto_informacion?.tipo_agave || "no especificado"
+                }
+                alcohol={
+                  producto.producto_informacion?.riquezaAlcoholica ||
+                  "no especificado"
+                }
+                imagen={producto.foto}
+                mercadoLibre={producto?.mercadoLibre || "NULL"}
               />
-              <button
-                className="absolute p-3 text-sm h-[55px] w-20 mt-8 ml-[1150px] border-2 border-gray-300 text-white bg-[#F70073] rounded-e-full  hover:opacity-75"
-                type="submit"
-              >
-                <img className="w-5 h-5 ml-3" src="\emoticons\lupa.png"></img>
-              </button>
-            </div>
-          </form>
-
-          <div className="flex flex-wrap gap-8 pl-[370px] pt-8">
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
+            ))}
           </div>
         </div>
       </div>
-
-    </LayoutPrincipal>
-
+    </div>
   );
 };
 

@@ -1,18 +1,45 @@
-import React from 'react'
+"use client";
+import React, { useState } from "react";
 
+const Contador = () => {
+  const [count, setCount] = useState(1);
 
-function Contador() {
+  const increment = () => {
+    setCount((prevCount) => prevCount + 1);
+  };
+
+  const decrement = () => {
+    setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1));
+  };
+
+  const handleInputChange = (event) => {
+    const value = parseInt(event.target.value, 10);
+    setCount(Number.isNaN(value) ? 0 : value);
+  };
+
   return (
-    <div className="flex items-center">
-      <button className="bg-gray-300 text-white font-bold object-cover py-1 px-4 rounded-full mt-2 flex items-center ml-3">
-        +
-      </button>
-      <p className="font-bold ml-2">0</p>
-      <button className="bg-gray-300 text-white font-bold object-cover py-1 px-4 rounded-full mt-2 flex items-center ml-2">
+    <div class=" ml-4 flex items-center justify-center bg-[#F70073] rounded-full mt-2  px-9 ">
+      <button
+        class="text-3xl text-white focus:outline-none  focus:ring-opacity-50 "
+        onClick={decrement}
+      >
         -
+      </button>
+      <input
+        type="text"
+        class="w-16 text-lg bg-[#F70073] text-white text-center focus:outline-none"
+        value={count}
+        onChange={handleInputChange}
+      />
+
+      <button
+        class=" text-2xl  text-white focus:outline-none  focus:ring-opacity-50"
+        onClick={increment}
+      >
+        +
       </button>
     </div>
   );
-}
+};
 
-export default Contador
+export default Contador;
