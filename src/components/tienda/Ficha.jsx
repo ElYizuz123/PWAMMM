@@ -102,6 +102,9 @@ const Ficha = () => {
           <Tarjeta></Tarjeta>
         </div>
       </div>
+      <div>
+        
+      </div>
     </div>
   );
 };
