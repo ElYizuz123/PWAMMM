@@ -13,6 +13,11 @@ h1 {
   width: 350px;
 }
 
+.slider-container-admin {
+  width: 1000px;
+  height: 200px;
+}
+
 .card-reduced {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   height: 410px;
