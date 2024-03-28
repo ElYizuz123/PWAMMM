@@ -2,9 +2,20 @@
 import Tarjeta_Producto_Admin from '@/components/Administrador/Tarjeta_Producto_Admin'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const page = () => {
+
+  const readData = async () => {
+    const res = await fetch('/api/read_productos');
+    const resJSON = await res.json();
+    setProductos(JSON.parse(resJSON));
+    console.log(resJSON);
+  };
+
+  useEffect(() => {
+    readData();
+  }, []);
 
   const [busqueda, setBusqueda] = useState('');
 
