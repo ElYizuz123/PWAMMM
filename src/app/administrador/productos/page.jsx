@@ -58,10 +58,10 @@ const page = () => {
 
   return (
     <LayoutCRUD title="Productos">
-      <div className='absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6'>
+      <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${cProductIsOpen ? "": "pointer-events-none"}`}>
         <Crear_Producto isOpen={cProductIsOpen} onClose={closeCProduct} marcas={marcas}/>
       </div>
-      <main className='flex flex-col items-center justify-between w-full h-auto'>
+      <main className='flex flex-col items-center justify-between w-full h-auto '>
         <div className='relative w-full h-auto overflow-hidden'>
           <div className='absolute bottom-0 w-full'>
             <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />

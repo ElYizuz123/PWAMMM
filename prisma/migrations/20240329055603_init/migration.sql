@@ -3,7 +3,7 @@ CREATE TABLE `asociada` (
     `id_asociada` INTEGER NOT NULL AUTO_INCREMENT,
     `nombre` VARCHAR(45) NOT NULL,
     `historia` LONGTEXT NOT NULL,
-    `foto` LONGBLOB NOT NULL,
+    `foto` VARCHAR(45) NOT NULL,
 
     PRIMARY KEY (`id_asociada`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -19,7 +19,7 @@ CREATE TABLE `categoria` (
 -- CreateTable
 CREATE TABLE `evento` (
     `id_evento` INTEGER NOT NULL AUTO_INCREMENT,
-    `foto` LONGBLOB NOT NULL,
+    `foto` VARCHAR(45) NOT NULL,
     `fecha_inicio` DATE NOT NULL,
     `fecha_fin` DATE NOT NULL,
 
@@ -29,7 +29,7 @@ CREATE TABLE `evento` (
 -- CreateTable
 CREATE TABLE `foto` (
     `id_foto` INTEGER NOT NULL AUTO_INCREMENT,
-    `foto` LONGBLOB NOT NULL,
+    `foto` VARCHAR(45) NOT NULL,
     `titulo` VARCHAR(45) NOT NULL,
     `categoria_id_categoria` INTEGER NOT NULL,
 
@@ -54,8 +54,9 @@ CREATE TABLE `producto` (
     `ml` INTEGER NOT NULL,
     `precio` DECIMAL(10, 2) NOT NULL,
     `descripcion` LONGTEXT NOT NULL,
-    `foto` LONGBLOB NOT NULL,
+    `foto` VARCHAR(45) NOT NULL,
     `marca_id_marca` INTEGER NOT NULL,
+    `mercado_lib` TINYTEXT NULL,
 
     INDEX `fk_producto_marca1_idx`(`marca_id_marca`),
     PRIMARY KEY (`id_producto`)
@@ -84,21 +85,12 @@ CREATE TABLE `venta_individual` (
 
 -- CreateTable
 CREATE TABLE `venta_total` (
-    `id_venta` INTEGER NOT NULL,
+    `id_venta` INTEGER NOT NULL AUTO_INCREMENT,
     `fecha_venta` DATETIME(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
     `total` DECIMAL(10, 2) NOT NULL,
     `status` VARCHAR(45) NOT NULL DEFAULT 'Pendiente',
 
     PRIMARY KEY (`id_venta`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `preguntas_frecuentes` (
-    `id_pregunta` INTEGER NOT NULL,
-    `pregunta` VARCHAR(50) NOT NULL DEFAULT 'X.- *vacío*',
-    `respuesta` VARCHAR(50) NOT NULL DEFAULT 'R- *vacío*',
-
-    PRIMARY KEY (`id_pregunta`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey

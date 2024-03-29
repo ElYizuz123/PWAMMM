@@ -1,7 +1,18 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react'
 
+
+
 const Crear_Producto = ({ isOpen, onClose, marcas }) => {
+
+    const buscarIDPorNombre = (nombre) => {
+        for (let i = 0; i < marcas.length; i++) {
+            if (marcas[i].nombre == nombre) {
+                return marcas[i].id_marca;
+            }
+        }
+        return null;
+    };
 
     const fileInputRef = useRef(null)
     const [data, setData] = useState(null)
@@ -16,11 +27,31 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
         fileInputRef.current.click();
     }
 
-    const handleOnSubmit = (e) =>{
+    const handleOnSubmit = (async (e) => {
         e.preventDefault();
-        setData({ ...data, "foto": productPhoto.name })
-        console.log(data);
-    }
+        setData({ ...data, "marca": buscarIDPorNombre(document.getElementById("select_marca").value) });
+
+        console.log(data)
+        const res = await fetch('/api/create_producto', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'aplication/json'
+            }
+        })
+        const resJSON = await res.json()
+        console.log(resJSON)
+        if (resJSON == "Registrado") {
+            setData({
+                nombre: "",
+                ml: "",
+                precio: "",
+                mercado_libre: "",
+                descripcion: "",
+            })
+            setProductPhoto(null)
+        }
+    })
 
 
 
@@ -41,6 +72,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                         ref={fileInputRef}
                         onChange={(e) => {
                             setProductPhoto(e.target.files[0])
+                            setData({ ...data, "foto": e.target.files[0].name})
                         }}
                     />
                 </form>
@@ -65,6 +97,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                         <p className='text-xl'>ML</p>
                         <p className='text-xl'>Precio</p>
                         <p className='text-xl'>Marca</p>
+                        <p className='text-xl'>Mercado libre</p>
                         <p className='text-xl'>Descripción</p>
                     </div>
                     <div>
@@ -91,12 +124,11 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     placeholder='Precio'
                                     onChange={handleOnChange}
-                                /> 
+                                />
                                 <select
                                     name='marca'
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
-                                    placeholder='Precio'
-                                    onChange={handleOnChange}
+                                    id="select_marca"
                                 >
                                     {marcas && (
                                         marcas.map((marca) => (
@@ -104,6 +136,13 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                         ))
                                     )}
                                 </select>
+                                <input
+                                    type='text'
+                                    name='mercado_lib'
+                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                    placeholder='Link a mercado libre'
+                                    onChange={handleOnChange}
+                                />
                                 <textarea
                                     type='text'
                                     name='descripcion'
@@ -113,7 +152,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                 <div className='w-full flex justify-end items-end'>
                                     <button
                                         type='submit'
-                                        className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[10%]'
+                                        className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[1%]'
                                     >Agregar
                                     </button>
                                 </div>

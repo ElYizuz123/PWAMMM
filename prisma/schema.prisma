@@ -57,6 +57,7 @@ model producto {
   descripcion      String             @db.LongText
   foto             String             @db.VarChar(45)
   marca_id_marca   Int
+  mercado_lib      String?            @db.MediumText
   marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_producto_marca1")
   venta_individual venta_individual[]
 
