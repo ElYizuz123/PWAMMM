@@ -37,4 +37,3 @@ next-env.d.ts
 
 #extra
 .env
-prisma/schema.prisma
