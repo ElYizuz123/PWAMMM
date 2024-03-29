@@ -62,12 +62,13 @@ const page = () => {
           </form>
         </div>
 
-        <div className="flex">
-          <div className="w-auto text-black z-10 my-8 mx-8">
+        <div className="flex my-8">
+          <div className="w-auto text-black z-10 mx-8">
             <Categoria />
           </div>
 
-          <div className="flex flex-wrap gap-8 mx-8 my-8 justify-center">
+          <div className="flex flex-wrap gap-8 mx-8 justify-between">
+            <Tarjeta />
             <Tarjeta />
             <Tarjeta />
             <Tarjeta />
