@@ -26,7 +26,17 @@ h1 {
   margin: 0 10px;
 
 }
-
+.image-gallery-image {
+  max-width: 80% !important;
+  max-height: 80% !important;
+}
+.text-delineado {
+  text-shadow:
+    2px 2px 0 #000,
+   -2px -2px 0 #000,
+    2px -2px 0 #000,
+     -2px 2px 0 #000
+}
 .fullscreen-video {
   position: fixed;
   top: 0;
