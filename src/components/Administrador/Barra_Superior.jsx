@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Barra_Superior = ({title}) => {
@@ -12,13 +13,13 @@ const Barra_Superior = ({title}) => {
             <div className="flex justify-center">
                 <p className="font-bold">Administrador</p>
                 <div className="bg-black w-[0.2%] opacity-50 ml-4 mr-4"></div>
-                <button>
+                <Link href="/administrador/ventas">
                     <img src="/notification.png" className="w-7 h-"></img>
-                </button>
+                </Link>
                 <div className="bg-black w-[0.2%] opacity-50 ml-4 mr-4"></div>
-                <button>
+                <Link href="/">
                     <img src="/logout.png" className="w-7 h-7"></img>
-                </button>
+                </Link>
             </div>
         </div>
     )

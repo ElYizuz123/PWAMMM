@@ -92,6 +92,15 @@ CREATE TABLE `venta_total` (
     PRIMARY KEY (`id_venta`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `preguntas_frecuentes` (
+    `id_pregunta` INTEGER NOT NULL,
+    `pregunta` VARCHAR(50) NOT NULL DEFAULT 'X.- *vacío*',
+    `respuesta` VARCHAR(50) NOT NULL DEFAULT 'R- *vacío*',
+
+    PRIMARY KEY (`id_pregunta`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `foto` ADD CONSTRAINT `fk_foto_categoria1` FOREIGN KEY (`categoria_id_categoria`) REFERENCES `categoria`(`id_categoria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
