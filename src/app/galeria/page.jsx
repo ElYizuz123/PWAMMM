@@ -7,8 +7,12 @@ function page() {
 
     return (
         <LayoutPrincipal>
-            <div className="bg-[#F5F5F5] h-max relative w-full">
+            <div className="bg-[#F5F5F5] h-max relative w-full overflow-x-hidden">
 
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
@@ -27,41 +31,26 @@ function page() {
                 </div>
                 {/* <div className="bg-cover bg-center bg-opacity-60 w-full h-max" style={{ backgroundImage: "url('/backgroundImage.png')" }}> */}
 
-                <br></br>
-                <br></br>
 
-                <div>
-                    <div>
-                        <p className="text-5xl ml-28 mb-6">Categoría</p>
-                    </div>
+                <div className="items-center justify-center">
 
-                    <div className="ml-28 mb-14">
+                    <div className="mb-14">
                         <CarruselGaleria></CarruselGaleria>
                     </div>
-
+                    
                 </div>
 
                 <div>
-                    <div>
-                        <p className="text-5xl ml-28 mb-6">Categoría</p>
-                    </div>
 
-                    <div className="ml-28">
+                    <div className="mb-14">
                         <CarruselGaleria></CarruselGaleria>
                     </div>
-
+                    
                 </div>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-
 
             </div>
         </LayoutPrincipal>
-
         // </div>
-
     )
 }
 
