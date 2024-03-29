@@ -9,6 +9,8 @@ const page = () => {
   const [cProductIsOpen, setCProductIsOpen] = useState(false);
 
   const [productos, setProductos] = useState(null);
+  const [marcas, setMarcas] = useState(null);
+
 
   const openCProduct = () => {
     setCProductIsOpen(true);
@@ -25,8 +27,16 @@ const page = () => {
     console.log(resJSON);
   };
 
+  const readMarcas = async () => {
+    const res = await fetch('/api/read_marcas');
+    const resJSON = await res.json();
+    setMarcas(JSON.parse(resJSON));
+    console.log(resJSON);
+  };
+
   useEffect(() => {
     readData();
+    readMarcas();
   }, []);
 
   useEffect(() => {
@@ -48,8 +58,8 @@ const page = () => {
 
   return (
     <LayoutCRUD title="Productos">
-      <div className='absolute top-1/2 left-[40%] z-10 w-5/12 h-4/6'>
-        <Crear_Producto isOpen={cProductIsOpen} onClose={closeCProduct}/>
+      <div className='absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6'>
+        <Crear_Producto isOpen={cProductIsOpen} onClose={closeCProduct} marcas={marcas}/>
       </div>
       <main className='flex flex-col items-center justify-between w-full h-auto'>
         <div className='relative w-full h-auto overflow-hidden'>
