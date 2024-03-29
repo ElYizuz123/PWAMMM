@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model marca {
+  idMarca     Int        @id
+  Nombre      String     @unique(map: "Nombre_UNIQUE") @db.VarChar(45)
+  idMezcalera String?    @db.VarChar(45)
+  Tipo        Int    
+  producto    producto[]
+}
+
+model producto {
+  idProducto           Int                   @id
+  nombre               String                @unique(map: "nombre_UNIQUE") @db.VarChar(45)
+  idMarca              Int
+  foto                 Bytes                 @db.Blob
+  precio               Decimal               @db.Decimal(10, 0)
+  mercadoLibre         String?               @db.LongText
+  cantidad             Int
+  marca                marca                 @relation(fields: [idMarca], references: [idMarca], onDelete: NoAction, onUpdate: NoAction, map: "producto_ibfk_1")
+  producto_informacion producto_informacion?
+
+  @@index([idMarca], map: "idMarca")
+}
+
+model producto_informacion {
+  idproducto_informacion Int      @id @unique(map: "idproducto_informacion_UNIQUE")
+  idProducto             Int      @unique(map: "idProducto_UNIQUE")
+  tipo_agave             String?  @db.VarChar(45)
+  tipo_cosecha           String?  @db.VarChar(45)
+  tipo_elaboracion       String?  @db.VarChar(45)
+  tipo_horno             String?  @db.VarChar(45)
+  tipo_molienda          String?  @db.VarChar(45)
+  tipo_fermentacion      String?  @db.VarChar(45)
+  tipo_destilador        String?  @db.VarChar(45)
+  riquezaAlcoholica      String?  @db.VarChar(45)
+  contenido              Int?
+  producto               producto @relation(fields: [idProducto], references: [idProducto], onDelete: NoAction, onUpdate: NoAction, map: "producto_informacion_ibfk_1")
+}
+
+model venta {
+  idventa       Int             @id @unique(map: "idventa_UNIQUE")
+  fechaVenta    DateTime        @db.Date
+  total         Decimal         @db.Decimal(10, 0)
+  status        Int             @default(0) @db.TinyInt
+  carrito       Json
+  envio         Int             @db.TinyInt
+  venta_detalle venta_detalle[]
+}
+
+model venta_detalle {
+  idventa_detalle   Int     @id
+  idVenta           Int
+  cliente_nombre    String  @db.VarChar(45)
+  cliente_apellidos String  @db.VarChar(60)
+  empresa_nombre    String? @db.VarChar(45)
+  cliente_telefono  String  @db.VarChar(10)
+  cliente_email     String  @db.VarChar(45)
+  cliente_cp        String  @db.VarChar(5)
+  cliente_calle     String  @db.VarChar(45)
+  cliente_numExt    Int
+  cliente_numInt    Int?
+  cliente_colonia   String  @db.VarChar(45)
+  cliente_poblacion String  @db.VarChar(45)
+  cliente_region    String  @db.VarChar(45)
+  cliente_pais      String  @default("MEXICO") @db.VarChar(45)
+  venta             venta   @relation(fields: [idVenta], references: [idventa], onDelete: NoAction, onUpdate: NoAction, map: "venta_detalle_ibfk_1")
+
+  @@index([idVenta], map: "idVenta")
+}
+
+model galeria_categoria {
+  id_categoria     Int                @id @unique(map: "idcategoria_UNIQUE") @default(autoincrement())
+  categoria        String             @unique(map: "categoria_UNIQUE") @default("*Categoría*") @db.VarChar(30)
+  galeria_fotos galeria_fotos[]
+}
+
+model galeria_fotos {
+  id_foto           Int               @id @unique(map: "id_foto_UNIQUE") @default(autoincrement())
+  foto              String            @default("/fotoDefault.jpg") @db.VarChar(45)
+  descripcion       String?           @default("*sin descripción*") @db.VarChar(45)
+  fk_id_categoria   Int
+  galeria_categoria galeria_categoria @relation(fields: [fk_id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_galeria_fotos_galeria_categoria")
+
+  @@index([fk_id_categoria], map: "fk_galeria_fotos_galeria_categoria_idx")
+}
