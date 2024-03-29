@@ -12,10 +12,12 @@ const Tarjeta = ({nombre,marca,precio,ml,agave,alcohol,imagen,mercadoLibre}) => 
 
   return (
     <div className={k2d.className}>
-      <div className="card relative rounded-5 overflow-hidden">
-        <button className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
+      <div className="card relative rounded-5 overflow-hidden ">
+        
+        
+        <Link href="\tienda\abrir_producto" className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
           <img src="\emoticons\ojo.png" alt="Icono" width="32" height="32" />
-        </button>
+        </Link>
         <figure>
           <img className="object-cover" src={imagen} />
         </figure>
