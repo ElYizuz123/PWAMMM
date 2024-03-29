@@ -7,15 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model marca {
+model marca2 {
   idMarca     Int        @id
   Nombre      String     @unique(map: "Nombre_UNIQUE") @db.VarChar(45)
   idMezcalera String?    @db.VarChar(45)
   Tipo        Int    
-  producto    producto[]
+  producto    producto2[]
 }
 
-model producto {
+model producto2 {
   idProducto           Int                   @id
   nombre               String                @unique(map: "nombre_UNIQUE") @db.VarChar(45)
   idMarca              Int
@@ -23,13 +23,13 @@ model producto {
   precio               Decimal               @db.Decimal(10, 0)
   mercadoLibre         String?               @db.LongText
   cantidad             Int
-  marca                marca                 @relation(fields: [idMarca], references: [idMarca], onDelete: NoAction, onUpdate: NoAction, map: "producto_ibfk_1")
-  producto_informacion producto_informacion?
+  marca                marca2                 @relation(fields: [idMarca], references: [idMarca], onDelete: NoAction, onUpdate: NoAction, map: "producto_ibfk_1")
+  producto_informacion producto_informacion2?
 
   @@index([idMarca], map: "idMarca")
 }
 
-model producto_informacion {
+model producto_informacion2 {
   idproducto_informacion Int      @id @unique(map: "idproducto_informacion_UNIQUE")
   idProducto             Int      @unique(map: "idProducto_UNIQUE")
   tipo_agave             String?  @db.VarChar(45)
@@ -41,7 +41,7 @@ model producto_informacion {
   tipo_destilador        String?  @db.VarChar(45)
   riquezaAlcoholica      String?  @db.VarChar(45)
   contenido              Int?
-  producto               producto @relation(fields: [idProducto], references: [idProducto], onDelete: NoAction, onUpdate: NoAction, map: "producto_informacion_ibfk_1")
+  producto               producto2 @relation(fields: [idProducto], references: [idProducto], onDelete: NoAction, onUpdate: NoAction, map: "producto_informacion_ibfk_1")
 }
 
 model venta {
