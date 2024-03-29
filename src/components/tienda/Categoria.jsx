@@ -1,25 +1,23 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-
-
 const Categoria = () => {
-const [items, setItems] = useState([]);
-const [selectedMarca, setSelectedMarca] = useState("Todos");
+  const [items, setItems] = useState([]);
+  const [selectedMarca, setSelectedMarca] = useState("Todos");
 
-useEffect(() => {
-  const fetchData = async () => {
-    const response = await fetch("/api/read_marcas");
-    const data = await response.json();
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api/read_marcas");
+      const data = await response.json();
 
-    setItems(data); // Suponiendo que 'data' es un array de items.
-  };
+      setItems(data); // Suponiendo que 'data' es un array de items.
+    };
 
-  fetchData();
-}, []);
+    fetchData();
+  }, []);
   return (
     <div>
-      <div className="flex flex-col p-4">
+      <div className="flex flex-col">
         <span className="text-lg font-bold border-b-2 border-[#F70073] mb-2">
           Default
         </span>
