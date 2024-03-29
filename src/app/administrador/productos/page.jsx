@@ -28,7 +28,7 @@ const page = () => {
   };
 
   const readMarcas = async () => {
-    const res = await fetch('/api/read_marcas');
+    const res = await fetch('/api/read_marcas_admin');
     const resJSON = await res.json();
     setMarcas(JSON.parse(resJSON));
     console.log(resJSON);
