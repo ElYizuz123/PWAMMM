@@ -16,7 +16,7 @@ const berkshire = Berkshire_Swash({
 
 const LayoutPrincipal = ({ children }) => {
   return (
-    <body className="bg-[#F5F5F5FD]">
+    <body className="bg-[#F5F5F5]">
       <div>
         <div>
           <nav className="bg-black w-full z-20 top-0 start-0">

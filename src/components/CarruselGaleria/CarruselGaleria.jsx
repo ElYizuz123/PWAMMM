@@ -5,30 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react';
 
-function Carousel() {
-
-  const [fotos, setFotos] = useState(null);
-  const readData = async () => {
-    const res = await fetch('/api/read_fotos');
-    const resJSON = await res.json();
-    setVentas(JSON.parse(resJSON));
-    console.log(resJSON);
-  };
-
-  const handleChange = () => {
-    if(document.getElementById("orden").value=="antiguo"){
-      setVentas(ventas.reverse());
-      setOrden("antiguo");
-      console.log(ventas);
-    }
-    else{
-      setOrden("reciente");
-      readData();
-    }
-  }
-
-
-
+function Carousel({fotos}) {
 
   var settings = {
     dots: true,
@@ -36,7 +13,8 @@ function Carousel() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    initialSlide: 0,
+    initialSlide: 0,  
+    
     responsive: [
       {
         breakpoint: 1024,
@@ -71,20 +49,45 @@ function Carousel() {
         <p className="text-5xl mb-6 ml-3">Categoría</p>
       </div>
       
-      <Slider {...settings}>
+      <Slider {...settings} className="w-full">
+
+      {/* {fotos.map(slide => {
+          (
+            <div key={slide.id_foto}>
+              <h3>{slide}</h3>
+            </div>
+          );
+      })} */}
+
+
+
         
-        <div>
+        <div className=''>
         {fotos &&
-        fotos.map((galeria_fotos) => (<div key={galeria_fotos.id_foto}>
-          <div>
+        fotos.map((galeria_fotos) => {
+          return (
+          <div key={galeria_fotos.id_foto}>
           <Image src={galeria_fotos.foto} alt="imagen" width={400} height={270} //1
-          className="border-4 border-pink-700 rounded-lg"></Image>
+           className="border-4 border-pink-700 rounded-lg"></Image>
+          
+          
           <div className="flex items-center text-center">
             <p className="text-3xl">descripción</p>
           </div>
-          </div>
 
-          </div>))}
+          </div>)
+          })
+        }
+        </div>
+
+
+{/* 
+        <div>
+        <Image src="/MairaMedel.jpg" alt="imagen" width={400} height={270} //1
+          className="border-4 border-pink-700 rounded-lg"></Image>
+          <div className="flex items-center text-center">
+            <p className="text-3xl">Título de la foto</p>
+          </div>
         </div>
 
 
@@ -101,14 +104,7 @@ function Carousel() {
           <div className="flex items-center text-center">
             <p className="text-3xl">Título de la foto</p>
           </div>
-        </div>
-        <div>
-        <Image src="/MairaMedel.jpg" alt="imagen" width={400} height={270} //1
-          className="border-4 border-pink-700 rounded-lg"></Image>
-          <div className="flex items-center text-center">
-            <p className="text-3xl">Título de la foto</p>
-          </div>
-        </div>
+        </div> */}
 
 
       </Slider>
