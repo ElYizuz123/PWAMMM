@@ -8,7 +8,8 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-const Tarjeta = () => {
+const Tarjeta = ({nombre,marca,precio,ml,agave,alcohol,imagen,mercadoLibre}) => {
+
   return (
     <div className={k2d.className}>
       <div className="card relative rounded-5 overflow-hidden">
@@ -16,32 +17,27 @@ const Tarjeta = () => {
           <img src="\emoticons\ojo.png" alt="Icono" width="32" height="32" />
         </button>
         <figure>
-          <img
-            className="object-cover"
-            src="\botellas\bottle_don_mateo.jpg"
-            alt="t-shirt"
-          />
+          <img className="object-cover" src={imagen} />
         </figure>
         <section className="details">
           <div className="min-details">
             <h1 className="text-xl font-semibold">
-              Don Mateo 750ml <span className="text-">Don Mateo</span>
+              {nombre} {ml}ml <span className="text-">{marca}</span>
             </h1>
-            <h1 className="price font-semibold">$350.00</h1>
+            <h1 className="price font-semibold">${precio}</h1>
           </div>
-
           <div className="options">
             <div>
               <div class="grid grid-cols-2 gap-2">
                 <div class="col-span-1 flex items-center justify-center">
                   <ul class="list-disc">
-                    <li>400 ml</li>
-                    <li>Agave Cupeatra</li>
+                    <li>{ml}ml</li>
+                    <li>Agave {agave}</li>
                   </ul>
                 </div>
                 <div class="col-span-1 flex items-center justify-center">
                   <ul class="list-disc ">
-                    <li>42% Alcohol</li>
+                    <li>{alcohol}% Alcohol</li>
                     <li>Origen México</li>
                   </ul>
                 </div>
@@ -51,14 +47,19 @@ const Tarjeta = () => {
           <Link href="#" className="btn font-semibold">
             Añadir a carrito
           </Link>
-          <button className="btn2 mt-1 flex items-center justify-center">
-            <span className="font-semibold">Comprar en mercado libre</span>
-            <img
-              className="w-8 h-8"
-              src="\emoticons\mercado_libre_logo.webp"
-              alt="Mercado Libre"
-            />
-          </button>
+
+          {mercadoLibre !== "NULL" && (
+            <button className="btn2 mt-1 flex items-center justify-center">
+              <a href={mercadoLibre} target="_blank" className="font-semibold">
+                Comprar en mercado libre
+              </a>
+              <img
+                className="w-8 h-8"
+                src="\emoticons\mercado_libre_logo.webp"
+                alt="Mercado Libre"
+              />
+            </button>
+          )}
         </section>
       </div>
     </div>

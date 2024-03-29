@@ -4,6 +4,7 @@ import db from '@/libs/db'
 export async function GET(){
     try{
         const data = await db.venta_total.findMany();
+        
         const dataReversed = data.reverse();
         console.log(dataReversed);
         return NextResponse.json(JSON.stringify(dataReversed));
