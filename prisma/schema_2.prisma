@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model asociada {
+  id_asociada Int     @id @default(autoincrement())
+  nombre      String  @db.VarChar(45)
+  historia    String  @db.LongText
+  foto        String  @db.VarChar(45)
+  marca       marca[]
+}
+
+model categoria {
+  id_categoria Int    @id @default(autoincrement())
+  nombre       String @db.VarChar(45)
+  foto         foto[]
+}
+
+model evento {
+  id_evento    Int      @id @default(autoincrement())
+  foto         String   @db.VarChar(45)
+  fecha_inicio DateTime @db.Date
+  fecha_fin    DateTime @db.Date
+}
+
+model foto {
+  id_foto                Int       @default(autoincrement())
+  foto                   String    @db.VarChar(45)
+  titulo                 String    @db.VarChar(45)
+  categoria_id_categoria Int
+  categoria              categoria @relation(fields: [categoria_id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_foto_categoria1")
+
+  @@id([id_foto, categoria_id_categoria])
+  @@index([categoria_id_categoria], map: "fk_foto_categoria1_idx")
+}
+
+model marca {
+  id_marca             Int        @id @default(autoincrement())
+  nombre               String     @db.VarChar(45)
+  Asociada_id_asociada Int
+  asociada             asociada   @relation(fields: [Asociada_id_asociada], references: [id_asociada], onDelete: NoAction, onUpdate: NoAction, map: "fk_marca_Asociada1")
+  producto             producto[]
+
+  @@index([Asociada_id_asociada], map: "fk_marca_Asociada1_idx")
+}
+
+model producto {
+  id_producto      Int                @id @default(autoincrement())
+  nombre           String             @db.VarChar(45)
+  ml               Int
+  precio           Decimal            @db.Decimal(10, 2)
+  descripcion      String             @db.LongText
+  foto             String             @db.VarChar(45)
+  marca_id_marca   Int
+  marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_producto_marca1")
+  venta_individual venta_individual[]
+
+  @@index([marca_id_marca], map: "fk_producto_marca1_idx")
+}
+
+model user {
+  user     Int    @id @default(autoincrement())
+  password String @db.MediumText
+}
+
+model venta_individual {
+  id_venta_individual  Int         @id @default(autoincrement())
+  cantidad_producto    Int
+  subtotal             Decimal     @db.Decimal(10, 2)
+  venta_total_id_venta Int
+  producto_id_producto Int
+  producto             producto    @relation(fields: [producto_id_producto], references: [id_producto], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_producto1")
+  venta_total          venta_total @relation(fields: [venta_total_id_venta], references: [id_venta], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_venta_total")
+
+  @@index([producto_id_producto], map: "fk_venta_individual_producto1_idx")
+  @@index([venta_total_id_venta], map: "fk_venta_individual_venta_total_idx")
+}
+
+model venta_total {
+  id_venta         Int                @id @default(autoincrement())
+  fecha_venta      DateTime           @default(now()) @db.DateTime(0)
+  total            Decimal            @db.Decimal(10, 2)
+  status           String             @default("Pendiente") @db.VarChar(45)
+  venta_individual venta_individual[]
+}
