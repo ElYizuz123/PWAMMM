@@ -49,7 +49,7 @@ const page = () => {
 
   const handleChange = (event) => {
     setBusqueda(event.target.value);
-  };
+  }; 
 
   const handleSubmit = (e) => {
     e.preventDefault();

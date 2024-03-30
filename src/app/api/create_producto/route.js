@@ -14,7 +14,7 @@ export async function POST(request){
                 descripcion: data.descripcion,
                 foto: data.foto, 
                 marca_id_marca: parseInt(data.marca),
-                mercado_lib: data.mercado_lib,
+                mercadoLibre: data.mercado_lib,
             }
         })
         return NextResponse.json("Registrado");

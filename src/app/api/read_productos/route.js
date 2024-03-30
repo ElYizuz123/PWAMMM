@@ -7,7 +7,7 @@ export async function GET(){
         console.log(data);
         return NextResponse.json(JSON.stringify(data));
 
-    }catch(err){
+    }catch(error){
         console.error('Error al leer los datos', error)
         return{
             status: 500,
