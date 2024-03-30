@@ -1,37 +1,22 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form';
 
 
 
 const Crear_Producto = ({ isOpen, onClose, marcas }) => {
-
-    const buscarIDPorNombre = (nombre) => {
-        for (let i = 0; i < marcas.length; i++) {
-            if (marcas[i].nombre == nombre) {
-                return marcas[i].id_marca;
-            }
-        }
-        return null;
-    };
+    const [productPhoto, setProductPhoto] = useState(null)
+    const { register, handleSubmit, reset} = useForm();
 
     const fileInputRef = useRef(null)
-    const [data, setData] = useState(null)
-    const [productPhoto, setProductPhoto] = useState(null)
-
-    const handleOnChange = ({ target: { name, value } }) => {
-        setData({ ...data, [name]: value })
-        console.log(data)
-    }
+    
 
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
 
-    const handleOnSubmit = (async (e) => {
-        e.preventDefault();
-        setData({ ...data, "marca": buscarIDPorNombre(document.getElementById("select_marca").value) });
-
-        console.log(data)
+    const handleOnSubmit = (async (data) => {
+        console.log(data);
         const res = await fetch('/api/create_producto', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -42,15 +27,10 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
         const resJSON = await res.json()
         console.log(resJSON)
         if (resJSON == "Registrado") {
-            setData({
-                nombre: "",
-                ml: "",
-                precio: "",
-                mercado_libre: "",
-                descripcion: "",
-            })
-            setProductPhoto(null)
+            setProductPhoto()
+            reset();
         }
+
     })
 
 
@@ -64,18 +44,6 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                 <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
             </div>
             <div className='w-full h-full flex justify-between'>
-                <form className='hidden'>
-                    <input
-                        type='file'
-                        name='foto'
-                        id='fotoSelecter'
-                        ref={fileInputRef}
-                        onChange={(e) => {
-                            setProductPhoto(e.target.files[0])
-                            setData({ ...data, "foto": e.target.files[0].name})
-                        }}
-                    />
-                </form>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                     {productPhoto && (
                         <img src={URL.createObjectURL(productPhoto)} alt='Preview' className='w-64' />
@@ -88,7 +56,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                         onClick={handleFileButton}
                     >Seleccionar Archivo</button>
                     {!productPhoto && (
-                        <p className='text-sm mt-1'>Ningún archivo seleccionado</p>
+                        <p className='text-sm mt-1'>Es necesario agregar una foto</p>
                     )}
                 </div>
                 <div className='h-full w-[60%] flex justify-between'>
@@ -102,52 +70,81 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                     </div>
                     <div>
                         <div className='h-full flex flex-col items-start mt-5 mr-2'>
-                            <form onSubmit={handleOnSubmit}>
-
+                            <form onSubmit={handleSubmit(handleOnSubmit)}>
+                                <input
+                                    type='file'
+                                    name='foto'
+                                    id='fotoSelecter'
+                                    className='hidden'
+                                    ref={fileInputRef}
+                                    onChange={(e) => {
+                                        setProductPhoto(e.target.files[0])
+                                        register('foto', {value:e.target.files[0].name})
+                                    }}
+                                />
                                 <input
                                     type='text'
                                     name='nombre'
+                                    id='campo_nombre'
+                                    {...register('nombre',{
+                                        required:true,
+                                        maxLength:45 
+                                    })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                     placeholder='Nombre del mezcal'
-                                    onChange={handleOnChange}
                                 />
                                 <input
                                     type='number'
                                     name='ml'
+                                    {...register('ml',{
+                                        required:true,
+                                        maxLength:10 
+                                    })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-5'
                                     placeholder='Mililitros'
-                                    onChange={handleOnChange}
                                 />
                                 <input
                                     type='number'
                                     name='precio'
+                                    {...register('precio',{
+                                        required:true,
+                                        maxLength:10 
+                                    })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     placeholder='Precio'
-                                    onChange={handleOnChange}
                                 />
                                 <select
                                     name='marca'
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     id="select_marca"
+                                    {...register('marca',{
+                                        required:true
+                                    })}
                                 >
+                                    <option></option>
                                     {marcas && (
                                         marcas.map((marca) => (
-                                            <option key={marca.id_marca}>{marca.nombre}</option>
+                                            <option value={marca.id_marca} key={marca.id_marca}>{marca.nombre}</option>
                                         ))
                                     )}
                                 </select>
                                 <input
                                     type='text'
                                     name='mercado_lib'
+                                    {...register('mercado_lib',{
+                                        maxLength:255 
+                                    })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     placeholder='Link a mercado libre'
-                                    onChange={handleOnChange}
                                 />
                                 <textarea
                                     type='text'
                                     name='descripcion'
+                                    {...register('descripcion',{
+                                        required:true,
+                                        maxLength:3000 
+                                    })}
                                     className='w-full h-72 border-2 border-black rounded-lg pl-1 mt-6 pt-1'
-                                    onChange={handleOnChange}
                                 />
                                 <div className='w-full flex justify-end items-end'>
                                     <button
