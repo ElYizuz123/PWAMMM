@@ -76,6 +76,9 @@ h1 {
   position: absolute;
   top: 82%;
   width: 100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
   transition: box-shadow 0.3s ease-in-out, top 0.3s ease-in-out;
 }
 

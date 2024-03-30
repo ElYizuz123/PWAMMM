@@ -8,45 +8,75 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-const Tarjeta = ({nombre,marca,precio,ml,agave,alcohol,imagen,mercadoLibre}) => {
-
+const Tarjeta = ({
+  nombre,
+  marca,
+  precio,
+  ml,
+  agave,
+  alcohol,
+  imagen,
+  mercadoLibre,
+  tipo,
+}) => {
   return (
     <div className={k2d.className}>
       <div className="card relative rounded-5 overflow-hidden ">
-        
-        
-        <Link href="\tienda\abrir_producto" className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
+        <Link
+          href="\tienda\abrir_producto"
+          className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon"
+        >
           <img src="\emoticons\ojo.png" alt="Icono" width="32" height="32" />
         </Link>
         <figure>
           <img className="object-cover" src={imagen} />
         </figure>
+
         <section className="details">
-          <div className="min-details">
-            <h1 className="text-xl font-semibold">
-              {nombre} {ml}ml <span className="text-">{marca}</span>
-            </h1>
-            <h1 className="price font-semibold">${precio}</h1>
-          </div>
-          <div className="options">
+          {tipo !== "2" ? (
             <div>
-              <div class="grid grid-cols-2 gap-2">
-                <div class="col-span-1 flex items-center justify-center">
-                  <ul class="list-disc">
-                    <li>{ml}ml</li>
-                    <li>Agave {agave}</li>
-                  </ul>
-                </div>
-                <div class="col-span-1 flex items-center justify-center">
-                  <ul class="list-disc ">
-                    <li>{alcohol}% Alcohol</li>
-                    <li>Origen México</li>
-                  </ul>
+              <div className="min-details">
+                <h1 className="text-xl flex justify-between font-semibold">
+                  {nombre} {ml}ml
+                  <div>
+                    <span className="font-normal">{marca}</span>
+                  </div>
+                </h1>
+                <h1 className="price ">${precio}</h1>
+              </div>
+              <div className="options">
+                <div>
+                  <div class="grid grid-cols-2 gap-2">
+                    <div class="col-span-1 flex items-center justify-center">
+                      <ul class="list-disc">
+                        <li>{ml}ml</li>
+                        <li>Agave {agave}</li>
+                      </ul>
+                    </div>
+                    <div class="col-span-1 flex items-center justify-center">
+                      <ul class="list-disc ">
+                        <li>{alcohol}% Alcohol</li>
+                        <li>Origen México</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <Link href="#" className="btn font-semibold">
+          ) : (
+            <div>
+              <div className="min-details ">
+                <h1 className="text-xl flex justify-between font-semibold">
+                  {nombre}
+                  <div>
+                    <span className="font-normal">{marca}</span>
+                  </div>
+                </h1>
+                <h1 className="price ">${precio}</h1>
+              </div>
+            </div>
+          )}
+          <Link href="#" className="mt-2 btn font-semibold">
             Añadir a carrito
           </Link>
 

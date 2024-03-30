@@ -1,5 +1,3 @@
-
-
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
 import Formulario from "@/components/tienda/Formulario";
 import React from "react";
