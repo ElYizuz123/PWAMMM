@@ -5,14 +5,28 @@ import Tarjeta from "./Tarjeta";
 import Contador from "./Contador";
 import Image from "next/image";
 
-
 const k2d = K2D({
   weight: ["400"],
   styles: ["normal"],
   subsets: ["latin"],
 });
 
-const Ficha = () => {
+const Ficha = ({
+  nombre,
+  marca,
+  precio,
+  agave,
+  cosecha,
+  elaboracion,
+  horno,
+  molienda,
+  fermentacion,
+  destilador,
+  alcohol,
+  contenido,
+  botella,
+  mercadoLibre,
+}) => {
   return (
     <div className={k2d.className}>
       <div className="relative">
@@ -44,8 +58,8 @@ const Ficha = () => {
               {/*imagen botellas*/}
               <div className="px-32 py-4">
                 <img
-                  className="object-cover bg-gray-200 rounded-md"
-                  src="\botella.png"
+                  className="w-[350px] h-[500px] bg-gray-200 rounded-md"
+                  src={botella}
                   alt="Botellas"
                 />
               </div>
@@ -57,19 +71,26 @@ const Ficha = () => {
               {/*información */}
               <div className="absolute top-10 left-[750px] ">
                 <p className="text-black">
-                  <strong className="text-3xl">Mezcal Lucifer 400ml</strong>
-                  <strong className="mt-2 block text-2xl">$350.00</strong>
+                  <strong className="text-3xl">
+                    {nombre} {contenido}ml
+                  </strong>
+                  <strong className="mt-2 block text-2xl">${precio}</strong>
                   IVA INCLUIDO
                 </p>
                 {/*lista de caracteristicas*/}
                 <p className="text-black mt-4">Datos del producto</p>
                 <div className="col-span-1  ml-5">
                   <ul className="text-black list-disc ">
-                    <li>400 ml</li>
-                    <li>Marca: Mezcal Armonía</li>
-                    <li>Agave Cupreata</li>
-                    <li>42% alcohol</li>
-                    <li>Origen México</li>
+                    <li>Marca: {marca}</li>
+                    <li>Agave: {agave}</li>
+                    <li>Cosecha: {cosecha}</li>
+                    <li>Elaboración: {elaboracion}</li>
+                    <li>Horno: {horno}</li>
+                    <li>Molienda: {molienda}</li>
+                    <li>Fermentación: {fermentacion}</li>
+                    <li>Destilador: {destilador}</li>
+                    <li>Riqueza alcoholica: {alcohol}</li>
+                    <li>Origen: México</li>
                   </ul>
                 </div>
                 <div className=" justify-center items-center">
