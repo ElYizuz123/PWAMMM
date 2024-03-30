@@ -15,34 +15,17 @@ model asociada {
   marca       marca[]
 }
 
-model categoria {
-  id_categoria Int    @id @default(autoincrement())
-  nombre       String @db.VarChar(45)
-  foto         foto[]
-}
-
 model evento {
-  id_evento    Int      @id @default(autoincrement())
-  foto         String   @db.VarChar(45)
-  fecha_inicio DateTime @db.Date
-  fecha_fin    DateTime @db.Date
-}
-
-model foto {
-  id_foto                Int       @default(autoincrement())
-  foto                   String    @db.VarChar(45)
-  titulo                 String    @db.VarChar(45)
-  categoria_id_categoria Int
-  categoria              categoria @relation(fields: [categoria_id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_foto_categoria1")
-
-  @@id([id_foto, categoria_id_categoria])
-  @@index([categoria_id_categoria], map: "fk_foto_categoria1_idx")
+  id_evento Int      @id @default(autoincrement())
+  foto      String   @db.VarChar(45)
+  fecha_fin DateTime @db.Date
 }
 
 model marca {
   id_marca             Int        @id @default(autoincrement())
-  nombre               String     @db.VarChar(45)
+  nombre               String     @unique(map: "nombre_UNIQUE") @db.VarChar(45)
   Asociada_id_asociada Int
+  tipo                 Int
   asociada             asociada   @relation(fields: [Asociada_id_asociada], references: [id_asociada], onDelete: NoAction, onUpdate: NoAction, map: "fk_marca_Asociada1")
   producto             producto[]
 
@@ -57,7 +40,8 @@ model producto {
   descripcion      String             @db.LongText
   foto             String             @db.VarChar(45)
   marca_id_marca   Int
-  mercado_lib      String?            @db.MediumText
+  mercadoLibre     String?            @db.MediumText
+  cantidad         Int?
   marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_producto_marca1")
   venta_individual venta_individual[]
 
@@ -65,7 +49,7 @@ model producto {
 }
 
 model user {
-  user     Int    @id @default(autoincrement())
+  user     String @id @db.VarChar(45)
   password String @db.MediumText
 }
 
@@ -83,9 +67,57 @@ model venta_individual {
 }
 
 model venta_total {
-  id_venta         Int                @id @default(autoincrement())
-  fecha_venta      DateTime           @default(now()) @db.DateTime(0)
-  total            Decimal            @db.Decimal(10, 2)
-  status           String             @default("Pendiente") @db.VarChar(45)
-  venta_individual venta_individual[]
+  id_venta          Int                @id
+  fecha_venta       DateTime           @default(now()) @db.DateTime(0)
+  total             Decimal            @db.Decimal(10, 2)
+  status            String             @default("Pendiente") @db.VarChar(45)
+  envio             Int                @db.TinyInt
+  nombre_cliente    String             @db.VarChar(45)
+  apellidos_cliente String             @db.VarChar(45)
+  empresa           String?            @db.VarChar(45)
+  telefono          String             @db.VarChar(10)
+  email             String             @db.VarChar(45)
+  cp                String             @db.VarChar(5)
+  calle             String             @db.VarChar(45)
+  num_ext           String             @db.VarChar(10)
+  num_int           String?            @db.VarChar(10)
+  colonia           String             @db.VarChar(45)
+  poblacion         String             @db.VarChar(45)
+  region            String             @db.VarChar(45)
+  venta_individual  venta_individual[]
+}
+
+model galeria_categoria {
+  id_categoria Int            @id @default(autoincrement())
+  categoria    String         @db.VarChar(30)
+  galeria_foto galeria_foto[]
+}
+
+model galeria_foto {
+  id_foto           Int               @default(autoincrement())
+  foto              String            @db.VarChar(45)
+  descripcion       String            @db.VarChar(45)
+  fk_id_categoria   Int
+  galeria_categoria galeria_categoria @relation(fields: [fk_id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_foto_categoria1")
+
+  @@id([id_foto, fk_id_categoria])
+  @@index([fk_id_categoria], map: "fk_foto_categoria1_idx")
+}
+
+model pregunta_frecuente {
+  id_pregunta_frencuente Int    @id @default(autoincrement())
+  pregunta               String @db.VarChar(45)
+  respuesta              String @db.TinyText
+}
+
+model producto_informacion {
+  id_producto_informacion Int     @id @default(autoincrement())
+  tipo_agave              String? @db.VarChar(45)
+  tipo_cosecha            String? @db.VarChar(45)
+  tipo_elaboracion        String? @db.VarChar(45)
+  tipo_horno              String? @db.VarChar(45)
+  tipo_molienda           String? @db.VarChar(45)
+  tipo_fermentacion       String? @db.VarChar(45)
+  tipo_destilador         String? @db.VarChar(45)
+  riquezaAlcoholica       String? @db.VarChar(45)
 }
