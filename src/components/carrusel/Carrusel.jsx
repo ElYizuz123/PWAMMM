@@ -42,35 +42,28 @@ const Carrusel = () => {
     },
   ];
 
-
   return (
-    <div className="bg-[#330e36] p-5 h-[600px]  ">
-      <div className="bg-[#c795cb]  max-w-3/4 mx-auto mt-5 mb-5 ">
-        <ReactImageGallery
-          autoPlay
-          items={images}
-          showThumbnails={true}
-          showPlayButton={false}
-          showFullscreenButton={false}
-          thumbnailPosition="left"
-          renderItem={(item) => (
-            <img className="mx-auto my-auto max-w-60vh max-h-60vh"
-              src={item.original}
-              alt={item.original}
-              style={{
-                maxWidth: "40%",
-                maxHeight: "40%",
-
-
-              }}
-            />
-          )}
-
-        />
-      </div>
-
+    <div className="bg-[#330e36] p-5 h-[600px] sm:h-[800px] md:h-[900px] lg:h-[1000px] xl:h-[1100px] 2xl:h-[1200px]">
+    <div className="bg-[#c795cb] max-w-3/4 mx-auto mt-5 mb-5" style={{ backgroundImage: "url('/multimedia/JIMA.jpg')"}}>
+      <ReactImageGallery
+        autoPlay
+        items={images}
+        showThumbnails={true}
+        showPlayButton={false}
+        showFullscreenButton={false}
+        thumbnailPosition="bottom"
+        renderItem={(item) => (
+          <img
+            className="mx-auto my-auto w-full h-full max-w-[60vh] max-h-[60vh] sm:max-w-[70vh] sm:max-h-[70vh] md:max-w-[80vh] md:max-h-[80vh] lg:max-w-[90vh] lg:max-h-[90vh] xl:max-w-[100vh] xl:max-h-[100vh]"
+            src={item.original}
+            alt={item.original}
+          />
+        )}
+      />
     </div>
-  );
+  </div>
+);
+  
 }
 
 export default Carrusel
