@@ -3,7 +3,7 @@ import db from '@/libs/db'
 
 export async function GET(){
     try{
-        const data = await db.galeria_categoria.findMany();
+        const data = await db.pregunta_frecuente.findMany();
         console.log(data);
         return NextResponse.json(JSON.stringify(data));
 

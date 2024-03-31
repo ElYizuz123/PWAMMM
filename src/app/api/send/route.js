@@ -10,9 +10,8 @@ export async function POST() {
     const data = await resend.emails.send({
       from: 'Asociación de mujeres Mezcaleras de Michoacán <onboarding@resend.dev>',
       to: ['carlosgascac@gmail.com'],
-      subject: "Hola vendo mezcal",
+      subject: "Holiwis",
       react: EmailTemplate({ firstName: 'Gask' }),
-      text: "hola"
     });
 
     console.log(data)

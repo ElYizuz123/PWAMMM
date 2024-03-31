@@ -7,16 +7,16 @@ import React, { useEffect, useState } from 'react';
 // Página de galería
 function page() {
 
-    const [fotos, setFotos] = useState(null);
+    const [categorias, setCategorias] = useState(null);
     const readData = async () => {
-      const res = await fetch('/api/read_fotos');
-      const resJSON = await res.json();
-      setFotos(JSON.parse(resJSON));
-      console.log(resJSON);
+        const res = await fetch('/api/read_categorias');
+        const resJSON = await res.json();
+        setCategorias(JSON.parse(resJSON));
+        console.log(resJSON);
     };
-  
+
     useEffect(() => {
-      readData();
+        readData();
     }, []);
 
 
@@ -32,10 +32,19 @@ function page() {
                     />
                 </div>
 
+                <br/>
+
                 <div className="items-center justify-center">
-                    <div className="mb-14">
-                        <CarruselGaleria fotos={fotos}></CarruselGaleria>
-                    </div>
+                    {categorias &&
+                        categorias.map((galeria_categoria) => (
+                            <div key={galeria_categoria.id_categoria}>
+                                <p className="text-5xl mb-6 ml-3">{galeria_categoria.categoria}</p>
+                                <div className="mb-14">
+                                    <CarruselGaleria categorias={galeria_categoria.id_categoria}></CarruselGaleria>
+                                </div>
+                            </div>
+                        ))}
+
                 </div>
 
             </div>
