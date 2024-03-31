@@ -151,3 +151,14 @@ h1 {
   transition: transform 0.3s ease; /* Agrega una transición suave */
 }
 
+/* cuadro modal de correo enviado */
+.container-modal {
+  width: 50%;
+  height: auto;
+  position: fixed;
+  background-color: #f5f5f5e2;
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}

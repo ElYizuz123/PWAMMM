@@ -22,7 +22,7 @@ const PreguntasFrecuentes = () => {
                 {preguntas &&
                     preguntas.map((pregunta_frecuente) => (
                         <div key={pregunta_frecuente.id_pregunta_frecuente}
-                            className="bg-[#FFFFFF] border border-black rounded-lg mb-5 flex">
+                            className="bg-[#FFFFFF] border border-black rounded-lg mb-5 flex shadow-lg">
                             <div class="ml-5 mt-3 mb-5 mr-5 flex flex-col">
                                 <p className="text-3xl font-bold">-{pregunta_frecuente.pregunta}-</p>
                                     <br/>
