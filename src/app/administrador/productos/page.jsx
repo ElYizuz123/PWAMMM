@@ -21,6 +21,10 @@ const page = () => {
     readData()
   };
 
+  const updatePage = () => {
+    readData()
+  }
+
   const readData = async () => {
     const res = await fetch('/api/read_productos');
     const resJSON = await res.json();
@@ -60,7 +64,12 @@ const page = () => {
   return (
     <LayoutCRUD title="Productos">
       <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${cProductIsOpen ? "": "pointer-events-none"}`}>
-        {cProductIsOpen && <Crear_Producto isOpen={cProductIsOpen} onClose={closeCProduct} marcas={marcas} nProductos={productos ? Object.keys(productos).length:0}/>}
+        {cProductIsOpen && <Crear_Producto 
+        isOpen={cProductIsOpen} 
+        onClose={closeCProduct} 
+        marcas={marcas} 
+        nProductos={productos ? Object.keys(productos).length:0}
+        />}
       </div>
       <main className='flex flex-col items-center justify-between w-full h-auto '>
         <div className='relative w-full h-auto overflow-hidden'>
@@ -109,6 +118,7 @@ const page = () => {
                   marca={producto.marca.nombre}
                   precio={producto.precio}
                   foto={producto.foto}
+                  updatePage={updatePage}
                 />))
                 }
             </div>

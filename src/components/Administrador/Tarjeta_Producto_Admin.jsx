@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto}) => {
+const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, updatePage}) => {
 
     const data = {
         "id_producto": id_producto,
@@ -25,8 +25,8 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto}) 
             })
             const resJSON = await res.json()
             console.log(resJSON)
-            if (resJSON == "Registrado") {
-                
+            if (resJSON == "Producto eliminado con éxito") {
+                updatePage()
             }
         }
     })
