@@ -2,17 +2,46 @@ import Link from 'next/link'
 import React from 'react'
 
 const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto}) => {
+
+    const data = {
+        "id_producto": id_producto,
+        "foto" : foto,
+        "source" : "botellas"
+    }
+
+    const deleteProduct = (async () => {
+        const deletedImage = await fetch('/api/delete_image', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        })
+        const resDeletedImageJSON = await deletedImage.json()
+        if(resDeletedImageJSON=='Arhivo eliminado correctamente'){
+            const res = await fetch('/api/delete_producto', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'aplication/json'
+                }
+            })
+            const resJSON = await res.json()
+            console.log(resJSON)
+            if (resJSON == "Registrado") {
+                
+            }
+        }
+    })
+
     return (
         <div className="relative rounded-5 overflow-hidden card-reduced">
             <button className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
                 <img src="\emoticons\editar.png" alt="Icono" width="32" height="32" />
             </button>
-            <button className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
+            <button onClick={deleteProduct} className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
                 <img src="\emoticons\eliminar.png" alt="Icono" width="32" height="32" />
             </button>
             <figure>
                 <img
-                    className="object-cover"
+                    className="object-contain"
                     src={"\\botellas\\"+foto}
                     alt="t-shirt"
                 />

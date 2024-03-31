@@ -4,12 +4,14 @@ import { useForm } from 'react-hook-form';
 
 
 
-const Crear_Producto = ({ isOpen, onClose, marcas }) => {
+const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
     const [productPhoto, setProductPhoto] = useState(null)
     const { register, handleSubmit, reset, setValue} = useForm();
-
+    const [numProductos, setNumProductos] = useState(nProductos)
     const fileInputRef = useRef(null)
-    
+
+    console.log(numProductos)
+
     useEffect(() => {
         register('foto'); 
     }, [register]);
@@ -20,23 +22,36 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
 
     const handleOnSubmit = (async (data) => {
         if(productPhoto){
-            console.log(data);
-            const res = await fetch('/api/create_producto', {
+            const form = new FormData()
+            form.set('file', productPhoto)
+            form.set('source', "botellas")
+            form.set('modifier', numProductos)
+            //Registrar foto en el servidor
+            const fotoRes = await fetch('/api/upload_image', {
                 method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'aplication/json'
-                }
+                body: form
             })
-            const resJSON = await res.json()
-            console.log(resJSON)
-            if (resJSON == "Registrado") {
-                setProductPhoto()
-                reset();
+            const fotoResJSON = await fotoRes.json()
+            console.log(fotoResJSON)
+
+            //Registrar producto en la DB
+            if(fotoResJSON == "Archivo subido correctamente"){
+                const res = await fetch('/api/create_producto', {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'aplication/json'
+                    }
+                })
+                const resJSON = await res.json()
+                console.log(resJSON)
+                if (resJSON == "Registrado") {
+                    setProductPhoto()
+                    setNumProductos(numProductos+1)
+                    reset();
+                }
             }
         }
-
-
     })
 
 
@@ -86,7 +101,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                     ref={fileInputRef}
                                     onChange={(e) => {
                                         setProductPhoto(e.target.files[0])
-                                        setValue('foto', e.target.files[0].name)
+                                        setValue('foto', e.target.files[0].name.split(".")[0]+numProductos+"."+e.target.files[0].name.split(".")[1])
                                     }}
                                 />
                                 <input
