@@ -19,6 +19,7 @@ const page = () => {
 
   const closeCProduct = () => {
     setCProductIsOpen(false);
+    readData()
   };
 
   const readData = async () => {

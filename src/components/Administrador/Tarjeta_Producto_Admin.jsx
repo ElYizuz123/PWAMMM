@@ -13,7 +13,7 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto}) 
             <figure>
                 <img
                     className="object-cover"
-                    src="\botellas\bottle_don_mateo.jpg"
+                    src={"\\botellas\\"+foto}
                     alt="t-shirt"
                 />
             </figure>
