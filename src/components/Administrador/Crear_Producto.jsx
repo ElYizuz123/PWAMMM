@@ -65,6 +65,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                         <p className='text-xl'>ML</p>
                         <p className='text-xl'>Precio</p>
                         <p className='text-xl'>Marca</p>
+                        <p className='text-xl'>Cantidad</p>
                         <p className='text-xl'>Mercado libre</p>
                         <p className='text-xl'>Descripción</p>
                     </div>
@@ -129,6 +130,15 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                     )}
                                 </select>
                                 <input
+                                    type='number'
+                                    name='cantidad'
+                                    placeholder='Cantidad de producto'
+                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                    {...register('cantidad', {
+                                        required:true
+                                    })}
+                                />
+                                <input
                                     type='text'
                                     name='mercado_lib'
                                     {...register('mercado_lib',{
@@ -144,7 +154,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                         required:true,
                                         maxLength:3000 
                                     })}
-                                    className='w-full h-72 border-2 border-black rounded-lg pl-1 mt-6 pt-1'
+                                    className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-6 pt-1'
                                 />
                                 <div className='w-full flex justify-end items-end'>
                                     <button
