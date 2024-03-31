@@ -12,6 +12,7 @@ const page = () => {
   const [marcas, setMarcas] = useState(null);
 
 
+
   const openCProduct = () => {
     setCProductIsOpen(true);
   };
@@ -31,7 +32,7 @@ const page = () => {
     const res = await fetch('/api/read_marcas_admin');
     const resJSON = await res.json();
     setMarcas(JSON.parse(resJSON));
-    console.log(resJSON);
+    //console.log(resJSON);
   };
 
   useEffect(() => {
@@ -100,16 +101,16 @@ const page = () => {
               </button>
             </div>
             <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
+              {productos &&
+                productos.map((producto) => (<Tarjeta_Producto_Admin key={producto.id_producto}
+                  id_producto={producto.id_producto}
+                  nombre={producto.nombre}
+                  ml={producto.ml}
+                  marca={producto.marca.nombre}
+                  precio={producto.precio}
+                  foto={producto.foto}
+                />))
+                }
             </div>
           </div>
         </div>
