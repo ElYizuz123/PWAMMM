@@ -6,30 +6,36 @@ import { useForm } from 'react-hook-form';
 
 const Crear_Producto = ({ isOpen, onClose, marcas }) => {
     const [productPhoto, setProductPhoto] = useState(null)
-    const { register, handleSubmit, reset} = useForm();
+    const { register, handleSubmit, reset, setValue} = useForm();
 
     const fileInputRef = useRef(null)
     
+    useEffect(() => {
+        register('foto'); 
+    }, [register]);
 
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
 
     const handleOnSubmit = (async (data) => {
-        console.log(data);
-        const res = await fetch('/api/create_producto', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'aplication/json'
+        if(productPhoto){
+            console.log(data);
+            const res = await fetch('/api/create_producto', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'aplication/json'
+                }
+            })
+            const resJSON = await res.json()
+            console.log(resJSON)
+            if (resJSON == "Registrado") {
+                setProductPhoto()
+                reset();
             }
-        })
-        const resJSON = await res.json()
-        console.log(resJSON)
-        if (resJSON == "Registrado") {
-            setProductPhoto()
-            reset();
         }
+
 
     })
 
@@ -80,7 +86,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                     ref={fileInputRef}
                                     onChange={(e) => {
                                         setProductPhoto(e.target.files[0])
-                                        register('foto', {value:e.target.files[0].name})
+                                        setValue('foto', e.target.files[0].name)
                                     }}
                                 />
                                 <input
