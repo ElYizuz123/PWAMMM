@@ -1,4 +1,4 @@
-import Carrusel_Admin from '@/components/Administrador/Carrusel_Admin'
+import Carrusel_Admin from '@/components/Administrador/galeria/Carrusel_Admin'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React from 'react'

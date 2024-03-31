@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, updatePage}) => {
+const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct}) => {
 
     const data = {
         "id_producto": id_producto,
@@ -33,7 +33,7 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
 
     return (
         <div className="relative rounded-5 overflow-hidden card-reduced">
-            <button className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
+            <button onClick={editProduct} className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
                 <img src="\emoticons\editar.png" alt="Icono" width="32" height="32" />
             </button>
             <button onClick={deleteProduct} className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">

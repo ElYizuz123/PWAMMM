@@ -1,61 +1,65 @@
 "use client"
-import Crear_Producto from '@/components/Administrador/Crear_Producto'
-import Tarjeta_Producto_Admin from '@/components/Administrador/Tarjeta_Producto_Admin'
+import Crear_Producto from '@/components/Administrador/productos/Crear_Producto'
+import Tarjeta_Producto_Admin from '@/components/Administrador/productos/Tarjeta_Producto_Admin'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
   const [cProductIsOpen, setCProductIsOpen] = useState(false);
-
   const [productos, setProductos] = useState(null);
   const [marcas, setMarcas] = useState(null);
+  const [busqueda, setBusqueda] = useState('');
 
-
+  //Función para abrir pop out crear productos
   const openCProduct = () => {
     setCProductIsOpen(true);
   };
 
+  //Función para cerrar pop out crear productos
   const closeCProduct = () => {
     setCProductIsOpen(false);
     readData()
   };
 
+  //Función para actualizar la página después de eliminación
   const updatePage = () => {
     readData()
   }
 
+  //Función para leer productos
   const readData = async () => {
     const res = await fetch('/api/read_productos');
     const resJSON = await res.json();
     setProductos(JSON.parse(resJSON));
-    console.log(resJSON);
   };
 
+  //Función para leer marcas
   const readMarcas = async () => {
     const res = await fetch('/api/read_marcas_admin');
     const resJSON = await res.json();
     setMarcas(JSON.parse(resJSON));
-    //console.log(resJSON);
   };
 
+  //Lectura inicial de productos y marcas
   useEffect(() => {
     readData();
     readMarcas();
   }, []);
 
+  //Scroll automático a ventana emergente
   useEffect(() => {
     if (cProductIsOpen) {
       window.scrollTo({ top: 230, behavior: 'smooth' });
     }
   }, [cProductIsOpen]);
 
-  const [busqueda, setBusqueda] = useState('');
-
+  //Cambio en la búsqueda
   const handleChange = (event) => {
     setBusqueda(event.target.value);
   }; 
 
+  //Confirmación en la búsqueda
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(busqueda)
@@ -119,6 +123,7 @@ const page = () => {
                   precio={producto.precio}
                   foto={producto.foto}
                   updatePage={updatePage}
+                  editProduct={openCProduct}
                 />))
                 }
             </div>
