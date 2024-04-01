@@ -3,11 +3,15 @@ import db from '@/libs/db'
 
 export async function GET(){
     try{
-        const data = await db.producto.findMany();
+        const data = await db.producto.findMany({
+            include: {
+                marca: true
+            }
+        });
         console.log(data);
         return NextResponse.json(JSON.stringify(data));
 
-    }catch(err){
+    }catch(error){
         console.error('Error al leer los datos', error)
         return{
             status: 500,
