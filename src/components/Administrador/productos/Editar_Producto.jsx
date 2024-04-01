@@ -94,13 +94,14 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
                     )}
+                    {!productPhoto && (<img src={`/botellas/${producto ? producto[0].foto:""}`} alt='Preview' className='w-64' />)}
+                    {!productPhoto && (
+                        <p className='text-sm'>{producto ? producto[0].foto:""}</p>
+                    )}
                     <button
                         className='bg-gray-300 w-36 rounded-lg border-[1px] border-black text-sm mt-3'
                         onClick={handleFileButton}
                     >Seleccionar Archivo</button>
-                    {!productPhoto && (
-                        <p className='text-sm mt-1'>Es necesario agregar una foto</p>
-                    )}
                 </div>
                 <div className='h-full w-[60%] flex justify-between'>
                     <div className='flex flex-col items-start gap-y-6 mt-4 mr-2'>
