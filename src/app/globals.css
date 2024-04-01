@@ -11,6 +11,7 @@ h1 {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   height: 460px;
   width: 350px;
+  background-color: #fff;
 }
 
 .slider-container-admin {
@@ -74,6 +75,9 @@ h1 {
   position: absolute;
   top: 82%;
   width: 100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
   transition: box-shadow 0.3s ease-in-out, top 0.3s ease-in-out;
 }
 
