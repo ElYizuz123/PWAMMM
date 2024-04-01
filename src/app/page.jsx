@@ -4,7 +4,9 @@ import Main from "@/components/Video/Main";
 import Carrusel from "@/components/carrusel/Carrusel";
 import CarruselInicio from "@/components/CarruselInicio/CarruselInicio";
 
+
 import Image from "next/image";
+import Carru from "@/components/Carru/Carru";
 
 export default function Home() {
   return (
@@ -12,7 +14,7 @@ export default function Home() {
       <main className="w-full h-screen ">
       <Main />
       
-      
+      <Carru/>
   <CarruselInicio/>
   <Carrusel/>
      

@@ -43,7 +43,7 @@ const Carrusel = () => {
   ];
 
   return (
-    <div className="bg-[#330e36] p-5 h-[600px] sm:h-[800px] md:h-[900px] lg:h-[1000px] xl:h-[1100px] 2xl:h-[1200px]">
+    <div className="bg-[#368158] p-5 h-[500px] sm:h-[800px] md:h-[900px] lg:h-[1000px] xl:h-[1100px] 2xl:h-[1200px]">
     <div className="bg-[#c795cb] max-w-3/4 mx-auto mt-5 mb-5" style={{ backgroundImage: "url('/multimedia/JIMA.jpg')"}}>
       <ReactImageGallery
         autoPlay

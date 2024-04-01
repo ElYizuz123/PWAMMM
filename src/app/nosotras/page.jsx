@@ -5,7 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
 import { Berkshire_Swash } from "next/font/google";
-const {PrismaClient}= require('@prisma/client')
+
+const ruta ="/mezcaleras/";
 const berkshire = Berkshire_Swash({
     weight: ["400"],
     styles: ["italic", "normal"],
@@ -15,32 +16,19 @@ const berkshire = Berkshire_Swash({
 
 const Page = () => {
 
-    const prisma =new PrismaClient()
+    const [asociadas, setAsociadas] = useState([]);
 
-async function main(){
-
-    const registros = await prisma.asociada.findMany()
-    console.log(registros);
-}
-    
-
-
-
-    const images = [
-        {
-            name: 'Argentina Anzo',
-            img: '/mezcaleras/ARGENTINA.png',
-            review: 'Hola mi nombre es Argentina Anzo y tengo dos marcas de mezcal  '
-        },
-        { name: 'Delia Garcia', img: '/mezcaleras/DELIA-GARCIA.png', review: 'Hola mi nombre es Argentina Anzo snsknsfskckjnksnkvdnkvknsnkvs' },
-        { name: 'Alondra', img: '/mezcaleras/ALONDRA.png', review: 'Hola mi nombre es Argentina Anzo snsknsfskckjnksnkvdnkvknsnkvs' },
-        { name: 'Irma Romero', img: '/mezcaleras/IRMA-ROMERO.png', review: 'Hola mi nombre es Argentina Anzo snsknsfskckjnksnkvdnkvknsnkvs' },
-        { name: 'Rocio', img: '/mezcaleras/ROCIO.png', review: 'Hola mi nombre es Argentina Anzo snsknsfskckjnksnkvdnkvknsnkvs' },
+    useEffect(() => {
+      const fetchAsociadas = async () => {
+        const response = await fetch("/api/read_asociadas");
+        const data = await response.json();
+        setAsociadas(data);
+      };
+  
+      fetchAsociadas();
+    }, []);
 
 
-
-
-    ];
     const settings = {
         className: "center",
         centerMode: true,
@@ -71,19 +59,26 @@ async function main(){
                     <br></br>
                     <br></br>
                     <br></br>
+                   
 
                     <div className="mt-20 ">
                         <Slider ref={sliderRef} {...settings}>
-                            {images.map((d) => (
+                            
+                        {asociadas &&
+                        
+                            asociadas.map((asociada) => (
+                                <div key={asociada.id_asociada}>
+                                   
                                 <div className="bg-white h-[700px]  text-black rounded-2xl">
                                     <div className="rounded-t-xl  bg-white flex justify-center items-center">
-                                        <img src={d.img} alt='' className="h-96 w-11/12 rounded-t-lg rounded-b-none mt-4 " />
+                                        <img src={`${ruta}${asociada.foto}`} alt='' className="h-96 w-11/12 rounded-t-lg rounded-b-none mt-4 " />
                                     </div>
                                     <div className="flex flex-col justify-center items-center gap-4 p-4">
-                                        <p className='text-xl font-semibold'>{d.name}</p>
-                                        <p className>{d.review}</p>
+                                        <p className='text-xl font-semibold'>{asociada.nombre}</p>
+                                        <p className ='text-xs'>{asociada.historia}</p>
                                         <button className="bg-[#f70073] text-white text-lg px-6 py-1 rounded -xl">Productos</button>
                                     </div>
+                                </div>
                                 </div>
                             ))}
                         </Slider>
