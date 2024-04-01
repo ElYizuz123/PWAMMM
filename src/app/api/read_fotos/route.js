@@ -1,9 +1,14 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
-export async function GET(){
+export async function POST(request){
+    const datos = await request.json();
     try{
-        const data = await db.galeria_fotos.findMany();
+        const data = await db.galeria_foto.findMany({
+            where:{
+                fk_id_categoria: datos.fk_id
+            }
+        });
         const dataReversed = data.reverse();
         console.log(dataReversed);
         return NextResponse.json(JSON.stringify(dataReversed));
@@ -15,6 +20,5 @@ export async function GET(){
             body: 'Error al obtener los datos'
         }
     }
-
     
 }

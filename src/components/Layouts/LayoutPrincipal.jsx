@@ -16,8 +16,7 @@ const berkshire = Berkshire_Swash({
 
 const LayoutPrincipal = ({ children }) => {
   return (
-   
-      <div className="bg-[#F5F5F5]">
+      <div>
         <div>
           <nav className="bg-black w-full z-20 top-0 start-0">
             <div className="container">
@@ -27,9 +26,9 @@ const LayoutPrincipal = ({ children }) => {
               <div className="container mx-auto flex">
                 <div>{logo}</div>
                 <div className="text-black absolute w-full flex lg:hidden py-8 px-4 justify-center">
-                  <p1 className={berkshire.className}>
-                    Mujeres Mezcaleras <br></br> De Michoacán
-                  </p1>
+                  <div className={berkshire.className}>
+                    <p1 className="text-xl">Mujeres Mezcaleras <br></br> De Michoacán</p1>
+                  </div>
                 </div>
 
                 <div className="absolute right-0 flex lg:hidden">
@@ -37,7 +36,7 @@ const LayoutPrincipal = ({ children }) => {
                 </div>
                 <div className="text-black lg:flex hidden flex-grow justify-between py-8 text-center">
                   <div className={berkshire.className}>
-                    <p1>
+                    <p1 className="text-2xl">
                       Mujeres Mezcaleras <br></br> De Michoacán
                     </p1>
                   </div>

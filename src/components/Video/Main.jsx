@@ -8,17 +8,14 @@ const Main = () => {
 
 
     return (
-        <div className='main'>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <video src='/multimedia/videoBg.mp4'
+        <div className='main '>
+
+            <video className='w-full h-auto'
+                src='/multimedia/videoBg.mp4'
                 autoPlay
                 loop
                 muted
-              
+
             />
             <br></br>
 
