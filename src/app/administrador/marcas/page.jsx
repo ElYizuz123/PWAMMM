@@ -3,12 +3,59 @@ import Crear_marca from '@/components/Administrador/marcas/Crear_marca'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
 
 const page = () => {
 
   const [marcas, setMarcas] = useState(null)
   const [asociadas, setAsociadas] = useState(null)
   const [cMarcasIsOpen, setCMarcasIsOpen] = useState(false)
+
+  //Eliminar una marca
+  const deleteProduct = async (data) => {
+    const res = await fetch('/api/marcas/delete_marca', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'aplication/json'
+      }
+    })
+    const resJSON = await res.json()
+    console.log(resJSON)
+    if (resJSON == "Marca eliminada con éxito") {
+      Swal.fire({
+        title: "Eliminado!",
+        text: "La marca fué eliminada",
+        icon: "success"
+      });
+      readData()
+    }
+    else{
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo salió mal!",
+      });
+    }
+  }
+
+  //Alerta de borrado
+  const handleDelete = async (data) => {
+    Swal.fire({
+      title: "Eliminar marca",
+      text: "No es posible revertir esta acción!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Si, borrar!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(data)
+      }
+    });
+  }
 
   //Abrir pop-up de agregar marca
   const openCMarca = () => {
@@ -50,11 +97,11 @@ const page = () => {
 
   return (
     <LayoutCRUD title="Marcas">
-      <div className={`absolute top-1/2 left-[45%] z-10 w-4/12 ${cMarcasIsOpen ? "": "pointer-events-none"}`}>
-        {cMarcasIsOpen && <Crear_marca 
-        isOpen={cMarcasIsOpen} 
-        onClose={closeCProduct} 
-        asociadas={asociadas}
+      <div className={`absolute top-1/2 left-[45%] z-10 w-4/12 ${cMarcasIsOpen ? "" : "pointer-events-none"}`}>
+        {cMarcasIsOpen && <Crear_marca
+          isOpen={cMarcasIsOpen}
+          onClose={closeCProduct}
+          asociadas={asociadas}
         />}
       </div>
       <main className='flex flex-col items-center justify-between w-full h-full'>
@@ -87,15 +134,17 @@ const page = () => {
                 <div className='w-full overflow-y-visible'>
                   {marcas && marcas.map((marca) => (
                     <div key={marca.id_marca}>
-                    <div className='flex justify-between w-full mt-0.5 pl-5 '>
-                      <p className='font-bold w-6 text-center'>{marca.nombre}</p>
-                      <p className='font-bold ml-[19%] text-left w-40'>{marca.asociada.nombre}</p>
-                      <p className='font-bold w-16 text-left ml-10'>{marca.tipo==0 ? "Mezcal":"Acompañamiento"}</p>
-                      <button className='w-12 h-6 font-bold flex justify-center items-center bg-[#91caf8]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'>Editar</button>
-                      <button className='w-16 h-6 font-bold flex justify-center items-center bg-[#f89191]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'>Eliminar</button>
+                      <div className='flex justify-between w-full mt-0.5 pl-5 '>
+                        <p className='font-bold w-6 text-center'>{marca.nombre}</p>
+                        <p className='font-bold ml-[19%] text-left w-40'>{marca.asociada.nombre}</p>
+                        <p className='font-bold w-16 text-left ml-10'>{marca.tipo == 0 ? "Mezcal" : "Acompañamiento"}</p>
+                        <button className='w-12 h-6 font-bold flex justify-center items-center bg-[#91caf8]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'>Editar</button>
+                        <button className='w-16 h-6 font-bold flex justify-center items-center bg-[#f89191]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'
+                          onClick={() => handleDelete(marca.id_marca)}
+                        >Eliminar</button>
+                      </div>
+                      <div className='w-full h-0.5 bg-[#B1A8A8] mt-0.5' />
                     </div>
-                    <div className='w-full h-0.5 bg-[#B1A8A8] mt-0.5' />
-                  </div>
 
                   ))}
                 </div>
