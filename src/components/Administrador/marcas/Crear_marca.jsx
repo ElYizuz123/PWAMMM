@@ -1,22 +1,42 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const Crear_marca = ({ isOpen, onClose, asociadas }) => {
-    const { register, handleSubmit, reset} = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
-    const handleOnSubmit = async (data) =>{
-        const res = await fetch('/api/marcas/create_marca',{
+    const handleOnSubmit = async (data) => {
+        const res = await fetch('/api/marcas/create_marca', {
             method: 'POST',
             body: JSON.stringify(data)
         })
         const resJSON = await res.json()
         console.log(resJSON)
-        if(resJSON=="Marca registrada"){
-            reset()
+        if (resJSON == "Marca registrada") {
+            let timerInterval;
+            Swal.fire({
+                title: "Producto añadido!",
+                icon: "success",
+                timer: 2000,
+                timerProgressBar: true,
+                confirmButtonText: "Ok",
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then(() => {
+                reset()
+            }); 
+        }
+        else{
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo salió mal!",
+              });
         }
     }
 
-    
+
 
     if (!isOpen) return null;
     return (
@@ -46,18 +66,18 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                     placeholder='Nombre de la marca'
                                 />
-                                <select 
+                                <select
                                     name='tipo'
                                     {...register('tipo', {
                                         required: true
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-5'
-                                    >
+                                >
                                     <option></option>
                                     <option value={0}>Mezcal</option>
                                     <option value={1}>Acompañamiento</option>
                                 </select>
-                                    
+
                                 <select
                                     name='asociada'
                                     {...register('asociada', {
