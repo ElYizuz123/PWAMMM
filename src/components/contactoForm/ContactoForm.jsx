@@ -81,8 +81,7 @@ const ContactoForm = () => {
         <div className="bg-[#D60064] w-full h-40 rounded-t-3xl mb-10 flex justify-center items-center shadow-2xl">
 
           <p className="font-semibold text-white text-center text-5xl">
-            🤓Nuestro equipo se pondrá en contacto contigo☝
-            🍾
+            Nuestro equipo se pondrá en contacto contigo
           </p>
         </div>
         <form onSubmit={sendEmail}>
@@ -131,12 +130,12 @@ const ContactoForm = () => {
                 setComentarios(e.target.value);
               }}
               className="border-gray-300 p-4 mb-4 w-11/12 h-60 text-3xl resize-none text-left rounded-lg shadow-md"
-              placeholder="Comentarios extra*">
+              placeholder="*Comentarios extra*">
             </textarea>
           </div>
 
           <div className="flex justify-center items-center">
-            <button id="btn-abrir-modal" type='submit' className="bg-[#D60064] w-1/4 h-16 rounded-3xl">
+            <button id="btn-abrir-modal" type='submit' className="bg-[#D60064] hover:bg-[#d60064c9] w-1/4 h-16 rounded-3xl">
               <span className="font-semibold text-white text-center text-4xl">
                 Enviar
               </span>
