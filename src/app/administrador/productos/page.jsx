@@ -12,8 +12,8 @@ const page = () => {
   const [productos, setProductos] = useState(null);
   const [productoEdit, setProductoEdit] = useState(null);
   const [marcas, setMarcas] = useState(null);
-  const [busqueda, setBusqueda] = useState('');
-
+  const [busqueda, setBusqueda] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState(null);
   //Función para abrir pop out crear productos
   const openCProduct = () => {
     setCProductIsOpen(true);
@@ -32,9 +32,15 @@ const page = () => {
   };
 
   //Función para cerrar pop out editar productos
-  const closeUProduct = () => {
-    setUProductIsOpen(false);
-    readData()
+  const closeUProduct = (uImage) => {
+    setUProductIsOpen(false)
+    if(uImage){
+      window.location.reload()
+    }
+    else{
+      readData()
+    }
+    
   };
 
   //Función para actualizar la página después de eliminación
@@ -44,9 +50,11 @@ const page = () => {
 
   //Función para leer productos
   const readData = async () => {
-    const res = await fetch('/api/producto/read_productos');
-    const resJSON = await res.json();
-    setProductos(JSON.parse(resJSON));
+    const res = await fetch('/api/producto/read_productos')
+    const resJSON = await res.json()
+    const parseado = JSON.parse(resJSON)
+    setProductos(parseado)
+    
   };
 
   //Función para leer marcas
@@ -60,6 +68,7 @@ const page = () => {
   useEffect(() => {
     readData();
     readMarcas();
+    
   }, []);
 
   //Scroll automático a ventana emergente
@@ -68,6 +77,23 @@ const page = () => {
       window.scrollTo({ top: 230, behavior: 'smooth' });
     }
   }, [cProductIsOpen]);
+
+  //Set de los productos filtrados
+  useEffect(() => {
+    setFilteredProducts(productos)
+  }, [productos]);
+
+  //Búsqueda
+  useEffect(() => {
+    if(productos){
+      const filtered = productos.filter((producto) =>
+        producto.nombre.toLowerCase().includes(busqueda?.toLowerCase()),
+      
+      );
+      setFilteredProducts(filtered);
+    }
+    
+  }, [busqueda]);
 
   //Cambio en la búsqueda
   const handleChange = (event) => {
@@ -138,8 +164,8 @@ const page = () => {
               </button>
             </div>
             <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
-              {productos &&
-                productos.map((producto) => (<Tarjeta_Producto_Admin key={producto.id_producto}
+              {filteredProducts &&
+                filteredProducts.map((producto) => (<Tarjeta_Producto_Admin key={producto.id_producto}
                   id_producto={producto.id_producto}
                   nombre={producto.nombre}
                   ml={producto.ml}

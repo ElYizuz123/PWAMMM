@@ -1,13 +1,13 @@
 import Link from 'next/link'
-import React from 'react'
+
 
 const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct}) => {
-
     const data = {
         "id_producto": id_producto,
         "foto" : foto,
         "source" : "botellas"
     }
+
 
     const handleEdit = () => {
         editProduct(id_producto)
@@ -45,6 +45,7 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
             <figure>
                 <img
                     className="object-contain"
+                    id='foto_botella'
                     src={"\\botellas\\"+foto}
                     alt="t-shirt"
                 />

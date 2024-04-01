@@ -107,14 +107,21 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
         }
     })
 
-
+    const handleClose = () => {
+        if(productPhoto){
+            onClose(true)
+        }
+        else{
+            onClose(false)
+        }
+    }
 
     if (!isOpen) return null;
     return (
         <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>Editar producto</p>
-                <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
+                <button className='mr-4 font-bold eye-icon' onClick={handleClose}>X</button>
             </div>
             <div className='w-full h-full flex justify-between'>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
