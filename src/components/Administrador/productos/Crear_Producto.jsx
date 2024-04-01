@@ -36,7 +36,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
 
             //Registrar producto en la DB
             if(fotoResJSON == "Archivo subido correctamente"){
-                const res = await fetch('/api/create_producto', {
+                const res = await fetch('/api/producto/create_producto', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {

@@ -19,7 +19,7 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
         })
         const resDeletedImageJSON = await deletedImage.json()
         if(resDeletedImageJSON=='Arhivo eliminado correctamente'){
-            const res = await fetch('/api/delete_producto', {
+            const res = await fetch('/api/producto/delete_producto', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

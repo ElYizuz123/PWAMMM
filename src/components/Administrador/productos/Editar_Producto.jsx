@@ -10,10 +10,26 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
 
+    const setForm = () =>{
+        register('nombre'),
+        register('ml'),
+        register('precio'),
+        register('marca'),
+        register('cantidad'),
+        register('mercado_lib'),
+        register('descripcion'),
+        register('id_producto')
 
-    useEffect(() => {
-        register('foto');
-    }, [register]);
+        setValue('id_producto', idProducto),
+        setValue('nombre', producto[0].nombre),
+        setValue('ml', producto[0].ml),
+        setValue('precio', producto[0].precio),
+        setValue('marca', producto[0].marca.id_marca),
+        setValue('cantidad', producto[0].cantidad),
+        setValue('mercado_lib', producto[0].mercadoLibre),
+        setValue('descripcion', producto[0].descripcion)
+    }
+
 
     const opcionDefault = () => {
         if(producto){
@@ -31,7 +47,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
     }
 
     const readProduct = (async (data) => {
-        const res = await fetch('/api/read_producto_admin', {
+        const res = await fetch('/api/producto/read_producto_admin', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -50,7 +66,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
             form.set('source', "botellas")
             form.set('modifier', numProductos)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/upload_image', {
+            const fotoRes = await fetch('/api/update_image', {
                 method: 'POST',
                 body: form
             })
@@ -59,7 +75,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
 
             //Registrar producto en la DB
             if (fotoResJSON == "Archivo subido correctamente") {
-                const res = await fetch('/api/create_producto', {
+                const res = await fetch('/api/producto/update_producto', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -73,6 +89,20 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                     setNumProductos(numProductos + 1)
                     reset();
                 }
+            }
+        }
+        else{
+            const res = await fetch('/api/producto/update_producto', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'aplication/json'
+                }
+            })
+            const resJSON = await res.json()
+            console.log(resJSON)
+            if (resJSON == "Registrado") {
+
             }
         }
     })
@@ -114,6 +144,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                         <p className='text-xl'>Descripción</p>
                     </div>
                     <div>
+                        {producto && setForm()}
                         <div className='h-full flex flex-col items-start mt-5 mr-2'>
                             <form onSubmit={handleSubmit(handleOnSubmit)}>
                                 <input

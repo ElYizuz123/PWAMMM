@@ -44,7 +44,7 @@ const page = () => {
 
   //Función para leer productos
   const readData = async () => {
-    const res = await fetch('/api/read_productos');
+    const res = await fetch('/api/producto/read_productos');
     const resJSON = await res.json();
     setProductos(JSON.parse(resJSON));
   };
