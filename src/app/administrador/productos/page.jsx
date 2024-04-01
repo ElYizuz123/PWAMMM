@@ -125,8 +125,8 @@ const page = () => {
         idProducto={productoEdit}
         />}
       </div>
-      <main className='flex flex-col items-center justify-between w-full h-auto '>
-        <div className='relative w-full h-auto overflow-hidden'>
+      <main className='flex h-[3000px] flex-col items-center justify-between w-full '>
+        <div className='relative h-full w-full overflow-hidden'>
           <div className='absolute bottom-0 w-full'>
             <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />
           </div>
