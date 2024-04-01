@@ -106,7 +106,7 @@ model galeria_foto {
 
 model pregunta_frecuente {
   id_pregunta_frencuente Int    @id @default(autoincrement())
-  pregunta               String @db.VarChar(45)
+  pregunta               String @db.TinyText
   respuesta              String @db.TinyText
 }
 
