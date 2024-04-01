@@ -68,7 +68,7 @@ const page = ({params}) => {
             <div>
               <div className="flex justify-between items-center md:mx-8 lg:mr-24 lg:ml-[306px] ">
                 <div className="relative top-4  text-black font-semibold text-sm rounded-full z-10 text-center ">
-                  Mostrando los {filteredProducts.length} resultados...
+                  Mostrando {filteredProducts.length} resultados...
                 </div>
 
                 <form className="relative top-4 z-10">
