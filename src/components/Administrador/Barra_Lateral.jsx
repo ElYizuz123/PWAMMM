@@ -7,10 +7,12 @@ const berkshire_swash = Berkshire_Swash({ subsets: ['latin'], weight: '400' })
 
 const buttonMap = {
     "/administrador/ventas": "text-black bg-[#0000000]",
+    "/administrador/marcas": "text-black bg-[#0000000]",
     "/administrador/productos": "text-black bg-[#0000000]",
     "/administrador/asociadas": "text-black bg-[#0000000]",
     "/administrador/eventos": "text-black bg-[#0000000]",
     "/administrador/galeria": "text-black bg-[#0000000]",
+    "/administrador/preguntas": "text-black bg-[#0000000]",
 }
 const changeColor = () => {
     for (const key in buttonMap) {
@@ -38,8 +40,14 @@ const Barra_Lateral = () => {
                 <Link href="/administrador/ventas" className={`w-11/12 ${buttonMap["/administrador/ventas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">VENTAS</p>
                 </Link>
+                <Link href="/administrador/marcas" className={`w-11/12 ${buttonMap["/administrador/marcas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
+                    <p className="font-bold text-2xl pr-3 pt-1 pb-1">MARCAS</p>
+                </Link>
                 <Link href="/administrador/productos" className={`w-11/12 ${buttonMap["/administrador/productos"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">PRODUCTOS</p>
+                </Link>
+                <Link href="/administrador/preguntas" className={`w-11/12 ${buttonMap["/administrador/preguntas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
+                    <p className="font-bold text-2xl pr-3 pt-1 pb-1">PREGUNTAS</p>
                 </Link>
                 <Link href="/administrador/asociadas" className={`w-11/12 ${buttonMap["/administrador/asociadas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl  pr-3 pt-1 pb-1">ASOCIADAS</p>
@@ -50,6 +58,7 @@ const Barra_Lateral = () => {
                 <Link href="/administrador/galeria" className={`w-11/12 ${buttonMap["/administrador/galeria"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">GALERÍA</p>
                 </Link>
+                
                 <button className="w-11/12 hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8">
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">AYUDA</p>
                 </button>

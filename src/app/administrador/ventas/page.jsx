@@ -35,8 +35,8 @@ const page = () => {
   return (
     <LayoutCRUD title="Ventas">
       <main className='flex flex-col items-center justify-between w-full h-full'>
-        <div className='relative w-full h-full overflow-hidden'>
-          <div className='absolute -top-96 w-full z-0'>
+        <div className='relative w-full h-[1000px] overflow-hidden'>
+          <div className='absolute bottom-0 w-full z-0'>
             <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} className='w-full opacity-50' />
           </div>
           <div className='relative w-full h-screen'>

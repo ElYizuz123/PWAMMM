@@ -14,24 +14,24 @@ const page = () => {
   const [marcas, setMarcas] = useState(null);
   const [busqueda, setBusqueda] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(null);
-  //Función para abrir pop out crear productos
+  //Función para abrir pop-up crear productos
   const openCProduct = () => {
     setCProductIsOpen(true);
   };
 
-  //Función para cerrar pop out crear productos
+  //Función para cerrar pop-up crear productos
   const closeCProduct = () => {
     setCProductIsOpen(false);
     readData()
   };
 
-  //Función para abrir pop out editar productos
+  //Función para abrir pop-up editar productos
   const openUProduct = (id_producto) => {
     setUProductIsOpen(true);
     setProductoEdit(id_producto)
   };
 
-  //Función para cerrar pop out editar productos
+  //Función para cerrar pop-up editar productos
   const closeUProduct = (uImage) => {
     setUProductIsOpen(false)
     if(uImage){
@@ -59,7 +59,7 @@ const page = () => {
 
   //Función para leer marcas
   const readMarcas = async () => {
-    const res = await fetch('/api/read_marcas_admin');
+    const res = await fetch('/api/marcas/read_marcas_admin');
     const resJSON = await res.json();
     setMarcas(JSON.parse(resJSON));
   };
@@ -76,7 +76,10 @@ const page = () => {
     if (cProductIsOpen) {
       window.scrollTo({ top: 230, behavior: 'smooth' });
     }
-  }, [cProductIsOpen]);
+    else if(uProductIsOpen){
+      window.scrollTo({ top: 230, behavior: 'smooth' });
+    }
+  }, [cProductIsOpen, uProductIsOpen]);
 
   //Set de los productos filtrados
   useEffect(() => {
@@ -157,10 +160,6 @@ const page = () => {
               <button onClick={openCProduct} className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
                 <img src='/emoticons/plus.png' className='w-8 ml-2'/>
                 <p className='mr-3'>Agregar producto</p>
-              </button>
-              <button className='bg-[#98E47D] w-44 h-10 font-bold rounded-lg flex justify-between items-center ml-4 hover:bg-[#98e47dab]'>
-                <img src='/emoticons/plus.png' className='w-8 ml-2'/>
-                <p className='mr-3'>Agregar marca</p>
               </button>
             </div>
             <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
