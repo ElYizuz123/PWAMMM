@@ -1,5 +1,6 @@
 "use client"
 import Crear_Producto from '@/components/Administrador/productos/Crear_Producto'
+import Editar_Producto from '@/components/Administrador/productos/Editar_Producto'
 import Tarjeta_Producto_Admin from '@/components/Administrador/productos/Tarjeta_Producto_Admin'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
@@ -7,7 +8,9 @@ import React, { useEffect, useState } from 'react'
 
 const page = () => {
   const [cProductIsOpen, setCProductIsOpen] = useState(false);
+  const [uProductIsOpen, setUProductIsOpen] = useState(false);
   const [productos, setProductos] = useState(null);
+  const [productoEdit, setProductoEdit] = useState(null);
   const [marcas, setMarcas] = useState(null);
   const [busqueda, setBusqueda] = useState('');
 
@@ -19,6 +22,18 @@ const page = () => {
   //Función para cerrar pop out crear productos
   const closeCProduct = () => {
     setCProductIsOpen(false);
+    readData()
+  };
+
+  //Función para abrir pop out editar productos
+  const openUProduct = (id_producto) => {
+    setUProductIsOpen(true);
+    setProductoEdit(id_producto)
+  };
+
+  //Función para cerrar pop out editar productos
+  const closeUProduct = () => {
+    setUProductIsOpen(false);
     readData()
   };
 
@@ -75,6 +90,15 @@ const page = () => {
         nProductos={productos ? Object.keys(productos).length:0}
         />}
       </div>
+      <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${uProductIsOpen ? "": "pointer-events-none"}`}>
+        {uProductIsOpen && <Editar_Producto 
+        isOpen={uProductIsOpen} 
+        onClose={closeUProduct} 
+        marcas={marcas} 
+        nProductos={productos ? Object.keys(productos).length:0}
+        idProducto={productoEdit}
+        />}
+      </div>
       <main className='flex flex-col items-center justify-between w-full h-auto '>
         <div className='relative w-full h-auto overflow-hidden'>
           <div className='absolute bottom-0 w-full'>
@@ -123,7 +147,7 @@ const page = () => {
                   precio={producto.precio}
                   foto={producto.foto}
                   updatePage={updatePage}
-                  editProduct={openCProduct}
+                  editProduct={openUProduct}
                 />))
                 }
             </div>

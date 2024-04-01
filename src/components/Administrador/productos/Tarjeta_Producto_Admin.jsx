@@ -9,6 +9,9 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
         "source" : "botellas"
     }
 
+    const handleEdit = () => {
+        editProduct(id_producto)
+    }
     const deleteProduct = (async () => {
         const deletedImage = await fetch('/api/delete_image', {
             method: 'POST',
@@ -33,7 +36,7 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
 
     return (
         <div className="relative rounded-5 overflow-hidden card-reduced">
-            <button onClick={editProduct} className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
+            <button onClick={handleEdit} className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
                 <img src="\emoticons\editar.png" alt="Icono" width="32" height="32" />
             </button>
             <button onClick={deleteProduct} className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
