@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import {writeFile} from 'fs/promises'
+import { unlink } from "fs/promises";
 import path from 'path'
 
 export async function POST(request){
@@ -8,9 +9,9 @@ export async function POST(request){
     const file = data.get('file')
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
-    const filePath = path.join(process.cwd(), 'public', data.source, data.foto)
+    const filePath = path.join(process.cwd(), 'public', data.get('source'), data.get('nombre'))
     await unlink (filePath)
-    const filePath2 = path.join(process.cwd(), 'public', data.get('source'), file.name.split('.')[0]+data.get('modifier')+"."+file.name.split('.')[1])
+    const filePath2 = path.join(process.cwd(), 'public', data.get('source'), data.get('nombre'))
     writeFile(filePath2, buffer)
 
 

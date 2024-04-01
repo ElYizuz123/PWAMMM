@@ -15,7 +15,6 @@ export async function POST(request){
                 ml: Number(data.ml),
                 precio: Number(data.precio),
                 descripcion: data.descripcion,
-                foto: data.foto, 
                 marca_id_marca: parseInt(data.marca),
                 mercadoLibre: data.mercado_lib,
                 cantidad: parseInt(data.cantidad),

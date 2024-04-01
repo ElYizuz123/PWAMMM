@@ -4,13 +4,13 @@ import { useForm } from 'react-hook-form';
 
 const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) => {
     const [productPhoto, setProductPhoto] = useState(null)
-    
-    const [numProductos, setNumProductos] = useState(nProductos)
+    const [defaultData, setDefaultData] = useState(false)
     const [producto, setProducto] = useState(null)
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
 
-    const setForm = () =>{
+    const setForm = (data) =>{
+        console.log(data)
         register('nombre'),
         register('ml'),
         register('precio'),
@@ -21,19 +21,20 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
         register('id_producto')
 
         setValue('id_producto', idProducto),
-        setValue('nombre', producto[0].nombre),
-        setValue('ml', producto[0].ml),
-        setValue('precio', producto[0].precio),
-        setValue('marca', producto[0].marca.id_marca),
-        setValue('cantidad', producto[0].cantidad),
-        setValue('mercado_lib', producto[0].mercadoLibre),
-        setValue('descripcion', producto[0].descripcion)
+        setValue('nombre', data[0].nombre),
+        setValue('ml', data[0].ml),
+        setValue('precio', data[0].precio),
+        setValue('marca', data[0].marca.id_marca),
+        setValue('cantidad', data[0].cantidad),
+        setValue('mercado_lib', data[0].mercadoLibre),
+        setValue('descripcion', data[0].descripcion)
     }
 
 
     const opcionDefault = () => {
         if(producto){
             document.getElementById("select_marca").value = producto[0].marca.id_marca;
+            setDefaultData(true)
         }
         
     }
@@ -56,7 +57,8 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
         })
         const resJSON = await res.json()
         setProducto(JSON.parse(resJSON))
-
+        setForm(JSON.parse(resJSON))
+       
     })
 
     const handleOnSubmit = (async (data) => {
@@ -64,7 +66,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
             const form = new FormData()
             form.set('file', productPhoto)
             form.set('source', "botellas")
-            form.set('modifier', numProductos)
+            form.set('nombre', producto[0].foto)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/update_image', {
                 method: 'POST',
@@ -85,9 +87,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                 const resJSON = await res.json()
                 console.log(resJSON)
                 if (resJSON == "Registrado") {
-                    setProductPhoto()
-                    setNumProductos(numProductos + 1)
-                    reset();
+                    
                 }
             }
         }
@@ -144,7 +144,6 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                         <p className='text-xl'>Descripción</p>
                     </div>
                     <div>
-                        {producto && setForm()}
                         <div className='h-full flex flex-col items-start mt-5 mr-2'>
                             <form onSubmit={handleSubmit(handleOnSubmit)}>
                                 <input
@@ -155,7 +154,6 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     ref={fileInputRef}
                                     onChange={(e) => {
                                         setProductPhoto(e.target.files[0])
-                                        setValue('foto', e.target.files[0].name.split(".")[0] + numProductos + "." + e.target.files[0].name.split(".")[1])
                                     }}
                                 />
                                 <input
@@ -201,7 +199,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     })}
                                     
                                 >
-                                    {opcionDefault()}
+                                    {defaultData ? opcionDefault():""}
                                     {marcas && (
                                         marcas.map((marca) => (
                                             <option value={marca.id_marca} key={marca.id_marca}>{marca.nombre}</option>
