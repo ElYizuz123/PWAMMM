@@ -82,6 +82,13 @@ h1 {
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
   top: 40%;
 }
+.text-delineado {
+  text-shadow: 
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000; 
+}
 
 .details > .min-details,
 .details > .options,
@@ -151,4 +158,5 @@ h1 {
   ); /* Aumenta el tamaño del icono cuando se pasa el cursor sobre él */
   transition: transform 0.3s ease; /* Agrega una transición suave */
 }
+
 
