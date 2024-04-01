@@ -1,4 +1,4 @@
-import Tarjeta_Asociadas from '@/components/Administrador/Tarjeta_Asociadas'
+import Tarjeta_Asociadas from '@/components/Administrador/asociadas/Tarjeta_Asociadas'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React from 'react'

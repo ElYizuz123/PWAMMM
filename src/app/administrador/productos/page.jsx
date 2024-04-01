@@ -1,56 +1,80 @@
 "use client"
-import Crear_Producto from '@/components/Administrador/Crear_Producto'
-import Tarjeta_Producto_Admin from '@/components/Administrador/Tarjeta_Producto_Admin'
+import Crear_Producto from '@/components/Administrador/productos/Crear_Producto'
+import Editar_Producto from '@/components/Administrador/productos/Editar_Producto'
+import Tarjeta_Producto_Admin from '@/components/Administrador/productos/Tarjeta_Producto_Admin'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
   const [cProductIsOpen, setCProductIsOpen] = useState(false);
-
+  const [uProductIsOpen, setUProductIsOpen] = useState(false);
   const [productos, setProductos] = useState(null);
+  const [productoEdit, setProductoEdit] = useState(null);
   const [marcas, setMarcas] = useState(null);
+  const [busqueda, setBusqueda] = useState('');
 
-
+  //Función para abrir pop out crear productos
   const openCProduct = () => {
     setCProductIsOpen(true);
   };
 
+  //Función para cerrar pop out crear productos
   const closeCProduct = () => {
     setCProductIsOpen(false);
+    readData()
   };
 
+  //Función para abrir pop out editar productos
+  const openUProduct = (id_producto) => {
+    setUProductIsOpen(true);
+    setProductoEdit(id_producto)
+  };
+
+  //Función para cerrar pop out editar productos
+  const closeUProduct = () => {
+    setUProductIsOpen(false);
+    readData()
+  };
+
+  //Función para actualizar la página después de eliminación
+  const updatePage = () => {
+    readData()
+  }
+
+  //Función para leer productos
   const readData = async () => {
     const res = await fetch('/api/read_productos');
     const resJSON = await res.json();
     setProductos(JSON.parse(resJSON));
-    console.log(resJSON);
   };
 
+  //Función para leer marcas
   const readMarcas = async () => {
-    const res = await fetch('/api/read_marcas');
+    const res = await fetch('/api/read_marcas_admin');
     const resJSON = await res.json();
     setMarcas(JSON.parse(resJSON));
-    console.log(resJSON);
   };
 
+  //Lectura inicial de productos y marcas
   useEffect(() => {
     readData();
     readMarcas();
   }, []);
 
+  //Scroll automático a ventana emergente
   useEffect(() => {
     if (cProductIsOpen) {
       window.scrollTo({ top: 230, behavior: 'smooth' });
     }
   }, [cProductIsOpen]);
 
-  const [busqueda, setBusqueda] = useState('');
-
+  //Cambio en la búsqueda
   const handleChange = (event) => {
     setBusqueda(event.target.value);
-  };
+  }; 
 
+  //Confirmación en la búsqueda
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(busqueda)
@@ -58,10 +82,24 @@ const page = () => {
 
   return (
     <LayoutCRUD title="Productos">
-      <div className='absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6'>
-        <Crear_Producto isOpen={cProductIsOpen} onClose={closeCProduct} marcas={marcas}/>
+      <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${cProductIsOpen ? "": "pointer-events-none"}`}>
+        {cProductIsOpen && <Crear_Producto 
+        isOpen={cProductIsOpen} 
+        onClose={closeCProduct} 
+        marcas={marcas} 
+        nProductos={productos ? Object.keys(productos).length:0}
+        />}
       </div>
-      <main className='flex flex-col items-center justify-between w-full h-auto'>
+      <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${uProductIsOpen ? "": "pointer-events-none"}`}>
+        {uProductIsOpen && <Editar_Producto 
+        isOpen={uProductIsOpen} 
+        onClose={closeUProduct} 
+        marcas={marcas} 
+        nProductos={productos ? Object.keys(productos).length:0}
+        idProducto={productoEdit}
+        />}
+      </div>
+      <main className='flex flex-col items-center justify-between w-full h-auto '>
         <div className='relative w-full h-auto overflow-hidden'>
           <div className='absolute bottom-0 w-full'>
             <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />
@@ -100,16 +138,18 @@ const page = () => {
               </button>
             </div>
             <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
-              <Tarjeta_Producto_Admin />
+              {productos &&
+                productos.map((producto) => (<Tarjeta_Producto_Admin key={producto.id_producto}
+                  id_producto={producto.id_producto}
+                  nombre={producto.nombre}
+                  ml={producto.ml}
+                  marca={producto.marca.nombre}
+                  precio={producto.precio}
+                  foto={producto.foto}
+                  updatePage={updatePage}
+                  editProduct={openUProduct}
+                />))
+                }
             </div>
           </div>
         </div>
