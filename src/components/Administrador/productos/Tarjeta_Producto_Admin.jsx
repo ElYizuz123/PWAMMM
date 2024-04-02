@@ -78,9 +78,9 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
             <button onClick={handleDelete} className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
                 <img src="\emoticons\eliminar.png" alt="Icono" width="32" height="32" />
             </button>
-            <figure>
+            <figure className='flex justify-center'>
                 <img
-                    className="object-contain"
+                    className="w-48 h-72"
                     id='foto_botella'
                     src={"\\botellas\\"+foto}
                     alt="t-shirt"

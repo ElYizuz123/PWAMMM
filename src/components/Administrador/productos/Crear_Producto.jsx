@@ -94,7 +94,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos }) => {
             <div className='w-full h-full flex justify-between'>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                     {productPhoto && (
-                        <img src={URL.createObjectURL(productPhoto)} alt='Preview' className='w-64' />
+                        <img src={URL.createObjectURL(productPhoto)} alt='Preview' className='w-48' />
                     )}
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
