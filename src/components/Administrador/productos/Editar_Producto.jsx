@@ -10,6 +10,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
 
+    //Default data
     const setForm = (data) => {
         console.log(data)
         register('nombre'),
@@ -32,6 +33,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
     }
 
 
+    //Set default data
     const opcionDefault = () => {
         if (producto) {
             document.getElementById("select_marca").value = producto[0].marca.id_marca;
@@ -40,14 +42,18 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
 
     }
 
+    //Leer producto 
     useEffect(() => {
         readProduct(idProducto);
     }, []);
 
+    //Seleccionar imagen
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
 
+
+    //Lectura de producto
     const readProduct = (async (data) => {
         const res = await fetch('/api/producto/read_producto_admin', {
             method: 'POST',
@@ -62,7 +68,10 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
 
     })
 
+
+    //Realizar cambio 
     const handleOnSubmit = (async (data) => {
+        //Cambio la fotografía
         if (productPhoto) {
             const form = new FormData()
             form.set('file', productPhoto)
@@ -109,6 +118,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                 }
             }
         }
+        //No se cambio la fotografía
         else {
             const res = await fetch('/api/producto/update_producto', {
                 method: 'POST',
@@ -140,6 +150,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
         }
     })
 
+    //Cerrado de la ventana y actualización 
     const handleClose = () => {
         if (productPhoto) {
             onClose(true)

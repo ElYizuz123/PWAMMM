@@ -3,6 +3,8 @@ import Swal from 'sweetalert2'
 
 
 const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct}) => {
+
+    //Data para el formulario
     const data = {
         "id_producto": id_producto,
         "foto" : foto,
@@ -10,9 +12,12 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
     }
 
 
+    //Abre el editor de producto
     const handleEdit = () => {
         editProduct(id_producto)
     }
+
+    //Elimina el producto
     const deleteProduct = (async () => {
         const deletedImage = await fetch('/api/delete_image', {
             method: 'POST',
@@ -53,6 +58,7 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
         }
     })
 
+    //Alerta para evitar borrado accidental 
     const handleDelete = () =>{
         Swal.fire({
             title: "Eliminar producto",

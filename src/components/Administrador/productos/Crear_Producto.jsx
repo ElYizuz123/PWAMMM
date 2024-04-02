@@ -13,14 +13,19 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos }) => {
 
     console.log(numProductos)
 
+    //Crear registro de foto
     useEffect(() => {
         register('foto');
     }, [register]);
 
+
+    //Establece la foto en el input del file 
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
 
+
+    //Guarda el producto
     const handleOnSubmit = (async (data) => {
         if (productPhoto) {
             const form = new FormData()
