@@ -111,7 +111,7 @@ CREATE TABLE `galeria_foto` (
 -- CreateTable
 CREATE TABLE `pregunta_frecuente` (
     `id_pregunta_frencuente` INTEGER NOT NULL AUTO_INCREMENT,
-    `pregunta` VARCHAR(45) NOT NULL,
+    `pregunta` TINYTEXT NOT NULL,
     `respuesta` TINYTEXT NOT NULL,
 
     PRIMARY KEY (`id_pregunta_frencuente`)

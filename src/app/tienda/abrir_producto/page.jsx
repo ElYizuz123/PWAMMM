@@ -24,19 +24,13 @@
             <Ficha
               key={producto.idProducto}
               nombre={producto.nombre}
-              marca={producto.marca.Nombre}
+              marca={producto.marca.nombre}
               precio={producto.precio}
-              agave={producto.producto_informacion?.tipo_agave}
-              cosecha={producto.producto_informacion?.tipo_cosecha}
-              elaboracion={producto.producto_informacion?.tipo_elaboracion}
-              horno={producto.producto_informacion?.tipo_horno}
-              molienda={producto.producto_informacion?.tipo_molienda}
-              fermentacion={producto.producto_informacion?.tipo_fermentacion}
-              destilador={producto.producto_informacion?.tipo_destilador}
-              alcohol={producto.producto_informacion?.riquezaAlcoholica}
-              contenido={producto.producto_informacion?.contenido}
-              botella={producto.foto}
+              contenido={producto.ml}
+              imagen={producto.foto}
               mercadoLibre={producto?.mercadoLibre || "NULL"}
+              descripcion={producto.descripcion}
+              cantidad={producto.cantidad}
             ></Ficha>
           ))}
         </div>

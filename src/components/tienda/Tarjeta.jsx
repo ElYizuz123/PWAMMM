@@ -8,17 +8,7 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-const Tarjeta = ({
-  nombre,
-  marca,
-  precio,
-  ml,
-  agave,
-  alcohol,
-  imagen,
-  mercadoLibre,
-  tipo,
-}) => {
+const Tarjeta = ({ nombre, marca, precio, ml, imagen, mercadoLibre, tipo }) => {
   return (
     <div className={k2d.className}>
       <div className="card relative rounded-5 overflow-hidden ">
@@ -29,11 +19,11 @@ const Tarjeta = ({
           <img src="\emoticons\ojo.png" alt="Icono" width="32" height="32" />
         </Link>
         <figure>
-          <img className="object-cover" src={imagen} />
+          <img className="object-cover" src={`/tienda_productos/${imagen}`} />
         </figure>
 
         <section className="details">
-          {tipo !== "2" ? (
+          {tipo !== 2 ? (
             <div>
               <div className="min-details">
                 <h1 className="text-xl flex justify-between font-semibold">
@@ -49,14 +39,12 @@ const Tarjeta = ({
                   <div class="grid grid-cols-2 gap-2">
                     <div class="col-span-1 flex items-center justify-center">
                       <ul class="list-disc">
-                        <li>{ml}ml</li>
-                        <li>Agave {agave}</li>
+                        <li>Agave cupreata</li>
                       </ul>
                     </div>
                     <div class="col-span-1 flex items-center justify-center">
                       <ul class="list-disc ">
-                        <li>{alcohol}% Alcohol</li>
-                        <li>Origen México</li>
+                        <li>45% Alcohol</li>
                       </ul>
                     </div>
                   </div>
@@ -67,7 +55,7 @@ const Tarjeta = ({
             <div>
               <div className="min-details ">
                 <h1 className="text-xl flex justify-between font-semibold">
-                  {nombre}
+                  {nombre} {ml}gr
                   <div>
                     <span className="font-normal">{marca}</span>
                   </div>

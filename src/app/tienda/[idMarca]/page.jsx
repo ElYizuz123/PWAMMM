@@ -5,6 +5,7 @@ import Categoria from "@/components/tienda/Categoria";
 import { K2D } from "next/font/google";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const k2d = K2D({
   weight: ["400"],
@@ -12,7 +13,7 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-const page = ({params}) => {
+const page = ({ params }) => {
   const [productos, setProductos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -31,11 +32,21 @@ const page = ({params}) => {
   }, []);
   useEffect(() => {
     const filtered = productos.filter((producto) =>
-      producto.nombre.toLowerCase().includes(searchTerm.toLowerCase()),
-      
+      producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
   }, [searchTerm, productos]);
+
+  useEffect(() => {
+    if (Number(params.idMarca) === 0) {
+      setFilteredProducts(productos);
+    } else {
+      const categoria = productos.filter(
+        (producto) => producto.marca.id_marca === Number(params.idMarca)
+      );
+      setFilteredProducts(categoria);
+    }
+  }, [params.idMarca, productos]);
 
   return (
     <LayoutPrincipal>
@@ -53,8 +64,11 @@ const page = ({params}) => {
               />
             </div>
 
-            <div className="fixed bottom-1/2 right-4 flex items-center justify-center w-16 h-16 bg-[#F70073] rounded-full z-50 hover:scale-110 transition transform duration-300 ease-in-out">
-              <button className="relative flex justify-center items-center">
+            <div className="fixed bottom-4 right-4 flex items-center justify-center w-16 h-16 bg-[#F70073] rounded-full z-50 hover:scale-110 transition transform duration-300 ease-in-out">
+              <Link
+                href={"/tienda/carrito"}
+                className="relative flex justify-center items-center"
+              >
                 <img
                   src="\emoticons\carrito.png"
                   className="z-10 object-cover"
@@ -62,7 +76,7 @@ const page = ({params}) => {
                 <span className="absolute -top-5 -right-5 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gray-800 rounded-full z-20">
                   1
                 </span>
-              </button>
+              </Link>
             </div>
 
             <div>
@@ -97,9 +111,7 @@ const page = ({params}) => {
 
             <div className="flex my-8">
               <div className="w-auto text-black z-10 mx-8 ">
-                <Categoria 
-                selec={params.idMarca}
-                />
+                <Categoria selec={params.idMarca} />
               </div>
 
               <div className="flex flex-wrap gap-8 mx-8 justify-center mr-24">
@@ -108,16 +120,14 @@ const page = ({params}) => {
                     producto // Cambia productos a filteredProducts
                   ) => (
                     <Tarjeta
-                      key={producto.idProducto}
+                      key={producto.id_producto}
                       nombre={producto.nombre}
-                      marca={producto.marca.Nombre}
+                      marca={producto.marca.nombre}
                       precio={producto.precio}
-                      ml={producto.producto_informacion?.contenido}
-                      agave={producto.producto_informacion?.tipo_agave}
-                      alcohol={producto.producto_informacion?.riquezaAlcoholica}
+                      ml={producto.ml}
                       imagen={producto.foto}
                       mercadoLibre={producto?.mercadoLibre || "NULL"}
-                      tipo={producto.marca.Tipo}
+                      tipo={producto.marca.tipo}
                     />
                   )
                 )}

@@ -15,17 +15,11 @@ const Ficha = ({
   nombre,
   marca,
   precio,
-  agave,
-  cosecha,
-  elaboracion,
-  horno,
-  molienda,
-  fermentacion,
-  destilador,
-  alcohol,
   contenido,
-  botella,
+  imagen,
   mercadoLibre,
+  descripcion,
+  cantidad,
 }) => {
   return (
     <div className={k2d.className}>
@@ -54,12 +48,12 @@ const Ficha = ({
           {/*contenido*/}
           <div className="absolute inset-0 flex justify-center items-center top-24">
             {/*tarjeta*/}
-            <div className=" relative  bg-white w-[1250px] h-auto rounded-lg shadow-lg top-11">
+            <div className=" relative  bg-white w-[1250px] h-auto rounded-lg shadow-lg  top-11">
               {/*imagen botellas*/}
               <div className="px-32 py-4">
                 <img
                   className="w-[350px] h-[500px] bg-gray-200 rounded-md"
-                  src={botella}
+                  src={`/tienda_productos/${imagen}`}
                   alt="Botellas"
                 />
               </div>
@@ -69,48 +63,70 @@ const Ficha = ({
               </div>
 
               {/*información */}
-              <div className="absolute top-10 left-[750px] ">
-                <p className="text-black">
-                  <strong className="text-3xl">
-                    {nombre} {contenido}ml
-                  </strong>
-                  <strong className="mt-2 block text-2xl">${precio}</strong>
-                  IVA INCLUIDO
-                </p>
-                {/*lista de caracteristicas*/}
-                <p className="text-black mt-4">Datos del producto</p>
-                <div className="col-span-1  ml-5">
-                  <ul className="text-black list-disc ">
-                    <li>Marca: {marca}</li>
-                    <li>Agave: {agave}</li>
-                    <li>Cosecha: {cosecha}</li>
-                    <li>Elaboración: {elaboracion}</li>
-                    <li>Horno: {horno}</li>
-                    <li>Molienda: {molienda}</li>
-                    <li>Fermentación: {fermentacion}</li>
-                    <li>Destilador: {destilador}</li>
-                    <li>Riqueza alcoholica: {alcohol}</li>
-                    <li>Origen: México</li>
-                  </ul>
-                </div>
-                <div className=" justify-center items-center">
-                  {/*Botón mercado libre, solo aparece si existe link en las caracteristicas de la botella*/}
-                  <div className="relative">
-                    <button className="bg-[#ffe500] text-black font-bold object-cover py-2 px-28 rounded-full mt-2 flex items-center">
-                      Comprar en Mercado Libre
-                      <img
-                        className="ml-4 h-10 w-10 "
-                        src="\emoticons\mercado_libre_logo.webp"
-                      />
-                    </button>
+              <div className="absolute top-10 left-[680px] ">
+                <div className="flex justify-end mr-8 -mt-5 ">
+                  <div className=" bg-green-200 rounded-full w-auto h-20 p-4 text-center">
+                    <p className="  font-bold text-3xl">${precio}</p>
+                    <p className=" font-thin text-xs">IVA INCLUIDO</p>
                   </div>
+                </div>
+
+                <div className="text-black -mt-10">
+                  <strong className="text-3xl ">
+                    {nombre}
+                    <span className=" ml-3  text-2xl">{contenido} ml</span>
+                  </strong>
+
+                  <p className=" text-xl  text-black font-light ">
+                    Marca:
+                    <span className=" ml-3 text-xl text-[#F70073] font-light">
+                      {marca}
+                    </span>
+                  </p>
+                  <p className=" text-xl  text-black font-light ">
+                    Alcohol:
+                    <span className=" ml-3 text-xl text-[#F70073] font-light">
+                      45°
+                    </span>
+                  </p>
+                </div>
+
+                {/*descripcion*/}
+                <p className="text-black mt-6 font-bold">DESCRIPCIÓN:</p>
+                <div className="text-justify mr-9 mt-3">
+                  <h3>{descripcion}</h3>
+                </div>
+
+                {/*botones*/}
+                <div className=" justify-center items-center">
                   <div className=" relative flex items-center ">
-                    <button className="bg-[#F70073] text-white font-bold object-cover py-2 px-20 rounded-full mt-2 flex items-center">
+                    <Link
+                      href={"/tienda/carrito"}
+                      className="bg-[#F70073] text-white hover:shadow-lg hover:-translate-y-0.5 font-bold object-cover py-3 px-20 rounded-full mt-4 flex items-center"
+                    >
                       Agregar al carrito
-                    </button>
+                    </Link>
                     <div>
-                      <Contador></Contador>
+                      <Contador cantidad2={cantidad}></Contador>
                     </div>
+                  </div>
+                  <div className="relative mt-3">
+                    {mercadoLibre !== "NULL" && (
+                      <button className="bg-[#ffe500] hover:shadow-lg hover:-translate-y-0.5 text-black font-bold py-2 px-40 rounded-full  flex items-center ">
+                        <a
+                          href={mercadoLibre}
+                          target="_blank"
+                          className="font-semibold"
+                        >
+                          Comprar en mercado libre
+                        </a>
+                        <img
+                          className="w-8 h-8"
+                          src="\emoticons\mercado_libre_logo.webp"
+                          alt="Mercado Libre"
+                        />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

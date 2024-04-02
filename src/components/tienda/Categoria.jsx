@@ -33,7 +33,7 @@ const Categoria = ({ selec }) => {
             }`}
             onClick={() => setSelectedMarca(0)}
           >
-            {"Todos"}
+            {"TODOS"}
           </div>
         </Link>
 
@@ -42,18 +42,18 @@ const Categoria = ({ selec }) => {
         </span>
 
         {items
-          .filter((item) => item.Tipo === "1") // Asegúrate de que la comparación sea con el tipo correcto
+          .filter((item) => item.tipo === 1) // Asegúrate de que la comparación sea con el tipo correcto
           .map((marca) => (
-            <Link href={`/tienda/${marca.idMarca}`} key={marca.idMarca}>
+            <Link href={`/tienda/${marca.id_marca}`} key={marca.id_marca}>
               <div
                 className={`cursor-pointer mb-2 p-2 px-4 hover:underline ${
-                  selectedMarca == marca.idMarca
+                  selectedMarca == marca.id_marca
                     ? "text-white bg-[#F70073] rounded-3xl hover:no-underline"
                     : "text-black"
                 }`}
-                onClick={() => setSelectedMarca(marca.idMarca)}
+                onClick={() => setSelectedMarca(marca.id_marca)}
               >
-                {marca.Nombre}
+                {marca.nombre}
               </div>
             </Link>
           ))}
@@ -61,18 +61,18 @@ const Categoria = ({ selec }) => {
           Acompañamientos
         </span>
         {items
-          .filter((item) => item.Tipo === "2") // Asegúrate de que la comparación sea con el tipo correcto
+          .filter((item) => item.tipo === 2) // Asegúrate de que la comparación sea con el tipo correcto
           .map((marca) => (
-            <Link href={`/tienda/${marca.idMarca}`} key={marca.idMarca}>
+            <Link href={`/tienda/${marca.id_marca}`} key={marca.id_marca}>
               <div
                 className={`cursor-pointer mb-2 p-2 px-4 hover:underline ${
-                  selectedMarca == marca.idMarca
+                  selectedMarca == marca.id_marca
                     ? "text-white bg-[#F70073] rounded-3xl hover:no-underline"
                     : "text-black"
                 }`}
-                onClick={() => setSelectedMarca(marca.idMarca)}
+                onClick={() => setSelectedMarca(marca.id_marca)}
               >
-                {marca.Nombre}
+                {marca.nombre}
               </div>
             </Link>
           ))}

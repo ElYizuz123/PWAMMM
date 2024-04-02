@@ -6,7 +6,7 @@ import Image from "next/image";
 const finalizar_compra = () => {
   return (
     <LayoutPrincipal>
-      <div className="w-full ">
+      <div className="w-full relative ">
         {/* imagen fondo */}
         <div className=" h-full w-full z-0 opacity-60 ">
           <Image
