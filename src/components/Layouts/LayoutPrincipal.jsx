@@ -18,7 +18,7 @@ const LayoutPrincipal = ({ children }) => {
   return (
       <div>
         <div>
-          <nav className="bg-black w-full z-20 top-0 start-0">
+          <nav className="bg-black w-full z-20 top-0 start-0 fixed">
             <div className="container">
               <img className="h-8 w-full" src="\navbar\banner.jpg" />
             </div>
