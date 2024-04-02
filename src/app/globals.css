@@ -174,3 +174,16 @@ h1 {
   display: none;
 }
 
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.background-image-nosotras {
+ align-items: center;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 40%;
+ /* Ajusta el brillo y el contraste */
+ 
+}
