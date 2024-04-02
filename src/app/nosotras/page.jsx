@@ -41,16 +41,17 @@ const Page = () => {
         <LayoutPrincipal>
             <div className="bg-cover bg-center w-full h-max" style={{ backgroundImage: "url('/multimedia/RECOLECCION.jpg')" }}>
                 <div className="w-5/6 m-auto">
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                   
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
+
                     <div className="mt-10 "> {/* Carrusel de la seccion NOSOTRAS, inicia automáticamente y cada 4 segundos cambia*/}
-                        <Swiper    
+                        <Swiper
                             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
                             effect={'coverflow'}
                             loop={true}
@@ -74,7 +75,8 @@ const Page = () => {
 
                             className="coverflow"
                         >
-                            {asociadas && asociadas.map((asociada, index) => {  {/*La informacion del carrusel como historia, nombre, etc*/}
+                            {asociadas && asociadas.map((asociada, index) => {
+                                {/*La informacion del carrusel como historia, nombre, etc*/ }
                                 return (
                                     <SwiperSlide key={asociada.id_asociada}>
 
@@ -86,7 +88,7 @@ const Page = () => {
                                                 <p className='text-xl font-semibold'>{asociada.nombre}</p>
                                                 <p className='text-xs'>{asociada.historia}</p>
                                                 <Link href={`${tienda}${asociada.id_asociada}`}>
-                                                <button className="bg-[#f70073] hover:bg-[#e39abd]  text-white text-lg px-6 py-1 rounded -xl">Productos</button>
+                                                    <button className="bg-[#f70073] hover:bg-[#e39abd]  text-white text-lg px-6 py-1 rounded -xl">Productos</button>
                                                 </Link>
                                             </div>
 
@@ -111,20 +113,20 @@ const Page = () => {
 
 
                     </div>
-                    
+
                     <br></br>
                     <br></br>
                     <br></br>
                     <div className="mt-4 p-6 bg-[#F1F1F1] bg-opacity-60 text-white rounded-lg border border-white  h-[760px] ">
                         <br></br>
-                        
+
                         <div className={berkshire.className} >
                             <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl font-semibold text-black mb-4 ml-20 sm:ml-7 md:ml-8 lg:ml-12 xl:ml-17 2xl:ml-20">Misión</p>
                         </div>
                         <div className="relative">
                             <hr className="border-t-8 border-b-4 border-[#F70073] my-4 ml-10 mr-14 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10 2xl:ml-10" />
                             <hr className=" absolute inset-0 border-t-2  border-white my-0 ml-10 mr-14 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10  2xl:ml-10" />
-                           
+
 
                         </div>
                         <p className='text-xs  md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10  2xl:ml-10 leading-normal sm:text-xl sm:leading-normal md:text-2xl md:leading-normal lg:text-3xl lg:leading-relaxed xl:text-4xl xl:leading-relaxed 2xl:text-4xl 2xl:leading-relaxed text-black  flex justify-center'> Proteger, regular y promover la Denominación de Origen MEZCAL, dentro de los Municipios comprendidos en el estado de Michoacán de Ocampo, así mismo vigilar y observar las especificaciones contenidas en la Norma Oficial Mexicana NOM-070 y sus actualizaciones, evaluando y promoviendo la incorporación de sistemas para asegurar la sustentabilidad y la calidad en todos los procesos productivos del mezcal. También Fomentaremos las formas tradicionales de producción resguardando su identidad regional, con objeto de conservar y consolidar al Mezcal Michoacano como parte de nuestra CULTURA LIQUIDA DE MEXICO.</p>
@@ -133,7 +135,7 @@ const Page = () => {
                         <br></br>
                         <br></br>
                     </div>
-                
+
                     <br></br>
                     <br></br>
                     <br></br>
