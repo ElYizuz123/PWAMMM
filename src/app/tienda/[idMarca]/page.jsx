@@ -1,10 +1,9 @@
-"use client";
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
 import Tarjeta from "@/components/tienda/Tarjeta";
 import Categoria from "@/components/tienda/Categoria";
 import { K2D } from "next/font/google";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 
 const k2d = K2D({
@@ -13,40 +12,47 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-const page = ({ params }) => {
-  const [productos, setProductos] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
+const Page = async ({ params }) => {
+  // const [productos, setProductos] = useState([]);
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [filteredProducts, setFilteredProducts] = useState([]);
+  // Cuando estoy en contexto de servidor de react hooks
+  const response = await fetch("/api/read_producto");
+  const data = await response.json();
+
+
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
-  useEffect(() => {
-    const fetchProductos = async () => {
-      const response = await fetch("/api/read_producto");
-      const data = await response.json();
-      setProductos(data);
-      setFilteredProducts(data);
-    };
+  // useEffect(() => {
+  //   const fetchProductos = async () => {
+  //     const response = await fetch("/api/read_producto");
+  //     const data = await response.json();
+  //     setProductos(data);
+  //     setFilteredProducts(data);
+  //   };
 
-    fetchProductos();
-  }, []);
-  useEffect(() => {
-    const filtered = productos.filter((producto) =>
-      producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-  }, [searchTerm, productos]);
+  //   fetchProductos();
+  // }, []);
 
-  useEffect(() => {
-    if (Number(params.idMarca) === 0) {
-      setFilteredProducts(productos);
-    } else {
-      const categoria = productos.filter(
-        (producto) => producto.marca.id_marca === Number(params.idMarca)
-      );
-      setFilteredProducts(categoria);
-    }
-  }, [params.idMarca, productos]);
+  // useEffect(() => {
+  //   const filtered = productos.filter((producto) =>
+  //     producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  //   setFilteredProducts(filtered);
+  // }, [searchTerm, productos]);
+
+  // useEffect(() => {
+  //   if (Number(params.idMarca) === 0) {
+  //     setFilteredProducts(productos);
+  //   } else {
+  //     const categoria = productos.filter(
+  //       (producto) => producto.marca.id_marca === Number(params.idMarca)
+  //     );
+  //     setFilteredProducts(categoria);
+  //   }
+  // }, [params.idMarca, productos]);
 
   return (
     <LayoutPrincipal>
@@ -113,8 +119,11 @@ const page = ({ params }) => {
               <div className="w-auto text-black z-10 mx-8 ">
                 <Categoria selec={params.idMarca} />
               </div>
-
-              <div className="flex flex-wrap gap-8 mx-8 justify-center mr-24">
+              <Suspense fallback={<div className="bg-red-300"></div>}>
+                <ComponenteNuevo data={data} />
+              </Suspense>
+              {/* Componente que maneje su estado propio */}
+              {/* <div className="flex flex-wrap gap-8 mx-8 justify-center mr-24">
                 {filteredProducts.map(
                   (
                     producto // Cambia productos a filteredProducts
@@ -131,7 +140,7 @@ const page = ({ params }) => {
                     />
                   )
                 )}
-              </div>
+              </div> */}
             </div>
 
             {/* SECCION */}
@@ -165,4 +174,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Page;
