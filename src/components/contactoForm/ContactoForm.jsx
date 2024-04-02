@@ -1,5 +1,4 @@
 "use client"
-import { POST } from '@/app/api/sendEmail/route'
 import React, { useState, useEffect } from 'react'
 
 const ContactoForm = () => {
@@ -84,52 +83,52 @@ const ContactoForm = () => {
             Nuestro equipo se pondrá en contacto contigo
           </p>
         </div>
-        <form onSubmit={sendEmail}>
+        <form className="m-20 mt-0" onSubmit={sendEmail}>
           <div className="flex justify-center items-center">
             <input type="text" id="motivo" name="motivo" required value={motivo}
               onChange={(e) => {
                 setMotivo(e.target.value);
               }}
-              className="border-gray-300 p-4 mb-4 w-11/12 text-3xl rounded-lg shadow-md"
+              className="border-gray-300 h-16 p-4 mb-4 w-full text-3xl rounded-lg shadow-md"
               placeholder="*Motivo*"></input>
           </div>
 
-          <div className="justify-center grid sm:grid-flow-row lg:grid-flow-col gap-48 w-full">
+          <div className="grid grid-flow-row sm:grid-flow-col gap-16 w-full">
             <input type="text" id="nombre" name="nombre" required value={nombre}
               onChange={(e) => {
                 setNombre(e.target.value);
               }}
-              className="border-gray-300 p-4 mb-4 w-full text-3xl rounded-lg shadow-md"
+              className="border-gray-300 h-16 p-4 mb-4 w-full text-3xl rounded-lg shadow-md"
               placeholder="*Nombre*"></input>
             <input type="text" id="apellido" name="apellido" required value={apellidos}
               onChange={(e) => {
                 setApellidos(e.target.value);
               }}
-              className="border-gray-300 p-4 mb-4 w-full text-3xl rounded-lg shadow-md"
+              className="border-gray-300 h-16 p-4 mb-4 w-full text-3xl rounded-lg shadow-md"
               placeholder="*Apellidos*"></input>
           </div>
 
-          <div className="justify-center grid grid-flow-row sm:grid-flow-col gap-48">
+          <div className="grid grid-flow-row sm:grid-flow-col gap-16 w-full">
             <input type="email" id="correo" name="correo" required value={correo}
               onChange={(e) => {
                 setCorreo(e.target.value);
               }}
-              className="border-gray-300 p-4 mb-4 w-full text-3xl rounded-lg shadow-md"
+              className="border-gray-300 h-16 p-4 mb-4 w-full text-3xl rounded-lg shadow-md"
               placeholder="*Correo*"></input>
             <input type="text" id="telefono" name="telefono" required value={telefono}
               onChange={(e) => {
                 setTelefono(e.target.value);
               }}
-              className="border-gray-300 p-4 mb-4 w-full text-3xl rounded-lg shadow-md"
+              className="border-gray-300 h-16 p-4 mb-4 w-full text-3xl rounded-lg shadow-md"
               placeholder="*Teléfono*"></input>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex w-full">
             <textarea id="comentario" name="comentario" value={comentarios}
               onChange={(e) => {
                 setComentarios(e.target.value);
               }}
-              className="border-gray-300 p-4 mb-4 w-11/12 h-60 text-3xl resize-none text-left rounded-lg shadow-md"
+              className="border-gray-300 p-4 mb-4 w-full h-60 text-3xl resize-none text-left rounded-lg shadow-md"
               placeholder="*Comentarios extra*">
             </textarea>
           </div>
@@ -153,6 +152,8 @@ const ContactoForm = () => {
   justify-content: center;
   align-items: center;
   display: none; */}
+
+      {/* cuadro de confirmación */}
       <div className="container-modal rounded-lg border-2 border-[#D60064] shadow-lg">
         <div className="content-modal ml-5 mr-5 mt-2 mb-2">
           <p className="text-3xl">Se ha enviado un correo con tus datos a la asociación</p>

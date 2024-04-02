@@ -32,9 +32,8 @@ function page() {
                     />
                 </div>
 
-                <br/>
 
-                <div className="items-center justify-center">
+                <div className="items-center justify-center mt-10">
                     {categorias &&
                         categorias.map((galeria_categoria) => (
                             <div key={galeria_categoria.id_categoria}>

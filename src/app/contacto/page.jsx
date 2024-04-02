@@ -9,10 +9,7 @@ function page() {
   return (
     <LayoutPrincipal>
 
-      <div className="h-max relative z-10 w-full">
-
-        <br></br>
-        <br></br>
+      <div className="h-max relative z-10 mt-10 w-full">
 
         {/* el fondo bueno, nomas que no jala bien */}
         {/* <div className="absolute bottom-0 z-0 inset-0">
