@@ -3,7 +3,7 @@ import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React from 'react'
 
-const page = () => {
+const Page = () => {
   return (
     <LayoutCRUD title="Eventos">
       <main className='flex flex-col items-center justify-between w-full h-auto'>
@@ -40,4 +40,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

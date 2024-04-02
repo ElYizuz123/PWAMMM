@@ -87,7 +87,7 @@ const Page = () => {
   }, [productos]);
 
   //Búsqueda
-  useEffect(() => {
+  useEffect((productos) => {
     if (productos) {
       const filtered = productos.filter((producto) =>
         producto.nombre.toLowerCase().includes(busqueda?.toLowerCase()),
@@ -152,13 +152,13 @@ const Page = () => {
                   className="p-3 text-sm h-[55px] w-20 mt-8 border-2 border-gray-300 text-white bg-[#F70073] rounded-e-full  hover:opacity-75"
                   type="submit"
                 >
-                  <img className="w-5 h-5 ml-3" src="\emoticons\lupa.png"></img>
+                  <Image alt="lupa" layout='intrinsic' width={40} height={40} className="w-5 h-5 ml-3" src="/emoticons/lupa.png"/>
                 </button>
               </div>
             </form>
             <div className='w-full flex justify-start ml-[10%] mt-5'>
               <button onClick={openCProduct} className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
-                <img src='/emoticons/plus.png' className='w-8 ml-2' />
+                <Image alt="mas" layout='intrinsic' width={40}  height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-3'>Agregar producto</p>
               </button>
             </div>
@@ -182,5 +182,4 @@ const Page = () => {
     </LayoutCRUD>
   )
 }
-
-export default Page
+export default Page 

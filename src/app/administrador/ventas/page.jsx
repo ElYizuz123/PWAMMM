@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 
 
-const page = () => {
+const Page = () => {
   const [ventas, setVentas] = useState(null);
   const [orden, setOrden]=useState("reciente");
   const readData = async () => {
@@ -83,4 +83,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

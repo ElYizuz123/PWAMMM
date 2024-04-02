@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 
-const page = () => {
+const Page = () => {
 
   const [marcas, setMarcas] = useState(null)
   const [asociadas, setAsociadas] = useState(null)
@@ -188,4 +188,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
