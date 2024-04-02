@@ -33,14 +33,13 @@ const Page = () => {
 
   //Función para cerrar pop-up editar productos
   const closeUProduct = (uImage) => {
-    readData()
-    // setUProductIsOpen(false)
-    // if (uImage) {
-    //   window.location.reload()
-    // }
-    // else {
-    //   readData()
-    // }
+    setUProductIsOpen(false)
+    if (uImage) {
+      window.location.reload()
+    }
+    else {
+      readData()
+    }
 
   };
 
@@ -51,7 +50,7 @@ const Page = () => {
 
   //Función para leer productos
   const readData = async () => {
-    const res = await fetch('/api/producto/read_productos')
+    const res = await fetch('/api/producto/read_productos',{ cache: "no-cache" })
     const resJSON = await res.json()
     const parseado = JSON.parse(resJSON)
     setProductos(parseado)
@@ -60,7 +59,7 @@ const Page = () => {
 
   //Función para leer marcas
   const readMarcas = async () => {
-    const res = await fetch('/api/marcas/read_marcas_admin', { cache: "no-cache" });
+    const res = await fetch('/api/marcas/read_marcas_admin');
     const resJSON = await res.json();
     setMarcas(JSON.parse(resJSON));
   };
