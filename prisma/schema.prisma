@@ -3,14 +3,15 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+//  TODO: Modelos en mayusculas
 model asociada {
   id_asociada Int     @id @default(autoincrement())
   nombre      String  @db.VarChar(45)
-  historia    String  @db.LongText
+  historia    String
   foto        String  @db.VarChar(45)
   marca       marca[]
 }
@@ -37,10 +38,10 @@ model producto {
   nombre           String             @db.VarChar(45)
   ml               Int
   precio           Decimal            @db.Decimal(10, 2)
-  descripcion      String             @db.LongText
+  descripcion      String
   foto             String             @db.VarChar(45)
   marca_id_marca   Int
-  mercadoLibre     String?            @db.MediumText
+  mercadoLibre     String?
   cantidad         Int?
   marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_producto_marca1")
   venta_individual venta_individual[]
@@ -50,7 +51,7 @@ model producto {
 
 model user {
   user     String @id @db.VarChar(45)
-  password String @db.MediumText
+  password String 
 }
 
 model venta_individual {
@@ -68,10 +69,10 @@ model venta_individual {
 
 model venta_total {
   id_venta          Int                @id
-  fecha_venta       DateTime           @default(now()) @db.DateTime(0)
+  fecha_venta       DateTime           @default(now())
   total             Decimal            @db.Decimal(10, 2)
   status            String             @default("Pendiente") @db.VarChar(45)
-  envio             Int                @db.TinyInt
+  envio             Int                
   nombre_cliente    String             @db.VarChar(45)
   apellidos_cliente String             @db.VarChar(45)
   empresa           String?            @db.VarChar(45)
@@ -106,8 +107,8 @@ model galeria_foto {
 
 model pregunta_frecuente {
   id_pregunta_frencuente Int    @id @default(autoincrement())
-  pregunta               String @db.TinyText
-  respuesta              String @db.TinyText
+  pregunta               String
+  respuesta              String
 }
 
 model producto_informacion {
