@@ -144,7 +144,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos }) => {
                                     maxLength={45}
                                     {...register('nombre', {
                                         required: true,
-                                        maxLength: 45
+                                        maxLength: 45,
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                     placeholder='Nombre del mezcal'

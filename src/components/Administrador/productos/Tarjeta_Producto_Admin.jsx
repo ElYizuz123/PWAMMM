@@ -2,13 +2,13 @@ import Link from 'next/link'
 import Swal from 'sweetalert2'
 
 
-const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct}) => {
+const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct }) => {
 
     //Data para el formulario
     const data = {
         "id_producto": id_producto,
-        "foto" : foto,
-        "source" : "botellas"
+        "foto": foto,
+        "source": "botellas"
     }
 
 
@@ -24,7 +24,7 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
             body: JSON.stringify(data),
         })
         const resDeletedImageJSON = await deletedImage.json()
-        if(resDeletedImageJSON=='Arhivo eliminado correctamente'){
+        if (resDeletedImageJSON == 'Arhivo eliminado correctamente') {
             const res = await fetch('/api/producto/delete_producto', {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -39,27 +39,27 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
                     title: "Eliminado!",
                     text: "La marca fué eliminada",
                     icon: "success"
-                  });
+                });
                 updatePage()
             }
-            else{
+            else {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "Algo salió mal!",
-                  });
+                });
             }
-        }else{
+        } else {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Algo salió mal!",
-              });
+            });
         }
     })
 
     //Alerta para evitar borrado accidental 
-    const handleDelete = () =>{
+    const handleDelete = () => {
         Swal.fire({
             title: "Eliminar producto",
             text: "Esta acción no puede ser revertida!",
@@ -69,11 +69,11 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
             cancelButtonColor: "#d33",
             cancelButtonText: "Cancelar",
             confirmButtonText: "Si, borrar!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              deleteProduct()
+                deleteProduct()
             }
-          });
+        });
     }
 
     return (
@@ -86,9 +86,10 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
             </button>
             <figure className='flex justify-center'>
                 <img
+                    key={`img${Date.now()}`}
                     className="w-48 h-72"
                     id='foto_botella'
-                    src={"\\botellas\\"+foto}
+                    src={"\\botellas\\" + foto}
                     alt="t-shirt"
                 />
             </figure>

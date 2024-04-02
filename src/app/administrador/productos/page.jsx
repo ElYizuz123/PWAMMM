@@ -6,7 +6,7 @@ import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
-const page = () => {
+const Page = () => {
   const [cProductIsOpen, setCProductIsOpen] = useState(false);
   const [uProductIsOpen, setUProductIsOpen] = useState(false);
   const [productos, setProductos] = useState(null);
@@ -34,13 +34,13 @@ const page = () => {
   //Función para cerrar pop-up editar productos
   const closeUProduct = (uImage) => {
     setUProductIsOpen(false)
-    if(uImage){
+    if (uImage) {
       window.location.reload()
     }
-    else{
+    else {
       readData()
     }
-    
+
   };
 
   //Función para actualizar la página después de eliminación
@@ -54,12 +54,12 @@ const page = () => {
     const resJSON = await res.json()
     const parseado = JSON.parse(resJSON)
     setProductos(parseado)
-    
+
   };
 
   //Función para leer marcas
   const readMarcas = async () => {
-    const res = await fetch('/api/marcas/read_marcas_admin');
+    const res = await fetch('/api/marcas/read_marcas_admin', { cache: "no-cache" });
     const resJSON = await res.json();
     setMarcas(JSON.parse(resJSON));
   };
@@ -68,7 +68,7 @@ const page = () => {
   useEffect(() => {
     readData();
     readMarcas();
-    
+
   }, []);
 
   //Scroll automático a ventana emergente
@@ -76,7 +76,7 @@ const page = () => {
     if (cProductIsOpen) {
       window.scrollTo({ top: 230, behavior: 'smooth' });
     }
-    else if(uProductIsOpen){
+    else if (uProductIsOpen) {
       window.scrollTo({ top: 230, behavior: 'smooth' });
     }
   }, [cProductIsOpen, uProductIsOpen]);
@@ -88,20 +88,20 @@ const page = () => {
 
   //Búsqueda
   useEffect(() => {
-    if(productos){
+    if (productos) {
       const filtered = productos.filter((producto) =>
         producto.nombre.toLowerCase().includes(busqueda?.toLowerCase()),
-      
+
       );
       setFilteredProducts(filtered);
     }
-    
+
   }, [busqueda]);
 
   //Cambio en la búsqueda
   const handleChange = (event) => {
     setBusqueda(event.target.value);
-  }; 
+  };
 
   //Confirmación en la búsqueda
   const handleSubmit = (e) => {
@@ -111,21 +111,21 @@ const page = () => {
 
   return (
     <LayoutCRUD title="Productos">
-      <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${cProductIsOpen ? "": "pointer-events-none"}`}>
-        {cProductIsOpen && <Crear_Producto 
-        isOpen={cProductIsOpen} 
-        onClose={closeCProduct} 
-        marcas={marcas} 
-        nProductos={productos ? Object.keys(productos).length:0}
+      <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${cProductIsOpen ? "" : "pointer-events-none"}`}>
+        {cProductIsOpen && <Crear_Producto
+          isOpen={cProductIsOpen}
+          onClose={closeCProduct}
+          marcas={marcas}
+          nProductos={productos ? Object.keys(productos).length : 0}
         />}
       </div>
-      <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${uProductIsOpen ? "": "pointer-events-none"}`}>
-        {uProductIsOpen && <Editar_Producto 
-        isOpen={uProductIsOpen} 
-        onClose={closeUProduct} 
-        marcas={marcas} 
-        nProductos={productos ? Object.keys(productos).length:0}
-        idProducto={productoEdit}
+      <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${uProductIsOpen ? "" : "pointer-events-none"}`}>
+        {uProductIsOpen && <Editar_Producto
+          isOpen={uProductIsOpen}
+          onClose={closeUProduct}
+          marcas={marcas}
+          nProductos={productos ? Object.keys(productos).length : 0}
+          idProducto={productoEdit}
         />}
       </div>
       <main className='flex h-[2300px] flex-col items-center justify-between w-full '>
@@ -134,7 +134,7 @@ const page = () => {
             <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />
           </div>
           <div className='w-full h-auto relative'>
-          <div className='w-full flex justify-center'>
+            <div className='w-full flex justify-center'>
               <p className='mt-6 text-3xl font-bold'>Bienvenido,</p>
               <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Productos</p>
             </div>
@@ -158,7 +158,7 @@ const page = () => {
             </form>
             <div className='w-full flex justify-start ml-[10%] mt-5'>
               <button onClick={openCProduct} className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
-                <img src='/emoticons/plus.png' className='w-8 ml-2'/>
+                <img src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-3'>Agregar producto</p>
               </button>
             </div>
@@ -174,7 +174,7 @@ const page = () => {
                   updatePage={updatePage}
                   editProduct={openUProduct}
                 />))
-                }
+              }
             </div>
           </div>
         </div>
@@ -183,4 +183,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
