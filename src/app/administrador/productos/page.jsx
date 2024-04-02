@@ -33,13 +33,14 @@ const Page = () => {
 
   //Función para cerrar pop-up editar productos
   const closeUProduct = (uImage) => {
-    setUProductIsOpen(false)
-    if (uImage) {
-      window.location.reload()
-    }
-    else {
-      readData()
-    }
+    readData()
+    // setUProductIsOpen(false)
+    // if (uImage) {
+    //   window.location.reload()
+    // }
+    // else {
+    //   readData()
+    // }
 
   };
 
