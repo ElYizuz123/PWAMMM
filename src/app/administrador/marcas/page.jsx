@@ -1,5 +1,6 @@
 "use client"
 import Crear_marca from '@/components/Administrador/marcas/Crear_marca'
+import Editar_marca from '@/components/Administrador/marcas/Editar_marca'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -10,6 +11,8 @@ const page = () => {
   const [marcas, setMarcas] = useState(null)
   const [asociadas, setAsociadas] = useState(null)
   const [cMarcasIsOpen, setCMarcasIsOpen] = useState(false)
+  const [uMarcasIsOpen, setUMarcasIsOpen] = useState(false)
+  const [updateMarca, setUpdateMarca] = useState(null)
 
   //Eliminar una marca
   const deleteProduct = async (data) => {
@@ -43,7 +46,7 @@ const page = () => {
   const handleDelete = async (data) => {
     Swal.fire({
       title: "Eliminar marca",
-      text: "No es posible revertir esta acción!",
+      text: "Todos los productos asociados a esta marca serán eliminados y no hay forma de revertir la acción!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -66,6 +69,18 @@ const page = () => {
     setCMarcasIsOpen(false)
     readData()
   };
+
+  //Cerrar pop-up de agregar marca
+  const closeUProduct = () => {
+    setUMarcasIsOpen(false)
+    readData()
+  };
+
+  //Abrir pop-up de agregar marca
+  const openUMarca = (idMarca) => {
+    setUpdateMarca(idMarca)
+    setUMarcasIsOpen(true)
+  }
 
   //Leer marcas
   const readData = async () => {
@@ -94,6 +109,12 @@ const page = () => {
     }
   }, [cMarcasIsOpen]);
 
+  useEffect(() => {
+    if (uMarcasIsOpen) {
+      window.scrollTo({ top: 180, behavior: 'smooth' });
+    }
+  }, [uMarcasIsOpen]);
+
 
   return (
     <LayoutCRUD title="Marcas">
@@ -102,6 +123,14 @@ const page = () => {
           isOpen={cMarcasIsOpen}
           onClose={closeCProduct}
           asociadas={asociadas}
+        />}
+      </div>
+      <div className={`absolute top-1/2 left-[45%] z-10 w-4/12 ${uMarcasIsOpen ? "" : "pointer-events-none"}`}>
+        {uMarcasIsOpen && <Editar_marca
+          isOpen={uMarcasIsOpen}
+          onClose={closeUProduct}
+          asociadas={asociadas}
+          idMarca={updateMarca}
         />}
       </div>
       <main className='flex flex-col items-center justify-between w-full h-full'>
@@ -135,10 +164,12 @@ const page = () => {
                   {marcas && marcas.map((marca) => (
                     <div key={marca.id_marca}>
                       <div className='flex justify-between w-full mt-0.5 pl-5 '>
-                        <p className='font-bold w-6 text-center'>{marca.nombre}</p>
-                        <p className='font-bold ml-[19%] text-left w-40'>{marca.asociada.nombre}</p>
-                        <p className='font-bold w-16 text-left ml-10'>{marca.tipo == 0 ? "Mezcal" : "Acompañamiento"}</p>
-                        <button className='w-12 h-6 font-bold flex justify-center items-center bg-[#91caf8]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'>Editar</button>
+                        <p className='font-bold w-44'>{marca.nombre}</p>
+                        <p className='font-bold ml-[7%] text-left w-44'>{marca.asociada.nombre}</p>
+                        <p className='font-bold w-16 text-left ml-5'>{marca.tipo == 0 ? "Mezcal" : "Acompañamiento"}</p>
+                        <button className='w-12 h-6 font-bold flex justify-center items-center bg-[#91caf8]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'
+                          onClick={() => openUMarca(marca.id_marca)}
+                        >Editar</button>
                         <button className='w-16 h-6 font-bold flex justify-center items-center bg-[#f89191]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'
                           onClick={() => handleDelete(marca.id_marca)}
                         >Eliminar</button>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Swal from 'sweetalert2'
 
 
 const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct}) => {
@@ -29,17 +30,52 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
             const resJSON = await res.json()
             console.log(resJSON)
             if (resJSON == "Producto eliminado con éxito") {
+                Swal.fire({
+                    title: "Eliminado!",
+                    text: "La marca fué eliminada",
+                    icon: "success"
+                  });
                 updatePage()
             }
+            else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Algo salió mal!",
+                  });
+            }
+        }else{
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo salió mal!",
+              });
         }
     })
+
+    const handleDelete = () =>{
+        Swal.fire({
+            title: "Eliminar producto",
+            text: "Esta acción no puede ser revertida!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Si, borrar!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              deleteProduct()
+            }
+          });
+    }
 
     return (
         <div className="relative rounded-5 overflow-hidden card-reduced">
             <button onClick={handleEdit} className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
                 <img src="\emoticons\editar.png" alt="Icono" width="32" height="32" />
             </button>
-            <button onClick={deleteProduct} className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
+            <button onClick={handleDelete} className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
                 <img src="\emoticons\eliminar.png" alt="Icono" width="32" height="32" />
             </button>
             <figure>

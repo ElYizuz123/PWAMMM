@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) => {
     const [productPhoto, setProductPhoto] = useState(null)
@@ -9,34 +10,34 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
 
-    const setForm = (data) =>{
+    const setForm = (data) => {
         console.log(data)
         register('nombre'),
-        register('ml'),
-        register('precio'),
-        register('marca'),
-        register('cantidad'),
-        register('mercado_lib'),
-        register('descripcion'),
-        register('id_producto')
+            register('ml'),
+            register('precio'),
+            register('marca'),
+            register('cantidad'),
+            register('mercado_lib'),
+            register('descripcion'),
+            register('id_producto')
 
         setValue('id_producto', idProducto),
-        setValue('nombre', data[0].nombre),
-        setValue('ml', data[0].ml),
-        setValue('precio', data[0].precio),
-        setValue('marca', data[0].marca.id_marca),
-        setValue('cantidad', data[0].cantidad),
-        setValue('mercado_lib', data[0].mercadoLibre),
-        setValue('descripcion', data[0].descripcion)
+            setValue('nombre', data[0].nombre),
+            setValue('ml', data[0].ml),
+            setValue('precio', data[0].precio),
+            setValue('marca', data[0].marca.id_marca),
+            setValue('cantidad', data[0].cantidad),
+            setValue('mercado_lib', data[0].mercadoLibre),
+            setValue('descripcion', data[0].descripcion)
     }
 
 
     const opcionDefault = () => {
-        if(producto){
+        if (producto) {
             document.getElementById("select_marca").value = producto[0].marca.id_marca;
             setDefaultData(true)
         }
-        
+
     }
 
     useEffect(() => {
@@ -58,7 +59,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
         const resJSON = await res.json()
         setProducto(JSON.parse(resJSON))
         setForm(JSON.parse(resJSON))
-       
+
     })
 
     const handleOnSubmit = (async (data) => {
@@ -87,11 +88,28 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                 const resJSON = await res.json()
                 console.log(resJSON)
                 if (resJSON == "Registrado") {
-                    
+                    let timerInterval;
+                    Swal.fire({
+                        title: "Producto actualizado!",
+                        icon: "success",
+                        timer: 2000,
+                        timerProgressBar: true,
+                        confirmButtonText: "Ok",
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+                    })
+                }
+                else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo salió mal!",
+                    })
                 }
             }
         }
-        else{
+        else {
             const res = await fetch('/api/producto/update_producto', {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -102,16 +120,31 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
             const resJSON = await res.json()
             console.log(resJSON)
             if (resJSON == "Registrado") {
-
+                Swal.fire({
+                    title: "Producto actualizado!",
+                    icon: "success",
+                    timer: 2000,
+                    timerProgressBar: true,
+                    confirmButtonText: "Ok",
+                    willClose: () => {
+                        clearInterval(timerInterval);
+                    }
+                })
+            }else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Algo salió mal!",
+                });
             }
         }
     })
 
     const handleClose = () => {
-        if(productPhoto){
+        if (productPhoto) {
             onClose(true)
         }
-        else{
+        else {
             onClose(false)
         }
     }
@@ -131,9 +164,9 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
                     )}
-                    {!productPhoto && (<img src={`/botellas/${producto ? producto[0].foto:""}`} alt='Preview' className='w-64' />)}
+                    {!productPhoto && (<img src={`/botellas/${producto ? producto[0].foto : ""}`} alt='Preview' className='w-64' />)}
                     {!productPhoto && (
-                        <p className='text-sm'>{producto ? producto[0].foto:""}</p>
+                        <p className='text-sm'>{producto ? producto[0].foto : ""}</p>
                     )}
                     <button
                         className='bg-gray-300 w-36 rounded-lg border-[1px] border-black text-sm mt-3'
@@ -166,7 +199,9 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 <input
                                     type='text'
                                     name='nombre'
-                                    defaultValue={producto ? producto[0].nombre: ""}
+                                    defaultValue={producto ? producto[0].nombre : ""}
+                                    required={true}
+                                    maxLength={45}
                                     id='campo_nombre'
                                     {...register('nombre', {
                                         required: true,
@@ -178,7 +213,9 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 <input
                                     type='number'
                                     name='ml'
-                                    defaultValue={producto ? producto[0].ml: ""}
+                                    defaultValue={producto ? producto[0].ml : ""}
+                                    required={true}
+                                    maxLength={10}
                                     {...register('ml', {
                                         required: true,
                                         maxLength: 10
@@ -189,7 +226,9 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 <input
                                     type='number'
                                     name='precio'
-                                    defaultValue={producto ? producto[0].precio: ""}
+                                    required={true}
+                                    maxLength={10}
+                                    defaultValue={producto ? producto[0].precio : ""}
                                     {...register('precio', {
                                         required: true,
                                         maxLength: 10
@@ -201,26 +240,29 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     name='marca'
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     id="select_marca"
+                                    required={true}
                                     {...register('marca', {
                                         required: true
                                     })}
-                                    
+
                                 >
-                                    {defaultData ? opcionDefault():""}
+                                    {defaultData ? opcionDefault() : ""}
                                     {marcas && (
                                         marcas.map((marca) => (
                                             <option value={marca.id_marca} key={marca.id_marca}>{marca.nombre}</option>
                                         ))
                                     )}
-                                    
+
                                 </select>
-                                {producto ? console.log(producto[0].marca):""}
+                                {producto ? console.log(producto[0].marca) : ""}
                                 <input
                                     type='number'
                                     name='cantidad'
                                     placeholder='Cantidad de producto'
+                                    required={true}
+                                    maxLength={10}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
-                                    defaultValue={producto ? producto[0].cantidad: ""}
+                                    defaultValue={producto ? producto[0].cantidad : ""}
                                     {...register('cantidad', {
                                         required: true
                                     })}
@@ -228,21 +270,24 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 <input
                                     type='text'
                                     name='mercado_lib'
+                                    maxLength={255}
                                     {...register('mercado_lib', {
                                         maxLength: 255
                                     })}
-                                    defaultValue={producto ? producto[0].mercadoLibre: ""}
+                                    defaultValue={producto ? producto[0].mercadoLibre : ""}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     placeholder='Link a mercado libre'
                                 />
                                 <textarea
                                     type='text'
                                     name='descripcion'
+                                    required={true}
+                                    maxLength={3000}
                                     {...register('descripcion', {
                                         required: true,
                                         maxLength: 3000
                                     })}
-                                    defaultValue={producto ? producto[0].descripcion: ""}
+                                    defaultValue={producto ? producto[0].descripcion : ""}
                                     className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-6 pt-1'
                                 />
                                 <div className='w-full flex justify-end items-end'>
