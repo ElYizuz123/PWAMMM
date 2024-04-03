@@ -20,7 +20,7 @@ model asociada {
 model evento {
   id_evento Int      @id @default(autoincrement())
   foto      String   @db.VarChar(45)
-  fecha_fin DateTime @db.Date
+  fecha_fin DateTime 
 }
 
 model marca {
@@ -28,7 +28,7 @@ model marca {
   nombre               String     @unique(map: "nombre_UNIQUE") @db.VarChar(45)
   Asociada_id_asociada Int
   tipo                 Int
-  asociada             asociada   @relation(fields: [Asociada_id_asociada], references: [id_asociada], onDelete: NoAction, onUpdate: NoAction, map: "fk_marca_Asociada1")
+  asociada             asociada   @relation(fields: [Asociada_id_asociada], references: [id_asociada], onDelete: Cascade, onUpdate: NoAction, map: "fk_marca_Asociada1")
   producto             producto[]
   acompanamiento        acompanamiento []
 
@@ -47,7 +47,7 @@ model producto {
   marca_id_marca   Int
   mercadoLibre     String?
   cantidad         Int?
-  marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_producto_marca1")
+  marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: Cascade, onUpdate: NoAction, map: "fk_producto_marca1")
   venta_individual venta_individual[]
 
   @@index([marca_id_marca], map: "fk_producto_marca1_idx")
@@ -62,7 +62,7 @@ model acompanamiento {
   foto             String             @db.VarChar(45)
   marca_id_marca   Int
   cantidad         Int?
-  marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_acompanamiento_marca1")
+  marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: Cascade, onUpdate: NoAction, map: "fk_acompanamiento_marca1")
   venta_individual venta_individual[]
 
   @@index([marca_id_marca], map: "fk_acompanamiento_marca1_idx")
@@ -81,9 +81,9 @@ model venta_individual {
   venta_total_id_venta Int
   producto_id_producto Int
   acompanamiento_id_acompanamiento  Int
-  producto             producto    @relation(fields: [producto_id_producto], references: [id_producto], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_producto1")
+  producto             producto?    @relation(fields: [producto_id_producto], references: [id_producto], onDelete: SetNull, onUpdate: NoAction, map: "fk_venta_individual_producto1")
   venta_total          venta_total @relation(fields: [venta_total_id_venta], references: [id_venta], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_venta_total")
-  acompanamiento       acompanamiento @relation(fields: [acompanamiento_id_acompanamiento], references: [id_acompanamiento], onDelete: NoAction, onUpdate: NoAction)      
+  acompanamiento       acompanamiento? @relation(fields: [acompanamiento_id_acompanamiento], references: [id_acompanamiento], onDelete: SetNull, onUpdate: NoAction)      
 
   @@index([producto_id_producto], map: "fk_venta_individual_producto1_idx")
   @@index([venta_total_id_venta], map: "fk_venta_individual_venta_total_idx")
