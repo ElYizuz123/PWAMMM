@@ -28,7 +28,7 @@ const Page = () => {
     if (resJSON == "Marca eliminada con éxito") {
       Swal.fire({
         title: "Eliminado!",
-        text: "La marca fué eliminada",
+        text: "La marca fue eliminada",
         icon: "success"
       });
       readData()

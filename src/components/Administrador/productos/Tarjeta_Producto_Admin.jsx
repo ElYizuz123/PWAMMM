@@ -37,7 +37,7 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
             if (resJSON == "Producto eliminado con éxito") {
                 Swal.fire({
                     title: "Eliminado!",
-                    text: "La marca fué eliminada",
+                    text: "La marca fue eliminada",
                     icon: "success"
                 });
                 updatePage()

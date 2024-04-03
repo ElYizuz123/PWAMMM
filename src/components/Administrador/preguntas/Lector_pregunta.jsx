@@ -2,12 +2,54 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { contexto } from './UpdateProvider'
 import Editar_pregunta from './Editar_pregunta'
+import Swal from 'sweetalert2'
 
 const Lector_pregunta = () => {
     let { update } = useContext(contexto)
     const [preguntas, setPreguntas] = useState(null)
     const [uPreguntasIsOpen, setUPreguntasIsOpen] = useState(null)
     const [id_pregunta, setId_pregunta] = useState(null)
+
+
+    const deletePregunta = async (data) =>{
+        const res = await fetch('/api/preguntas/delete_pregunta',{
+            method:'POST',
+            body: data
+        })
+        const resJSON = await res.json()
+        if(resJSON=="Pregunta eliminada con éxito"){
+            Swal.fire({
+                title: "Eliminado!",
+                text: "La pregunta fue eliminada",
+                icon: "success"
+              });
+              readData()
+        }else{
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo salió mal!",
+            });
+        }
+    }
+
+    const handleDelete = async (data) =>{
+        Swal.fire({
+            title: "Eliminar marca",
+            text: "Todos los productos asociados a esta marca serán eliminados y no hay forma de revertir la acción!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Si, borrar!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                deletePregunta(data)
+            }
+          });
+        
+    }
 
     const upenUPregunta = (data) =>{
         setId_pregunta(data)
