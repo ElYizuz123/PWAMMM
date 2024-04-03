@@ -10,10 +10,12 @@ datasource db {
 model asociada {
   id_asociada Int     @id @default(autoincrement())
   nombre      String  @db.VarChar(45)
-  historia    String  
+  historia    String
   foto        String  @db.VarChar(45)
   marca       marca[]
 }
+
+
 
 model evento {
   id_evento Int      @id @default(autoincrement())
@@ -28,6 +30,7 @@ model marca {
   tipo                 Int
   asociada             asociada   @relation(fields: [Asociada_id_asociada], references: [id_asociada], onDelete: NoAction, onUpdate: NoAction, map: "fk_marca_Asociada1")
   producto             producto[]
+  acompanamiento        acompanamiento []
 
   @@index([Asociada_id_asociada], map: "fk_marca_Asociada1_idx")
 }
@@ -35,12 +38,14 @@ model marca {
 model producto {
   id_producto      Int                @id @default(autoincrement())
   nombre           String             @db.VarChar(45)
+  tipo_agave       String
+  cantidad_alcohol Int
   ml               Int
   precio           Decimal            @db.Decimal(10, 2)
-  descripcion      String             
+  descripcion      String
   foto             String             @db.VarChar(45)
   marca_id_marca   Int
-  mercadoLibre     String?            
+  mercadoLibre     String?
   cantidad         Int?
   marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_producto_marca1")
   venta_individual venta_individual[]
@@ -48,9 +53,25 @@ model producto {
   @@index([marca_id_marca], map: "fk_producto_marca1_idx")
 }
 
+
+model acompanamiento {
+  id_acompanamiento Int               @id @default(autoincrement())
+  nombre           String             @db.VarChar(45)
+  gr String
+  descripcion      String
+  foto             String             @db.VarChar(45)
+  marca_id_marca   Int
+  cantidad         Int?
+  marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_acompanamiento_marca1")
+  venta_individual venta_individual[]
+
+  @@index([marca_id_marca], map: "fk_acompanamiento_marca1_idx")
+ 
+}
+
 model user {
   user     String @id @db.VarChar(45)
-  password String 
+  password String
 }
 
 model venta_individual {
@@ -59,19 +80,23 @@ model venta_individual {
   subtotal             Decimal     @db.Decimal(10, 2)
   venta_total_id_venta Int
   producto_id_producto Int
+  acompanamiento_id_acompanamiento  Int
   producto             producto    @relation(fields: [producto_id_producto], references: [id_producto], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_producto1")
   venta_total          venta_total @relation(fields: [venta_total_id_venta], references: [id_venta], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_venta_total")
+  acompanamiento       acompanamiento @relation(fields: [acompanamiento_id_acompanamiento], references: [id_acompanamiento], onDelete: NoAction, onUpdate: NoAction)      
 
   @@index([producto_id_producto], map: "fk_venta_individual_producto1_idx")
   @@index([venta_total_id_venta], map: "fk_venta_individual_venta_total_idx")
+  @@index([acompanamiento_id_acompanamiento], map: "fk_venta_individual_acompanamiento_idx")
+  
 }
 
 model venta_total {
   id_venta          Int                @id
-  fecha_venta       DateTime           @default(now()) 
+  fecha_venta       DateTime           @default(now())
   total             Decimal            @db.Decimal(10, 2)
   status            String             @default("Pendiente") @db.VarChar(45)
-  envio             Int                
+  envio             Int
   nombre_cliente    String             @db.VarChar(45)
   apellidos_cliente String             @db.VarChar(45)
   empresa           String?            @db.VarChar(45)
@@ -106,8 +131,8 @@ model galeria_foto {
 
 model pregunta_frecuente {
   id_pregunta_frencuente Int    @id @default(autoincrement())
-  pregunta               String 
-  respuesta              String 
+  pregunta               String
+  respuesta              String
 }
 
 model producto_informacion {

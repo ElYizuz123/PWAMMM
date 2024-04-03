@@ -8,7 +8,7 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
     const data = {
         "id_producto": id_producto,
         "foto": foto,
-        "source": "botellas"
+        "source": "productos"
     }
 
 
@@ -89,7 +89,7 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
                     key={`img${Date.now()}`}
                     className="w-48 h-72"
                     id='foto_botella'
-                    src={"\\botellas\\" + foto}
+                    src={"\\productos\\" + foto}
                     alt="t-shirt"
                 />
             </figure>

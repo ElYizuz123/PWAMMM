@@ -30,7 +30,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos }) => {
         if (productPhoto) {
             const form = new FormData()
             form.set('file', productPhoto)
-            form.set('source', "botellas")
+            form.set('source', "productos")
             form.set('modifier', numProductos)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/upload_image', {

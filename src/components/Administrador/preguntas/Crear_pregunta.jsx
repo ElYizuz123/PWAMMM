@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from './UpdateProvider';
+import Image from 'next/image';
 
 const Crear_pregunta = () => {
     const [cPreguntaIsOpen, setCPreguntaIsOpen] = useState(false)
@@ -119,9 +120,9 @@ const Crear_pregunta = () => {
                     </div>
                 </div>
             </div>
-            <button onClick={openCPregunta} className='bg-[#98E47D] w-44 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
-                <img src='/emoticons/plus.png' className='w-8 ml-2' />
-                <p className='mr-3'>Agregar marca</p>
+            <button onClick={openCPregunta} className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
+            <Image alt="mas" layout='intrinsic' width={40}  height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
+                <p className='mr-3'>Agregar pregunta</p>
             </button>
         </div>
     )

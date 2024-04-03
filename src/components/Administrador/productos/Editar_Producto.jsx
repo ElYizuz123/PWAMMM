@@ -7,7 +7,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
     const [productPhoto, setProductPhoto] = useState(null)
     const [defaultData, setDefaultData] = useState(false)
     const [producto, setProducto] = useState(null)
-    const { register, handleSubmit, reset, setValue } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
     const fileInputRef = useRef(null)
 
     //Default data
@@ -75,7 +75,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
         if (productPhoto) {
             const form = new FormData()
             form.set('file', productPhoto)
-            form.set('source', "botellas")
+            form.set('source', "productos")
             form.set('nombre', producto[0].foto)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/update_image', {

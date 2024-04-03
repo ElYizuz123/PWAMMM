@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 
 const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
-    const { register, handleSubmit, reset, setValue } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
     const [marca, setMarca] = useState(null)
 
     const setForm = (data) =>{
@@ -46,7 +46,7 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
                     clearInterval(timerInterval);
                 }
             }).then(() => {
-                reset()
+                
             });
         }
         else {

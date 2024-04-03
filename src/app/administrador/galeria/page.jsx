@@ -18,11 +18,11 @@ const Page = () => {
           <div className='w-full h-auto relative'>
             <div className='w-full flex justify-center mt-5'>
               <button className='bg-[#98E47D] w-44 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
-                <img src='/emoticons/plus.png' className='w-8 ml-2' />
+              <Image alt="mas" layout='intrinsic' width={40}  height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-4'>Agregar foto</p>
               </button>
               <button className='bg-[#98E47D] w-52 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab] ml-5'>
-                <img src='/emoticons/plus.png' className='w-8 ml-2' />
+              <Image alt="mas" layout='intrinsic' width={40}  height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-4'>Agregar categoría</p>
               </button>
             </div>

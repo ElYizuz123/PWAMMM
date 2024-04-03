@@ -146,7 +146,7 @@ const Page = () => {
             <div className='w-full flex justify-center mt-4'>
               <div className='w-10/12 flex justify-begin'>
                 <button onClick={openCMarca} className='bg-[#98E47D] w-44 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
-                  <img src='/emoticons/plus.png' className='w-8 ml-2' />
+                <Image alt="mas" layout='intrinsic' width={40}  height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                   <p className='mr-3'>Agregar marca</p>
                 </button>
               </div>
