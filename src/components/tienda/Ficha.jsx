@@ -58,7 +58,7 @@ const Ficha = ({
                 />
               </div>
               {/*imagen fondo copreata*/}
-              <div className="absolute top-2 left-[600px] opacity-40">
+              <div className="absolute top-10 left-[600px] opacity-40">
                 <img className="object-cover " src="\cupreata.png" />
               </div>
 
@@ -71,34 +71,46 @@ const Ficha = ({
                   </div>
                 </div>
 
-                <div className="text-black -mt-10">
+                <div className="text-black mt-4">
                   <strong className="text-3xl ">
                     {nombre}
                     <span className=" ml-3  text-2xl">{contenido} ml</span>
                   </strong>
 
-                  <p className=" text-xl  text-black font-light ">
+                  <p className=" text-xl  text-black font-light mt-5 ">
                     Marca:
                     <span className=" ml-3 text-xl text-[#F70073] font-light">
                       {marca}
                     </span>
                   </p>
-                  <p className=" text-xl  text-black font-light ">
+                  <p className=" text-xl  text-black font-light mt-2 ">
                     Alcohol:
                     <span className=" ml-3 text-xl text-[#F70073] font-light">
                       45°
                     </span>
                   </p>
+                  <p className=" text-xl  text-black font-light mt-2 ">
+                    Agave:
+                    <span className=" ml-3 text-xl text-[#F70073] font-light">
+                      Cupreata
+                    </span>
+                  </p>
+                  <p className=" text-xl  text-black font-light mt-2">
+                    Existencia:
+                    <span className=" ml-3 text-xl text-[#F70073] font-light">
+                      {cantidad}
+                    </span>
+                  </p>
                 </div>
 
                 {/*descripcion*/}
-                <p className="text-black mt-6 font-bold">DESCRIPCIÓN:</p>
+                {/* <p className="text-black mt-6 font-bold">DESCRIPCIÓN:</p>
                 <div className="text-justify mr-9 mt-3">
                   <h3>{descripcion}</h3>
-                </div>
+                </div> */}
 
                 {/*botones*/}
-                <div className=" justify-center items-center">
+                <div className=" justify-center items-center mt-5">
                   <div className=" relative flex items-center ">
                     <Link
                       href={"/tienda/carrito"}
@@ -132,14 +144,25 @@ const Ficha = ({
               </div>
             </div>
           </div>
+          {/*descripcion*/}
+          <div className="  flex justify-center items-center mx-60 mt-[450px] rounded-lg shadow-lg ">
+            <div className=" bg-white p-4">
+              <h3 className="text-black  font-bold">DESCRIPCIÓN</h3>
+              <h3 className=" mt-2 text-justify mx-4">
+                {descripcion}
+                {descripcion}
+              </h3>
+            </div>
+          </div>
         </div>
         <div>
           {/*productos relacionados*/}
-          <div className="   w-full flex justify-center items-center ">
+          <div className="   w-full flex justify-center items-center mt-40">
             <p className="text-[#dd6c5a] text-3xl font-bold z-50 bg-white px-9 rounded-lg ">
               PRODUCTOS RELACIONADOS
             </p>
           </div>
+
           <div className="   z-0  w-full flex flex-wrap gap-10 justify-center items-center top-11 pt-11">
             <Tarjeta></Tarjeta>
             <Tarjeta></Tarjeta>

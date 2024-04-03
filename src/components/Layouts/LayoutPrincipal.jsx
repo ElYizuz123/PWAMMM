@@ -46,7 +46,7 @@ const LayoutPrincipal = ({ children }) => {
                       INICIO
                     </a>
                     <Link
-                      href="\tienda"
+                      href="\tienda\0"
                       className="lg:mr-16 hover:text-[#F70073]"
                     >
                       {IconoTienda}

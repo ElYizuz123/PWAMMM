@@ -3,8 +3,9 @@ import Tarjeta from "@/components/tienda/Tarjeta";
 import Categoria from "@/components/tienda/Categoria";
 import { K2D } from "next/font/google";
 import Image from "next/image";
-import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
+import MostrarProductos from "@/components/tienda/MostrarProductos";
+import { Suspense } from "react";
 
 const k2d = K2D({
   weight: ["400"],
@@ -13,47 +14,6 @@ const k2d = K2D({
 });
 
 const Page = async ({ params }) => {
-  // const [productos, setProductos] = useState([]);
-  // const [searchTerm, setSearchTerm] = useState("");
-  // const [filteredProducts, setFilteredProducts] = useState([]);
-  // Cuando estoy en contexto de servidor de react hooks
-  const response = await fetch("/api/read_producto");
-  const data = await response.json();
-
-
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-  // useEffect(() => {
-  //   const fetchProductos = async () => {
-  //     const response = await fetch("/api/read_producto");
-  //     const data = await response.json();
-  //     setProductos(data);
-  //     setFilteredProducts(data);
-  //   };
-
-  //   fetchProductos();
-  // }, []);
-
-  // useEffect(() => {
-  //   const filtered = productos.filter((producto) =>
-  //     producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-  //   );
-  //   setFilteredProducts(filtered);
-  // }, [searchTerm, productos]);
-
-  // useEffect(() => {
-  //   if (Number(params.idMarca) === 0) {
-  //     setFilteredProducts(productos);
-  //   } else {
-  //     const categoria = productos.filter(
-  //       (producto) => producto.marca.id_marca === Number(params.idMarca)
-  //     );
-  //     setFilteredProducts(categoria);
-  //   }
-  // }, [params.idMarca, productos]);
-
   return (
     <LayoutPrincipal>
       <div className={k2d.className}>
@@ -88,7 +48,8 @@ const Page = async ({ params }) => {
             <div>
               <div className="flex justify-between items-center md:mx-8 lg:mr-24 lg:ml-[306px] ">
                 <div className="relative top-4  text-black font-semibold text-sm rounded-full z-10 text-center ">
-                  Mostrando {filteredProducts.length} resultados...
+                  {/* Mostrando {filteredProducts.length} resultados... */}
+                  MOSTRANDO TODO CHUECO
                 </div>
 
                 <form className="relative top-4 z-10">
@@ -98,7 +59,7 @@ const Page = async ({ params }) => {
                     type="search"
                     name="search"
                     id="search"
-                    onChange={handleSearchChange}
+                    // onChange={handleSearchChange}
                   />
 
                   <button
@@ -119,8 +80,9 @@ const Page = async ({ params }) => {
               <div className="w-auto text-black z-10 mx-8 ">
                 <Categoria selec={params.idMarca} />
               </div>
+
               <Suspense fallback={<div className="bg-red-300"></div>}>
-                <ComponenteNuevo data={data} />
+                <MostrarProductos idMarca={params.idMarca}></MostrarProductos>
               </Suspense>
               {/* Componente que maneje su estado propio */}
               {/* <div className="flex flex-wrap gap-8 mx-8 justify-center mr-24">

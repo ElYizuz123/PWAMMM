@@ -19,6 +19,11 @@ const Categoria = ({ selec }) => {
 
   return (
     <div>
+
+
+
+
+      
       <div className="flex flex-col">
         <span className="text-lg font-bold border-b-2 border-[#F70073] mb-2">
           Default

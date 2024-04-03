@@ -18,7 +18,7 @@
       fetchProductos();
     }, []);
     return (
-      <LayoutPrincipal>
+      // <LayoutPrincipal>
         <div className="w-full ">
           {productos.map((producto) => (
             <Ficha
@@ -34,7 +34,7 @@
             ></Ficha>
           ))}
         </div>
-      </LayoutPrincipal>
+      // </LayoutPrincipal>
     );
   };
 
