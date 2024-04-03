@@ -1,6 +1,6 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
-import { contexto } from './UpdateProvider'
+import { contexto } from '../UpdateProvider'
 import Editar_pregunta from './Editar_pregunta'
 import Swal from 'sweetalert2'
 

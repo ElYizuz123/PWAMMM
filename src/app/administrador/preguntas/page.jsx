@@ -1,4 +1,4 @@
-import { UpdateProvider } from '@/components/Administrador/preguntas/UpdateProvider'
+import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Crear_pregunta from '@/components/Administrador/preguntas/Crear_pregunta'
 import Lector_pregunta from '@/components/Administrador/preguntas/Lector_pregunta'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'

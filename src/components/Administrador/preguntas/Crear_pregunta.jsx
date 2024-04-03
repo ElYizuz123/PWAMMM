@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import { contexto } from './UpdateProvider';
+import { contexto } from '../UpdateProvider';
 import Image from 'next/image';
 
 const Crear_pregunta = () => {
