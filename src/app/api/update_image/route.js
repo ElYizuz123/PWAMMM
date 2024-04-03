@@ -11,7 +11,7 @@ export async function POST(request){
     const buffer = Buffer.from(bytes)
     const filePath = path.join(process.cwd(), 'public', data.get('source'), data.get('nombre'))
     await unlink (filePath)
-    const filePath2 = path.join(process.cwd(), 'public', data.get('source'), data.get('nombre'))
+    const filePath2 = path.join(process.cwd(), 'public', data.get('source'), file.name.split('.')[0]+data.get('modifier')+"."+file.name.split('.')[1])
     writeFile(filePath2, buffer)
 
 

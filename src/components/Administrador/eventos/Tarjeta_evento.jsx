@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React, { useContext } from 'react'
 import { contexto } from '../UpdateProvider'
+import Swal from 'sweetalert2'
 
 const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit}) => {
     const {update, setUpdate} = useContext(contexto)
@@ -8,11 +9,11 @@ const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit}) => {
     const data = {
         "id_producto": id_evento,
         "foto": foto,
-        "source": "mezcaleras"
+        "source": "eventos"
     }
 
 
-    const deleteAsociada = (async () => {
+    const deleteEvento = (async () => {
         const deletedImage = await fetch('/api/delete_image', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -21,17 +22,17 @@ const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit}) => {
         if (resDeletedImageJSON == 'Arhivo eliminado correctamente') {
             const res = await fetch('/api/eventos/delete_evento', {
                 method: 'POST',
-                body: JSON.stringify(id_asociada),
+                body: JSON.stringify(id_evento),
                 headers: {
                     'Content-Type': 'aplication/json'
                 }
             })
             const resJSON = await res.json()
             console.log(resJSON)
-            if (resJSON == "Asociada eliminada con éxito") {
+            if (resJSON == "Evento eliminada con éxito") {
                 Swal.fire({
                     title: "Eliminado!",
-                    text: "El evento fue eliminada",
+                    text: "El evento fue eliminado",
                     icon: "success"
                 });
                 const up =!update
@@ -56,7 +57,7 @@ const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit}) => {
     //Alerta para evitar borrado accidental 
     const handleDelete = () => {
         Swal.fire({
-            title: "Eliminar producto",
+            title: "Eliminar evento",
             text: "Esta acción no puede ser revertida!",
             icon: "warning",
             showCancelButton: true,
@@ -66,7 +67,7 @@ const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit}) => {
             confirmButtonText: "Si, borrar!"
         }).then((result) => {
             if (result.isConfirmed) {
-                deleteAsociada()
+                deleteEvento()
             }
         });
     }
@@ -80,7 +81,7 @@ const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit}) => {
                         width={400}
                         height={400}
                         className="object-top object-cover rounded-t-[100px] w-full h-64"
-                        src={"/mezcaleras/" + foto}
+                        src={"/eventos/" + foto}
                         alt="t-shirt"
                     />
                 </figure>
