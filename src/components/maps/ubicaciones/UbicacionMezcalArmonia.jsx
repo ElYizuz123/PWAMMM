@@ -14,7 +14,7 @@ const UbicacionMezcalArmonia = () => {
           </iframe>
         </div>
 
-        <div className="ml-4 mt-14 mr-20">
+        <div className="ml-4 mt-14 mr-24 bg-white bg-opacity-70 rounded-lg h-[170px]">
           <div className="flex mb-8">
             {IconoUbicacion}
             <p className="ml-2 text-3xl">Gob. Aristeo Mercado 161-local 4, Col del Empleado, 58020 Morelia, Mich., México</p>

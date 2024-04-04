@@ -3,6 +3,7 @@ import IconoUbicacion from '../iconoUbicacion'
 import IconoTelefono from '../iconoTelefono'
 
 const UbicacionDonMateo = () => {
+
   return (
     <div>
       {/* mapa */}
@@ -13,14 +14,14 @@ const UbicacionDonMateo = () => {
           </iframe>
         </div>
 
-        <div className="ml-4 mt-14 mr-20">
+        <div className="ml-4 mt-14 mr-24 bg-white bg-opacity-70 rounded-lg h-[170px]">
           <div className="flex mb-8">
             {IconoUbicacion}
-            <p className="ml-2 text-3xl">Gob. Aristeo Mercado 161-local 4, Col del Empleado, 58020 Morelia, Mich., México</p>
+            <p className="ml-2 text-3xl">58060, Avenida Universidad 1146, Villa Universidad, 58060 Morelia, Mich.</p>
           </div>
           <div className="flex">
             {IconoTelefono}
-            <p className="ml-2 text-3xl">+52 443 186 1694</p>
+            <p className="ml-2 text-3xl">+52 443 316 8585</p>
           </div>
         </div>
       </div>

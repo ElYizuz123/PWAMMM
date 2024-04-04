@@ -74,7 +74,7 @@ const ContactoForm = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-start mb-32">
+    <div className="flex justify-center items-start mb-16">
 
       <div className="bg-[#F3E8E8] w-8/12 h-[780px] rounded-3xl shadow-2xl">
         <div className="bg-[#D60064] w-full h-40 rounded-t-3xl mb-10 flex justify-center items-center shadow-2xl">
