@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { contexto } from '../UpdateProvider';
 
 const Crear_marca = ({ isOpen, onClose, asociadas }) => {
     const { register, handleSubmit, reset } = useForm();
+    const {update, setUpdate} = useContext(contexto)
 
     const handleOnSubmit = async (data) => {
         const res = await fetch('/api/marcas/create_marca', {
@@ -24,7 +26,10 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                     clearInterval(timerInterval);
                 }
             }).then(() => {
+                const up = !update
+                setUpdate(up)
                 reset()
+
             }); 
         }
         else{

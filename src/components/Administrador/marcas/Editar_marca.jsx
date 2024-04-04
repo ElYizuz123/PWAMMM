@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { contexto } from '../UpdateProvider';
 
 const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
     const { register, handleSubmit, setValue } = useForm();
     const [marca, setMarca] = useState(null)
-
+    const {update, setUpdate} = useContext(contexto)
+    const [updated, setUpdated] = useState(false)
     const setForm = (data) =>{
         console.log(data)
         register('nombre'),
@@ -20,7 +22,7 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
     }
 
     const opcionDefault = () => {
-        if(marca){
+        if(marca&&!updated){
             document.getElementById("select_tipo").value = marca[0].tipo;
             document.getElementById("select_asociada").value = marca[0].asociada.id_asociada;
         }
@@ -46,7 +48,9 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
                     clearInterval(timerInterval);
                 }
             }).then(() => {
-                
+                const up= !update
+                setUpdate(up)
+                setUpdated(true)
             });
         }
         else {
