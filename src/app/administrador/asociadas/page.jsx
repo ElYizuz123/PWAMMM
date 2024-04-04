@@ -1,7 +1,6 @@
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Crear_Asociada from '@/components/Administrador/asociadas/Crear_Asociada'
 import LeerAsociadas from '@/components/Administrador/asociadas/LeerAsociadas'
-import Tarjeta_Asociadas from '@/components/Administrador/asociadas/Tarjeta_Asociadas'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React from 'react'

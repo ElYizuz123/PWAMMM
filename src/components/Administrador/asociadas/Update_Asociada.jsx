@@ -4,6 +4,12 @@ import { useForm } from 'react-hook-form'
 import { contexto } from '../UpdateProvider'
 import Swal from 'sweetalert2'
 
+const randomHexa = () =>{
+    const randomNumber = Math.floor(Math.random() * 65536);
+    const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
+    return hexadecimalValue
+}
+
 const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
     
     const {update,setUpdate} = useContext(contexto)
@@ -11,6 +17,21 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
     const [asociada, setAsociada] = useState(null)
     const { register, handleSubmit, setValue } = useForm()
     const fileInputRef = useRef(null)
+    const hexa = randomHexa()
+
+    const setForm = (data) => {
+        console.log(data)
+            register('id_asociada')
+            register('nombre')
+            register('historia')
+            register('foto')
+            register('hexa')
+
+            setValue('foto', data[0].foto)
+            setValue('id_asociada', idAsociada)
+            setValue('nombre', data[0].nombre)
+            setValue('historia', data[0].historia)
+    }
 
     const handleFileButton = () => {
         fileInputRef.current.click();
@@ -22,6 +43,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
             form.set('file', asociadaPhoto)
             form.set('source', "mezcaleras")
             form.set('nombre', asociada[0].foto)
+            form.set('modifier', data.hexa)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/update_image', {
                 method: 'POST',
@@ -49,6 +71,8 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                         timerProgressBar: true,
                         confirmButtonText: "Ok",
                     })
+                    const up = !update
+                    setUpdate(up)
                 }
                 else{
                     Swal.fire({
@@ -56,6 +80,8 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                         title: "Oops...",
                         text: "Algo salió mal!",
                     })
+                    const up = !update
+                    setUpdate(up)
                 }
             }
         }
@@ -90,16 +116,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
         }
     }
 
-    const setForm = (data) => {
-        console.log(data)
-            register('id_asociada'),
-            register('nombre'),
-            register('historia'),
-
-            setValue('id_asociada', idAsociada),
-            setValue('nombre', data[0].nombre),
-            setValue('historia', data[0].historia)
-    }
+    
 
     const readData = async () =>{
         const res = await fetch('/api/asociadas/read_asociada',{
@@ -122,7 +139,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
         <div className='w-full h-3/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>Producto</p>
-                <button className='mr-4 font-bold eye-icon' onClick={() => onClose(asociadaPhoto ? true:false)}>X</button>
+                <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
             </div>
             <div className='w-full h-full flex justify-between'>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
@@ -157,6 +174,8 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                                     ref={fileInputRef}
                                     onChange={(e) => {
                                         setAsociadaPhoto(e.target.files[0])
+                                        setValue('foto', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
+                                        setValue('hexa', hexa)
                                     }}
                                 />
                                 <input

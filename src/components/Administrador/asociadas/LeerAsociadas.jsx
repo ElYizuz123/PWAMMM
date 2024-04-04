@@ -10,20 +10,14 @@ const LeerAsociadas = () => {
     const [uAsociadasIsOpen, setUAsociadasIsOpen] = useState(false)
     const [updateAsociada, setUpdateAsociada] = useState(null)
 
-    const readData = async () =>{
+    const readData = async () => {
         const res = await fetch('/api/asociadas/read_asociadas')
         const resJSON = await res.json()
         setAsociadas(JSON.parse(resJSON))
     }
 
-    const onClose = (imageUpdated) => {
-        if(imageUpdated){
-            window.location.reload()
-        }
-        else{
-            setUAsociadasIsOpen(false)
-        }   
-        
+    const onClose = () => {
+        setUAsociadasIsOpen(false)
     }
 
     const isOpen = (data) => {
@@ -33,11 +27,11 @@ const LeerAsociadas = () => {
 
     useEffect(() => {
         if (uAsociadasIsOpen) {
-          window.scrollTo({ top: 230, behavior: 'smooth' });
+            window.scrollTo({ top: 230, behavior: 'smooth' });
         }
-      }, [uAsociadasIsOpen]);
+    }, [uAsociadasIsOpen]);
 
-    useEffect(() =>{
+    useEffect(() => {
         readData()
     }, [update])
 
@@ -49,20 +43,22 @@ const LeerAsociadas = () => {
                     onClose={onClose}
                     idAsociada={updateAsociada}
                 />}
-    
+
             </div>
-            <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
-            {asociadas && asociadas.map((asociada) => (
-                <Tarjeta_Asociadas key={asociada.id_asociada} 
-                id_asociada={asociada.id_asociada}
-                nombre={asociada.nombre}
-                foto={asociada.foto}
-                openEdit={isOpen}
-                />
-            ))}
+            <div>
+                <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
+                    {asociadas && asociadas.map((asociada) => (
+                        <Tarjeta_Asociadas key={asociada.id_asociada}
+                            id_asociada={asociada.id_asociada}
+                            nombre={asociada.nombre}
+                            foto={asociada.foto}
+                            openEdit={isOpen}
+                        />
+                    ))}
+                </div>
+            </div>
         </div>
-        </div>
-        
+
     )
 }
 
