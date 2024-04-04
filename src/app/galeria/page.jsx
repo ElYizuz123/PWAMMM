@@ -22,7 +22,7 @@ function page() {
 
     return (
         <LayoutPrincipal>
-            <div className="bg-[#F5F5F5] h-max relative w-full overflow-x-hidden">
+            <div className="bg-[#F5F5F5] mt-40 h-max relative w-full overflow-x-hidden">
 
                 <div className="absolute inset-0 ">
                     <img
@@ -33,7 +33,7 @@ function page() {
                 </div>
 
 
-                <div className="items-center justify-center mt-10">
+                <div className="items-center justify-center mt-14 ml-24">
                     {categorias &&
                         categorias.map((galeria_categoria) => (
                             <div key={galeria_categoria.id_categoria}>
