@@ -35,7 +35,7 @@ const Leer_productos = ({marcas}) => {
     };
 
     const closeUProduct = () => {
-        readData()
+        setUProductIsOpen(false)
     };
 
     useEffect(() => {
@@ -78,12 +78,11 @@ const Leer_productos = ({marcas}) => {
 
     return (
         <div > 
-            <div className={`absolute top-1/2 left-[35%] z-10 w-6/12 h-4/6 ${uProductIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-[300px] left-[25%] z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
                 {uProductIsOpen && <Editar_Producto
                     isOpen={uProductIsOpen}
                     onClose={closeUProduct}
                     marcas={marcas}
-                    nProductos={productos ? Object.keys(productos).length : 0}
                     idProducto={productoEdit}
                 />}
             </div>

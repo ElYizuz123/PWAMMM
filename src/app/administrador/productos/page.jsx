@@ -11,9 +11,6 @@ const Page = async () => {
   const resJSON = await res.json()
   const marcas = (JSON.parse(resJSON))
 
-
-
-
   return (
     <LayoutCRUD title="Productos">
       <UpdateProvider>
