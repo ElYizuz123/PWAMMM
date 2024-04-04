@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 
 
-const Carrusel_Admin = ({ fotos }) => {
+const Carrusel_Admin = ({ fotos, handleEdit }) => {
   console.log(fotos)
 
   var settings = {
@@ -47,6 +47,10 @@ const Carrusel_Admin = ({ fotos }) => {
     ]
   };
 
+  const handleDelete = () =>{
+
+  }
+
   return (
     <div className="w-[1050px] flex justify-center">
 
@@ -56,9 +60,14 @@ const Carrusel_Admin = ({ fotos }) => {
           fotos.map((galeria_fotos) => {
             return (
               <div key={galeria_fotos.id_foto}>
-                <Image src={"/galeria/"+galeria_fotos.foto} alt="imagen" width={400} height={270} //1
+                <button onClick={() => handleEdit(galeria_fotos.id_foto)} className="absolute z-10 top-0 m-2 p-2 text-pink-600 rounded eye-icon w-12 h-12">
+                  <Image src="/emoticons/editar.png" alt="Icono" width="50" height="50" className='w-10 h-8'/>
+                </button>
+                <button onClick={handleDelete} className="absolute z-10 top-0 m-2 ml-12 p-2 text-pink-600 rounded eye-icon w-12 h-12">
+                  <Image src="/emoticons/eliminar.png" alt="Icono" width="50" height="50" className='w-10 h-8'/>
+                </button>
+                <Image src={"/galeria/" + galeria_fotos.foto} alt="imagen" width={400} height={270} //1
                   className="border-4 border-pink-700 rounded-lg shadow-lg"></Image>
-
 
                 <div className="flex items-center text-center">
                   <p className="text-3xl">{galeria_fotos.descripcion}</p>

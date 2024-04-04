@@ -119,13 +119,12 @@ model galeria_categoria {
 }
 
 model galeria_foto {
-  id_foto           Int               @default(autoincrement())
+  id_foto           Int               @id @default(autoincrement())
   foto              String            @db.VarChar(45)
   descripcion       String            @db.VarChar(45)
   fk_id_categoria   Int
   galeria_categoria galeria_categoria @relation(fields: [fk_id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_foto_categoria1")
 
-  @@id([id_foto, fk_id_categoria])
   @@index([fk_id_categoria], map: "fk_foto_categoria1_idx")
 }
 
