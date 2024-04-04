@@ -1,15 +1,66 @@
 "use client"
-import React from 'react'
+import React, { useContext } from 'react'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import Image from 'next/image'
+import Swal from 'sweetalert2'
+import { contexto } from '../UpdateProvider'
 
 
 
 
 const Carrusel_Admin = ({ fotos, handleEdit }) => {
   console.log(fotos)
+  const {update, setUpdate} = useContext(contexto)
+
+
+  const deleteEvento = (async (idFoto, foto) => {
+    const data = {
+      "id_producto": idFoto,
+      "foto": foto,
+      "source": "galeria"
+    }
+    console.log(data)
+    const deletedImage = await fetch('/api/delete_image', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+    const resDeletedImageJSON = await deletedImage.json()
+    if (resDeletedImageJSON == 'Arhivo eliminado correctamente') {
+      const res = await fetch('/api/galeria/delete_foto', {
+        method: 'POST',
+        body: JSON.stringify(idFoto),
+        headers: {
+          'Content-Type': 'aplication/json'
+        }
+      })
+      const resJSON = await res.json()
+      console.log(resJSON)
+      if (resJSON == "Foto eliminada con éxito") {
+        Swal.fire({
+          title: "Eliminado!",
+          text: "El evento fue eliminado",
+          icon: "success"
+        });
+        const up = !update
+        setUpdate(up)
+      }
+      else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Algo salió mal!",
+        });
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo salió mal!",
+      });
+    }
+  })
 
   var settings = {
     dots: false,
@@ -47,8 +98,21 @@ const Carrusel_Admin = ({ fotos, handleEdit }) => {
     ]
   };
 
-  const handleDelete = () =>{
-
+  const handleDelete = (idFoto, foto) => {
+    Swal.fire({
+      title: "Eliminar foto",
+      text: "Esta acción no puede ser revertida!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Si, borrar!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteEvento(idFoto, foto)
+      }
+    });
   }
 
   return (
@@ -61,10 +125,10 @@ const Carrusel_Admin = ({ fotos, handleEdit }) => {
             return (
               <div key={galeria_fotos.id_foto}>
                 <button onClick={() => handleEdit(galeria_fotos.id_foto)} className="absolute z-10 top-0 m-2 p-2 text-pink-600 rounded eye-icon w-12 h-12">
-                  <Image src="/emoticons/editar.png" alt="Icono" width="50" height="50" className='w-10 h-8'/>
+                  <Image src="/emoticons/editar.png" alt="Icono" width="50" height="50" className='w-10 h-8' />
                 </button>
-                <button onClick={handleDelete} className="absolute z-10 top-0 m-2 ml-12 p-2 text-pink-600 rounded eye-icon w-12 h-12">
-                  <Image src="/emoticons/eliminar.png" alt="Icono" width="50" height="50" className='w-10 h-8'/>
+                <button onClick={() => handleDelete(galeria_fotos.id_foto, galeria_fotos.foto)} className="absolute z-10 top-0 m-2 ml-12 p-2 text-pink-600 rounded eye-icon w-12 h-12">
+                  <Image src="/emoticons/eliminar.png" alt="Icono" width="50" height="50" className='w-10 h-8' />
                 </button>
                 <Image src={"/galeria/" + galeria_fotos.foto} alt="imagen" width={400} height={270} //1
                   className="border-4 border-pink-700 rounded-lg shadow-lg"></Image>

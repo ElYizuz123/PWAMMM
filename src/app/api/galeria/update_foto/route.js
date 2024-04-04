@@ -13,7 +13,7 @@ export async function POST(request){
             data:{
                 foto: data.foto,
                 descripcion: data.descripcion,
-                fk_id_categoria: data.categoria
+                fk_id_categoria: parseInt(data.categoria)
             }
         })
         return NextResponse.json("Registrada");

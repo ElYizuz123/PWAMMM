@@ -4,7 +4,6 @@ import db from '@/libs/db'
 export async function GET(){
     try{
         const res = await db.galeria_categoria.findMany();
-        console.log(res);
         return NextResponse.json(JSON.stringify(res));
 
     }catch(error){

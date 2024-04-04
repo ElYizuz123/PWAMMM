@@ -8,7 +8,6 @@ export async function GET(){
                 galeria_foto: true
             }
         });
-        console.log(res);
         return NextResponse.json(JSON.stringify(res));
 
     }catch(error){

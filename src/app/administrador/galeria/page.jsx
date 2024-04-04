@@ -1,6 +1,7 @@
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Carrusel_Admin from '@/components/Administrador/galeria/Carrusel_Admin'
 import Categorias from '@/components/Administrador/galeria/Categorias'
+import Crear_categoria from '@/components/Administrador/galeria/Crear_categoria'
 import Crear_foto from '@/components/Administrador/galeria/Crear_foto'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
@@ -22,10 +23,7 @@ const Page = () => {
             <div className='w-full h-auto relative'>
               <div className='w-full flex justify-center mt-5'>
                 <Crear_foto/>
-                <button className='bg-[#98E47D] w-52 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab] ml-5'>
-                  <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
-                  <p className='mr-4'>Agregar categoría</p>
-                </button>
+                <Crear_categoria/>
               </div>
               <div className="items-center justify-center">
                 <Categorias />

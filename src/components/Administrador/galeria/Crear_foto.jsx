@@ -17,7 +17,7 @@ const Crear_foto = () => {
     const [cFotoIsOpen, setCFotoIsOpen] = useState(false)
     const [eventoPhoto, setEventoPhoto] = useState(null)
     const [categorias, setCategorias] = useState(null)
-    const { register, handleSubmit, reset, setValue } = useForm();
+    const { register, handleSubmit, reset, setValue } = useForm()
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
 
@@ -51,7 +51,6 @@ const Crear_foto = () => {
     }
 
     const handleOnSubmit = async (data) => {
-        console.log(data)
         if (eventoPhoto) {
             const form = new FormData()
             form.set('file', eventoPhoto)
@@ -75,7 +74,6 @@ const Crear_foto = () => {
                     }
                 })
                 const resJSON = await res.json()
-                console.log(resJSON)
                 if (resJSON == "Registrado") {
                     let timerInterval;
                     Swal.fire({

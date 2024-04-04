@@ -9,7 +9,6 @@ export async function POST(request){
                 id_foto: data
             }
         });
-        console.log(res);
         return NextResponse.json(JSON.stringify(res));
 
     }catch(error){

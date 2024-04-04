@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { contexto } from '../UpdateProvider';
+import Swal from 'sweetalert2';
 
 const randomHexa = () => {
     const randomNumber = Math.floor(Math.random() * 65536);
@@ -79,7 +80,7 @@ const Editar_foto = ({ isOpen, onClose, idFoto, categorias }) => {
                 })
                 const resJSON = await res.json()
                 console.log(resJSON)
-                if (resJSON == "Registrado") {
+                if (resJSON == "Registrada") {
                     let timerInterval;
                     Swal.fire({
                         title: "Foto modificada!",
@@ -93,6 +94,7 @@ const Editar_foto = ({ isOpen, onClose, idFoto, categorias }) => {
                     }).then(() => {
                         const up = !update
                         setUpdate(up)
+                        readData()
                     });
                 }
                 else {
@@ -121,7 +123,7 @@ const Editar_foto = ({ isOpen, onClose, idFoto, categorias }) => {
             })
             const resJSON = await res.json()
             console.log(resJSON)
-            if (resJSON == "Registrado") {
+            if (resJSON == "Registrada") {
                 let timerInterval;
                 Swal.fire({
                     title: "Foto modificada!",
@@ -135,6 +137,7 @@ const Editar_foto = ({ isOpen, onClose, idFoto, categorias }) => {
                 }).then(() => {
                     const up = !update
                     setUpdate(up)
+                    readData()
                 });
             }
             else {
@@ -243,7 +246,7 @@ const Editar_foto = ({ isOpen, onClose, idFoto, categorias }) => {
                                         <button
                                             type='submit'
                                             className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[50%]'
-                                        >Agregar
+                                        >Editar
                                         </button>
                                     </div>
                                 </form>
