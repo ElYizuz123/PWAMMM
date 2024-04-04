@@ -32,7 +32,7 @@ export async function POST(request) {
             }
         });
 
-        return NextResponse.json(JSON.stringify(res2));
+        return NextResponse.json("Categoria eliminada");
 
     } catch (error) {
         console.error('Error al leer los datos', error)

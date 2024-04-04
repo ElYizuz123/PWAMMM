@@ -52,6 +52,8 @@ const Carrusel_Admin = ({ fotos, handleEdit }) => {
           title: "Oops...",
           text: "Algo salió mal!",
         });
+        const up = !update
+        setUpdate(up)
       }
     } else {
       Swal.fire({
@@ -59,6 +61,8 @@ const Carrusel_Admin = ({ fotos, handleEdit }) => {
         title: "Oops...",
         text: "Algo salió mal!",
       });
+      const up = !update
+        setUpdate(up)
     }
   })
 

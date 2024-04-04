@@ -73,7 +73,7 @@ const Categorias = () => {
           })
           const resJSON = await res.json()
           console.log(resJSON)
-          if (resJSON == "Foto eliminada con éxito") {
+          if (resJSON == "Categoria eliminada") {
             Swal.fire({
               title: "Eliminado!",
               text: "El evento fue eliminado",
@@ -88,12 +88,14 @@ const Categorias = () => {
               title: "Oops...",
               text: "Algo salió mal!",
             });
+            const up = !update
+            setUpdate(up)
           }
     }
 
     const handleDelete = (id_Categoria) =>{
         Swal.fire({
-            title: "Eliminar foto",
+            title: "Eliminar categoría",
             text: "Esta acción no puede ser revertida!",
             icon: "warning",
             showCancelButton: true,

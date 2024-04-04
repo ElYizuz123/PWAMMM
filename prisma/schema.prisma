@@ -118,7 +118,7 @@ model galeria_foto {
   foto              String            @db.VarChar(45)
   descripcion       String            @db.VarChar(45)
   fk_id_categoria   Int
-  galeria_categoria galeria_categoria @relation(fields: [fk_id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_foto_categoria1")
+  galeria_categoria galeria_categoria @relation(fields: [fk_id_categoria], references: [id_categoria], onDelete: Cascade, onUpdate: NoAction, map: "fk_foto_categoria1")
 
   @@index([fk_id_categoria], map: "fk_foto_categoria1_idx")
 }
