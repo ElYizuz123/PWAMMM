@@ -8,15 +8,6 @@ const Page = () => {
   return (
     <LayoutCRUD title="Preguntas frecuentes">
       <UpdateProvider>
-        {/*
-      <div className={`absolute top-1/2 left-[45%] z-10 w-4/12 ${uMarcasIsOpen ? "" : "pointer-events-none"}`}>
-        {uMarcasIsOpen && <Editar_marca
-          isOpen={uMarcasIsOpen}
-          onClose={closeUProduct}
-          asociadas={asociadas}
-          idMarca={updateMarca}
-        />}
-      </div> */}
         <main className='flex flex-col items-center justify-between w-full h-full'>
           <div className='relative w-full h-[1000px] overflow-hidden'>
             <div className='absolute bottom-0 w-full z-0'>
