@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Tarjeta_Producto_Admin from './Tarjeta_Producto_Admin'
 import Editar_Producto from './Editar_Producto';
 import { contexto } from '../UpdateProvider';
+import Paginacion from './Paginacion';
 
 const Leer_productos = ({ marcas }) => {
 
@@ -121,6 +122,9 @@ const Leer_productos = ({ marcas }) => {
                         editProduct={openUProduct}
                     />))
                 }
+            </div>
+            <div className='w-full flex justify-end'>
+                <Paginacion totalPages={10}/>
             </div>
         </div>
     )

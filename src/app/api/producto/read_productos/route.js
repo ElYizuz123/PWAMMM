@@ -4,8 +4,13 @@ import db from '@/libs/db'
 export async function GET(){
     try{
         const data = await db.producto.findMany({
+            take:12,
+            skip:0,
             include: {
                 marca: true
+            },
+            orderBy:{
+                id_producto:'asc'
             }
         });
         console.log(data);

@@ -14,15 +14,17 @@ const buttonMap = {
     "/administrador/galeria": "text-black bg-[#0000000]",
     "/administrador/preguntas": "text-black bg-[#0000000]",
 }
-const changeColor = () => {
-    for (const key in buttonMap) {
-        buttonMap[key] = 'text-black bg-[#0000000]';
-    }
-    const pathName = usePathname();
-    buttonMap[pathName] = 'text-white bg-[#F70073]';
-}
+
 
 const Barra_Lateral = () => {
+    const pathName = usePathname()
+    const changeColor = () => {
+        for (const key in buttonMap) {
+            buttonMap[key] = 'text-black bg-[#0000000]';
+        }
+        
+        buttonMap[pathName] = 'text-white bg-[#F70073]';
+    }
     changeColor()
     return (
         <div className="h-auto w-80 bg-[#FF533A] bg-opacity-25 rounded-tl-3xl rounded-br-3xl flex flex-col">
