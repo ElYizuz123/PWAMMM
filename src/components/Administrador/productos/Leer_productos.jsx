@@ -1,16 +1,18 @@
 "use client"
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Tarjeta_Producto_Admin from './Tarjeta_Producto_Admin'
 import Editar_Producto from './Editar_Producto';
+import { contexto } from '../UpdateProvider';
 
-const Leer_productos = ({marcas}) => {
+const Leer_productos = ({ marcas }) => {
 
     const [filteredProducts, setFilteredProducts] = useState(null);
     const [busqueda, setBusqueda] = useState(null);
     const [uProductIsOpen, setUProductIsOpen] = useState(false)
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
+    const {update} = useContext(contexto)
 
 
     //Función para abrir pop-up editar productos
@@ -38,10 +40,6 @@ const Leer_productos = ({marcas}) => {
         setUProductIsOpen(false)
     };
 
-    useEffect(() => {
-        readData();
-    }, []);
-
     //Confirmación en la búsqueda
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,7 +48,7 @@ const Leer_productos = ({marcas}) => {
 
     //Cambio en la búsqueda
     const handleChange = (event) => {
-        
+
         setBusqueda(event.target.value);
     };
 
@@ -62,13 +60,19 @@ const Leer_productos = ({marcas}) => {
 
     }, [uProductIsOpen])
 
+    //Actualización
+    useEffect(()=>{
+        readData()
+    }, [update])
+
     //Búsqueda
     useEffect(() => {
-        const filtered = productos.filter((producto) =>
-            producto.nombre.toLowerCase().includes(busqueda?.toLowerCase()),
-        );
-        setFilteredProducts(filtered);
-
+        if (productos) {
+            const filtered = productos.filter((producto) =>
+                producto.nombre.toLowerCase().includes(busqueda?.toLowerCase()),
+            );
+            setFilteredProducts(filtered);
+        }
     }, [productos, busqueda]);
 
     //Set de los productos filtrados
@@ -77,7 +81,7 @@ const Leer_productos = ({marcas}) => {
     }, [productos]);
 
     return (
-        <div > 
+        <div >
             <div className={`absolute top-[300px] left-[25%] z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
                 {uProductIsOpen && <Editar_Producto
                     isOpen={uProductIsOpen}

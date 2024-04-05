@@ -18,6 +18,9 @@ export async function POST(request){
                 marca_id_marca: parseInt(data.marca),
                 mercadoLibre: data.mercado_lib,
                 cantidad: parseInt(data.cantidad),
+                foto: data.foto,
+                tipo_agave: data.tipo_agave,
+                cantidad_alcohol: parseInt(data.cantidad_alcohol)
             }
 
         })

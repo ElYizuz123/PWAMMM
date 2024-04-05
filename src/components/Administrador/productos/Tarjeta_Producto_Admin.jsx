@@ -86,7 +86,6 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
             </button>
             <figure className='flex justify-center'>
                 <img
-                    key={`img${Date.now()}`}
                     className="w-48 h-72"
                     id='foto_botella'
                     src={"\\productos\\" + foto}

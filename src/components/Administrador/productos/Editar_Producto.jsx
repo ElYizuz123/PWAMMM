@@ -1,7 +1,14 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { contexto } from '../UpdateProvider';
+
+const randomHexa = () => {
+    const randomNumber = Math.floor(Math.random() * 65536);
+    const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
+    return hexadecimalValue
+}
 
 const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) => {
     const [productPhoto, setProductPhoto] = useState(null)
@@ -9,27 +16,36 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
     const [producto, setProducto] = useState(null)
     const { register, handleSubmit, setValue } = useForm();
     const fileInputRef = useRef(null)
+    const {udpate, setUpdate} = useContext(contexto)
+    const hexa = randomHexa()
 
     //Default data
     const setForm = (data) => {
         console.log(data)
-        register('nombre'),
-            register('ml'),
-            register('precio'),
-            register('marca'),
-            register('cantidad'),
-            register('mercado_lib'),
-            register('descripcion'),
-            register('id_producto')
+        register('nombre')
+        register('ml')
+        register('precio')
+        register('marca')
+        register('cantidad')
+        register('mercado_lib')
+        register('descripcion')
+        register('id_producto')
+        register('tipo_agave')
+        register('cantidad_alcohol')
+        register('foto')
+        register('hexa')
 
-        setValue('id_producto', idProducto),
-            setValue('nombre', data[0].nombre),
-            setValue('ml', data[0].ml),
-            setValue('precio', data[0].precio),
-            setValue('marca', data[0].marca.id_marca),
-            setValue('cantidad', data[0].cantidad),
-            setValue('mercado_lib', data[0].mercadoLibre),
-            setValue('descripcion', data[0].descripcion)
+        setValue('foto', data[0].foto)
+        setValue('tipo_agave', data[0].tipo_agave)
+        setValue('cantidad_alcohol', data[0].cantidad_alcohol)
+        setValue('id_producto', idProducto)
+        setValue('nombre', data[0].nombre)
+        setValue('ml', data[0].ml)
+        setValue('precio', data[0].precio)
+        setValue('marca', data[0].marca.id_marca)
+        setValue('cantidad', data[0].cantidad)
+        setValue('mercado_lib', data[0].mercadoLibre)
+        setValue('descripcion', data[0].descripcion)
     }
 
 
@@ -77,6 +93,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
             form.set('file', productPhoto)
             form.set('source', "productos")
             form.set('nombre', producto[0].foto)
+            form.set('modifier', data.hexa)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/update_image', {
                 method: 'POST',
@@ -108,8 +125,10 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                             clearInterval(timerInterval);
                         }
                     })
+                    const up = !udpate
+                    setUpdate(up)
                 }
-                else{
+                else {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
@@ -140,7 +159,9 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                         clearInterval(timerInterval);
                     }
                 })
-            }else{
+                const up = !udpate
+                setUpdate(up)
+            } else {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -152,17 +173,12 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
 
     //Cerrado de la ventana y actualización 
     const handleClose = () => {
-        if (productPhoto) {
-            onClose(true)
-        }
-        else {
-            onClose(false)
-        }
+        onClose()
     }
 
     if (!isOpen) return null;
     return (
-        <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+        <div className='w-full h-[780px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>Editar producto</p>
                 <button className='mr-4 font-bold eye-icon' onClick={handleClose}>X</button>
@@ -175,7 +191,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
                     )}
-                    {!productPhoto && (<img src={`/botellas/${producto ? producto[0].foto : ""}`} alt='Preview' className='w-64' />)}
+                    {!productPhoto && (<img src={`/productos/${producto ? producto[0].foto : ""}`} alt='Preview' className='w-64' />)}
                     {!productPhoto && (
                         <p className='text-sm'>{producto ? producto[0].foto : ""}</p>
                     )}
@@ -185,13 +201,15 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                     >Seleccionar Archivo</button>
                 </div>
                 <div className='h-full w-[60%] flex justify-between'>
-                    <div className='flex flex-col items-start gap-y-6 mt-4 mr-2'>
+                    <div className='flex flex-col items-start gap-y-6 mt-4 mr-2 w-[700px]'>
                         <p className='text-xl'>Nombre</p>
                         <p className='text-xl'>ML</p>
                         <p className='text-xl'>Precio</p>
                         <p className='text-xl'>Marca</p>
                         <p className='text-xl'>Cantidad</p>
                         <p className='text-xl'>Mercado libre</p>
+                        <p className='text-xl'>Tipo de agave</p>
+                        <p className='text-xl'>Cantidad de alcohol</p>
                         <p className='text-xl'>Descripción</p>
                     </div>
                     <div>
@@ -205,6 +223,8 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     ref={fileInputRef}
                                     onChange={(e) => {
                                         setProductPhoto(e.target.files[0])
+                                        setValue('foto', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
+                                        setValue('hexa', hexa)
                                     }}
                                 />
                                 <input
@@ -288,6 +308,30 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     defaultValue={producto ? producto[0].mercadoLibre : ""}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     placeholder='Link a mercado libre'
+                                />
+                                <input
+                                    type='text'
+                                    name='tipo_agave'
+                                    maxLength={255}
+                                    required={true}
+                                    defaultValue={producto ? producto[0].tipo_agave : ""}
+                                    {...register('tipo_agave', {
+                                        maxLength: 255
+                                    })}
+                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                    placeholder='Tipo de agave'
+                                />
+                                <input 
+                                    type='number'
+                                    name='cantidad_alcohol'
+                                    maxLength={255}
+                                    required={true}
+                                    defaultValue={producto ? producto[0].cantidad_alcohol : ""}
+                                    {...register('cantidad_alcohol', {
+                                        maxLength: 255
+                                    })}
+                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-9'
+                                    placeholder='Cantidad de alcohol'
                                 />
                                 <textarea
                                     type='text'
