@@ -12,18 +12,19 @@ export default function Home() {
   return (
     <LayoutPrincipal>
       {/*<MensajeBienvenida/>*/}
+      <div className="  bg-cover bg-center w-full h-auto" style={{ backgroundImage: "url('/multimedia/fondo-agave.jpeg')" }}>
          <Main />
 
 
         
       
       
-      <div className="  bg-cover bg-center w-full h-auto" style={{ backgroundImage: "url('/multimedia/fondo-agave.jpeg')" }}>
+     
         <CarruselInicio />  
        <Historia/>
      
      
-       <NuestrasMarcas/>
+      <div className="mt-60"><NuestrasMarcas/></div> 
        </div>
   
   </LayoutPrincipal>

@@ -55,8 +55,8 @@ const CarruselAsociadas = () => {
                                 return (
                                     <SwiperSlide key={asociada.id_asociada}>
 
-                                        <div className="bg-white  h-[533px] w-[395px]  text-black rounded-3xl border-t-2 border-l-2 border-b-2 border-r-2">
-                                            <div className=" bg-[#d1f6d4] flex justify-center items-center rounded-t-3xl">
+                                        <div className="bg-white mt-56  h-[533px] w-[395px]  text-black rounded-3xl border-t-2 border-l-2 border-b-2 border-r-2 hover:scale-105">
+                                            <div className=" bg-white flex justify-center items-center rounded-t-3xl">
                                                 <Image src={`${ruta}${asociada.foto}`} width={325} height={490} alt='' className="h-64 w-11/12 rounded-t-3xl rounded-b-none mt-4 " />
                                               
                                             </div>
@@ -69,7 +69,7 @@ const CarruselAsociadas = () => {
                                                 
                                                 <p className='text-xs text-justify font-semibold '>{asociada.historia}</p>
                                                 <Link href={`${tienda}${asociada.id_asociada}`}>
-                                                <button className="bg-[#f70073] hover:bg-[#e39abd]  text-white text-lg px-6 py-1 rounded -xl">Productos</button>
+                                                <button className="bg-[#f70073] hover:bg-[#e39abd] hover:scale-105 hover:shadow-lg hover:font-bold text-white text-lg px-6 py-1 rounded -xl">Productos</button>
                                                 </Link>
                                             </div>
 
@@ -82,10 +82,10 @@ const CarruselAsociadas = () => {
 
                             <div className="slider-controler ">
                                 <div className="swiper-button-prev slider-arrow">
-                                    <img src="/multimedia/flechaIzquierda.png" height={200} name="arrow-back-outline" />
+                                    
                                 </div>
                                 <div className="swiper-button-next slider-arrow">
-                                    <img src="/multimedia/flechaDerecho.png" height={200} name="arrow-forward-outline" />
+                                   
                                 </div>
                                 <div className="swiper-pagination"></div>
                             </div>

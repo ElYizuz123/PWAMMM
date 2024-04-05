@@ -201,15 +201,25 @@ h1 {
 
 .card-logo {
 @apply bg-white w-32 h-32 grid place-content-center rounded-lg text-black
-border-2 border-black object-cover shadow-white shadow-md
+border-2 border-black object-cover shadow-white/35 shadow-md
 
 }
+
+.foto-asociada {
+  @apply bg-white w-11/12 h-64 mt-4 rounded-t-3xl rounded-b-none grid place-content-center rounded-lg text-black
+  border-2 border-black object-cover shadow-white/35 shadow-md
+  
+  }
 
 .card-logo:hover {
 
   transition: all 0.2s ease-in-out;
   border-radius: 20%;
   opacity: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);;
+  scale: 105%;
+  
+
   }
 
 

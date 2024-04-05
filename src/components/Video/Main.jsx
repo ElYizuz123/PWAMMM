@@ -10,16 +10,17 @@ const Main = () => {
 
 
     return (
-        
-        <div>
+       
+        <div className='mt-28 '>
             
  
 
-            <video className="w-full h-full object-cover z-0"
-                src='/multimedia/videoBg.mp4'
+            <video className="w-full aspect-auto z-0"
+                src='/multimedia/videoBg2.mp4'
                 autoPlay
                 loop
                 muted
+                
 
             />
          

@@ -41,8 +41,8 @@ const Page = () => {
     return (
         <LayoutPrincipal>
          
-            <div className="bg-cover bg-center w-full h-max  " style={{ backgroundImage: "url('/multimedia/agave.jpeg')" }}>
-                <div className="w-11/12 m-auto mt-56">
+            <div className="bg-cover bg-center w-full h-auto " style={{ backgroundImage: "url('/multimedia/agave.jpeg')" }}>
+                <div className="w-11/12 m-auto ">
 
                     <div className=""> {/* Carrusel de la seccion NOSOTRAS, inicia automáticamente y cada 4 segundos cambia*/}
                         <CarruselAsociadas />
