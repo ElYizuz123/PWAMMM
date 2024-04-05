@@ -92,6 +92,13 @@ h1 {
     -1px  1px 0 #000,
      1px  1px 0 #000; 
 }
+.text-delinead {
+  text-shadow: 
+    -1px -1px 0 #ffffff,  
+     1px -1px 0 #ffffff,
+    -1px  1px 0 #ffffff,
+     1px  1px 0 #ffffff; 
+}
 
 .details > .min-details,
 .details > .options,
@@ -187,3 +194,30 @@ h1 {
  /* Ajusta el brillo y el contraste */
  
 }
+.custom-shadow {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+
+}
+
+.card-logo {
+@apply bg-white w-32 h-32 grid place-content-center rounded-lg text-black
+border-2 border-black object-cover shadow-white shadow-md
+
+}
+
+.card-logo:hover {
+
+  transition: all 0.2s ease-in-out;
+  border-radius: 20%;
+  opacity: 50%;
+  }
+
+
+.imagen-componente {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  
+}
+
+

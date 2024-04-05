@@ -7,11 +7,13 @@ const berkshire = Berkshire_Swash({
     subsets: ["latin"],
 
 });
+
 const Historia = () => {
     return (
-        <div className='relative '>
-            <div className="absolute inset-0  bg-cover bg-center w-full h-max " style={{ backgroundImage: "url('/multimedia/FondoHorno.jpg')" }}>
-                <div className='bg-gray-950 mt-4 p-6 bg-opacity-40'>
+       
+        <div className='relative z-10 '>
+            <div className=" inset-0  bg-cover bg-center w-full h-[500px] " >
+                <div className='bg-gray-950 mt-4 p-6 bg-opacity-60'>
 
                     <br></br>
                     
@@ -22,7 +24,7 @@ const Historia = () => {
                     </div>
                     <br></br>
                     <br></br>
-                    <p className='text-base leading-relaxed  text-white ml-8 mr-8 flex justify-center  sm:text-2xl sm:ml-10 sm:mr-10 md:text-3xl md:leading-normal lg:text-4xl lg:leading-relaxed xl:text-4xl xl:leading-relaxed  2xl:text-4xl 2xl:leading-relaxed'> Para que el pueblo Purépecha CURICAUERI nació en el oriente y tomaba la forma del sol, Dios del fuego que recorría la bóveda celeste como un halcón. El aire, el agua, la tierra y el fuego son los cuatro elementos a los que les hacían reverencia y era CURICAUERI “el gran dios del fuego” y son estos mismos elementos los indispensables para le elaboración del elixir de la vida, el Mezcal…. CURICAUERI “El gran dios del fuego” y XARATANGA “Diosa de la luna” son los dioses principales en la mitología purépecha; de la unión de ellos, nació la Armonía y la felicidad, y con ello, todo lo que conocemos en la tierra.
+                    <p className='text-justify text-base leading-relaxed  text-white ml-8 mr-8 flex justify-center  sm:text-2xl sm:ml-10 sm:mr-10 md:text-3xl md:leading-normal lg:text-4xl lg:leading-relaxed xl:text-3xl xl:leading-relaxed  2xl:text-4xl 2xl:leading-relaxed'> Para que el pueblo Purépecha CURICAUERI nació en el oriente y tomaba la forma del sol, Dios del fuego que recorría la bóveda celeste como un halcón. El aire, el agua, la tierra y el fuego son los cuatro elementos a los que les hacían reverencia y era CURICAUERI “el gran dios del fuego” y son estos mismos elementos los indispensables para le elaboración del elixir de la vida, el Mezcal…. CURICAUERI “El gran dios del fuego” y XARATANGA “Diosa de la luna” son los dioses principales en la mitología purépecha; de la unión de ellos, nació la Armonía y la felicidad, y con ello, todo lo que conocemos en la tierra.
 
                     </p>
                     <br></br>
@@ -32,6 +34,7 @@ const Historia = () => {
                 </div>
             </div>
         </div>
+       
 
     )
 }

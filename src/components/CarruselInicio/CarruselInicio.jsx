@@ -2,13 +2,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import React, { useState, useEffect } from 'react';
 import SwiperCore, { Navigation, Pagination, EffectCoverflow, Autoplay } from "swiper/modules";
-
+import Image from "next/image";
 // Import Swiper styles
 import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
 import 'swiper/scss';
 
-const ruta = 'url(/eventos/';
+const ruta = '/eventos/';
 
 
 
@@ -30,7 +30,7 @@ const carruselInicio = () => {
 
 
   return (
-    <div>
+    <div className="relative z-10 ">
       <Swiper
         modules={[Navigation, Pagination, EffectCoverflow, Autoplay]}
         navigation
@@ -42,32 +42,21 @@ const carruselInicio = () => {
           depth: 100,
           modifier: 1,
           slideShadows: false,
-          spaceBetween: 40
+          spaceBetween: 10
         }}
-        slidesPerView={2}
+        slidesPerView={3}
         centeredSlides
-        style={{
-          height: "630px",
-          backgroundImage: "url('/multimedia/agave 2.jpeg')"
-        }}
+        
         autoplay={{ delay: 3500, disableOnInteraction: false }}
 
       >
         {eventos && eventos.map((evento, index) => {
           return (
-            <div className="bg-gray-600">
-              <SwiperSlide key={evento.id_evento}
-                style={{
-                  backgroundImage: ruta + evento.foto,
-                  backgroundSize: 'cover',
-                  borderRadius: '5%',
-                  boxShadow: '0 4px 4px #f70073'
-
-
-                }}
-
-              >
-
+            <div className="bg-gray-600" key={evento.id_evento}>
+              <SwiperSlide key={evento.id_evento}>
+              <div className="bg-gray-600" style={{ width: '300px', height: '500px' }}>
+                <Image src={ruta + evento.foto} alt=""  layout="fill" objectFit="cover" />
+                </div>
               </SwiperSlide >
             </div>
           );
