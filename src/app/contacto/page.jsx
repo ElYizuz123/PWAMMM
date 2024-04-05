@@ -9,9 +9,9 @@ function page() {
   return (
     <LayoutPrincipal>
 
-      <div className="h-max absolute z-0 w-full overflow-x-hidden">
+      <div className="h-max absolute z-0 w-full overflow-x-hidden bg-[#F5F5F5]">
         {/* el fondo bueno, nomas que no jala bien */}
-        {/* <div className="absolute bottom-0 z-0 inset-0">
+        {/* <div className="absolute inset-0">
           <img
             className="w-full h-full object-cover opacity-60"
             src="\backgroundImage.png"
