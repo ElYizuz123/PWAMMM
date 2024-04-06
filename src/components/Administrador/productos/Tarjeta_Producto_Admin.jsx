@@ -45,7 +45,7 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
             <figure>
                 <img
                     className="object-contain"
-                    src={"\\botellas\\"+foto}
+                    src={"\\productos\\"+foto}
                     alt="t-shirt"
                 />
             </figure>

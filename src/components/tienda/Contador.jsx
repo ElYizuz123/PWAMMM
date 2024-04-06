@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from "react";
+
+import { useState } from "react";
+
 
 const Contador = ({ cantidad2 }) => {
   const [count, setCount] = useState(1);

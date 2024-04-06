@@ -1,5 +1,6 @@
 import "./globals.css";
 import { K2D } from "next/font/google";
+import { ProductProvider } from "@/context/ProductContext";
 
 export const metadata = {
   title: "Mujeres Mezcaleras",
@@ -13,7 +14,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={k2d.className}>
-        {children}
+      <ProductProvider>
+          <div>{children}</div>
+        </ProductProvider>
       </body>
     </html>
   

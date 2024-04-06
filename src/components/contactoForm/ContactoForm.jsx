@@ -1,5 +1,5 @@
 "use client"
-import { POST } from '@/app/api/sendEmail/route'
+import { POST } from '@/api/sendEmail/route';
 import React, { useState, useEffect } from 'react'
 
 const ContactoForm = () => {

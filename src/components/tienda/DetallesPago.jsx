@@ -1,6 +1,7 @@
 import React from "react";
-import FormaPago from "./FormaPago";
 import ProductosPago from "./ProductosPago";
+import FormaPago from "./FormaPago";
+
 
 function DetallesPago() {
   return (

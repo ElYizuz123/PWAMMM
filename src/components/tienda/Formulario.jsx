@@ -1,9 +1,6 @@
 import Image from "next/image";
 import { K2D } from "next/font/google";
 import { Berkshire_Swash } from "next/font/google";
-
-import ProductosPago from "./ProductosPago";
-import FormaPago from "./FormaPago";
 import DetallesPago from "./DetallesPago";
 
 const k2d = K2D({

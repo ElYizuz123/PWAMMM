@@ -1,23 +1,34 @@
-import React from "react";
+"use client";
+import { ProductContext } from "@/context/ProductContext";
+import React, { useContext, useEffect, useState } from "react";
+import MostrarAcompanamientoCarrito from "./MostrarAcompanamientoCarrito";
 
 const AcompañamientoCarrito = () => {
-  return (
-    <div className="my-2 p-2 bg-gray-100 flex items-center ">
-      <div className="justify-between">
-        <img
-          src="/tienda_productos/queso.png"
-          alt="Producto"
-          className="h-24 mr-4"
-        />
-      </div>
+  const [acompanamientos, setAcompanamientos] = useState([]);
 
-      <div>
-        <h4>Queso cotija 500 gr</h4>
-        <p className="text-green-700 font-bold ">$500.00</p>
-        <button className="text-blue-600 hover:underline">
-          Agregar al carrito
-        </button>
-      </div>
+  useEffect(() => {
+    const fetchProductos = async () => {
+      const response = await fetch("/api/read_acompanamientos");
+      const data = await response.json();
+
+      setAcompanamientos(data);
+    };
+
+    fetchProductos();
+  }, []);
+
+  return (
+    <div>
+      {acompanamientos 
+       .map((acompanamiento) => (
+          <MostrarAcompanamientoCarrito
+            id_producto={acompanamiento.id_acompanamiento}
+            nombre={acompanamiento.nombre}
+            precio={"200"}
+            ml={acompanamiento.gr}
+            imagen={acompanamiento.foto}
+          ></MostrarAcompanamientoCarrito>
+        ))}
     </div>
   );
 };

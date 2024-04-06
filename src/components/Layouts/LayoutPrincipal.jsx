@@ -7,6 +7,7 @@ import Link from "next/link";
 import logo from "@/components/navbar/logo";
 import IconoMenu from "@/components/navbar/iconoMenu";
 import { Berkshire_Swash } from "next/font/google";
+import Carrito from "../tienda/Carrito";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -46,7 +47,7 @@ const LayoutPrincipal = ({ children }) => {
                       INICIO
                     </a>
                     <Link
-                      href="\tienda\0"
+                      href="\tienda"
                       className="lg:mr-16 hover:text-[#F70073]"
                     >
                       {IconoTienda}
@@ -79,6 +80,7 @@ const LayoutPrincipal = ({ children }) => {
             </nav>
           </nav>
         </div>
+        <Carrito />
         <div>{children}</div>
       </div>
   );
