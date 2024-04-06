@@ -1,7 +1,6 @@
 "use server"
 
-import next from "next";
-import { NextResponse } from "next/server";
+  import { NextResponse } from "next/server";
 
 const nodemailer = require("nodemailer");
 

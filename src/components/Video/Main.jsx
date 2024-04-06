@@ -1,5 +1,7 @@
 import React from 'react'
-
+import CarruselInicio from "@/components/CarruselInicio/CarruselInicio";
+import Historia from "@/components/Historia/Historia";
+import MensajeBienvenida from "@/components/MensajeBienvenida/MensajeBienvenida";
 
 
 
@@ -8,20 +10,23 @@ const Main = () => {
 
 
     return (
-        <div className='main '>
+       
+        <div className='mt-28 '>
+            
+ 
 
-            <video className='w-full h-auto'
-                src='/multimedia/videoBg.mp4'
+            <video className="w-full aspect-auto z-0"
+                src='/multimedia/videoBg2.mp4'
                 autoPlay
                 loop
                 muted
+                
 
             />
-            <br></br>
-
-
+         
 
         </div>
+        
 
 
     );

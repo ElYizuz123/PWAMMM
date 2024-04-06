@@ -1,6 +1,6 @@
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
 import ContactoForm from '@/components/contactoForm/ContactoForm';
-import Ubicaciones from '@/components/maps/ubicaciones';
+import ListaUbicaciones from '@/components/maps/ListaUbicaciones';
 import PreguntasFrecuentes from '@/components/preguntasFrecuentes/PreguntasFrecuentes';
 import React from 'react';
 // Página de contacto
@@ -9,45 +9,41 @@ function page() {
   return (
     <LayoutPrincipal>
 
-      <div className="h-max relative z-10 w-full">
-
-        <br></br>
-        <br></br>
-
+      <div className="h-max absolute z-0 w-full overflow-x-hidden bg-[#F5F5F5]">
         {/* el fondo bueno, nomas que no jala bien */}
-        {/* <div className="absolute bottom-0 z-0 inset-0">
-        <img
-          className="w-full h-full object-cover bg-opacity-60"
-          src="\backgroundImage.png"
-          alt="Background"/>
+        {/* <div className="absolute inset-0">
+          <img
+            className="w-full h-full object-cover opacity-60"
+            src="\backgroundImage.png"
+            alt="Background" />
         </div> */}
-        
-        <div className="bg-cover bg-center bg-opacity-60 w-full h-max" style={{ backgroundImage: "url('/backgroundImage.png')" }}>
 
 
-        <div>
+        <div className="z-0 bg-cover bg-center bg-opacity-60 w-full h-max" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+
+
+        <div className="mt-48">
           <ContactoForm></ContactoForm>
         </div>
 
-         <div>
-            <p className="text-6xl mb-2 ml-20">Preguntas Frecuentes</p>
-            <br/>
-            <div className="flex items-center align-middle object-center">
-              <PreguntasFrecuentes></PreguntasFrecuentes>
-            </div>
-         </div>
-
-
-          <div>
-            <p className="text-6xl mb-8 ml-20">Tiendas Físicas</p>
-            <Ubicaciones></Ubicaciones>
+        <div>
+          <p className="text-6xl mb-2 ml-20">Preguntas Frecuentes</p>
+          <br />
+          <div className="flex items-center align-middle object-center">
+            <PreguntasFrecuentes></PreguntasFrecuentes>
           </div>
+        </div>
 
-          <br></br>
-          <br></br>
+
+        <div>
+          <p className="text-6xl mb-8 ml-20">Tiendas Físicas</p>
+          <ListaUbicaciones />
+        </div>
+
+        <br />
 
         </div>
-        </div>
+      </div>
     </LayoutPrincipal>
 
   )

@@ -39,4 +39,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 * Formularios: npm install react-hook-form
 * Alertas: npm install sweetalert2
-
+* Carrusel Nosotras: npm i swiper
