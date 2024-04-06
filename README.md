@@ -38,4 +38,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ##Dependencias
 
 * Formularios: npm install react-hook-form
+* Carrusel Nosotras: npm i swiper
+
 

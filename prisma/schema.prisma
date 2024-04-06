@@ -3,14 +3,16 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
+//  TODO: Modelos en mayusculas
 model asociada {
   id_asociada Int     @id @default(autoincrement())
   nombre      String  @db.VarChar(45)
-  historia    String  @db.LongText
+  historia    String
+  historia    String
   foto        String  @db.VarChar(45)
   marca       marca[]
 }
@@ -18,15 +20,16 @@ model asociada {
 model evento {
   id_evento Int      @id @default(autoincrement())
   foto      String   @db.VarChar(45)
-  fecha_fin DateTime @db.Date
+  fecha_fin DateTime @db.Timestamp(6)
 }
 
 model marca {
-  id_marca             Int        @id @default(autoincrement())
-  nombre               String     @unique(map: "nombre_UNIQUE") @db.VarChar(45)
+  id_marca             Int              @id @default(autoincrement())
+  nombre               String           @unique(map: "nombre_UNIQUE") @db.VarChar(45)
   Asociada_id_asociada Int
   tipo                 Int
-  asociada             asociada   @relation(fields: [Asociada_id_asociada], references: [id_asociada], onDelete: NoAction, onUpdate: NoAction, map: "fk_marca_Asociada1")
+  acompanamiento       acompanamiento[]
+  asociada             asociada         @relation(fields: [Asociada_id_asociada], references: [id_asociada], onDelete: Cascade, onUpdate: NoAction, map: "fk_marca_Asociada1")
   producto             producto[]
 
   @@index([Asociada_id_asociada], map: "fk_marca_Asociada1_idx")
@@ -35,43 +38,65 @@ model marca {
 model producto {
   id_producto      Int                @id @default(autoincrement())
   nombre           String             @db.VarChar(45)
+  tipo_agave       String
+  cantidad_alcohol Int
   ml               Int
   precio           Decimal            @db.Decimal(10, 2)
-  descripcion      String             @db.LongText
+  descripcion      String
+  descripcion      String
   foto             String             @db.VarChar(45)
   marca_id_marca   Int
-  mercadoLibre     String?            @db.MediumText
+  mercadoLibre     String?
+  mercadoLibre     String?
   cantidad         Int?
-  marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "fk_producto_marca1")
+  marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: Cascade, onUpdate: NoAction, map: "fk_producto_marca1")
   venta_individual venta_individual[]
 
   @@index([marca_id_marca], map: "fk_producto_marca1_idx")
 }
 
+model acompanamiento {
+  id_acompanamiento Int                @id @default(autoincrement())
+  nombre            String             @db.VarChar(45)
+  gr                String
+  descripcion       String
+  foto              String             @db.VarChar(45)
+  marca_id_marca    Int
+  cantidad          Int?
+  marca             marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: Cascade, onUpdate: NoAction, map: "fk_acompanamiento_marca1")
+  venta_individual  venta_individual[]
+
+  @@index([marca_id_marca], map: "fk_acompanamiento_marca1_idx")
+}
+
 model user {
   user     String @id @db.VarChar(45)
-  password String @db.MediumText
+  password String
 }
 
 model venta_individual {
-  id_venta_individual  Int         @id @default(autoincrement())
-  cantidad_producto    Int
-  subtotal             Decimal     @db.Decimal(10, 2)
-  venta_total_id_venta Int
-  producto_id_producto Int
-  producto             producto    @relation(fields: [producto_id_producto], references: [id_producto], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_producto1")
-  venta_total          venta_total @relation(fields: [venta_total_id_venta], references: [id_venta], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_venta_total")
+  id_venta_individual              Int             @id @default(autoincrement())
+  cantidad_producto                Int
+  subtotal                         Decimal         @db.Decimal(10, 2)
+  venta_total_id_venta             Int
+  producto_id_producto             Int?
+  acompanamiento_id_acompanamiento Int?
+  producto                         producto?       @relation(fields: [producto_id_producto], references: [id_producto], onUpdate: NoAction, map: "fk_venta_individual_producto1")
+  venta_total                      venta_total     @relation(fields: [venta_total_id_venta], references: [id_venta], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_venta_total")
+  acompanamiento                   acompanamiento? @relation(fields: [acompanamiento_id_acompanamiento], references: [id_acompanamiento], onUpdate: NoAction)
 
   @@index([producto_id_producto], map: "fk_venta_individual_producto1_idx")
   @@index([venta_total_id_venta], map: "fk_venta_individual_venta_total_idx")
+  @@index([acompanamiento_id_acompanamiento], map: "fk_venta_individual_acompanamiento_idx")
 }
 
 model venta_total {
   id_venta          Int                @id
-  fecha_venta       DateTime           @default(now()) @db.DateTime(0)
+  fecha_venta       DateTime           @default(now())
+  fecha_venta       DateTime           @default(now())
   total             Decimal            @db.Decimal(10, 2)
   status            String             @default("Pendiente") @db.VarChar(45)
-  envio             Int                @db.TinyInt
+  envio             Int
   nombre_cliente    String             @db.VarChar(45)
   apellidos_cliente String             @db.VarChar(45)
   empresa           String?            @db.VarChar(45)
@@ -94,20 +119,21 @@ model galeria_categoria {
 }
 
 model galeria_foto {
-  id_foto           Int               @default(autoincrement())
+  id_foto           Int               @id(map: "galeria_foto_pk") @default(autoincrement())
   foto              String            @db.VarChar(45)
   descripcion       String            @db.VarChar(45)
   fk_id_categoria   Int
   galeria_categoria galeria_categoria @relation(fields: [fk_id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_foto_categoria1")
 
-  @@id([id_foto, fk_id_categoria])
   @@index([fk_id_categoria], map: "fk_foto_categoria1_idx")
 }
 
 model pregunta_frecuente {
   id_pregunta_frencuente Int    @id @default(autoincrement())
-  pregunta               String @db.TinyText
-  respuesta              String @db.TinyText
+  pregunta               String
+  respuesta              String
+  pregunta               String
+  respuesta              String
 }
 
 model producto_informacion {
@@ -121,3 +147,4 @@ model producto_informacion {
   tipo_destilador         String? @db.VarChar(45)
   riquezaAlcoholica       String? @db.VarChar(45)
 }
+

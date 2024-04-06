@@ -92,6 +92,13 @@ h1 {
     -1px  1px 0 #000,
      1px  1px 0 #000; 
 }
+.text-delinead {
+  text-shadow: 
+    -1px -1px 0 #ffffff,  
+     1px -1px 0 #ffffff,
+    -1px  1px 0 #ffffff,
+     1px  1px 0 #ffffff; 
+}
 
 .details > .min-details,
 .details > .options,
@@ -173,4 +180,54 @@ h1 {
   align-items: center;
   display: none;
 }
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.background-image-nosotras {
+ align-items: center;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 40%;
+ /* Ajusta el brillo y el contraste */
+ 
+}
+.custom-shadow {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+
+}
+
+.card-logo {
+@apply bg-white w-32 h-32 grid place-content-center rounded-lg text-black
+border-2 border-black object-cover shadow-white/35 shadow-md
+
+}
+
+.foto-asociada {
+  @apply bg-white w-11/12 h-64 mt-4 rounded-t-3xl rounded-b-none grid place-content-center rounded-lg text-black
+  border-2 border-black object-cover shadow-white/35 shadow-md
+  
+  }
+
+.card-logo:hover {
+
+  transition: all 0.2s ease-in-out;
+  border-radius: 20%;
+  opacity: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);;
+  scale: 105%;
+  
+
+  }
+
+
+.imagen-componente {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  
+}
+
 
