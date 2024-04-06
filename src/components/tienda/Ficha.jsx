@@ -1,9 +1,8 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { K2D } from "next/font/google";
-import Tarjeta from "./Tarjeta";
 import Contador from "./Contador";
-import Image from "next/image";
 
 const k2d = K2D({
   weight: ["400"],
@@ -12,33 +11,34 @@ const k2d = K2D({
 });
 
 const Ficha = ({
+  tipo,
   nombre,
   marca,
   precio,
-  agave,
-  cosecha,
-  elaboracion,
-  horno,
-  molienda,
-  fermentacion,
-  destilador,
-  alcohol,
-  contenido,
-  botella,
+  imagen,
   mercadoLibre,
+  descripcion,
+  ml,
+  agave,
+  cantidad,
+  alcohol,
 }) => {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      const response = await fetch("/api/read_producto");
+      const data = await response.json();
+      setProductos(data);
+    };
+
+    fetchProductos();
+  }, []);
+
   return (
     <div className={k2d.className}>
       <div className="relative">
         {/* imagen fondo */}
-        <div className=" h-full w-full z-0 opacity-60 ">
-          <Image
-            src="/backgroundImage.jpg"
-            layout="fill"
-            quality={100}
-            alt="Fondo"
-          />
-        </div>
 
         <div className=" pt-5 items-center relative h-screen">
           <div className=" flex justify-center items-center">
@@ -53,81 +53,181 @@ const Ficha = ({
           </div>
           {/*contenido*/}
           <div className="absolute inset-0 flex justify-center items-center top-24">
-            {/*tarjeta*/}
-            <div className=" relative  bg-white w-[1250px] h-auto rounded-lg shadow-lg top-11">
-              {/*imagen botellas*/}
-              <div className="px-32 py-4">
-                <img
-                  className="w-[350px] h-[500px] bg-gray-200 rounded-md"
-                  src={botella}
-                  alt="Botellas"
-                />
-              </div>
-              {/*imagen fondo copreata*/}
-              <div className="absolute top-2 left-[600px] opacity-40">
-                <img className="object-cover " src="\cupreata.png" />
-              </div>
-
-              {/*información */}
-              <div className="absolute top-10 left-[750px] ">
-                <p className="text-black">
-                  <strong className="text-3xl">
-                    {nombre} {contenido}ml
-                  </strong>
-                  <strong className="mt-2 block text-2xl">${precio}</strong>
-                  IVA INCLUIDO
-                </p>
-                {/*lista de caracteristicas*/}
-                <p className="text-black mt-4">Datos del producto</p>
-                <div className="col-span-1  ml-5">
-                  <ul className="text-black list-disc ">
-                    <li>Marca: {marca}</li>
-                    <li>Agave: {agave}</li>
-                    <li>Cosecha: {cosecha}</li>
-                    <li>Elaboración: {elaboracion}</li>
-                    <li>Horno: {horno}</li>
-                    <li>Molienda: {molienda}</li>
-                    <li>Fermentación: {fermentacion}</li>
-                    <li>Destilador: {destilador}</li>
-                    <li>Riqueza alcoholica: {alcohol}</li>
-                    <li>Origen: México</li>
-                  </ul>
-                </div>
-                <div className=" justify-center items-center">
-                  {/*Botón mercado libre, solo aparece si existe link en las caracteristicas de la botella*/}
-                  <div className="relative">
-                    <button className="bg-[#ffe500] text-black font-bold object-cover py-2 px-28 rounded-full mt-2 flex items-center">
-                      Comprar en Mercado Libre
-                      <img
-                        className="ml-4 h-10 w-10 "
-                        src="\emoticons\mercado_libre_logo.webp"
-                      />
-                    </button>
+            {tipo !== 2 ? (
+              <div>
+                {/*tarjeta*/}
+                <div className=" relative  bg-white w-[1250px] h-auto rounded-lg shadow-2xl  top-11">
+                  {/*imagen botellas*/}
+                  <div className="ml-20 py-4">
+                    <img
+                      className="w-[400px] h-[500px] rounded-md  "
+                      src={`/productos/${imagen}`}
+                      alt="Botellas"
+                    />
                   </div>
-                  <div className=" relative flex items-center ">
-                    <button className="bg-[#F70073] text-white font-bold object-cover py-2 px-20 rounded-full mt-2 flex items-center">
-                      Agregar al carrito
-                    </button>
-                    <div>
-                      <Contador></Contador>
+                  {/*imagen fondo copreata*/}
+                  <div className="absolute top-10 left-[580px] opacity-40 ">
+                    <img className="object-cover " src="\cupreata.png" />
+                  </div>
+
+                  {/*información */}
+                  <div className="absolute top-10 left-[600px] ">
+                    <div className="flex justify-end mr-0 -mt-1 ">
+                      <div className=" bg-green-200 rounded-full w-auto h-20 p-4 text-center">
+                        <p className="  font-bold text-3xl">${precio}</p>
+                        <p className=" font-thin text-xs">IVA INCLUIDO</p>
+                      </div>
+                    </div>
+
+                    <div className="text-black mt-4">
+                      <strong className="text-3xl ">
+                        {nombre}
+                        <span className=" ml-3  text-2xl">{ml} ml</span>
+                      </strong>
+
+                      <p className=" text-xl  text-black font-light mt-5 ">
+                        Marca:
+                        <span className=" ml-3 text-xl text-[#F70073] font-light">
+                          {marca}
+                        </span>
+                      </p>
+
+                      <p className=" text-xl  text-black font-light mt-2 ">
+                        Agave:
+                        <span className=" ml-3 text-xl text-[#F70073] font-light">
+                          {agave}
+                        </span>
+                      </p>
+                      <p className=" text-xl  text-black font-light mt-2 ">
+                        Alcohol:
+                        <span className=" ml-3 text-xl text-[#F70073] font-light">
+                          {alcohol}°
+                        </span>
+                      </p>
+                      <p className=" text-xl  text-black font-light mt-2">
+                        Existencia:
+                        <span className=" ml-3 text-xl text-[#F70073] font-light">
+                          {cantidad}
+                        </span>
+                      </p>
+                    </div>
+
+                    {/*botones*/}
+                    <div className=" justify-center items-center mt-5">
+                      <div className=" relative flex items-center ">
+                        <Link
+                          href={"/tienda/carrito"}
+                          className="bg-[#F70073] text-white hover:shadow-lg hover:-translate-y-0.5 font-bold object-cover py-3 px-20 rounded-full mt-4 flex items-center"
+                        >
+                          Agregar al carrito
+                        </Link>
+                        <div>
+                          <Contador cantidad2={cantidad}></Contador>
+                        </div>
+                      </div>
+                      <div className="relative mt-3">
+                        {mercadoLibre !== "NULL" && (
+                          <button className="bg-[#ffe500] hover:shadow-lg hover:-translate-y-0.5 text-black font-bold py-2 px-40 rounded-full  flex items-center ">
+                            <a
+                              href={mercadoLibre}
+                              target="_blank"
+                              className="font-semibold"
+                            >
+                              Comprar en mercado libre
+                            </a>
+                            <img
+                              className="w-8 h-8"
+                              src="\emoticons\mercado_libre_logo.webp"
+                              alt="Mercado Libre"
+                            />
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div>
+                {/*tarjeta*/}
+                <div className=" relative  bg-white w-[1200px] h-auto rounded-lg shadow-2xl  top-11">
+                  {/*imagen botellas*/}
+                  <div className="px-32 py-4">
+                    <img
+                      className="w-[400px] h-[400px] rounded-md"
+                      src={`/productos/${imagen}`}
+                      alt="Botellas"
+                    />
+                  </div>
+                  {/*imagen fondo copreata*/}
+                  <div className="absolute top-10 left-[700px] opacity-40">
+                    <img className=" object-cover " src="\cupreata.png" />
+                  </div>
+
+                  {/*información */}
+                  <div className="absolute top-10 left-[680px] ">
+                    <div className="text-black mt-4">
+                      <strong className="text-3xl ">
+                        {nombre}
+                        <span className=" ml-3  text-2xl">{ml} gr</span>
+                      </strong>
+
+                      <p className="  font-bold text-3xl mt-2 text-green-700">
+                        ${precio}
+                      </p>
+                      <p className="  font-thin text-xs"> IVA INCLUIDO</p>
+
+                      <p className=" text-xl  text-black font-light mt-7 ">
+                        Marca:
+                        <span className=" ml-3 text-xl text-[#F70073] font-light">
+                          {marca}
+                        </span>
+                      </p>
+
+                      <p className=" text-xl  text-black font-light mt-2">
+                        Existencia:
+                        <span className=" ml-3 text-xl text-[#F70073] font-light">
+                          {cantidad}
+                        </span>
+                      </p>
+                    </div>
+
+                    {/*botones*/}
+                    <div className=" justify-center items-center mt-10">
+                      <div className=" relative flex items-center ">
+                        <Link
+                          href={"/tienda/carrito"}
+                          className="bg-[#F70073] text-white hover:shadow-lg hover:-translate-y-0.5 font-bold object-cover py-3 px-14 rounded-full mt-4 flex items-center"
+                        >
+                          Agregar al carrito
+                        </Link>
+                        <div className="">
+                          <Contador cantidad2={cantidad}></Contador>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        {/*descripcion*/}
+        <div className=" flex justify-center items-center ">
+          <div className=" absolute w-[1250px]  rounded-lg shadow-2xl bg-white p-4 ">
+            <h3 className="text-black  font-bold">DESCRIPCIÓN</h3>
+            <h3 className=" mt-2 text-justify mx-4">
+              {descripcion}
+              {descripcion}
+            </h3>
           </div>
         </div>
         <div>
           {/*productos relacionados*/}
-          <div className="   w-full flex justify-center items-center ">
+          <div className="   w-full flex justify-center items-center mt-40">
             <p className="text-[#dd6c5a] text-3xl font-bold z-50 bg-white px-9 rounded-lg ">
               PRODUCTOS RELACIONADOS
             </p>
-          </div>
-          <div className="   z-0  w-full flex flex-wrap gap-10 justify-center items-center top-11 pt-11">
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
-            <Tarjeta></Tarjeta>
           </div>
         </div>
       </div>
