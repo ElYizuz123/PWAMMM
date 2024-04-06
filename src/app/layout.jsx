@@ -15,7 +15,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={k2d.className}>
-        {children}
+      <ProductProvider>
+          <div>{children}</div>
+        </ProductProvider>
         <footer>
           <Footer />
         </footer>
