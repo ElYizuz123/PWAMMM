@@ -22,7 +22,7 @@ function page() {
 
     return (
         <LayoutPrincipal>
-            <div className="bg-[#F5F5F5] h-max relative w-full overflow-x-hidden">
+            <div className="bg-[#F5F5F5] mt-40 h-max relative w-full overflow-x-hidden">
 
                 <div className="absolute inset-0 ">
                     <img
@@ -32,13 +32,12 @@ function page() {
                     />
                 </div>
 
-                <br/>
 
-                <div className="items-center justify-center">
+                <div className="items-center text-black justify-center mt-14 ml-6 lg:ml-24 md:ml-16 sm:ml-4">
                     {categorias &&
                         categorias.map((galeria_categoria) => (
                             <div key={galeria_categoria.id_categoria}>
-                                <p className="text-5xl mb-6 ml-3">{galeria_categoria.categoria}</p>
+                                <p className="text-5xl ml-3">{galeria_categoria.categoria}</p>
                                 <div className="mb-14">
                                     <CarruselGaleria categorias={galeria_categoria.id_categoria}></CarruselGaleria>
                                 </div>

@@ -1,25 +1,31 @@
 import Link from 'next/link'
-import React from 'react'
+import Swal from 'sweetalert2'
 
-const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct}) => {
 
+const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct }) => {
+
+    //Data para el formulario
     const data = {
         "id_producto": id_producto,
-        "foto" : foto,
-        "source" : "botellas"
+        "foto": foto,
+        "source": "productos"
     }
 
+
+    //Abre el editor de producto
     const handleEdit = () => {
         editProduct(id_producto)
     }
+
+    //Elimina el producto
     const deleteProduct = (async () => {
         const deletedImage = await fetch('/api/delete_image', {
             method: 'POST',
             body: JSON.stringify(data),
         })
         const resDeletedImageJSON = await deletedImage.json()
-        if(resDeletedImageJSON=='Arhivo eliminado correctamente'){
-            const res = await fetch('/api/delete_producto', {
+        if (resDeletedImageJSON == 'Arhivo eliminado correctamente') {
+            const res = await fetch('/api/producto/delete_producto', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -29,23 +35,60 @@ const Tarjeta_Producto_Admin = ({id_producto, nombre, ml, marca, precio, foto, u
             const resJSON = await res.json()
             console.log(resJSON)
             if (resJSON == "Producto eliminado con éxito") {
+                Swal.fire({
+                    title: "Eliminado!",
+                    text: "La marca fue eliminada",
+                    icon: "success"
+                });
                 updatePage()
             }
+            else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Algo salió mal!",
+                });
+            }
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo salió mal!",
+            });
         }
     })
+
+    //Alerta para evitar borrado accidental 
+    const handleDelete = () => {
+        Swal.fire({
+            title: "Eliminar producto",
+            text: "Esta acción no puede ser revertida!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Si, borrar!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteProduct()
+            }
+        });
+    }
 
     return (
         <div className="relative rounded-5 overflow-hidden card-reduced">
             <button onClick={handleEdit} className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
                 <img src="\emoticons\editar.png" alt="Icono" width="32" height="32" />
             </button>
-            <button onClick={deleteProduct} className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
+            <button onClick={handleDelete} className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
                 <img src="\emoticons\eliminar.png" alt="Icono" width="32" height="32" />
             </button>
-            <figure>
+            <figure className='flex justify-center'>
                 <img
-                    className="object-contain"
-                    src={"\\productos\\"+foto}
+                    className="w-48 h-72"
+                    id='foto_botella'
+                    src={"\\productos\\" + foto}
                     alt="t-shirt"
                 />
             </figure>
