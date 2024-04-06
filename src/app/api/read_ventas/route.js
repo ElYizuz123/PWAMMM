@@ -1,7 +1,7 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
-export async function GET(){
+export async function Read_ventas(){
     try{
         const data = await db.venta_total.findMany();
         

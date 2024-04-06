@@ -1,31 +1,43 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
+import { contexto } from '../UpdateProvider';
 
 
-
-const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
+const randomHexa = () => {
+    const randomNumber = Math.floor(Math.random() * 65536);
+    const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
+    return hexadecimalValue
+}
+const Crear_Producto = ({ isOpen, onClose, marcas }) => {
     const [productPhoto, setProductPhoto] = useState(null)
-    const { register, handleSubmit, reset, setValue} = useForm();
-    const [numProductos, setNumProductos] = useState(nProductos)
+    const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
+    const {update, setUpdate} = useContext(contexto)
+    const hexa = randomHexa()
 
-    console.log(numProductos)
-
+    //Crear registro de foto
     useEffect(() => {
-        register('foto'); 
+        register('foto')
+        register('hexa')
     }, [register]);
 
+
+    //Establece la foto en el input del file 
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
 
+
+    //Guarda el producto
     const handleOnSubmit = (async (data) => {
-        if(productPhoto){
+        console.log(data.hexa)
+        if (productPhoto) {
             const form = new FormData()
             form.set('file', productPhoto)
-            form.set('source', "botellas")
-            form.set('modifier', numProductos)
+            form.set('source', "productos")
+            form.set('modifier', data.hexa)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/upload_image', {
                 method: 'POST',
@@ -35,8 +47,8 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
             console.log(fotoResJSON)
 
             //Registrar producto en la DB
-            if(fotoResJSON == "Archivo subido correctamente"){
-                const res = await fetch('/api/create_producto', {
+            if (fotoResJSON == "Archivo subido correctamente") {
+                const res = await fetch('/api/producto/create_producto', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -46,10 +58,37 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
                 const resJSON = await res.json()
                 console.log(resJSON)
                 if (resJSON == "Registrado") {
-                    setProductPhoto()
-                    setNumProductos(numProductos+1)
-                    reset();
+                    let timerInterval;
+                    Swal.fire({
+                        title: "Producto añadido!",
+                        icon: "success",
+                        timer: 2000,
+                        timerProgressBar: true,
+                        confirmButtonText: "Ok",
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+                    }).then(() => {
+                        const up = !update
+                        setUpdate(up)
+                        setProductPhoto()
+                        reset();
+                    });
                 }
+                else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo salió mal!",
+                    });
+                }
+            }
+            else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Algo salió mal!",
+                });
             }
         }
     })
@@ -59,7 +98,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
     if (!isOpen) return null;
 
     return (
-        <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+        <div className='w-full h-[780px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>Producto</p>
                 <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
@@ -67,7 +106,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
             <div className='w-full h-full flex justify-between'>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                     {productPhoto && (
-                        <img src={URL.createObjectURL(productPhoto)} alt='Preview' className='w-64' />
+                        <img src={URL.createObjectURL(productPhoto)} alt='Preview' className='w-48' />
                     )}
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
@@ -77,17 +116,19 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
                         onClick={handleFileButton}
                     >Seleccionar Archivo</button>
                     {!productPhoto && (
-                        <p className='text-sm mt-1'>Es necesario agregar una foto</p>
+                        <p className='text-sm mt-1 text-red-700'>Es necesario agregar una foto</p>
                     )}
                 </div>
                 <div className='h-full w-[60%] flex justify-between'>
-                    <div className='flex flex-col items-start gap-y-6 mt-4 mr-2'>
+                    <div className='flex flex-col items-start gap-y-6 mt-4 mr-2 w-[700px]'>
                         <p className='text-xl'>Nombre</p>
                         <p className='text-xl'>ML</p>
                         <p className='text-xl'>Precio</p>
                         <p className='text-xl'>Marca</p>
                         <p className='text-xl'>Cantidad</p>
                         <p className='text-xl'>Mercado libre</p>
+                        <p className='text-xl'>Tipo de agave</p>
+                        <p className='text-xl'>Cantidad de alcohol</p>
                         <p className='text-xl'>Descripción</p>
                     </div>
                     <div>
@@ -101,16 +142,19 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
                                     ref={fileInputRef}
                                     onChange={(e) => {
                                         setProductPhoto(e.target.files[0])
-                                        setValue('foto', e.target.files[0].name.split(".")[0]+numProductos+"."+e.target.files[0].name.split(".")[1])
+                                        setValue('foto', e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1])
+                                        setValue('hexa', hexa)
                                     }}
                                 />
                                 <input
                                     type='text'
                                     name='nombre'
                                     id='campo_nombre'
-                                    {...register('nombre',{
-                                        required:true,
-                                        maxLength:45 
+                                    required={true}
+                                    maxLength={45}
+                                    {...register('nombre', {
+                                        required: true,
+                                        maxLength: 45,
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                     placeholder='Nombre del mezcal'
@@ -118,9 +162,11 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
                                 <input
                                     type='number'
                                     name='ml'
-                                    {...register('ml',{
-                                        required:true,
-                                        maxLength:10 
+                                    required={true}
+                                    maxLength={10}
+                                    {...register('ml', {
+                                        required: true,
+                                        maxLength: 10
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-5'
                                     placeholder='Mililitros'
@@ -128,9 +174,11 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
                                 <input
                                     type='number'
                                     name='precio'
-                                    {...register('precio',{
-                                        required:true,
-                                        maxLength:10 
+                                    required={true}
+                                    maxLength={10}
+                                    {...register('precio', {
+                                        required: true,
+                                        maxLength: 10
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     placeholder='Precio'
@@ -139,8 +187,9 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
                                     name='marca'
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     id="select_marca"
-                                    {...register('marca',{
-                                        required:true
+                                    required={true}
+                                    {...register('marca', {
+                                        required: true
                                     })}
                                 >
                                     <option></option>
@@ -154,28 +203,53 @@ const Crear_Producto = ({ isOpen, onClose, marcas, nProductos}) => {
                                     type='number'
                                     name='cantidad'
                                     placeholder='Cantidad de producto'
+                                    required={true}
+                                    maxLength={10}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     {...register('cantidad', {
-                                        required:true
+                                        required: true
                                     })}
                                 />
                                 <input
                                     type='text'
                                     name='mercado_lib'
-                                    {...register('mercado_lib',{
-                                        maxLength:255 
+                                    maxLength={255}
+                                    {...register('mercado_lib', {
+                                        maxLength: 255
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     placeholder='Link a mercado libre'
                                 />
+                                <input
+                                    type='text'
+                                    name='tipo_agave'
+                                    maxLength={255}
+                                    {...register('tipo_agave', {
+                                        maxLength: 255
+                                    })}
+                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                    placeholder='Tipo de agave'
+                                />
+                                <input 
+                                    type='number'
+                                    name='cantidad_alcohol'
+                                    maxLength={255}
+                                    {...register('cantidad_alcohol', {
+                                        maxLength: 255
+                                    })}
+                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-9'
+                                    placeholder='Cantidad de alcohol'
+                                />
                                 <textarea
                                     type='text'
                                     name='descripcion'
-                                    {...register('descripcion',{
-                                        required:true,
-                                        maxLength:3000 
+                                    required={true}
+                                    maxLength={3000}
+                                    {...register('descripcion', {
+                                        required: true,
+                                        maxLength: 3000
                                     })}
-                                    className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-6 pt-1'
+                                    className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-9 pt-1'
                                 />
                                 <div className='w-full flex justify-end items-end'>
                                     <button
