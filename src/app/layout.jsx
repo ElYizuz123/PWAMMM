@@ -2,6 +2,7 @@ import "./globals.css";
 import { K2D } from "next/font/google";
 import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
+import { ProductProvider } from "@/context/ProductContext";
 
 export const metadata = {
   title: "Mujeres Mezcaleras",
