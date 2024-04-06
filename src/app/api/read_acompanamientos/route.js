@@ -3,14 +3,14 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const producto = await db.producto.findMany({
+    const acompanamiento = await db.acompanamiento.findMany({
       include: {
         marca: true,
       },
     });
 
-    console.log(producto);
-    return NextResponse.json(producto);
+    console.log(acompanamiento);
+    return NextResponse.json(acompanamiento);
   } catch (error) {
     console.error("Error al leer los datos", error);
     return {
