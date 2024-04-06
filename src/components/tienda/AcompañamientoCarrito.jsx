@@ -27,6 +27,7 @@ const AcompañamientoCarrito = () => {
             precio={"200"}
             ml={acompanamiento.gr}
             imagen={acompanamiento.foto}
+           marca={acompanamiento.marca.nombre}
           ></MostrarAcompanamientoCarrito>
         ))}
     </div>

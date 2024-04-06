@@ -45,7 +45,7 @@ const Tarjeta = ({
         <Link
           href={`/tienda/abrir_producto/${tipo}/${id_producto}`}
           className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon"
-        >
+        > 
           <img src="\emoticons\ojo.png" alt="Icono" width="32" height="32" />
         </Link>
         <figure>

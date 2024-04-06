@@ -41,6 +41,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
               .filter((item) => item.id_producto === Number(idProducto))
               .map((producto) => (
                 <Ficha
+                  id_producto={idProducto}
                   tipo={1}
                   nombre={producto.nombre}
                   marca={producto.marca.nombre}

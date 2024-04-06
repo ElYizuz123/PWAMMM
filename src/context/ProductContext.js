@@ -37,8 +37,7 @@ export const ProductProvider = ({ children }) => {
 
   const deleteProduct = (idProducto, name) => {
     const updatedProductos = productos.filter(
-      (producto) =>
-        producto.id_producto !== idProducto && producto.nombre !== name
+      (producto) => producto.nombre !== name
     );
 
     setProductos(updatedProductos);

@@ -2,31 +2,24 @@
 import { ProductContext } from "@/context/ProductContext";
 import { Preahvihear } from "next/font/google";
 import React, { useContext } from "react";
-import { useRouter } from 'next/router';
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
-const MostrarAcompanamientoCarrito = ({ id_producto, nombre, imagen, ml }) => {
+const MostrarAcompanamientoCarrito = ({ id_producto, nombre, precio, imagen, ml, marca }) => {
   const { addProductos } = useContext(ProductContext);
-  const [productoAñadido, setProductoAñadido] = useState(false);
   
   const handleAddToCart = () => {
     const newProduct = {
       id_producto,
       imagen,
       nombre,
-      precio: "200",
+      marca,
+      precio,
       ml,
     };
 
     addProductos(newProduct);
-    setProductoAñadido(true);
   };
-  useEffect(() => {
-    if (productoAñadido) {
-      // Confirma que el producto fue añadido y luego navega
-      window.location.href = '/tienda/carrito';
-    }
-  }, [productoAñadido]);
   return (
     <div className="my-2 p-2 shadow-lg flex items-center relative">
       <div className="justify-between">
@@ -47,7 +40,9 @@ const MostrarAcompanamientoCarrito = ({ id_producto, nombre, imagen, ml }) => {
       </div>
 
       <div className="absolute right-2 top-2 hover:scale-110 transition transform duration-300 ease-in-out">
-        <button onClick={handleAddToCart}>
+      <button onClick={handleAddToCart}>
+        <Link href={"/tienda/carrito"}></Link>
+       
           <img
             src="/emoticons/carrito3.png"
           />

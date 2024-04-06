@@ -5,7 +5,7 @@ import autoprefixer from 'autoprefixer';
 const Footer = () => {
   return (
     <footer className="bg-black text-white ">
-    <div className="text-center flex   p-6 dark:border-neutral-500 lg:justify-center" style={{ backgroundImage: "url('/navbar/banner.jpg')" }}>
+    <div className="text-center flex p-6 dark:border-neutral-500 lg:justify-center" style={{ backgroundImage: "url('/navbar/banner.jpg')" }}>
       <div className="mr-12 hidden lg:block">
 
         <span className="text-center text-2xl font-bold">Datos de contacto</span>

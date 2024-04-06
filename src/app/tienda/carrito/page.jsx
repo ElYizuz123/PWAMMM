@@ -1,11 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
 import Image from "next/image";
 import AcompañamientoCarrito from "@/components/tienda/AcompañamientoCarrito";
 import MostrarAcompanamientoCarrito from "@/components/tienda/MostrarAcompanamientoCarrito";
 import MostrarItemsCarrito from "@/components/tienda/MostrarItemsCarrito";
 import { K2D } from "next/font/google";
+import { ProductContext } from "@/context/ProductContext";
+import Link from "next/link";
 
 const k2d = K2D({
   weight: ["400"],
@@ -13,16 +15,8 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-
-const Page = (
-  id_producto,
-  nombre,
-  marca,
-  precio,
-  ml,
-  imagen
-) => {
-   
+const Page = (total) => {
+  const { productos } = useContext(ProductContext);
 
   return (
     <LayoutPrincipal>
@@ -36,15 +30,20 @@ const Page = (
               alt="Fondo"
             />
           </div>
+
           <div className="relative w-full py-48 ">
+            <div className="  text-black  z-10 flex items-start px-32   ">
+              <Link href="/tienda">
+                <img src="/flecha.png" className="ml-2" />
+              </Link>
+              <Link className="ml-3 hover:text-[#F70073]" href="/tienda">
+                Volver a tienda
+              </Link>
+            </div>
             <div className="  mt-12 p-6 mx-48  bg-white border-[#1E1E1E] border-opacity-50 dark:border-gray-600 shadow-lg">
               <div className=" flex mb-4  mt-4 text-3xl font-bold text-[#F70073]">
-               
-                  <img
-              
-                    src="/emoticons/carrito2.png"
-                  />
-                
+                <img src="/emoticons/carrito2.png" />
+
                 <p className="ml-5">CARRITO </p>
               </div>
 
@@ -56,16 +55,29 @@ const Page = (
                 <div className="w-2/5 ml-4 p-4 bg-white">
                   <div className="mb-6">
                     <h2 className="font-bold text-xl mb-2">
-                      Resumen de la compra
+                      Resumen de compra
                     </h2>
 
                     <div className="flex justify-between">
-                      <span>2 productos</span>
-                      <span className="flex">
+                      <p className="text-[#F70073] font-bold text-xl">
+                        {productos.reduce(
+                          (total, producto) => total + producto.cantidad,
+                          0
+                        )}
+                        <span className="text-black ml-2">Productos</span>
+                      </p>
+
+                      <span className="flex font-bold text-xl">
                         <p>Subtotal: </p>
-                        <p className="text-green-700 ml-2 font-bold">
-                          $1,948.00{" "}
-                        </p>{" "}
+
+                        <p className="text-green-700 ml-2 font-bold border-b-2 border-red-500">
+                          $
+                          {productos.reduce(
+                            (total, producto) =>
+                              total + producto.cantidad * producto.precio,
+                            0
+                          )}
+                        </p>
                       </span>
                     </div>
                     <button className="w-full bg-green-500 text-white py-2 my-4 hover:bg-green-600">

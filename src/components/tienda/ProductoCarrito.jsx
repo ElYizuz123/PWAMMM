@@ -4,31 +4,25 @@ import { useState } from "react";
 import { ProductContext } from "@/context/ProductContext";
 import { useContext } from "react";
 
-const ProductoCarrito = ( {id_producto, nombre, marca, precio, ml,imagen, cantidad}) => {
+const ProductoCarrito = ( {id_producto, nombre, marca, precio, ml,imagen, cantidad} ) => {
   const [quantity, setQuantity] = useState(cantidad);
-  const [precio2, setPrecio2] = useState(precio);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(precio*cantidad);
+
+
 
   const handleQuantityChange = (e) => {
     const newQuantity = Math.max(1, parseInt(e.target.value, 10) || 1);
     setQuantity(newQuantity);
-    const sumaCantidadProductos = Number(precio2) * newQuantity;
-    
+    const sumaCantidadProductos = Number(precio) * newQuantity;
     setTotal(sumaCantidadProductos);
     
-     console.log(newQuantity);
   };
-
-
-
 
   const { deleteProduct } = useContext(ProductContext);
 
   const handleDelete = (id_producto, nombre) => {
     deleteProduct(id_producto, nombre);
   };
-
-
 
   return (
     <div className="flex items-center justify-between p-4 bg-white shadow-lg my-2">
@@ -42,7 +36,7 @@ const ProductoCarrito = ( {id_producto, nombre, marca, precio, ml,imagen, cantid
           <h2 className="font-bold">
             {nombre} {ml}ml
           </h2>
-          <p>Marca: {marca}</p>
+          <p> {marca}</p>
           <div className="mt-2">
             <input
               className="w-12 text-center  px-2 py-1   rounded "
@@ -61,7 +55,7 @@ const ProductoCarrito = ( {id_producto, nombre, marca, precio, ml,imagen, cantid
         </h2>
         <span className="ml-4 text-green-700 font-bold">$ {total}</span>
       </div>
-      <button className="text-red-600 hover:underline" onClick={handleDelete}>Eliminar</button>
+      <button className="text-red-600 hover:underline" onClick={() => handleDelete(id_producto, nombre)}>Eliminar</button>
     </div>
   );
 };

@@ -3,6 +3,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { K2D } from "next/font/google";
 import Contador from "./Contador";
+import { ProductContext } from "@/context/ProductContext";
+import { useContext } from "react";
 
 const k2d = K2D({
   weight: ["400"],
@@ -11,6 +13,7 @@ const k2d = K2D({
 });
 
 const Ficha = ({
+  id_producto,
   tipo,
   nombre,
   marca,
@@ -24,6 +27,20 @@ const Ficha = ({
   alcohol,
 }) => {
   const [productos, setProductos] = useState([]);
+
+  const { addProductos } = useContext(ProductContext);
+  const handleAddToCart = () => {
+    const newProduct = {
+      id_producto,
+      imagen,
+      nombre,
+      marca,
+      precio,
+      ml,
+    };
+
+    addProductos(newProduct);
+  };
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -115,12 +132,15 @@ const Ficha = ({
                     {/*botones*/}
                     <div className=" justify-center items-center mt-5">
                       <div className=" relative flex items-center ">
-                        <Link
-                          href={"/tienda/carrito"}
-                          className="bg-[#F70073] text-white hover:shadow-lg hover:-translate-y-0.5 font-bold object-cover py-3 px-20 rounded-full mt-4 flex items-center"
-                        >
-                          Agregar al carrito
-                        </Link>
+                        <button onClick={handleAddToCart}>
+                          <Link
+                            href={"/tienda/carrito"}
+                            className="bg-[#F70073] text-white hover:shadow-lg hover:-translate-y-0.5 font-bold object-cover py-3 px-20 rounded-full mt-4 flex items-center"
+                          >
+                            Agregar al carrito
+                          </Link>
+                        </button>
+
                         <div>
                           <Contador cantidad2={cantidad}></Contador>
                         </div>
