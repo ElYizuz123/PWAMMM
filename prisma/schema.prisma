@@ -7,9 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//  TODO: Modelos en mayusculas
 model asociada {
   id_asociada Int     @id @default(autoincrement())
   nombre      String  @db.VarChar(45)
+  historia    String
   historia    String
   foto        String  @db.VarChar(45)
   marca       marca[]
@@ -41,8 +43,10 @@ model producto {
   ml               Int
   precio           Decimal            @db.Decimal(10, 2)
   descripcion      String
+  descripcion      String
   foto             String             @db.VarChar(45)
   marca_id_marca   Int
+  mercadoLibre     String?
   mercadoLibre     String?
   cantidad         Int?
   marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: Cascade, onUpdate: NoAction, map: "fk_producto_marca1")
@@ -89,6 +93,7 @@ model venta_individual {
 model venta_total {
   id_venta          Int                @id
   fecha_venta       DateTime           @default(now())
+  fecha_venta       DateTime           @default(now())
   total             Decimal            @db.Decimal(10, 2)
   status            String             @default("Pendiente") @db.VarChar(45)
   envio             Int
@@ -127,6 +132,8 @@ model pregunta_frecuente {
   id_pregunta_frencuente Int    @id @default(autoincrement())
   pregunta               String
   respuesta              String
+  pregunta               String
+  respuesta              String
 }
 
 model producto_informacion {
@@ -140,3 +147,4 @@ model producto_informacion {
   tipo_destilador         String? @db.VarChar(45)
   riquezaAlcoholica       String? @db.VarChar(45)
 }
+

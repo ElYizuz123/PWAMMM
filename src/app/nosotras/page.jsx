@@ -60,6 +60,7 @@ const Page = () => {
                             <hr className=" absolute inset-0 border-t-2  border-white my-0 ml-10 mr-14 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10  2xl:ml-10" />
 
 
+
                         </div>
                         <p className='text-3xl ml-8 mr-8 text-black leading-relaxed text-justify'> Proteger, regular y promover la Denominación de Origen MEZCAL, dentro de los Municipios comprendidos en el estado de Michoacán de Ocampo, así mismo vigilar y observar las especificaciones contenidas en la Norma Oficial Mexicana NOM-070 y sus actualizaciones, evaluando y promoviendo la incorporación de sistemas para asegurar la sustentabilidad y la calidad en todos los procesos productivos del mezcal. También Fomentaremos las formas tradicionales de producción resguardando su identidad regional, con objeto de conservar y consolidar al Mezcal Michoacano como parte de nuestra CULTURA LIQUIDA DE MÉXICO.</p>
                         <br></br>
@@ -67,6 +68,7 @@ const Page = () => {
                         <br></br>
                         <br></br>
                     </div>
+
 
                     <br></br>
                     <br></br>
