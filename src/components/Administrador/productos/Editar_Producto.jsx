@@ -178,7 +178,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
 
     if (!isOpen) return null;
     return (
-        <div className='w-full h-[780px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
+        <div className='w-full h-[850px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>Editar producto</p>
                 <button className='mr-4 font-bold eye-icon' onClick={handleClose}>X</button>
@@ -186,12 +186,12 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
             <div className='w-full h-full flex justify-between'>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                     {productPhoto && (
-                        <img src={URL.createObjectURL(productPhoto)} alt='Preview' className='w-64' />
+                        <img src={URL.createObjectURL(productPhoto)} alt='Preview' className='w-48' />
                     )}
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
                     )}
-                    {!productPhoto && (<img src={`/productos/${producto ? producto[0].foto : ""}`} alt='Preview' className='w-64' />)}
+                    {!productPhoto && (<img src={`/productos/${producto ? producto[0].foto : ""}`} alt='Preview' className='w-48' />)}
                     {!productPhoto && (
                         <p className='text-sm'>{producto ? producto[0].foto : ""}</p>
                     )}
@@ -206,7 +206,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                         <p className='text-xl'>ML</p>
                         <p className='text-xl'>Precio</p>
                         <p className='text-xl'>Marca</p>
-                        <p className='text-xl'>Cantidad</p>
+                        <p className='text-xl pt-3'>Cantidad</p>
                         <p className='text-xl'>Mercado libre</p>
                         <p className='text-xl'>Tipo de agave</p>
                         <p className='text-xl'>Cantidad de alcohol</p>
@@ -269,7 +269,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 />
                                 <select
                                     name='marca'
-                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                    className='w-full border-2 border-black rounded-lg pl-1 mt-6'
                                     id="select_marca"
                                     required={true}
                                     {...register('marca', {
@@ -306,7 +306,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                         maxLength: 255
                                     })}
                                     defaultValue={producto ? producto[0].mercadoLibre : ""}
-                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-7'
                                     placeholder='Link a mercado libre'
                                 />
                                 <input
@@ -318,7 +318,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     {...register('tipo_agave', {
                                         maxLength: 255
                                     })}
-                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-14'
                                     placeholder='Tipo de agave'
                                 />
                                 <input 
@@ -330,7 +330,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     {...register('cantidad_alcohol', {
                                         maxLength: 255
                                     })}
-                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-9'
+                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-12'
                                     placeholder='Cantidad de alcohol'
                                 />
                                 <textarea
@@ -343,7 +343,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                         maxLength: 3000
                                     })}
                                     defaultValue={producto ? producto[0].descripcion : ""}
-                                    className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-6 pt-1'
+                                    className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-8 pt-1'
                                 />
                                 <div className='w-full flex justify-end items-end'>
                                     <button
