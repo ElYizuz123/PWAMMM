@@ -155,7 +155,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
 
     return (
         <div className='h-full'>
-            <div className='w-[80%] h-[400px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+            <div className='w-[80%] h-[400px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[600px]'>
                 <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                     <p className='font-bold pl-5'>Producto</p>
                     <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>

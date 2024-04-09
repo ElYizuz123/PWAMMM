@@ -37,7 +37,7 @@ const Leer_evento = () => {
 
     return (
         <div>
-            <div className={`absolute top-[10%] left-[25%] z-10 w-6/12 h-3/6 ${uEventoIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uEventoIsOpen ? "" : "pointer-events-none"}`}>
                 {uEventoIsOpen && <Editar_evento
                     isOpen={uEventoIsOpen}
                     onClose={onClose}
