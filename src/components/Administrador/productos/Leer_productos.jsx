@@ -83,7 +83,7 @@ const Leer_productos = ({ marcas }) => {
 
     return (
         <div >
-            <div className={`absolute top-[300px] left-[25%] z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
                 {uProductIsOpen && <Editar_Producto
                     isOpen={uProductIsOpen}
                     onClose={closeUProduct}

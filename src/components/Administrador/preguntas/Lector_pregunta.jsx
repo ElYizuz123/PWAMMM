@@ -79,7 +79,7 @@ const Lector_pregunta = () => {
 
     return (
         <div className='w-full overflow-y-visible'>
-            <div className={`absolute top-1/3 left-[30%] z-10 w-4/12 ${uPreguntasIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${uPreguntasIsOpen ? "" : "pointer-events-none"}`}>
                 {uPreguntasIsOpen && <Editar_pregunta
                     isOpen={uPreguntasIsOpen}
                     onClose={closeUPregunta}
