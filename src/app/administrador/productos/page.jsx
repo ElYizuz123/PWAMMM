@@ -14,8 +14,8 @@ const Page = async () => {
   return (
     <LayoutCRUD title="Productos">
       <UpdateProvider>
-        <main className='flex h-[2300px] flex-col items-center justify-between w-full '>
-          <div className='relative h-full w-full overflow-hidden'>
+        <main className='flex flex-col items-center justify-between w-full min-h-[2300px]'>
+          <div className='relative h-full w-full overflow-hidden min-h-[2300px]'>
             <div className='absolute bottom-0 w-full'>
               <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />
             </div>

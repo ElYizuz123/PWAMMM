@@ -98,7 +98,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
     if (!isOpen) return null;
 
     return (
-        <div className='w-full h-[780px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+        <div className='w-full h-[780px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>Producto</p>
                 <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
@@ -120,7 +120,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                     )}
                 </div>
                 <div className='h-full w-[60%] flex justify-between'>
-                    <div className='flex flex-col items-start gap-y-6 mt-4 mr-2 w-[700px]'>
+                    <div className='flex flex-col items-start gap-y-6 mt-4 mr-2'>
                         <p className='text-xl'>Nombre</p>
                         <p className='text-xl'>ML</p>
                         <p className='text-xl'>Precio</p>

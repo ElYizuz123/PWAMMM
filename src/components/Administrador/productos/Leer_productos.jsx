@@ -123,7 +123,7 @@ const Leer_productos = ({ marcas }) => {
                     />))
                 }
             </div>
-            <div className='w-full flex justify-end'>
+            <div className='w-full flex justify-end pb-5'>
                 <Paginacion totalPages={10}/>
             </div>
         </div>

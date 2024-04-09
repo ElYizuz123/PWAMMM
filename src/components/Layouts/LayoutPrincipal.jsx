@@ -83,6 +83,9 @@ const LayoutPrincipal = ({ children }) => {
         </div>
         <Carrito />
         <div>{children}</div>
+        <footer>
+          <Footer />
+        </footer>
 
       </div>
       

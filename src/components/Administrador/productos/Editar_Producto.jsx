@@ -178,7 +178,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
 
     if (!isOpen) return null;
     return (
-        <div className='w-full h-[780px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+        <div className='w-full h-[780px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>Editar producto</p>
                 <button className='mr-4 font-bold eye-icon' onClick={handleClose}>X</button>
