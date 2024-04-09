@@ -120,8 +120,8 @@ const Crear_foto = () => {
                 <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-4'>Agregar foto</p>
             </button>
-            <div hidden={!cFotoIsOpen} className={`absolute top-[10%] left-[25%] z-10 w-6/12 h-[1200px] ${cFotoIsOpen ? "" : "pointer-events-none"}`}>
-                <div className='w-[80%] h-2/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+            <div hidden={!cFotoIsOpen} className={`absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[1200px] ${cFotoIsOpen ? "" : "pointer-events-none"}`}>
+                <div className='w-[80%] h-2/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                         <p className='font-bold pl-5'>Producto</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
@@ -182,7 +182,7 @@ const Crear_foto = () => {
                                             {...register('categoria', {
                                                 required: true
                                             })}
-                                            className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                            className='w-full border-2 border-black rounded-lg pl-1 mt-6'
                                         >
                                             <option></option>
                                             {categorias && categorias.map((categoria) =>(

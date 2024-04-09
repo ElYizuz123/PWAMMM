@@ -112,7 +112,7 @@ const Categorias = () => {
 
     return (
         <div>
-            <div className={`absolute top-[15%] left-[40%] z-10 w-6/12 h-[1200px] ${uFotoIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[1200px] ${uFotoIsOpen ? "" : "pointer-events-none"}`}>
                 {uFotoIsOpen && <Editar_foto
                     isOpen={uFotoIsOpen}
                     onClose={onClose}
@@ -120,7 +120,7 @@ const Categorias = () => {
                     categorias={onlyCategorias}
                 />}
             </div>
-            <div className={`absolute top-[10%] left-[25%] z-10 w-6/12 h-[1200px] ${uCategoriaIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-3/4 left-1/2 transform -translate-x-1/4 -translate-y-1/3 z-10 w-6/12 h-[1200px] ${uCategoriaIsOpen ? "" : "pointer-events-none"}`}>
                 {uCategoriaIsOpen && <Editar_categoria
                     isOpen={uCategoriaIsOpen}
                     onClose={onCloseCategorias}

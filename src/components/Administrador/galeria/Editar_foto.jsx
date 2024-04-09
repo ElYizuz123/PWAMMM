@@ -166,7 +166,7 @@ const Editar_foto = ({ isOpen, onClose, idFoto, categorias }) => {
     if (!isOpen) return null;
     return (
         <div className='h-full'>
-            <div className='w-[80%] h-2/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+            <div className='w-[80%] h-2/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
                 <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                     <p className='font-bold pl-5'>Producto</p>
                     <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
@@ -230,7 +230,7 @@ const Editar_foto = ({ isOpen, onClose, idFoto, categorias }) => {
                                         {...register('categoria', {
                                             required: true
                                         })}
-                                        className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                        className='w-full border-2 border-black rounded-lg pl-1 mt-6'
                                     >
                                         {opcionDefault()}
                                         <option></option>
