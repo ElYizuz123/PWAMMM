@@ -5,6 +5,7 @@ import Tarjeta_Producto_Admin from './Tarjeta_Producto_Admin'
 import Editar_Producto from './Editar_Producto';
 import { contexto } from '../UpdateProvider';
 import Paginacion from './Paginacion';
+import { useSearchParams } from 'next/navigation';
 
 const Leer_productos = ({ marcas }) => {
 
@@ -13,7 +14,8 @@ const Leer_productos = ({ marcas }) => {
     const [uProductIsOpen, setUProductIsOpen] = useState(false)
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
-    const {update} = useContext(contexto)
+    const {update, page} = useContext(contexto)
+    const searchParams = useSearchParams()
 
 
     //Función para abrir pop-up editar productos
@@ -30,7 +32,18 @@ const Leer_productos = ({ marcas }) => {
 
     //Función para leer productos
     const readData = async () => {
-        const res = await fetch('/api/producto/read_productos', { cache: "no-cache" })
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        console.log(search)
+        const res = await fetch('/api/producto/read_productos',{
+            method:'POST',
+            body: JSON.stringify(search)
+        })
         const resJSON = await res.json()
         const parseado = JSON.parse(resJSON)
         setProductos(parseado)
@@ -44,7 +57,6 @@ const Leer_productos = ({ marcas }) => {
     //Confirmación en la búsqueda
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(busqueda)
     }
 
     //Cambio en la búsqueda
@@ -122,9 +134,6 @@ const Leer_productos = ({ marcas }) => {
                         editProduct={openUProduct}
                     />))
                 }
-            </div>
-            <div className='w-full flex justify-end pb-5'>
-                <Paginacion totalPages={10}/>
             </div>
         </div>
     )

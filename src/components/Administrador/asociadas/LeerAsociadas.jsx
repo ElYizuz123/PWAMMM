@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { contexto } from '../UpdateProvider'
 import Tarjeta_Asociadas from './Tarjeta_Asociadas'
 import Update_Asociada from './Update_Asociada'
+import Paginacion from '../productos/Paginacion'
 
 const LeerAsociadas = () => {
     const { update } = useContext(contexto)

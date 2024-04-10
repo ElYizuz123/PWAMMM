@@ -2,6 +2,7 @@ import { Read_marcas } from '@/app/api/producto/read_marcas/Read_marcas'
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Agregar_producto from '@/components/Administrador/productos/Agregar_producto'
 import Leer_productos from '@/components/Administrador/productos/Leer_productos'
+import Paginacion from '@/components/Administrador/productos/Paginacion'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 
@@ -31,6 +32,9 @@ const Page = async () => {
                 <Leer_productos marcas={marcas}/>
               </div>
             </div>
+            <div className='absolute bottom-5 right-0'>
+                    <Paginacion totalPages={10}/>
+              </div>
           </div>
         </main>
       </UpdateProvider>

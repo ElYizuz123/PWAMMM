@@ -1,6 +1,7 @@
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Crear_evento from '@/components/Administrador/eventos/Crear_evento'
 import Leer_evento from '@/components/Administrador/eventos/Leer_evento'
+import Paginacion from '@/components/Administrador/productos/Paginacion'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React from 'react'
@@ -26,6 +27,9 @@ const Page = () => {
                 <Leer_evento/>
               </div>
             </div>
+            <div className='absolute bottom-5 right-0'>
+                    <Paginacion totalPages={10}/>
+              </div>
           </div>
         </main>
       </UpdateProvider>

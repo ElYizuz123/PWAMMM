@@ -1,11 +1,13 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
-export async function GET(){
+export async function POST(request){
+
     try{
+        const datos = await request.json()
         const data = await db.producto.findMany({
             take:12,
-            skip:0,
+            skip:(datos-1)*12,
             include: {
                 marca: true
             },
@@ -13,7 +15,6 @@ export async function GET(){
                 id_producto:'asc'
             }
         });
-        console.log(data);
         return NextResponse.json(JSON.stringify(data));
 
     }catch(error){

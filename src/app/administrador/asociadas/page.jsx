@@ -1,6 +1,7 @@
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Crear_Asociada from '@/components/Administrador/asociadas/Crear_Asociada'
 import LeerAsociadas from '@/components/Administrador/asociadas/LeerAsociadas'
+import Paginacion from '@/components/Administrador/productos/Paginacion'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React from 'react'
@@ -26,6 +27,9 @@ const Page = () => {
                 <LeerAsociadas/>
               </div>
             </div>
+            <div className='absolute bottom-5 right-0'>
+                    <Paginacion totalPages={10}/>
+              </div>
           </div>
         </main>
       </UpdateProvider>
