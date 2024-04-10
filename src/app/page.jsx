@@ -11,20 +11,15 @@ import MensajeBienvenida from "@/components/MensajeBienvenida/MensajeBienvenida"
 export default function Home() {
   return (
     <LayoutPrincipal>
-      {/*<MensajeBienvenida/>*/}
+     {/* <MensajeBienvenida/>*/}
       <div className="  bg-cover bg-center w-full h-auto" style={{ backgroundImage: "url('/multimedia/fondo-agave.jpeg')" }}>
          <Main />
 
-
-        
-      
-      
-     
         <CarruselInicio />  
        <Historia/>
      
      
-      <div className="mt-60"><NuestrasMarcas/></div> 
+      <div className="mt-40"><NuestrasMarcas/></div> 
        </div>
   
   </LayoutPrincipal>

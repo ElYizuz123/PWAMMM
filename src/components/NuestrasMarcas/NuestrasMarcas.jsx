@@ -15,8 +15,8 @@ const NuestrasMarcas = () => {
     return (
         <div className={berkshire.className} >
 
-       <p className='text-white text-7xl ml-24 text-delineado  '> Nuestras  </p>
-       <p className='text-[#f70073]  text-8xl ml-80 text-delineado'> Marcas </p>
+       <p className='text-white text-7xl ml-44 text-delineado  '> Nuestras  </p>
+       <p className='text-[#f70073]  text-8xl ml-96 text-delineado'> Marcas </p>
         <div className='w-[90%] max-w-[1200px] m-auto p-10 '>{/*Este es el contenedor principal*/}
             <div className=' flex flex-wrap gap-4 items-center justify-center'> {/*Este es el contenedor de las marcas*/}
 

@@ -30,7 +30,7 @@ const carruselInicio = () => {
 
 
   return (
-    <div className="relative z-10 ">
+    <div className="relative z-10 mt-16 mb-16 ">
       <Swiper
         modules={[Navigation, Pagination, EffectCoverflow, Autoplay]}
         navigation

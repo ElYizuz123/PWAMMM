@@ -205,11 +205,7 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 
 }
 
-.foto-asociada {
-  @apply bg-white w-11/12 h-64 mt-4 rounded-t-3xl rounded-b-none grid place-content-center rounded-lg text-black
-  border-2 border-black object-cover shadow-white/35 shadow-md
-  
-  }
+
 
 .card-logo:hover {
 

@@ -57,7 +57,7 @@ const CarruselAsociadas = () => {
 
                                         <div className="bg-white mt-56  h-[533px] w-[395px]  text-black rounded-3xl border-t-2 border-l-2 border-b-2 border-r-2 hover:scale-105">
                                             <div className=" bg-white flex justify-center items-center rounded-t-3xl">
-                                                <Image src={`${ruta}${asociada.foto}`} width={325} height={490} alt='' className="h-64 w-11/12 rounded-t-3xl rounded-b-none mt-4 " />
+                                                <Image src={`${ruta}${asociada.foto}`} width={325} height={490} alt='' className="h-64 w-11/12 rounded-t-3xl rounded-b-none mt-4 object-cover " />
                                               
                                             </div>
                                             <div className="flex flex-col justify-center items-center gap-4 p-4 ">
