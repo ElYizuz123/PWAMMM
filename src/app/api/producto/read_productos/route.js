@@ -4,7 +4,9 @@ import db from '@/libs/db'
 export async function POST(request){
 
     try{
-        const datos = await request.json()
+        var datos = await request.json()
+        if(datos==null)
+        datos=1
         const data = await db.producto.findMany({
             take:12,
             skip:(datos-1)*12,
