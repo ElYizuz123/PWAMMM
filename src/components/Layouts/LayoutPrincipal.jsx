@@ -43,35 +43,33 @@ const LayoutPrincipal = ({ children }) => {
                     </p1>
                   </div>
                   <div className="flex">
-                    <a href="\" className="lg:mr-16 hover:text-[#F70073]">
+                    <Link 
+                      href="\" 
+                      className="lg:mr-16 hover:text-[#F70073] w-12">
                       {IconoInicio}
                       INICIO
-                    </a>
+                    </Link>
                     <Link
                       href="\tienda"
-                      className="lg:mr-16 hover:text-[#F70073]"
-                    >
+                      className="lg:mr-16 hover:text-[#F70073] w-12">
                       {IconoTienda}
                       TIENDA
                     </Link>
                     <Link
                       href="\nosotras"
-                      className="lg:mr-16 hover:text-[#F70073]"
-                    >
+                      className="lg:mr-16 hover:text-[#F70073] w-12">
                       {IconoNosotras}
                       NOSOTRAS
                     </Link>
                     <Link
                       href="\galeria"
-                      className="lg:mr-16 hover:text-[#F70073]"
-                    >
+                      className="lg:mr-16 hover:text-[#F70073] w-12">
                       {IconoGaleria}
                       GALERIA
                     </Link>
                     <Link
                       href="\contacto"
-                      className="lg:pr-16 hover:text-[#F70073]"
-                    >
+                      className="lg:mr-16 hover:text-[#F70073] w-12">
                       {IconoContacto}
                       CONTACTO
                     </Link>
