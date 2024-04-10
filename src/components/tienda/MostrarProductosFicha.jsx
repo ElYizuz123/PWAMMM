@@ -41,7 +41,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
               .filter((item) => item.id_producto === Number(idProducto))
               .map((producto) => (
                 <Ficha
-                  id_producto={idProducto}
+                  id_producto={producto.id_producto}
                   tipo={1}
                   nombre={producto.nombre}
                   marca={producto.marca.nombre}
@@ -63,6 +63,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
               .map((acompanamiento) => (
                 <Ficha
                   tipo={2}
+                  id_producto={acompanamiento.id_acompanamiento}
                   nombre={acompanamiento.nombre}
                   marca={acompanamiento.marca.nombre}
                   precio={"200"}

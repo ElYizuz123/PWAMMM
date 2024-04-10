@@ -16,8 +16,8 @@ const AcompañamientoCarrito = () => {
 
     fetchProductos();
   }, []);
-
-  return (
+  
+  return(
     <div>
       {acompanamientos 
        .map((acompanamiento) => (

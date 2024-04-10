@@ -230,4 +230,30 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   
 }
 
+.enter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  gap: 25px;
+  font-size: 0.7em;
+  letter-spacing: 2px;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(to right, rgb(59, 59, 59), rgb(34, 34, 34));
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid rgb(65, 65, 65);
+  transition-duration: 0.3s;
+}
 
+.arrow {
+  height: 20px;
+}
+.enter-button:hover {
+  transition-duration: 0.3s;
+  box-shadow: 0px 0px 2px rgb(185, 185, 185), 0px 0px 10px rgb(97, 97, 97);
+}
+.enter-button:active {
+  transform: scale(0.95);
+}

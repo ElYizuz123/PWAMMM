@@ -5,9 +5,16 @@ import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const MostrarAcompanamientoCarrito = ({ id_producto, nombre, precio, imagen, ml, marca }) => {
+const MostrarAcompanamientoCarrito = ({
+  id_producto,
+  nombre,
+  precio,
+  imagen,
+  ml,
+  marca,
+}) => {
   const { addProductos } = useContext(ProductContext);
-  
+
   const handleAddToCart = () => {
     const newProduct = {
       id_producto,
@@ -21,31 +28,25 @@ const MostrarAcompanamientoCarrito = ({ id_producto, nombre, precio, imagen, ml,
     addProductos(newProduct);
   };
   return (
-    <div className="my-2 p-2 shadow-lg flex items-center relative">
-      <div className="justify-between">
+    <div className="space-y-4 mt-4">
+      {/* Product 1 */}
+      <div className="flex justify-between items-center bg-white shadow rounded-lg p-4 ">
         <img
+          className="h-12 w-12 rounded"
           src={`/productos/${imagen}`}
-          alt="Producto"
-          className="h-24 mr-4"
+          alt="Queso"
         />
-      </div>
-
-      <div>
-        <div className="flex-col ml-3 ">
-          <h4>
-            {nombre} {ml} gr
-          </h4>
-          <p className="mt-0 text-green-700 font-bold ">${"200"}</p>
+        <div className="flex-grow px-6">
+          <h3 className="font-medium">{nombre} {ml}gr</h3>
+          <p className="text-sm text-gray-500">${precio}</p>
         </div>
-      </div>
-
-      <div className="absolute right-2 top-2 hover:scale-110 transition transform duration-300 ease-in-out">
-      <button onClick={handleAddToCart}>
-        <Link href={"/tienda/carrito"}></Link>
-       
+        <button className="text-pink-500 hover:text-pink-600" onClick={handleAddToCart}>
           <img
+            className="h-6 w-6 rounded"
             src="/emoticons/carrito3.png"
+            alt="Queso"
           />
+          <span className="sr-only ">Agregar al carrito</span>
         </button>
       </div>
     </div>

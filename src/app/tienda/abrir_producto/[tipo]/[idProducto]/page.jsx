@@ -22,7 +22,7 @@ const abrir_producto = ({ params }) => {
           <MostrarProductosFicha
             tipo={params.tipo}
             idProducto={params.idProducto}
-            //marca={params.marca}
+              
           ></MostrarProductosFicha>
         </div>
       </div>

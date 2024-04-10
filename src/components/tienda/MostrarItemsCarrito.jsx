@@ -7,7 +7,7 @@ import { useContext } from "react";
 const MostrarItemsCarrito = () => {
   const { productos } = useContext(ProductContext);
   return (
-    <div className="flex flex-col w-3/5  p-4">
+    <div>
       {productos.map((producto) => (
         <ProductoCarrito
           id_producto={producto.id_producto}
