@@ -9,7 +9,7 @@ export async function Read_ventas(){
         console.log(dataReversed);
         return NextResponse.json(JSON.stringify(dataReversed));
 
-    }catch(err){
+    }catch(error){
         console.error('Error al leer los datos', error)
         return{
             status: 500,
