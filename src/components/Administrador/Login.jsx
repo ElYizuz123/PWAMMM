@@ -8,22 +8,22 @@ import { signIn } from "next-auth/react"
 const Login = () => {
 
     const { register, handleSubmit } = useForm();
-    
+    const router = useRouter()
 
     const handleOnSubmit = async (data) => {
-        const res = await signIn('credentials',{
-            user:data.user,
-            password:data.password,
+        const res = await signIn('credentials', {
+            user: data.user,
+            password: data.password,
             redirect: false
-          })
+        })
 
-          if(res.error){
+        if (res.error) {
             //esto es un String, podemos mostrarlo en el formulario
             alert(res.error)
-          }
-          else{
+        }
+        else {
             router.push('/administrador/ventas')
-          }
+        }
     }
 
     return (
@@ -62,7 +62,7 @@ const Login = () => {
             >
                 Iniciar sesión
             </button>
-            
+
         </form>
     )
 }
