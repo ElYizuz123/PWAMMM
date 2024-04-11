@@ -103,48 +103,6 @@ const NuestrasMarcas = () => {
 
 
 
-            <div className='card-logo'>
-                <Link href="https://www.facebook.com/mezcaldonmateo?locale=es_LA">
-                     <Image src={'/logos/Logo-DonMateo.jpeg'} width={90} height={90} alt='' className='imagen-componente'/> 
-                 </Link>   
-            </div>
-
-            <div className='card-logo'>
-                <Link href="https://www.facebook.com/mezcalarmonia?locale=es_LA">
-                      <Image src={'/logos/Logo-MezcalArmoniaBla.png'} width={100} height={100} alt='' className='imagen-componente'/>   
-                </Link> 
-            </div>
-
-            <div className='card-logo'>
-                <Link href="https://www.facebook.com/rocio.vega.12979?mibextid=ZbWKwL">
-                     <Image src={'/logos/Logo-RocioVega.jpg'} width={90} height={90} alt='' className='imagen-componente'/>   
-                </Link> 
-            </div>
-
-            <div className='card-logo  '>
-                <Link href="https://www.facebook.com/profile.php?id=100093951884648">
-                     <Image src={'/logos/Logo-MataVerde.png'} width={100} height={100} alt='' className='imagen-componente'/>
-                </Link>
-            </div>
-
-            <div className='card-logo'>
-                <Link href="https://www.facebook.com/mezcaldonmateo?locale=es_LA">
-                     <Image src={'/logos/Logo-DonMateo.jpeg'} width={90} height={90} alt='' className='imagen-componente'/> 
-                </Link>   
-            </div>
-
-            <div className='card-logo'>
-                <Link href="https://www.facebook.com/mezcalarmonia?locale=es_LA">
-                     <Image src={'/logos/Logo-MezcalArmoniaBla.png'} width={100} height={100} alt='' className='imagen-componente'/>   
-                </Link> 
-            </div>
-
-            <div className='card-logo'>
-                <Link href="https://www.facebook.com/rocio.vega.12979?mibextid=ZbWKwL">
-                     <Image src={'/logos/Logo-RocioVega.jpg'} width={90} height={90} alt='' className='imagen-componente'/>   
-                 </Link> 
-            </div>
-
 
               
 

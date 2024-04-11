@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
 import { Berkshire_Swash } from "next/font/google";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
+
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css';
 import Link from "next/link";
 import CarruselAsociadas from '@/components/CarruselAsociadas/CarruselAsociadas';
+import ProcesoMezcal from '@/components/ProcesoMezcal/ProcesoMezcal';
 
 
 
@@ -83,9 +83,14 @@ const Page = () => {
                      
 
                     </div>
+                    <div className="mt-24 p-6 bg-[#F1F1F1] bg-opacity-60 h-[700px] rounded-lg border border-white ">
+                <ProcesoMezcal/>
                 </div>
-              
+                </div>
+                
             </div>
+
+       
 
         </LayoutPrincipal >
     );
