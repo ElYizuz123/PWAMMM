@@ -1,5 +1,7 @@
+"use client"
 import Link from 'next/link'
 import React from 'react'
+import { signOut } from 'next-auth/react'
 
 const Barra_Superior = ({title}) => {
     return (
@@ -17,9 +19,9 @@ const Barra_Superior = ({title}) => {
                     <img src="/notification.png" className="w-7 h-"></img>
                 </Link>
                 <div className="bg-black w-[0.2%] opacity-50 ml-4 mr-4"></div>
-                <Link href="/">
+                <button onClick={() => signOut()}>
                     <img src="/logout.png" className="w-7 h-7"></img>
-                </Link>
+                </button>
             </div>
         </div>
     )
