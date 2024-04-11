@@ -15,7 +15,8 @@ const UbicacionMezcalArmonia = () => {
           </iframe>
         </div>
 
-        <div className="ml-4 mr-24 bg-white bg-opacity-70 rounded-lg h-[200px]">
+        <div className="ml-4">
+          <div className="bg-white bg-opacity-70 rounded-lg mr-36">
           <div className="flex mb-8">
             <div>{IconoUbicacion}</div>
             <p className="ml-2 text-3xl">Gob. Aristeo Mercado 161-local 4, Col del Empleado, 58020 Morelia, Mich., México</p>
@@ -23,6 +24,7 @@ const UbicacionMezcalArmonia = () => {
           <div className="flex">
             <div>{IconoTelefono}</div>
             <p className="ml-2 text-3xl">+52 443 186 1694</p>
+          </div>
           </div>
           <div className="mt-8 border-2 border-black w-[380px]">
             <Image src={"/qrUbicaciones/mezcalArmonia.png"} width={380} height={380}></Image>

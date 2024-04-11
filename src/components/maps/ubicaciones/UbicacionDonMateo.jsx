@@ -15,7 +15,8 @@ const UbicacionDonMateo = () => {
           </iframe>
         </div>
 
-        <div className="ml-4 mr-24 bg-white bg-opacity-70 rounded-lg h-[200px]">
+        <div className="ml-4">
+        <div className="bg-white bg-opacity-70 rounded-lg mr-36">
           <div className="flex mb-8">
           <div>{IconoUbicacion}</div>
             <p className="ml-2 text-3xl">58060, Avenida Universidad 1146, Villa Universidad, 58060 Morelia, Mich.</p>
@@ -23,6 +24,7 @@ const UbicacionDonMateo = () => {
           <div className="flex">
           <div>{IconoTelefono}</div>
             <p className="ml-2 text-3xl">+52 443 316 8585</p>
+          </div>
           </div>
           <div className="mt-8 border-2 border-black w-[380px]">
             <Image src={"/qrUbicaciones/donmateo.png"} width={380} height={380}></Image>

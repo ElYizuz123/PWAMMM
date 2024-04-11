@@ -8,7 +8,6 @@ import logo from "@/components/navbar/logo";
 import IconoMenu from "@/components/navbar/iconoMenu";
 import { Berkshire_Swash } from "next/font/google";
 import Carrito from "../tienda/Carrito";
-import Footer from "../Footer/Footer";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -45,50 +44,42 @@ const LayoutPrincipal = ({ children }) => {
                 <div className="flex">
                   <Link
                     href="\"
-                    className="lg:mr-16 hover:text-[#F70073] w-12">
-                    {IconoInicio}
+                    className="lg:mr-16 hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoInicio}
+                    </div>
                     INICIO
                   </Link>
-                  {/* Puedes hacer esto, nada más tendrías que quitarle el w-12 al Link y se centra con flex */}
-                  {/* <Link
-                    href="\tienda"
-                    className="lg:mr-16 hover:text-[#F70073] flex-col flex items-center">
-                    <div className="size-12">
-                      {IconoTienda}
-                    </div>
-                    TIENDA
-                  </Link> */}
-                  {/* La verdad en este caso es más rápido con mx-auto */}
-                  {/* <Link
-                      href="\tienda"
-                      className="lg:mr-16 hover:text-[#F70073]">
-                      <div className="mx-auto size-12">
-                        {IconoTienda}
-                      </div>
-                      TIENDA
-                    </Link> */}
                   <Link
                     href="\tienda"
-                    className="lg:mr-16 hover:text-[#F70073] w-12">
-                    {IconoTienda}
+                    className="lg:mr-16 hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoTienda}
+                    </div>
                     TIENDA
                   </Link>
                   <Link
                     href="\nosotras"
-                    className="lg:mr-16 hover:text-[#F70073] w-12">
-                    {IconoNosotras}
+                    className="lg:mr-16 hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoNosotras}
+                    </div>
                     NOSOTRAS
                   </Link>
                   <Link
                     href="\galeria"
-                    className="lg:mr-16 hover:text-[#F70073] w-12">
-                    {IconoGaleria}
+                    className="lg:mr-16 hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoGaleria}
+                    </div>
                     GALERIA
                   </Link>
                   <Link
                     href="\contacto"
-                    className="lg:mr-16 hover:text-[#F70073] w-12">
-                    {IconoContacto}
+                    className="hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoContacto}
+                    </div>
                     CONTACTO
                   </Link>
                 </div>

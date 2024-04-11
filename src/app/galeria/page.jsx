@@ -23,7 +23,7 @@ function page() {
     return (
         <LayoutPrincipal>
             <div className="bg-[#F5F5F5] mt-40 h-max relative w-full overflow-x-hidden">
-            <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/multimedia/fondo-agave.jpeg')" }}>
+            <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
 
                 {/* <div className="absolute inset-0 ">
                     <img
@@ -38,7 +38,7 @@ function page() {
                     {categorias &&
                         categorias.map((galeria_categoria) => (
                             <div key={galeria_categoria.id_categoria}>
-                                <p className="text-5xl ml-3 text-white">{galeria_categoria.categoria}</p>
+                                <p className="text-5xl ml-3">{galeria_categoria.categoria}</p>
                                 <div className="mb-14">
                                     <CarruselGaleria categorias={galeria_categoria.id_categoria}></CarruselGaleria>
                                 </div>

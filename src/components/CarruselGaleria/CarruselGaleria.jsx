@@ -79,7 +79,7 @@ function Carousel({ categorias }) {
 
 
                 <div className="flex items-center text-center">
-                  <p className="text-3xl text-white">{galeria_fotos.descripcion}</p>
+                  <p className="text-3xl">{galeria_fotos.descripcion}</p>
                 </div>
 
               </div>)
