@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { signIn } from "next-auth/react"
@@ -9,6 +9,7 @@ const Login = () => {
 
     const { register, handleSubmit } = useForm();
     const router = useRouter()
+    const [error, setError] = useState(null)
 
     const handleOnSubmit = async (data) => {
         const res = await signIn('credentials', {
@@ -18,8 +19,7 @@ const Login = () => {
         })
 
         if (res.error) {
-            //esto es un String, podemos mostrarlo en el formulario
-            alert(res.error)
+            setError(res.error)
         }
         else {
             router.push('/administrador/ventas')
@@ -62,6 +62,7 @@ const Login = () => {
             >
                 Iniciar sesión
             </button>
+            {error && <p className='text-red-700 text-xs pt-4 w-full text-center'>{error}</p>}
 
         </form>
     )

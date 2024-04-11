@@ -64,11 +64,11 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                                     type='text'
                                     name='nombre'
                                     id='campo_nombre'
-                                    maxLength={45}
+                                    maxLength={30}
                                     required={true}
                                     {...register('nombre', {
                                         required: true,
-                                        maxLength: 45
+                                        maxLength: 30
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                     placeholder='Nombre de la marca'
