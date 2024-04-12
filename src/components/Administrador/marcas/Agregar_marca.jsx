@@ -28,7 +28,7 @@ const Agregar_marca = ({asociadas}) => {
                 <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-3'>Agregar marca</p>
             </button>
-            <div className={`absolute top-1/3 left-[35%] z-10 w-4/12 ${cMarcasIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${cMarcasIsOpen ? "" : "pointer-events-none"}`}>
                 {cMarcasIsOpen && <Crear_marca
                     isOpen={cMarcasIsOpen}
                     onClose={closeCProduct}

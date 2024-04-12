@@ -88,7 +88,7 @@ const Leer_marcas = ({asociadas}) => {
 
     return (
         <div>
-            <div className={`absolute top-1/2 left-[45%] z-10 w-4/12 ${uMarcasIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${uMarcasIsOpen ? "" : "pointer-events-none"}`}>
                 {uMarcasIsOpen && <Editar_marca
                     isOpen={uMarcasIsOpen}
                     onClose={closeUProduct}

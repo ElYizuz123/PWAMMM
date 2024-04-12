@@ -61,7 +61,7 @@ const Crear_categoria = () => {
                 <p className='mr-4'>Agregar categoría</p>
             </button>
             <div hidden={!cCategoria} className={`absolute top-[15%] left-[40%] z-10 w-6/12 h-[1200px] ${cCategoria ? "" : "pointer-events-none"}`}>
-                <div className='w-[40%] h-1/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+                <div className='w-[40%] h-1/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[300px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                         <p className='font-bold pl-5'>Producto</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
@@ -78,10 +78,10 @@ const Crear_categoria = () => {
                                         name='categoria'
                                         id='categoria'
                                         required={true}
-                                        maxLength={45}
+                                        maxLength={20}
                                         {...register('categoria', {
                                             required: true,
-                                            maxLength: 45,
+                                            maxLength: 20,
                                         })}
                                         className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                         placeholder='Nombre de categoría'

@@ -1,6 +1,7 @@
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Crear_evento from '@/components/Administrador/eventos/Crear_evento'
 import Leer_evento from '@/components/Administrador/eventos/Leer_evento'
+import Paginacion from '@/components/Administrador/productos/Paginacion'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React from 'react'
@@ -9,8 +10,8 @@ const Page = () => {
   return (
     <LayoutCRUD title="Eventos">
       <UpdateProvider>
-        <main className='flex flex-col items-center justify-between w-full h-[2000px]'>
-          <div className='relative w-full h-[2000px] overflow-hidden'>
+        <main className='flex flex-col items-center justify-between w-full min-h-[2300px]'>
+          <div className='relative w-full min-h-[2300px] overflow-hidden'>
             <div className='w-full flex justify-center'>
               <p className='mt-6 text-3xl font-bold'>Bienvenido,</p>
               <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Eventos</p>
@@ -26,6 +27,9 @@ const Page = () => {
                 <Leer_evento/>
               </div>
             </div>
+            <div className='absolute bottom-5 right-0'>
+                    <Paginacion totalPages={10}/>
+              </div>
           </div>
         </main>
       </UpdateProvider>

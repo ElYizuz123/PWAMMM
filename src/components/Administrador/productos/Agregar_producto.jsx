@@ -20,14 +20,14 @@ const Agregar_producto = ({marcas}) => {
     //Scroll automático a ventana emergente
     useEffect(() => {
         if (cProductIsOpen) {
-          window.scrollTo({ top: 230, behavior: 'smooth' })
+          window.scrollTo({ top: 320, behavior: 'smooth' })
         }
       }, [cProductIsOpen])
 
 
     return (
         <div>
-            <div hidden={!cProductIsOpen} className={`absolute top-72 left-[25%] z-10 w-6/12 h-[670px] ${cProductIsOpen ? "" : "pointer-events-none"}`}>
+            <div hidden={!cProductIsOpen} className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[670px] ${cProductIsOpen ? "" : "pointer-events-none"}`}>
                 {cProductIsOpen && <Crear_Producto
                     isOpen={cProductIsOpen}
                     onClose={closeCProduct}

@@ -65,8 +65,8 @@ const Crear_pregunta = () => {
 
     return (
         <div>
-            <div hidden={!cPreguntaIsOpen} className={`absolute top-1/3 left-[30%] z-10 w-4/12 ${cPreguntaIsOpen ? "" : "pointer-events-none"}`}>
-                <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+            <div hidden={!cPreguntaIsOpen} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${cPreguntaIsOpen ? "" : "pointer-events-none"}`}>
+                <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[300px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                         <p className='font-bold pl-5'>Producto</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>

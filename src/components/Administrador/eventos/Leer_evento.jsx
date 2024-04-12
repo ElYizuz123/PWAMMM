@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Tarjeta_evento from './Tarjeta_evento'
 import { contexto } from '../UpdateProvider'
 import Editar_evento from './Editar_evento'
+import Paginacion from '../productos/Paginacion'
 
 const Leer_evento = () => {
     const { update } = useContext(contexto)
@@ -10,7 +11,7 @@ const Leer_evento = () => {
     const [uEventoIsOpen, setUEventoIsOpen] = useState(false)
     const [updateEvento, setUpdateEvento] = useState(null)
 
-    const readData = async () =>{
+    const readData = async () => {
         const res = await fetch('/api/eventos/read_eventos')
         const resJSON = await res.json()
         setEventos(JSON.parse(resJSON))
@@ -27,36 +28,38 @@ const Leer_evento = () => {
 
     useEffect(() => {
         if (uEventoIsOpen) {
-          window.scrollTo({ top: 230, behavior: 'smooth' });
+            window.scrollTo({ top: 230, behavior: 'smooth' });
         }
-      }, [uEventoIsOpen]);
+    }, [uEventoIsOpen]);
 
-    useEffect(() =>{
+    useEffect(() => {
         readData()
     }, [update])
 
     return (
         <div>
-            <div className={`absolute top-[10%] left-[25%] z-10 w-6/12 h-3/6 ${uEventoIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uEventoIsOpen ? "" : "pointer-events-none"}`}>
                 {uEventoIsOpen && <Editar_evento
                     isOpen={uEventoIsOpen}
                     onClose={onClose}
                     idEvento={updateEvento}
                 />}
-    
+
             </div>
             <div className='w-full flex flex-wrap gap-20 pl-10 pt-8 pb-36'>
-            {eventos && eventos.map((evento) => (
-                <Tarjeta_evento key={evento.id_evento} 
-                id_evento={evento.id_evento}
-                foto={evento.foto}
-                duracion={evento.fecha_fin}
-                openEdit={isOpen}
-                />
-            ))}
-        </div>
+                {eventos && eventos.map((evento) => (
+                    <Tarjeta_evento key={evento.id_evento}
+                        id_evento={evento.id_evento}
+                        foto={evento.foto}
+                        duracion={evento.fecha_fin}
+                        openEdit={isOpen}
+                    />
+                ))}
+            </div>
+            
         </div>
         
+
     )
 }
 

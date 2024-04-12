@@ -86,7 +86,12 @@ const LayoutPrincipal = ({ children }) => {
               </div>
             </div>
           </nav>
-        </nav>
+        </div>
+        <Carrito />
+        <div>{children}</div>
+        <footer>
+          <Footer />
+        </footer>
       </div>
       <Carrito />
       <div>{children}</div>
