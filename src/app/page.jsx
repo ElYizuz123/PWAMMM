@@ -11,21 +11,28 @@ import MensajeBienvenida from "@/components/MensajeBienvenida/MensajeBienvenida"
 export default function Home() {
   return (
     <LayoutPrincipal>
-     {/* <MensajeBienvenida/>*/}
-      <div className="  bg-cover bg-center w-full h-auto" style={{ backgroundImage: "url('/multimedia/fondo-agave.jpeg')" }}>
-         <Main />
+      {/* <MensajeBienvenida/>*/}
+      {/*<div className="  bg-cover bg-center w-full h-auto" style={{ backgroundImage: "url('/fondo-agave.jpeg')" }}>*/}
+      
+      <Main />
+      <div className="bg-cover bg-center w-full h-auto " style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+          <div className="bg-gradient-to-b  from-green-200 to-transparent">
+              <CarruselInicio />
+          </div>
+     
+        
+      
+          <Historia />
+       
 
-        <CarruselInicio />  
-       <Historia/>
-     
-     
-      <div className="mt-40"><NuestrasMarcas/></div> 
-       </div>
-  
-  </LayoutPrincipal>
-    
-   
-  
+
+        <div className="mt-60"><NuestrasMarcas /></div>
+      </div>
+
+    </LayoutPrincipal>
+
+
+
   );
 }
 

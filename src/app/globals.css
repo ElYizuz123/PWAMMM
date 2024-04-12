@@ -100,6 +100,7 @@ h1 {
      1px  1px 0 #ffffff; 
 }
 
+
 .details > .min-details,
 .details > .options,
 .details > .options > .options-colors {
@@ -230,8 +231,8 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 /*Prueba*/
 .cardd {
   position: relative;
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   color: #2e2d31;
   background: #131313;
   overflow: hidden;

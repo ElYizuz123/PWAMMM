@@ -25,7 +25,9 @@ const CarruselAsociadas = () => {
 
         fetchAsociadas();
     }, []);
+
     return (
+        
                                         <Swiper
                                             modules={[Navigation, Pagination, EffectCoverflow, Autoplay]}
                                             navigation
@@ -43,7 +45,7 @@ const CarruselAsociadas = () => {
                                             slidesPerView={3}
                                             centeredSlides={true}
                                             autoplay={{ delay: 4000, disableOnInteraction: false }}
-
+                                            
 
                                         >
             {asociadas && asociadas.map((asociada, index) => {
@@ -51,7 +53,7 @@ const CarruselAsociadas = () => {
                 return (
                     <SwiperSlide key={asociada.id_asociada}>
 
-                        <div className="bg-white mt-56  h-[533px] w-[395px]  text-black rounded-3xl border-t-2 border-l-2 border-b-2 border-r-2">
+                        <div className="bg-white mt-56  border-[#f70073] h-[533px] w-[395px]  text-black rounded-3xl border-t-2 border-l-2 border-b-2 border-r-2">
                             <div className=" bg-white flex justify-center items-center rounded-t-3xl">
                                 <img src={`${ruta}${asociada.foto}`}  alt='' className="h-64 w-11/12 rounded-t-3xl rounded-b-none mt-4 object-cover " />
 
@@ -78,7 +80,7 @@ const CarruselAsociadas = () => {
 
          
         </Swiper>
-
+       
     )
 }
 

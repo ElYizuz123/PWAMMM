@@ -8,6 +8,7 @@ const berkshire = Berkshire_Swash({
     subsets: ["latin"],
 
 });
+
 const NewsCard = ({ titulo, imageUrl, desc }) => {
     return (
         <article className="cardd ">
@@ -20,30 +21,35 @@ const NewsCard = ({ titulo, imageUrl, desc }) => {
         <span className="cardd_subtitle">
         Mujeres Mezcaleras de Michoacán
         </span>
-          <p className="cardd_description  text-black font-light mb-2">{desc}</p>
+          <p className="cardd_description text-justify  text-black font-light mb-2">{desc}</p>
         </div>
       </article>
     );
   };
-  
+
 
 
 
 const ProcesoMezcal = () => {
-    
+   
     const cards = [
-        { imageUrl: "/multimedia/CorteJimado.jpg", titulo: "Corte y Jimado del Agave", desc: "La recolección implica la tala de las plantas de agave de la variedad Cupreata, las cuales prosperan ya sea en los valles o en las montañas en el caso de las especies silvestres, o en los campos de cultivo si se trata de agaves cultivados." },
-        { imageUrl: "/multimedia/Cocción.jpg", titulo: "Cocción", desc: "Esta etapa es decisiva para el aprovechamiento del maguey, para transformar los polisacáridos (incomibles) y disminuir el pH (acidez) y por lo tanto, el cocimiento es definitorio de los sabores y aromas del mezcal." },
-        { imageUrl: "/multimedia/Molienda.jpg", titulo: "Molienda", desc: "La molienda del agave cocido es otra etapa necesaria para liberar los azúcares fermentables contenidos en las fibras del agave. También existen varios métodos para llevar a cabo la molienda o 'machucada" },
-        { imageUrl: "/multimedia/Fermentacion.jpg", titulo: "Fermentación", desc: "La fermentación consiste en la transformación de los azúcares de agave y ocurre en dos etapas: la reproducción de levaduras y su consumo de azúcares, transformándolos en alcohol" },
-        { imageUrl:"/multimedia/Destilacion.jpg" , titulo: "Destilación", desc: "La destilación consiste en separar, por vaporización, una mezcla líquida de sustancias mezclables y volátiles en componentes individuales o, en algunos casos, en grupos de compuestos. " },
-        { imageUrl: "/multimedia/alcohol.jpg", titulo: "Ajuste Alcohólico", desc: " utilizando el 'cuerpo' como componente principal del mezcal y utilizando pequeñas porciones de las 'puntas' y 'colas' para definir el producto final; esta es la etapa final en la elaboración del mezcal y se conoce como Ajuste Alcohólico." }
+        { imageUrl: "/multimedia/CorteJimado.jpg", titulo: "Corte y Jimado del Agave", desc: "Se elimina cuidadosamente la parte exterior de las hojas y las raíces del maguey, dejando expuesto el centro de la planta, conocido comúnmente como piña. Este proceso se lleva a cabo utilizando un machete y una herramienta llamada coa, que es un utensilio semicircular con un filo de metal afilado y un mango de madera para sujetarlo." },
+        { imageUrl: "/multimedia/Cocción.jpg", titulo: "Cocción", desc: "Este proceso durante la producción del mezcal implica la extracción de los azúcares del agave, los cuales se logran aumentando la temperatura de la planta. Esta elevación de temperatura se realiza típicamente utilizando hornos de forma cónica hechos de piedra y enterrados bajo tierra, los cuales se calientan con leña de gran tamaño. " },
+        { imageUrl: "/multimedia/Molienda.jpg", titulo: "Molienda", desc: "Después de cocer las piñas, se fragmentan en trozos más pequeños para triturarlas. Generalmente, se emplea una molienda circular de piedra o cemento, donde una piedra de alrededor de 500 kilos gira, siendo arrastrada por un animal de carga." },
+        { imageUrl: "/multimedia/Fermentacion.jpg", titulo: "Fermentación", desc: "Una vez que el agave ha sido molido, se coloca en contenedores para iniciar el proceso de fermentación, el cual puede durar varios días. Sin embargo, la fermentación comienza verdaderamente una vez que la cocción del agave ha finalizado" },
+        { imageUrl:"/multimedia/Destilacion.jpg" , titulo: "Destilación", desc:"La destilación se lleva a cabo utilizando un alambique y diversos equipos hechos de cobre, ollas de barro, carrizo o quiote.La mezcla se calienta en el alambique, se evapora y luego se condensa lentamente a través de un serpentín que deposita el líquido resultante en un recipiente."}  ,
+        { imageUrl: "/multimedia/alcohol.jpg", titulo: "Ajuste Alcohólico", desc: "Los mezcaleros ajustan el contenido de alcohol según lo establecido por la NOM, que especifica que debe oscilar entre el 36% y el 55%." }
       ];
     
       return (
-        <div className="  min-h-screen p-6 flex flex-wrap justify-center items-center">
+        <div id="historia-Mezcal">
+
+        
+        <div className="  min-h-screen p-6 flex flex-wrap justify-center items-center" >
             <div className={berkshire.className}>
-                <p className="text-7xl text-center text-delinead"> "El arte de hacer Mezcal"</p>
+                <p className="text-7xl text-left text-delinead"> " El arte </p>
+                <p className="text-7xl text-right ml-56 text-delinead" > de hacer Mezcal"</p>
+                <hr className=" border-b-4  border-[#F70073] my-4 ml-5 mr-14 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10 2xl:ml-10" />
                 
             </div>
           <div className="justify-center max-w-6xl flex flex-wrap mx-auto gap-5">
@@ -53,8 +59,10 @@ const ProcesoMezcal = () => {
           </div>
         </div>
        
-
+        </div>
       );
+    
+    
 };
 
 export default ProcesoMezcal

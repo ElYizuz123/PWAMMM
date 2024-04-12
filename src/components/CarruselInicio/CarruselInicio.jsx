@@ -14,7 +14,7 @@ const ruta = '/eventos/';
 
 
 
-const carruselInicio = () => {
+const CarruselInicio = () => {
   const [eventos, setEventos] = useState([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const carruselInicio = () => {
 
 
   return (
-    <div className="relative z-10 mt-16 mb-16 ">
+    <div className="relative z-10 p-8 mb-16  ">
       <Swiper
         modules={[Navigation, Pagination, EffectCoverflow, Autoplay]}
         navigation
@@ -69,4 +69,4 @@ const carruselInicio = () => {
 
 }
 
-export default carruselInicio;
+export default CarruselInicio;
