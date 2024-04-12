@@ -1,50 +1,59 @@
-import React from 'react'
+import React from "react";
 import Link from "next/link";
-import autoprefixer from 'autoprefixer';
+import autoprefixer from "autoprefixer";
+import Image from 'next/image'
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white ">
-    <div className="text-center flex   p-6 dark:border-neutral-500 lg:justify-center" style={{ backgroundImage: "url('/navbar/banner.jpg')" }}>
-      <div className="mr-12 hidden lg:block">
-
-        <span className="text-center text-2xl font-bold">Datos de contacto</span>
+    <footer className="bg-black text-white w-screen">
+      <div className="bg-black z-50 top-0 left-0 w-screen">
+        <img className="h-8 w-full" src="\navbar\banner.jpg" alt="Banner" />
       </div>
-    </div>
-    <div className="mx-6 py-10 text-center md:text-left">
-      <div className="text-center">
-       <Link href="https://maps.app.goo.gl/rqeTDQR3dqkG4C53A">
-        <h1>Aristeo Mercado No. 161, Local 4, Col. Del Empleado, Morelia, Mich.Plaza  </h1>
-       
-        <h1>Comercial “Takamba”</h1>
-        </Link>
-        <div className='flex  justify-end ml-8'>
-        <img className='mr-5' src="/multimedia/banderaUsa.svg" width={50} height={25}  />
-        <Link href="/">
-        <img src="/multimedia/banderasMexico.jpg" width={50} height={25}  />
-        </Link>
-        </div>
-        <div className="flex items-center justify-center">
-          <Link href="/contacto">
-            <img className="ml-5" src="/multimedia/gmail icon.png" width={50} height={50} />
-          </Link>
-          <Link href="https://www.facebook.com/mujeresmezcalerasdemichoacan">
-            <img className="ml-5" src="/multimedia/facebook icon.png" width={50} height={50} />
-          </Link>
-          <Link href="https://api.whatsapp.com/send?phone=4431386613">
-            <img className="ml-5" src="/multimedia/whatsapp icon.png" width={50} height={50} />
-          </Link>
+      <div className="max-w-7xl mx-auto px-4 py-10">
+        <div className="flex flex-wrap justify-between items-center">
+          <div className="mb-4 lg:mb-0">
+            <img src="/footer/fondoLetrasBlancas.png" className="h-16" />
+          </div>
 
+          <div className="flex flex-wrap justify-center items-center mb-4 sm:mb-0">
+            <Link className="text-center mx-3 hover:underline" href={"/"}>INICIO</Link>
+            <Link className="text-center mx-3 hover:underline" href={"/tienda"}>TIENDA</Link>
+            <Link className="text-center mx-3 hover:underline" href={"/nosotras"}>NOSOTRAS</Link>
+            <Link className="text-center mx-3 hover:underline" href={"/galeria"}>GALERIA</Link>
+            <Link className="text-center mx-3 hover:underline" href={"/contacto"}>CONTACTO</Link>
+          </div>
+
+          <div className="flex flex-wrap">
+            <div className="text-gray-500 flex space-x-4">
+              <img src="/footer/mexico.png" width={18} height={18} />
+              <div>|</div>
+              <img src="/footer/estados-unidos.png" width={18} height={18} />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap justify-center items-center border-t border-gray-700 pt-4 mt-4">
+          <span>
+            <div className="flex space-x-4 mb-4 lg:mb-0">
+              <Image alt="" src="/footer/gmail.png" width={24} height={24} />
+              <img src="/footer/facebook.png" width={24} height={24} />
+              <img src="/footer/whatsapp.png" width={24} height={24} />
+              <img src="/footer/instagram.png" width={24} height={24} />
+            </div>
+          </span>
+        </div>
+
+        <div className="text-center text-gray-500 text-xs border-t border-gray-700 pt-4 mt-4 font-bold">
+          ARISTEO MERCADO NO. 161, LOCAL 4, COL. DEL EMPLEADO, MORELIA, MICH,
+          PLAZA COMERCIAL "TAKAMBA"
+          <div className="mt-2">
+            © 2024 MUJERES MEZCALERAS DE MICHOACÁN A.C.
+          </div>
+          <div className="mt-2">DESARROLLADO POR 4JA</div>
         </div>
       </div>
-    </div>
-    <div className="bg-neutral-700 p-6 text-center dark:bg-neutral-700">
-      <span>© 2024 Copyright: </span>
-      
-      4JA Designers
-    </div>
-  </footer>
-  )
-}
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

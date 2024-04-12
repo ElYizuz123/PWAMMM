@@ -1,24 +1,28 @@
-import React, { useEffect, useState } from 'react'
+"use client"
+import React, { useContext, useEffect, useState } from 'react'
 import Link from "next/link"
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { contexto } from '../UpdateProvider'
 
 
 const Paginacion = ({ totalPages }) => {
+    
 
     const [paginas, setPaginas] = useState()
-    const [colorIndex, setColorIndex] = useState()
+    const {setPage, update, setUpdate} = useContext(contexto)
     const pathName = usePathname()
+    const router = useRouter()
+    const searchParams = useSearchParams()
 
-    const handleChange = () => {
-        
-        
-        buttonMap[pathName] = 'bg-[#F70073]';
+    const handleChange = (page) => {    
+        router.push('?pages='+page)
+        setPage(page)
+        const up= !update
+        setUpdate(up)
     }
 
+
         
-    useEffect(() =>{
-       
-    }, [colorIndex])
 
     
         
@@ -49,7 +53,7 @@ const Paginacion = ({ totalPages }) => {
             <button className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
                 Anterior
             </button>
-            {paginas && paginas.map((pagina, index) =>(<button key={pagina} className="px-3 py-1 rounded-md bg-slate-200 hover:bg-gray-300">
+            {paginas && paginas.map((pagina, index) =>(<button key={pagina} onClick={() => handleChange(pagina)} className="px-3 py-1 rounded-md bg-slate-200 hover:bg-gray-300">
                 {pagina}
                 
             </button>))}

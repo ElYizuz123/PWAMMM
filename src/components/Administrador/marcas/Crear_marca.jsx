@@ -54,8 +54,8 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                 <div className='h-full w-full flex justify-between ml-5 mr-5'>
                     <div className='flex flex-col items-start gap-y-6 mt-4 mr-4'>
                         <p id='label_nombre' className='text-xl'>Nombre</p>
-                        <p className='text-xl'>Tipo</p>
-                        <p className='text-xl'>Asociada</p>
+                        <p className='text-xl pt-2'>Tipo</p>
+                        <p className='text-xl pt-5'>Asociada</p>
                     </div>
                     <div>
                         <div className='h-full flex flex-col items-start mt-5 mr-2'>
@@ -64,11 +64,11 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                                     type='text'
                                     name='nombre'
                                     id='campo_nombre'
-                                    maxLength={45}
+                                    maxLength={30}
                                     required={true}
                                     {...register('nombre', {
                                         required: true,
-                                        maxLength: 45
+                                        maxLength: 30
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                     placeholder='Nombre de la marca'
@@ -79,7 +79,7 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                                     {...register('tipo', {
                                         required: true
                                     })}
-                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-5'
+                                    className='w-full border-2 border-black rounded-lg pl-1 mt-5'
                                 >
                                     <option></option>
                                     <option value={0}>Mezcal</option>
@@ -92,7 +92,7 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                                     {...register('asociada', {
                                         required: true
                                     })}
-                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
+                                    className='w-full border-2 border-black rounded-lg pl-1 mt-6'
                                 >
                                     <option></option>
                                     {asociadas && asociadas.map((asociada) => (<option value={asociada.id_asociada} key={asociada.id_asociada}>

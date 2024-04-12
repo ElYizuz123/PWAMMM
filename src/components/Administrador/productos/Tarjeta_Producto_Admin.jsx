@@ -86,13 +86,13 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
             </button>
             <figure className='flex justify-center'>
                 <img
-                    className="w-48 h-72"
+                    className="w-48 max-h-72"
                     id='foto_botella'
                     src={"\\productos\\" + foto}
-                    alt="t-shirt"
+                    alt="botella"
                 />
             </figure>
-            <div className='w-full flex justify-center'>
+            <div className='absolute bottom-5 w-full flex justify-center'>
                 <div className="min-details text-center">
                     <h1 className="text-xl font-semibold">
                         {nombre} {ml} ml <span className="text-">({marca})</span>

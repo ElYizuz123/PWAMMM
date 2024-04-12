@@ -112,7 +112,7 @@ const Categorias = () => {
 
     return (
         <div>
-            <div className={`absolute top-[15%] left-[40%] z-10 w-6/12 h-[1200px] ${uFotoIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[1200px] ${uFotoIsOpen ? "" : "pointer-events-none"}`}>
                 {uFotoIsOpen && <Editar_foto
                     isOpen={uFotoIsOpen}
                     onClose={onClose}
@@ -120,7 +120,7 @@ const Categorias = () => {
                     categorias={onlyCategorias}
                 />}
             </div>
-            <div className={`absolute top-[10%] left-[25%] z-10 w-6/12 h-[1200px] ${uCategoriaIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-3/4 left-1/2 transform -translate-x-1/4 -translate-y-1/3 z-10 w-6/12 h-[1200px] ${uCategoriaIsOpen ? "" : "pointer-events-none"}`}>
                 {uCategoriaIsOpen && <Editar_categoria
                     isOpen={uCategoriaIsOpen}
                     onClose={onCloseCategorias}
@@ -131,7 +131,7 @@ const Categorias = () => {
                 <div key={categoria.id_categoria} className='flex justify-center'>
                     <div className='w-[1050px]'>
                         <div className='flex justify-start'>
-                            <p className='text-left font-bold text-2xl mb-4' >{categoria.categoria}</p>
+                            <p className='text-left font-bold text-2xl mb-4 ml-12' >{categoria.categoria}</p>
                             <button onClick={() => handleEditCategoria(categoria.id_categoria)} className="ml-1 pl-1 text-pink-600 rounded eye-icon w-12 h-12">
                                 <Image src="/emoticons/editar.png" alt="Icono" width="50" height="50" className='w-8 h-8' />
                             </button>

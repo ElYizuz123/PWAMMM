@@ -74,7 +74,7 @@ const ContactoForm = () => {
       <div className="bg-[#F3E8E8] lg:w-8/12 md:w-9/12 w-10/12 lg:h-[780px] md:h-[630px] sm:h-[560px] rounded-3xl shadow-2xl">
         <div className="bg-[#D60064] w-full h-40 rounded-t-3xl flex justify-center items-center shadow-2xl">
 
-          <p className="font-semibold text-white text-center lg:text-5xl md:text-4xl sm:text-3xl text-2xl">
+          <p className="m-2 font-semibold text-white text-center lg:text-5xl md:text-4xl sm:text-3xl text-2xl">
             Nuestro equipo se pondrá en contacto contigo
           </p>
         </div>

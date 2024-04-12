@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { contexto } from '../UpdateProvider'
 import Tarjeta_Asociadas from './Tarjeta_Asociadas'
 import Update_Asociada from './Update_Asociada'
+import Paginacion from '../productos/Paginacion'
 
 const LeerAsociadas = () => {
     const { update } = useContext(contexto)
@@ -27,7 +28,7 @@ const LeerAsociadas = () => {
 
     useEffect(() => {
         if (uAsociadasIsOpen) {
-            window.scrollTo({ top: 230, behavior: 'smooth' });
+            window.scrollTo({ top: 400, behavior: 'smooth' });
         }
     }, [uAsociadasIsOpen]);
 
@@ -37,7 +38,7 @@ const LeerAsociadas = () => {
 
     return (
         <div>
-            <div className={`absolute top-[10%] left-[25%] z-10 w-6/12 h-3/6 ${uAsociadasIsOpen ? "" : "pointer-events-none"}`}>
+            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uAsociadasIsOpen ? "" : "pointer-events-none"}`}>
                 {uAsociadasIsOpen && <Update_Asociada
                     isOpen={uAsociadasIsOpen}
                     onClose={onClose}

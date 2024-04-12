@@ -18,74 +18,82 @@ const berkshire = Berkshire_Swash({
 
 const LayoutPrincipal = ({ children }) => {
   return (
+    <div>
       <div>
-        <div>
-          <nav className="bg-black w-full z-20 top-0 start-0 fixed">
-            <div className="container">
-              <img className="h-8 w-full" src="\navbar\banner.jpg" />
-            </div>
-            <nav className="bg-[#F5F5F5] border-[#1E1E1E] border-opacity-50 dark:border-gray-600 font-bold shadow-md">
-              <div className="container mx-auto flex">
-                <div>{logo}</div>
-                <div className="text-black absolute w-full flex lg:hidden py-8 px-4 justify-center">
-                  <div className={berkshire.className}>
-                    <p1 className="text-xl">Mujeres Mezcaleras <br></br> De Michoacán</p1>
-                  </div>
-                </div>
-
-                <div className="absolute right-0 flex lg:hidden">
-                  {IconoMenu}
-                </div>
-                <div className="text-black lg:flex hidden flex-grow justify-between py-8 text-center">
-                  <div className={berkshire.className}>
-                    <p1 className="text-2xl">
-                      Mujeres Mezcaleras <br></br> De Michoacán
-                    </p1>
-                  </div>
-                  <div className="flex">
-                    <a href="\" className="lg:mr-16 hover:text-[#F70073]">
-                      {IconoInicio}
-                      INICIO
-                    </a>
-                    <Link
-                      href="\tienda"
-                      className="lg:mr-16 hover:text-[#F70073]"
-                    >
-                      {IconoTienda}
-                      TIENDA
-                    </Link>
-                    <Link
-                      href="\nosotras"
-                      className="lg:mr-16 hover:text-[#F70073]"
-                    >
-                      {IconoNosotras}
-                      NOSOTRAS
-                    </Link>
-                    <Link
-                      href="\galeria"
-                      className="lg:mr-16 hover:text-[#F70073]"
-                    >
-                      {IconoGaleria}
-                      GALERIA
-                    </Link>
-                    <Link
-                      href="\contacto"
-                      className="lg:pr-16 hover:text-[#F70073]"
-                    >
-                      {IconoContacto}
-                      CONTACTO
-                    </Link>
-                  </div>
+        <nav className="bg-black w-full z-20 top-0 start-0 fixed">
+          <div className="">
+            <img className="h-8 w-full" src="\navbar\banner.jpg" />
+          </div>
+          <nav className="bg-[#F5F5F5] border-[#1E1E1E] border-opacity-50 dark:border-gray-600 font-bold shadow-md">
+            <div className="container mx-auto flex">
+              <div>{logo}</div>
+              <div className="text-black absolute w-full flex lg:hidden py-8 px-4 justify-center">
+                <div className={berkshire.className}>
+                  <p1 className="text-xl">Mujeres Mezcaleras <br></br> De Michoacán</p1>
                 </div>
               </div>
-            </nav>
-          </nav>
-        </div>
-        <Carrito />
-        <div>{children}</div>
 
+              <div className="absolute right-0 flex lg:hidden">
+                {IconoMenu}
+              </div>
+              <div className="text-black lg:flex hidden flex-grow justify-between py-8 text-center">
+                <div className={berkshire.className}>
+                  <p1 className="text-2xl">
+                    Mujeres Mezcaleras <br></br> De Michoacán
+                  </p1>
+                </div>
+                <div className="flex">
+                  <Link
+                    href="\"
+                    className="lg:mr-16 hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoInicio}
+                    </div>
+                    INICIO
+                  </Link>
+                  <Link
+                    href="\tienda"
+                    className="lg:mr-16 hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoTienda}
+                    </div>
+                    TIENDA
+                  </Link>
+                  <Link
+                    href="\nosotras"
+                    className="lg:mr-16 hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoNosotras}
+                    </div>
+                    NOSOTRAS
+                  </Link>
+                  <Link
+                    href="\galeria"
+                    className="lg:mr-16 hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoGaleria}
+                    </div>
+                    GALERIA
+                  </Link>
+                  <Link
+                    href="\contacto"
+                    className="hover:text-[#F70073]">
+                    <div className="mx-auto size-12">
+                      {IconoContacto}
+                    </div>
+                    CONTACTO
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </nav>
       </div>
-      
+      <Carrito />
+      <div>{children}</div>
+      <Footer/>
+    </div>
+
   );
 };
 

@@ -71,7 +71,7 @@ const Editar_categoria = ({isOpen, onClose, idCategoria}) => {
     if (!isOpen) return null
     return (
         <div className='h-full'>
-                <div className='w-[40%] h-1/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+                <div className='w-[40%] h-1/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[300px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                         <p className='font-bold pl-5'>Producto</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
@@ -88,11 +88,11 @@ const Editar_categoria = ({isOpen, onClose, idCategoria}) => {
                                         name='categoria'
                                         id='categoria'
                                         required={true}
-                                        maxLength={45}
+                                        maxLength={20}
                                         defaultValue={categoria ? categoria[0].categoria:""}
                                         {...register('categoria', {
                                             required: true,
-                                            maxLength: 45,
+                                            maxLength: 20,
                                         })}
                                         className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                         placeholder='Nombre de categoría'
