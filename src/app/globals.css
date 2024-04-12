@@ -102,6 +102,7 @@ h1 {
      1px  1px 0 #ffffff; 
 }
 
+
 .details > .min-details,
 .details > .options,
 .details > .options > .options-colors {
@@ -207,11 +208,7 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 
 }
 
-.foto-asociada {
-  @apply bg-white w-11/12 h-64 mt-4 rounded-t-3xl rounded-b-none grid place-content-center rounded-lg text-black
-  border-2 border-black object-cover shadow-white/35 shadow-md
-  
-  }
+
 
 .card-logo:hover {
 
@@ -352,6 +349,97 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   border-style: solid;
   border-color: transparent transparent #333 transparent;
 }
+
+
+
+/*Prueba*/
+.cardd {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  color: #2e2d31;
+  background: #131313;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.temporary_text {
+  font-weight: bold;
+  font-size: 24px;
+  padding: 6px 12px;
+  color: #f8f8f8;
+}
+
+.cardd_title {
+  font-weight: bold;
+}
+
+.cardd_content {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    /* edit the width to fit card */
+  width: 100%;
+  padding: 20px;
+  background: #f2f2f2;
+  border-top-left-radius: 20px;
+    /* edit here to change the height of the content box */
+  transform: translateY(150px);
+  transition: transform .25s;
+}
+
+.cardd_content::before {
+  content: '';
+  position: absolute;
+  top: -47px;
+  right: -45px;
+  width: 100px;
+  height: 100px;
+  transform: rotate(-175deg);
+  border-radius: 50%;
+  box-shadow: inset 48px 48px #f2f2f2;
+}
+
+.cardd_title {
+  color: #F70073;
+  line-height: 15px;
+}
+
+.cardd_subtitle {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.cardd_description {
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.cardd:hover .cardd_content {
+  transform: translateY(0);
+}
+
+.cardd:hover .cardd_description {
+  opacity: 1;
+  transition-delay: .25s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
