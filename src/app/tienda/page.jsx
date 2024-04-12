@@ -17,23 +17,22 @@ const Page = () => {
   return (
     <LayoutPrincipal>
       <div className={k2d.className}>
-        <div className=" my-44">
+        <div className=" mt-44">
           <div className="relative  min-h-screen  ">
-            <div className="absolute w-full z-0">
+            <div className="absolute bottom-0 h-full w-full z-0">
               <Image
                 src="/backgroundImage.jpg"
                 alt="Imagen de fondo"
                 width={1000}
                 height={1000}
-                objectFit="cover"
-                className="w-full opacity-60 z-0"
+                className="w-full opacity-50"
               />
             </div>
 
-            <Categoria selec= {0} />
+            <Categoria selec={0} />
 
             {/* SECCION */}
-            <div className="relative z-10">
+            <div className="relative z-10 pb-3 pr-28">
               <div className="flex items-center justify-end space-x-1 mr-24">
                 <button className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
                   Anterior

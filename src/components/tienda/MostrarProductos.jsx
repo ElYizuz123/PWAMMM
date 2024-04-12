@@ -43,7 +43,7 @@ function MostrarProductos({ idMarca }) {
 
   const filteredAcompanamientos = useMemo(() => {
     return acompanamientos
-
+      
       .filter((acompanamiento) =>
         searchTerm
           ? acompanamiento.nombre
@@ -95,7 +95,7 @@ function MostrarProductos({ idMarca }) {
 
       {/* Componente que maneje su estado propio */}
       <div>
-        <div className="flex flex-wrap gap-8 justify-start px-24">
+        <div className="flex flex-wrap gap-8 justify-start px-24 pb-8">
           {filteredProducts.map(
             (
               producto // Cambia productos a filteredProducts

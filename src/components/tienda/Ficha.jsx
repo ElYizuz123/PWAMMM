@@ -11,6 +11,7 @@ const k2d = K2D({
 });
 
 const Ficha = ({
+  id_producto,
   tipo,
   nombre,
   marca,
@@ -42,12 +43,57 @@ const Ficha = ({
 
         <div className=" pt-5 items-center relative h-screen">
           <div className=" flex justify-center items-center">
-            <div className=" relative text-black py-44  z-10 flex items-start  w-[1250px]">
-              <Link href="/">
-                <img src="/flecha.png" className="ml-2" />
-              </Link>
-              <Link className="ml-3 hover:text-[#F70073]" href="/tienda">
-                Volver a tienda
+            <div className=" relative  py-44  z-10 flex items-start  w-[1250px]">
+              <Link href="/tienda">
+                <button class="enter-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 27"
+                    class="arrow"
+                  >
+                    <line
+                      stroke-width="2"
+                      stroke="white"
+                      y2="14"
+                      x2="40"
+                      y1="14"
+                      x1="1"
+                    ></line>
+                    <line
+                      stroke-width="2"
+                      stroke="white"
+                      y2="1.41537"
+                      x2="10.4324"
+                      y1="14.2433"
+                      x1="1.18869"
+                    ></line>
+                    <line
+                      stroke-width="2"
+                      stroke="white"
+                      y2="13.6007"
+                      x2="1.20055"
+                      y1="26.2411"
+                      x1="10.699"
+                    ></line>
+                    <line
+                      stroke="white"
+                      y2="14.3133"
+                      x2="1.07325"
+                      y1="13.6334"
+                      x1="0.33996"
+                    ></line>
+                    <line
+                      stroke-width="2"
+                      stroke="white"
+                      y2="13"
+                      x2="39"
+                      y1="8"
+                      x1="39"
+                    ></line>
+                  </svg>
+                  <p className="font-semibold ">REGRESAR</p> 
+                </button>
               </Link>
             </div>
           </div>
@@ -114,20 +160,23 @@ const Ficha = ({
 
                     {/*botones*/}
                     <div className=" justify-center items-center mt-5">
-                      <div className=" relative flex items-center ">
-                        <Link
-                          href={"/tienda/carrito"}
-                          className="bg-[#F70073] text-white hover:shadow-lg hover:-translate-y-0.5 font-bold object-cover py-3 px-20 rounded-full mt-4 flex items-center"
-                        >
-                          Agregar al carrito
-                        </Link>
+                    {cantidad !== 0 ? ( <div className=" relative flex items-center ">
                         <div>
-                          <Contador cantidad2={cantidad}></Contador>
+                          <Contador
+                            cantidad2={cantidad}
+                            id_producto={id_producto}
+                            imagen={imagen}
+                            nombre={nombre}
+                            marca={marca}
+                            precio={precio}
+                            ml={ml}
+                          ></Contador>
                         </div>
-                      </div>
+                      </div> ) : ( <div className="w-[500px] mt-2 bg-red-600 text-white font-semibold flex justify-center items-center">SIN EXISTENCIA</div> )}
+                      
                       <div className="relative mt-3">
                         {mercadoLibre !== "NULL" && (
-                          <button className="bg-[#ffe500] hover:shadow-lg hover:-translate-y-0.5 text-black font-bold py-2 px-40 rounded-full  flex items-center ">
+                          <button className="bg-[#ffe500] hover:shadow-lg hover:-translate-y-0.5 text-black font-bold py-2 px-40 rounded   flex items-center ">
                             <a
                               href={mercadoLibre}
                               target="_blank"
@@ -150,7 +199,7 @@ const Ficha = ({
             ) : (
               <div>
                 {/*tarjeta*/}
-                <div className=" relative  bg-white w-[1200px] h-auto rounded-lg shadow-2xl  top-11">
+                <div className=" relative  bg-white w-[1250px] h-auto rounded-lg shadow-2xl  top-11">
                   {/*imagen botellas*/}
                   <div className="px-32 py-4">
                     <img
@@ -194,16 +243,16 @@ const Ficha = ({
 
                     {/*botones*/}
                     <div className=" justify-center items-center mt-10">
-                      <div className=" relative flex items-center ">
-                        <Link
-                          href={"/tienda/carrito"}
-                          className="bg-[#F70073] text-white hover:shadow-lg hover:-translate-y-0.5 font-bold object-cover py-3 px-14 rounded-full mt-4 flex items-center"
-                        >
-                          Agregar al carrito
-                        </Link>
-                        <div className="">
-                          <Contador cantidad2={cantidad}></Contador>
-                        </div>
+                      <div>
+                        <Contador
+                          cantidad2={cantidad}
+                          id_producto={id_producto}
+                          imagen={imagen}
+                          nombre={nombre}
+                          marca={marca}
+                          precio={precio}
+                          ml={ml}
+                        ></Contador>
                       </div>
                     </div>
                   </div>
@@ -225,7 +274,7 @@ const Ficha = ({
         <div>
           {/*productos relacionados*/}
           <div className="   w-full flex justify-center items-center mt-40">
-            <p className="text-[#dd6c5a] text-3xl font-bold z-50 bg-white px-9 rounded-lg ">
+            <p className="text-[#dd6c5a] text-3xl font-bold  bg-white px-9 rounded-lg ">
               PRODUCTOS RELACIONADOS
             </p>
           </div>

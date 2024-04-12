@@ -34,6 +34,7 @@ function FormaPago() {
 
   return (
     <div className={k2d.className}>
+      
       <div className=" w-[500px] h-auto  p-6   py-4 ">
         <p className="font-bold text-[#F70073] text-2xl">FORMA DE PAGO</p>
         <div className=" flex ml-4 mt-10">
