@@ -17,6 +17,7 @@ const MostrarItemsCarrito = () => {
           ml={producto.ml}
           imagen={producto.imagen}
           cantidad={producto.cantidad}
+          subtotal = {producto.precio * producto.cantidad}
         />
       ))}
     </div>

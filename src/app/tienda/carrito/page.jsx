@@ -16,7 +16,7 @@ const k2d = K2D({
 });
 
 const Page = () => {
-  const { productos } = useContext(ProductContext);
+  const { productos, total } = useContext(ProductContext);
 
   return (
     <LayoutPrincipal>
@@ -29,6 +29,62 @@ const Page = () => {
               quality={100}
               alt="Fondo"
             />
+          </div>
+
+          <div className="  flex justify-center items-center ">
+            <div className="absolute  w-[1250px]  ">
+              <Link href="/tienda">
+                <button class="enter-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 40 27"
+                    class="arrow"
+                  >
+                    <line
+                      stroke-width="2"
+                      stroke="white"
+                      y2="14"
+                      x2="40"
+                      y1="14"
+                      x1="1"
+                    ></line>
+                    <line
+                      stroke-width="2"
+                      stroke="white"
+                      y2="1.41537"
+                      x2="10.4324"
+                      y1="14.2433"
+                      x1="1.18869"
+                    ></line>
+                    <line
+                      stroke-width="2"
+                      stroke="white"
+                      y2="13.6007"
+                      x2="1.20055"
+                      y1="26.2411"
+                      x1="10.699"
+                    ></line>
+                    <line
+                      stroke="white"
+                      y2="14.3133"
+                      x2="1.07325"
+                      y1="13.6334"
+                      x1="0.33996"
+                    ></line>
+                    <line
+                      stroke-width="2"
+                      stroke="white"
+                      y2="13"
+                      x2="39"
+                      y1="8"
+                      x1="39"
+                    ></line>
+                  </svg>
+                  <p className="font-semibold ">REGRESAR</p>
+                </button>
+              </Link>
+            </div>
           </div>
 
           <div className="relative w-full py-48 ">
@@ -44,7 +100,7 @@ const Page = () => {
                       quality={100}
                       alt="Fondo"
                     ></Image>
-                    <h1 className="ml-4 text-2xl font-bold text-gray-700">
+                    <h1 className="ml-4 text-3xl font-bold text-gray-700">
                       BOLSA DE COMPRAS
                     </h1>
                     <hr className="my-2" />
@@ -64,35 +120,33 @@ const Page = () => {
                   {/* Product row */}
                   <MostrarItemsCarrito />
                 </div>
+                <div className="flex flex-col md:w-1/3 mt-[150px]">
+                  <div class="w-full bg-white shadow-md rounded p-4 ">
+                    {/* <div class="flex flex-col mt-4"> */}
+                    <div class="flex">
+                      <p class="font-semibold ml-4 text-2xl">Total :</p>
 
-                <div class="w-full md:w-1/3 bg-white shadow-md rounded p-4 mt-[59px]">
-                  <div className="mb-6">
-                    <h2 className="text-2xl font-bold text-gray-800">
-                      Acompáñalo con...
-                    </h2>
-                    {/* Product list */}
-                    <AcompañamientoCarrito />
-                  </div>
-                  <div class="flex flex-col mt-4">
-                    <div class="flex justify-between mt-2">
-                      <p class="font-semibold text-lg ">Total</p>
-                      <p class="font-semibold text-lg  border-b-2 border-red-500">
-                        {productos.reduce(
-                          (subTotal, producto) =>  subTotal + producto.total,
-                          0
-                        )}
-                        PINCHE VIDA
-                        
+                      <p className=" ml-[165px] font-semibold text-lg  border-b-2 border-red-500">
+                        ${total}
                       </p>
                     </div>
-                    
-                      <Link
-                        href={"/tienda/finalizar_compra"}
-                        className="flex justify-center mt-4 py-2 px-4 bg-green-500 font-bold text-white rounded  hover:bg-gray-800"
-                      >
-                        Finalizar compra
-                      </Link>
-                    
+
+                    <Link
+                      className=" flex w-72 mx-5 justify-center mt-4 py-2 bg-green-500  text-white rounded  hover:shadow-lg hover:-translate-y-0.5 font-bold  "
+                      href={"/tienda/finalizar_compra"}
+                    >
+                      Finalizar compra
+                    </Link>
+                    {/* </div> */}
+                  </div>
+                  <div class="w-full  bg-white shadow-md rounded p-4 mt-[15px] ">
+                    <div className="mb-6">
+                      <h2 className="text-2xl font-bold text-gray-800">
+                        Acompáñalo con...
+                      </h2>
+                      {/* Product list */}
+                      <AcompañamientoCarrito />
+                    </div>
                   </div>
                 </div>
               </div>

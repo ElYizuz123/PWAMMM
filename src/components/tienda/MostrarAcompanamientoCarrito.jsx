@@ -37,16 +37,20 @@ const MostrarAcompanamientoCarrito = ({
           alt="Queso"
         />
         <div className="flex-grow px-6">
-          <h3 className="font-medium">{nombre} {ml}gr</h3>
+          <h3 className="font-medium">
+            {nombre} {ml}gr
+          </h3>
           <p className="text-sm text-gray-500">${precio}</p>
         </div>
-        <button className="text-pink-500 hover:text-pink-600" onClick={handleAddToCart}>
+        <button
+          className="text-pink-500 hover:scale-110 transition transform duration-300 ease-in-out"
+          onClick={handleAddToCart}
+        >
           <img
             className="h-6 w-6 rounded"
             src="/emoticons/carrito3.png"
             alt="Queso"
           />
-          <span className="sr-only ">Agregar al carrito</span>
         </button>
       </div>
     </div>

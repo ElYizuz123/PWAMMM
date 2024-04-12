@@ -8,7 +8,7 @@ const finalizar_compra = () => {
     <LayoutPrincipal>
       <div className="w-full relative ">
         {/* imagen fondo */}
-        <div className=" h-full w-full z-0 opacity-60 ">
+        <div className=" h-full w-full z-0 opacity-45 ">
           <Image
             src="/backgroundImage.jpg"
             layout="fill"

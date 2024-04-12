@@ -33,7 +33,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
   }, []);
 
   return (
-    <div>
+    <div className="pb-16">
       <div>
         {tipo == 1 ? (
           <div>

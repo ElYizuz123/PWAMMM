@@ -8,21 +8,19 @@ const abrir_producto = ({ params }) => {
   return (
     <LayoutPrincipal>
       <div className=" relative  flex justify-center ">
-        <div className="absolute bottom-0 w-full">
+        <div className="absolute w-full h-full bottom-0  top-40 z-0">
           <Image
-            src="/backgroundImage.jpg"
+            src="/backgroundImage - copia.jpg"
             alt="Imagen de fondo"
             width={1000}
             height={1000}
-            objectFit="cover"
-            className="w-full opacity-60"
+            className="w-full h-[1530px]  opacity-50"
           />
         </div>
         <div>
           <MostrarProductosFicha
             tipo={params.tipo}
             idProducto={params.idProducto}
-              
           ></MostrarProductosFicha>
         </div>
       </div>

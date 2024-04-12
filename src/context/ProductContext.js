@@ -71,21 +71,33 @@ export const ProductProvider = ({ children }) => {
     if (tipo == 1) {
       newProducts[existe] = {
         ...newProducts[existe],
-        cantidad: (newProducts[existe].cantidad || 1) + 1,
+        cantidad: (newProducts[existe].cantidad || 0) + 1,
       };
     } else {
+      const newQuantity = (newProducts[existe].cantidad || 1) - 1;
       newProducts[existe] = {
         ...newProducts[existe],
-        cantidad: (newProducts[existe].cantidad || 1) - 1,
+        cantidad: newQuantity >= 1 ? newQuantity : 1,
       };
     }
     setProductos(newProducts);
     localStorage.setItem("productos", JSON.stringify(newProducts));
   };
 
+  const total = productos.reduce(
+    (sub, producto) => sub + producto.precio * producto.cantidad,
+    0
+  );
+
   return (
     <ProductContext.Provider
-      value={{ productos, addProductos, deleteProduct, updateQuantity }}
+      value={{
+        productos,
+        addProductos,
+        deleteProduct,
+        updateQuantity,
+        total,
+      }}
     >
       <div>{children}</div>
     </ProductContext.Provider>

@@ -21,7 +21,7 @@ const LayoutPrincipal = ({ children }) => {
       <div>
         <div>
           <nav className="bg-black w-full z-20 top-0 start-0 fixed">
-            <div className="container">
+            <div>
               <img className="h-8 w-full" src="\navbar\banner.jpg" />
             </div>
             <nav className="bg-[#F5F5F5] border-[#1E1E1E] border-opacity-50 dark:border-gray-600 font-bold shadow-md">

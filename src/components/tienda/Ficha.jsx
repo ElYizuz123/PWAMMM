@@ -43,7 +43,7 @@ const Ficha = ({
 
         <div className=" pt-5 items-center relative h-screen">
           <div className=" flex justify-center items-center">
-            <div className=" relative text-black py-44  z-10 flex items-start  w-[1250px]">
+            <div className=" relative  py-44  z-10 flex items-start  w-[1250px]">
               <Link href="/tienda">
                 <button class="enter-button">
                   <svg
@@ -92,7 +92,7 @@ const Ficha = ({
                       x1="39"
                     ></line>
                   </svg>
-                  ENTER
+                  <p className="font-semibold ">REGRESAR</p> 
                 </button>
               </Link>
             </div>
@@ -160,7 +160,7 @@ const Ficha = ({
 
                     {/*botones*/}
                     <div className=" justify-center items-center mt-5">
-                      <div className=" relative flex items-center ">
+                    {cantidad !== 0 ? ( <div className=" relative flex items-center ">
                         <div>
                           <Contador
                             cantidad2={cantidad}
@@ -172,10 +172,11 @@ const Ficha = ({
                             ml={ml}
                           ></Contador>
                         </div>
-                      </div>
+                      </div> ) : ( <div className="w-[500px] mt-2 bg-red-600 text-white font-semibold flex justify-center items-center">SIN EXISTENCIA</div> )}
+                      
                       <div className="relative mt-3">
                         {mercadoLibre !== "NULL" && (
-                          <button className="bg-[#ffe500] hover:shadow-lg hover:-translate-y-0.5 text-black font-bold py-2 px-40 rounded-full  flex items-center ">
+                          <button className="bg-[#ffe500] hover:shadow-lg hover:-translate-y-0.5 text-black font-bold py-2 px-40 rounded   flex items-center ">
                             <a
                               href={mercadoLibre}
                               target="_blank"
