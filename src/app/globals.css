@@ -12,6 +12,7 @@ h1 {
   height: 460px;
   width: 350px;
   background-color: #fff;
+  z-index: 0;
 }
 
 .slider-container-admin {
@@ -78,6 +79,7 @@ h1 {
   bottom: 0;
   right: 0;
   left: 0;
+  z-index: 0;
   transition: box-shadow 0.3s ease-in-out, top 0.3s ease-in-out;
 }
 
@@ -99,6 +101,7 @@ h1 {
     -1px  1px 0 #ffffff,
      1px  1px 0 #ffffff; 
 }
+
 
 .details > .min-details,
 .details > .options,
@@ -205,11 +208,7 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 
 }
 
-.foto-asociada {
-  @apply bg-white w-11/12 h-64 mt-4 rounded-t-3xl rounded-b-none grid place-content-center rounded-lg text-black
-  border-2 border-black object-cover shadow-white/35 shadow-md
-  
-  }
+
 
 .card-logo:hover {
 
@@ -229,5 +228,218 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   object-fit: cover; 
   
 }
+
+.enter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  gap: 25px;
+  font-size: 0.7em;
+  letter-spacing: 2px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  background: #C1D128;
+  position: relative;
+  border-radius: 8px;
+  transition-duration: 0.3s;
+}
+
+.arrow {
+  height: 20px;
+}
+.enter-button:hover {
+  transition-duration: 0.3s;
+  box-shadow: 0px 0px 2px rgb(185, 185, 185), 0px 0px 10px rgb(97, 97, 97);
+}
+.enter-button:active {
+  transform: scale(0.95);
+}
+
+.bin-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  background-color: rgb(255, 0, 0);
+  cursor: pointer;
+  border: 2px solid rgb(255, 201, 201);
+  transition-duration: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.bin-bottom {
+  width: 15px;
+  z-index: 2;
+}
+.bin-top {
+  width: 17px;
+  transform-origin: right;
+  transition-duration: 0.3s;
+  z-index: 2;
+}
+.bin-button:hover .bin-top {
+  transform: rotate(45deg);
+}
+.bin-button:hover {
+  background-color: rgb(255, 95, 95);
+}
+.bin-button:active {
+  transform: scale(0.9);
+}
+.garbage {
+  position: absolute;
+  width: 14px;
+  height: auto;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+}
+.bin-button:hover .garbage {
+  animation: throw 0.4s linear;
+}
+@keyframes throw {
+  from {
+    transform: translate(-400%, -700%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+}
+
+.tooltip {
+  cursor: pointer;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltiptext {
+  visibility:hidden;
+  width: 20px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  z-index: 10;
+  top: 125%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  z-index: 10;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+}
+
+
+
+/*Prueba*/
+.cardd {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  color: #2e2d31;
+  background: #131313;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.temporary_text {
+  font-weight: bold;
+  font-size: 24px;
+  padding: 6px 12px;
+  color: #f8f8f8;
+}
+
+.cardd_title {
+  font-weight: bold;
+}
+
+.cardd_content {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    /* edit the width to fit card */
+  width: 100%;
+  padding: 20px;
+  background: #f2f2f2;
+  border-top-left-radius: 20px;
+    /* edit here to change the height of the content box */
+  transform: translateY(150px);
+  transition: transform .25s;
+}
+
+.cardd_content::before {
+  content: '';
+  position: absolute;
+  top: -47px;
+  right: -45px;
+  width: 100px;
+  height: 100px;
+  transform: rotate(-175deg);
+  border-radius: 50%;
+  box-shadow: inset 48px 48px #f2f2f2;
+}
+
+.cardd_title {
+  color: #F70073;
+  line-height: 15px;
+}
+
+.cardd_subtitle {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.cardd_description {
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.cardd:hover .cardd_content {
+  transform: translateY(0);
+}
+
+.cardd:hover .cardd_description {
+  opacity: 1;
+  transition-delay: .25s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
