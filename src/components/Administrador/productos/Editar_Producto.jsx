@@ -232,11 +232,11 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     name='nombre'
                                     defaultValue={producto ? producto[0].nombre : ""}
                                     required={true}
-                                    maxLength={45}
+                                    maxLength={30}
                                     id='campo_nombre'
                                     {...register('nombre', {
                                         required: true,
-                                        maxLength: 45
+                                        maxLength: 30
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                     placeholder='Nombre del mezcal'
@@ -246,7 +246,8 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     name='ml'
                                     defaultValue={producto ? producto[0].ml : ""}
                                     required={true}
-                                    maxLength={10}
+                                    max={5000}
+                                    min={0}
                                     {...register('ml', {
                                         required: true,
                                         maxLength: 10
@@ -258,7 +259,8 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     type='number'
                                     name='precio'
                                     required={true}
-                                    maxLength={10}
+                                    max={5000}
+                                    min={0}
                                     defaultValue={producto ? producto[0].precio : ""}
                                     {...register('precio', {
                                         required: true,
@@ -291,7 +293,8 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     name='cantidad'
                                     placeholder='Cantidad de producto'
                                     required={true}
-                                    maxLength={10}
+                                    max={5000}
+                                    min={0}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     defaultValue={producto ? producto[0].cantidad : ""}
                                     {...register('cantidad', {
@@ -312,11 +315,11 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 <input
                                     type='text'
                                     name='tipo_agave'
-                                    maxLength={255}
+                                    maxLength={20}
                                     required={true}
                                     defaultValue={producto ? producto[0].tipo_agave : ""}
                                     {...register('tipo_agave', {
-                                        maxLength: 255
+                                        maxLength: 20
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-14'
                                     placeholder='Tipo de agave'
@@ -324,7 +327,8 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 <input 
                                     type='number'
                                     name='cantidad_alcohol'
-                                    maxLength={255}
+                                    max={70}
+                                    min={0}
                                     required={true}
                                     defaultValue={producto ? producto[0].cantidad_alcohol : ""}
                                     {...register('cantidad_alcohol', {

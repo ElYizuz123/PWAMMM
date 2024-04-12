@@ -151,10 +151,10 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                     name='nombre'
                                     id='campo_nombre'
                                     required={true}
-                                    maxLength={45}
+                                    maxLength={30}
                                     {...register('nombre', {
                                         required: true,
-                                        maxLength: 45,
+                                        maxLength: 30,
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                     placeholder='Nombre del mezcal'
@@ -163,7 +163,8 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                     type='number'
                                     name='ml'
                                     required={true}
-                                    maxLength={10}
+                                    max={5000}
+                                    min={0}
                                     {...register('ml', {
                                         required: true,
                                         maxLength: 10
@@ -175,7 +176,8 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                     type='number'
                                     name='precio'
                                     required={true}
-                                    maxLength={10}
+                                    max={5000}
+                                    min={0}
                                     {...register('precio', {
                                         required: true,
                                         maxLength: 10
@@ -204,7 +206,8 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                     name='cantidad'
                                     placeholder='Cantidad de producto'
                                     required={true}
-                                    maxLength={10}
+                                    max={5000}
+                                    min={0}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
                                     {...register('cantidad', {
                                         required: true
@@ -223,9 +226,9 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                 <input
                                     type='text'
                                     name='tipo_agave'
-                                    maxLength={255}
+                                    maxLength={20}
                                     {...register('tipo_agave', {
-                                        maxLength: 255
+                                        maxLength: 20
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-14'
                                     placeholder='Tipo de agave'
@@ -233,9 +236,10 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                 <input 
                                     type='number'
                                     name='cantidad_alcohol'
-                                    maxLength={255}
+                                    max={70}
+                                    min={0}
                                     {...register('cantidad_alcohol', {
-                                        maxLength: 255
+                                        maxLength: 5
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-12'
                                     placeholder='Cantidad de alcohol'
