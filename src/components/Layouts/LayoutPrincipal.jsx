@@ -8,6 +8,7 @@ import logo from "@/components/navbar/logo";
 import IconoMenu from "@/components/navbar/iconoMenu";
 import { Berkshire_Swash } from "next/font/google";
 import Carrito from "../tienda/Carrito";
+import Footer from "../Footer/Footer";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -86,16 +87,11 @@ const LayoutPrincipal = ({ children }) => {
               </div>
             </div>
           </nav>
-        </div>
-        <Carrito />
-        <div>{children}</div>
-        <footer>
-          <Footer />
-        </footer>
+        </nav>
       </div>
       <Carrito />
       <div>{children}</div>
-
+      <Footer/>
     </div>
 
   );

@@ -15,7 +15,7 @@ const Footer = () => {
             <img src="/footer/fondoLetrasBlancas.png" className="h-16" />
           </div>
 
-          <div className="ml-12 flex flex-wrap justify-center items-center mb-4 sm:mb-0">
+          <div className="flex flex-wrap justify-center items-center mb-4 sm:mb-0">
             <Link className="text-center mx-3 hover:underline" href={"/"}>INICIO</Link>
             <Link className="text-center mx-3 hover:underline" href={"/tienda"}>TIENDA</Link>
             <Link className="text-center mx-3 hover:underline" href={"/nosotras"}>NOSOTRAS</Link>
