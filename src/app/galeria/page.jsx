@@ -23,14 +23,15 @@ function page() {
     return (
         <LayoutPrincipal>
             <div className="bg-[#F5F5F5] mt-40 h-max relative w-full overflow-x-hidden">
+            <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
 
-                <div className="absolute inset-0 ">
+                {/* <div className="absolute inset-0 ">
                     <img
                         className="w-full h-full object-cover opacity-60"
-                        src="\backgroundImage.png"
+                        src="\multimedia\agave 2.jpeg"
                         alt="Background"
                     />
-                </div>
+                </div> */}
 
 
                 <div className="items-center text-black justify-center mt-14 ml-6 lg:ml-24 md:ml-16 sm:ml-4">
@@ -46,6 +47,7 @@ function page() {
 
                 </div>
 
+            </div>
             </div>
 
         </LayoutPrincipal>
