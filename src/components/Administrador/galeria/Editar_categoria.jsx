@@ -88,11 +88,11 @@ const Editar_categoria = ({isOpen, onClose, idCategoria}) => {
                                         name='categoria'
                                         id='categoria'
                                         required={true}
-                                        maxLength={45}
+                                        maxLength={20}
                                         defaultValue={categoria ? categoria[0].categoria:""}
                                         {...register('categoria', {
                                             required: true,
-                                            maxLength: 45,
+                                            maxLength: 20,
                                         })}
                                         className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                         placeholder='Nombre de categoría'

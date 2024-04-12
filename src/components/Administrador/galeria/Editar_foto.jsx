@@ -214,11 +214,11 @@ const Editar_foto = ({ isOpen, onClose, idFoto, categorias }) => {
                                         name='descripcion'
                                         id='descripcion'
                                         required={true}
-                                        maxLength={45}
+                                        maxLength={20}
                                         defaultValue={foto ? foto[0].descripcion : ""}
                                         {...register('descripcion', {
                                             required: true,
-                                            maxLength: 45,
+                                            maxLength: 20,
                                         })}
                                         className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                         placeholder='Descripción de la foto'

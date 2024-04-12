@@ -167,10 +167,10 @@ const Crear_foto = () => {
                                             name='descripcion'
                                             id='descripcion'
                                             required={true}
-                                            maxLength={45}
+                                            maxLength={20}
                                             {...register('descripcion', {
                                                 required: true,
-                                                maxLength: 45,
+                                                maxLength: 20,
                                             })}
                                             className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                             placeholder='Descripción de la foto'

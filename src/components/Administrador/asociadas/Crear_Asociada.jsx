@@ -158,10 +158,10 @@ const Crear_Asociada = () => {
                                             name='nombre'
                                             id='campo_nombre'
                                             required={true}
-                                            maxLength={45}
+                                            maxLength={30}
                                             {...register('nombre', {
                                                 required: true,
-                                                maxLength: 45,
+                                                maxLength: 30,
                                             })}
                                             className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                             placeholder='Nombre'

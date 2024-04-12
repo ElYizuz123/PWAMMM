@@ -184,10 +184,10 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                                     id='campo_nombre'
                                     defaultValue={asociada ? asociada[0].nombre:""}
                                     required={true}
-                                    maxLength={45}
+                                    maxLength={30}
                                     {...register('nombre', {
                                         required: true,
-                                        maxLength: 45,
+                                        maxLength: 30,
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                     placeholder='Nombre'

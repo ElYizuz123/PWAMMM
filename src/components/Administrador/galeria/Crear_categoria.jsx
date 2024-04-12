@@ -78,10 +78,10 @@ const Crear_categoria = () => {
                                         name='categoria'
                                         id='categoria'
                                         required={true}
-                                        maxLength={45}
+                                        maxLength={20}
                                         {...register('categoria', {
                                             required: true,
-                                            maxLength: 45,
+                                            maxLength: 20,
                                         })}
                                         className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                         placeholder='Nombre de categoría'

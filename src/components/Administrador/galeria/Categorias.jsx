@@ -131,7 +131,7 @@ const Categorias = () => {
                 <div key={categoria.id_categoria} className='flex justify-center'>
                     <div className='w-[1050px]'>
                         <div className='flex justify-start'>
-                            <p className='text-left font-bold text-2xl mb-4' >{categoria.categoria}</p>
+                            <p className='text-left font-bold text-2xl mb-4 ml-12' >{categoria.categoria}</p>
                             <button onClick={() => handleEditCategoria(categoria.id_categoria)} className="ml-1 pl-1 text-pink-600 rounded eye-icon w-12 h-12">
                                 <Image src="/emoticons/editar.png" alt="Icono" width="50" height="50" className='w-8 h-8' />
                             </button>
