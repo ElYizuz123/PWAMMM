@@ -4,15 +4,27 @@ import Tarjeta_evento from './Tarjeta_evento'
 import { contexto } from '../UpdateProvider'
 import Editar_evento from './Editar_evento'
 import Paginacion from '../productos/Paginacion'
+import { useSearchParams } from 'next/navigation'
 
 const Leer_evento = () => {
-    const { update } = useContext(contexto)
+    const { update, page } = useContext(contexto)
     const [eventos, setEventos] = useState(null)
     const [uEventoIsOpen, setUEventoIsOpen] = useState(false)
     const [updateEvento, setUpdateEvento] = useState(null)
+    const searchParams = useSearchParams()
 
     const readData = async () => {
-        const res = await fetch('/api/eventos/read_eventos')
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        const res = await fetch('/api/eventos/read_eventos',{
+            method:'POST',
+            body:JSON.stringify(search)
+        })
         const resJSON = await res.json()
         setEventos(JSON.parse(resJSON))
     }

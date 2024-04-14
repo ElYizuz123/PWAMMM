@@ -6,23 +6,36 @@ import Editar_foto from './Editar_foto'
 import Image from 'next/image'
 import Editar_categoria from './Editar_categoria'
 import Swal from 'sweetalert2'
+import { useSearchParams } from 'next/navigation'
 
 const Categorias = () => {
-    const { update, setUpdate } = useContext(contexto)
+    const { update, setUpdate, page } = useContext(contexto)
     const [categorias, setCategorias] = useState()
     const [updateFoto, setUpdateFoto] = useState(null)
     const [uFotoIsOpen, setUFotoIsOpen] = useState(false)
     const [onlyCategorias, setOnlyCategorias] = useState(null)
     const [uCategoriaIsOpen, setUCategoriaIsOpen] = useState(false)
     const [idCategoria, setIdCategoria] = useState(null)
+    const searchParams = useSearchParams()
 
     const readData = async () => {
-        const res = await fetch('/api/galeria/read_categorias')
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        const res = await fetch('/api/galeria/read_categorias',{
+            method:'POST',
+            body:JSON.stringify(search)
+        })
         const resJSON = await res.json()
         setCategorias(JSON.parse(resJSON))
     }
 
     const readCategorias = async () => {
+        
         const res = await fetch('/api/galeria/read_only_categorias')
         const resJSON = await res.json()
         setOnlyCategorias(JSON.parse(resJSON))

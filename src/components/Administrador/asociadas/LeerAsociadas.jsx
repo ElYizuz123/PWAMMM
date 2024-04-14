@@ -4,15 +4,27 @@ import { contexto } from '../UpdateProvider'
 import Tarjeta_Asociadas from './Tarjeta_Asociadas'
 import Update_Asociada from './Update_Asociada'
 import Paginacion from '../productos/Paginacion'
+import { useSearchParams } from 'next/navigation'
 
 const LeerAsociadas = () => {
-    const { update } = useContext(contexto)
+    const { update, page} = useContext(contexto)
     const [asociadas, setAsociadas] = useState(null)
     const [uAsociadasIsOpen, setUAsociadasIsOpen] = useState(false)
     const [updateAsociada, setUpdateAsociada] = useState(null)
+    const searchParams = useSearchParams()
 
     const readData = async () => {
-        const res = await fetch('/api/asociadas/read_asociadas')
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        const res = await fetch('/api/asociadas/read_asociadas',{
+            method: 'POST',
+            body : JSON.stringify(search)
+        })
         const resJSON = await res.json()
         setAsociadas(JSON.parse(resJSON))
     }

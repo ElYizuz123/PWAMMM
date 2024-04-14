@@ -10,7 +10,6 @@ import { useSearchParams } from 'next/navigation';
 const Leer_productos = ({ marcas }) => {
 
     const [filteredProducts, setFilteredProducts] = useState(null);
-    const [busqueda, setBusqueda] = useState(null);
     const [uProductIsOpen, setUProductIsOpen] = useState(false)
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
@@ -39,7 +38,6 @@ const Leer_productos = ({ marcas }) => {
         else{
             search = page
         }
-        console.log(search)
         const res = await fetch('/api/producto/read_productos',{
             method:'POST',
             body: JSON.stringify(search)
@@ -55,14 +53,32 @@ const Leer_productos = ({ marcas }) => {
     };
 
     //Confirmación en la búsqueda
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit =  async (e) => {
+        e.preventDefault()
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        const data = {
+            busqueda:e.target[0].value,
+            page:search
+        }
+        const res = await fetch('/api/producto/read_producto_like',{
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+        const resJSON = await res.json()
+        setFilteredProducts(JSON.parse(resJSON))
     }
 
     //Cambio en la búsqueda
     const handleChange = (event) => {
-
-        setBusqueda(event.target.value);
+        if(event.target.value==""){
+            readData()
+        }
     };
 
     //Scroll automático a ventana emergente
@@ -78,15 +94,6 @@ const Leer_productos = ({ marcas }) => {
         readData()
     }, [update])
 
-    //Búsqueda
-    useEffect(() => {
-        if (productos) {
-            const filtered = productos.filter((producto) =>
-                producto.nombre.toLowerCase().includes(busqueda?.toLowerCase()),
-            );
-            setFilteredProducts(filtered);
-        }
-    }, [productos, busqueda]);
 
     //Set de los productos filtrados
     useEffect(() => {

@@ -3,6 +3,7 @@ import Carrusel_Admin from '@/components/Administrador/galeria/Carrusel_Admin'
 import Categorias from '@/components/Administrador/galeria/Categorias'
 import Crear_categoria from '@/components/Administrador/galeria/Crear_categoria'
 import Crear_foto from '@/components/Administrador/galeria/Crear_foto'
+import Paginacion from '@/components/Administrador/productos/Paginacion'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 import React from 'react'
@@ -28,8 +29,11 @@ const Page = () => {
               <div className="items-center justify-center">
                 <Categorias />
               </div>
-
+              
             </div>
+            <div className='absolute bottom-5 right-0'>
+                    <Paginacion totalPages={10}/>
+              </div>
           </div>
         </main>
       </UpdateProvider>

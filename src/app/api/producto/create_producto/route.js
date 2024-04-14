@@ -8,7 +8,7 @@ export async function POST(request){
     try{
         const newProducto = await db.producto.create({
             data:{
-                nombre: data.nombre,
+                nombre: data.nombre.toUpperCase(),
                 ml: Number(data.ml),
                 precio: Number(data.precio),
                 descripcion: data.descripcion,
