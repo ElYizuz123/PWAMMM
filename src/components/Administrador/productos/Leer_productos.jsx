@@ -13,7 +13,7 @@ const Leer_productos = ({ marcas }) => {
     const [uProductIsOpen, setUProductIsOpen] = useState(false)
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
-    const {update, page} = useContext(contexto)
+    const {update, page, setTotalPages} = useContext(contexto)
     const searchParams = useSearchParams()
 
 
@@ -47,6 +47,12 @@ const Leer_productos = ({ marcas }) => {
         setProductos(parseado)
 
     };
+
+    const countData = async () =>{
+        const res = await fetch('/api/producto/cont_productos')
+        const resJSON = await res.json()
+        setTotalPages(Math.ceil((resJSON)/12))
+    }
 
     const closeUProduct = () => {
         setUProductIsOpen(false)
@@ -92,6 +98,7 @@ const Leer_productos = ({ marcas }) => {
     //Actualización
     useEffect(()=>{
         readData()
+        countData()
     }, [update])
 
 

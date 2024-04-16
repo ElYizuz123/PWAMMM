@@ -7,7 +7,7 @@ import Paginacion from '../productos/Paginacion'
 import { useSearchParams } from 'next/navigation'
 
 const Leer_evento = () => {
-    const { update, page } = useContext(contexto)
+    const { update, page, setTotalPages} = useContext(contexto)
     const [eventos, setEventos] = useState(null)
     const [uEventoIsOpen, setUEventoIsOpen] = useState(false)
     const [updateEvento, setUpdateEvento] = useState(null)
@@ -29,6 +29,12 @@ const Leer_evento = () => {
         setEventos(JSON.parse(resJSON))
     }
 
+    const countData = async () =>{
+        const res = await fetch('/api/eventos/count_eventos')
+        const resJSON = await res.json()
+        setTotalPages(Math.ceil((resJSON)/12))
+    }
+
     const onClose = () => {
         setUEventoIsOpen(false)
     }
@@ -46,6 +52,7 @@ const Leer_evento = () => {
 
     useEffect(() => {
         readData()
+        countData()
     }, [update])
 
     return (

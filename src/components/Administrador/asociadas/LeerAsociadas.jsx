@@ -7,7 +7,7 @@ import Paginacion from '../productos/Paginacion'
 import { useSearchParams } from 'next/navigation'
 
 const LeerAsociadas = () => {
-    const { update, page} = useContext(contexto)
+    const { update, page, setTotalPages} = useContext(contexto)
     const [asociadas, setAsociadas] = useState(null)
     const [uAsociadasIsOpen, setUAsociadasIsOpen] = useState(false)
     const [updateAsociada, setUpdateAsociada] = useState(null)
@@ -29,6 +29,12 @@ const LeerAsociadas = () => {
         setAsociadas(JSON.parse(resJSON))
     }
 
+    const countData = async () =>{
+        const res = await fetch('/api/asociadas/cont_asociadas')
+        const resJSON = await res.json()
+        setTotalPages(Math.ceil((resJSON)/12))
+    }
+
     const onClose = () => {
         setUAsociadasIsOpen(false)
     }
@@ -46,6 +52,7 @@ const LeerAsociadas = () => {
 
     useEffect(() => {
         readData()
+        countData()
     }, [update])
 
     return (

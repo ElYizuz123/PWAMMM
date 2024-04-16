@@ -5,20 +5,23 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { contexto } from '../UpdateProvider'
 
 
-const Paginacion = ({ totalPages }) => {
+const Paginacion = () => {
 
 
     const [paginas, setPaginas] = useState()
-    const { setPage, update, setUpdate, page } = useContext(contexto)
+    const { setPage, update, setUpdate, page, totalPages } = useContext(contexto)
     const pathName = usePathname()
     const router = useRouter()
     const searchParams = useSearchParams()
 
     const handleChange = (newPage) => {
-        router.push('?pages=' + newPage)
-        setPage(newPage)
-        const up = !update
-        setUpdate(up)
+        console.log(totalPages)
+        if (newPage <= totalPages) {
+            router.push('?pages=' + newPage)
+            setPage(newPage)
+            const up = !update
+            setUpdate(up)
+        }
     }
 
 
@@ -27,6 +30,7 @@ const Paginacion = ({ totalPages }) => {
 
 
     useEffect(() => {
+        console.log(totalPages)
         var search = 0
         if (!page) {
             search = parseInt(searchParams.get('pages'))
@@ -43,19 +47,21 @@ const Paginacion = ({ totalPages }) => {
                 setPaginas(arr)
             }
             else {
-                if(search>4){
-                    
-                    var arr=[]
-                    var it=0
-                    for(var i =search-4; i<search; i++){
-                        arr[it]=i+1
-                        console.log(i+1)
-                        it++
+                if (search > 4) {
+
+                    if((search+1)<=totalPages){
+                        var arr = []
+                        var it = 0
+                        for (var i = search - 4; i < search; i++) {
+                            arr[it] = i + 1
+                            console.log(i + 1)
+                            it++
+                        }
+                        arr[it] = search + 1
+                        setPaginas(arr)
                     }
-                    arr[it]=search+1
-                    setPaginas(arr)
                 }
-                else{
+                else {
                     const arr = [1, 2, 3, 4, 5]
                     setPaginas(arr)
                 }
@@ -75,9 +81,9 @@ const Paginacion = ({ totalPages }) => {
                 setPaginas(arr)
             }
         }
-    }, [page])
+    }, [totalPages])
 
-    const handleNext = ()=>{
+    const handleNext = () => {
         var search = 0
         if (!page) {
             search = parseInt(searchParams.get('pages'))
@@ -85,19 +91,23 @@ const Paginacion = ({ totalPages }) => {
         else {
             search = parseInt(page)
         }
-        if(search){
-            router.push('?pages=' + (search+1))
-            setPage(search+1)
-            const up = !update
-            setUpdate(up)
-        }else{
-            router.push('?pages=' + 1)
-            setPage(1)
-            const up = !update
-            setUpdate(up)
+        if (search) {
+            if ((search + 1) <= totalPages) {
+                router.push('?pages=' + (search + 1))
+                setPage(search + 1)
+                const up = !update
+                setUpdate(up)
+            }
+        } else {
+            if ((search + 1) <= totalPages) {
+                router.push('?pages=' + 1)
+                setPage(1)
+                const up = !update
+                setUpdate(up)
+            }
         }
     }
-    const handlePrev = ()=>{
+    const handlePrev = () => {
         var search = 0
         if (!page) {
             search = parseInt(searchParams.get('pages'))
@@ -105,9 +115,9 @@ const Paginacion = ({ totalPages }) => {
         else {
             search = page
         }
-        if(search&&search!=1){
-            router.push('?pages=' + (search-1))
-            setPage(search-1)
+        if (search && search != 1) {
+            router.push('?pages=' + (search - 1))
+            setPage(search - 1)
             const up = !update
             setUpdate(up)
         }

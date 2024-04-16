@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 import { useSearchParams } from 'next/navigation'
 
 const Categorias = () => {
-    const { update, setUpdate, page } = useContext(contexto)
+    const { update, setUpdate, page, setTotalPages } = useContext(contexto)
     const [categorias, setCategorias] = useState()
     const [updateFoto, setUpdateFoto] = useState(null)
     const [uFotoIsOpen, setUFotoIsOpen] = useState(false)
@@ -32,6 +32,12 @@ const Categorias = () => {
         })
         const resJSON = await res.json()
         setCategorias(JSON.parse(resJSON))
+    }
+
+    const countData = async () =>{
+        const res = await fetch('/api/galeria/count_categorias')
+        const resJSON = await res.json()
+        setTotalPages(Math.ceil((resJSON)/6))
     }
 
     const readCategorias = async () => {
@@ -73,6 +79,7 @@ const Categorias = () => {
 
     useEffect(() => {
         readData()
+        countData()
         readCategorias()
     }, [update])
 
