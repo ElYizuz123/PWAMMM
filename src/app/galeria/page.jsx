@@ -20,7 +20,6 @@ function page() {
         readData();
     }, []);
 
-
     return (
         <LayoutPrincipal>
             <div className="bg-[#F5F5F5] mt-40 h-max relative w-full overflow-x-hidden">
@@ -34,14 +33,14 @@ function page() {
                     />
                 </div> */}
 
-                <p className="text-4xl font-medium pb-12" style={{textAlign: 'center'}}>Galería</p>
+                <p className="text-5xl font-medium pb-6" style={{textAlign: 'center'}}>Galería</p>
 
                 <Galeria/>
 
 
 
 
-                {/* <div className="items-center text-black justify-center mt-96 ml-6 lg:ml-24 md:ml-16 sm:ml-4">
+                {/* <div className="items-center text-black justify-centerh mt-96 ml-6 lg:ml-24 md:ml-16 sm:ml-4">
                     {categorias &&
                         categorias.map((galeria_categoria) => (
                             <div key={galeria_categoria.id_categoria}>

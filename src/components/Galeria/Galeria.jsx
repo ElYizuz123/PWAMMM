@@ -41,7 +41,8 @@ const Galeria = () => {
                     foto.map((foto, index) => {
                         return (
                             <div className="pics" key={index} onClick={() => getImg("/galeria/" + foto.foto)}>
-                                <Image className="rounded-lg" src={"/galeria/" + foto.foto} width={1000} height={1000} style={{ width: '100%' }}></Image>
+                                <Image className="rounded-lg cursor-pointer"
+                                src={"/galeria/" + foto.foto} width={1000} height={1000} style={{ width: '100%' }}></Image>
                             </div>
                         )
                     })}

@@ -12,7 +12,6 @@
 .gallery .pics {
     -webkit-transition: all 350ms ease;
     transition: all 350ms ease;
-    cursor: pointer;
     margin-bottom: 12px;
 }
 
@@ -25,7 +24,6 @@
         -webkit-column-count: 2;
         -moz-column-count: 2;
         column-count: 2;
-
     }
 }
 
