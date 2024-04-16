@@ -20,6 +20,7 @@ const Crear_evento = () => {
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
+    const createRef = useRef(null)
 
     useEffect(() => {
         register('foto');
@@ -35,7 +36,7 @@ const Crear_evento = () => {
 
     useEffect(() => {
         if (cEventosIsOpen) {
-          window.scrollTo({ top: 230, behavior: 'smooth' });
+            createRef.current.scrollIntoView({ behavior: 'smooth' })
         }
       }, [cEventosIsOpen]);
 
@@ -113,7 +114,7 @@ const Crear_evento = () => {
                   <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                   <p className='mr-4'>Agregar evento</p>
             </button>
-            <div hidden={!cEventosIsOpen} className={`absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[1200px] ${cEventosIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={createRef} hidden={!cEventosIsOpen} className={`absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[1200px] ${cEventosIsOpen ? "" : "pointer-events-none"}`}>
                 <div className='w-[80%] h-2/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[600px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                         <p className='font-bold pl-5'>Producto</p>

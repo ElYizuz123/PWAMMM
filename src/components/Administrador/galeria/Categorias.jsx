@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Carrusel_Admin from './Carrusel_Admin'
 import { contexto } from '../UpdateProvider'
 import Editar_foto from './Editar_foto'
@@ -17,6 +17,8 @@ const Categorias = () => {
     const [uCategoriaIsOpen, setUCategoriaIsOpen] = useState(false)
     const [idCategoria, setIdCategoria] = useState(null)
     const searchParams = useSearchParams()
+    const editCatRef = useRef(null)
+    const editFotoRef = useRef(null)
 
     const readData = async () => {
         var search = ""
@@ -49,13 +51,13 @@ const Categorias = () => {
 
     useEffect(() => {
         if (uFotoIsOpen) {
-            window.scrollTo({ top: 230, behavior: 'smooth' });
+            editFotoRef.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [uFotoIsOpen]);
 
     useEffect(() => {
         if (uCategoriaIsOpen) {
-            window.scrollTo({ top: 230, behavior: 'smooth' });
+            editCatRef.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [uCategoriaIsOpen]);
 
@@ -132,7 +134,7 @@ const Categorias = () => {
 
     return (
         <div>
-            <div className={`absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[1200px] ${uFotoIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={editFotoRef} className={`absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[1200px] ${uFotoIsOpen ? "" : "pointer-events-none"}`}>
                 {uFotoIsOpen && <Editar_foto
                     isOpen={uFotoIsOpen}
                     onClose={onClose}
@@ -140,7 +142,7 @@ const Categorias = () => {
                     categorias={onlyCategorias}
                 />}
             </div>
-            <div className={`absolute top-3/4 left-1/2 transform -translate-x-1/4 -translate-y-1/3 z-10 w-6/12 h-[1200px] ${uCategoriaIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={editCatRef} className={`absolute top-3/4 left-1/2 transform -translate-x-1/4 -translate-y-1/3 z-10 w-6/12 h-[1200px] ${uCategoriaIsOpen ? "" : "pointer-events-none"}`}>
                 {uCategoriaIsOpen && <Editar_categoria
                     isOpen={uCategoriaIsOpen}
                     onClose={onCloseCategorias}

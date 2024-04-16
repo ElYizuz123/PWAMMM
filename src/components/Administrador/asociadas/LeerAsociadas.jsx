@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { contexto } from '../UpdateProvider'
 import Tarjeta_Asociadas from './Tarjeta_Asociadas'
 import Update_Asociada from './Update_Asociada'
@@ -12,6 +12,7 @@ const LeerAsociadas = () => {
     const [uAsociadasIsOpen, setUAsociadasIsOpen] = useState(false)
     const [updateAsociada, setUpdateAsociada] = useState(null)
     const searchParams = useSearchParams()
+    const editRef = useRef(null)
 
     const readData = async () => {
         var search = ""
@@ -46,7 +47,7 @@ const LeerAsociadas = () => {
 
     useEffect(() => {
         if (uAsociadasIsOpen) {
-            window.scrollTo({ top: 400, behavior: 'smooth' });
+            editRef.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [uAsociadasIsOpen]);
 
@@ -57,7 +58,7 @@ const LeerAsociadas = () => {
 
     return (
         <div>
-            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uAsociadasIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={editRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uAsociadasIsOpen ? "" : "pointer-events-none"}`}>
                 {uAsociadasIsOpen && <Update_Asociada
                     isOpen={uAsociadasIsOpen}
                     onClose={onClose}

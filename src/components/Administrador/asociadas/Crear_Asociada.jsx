@@ -18,6 +18,7 @@ const Crear_Asociada = () => {
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
+    const createRef = useRef(null)
 
     useEffect(() => {
         register('foto');
@@ -34,7 +35,7 @@ const Crear_Asociada = () => {
 
     useEffect(() => {
         if (cAsociadasIsOpen) {
-          window.scrollTo({ top: 230, behavior: 'smooth' });
+            createRef.current.scrollIntoView({ behavior: 'smooth' })
         }
       }, [cAsociadasIsOpen]);
 
@@ -111,7 +112,7 @@ const Crear_Asociada = () => {
                 <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-3'>Agregar asociada</p>
             </button>
-            <div hidden={!cAsociadasIsOpen} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-4/6 ${cAsociadasIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={createRef} hidden={!cAsociadasIsOpen} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-4/6 ${cAsociadasIsOpen ? "" : "pointer-events-none"}`}>
                 <div className='w-full h-2/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[400px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                         <p className='font-bold pl-5'>Producto</p>

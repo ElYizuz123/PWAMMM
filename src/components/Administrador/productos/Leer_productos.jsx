@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Tarjeta_Producto_Admin from './Tarjeta_Producto_Admin'
 import Editar_Producto from './Editar_Producto';
 import { contexto } from '../UpdateProvider';
@@ -15,6 +15,7 @@ const Leer_productos = ({ marcas }) => {
     const [productoEdit, setProductoEdit] = useState(null)
     const {update, page, setTotalPages} = useContext(contexto)
     const searchParams = useSearchParams()
+    const upRef = useRef(null)
 
 
     //Función para abrir pop-up editar productos
@@ -90,7 +91,7 @@ const Leer_productos = ({ marcas }) => {
     //Scroll automático a ventana emergente
     useEffect(() => {
         if (uProductIsOpen) {
-            window.scrollTo({ top: 230, behavior: 'smooth' })
+            upRef.current.scrollIntoView({ behavior: 'smooth' })
         }
 
     }, [uProductIsOpen])
@@ -109,7 +110,7 @@ const Leer_productos = ({ marcas }) => {
 
     return (
         <div >
-            <div className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={upRef} className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
                 {uProductIsOpen && <Editar_Producto
                     isOpen={uProductIsOpen}
                     onClose={closeUProduct}

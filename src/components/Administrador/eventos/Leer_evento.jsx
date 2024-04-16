@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Tarjeta_evento from './Tarjeta_evento'
 import { contexto } from '../UpdateProvider'
 import Editar_evento from './Editar_evento'
@@ -12,6 +12,7 @@ const Leer_evento = () => {
     const [uEventoIsOpen, setUEventoIsOpen] = useState(false)
     const [updateEvento, setUpdateEvento] = useState(null)
     const searchParams = useSearchParams()
+    const editRef = useRef(null)
 
     const readData = async () => {
         var search = ""
@@ -46,7 +47,7 @@ const Leer_evento = () => {
 
     useEffect(() => {
         if (uEventoIsOpen) {
-            window.scrollTo({ top: 230, behavior: 'smooth' });
+            editRef.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [uEventoIsOpen]);
 
@@ -57,7 +58,7 @@ const Leer_evento = () => {
 
     return (
         <div>
-            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uEventoIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={editRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uEventoIsOpen ? "" : "pointer-events-none"}`}>
                 {uEventoIsOpen && <Editar_evento
                     isOpen={uEventoIsOpen}
                     onClose={onClose}

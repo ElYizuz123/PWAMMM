@@ -1,10 +1,11 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Crear_marca from './Crear_marca'
 import Image from 'next/image'
 
 const Agregar_marca = ({asociadas}) => {
     const [cMarcasIsOpen, setCMarcasIsOpen] = useState(false)
+    const createMarca = useRef(null)
 
     //Abrir pop-up de agregar marca
     const openCMarca = () => {
@@ -18,7 +19,7 @@ const Agregar_marca = ({asociadas}) => {
     //Animación de scroll
     useEffect(() => {
         if (cMarcasIsOpen) {
-            window.scrollTo({ top: 180, behavior: 'smooth' });
+            createMarca.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [cMarcasIsOpen]);
 
@@ -28,7 +29,7 @@ const Agregar_marca = ({asociadas}) => {
                 <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-3'>Agregar marca</p>
             </button>
-            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${cMarcasIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={createMarca} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${cMarcasIsOpen ? "" : "pointer-events-none"}`}>
                 {cMarcasIsOpen && <Crear_marca
                     isOpen={cMarcasIsOpen}
                     onClose={closeCProduct}
