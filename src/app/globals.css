@@ -312,43 +312,18 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   }
 }
 
-.tooltip {
-  cursor: pointer;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
-
-.tooltiptext {
-  visibility:hidden;
-  width: 20px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 10px;
+/* Añade esto a tu archivo CSS */
+/* .tooltip::after {
+  content: '';
   position: absolute;
-  z-index: 10;
-  top: 125%;
-  left: 50%;
-  margin-left: -100px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  z-index: 10;
-  margin-left: -10px;
-  border-width: 10px;
+  top: 0;
+  left: 80%;
+  transform: translateX(-50%) translateY(-100%);
+  border-width: 0.5rem;
   border-style: solid;
-  border-color: transparent transparent #333 transparent;
-}
+  border-color: transparent transparent black transparent;
+  transition: opacity 0.3s ease-in-out;
+} */
 
 
 
@@ -424,6 +399,25 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 .cardd:hover .cardd_description {
   opacity: 1;
   transition-delay: .25s;
+}
+
+/* Estilo para Firefox */
+.custom-scrollbar {
+  scrollbar-color: #F70073 white; /* thumb y track */
+  scrollbar-width: thin;
+}
+
+/*-----------------*/
+
+.custom-scrollbarL::-webkit-scrollbar-thumb {
+  background-color: #F70073; /* El color del pulgar del scrollbar */
+  border-radius: 20px;
+  border: 3px solid orange; /* Si quieres un borde alrededor del pulgar */
+}
+
+/* Estilo para Firefox */
+.custom-scrollbarL {
+  scrollbar-color: #F70073 white; /* thumb y track */
 }
 
 

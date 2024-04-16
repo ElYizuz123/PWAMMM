@@ -5,8 +5,8 @@ import React from "react";
 import { K2D } from "next/font/google";
 import { ProductContext } from "@/context/ProductContext";
 import { useContext, useState } from "react";
-import { CheckCircleIcon, RefreshIcon } from '@heroicons/react/solid';
-
+import { CheckCircleIcon, RefreshIcon } from "@heroicons/react/solid";
+import { EyeIcon } from "@heroicons/react/solid";
 
 const k2d = K2D({
   weight: ["400"],
@@ -28,6 +28,9 @@ const Tarjeta = ({
   tipo,
 }) => {
   const { addProductos } = useContext(ProductContext);
+  const [buttonState, setButtonState] = useState("idle");
+  const [showTooltip, setShowTooltip] = useState(false);
+
   const handleAddToCart = () => {
     setButtonState("loading");
     setTimeout(() => {
@@ -41,13 +44,14 @@ const Tarjeta = ({
         precio,
         ml,
       };
-  
+
       addProductos(newProduct);
-    }, 2000);
 
+      setTimeout(() => {
+        setButtonState("idle");
+      }, 3000);
+    }, 2500);
   };
-
-  const [buttonState, setButtonState] = useState("idle");
 
   return (
     <div className={k2d.className}>
@@ -56,18 +60,22 @@ const Tarjeta = ({
           <Link
             href={`/tienda/abrir_producto/${tipo}/${id_producto}`}
             // className="absolute top-0 right-0 m-2 p-1 z-0"
-            className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon"
+            className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded"
           >
-            <div class="relative">
-              <div class="text-xl p-1 font-bold">
-                <img
-                  src="\emoticons\ojo.png"
-                  alt="Icono"
-                  width="32"
-                  height="32"
-                />
+            <div className="absolute top-0 right-0 mt-2 mr-2 hover:scale-110 transition transform duration-300 ease-in-out">
+              <div
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+                className="relative cursor-pointer"
+              >
+                <EyeIcon className="h-8 w-8 text-pink-600" />
+
+                {showTooltip && (
+                  <div className="absolute -bottom-10 left-0 transform -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded tooltip">
+                    Ver más detalles
+                  </div>
+                )}
               </div>
-              <div class="tooltiptext">Más información!</div>
             </div>
           </Link>
         </div>
@@ -128,7 +136,9 @@ const Tarjeta = ({
 
           {cantidad !== 0 ? (
             <button
-              className={`mt-2 btn font-semibold ${buttonState === 'loading' && 'bg-pink-300'}`}
+              className={`mt-2 btn font-semibold ${
+                buttonState === "loading" && "bg-pink-300"
+              }`}
               onClick={handleAddToCart}
             >
               {buttonState === "idle" && "Añadir A Carrito"}
