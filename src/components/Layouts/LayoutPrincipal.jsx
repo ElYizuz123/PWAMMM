@@ -11,6 +11,7 @@ import { Berkshire_Swash } from "next/font/google";
 import Carrito from "../tienda/Carrito";
 import Footer from "../Footer/Footer";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -20,20 +21,33 @@ const berkshire = Berkshire_Swash({
 
 const LayoutPrincipal = ({ children }) => {
   const { scrollY } = useScroll();
-  const scale = useTransform(scrollY, [0, 100], [1, 0.6]);
+  const scale = useTransform(scrollY, [0, 100], [1, 0.7]);
+  const [styleNav, setStyleNav] = useState("size-12 top-6")
+
+  window.addEventListener('scroll', function() {
+    if (window.scrollY === 0) {
+      setStyleNav("size-12 top-6 transition-size duration-200 ease-in-out")
+    }
+    else{
+      setStyleNav("size-10 top-2 transition-size duration-300 ease-in-out")
+    }
+    
+})
 
   return (
     <div>
       <div>
-        <motion.nav className="bg-black w-full z-20 top-0 fixed"
+        <div className="w-full z-20 top-0 fixed">
+          <img className="h-8 w-full" src="\navbar\banner.jpg" />
+        </div>
+        <motion.div className="w-full z-20 top-6 fixed border-[#1E1E1E] border-opacity-50 dark:border-gray-600"
           style={{
             scaleY: scale,
             transformOrigin: "top",
           }}>
-          <div className="">
-            <img className="h-8 w-full" src="\navbar\banner.jpg" />
-          </div>
-          <nav className="bg-[#F5F5F5] border-[#1E1E1E] border-opacity-50 dark:border-gray-600 font-bold shadow-md">
+            <p className="bg-white w-full text-white h-36 shadow-md" id="p-1">p</p>
+        </motion.div>
+        <nav className={`font-bold fixed z-20 w-full h-36 ${styleNav}`}>
             <div className="container mx-auto flex">
               <div>{logo}</div>
               <div className="text-black absolute w-full flex lg:hidden py-8 px-4 justify-center">
@@ -55,7 +69,7 @@ const LayoutPrincipal = ({ children }) => {
                   <Link
                     href="\"
                     className="lg:mr-16 hover:text-[#F70073]">
-                    <div className="mx-auto size-12">
+                    <div className={`mx-auto ${styleNav}`}>
                       {IconoInicio}
                     </div>
                     INICIO
@@ -63,7 +77,7 @@ const LayoutPrincipal = ({ children }) => {
                   <Link
                     href="\tienda"
                     className="lg:mr-16 hover:text-[#F70073]">
-                    <div className="mx-auto size-12">
+                    <div className={`mx-auto ${styleNav}`}>
                       {IconoTienda}
                     </div>
                     TIENDA
@@ -71,7 +85,7 @@ const LayoutPrincipal = ({ children }) => {
                   <Link
                     href="\nosotras"
                     className="lg:mr-16 hover:text-[#F70073]">
-                    <div className="mx-auto size-12">
+                    <div className={`mx-auto ${styleNav}`}>
                       {IconoNosotras}
                     </div>
                     NOSOTRAS
@@ -79,7 +93,7 @@ const LayoutPrincipal = ({ children }) => {
                   <Link
                     href="\galeria"
                     className="lg:mr-16 hover:text-[#F70073]">
-                    <div className="mx-auto size-12">
+                    <div className={`mx-auto ${styleNav}`}>
                       {IconoGaleria}
                     </div>
                     GALERIA
@@ -87,7 +101,7 @@ const LayoutPrincipal = ({ children }) => {
                   <Link
                     href="\contacto"
                     className="hover:text-[#F70073]">
-                    <div className="mx-auto size-12">
+                    <div className={`mx-auto ${styleNav}`}>
                       {IconoContacto}
                     </div>
                     CONTACTO
@@ -96,7 +110,6 @@ const LayoutPrincipal = ({ children }) => {
               </div>
             </div>
           </nav>
-        </motion.nav>
       </div>
       <Carrito />
       <div>{children}</div>
