@@ -378,12 +378,10 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   position: absolute;
   left: 0;
   bottom: 0;
-    /* edit the width to fit card */
   width: 100%;
   padding: 20px;
-  background: #f2f2f2;
+  background: white;
   border-top-left-radius: 20px;
-    /* edit here to change the height of the content box */
   transform: translateY(150px);
   transition: transform .25s;
 }
@@ -397,7 +395,7 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   height: 100px;
   transform: rotate(-175deg);
   border-radius: 50%;
-  box-shadow: inset 48px 48px #f2f2f2;
+  box-shadow: inset 48px 48px white;
 }
 
 .cardd_title {
@@ -428,8 +426,11 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 
 
 
-
-
+.paginacionCarruselAsociadas {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; 
+}
 
 
 

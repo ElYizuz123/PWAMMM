@@ -15,7 +15,7 @@ export default function Home() {
       {/*<div className="  bg-cover bg-center w-full h-auto" style={{ backgroundImage: "url('/fondo-agave.jpeg')" }}>*/}
       
       <Main />
-      <div className="bg-cover bg-center w-full h-auto " style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+      <div className="bg-cover bg-center w-full h-auto " style={{ backgroundImage: "url('/backgroundImagev2.png')" }}>
           <div className="bg-gradient-to-b  from-green-200 to-transparent">
               <CarruselInicio />
           </div>

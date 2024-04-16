@@ -31,7 +31,15 @@ const CarruselAsociadas = () => {
                                         <Swiper
                                             modules={[Navigation, Pagination, EffectCoverflow, Autoplay]}
                                             navigation
-                                            pagination={{ clickable: true }}
+                                            pagination={{
+                                             
+                                                el: '.paginacionCarruselAsociadas',
+                                                clickable: true,
+                                                renderBullet: function (index, className) {
+                                                    return '<span class="' + className + '">' + (index + 1) + '</span>';
+                                                  },
+                                           
+                                              }}
                                             effect="coverflow"
                                             coverflowEffect={{
                                                 rotate: 0,
@@ -40,6 +48,7 @@ const CarruselAsociadas = () => {
 
 
                                             }}
+                                            
                                             
                                             spaceBetween={20}
                                             slidesPerView={3}
@@ -76,10 +85,12 @@ const CarruselAsociadas = () => {
                 );
             })}
             
-          
-
+    <div className="paginacionCarruselAsociadas"></div>
+ 
+           
          
         </Swiper>
+        
        
     )
 }

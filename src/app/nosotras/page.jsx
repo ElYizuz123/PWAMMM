@@ -51,14 +51,24 @@ const Page = () => {
     }, []);
 
     const [cambiarImagen, setCambiarImagen] = useState(0);
+    const [cambiarFoto, setCambiarFoto] = useState(0);
 
     useEffect(() => {
       const interval = setInterval(() => {
         setCambiarImagen(prevIndex => (prevIndex + 1) % images.length);
-      }, 2000); // Cambia la imagen cada 5 segundos (5000 milisegundos)
+      }, 6000); 
   
       return () => clearInterval(interval);
     }, []);
+
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+          setCambiarFoto(prevIndex => (prevIndex + 1) % images.length);
+        }, 9000); 
+    
+        return () => clearInterval(interval);
+      }, []);
     return (
         <LayoutPrincipal>
 
@@ -72,7 +82,7 @@ const Page = () => {
                         <CarruselAsociadas  />
                         </div>
             </div>
-            <div className="  bg-cover bg-center w-full h-auto p-12 " style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+            <div className="  bg-cover bg-center w-full h-auto p-12 " style={{ backgroundImage: "url('/backgroundImagev2.png')" }}>
             <div className="w-11/12 m-auto ">
 
                        
@@ -121,9 +131,9 @@ const Page = () => {
 <div className="text-center p-8">
   
 
-    <div className="flex flex-wrap items-center mt-28 text-center bg-white rounded-lg shadow-lg">
+    <div className="flex flex-wrap items-center mt-28 text-center p-6 bg-white rounded-lg shadow-lg ">
         <div className="w-full md:w-3/5 lg:w-1/2 px-4">
-            <Image src={images[cambiarImagen]} height={300} width={600} alt="Mujeres Mezcaleras de Michoacán" className=" inline-block rounded shadow-lg border border-merino-400" />
+            <img src={images[cambiarImagen]} alt="Mujeres Mezcaleras de Michoacán" className=" w-11/12 inline-block rounded shadow-lg border border-merino-400" />
         </div>
         
         <div className="w-full md:w-2/5 lg:w-1/2 px-4 text-center md:text-left lg:pl-12">
@@ -133,8 +143,8 @@ const Page = () => {
 
         <hr className=" border-b-4  border-[#F70073] my-4 ml-10 mr-14 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10 2xl:ml-10" />
         
-            <p className="sm:text-lg mt-6 ml-8 mr-8 text-justify">
-            "Proteger, regular y promover la Denominación de Origen MEZCAL dentro de los municipios comprendidos en el estado de Michoacán de Ocampo.
+        <p className="sm:text-lg mt-6 ml-8 mr-8 text-justify">
+            "Proteger, regular y promover la Denominación de Origen Mezcal dentro de los municipios comprendidos en el estado de Michoacán de Ocampo.
              Asimismo, vigilar y observar las especificaciones contenidas en la Norma Oficial Mexicana NOM-070 y sus actualizaciones, evaluando y promoviendo
              la incorporación de sistemas para asegurar la sustentabilidad y la calidad en todos los procesos productivos del mezcal. También fomentaremos las
              formas tradicionales de producción, resguardando su identidad regional, con el objetivo de conservar y consolidar al Mezcal Michoacano como parte 
@@ -149,9 +159,9 @@ const Page = () => {
     </div>
 
     
-    <div className="flex flex-wrap items-center mt-28 text-center bg-white rounded-lg shadow-lg">
+    <div className="flex flex-wrap items-center mt-28 text-center p-6 bg-white rounded-lg shadow-lg">
         <div className="w-full md:w-3/5 lg:w-1/2 px-4">
-        <Image src={imagesVision[cambiarImagen]} height={300} width={600} alt="Mujeres Mezcaleras de Michoacán" className=" inline-block rounded shadow-lg border border-merino-400" />
+        <img src={imagesVision[cambiarFoto]} alt="Mujeres Mezcaleras de Michoacán" className=" w-11/12 inline-block rounded shadow-lg border border-merino-400" />
         </div>
         <div className="w-full md:w-2/5 lg:w-1/2 px-4 md:order-first text-center md:text-left lg:pr-12">
         <div className={berkshire.className} >
@@ -169,9 +179,7 @@ const Page = () => {
     </div>
 
     
-    <div className="mt-24 p-6 bg-white  h-[900px] rounded-lg border border-white ">
-                <ProcesoMezcal/>
-                </div>
+ 
     
 
 </div>

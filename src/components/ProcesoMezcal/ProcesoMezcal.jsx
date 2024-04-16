@@ -13,13 +13,13 @@ const NewsCard = ({ titulo, imageUrl, desc }) => {
     return (
         <article className="cardd ">
             <div className="temporary_text">
-                 <Image src={imageUrl} alt="" width={300} height={300} className=" w-[300px] h-[300px] object-cover transition-transform duration-300 transform scale-100 hover:scale-125 "  />
+                 <img src={imageUrl} alt=""  className=" w-[300px] h-[300px] object-cover transition-transform duration-300 transform scale-100 hover:scale-125 "  />
 
             </div>
       <div className="cardd_content ">
         <span className=" cardd_title text-[#F70073] ">{titulo}</span>
         <span className="cardd_subtitle">
-        Mujeres Mezcaleras de Michoacán
+        Proceso de hacer Mezcal 
         </span>
           <p className="cardd_description text-justify  text-black font-light mb-2">{desc}</p>
         </div>
@@ -38,7 +38,7 @@ const ProcesoMezcal = () => {
         { imageUrl: "/multimedia/Molienda.jpg", titulo: "Molienda", desc: "Después de cocer las piñas, se fragmentan en trozos más pequeños para triturarlas. Generalmente, se emplea una molienda circular de piedra o cemento, donde una piedra de alrededor de 500 kilos gira, siendo arrastrada por un animal de carga." },
         { imageUrl: "/multimedia/Fermentacion.jpg", titulo: "Fermentación", desc: "Una vez que el agave ha sido molido, se coloca en contenedores para iniciar el proceso de fermentación, el cual puede durar varios días. Sin embargo, la fermentación comienza verdaderamente una vez que la cocción del agave ha finalizado" },
         { imageUrl:"/multimedia/Destilacion.jpg" , titulo: "Destilación", desc:"La destilación se lleva a cabo utilizando un alambique y diversos equipos hechos de cobre, ollas de barro, carrizo o quiote.La mezcla se calienta en el alambique, se evapora y luego se condensa lentamente a través de un serpentín que deposita el líquido resultante en un recipiente."}  ,
-        { imageUrl: "/multimedia/alcohol.jpg", titulo: "Ajuste Alcohólico", desc: "Los mezcaleros ajustan el contenido de alcohol según lo establecido por la NOM, que especifica que debe oscilar entre el 36% y el 55%." }
+        { imageUrl: "/multimedia/alcohol.jpg", titulo: "Ajuste Alcohólico", desc: "El ajuste alcohólico en la elaboración del mezcal es el proceso mediante el cual se ajusta el contenido de alcohol en la bebida para alcanzar el nivel deseado. Los mezcaleros ajustan el contenido de alcohol según lo establecido por la NOM, que especifica que debe oscilar entre el 36% y el 55%." }
       ];
     
       return (
@@ -47,9 +47,9 @@ const ProcesoMezcal = () => {
         
         <div className="  min-h-screen p-6 flex flex-wrap justify-center items-center" >
             <div className={berkshire.className}>
-                <p className="text-7xl text-left text-delinead"> " El arte </p>
-                <p className="text-7xl text-right ml-56 text-delinead" > de hacer Mezcal"</p>
-                <hr className=" border-b-4  border-[#F70073] my-4 ml-5 mr-14 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10 2xl:ml-10" />
+                <p className="text-7xl text-left ml-8 text-delinead"> " El arte </p>
+                <p className="text-7xl text-left ml-64 text-delinead" > de hacer Mezcal"</p>
+                <hr className=" w-[740px] border-b-4  border-[#F70073] my-4 ml-5 mr-5 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10 2xl:ml-10" />
                 
             </div>
           <div className="justify-center max-w-6xl flex flex-wrap mx-auto gap-5">
