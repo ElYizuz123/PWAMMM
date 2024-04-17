@@ -145,7 +145,7 @@ const Leer_productos = ({ marcas }) => {
 
     return (
         <div >
-            <div ref={upRef} className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={upRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
                 {uProductIsOpen && <Editar_Producto
                     isOpen={uProductIsOpen}
                     onClose={closeUProduct}
@@ -174,6 +174,7 @@ const Leer_productos = ({ marcas }) => {
             <div className='w-full flex flex-wrap gap-20 pl-44 pt-6 pb-36'>
                 {filteredProducts &&
                     filteredProducts.map((producto) => (<Tarjeta_Producto_Admin key={producto.id_producto}
+                        isAcompanamiento={false}
                         id_producto={producto.id_producto}
                         nombre={producto.nombre}
                         ml={producto.ml}
@@ -186,6 +187,7 @@ const Leer_productos = ({ marcas }) => {
                 }
                 {acompanamientos &&
                     acompanamientos.map((acompanamiento) => (<Tarjeta_Producto_Admin key={acompanamiento.id_acompanamiento}
+                        isAcompanamiento={true}
                         id_producto={acompanamiento.id_acompanamiento}
                         nombre={acompanamiento.nombre}
                         ml={acompanamiento.gr}

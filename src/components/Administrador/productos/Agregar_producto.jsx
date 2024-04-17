@@ -47,14 +47,14 @@ const Agregar_producto = ({ marcas }) => {
 
     return (
         <div>
-            <div hidden={!cProductIsOpen} ref={createRef} className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[670px] ${cProductIsOpen ? "" : "pointer-events-none"}`}>
+            <div hidden={!cProductIsOpen} ref={createRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[670px] ${cProductIsOpen ? "" : "pointer-events-none"}`}>
                 {cProductIsOpen && <Crear_Producto
                     isOpen={cProductIsOpen}
                     onClose={closeCProduct}
                     marcas={marcas}
                 />}
             </div>
-            <div hidden={!cAcompIsOpen} ref={createRefAcomp} className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${cAcompIsOpen ? "" : "pointer-events-none"}`}>
+            <div hidden={!cAcompIsOpen} ref={createRefAcomp} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${cAcompIsOpen ? "" : "pointer-events-none"}`}>
                 {cAcompIsOpen && <Crear_Acompanamiento
                     isOpen={cAcompIsOpen}
                     onClose={closeCAcomp}
