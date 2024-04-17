@@ -10,7 +10,7 @@ const randomHexa = () => {
     const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
     return hexadecimalValue
 }
-const Crear_Producto = ({ isOpen, onClose, marcas }) => {
+const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
     const [productPhoto, setProductPhoto] = useState(null)
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
@@ -48,7 +48,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
 
             //Registrar producto en la DB
             if (fotoResJSON == "Archivo subido correctamente") {
-                const res = await fetch('/api/producto/create_producto', {
+                const res = await fetch('/api/producto/create_acompanamiento', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -98,9 +98,9 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
     if (!isOpen) return null;
 
     return (
-        <div className='w-full h-[850px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
+        <div className='w-full h-[700px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
-                <p className='font-bold pl-5'>Botella</p>
+                <p className='font-bold pl-5'>Acompañamiento</p>
                 <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
             </div>
             <div className='w-full h-full flex justify-between'>
@@ -122,13 +122,11 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                 <div className='h-full w-[60%] flex justify-between'>
                     <div className='flex flex-col items-start gap-y-6 mt-4 mr-2'>
                         <p className='text-xl'>Nombre</p>
-                        <p className='text-xl'>ML</p>
+                        <p className='text-xl'>GR</p>
                         <p className='text-xl'>Precio</p>
                         <p className='text-xl'>Marca</p>
                         <p className='text-xl pt-3'>Cantidad</p>
                         <p className='text-xl'>Mercado libre</p>
-                        <p className='text-xl'>Tipo de agave</p>
-                        <p className='text-xl'>Cantidad de alcohol</p>
                         <p className='text-xl'>Descripción</p>
                     </div>
                     <div>
@@ -157,20 +155,20 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                         maxLength: 30,
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1'
-                                    placeholder='Nombre del mezcal'
+                                    placeholder='Nombre del acompañamiento'
                                 />
                                 <input
                                     type='number'
-                                    name='ml'
+                                    name='gr'
                                     required={true}
                                     max={5000}
                                     min={0}
-                                    {...register('ml', {
+                                    {...register('gr', {
                                         required: true,
                                         maxLength: 10
                                     })}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-5'
-                                    placeholder='Mililitros'
+                                    placeholder='Gramos'
                                 />
                                 <input
                                     type='number'
@@ -223,27 +221,6 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-7'
                                     placeholder='Link a mercado libre'
                                 />
-                                <input
-                                    type='text'
-                                    name='tipo_agave'
-                                    maxLength={20}
-                                    {...register('tipo_agave', {
-                                        maxLength: 20
-                                    })}
-                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-14'
-                                    placeholder='Tipo de agave'
-                                />
-                                <input 
-                                    type='number'
-                                    name='cantidad_alcohol'
-                                    max={70}
-                                    min={0}
-                                    {...register('cantidad_alcohol', {
-                                        maxLength: 5
-                                    })}
-                                    className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-12'
-                                    placeholder='Cantidad de alcohol'
-                                />
                                 <textarea
                                     type='text'
                                     name='descripcion'
@@ -271,4 +248,4 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
     );
 };
 
-export default Crear_Producto
+export default Crear_Acompanamiento

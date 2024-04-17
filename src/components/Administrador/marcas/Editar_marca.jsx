@@ -81,9 +81,9 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
 
     if (!isOpen) return null;
     return (
-        <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073]'>
+        <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[350px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
-                <p className='font-bold pl-5'>Producto</p>
+                <p className='font-bold pl-5'>Marca</p>
                 <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
             </div>
             <div className='w-full h-full flex justify-center'>
@@ -143,8 +143,8 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
                                 <div className='w-full flex justify-end items-end'>
                                     <button
                                         type='submit'
-                                        className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5'
-                                    >Editar
+                                        className='bg-[#98E47D] w-56 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5'
+                                    >Guardar cambios
                                     </button>
                                 </div>
                             </form>
