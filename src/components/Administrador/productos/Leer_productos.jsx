@@ -14,9 +14,10 @@ const Leer_productos = ({ marcas }) => {
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
     const {update, page, setTotalPages} = useContext(contexto)
+    const [totalBottles, setTotalBottles] = useState(0)
+    const [acompanamientos, setAcompanamientos] = useState(null)
     const searchParams = useSearchParams()
     const upRef = useRef(null)
-
 
     //Función para abrir pop-up editar productos
     const openUProduct = (id_producto) => {
@@ -46,14 +47,48 @@ const Leer_productos = ({ marcas }) => {
         const resJSON = await res.json()
         const parseado = JSON.parse(resJSON)
         setProductos(parseado)
-
+        setAcompanamientos(null)
     };
 
     const countData = async () =>{
         const res = await fetch('/api/producto/cont_productos')
         const resJSON = await res.json()
         setTotalPages(Math.ceil((resJSON)/12))
+        setTotalBottles(parseInt(resJSON))
     }
+
+    const readAcomp = async () =>{
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        if(filteredProducts){
+            const sobrante = 12-(filteredProducts.length%12)
+            var pagActual = 1
+            if(search){
+                pagActual = parseInt(search)-(Math.ceil(totalBottles/12))+1
+            }
+            if(sobrante>0 && filteredProducts.length<12){
+                const data ={
+                    toma:sobrante,
+                    pag:pagActual
+                }
+                const res = await fetch('/api/producto/read_acompanamientos',{
+                    method:'POST',
+                    body:JSON.stringify(data)
+                })
+                const resJSON = await res.json()
+                setAcompanamientos(JSON.parse(resJSON))
+            }
+        }
+    }
+
+    useEffect(() =>{
+        readAcomp()
+    }, [filteredProducts])
 
     const closeUProduct = () => {
         setUProductIsOpen(false)
@@ -145,6 +180,18 @@ const Leer_productos = ({ marcas }) => {
                         marca={producto.marca.nombre}
                         precio={producto.precio}
                         foto={producto.foto}
+                        updatePage={updatePage}
+                        editProduct={openUProduct}
+                    />))
+                }
+                {acompanamientos &&
+                    acompanamientos.map((acompanamiento) => (<Tarjeta_Producto_Admin key={acompanamiento.id_acompanamiento}
+                        id_producto={acompanamiento.id_acompanamiento}
+                        nombre={acompanamiento.nombre}
+                        ml={acompanamiento.gr}
+                        marca={acompanamiento.marca.nombre}
+                        precio={acompanamiento.precio}
+                        foto={acompanamiento.foto}
                         updatePage={updatePage}
                         editProduct={openUProduct}
                     />))

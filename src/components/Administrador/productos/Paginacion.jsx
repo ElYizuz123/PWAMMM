@@ -15,7 +15,6 @@ const Paginacion = () => {
     const searchParams = useSearchParams()
 
     const handleChange = (newPage) => {
-        console.log(totalPages)
         if (newPage <= totalPages) {
             router.push('?pages=' + newPage)
             setPage(newPage)
