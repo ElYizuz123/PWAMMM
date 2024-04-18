@@ -14,7 +14,7 @@ function page() {
       <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
 
 
-        <div className="mt-48">
+        <div className="mt-12">
           <ContactoForm></ContactoForm>
         </div>
 
