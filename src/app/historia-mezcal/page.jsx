@@ -49,7 +49,7 @@ const page = () => {
 
                             <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                               {/* <Image  src="/multimedia/historia.jpg" height={300} width={600} alt="Mujeres Mezcaleras de Michoacán"  className="h-full w-full object-cover object-center shadow-lg "/>*/}
-                              <img src="/multimedia/historia.jpg" alt="Mujeres Mezcaleras de Michoacán" className="h-full w-full object-cover object-center shadow-lg " />
+                              <img src="/multimedia/historia.jpg" alt="Mujeres Mezcaleras de Michoacán" className="h-full w-full object-cover object-center shadow-lg border-4 " />
                             </div>
                             <div className="h-64 w-44 overflow-hidden rounded-lg">
                               {/* <Image  src="/multimedia/fondo-historia.jpeg" height={300} width={600} alt="Mujeres Mezcaleras de Michoacán"  className="h-full w-full object-cover object-center shadow-lg "/>*/}
@@ -87,7 +87,6 @@ const page = () => {
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>

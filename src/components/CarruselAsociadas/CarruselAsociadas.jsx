@@ -54,6 +54,7 @@ const CarruselAsociadas = () => {
                                             slidesPerView={3}
                                             centeredSlides={true}
                                             autoplay={{ delay: 4000, disableOnInteraction: false }}
+                                            className='miSwiper'
                                             
 
                                         >

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Berkshire_Swash } from "next/font/google";
 import Image from 'next/image';
 
