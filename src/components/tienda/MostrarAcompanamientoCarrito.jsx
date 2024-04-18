@@ -4,6 +4,8 @@ import { Preahvihear } from "next/font/google";
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { PlusIcon, CheckIcon } from "@heroicons/react/solid"; // o @heroicons/react/solid para un estilo lleno
+import { CheckCircleIcon, RefreshIcon } from "@heroicons/react/solid";
 
 const MostrarAcompanamientoCarrito = ({
   id_producto,
@@ -13,19 +15,30 @@ const MostrarAcompanamientoCarrito = ({
   ml,
   marca,
 }) => {
+  const [buttonState, setButtonState] = useState("idle");
   const { addProductos } = useContext(ProductContext);
 
   const handleAddToCart = () => {
-    const newProduct = {
-      id_producto,
-      imagen,
-      nombre,
-      marca,
-      precio,
-      ml,
-    };
+    setButtonState("loading");
+    setTimeout(() => {
+      setButtonState("success");
 
-    addProductos(newProduct);
+      const newProduct = {
+        id_producto,
+        imagen,
+        nombre,
+        marca,
+        precio,
+        ml,
+      };
+
+      addProductos(newProduct);
+
+      setTimeout(() => {
+        setButtonState("idle");
+      }, 2000);
+    }, 1500);
+    
   };
   return (
     <div className="space-y-4 mt-4">
@@ -42,15 +55,27 @@ const MostrarAcompanamientoCarrito = ({
           </h3>
           <p className="text-sm text-gray-500">${precio}</p>
         </div>
+
         <button
-          className="text-pink-500 hover:scale-110 transition transform duration-300 ease-in-out"
+          className={`p-2 rounded-full ${
+            buttonState === "loading"
+              ? "bg-white text-[#F70073]"
+              : buttonState === "success"
+              ? "bg-green-500"
+              : "text-[#F70073] bg-white hover:bg-[#F70073] hover:text-white"
+          }`}
           onClick={handleAddToCart}
         >
-          <img
-            className="h-6 w-6 rounded"
-            src="/emoticons/carrito3.png"
-            alt="Queso"
-          />
+          {buttonState === "idle" && <PlusIcon className="h-6 w-6" />}
+          {buttonState === "loading" && (
+            <RefreshIcon className="h-5 w-5 animate-spin mx-auto" />
+          )}
+          {buttonState === "success" && (
+            <div className="flex items-center justify-center">
+              <CheckIcon className="h-6 w-6 text-white" />
+              <span className="ml-2 text-white">Agregado</span>
+            </div>
+          )}
         </button>
       </div>
     </div>

@@ -17,15 +17,16 @@ const Page = () => {
   return (
     <LayoutPrincipal>
       <div className={k2d.className}>
-        <div className=" mt-44">
+        <div className=" mt-40">
           <div className="relative  min-h-screen  ">
-            <div className="absolute bottom-0 h-full w-full z-0">
+            <div className="absolute bottom-0 w-full ">
               <Image
-                src="/backgroundImage.jpg"
+                src="/mezcal_background.png"
                 alt="Imagen de fondo"
                 width={1000}
                 height={1000}
-                className="w-full opacity-50"
+                objectFit="cover"
+                className="w-full opacity-60"
               />
             </div>
 

@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { K2D } from "next/font/google";
 import Link from "next/link";
+import { ProductContext } from "@/context/ProductContext";
 
 const k2d = K2D({
   weight: ["400"],
@@ -11,11 +12,20 @@ const k2d = K2D({
 
 function FormaPago() {
   const [shippingMethod, setShippingMethod] = useState("delivery");
+  const envio = 199;
+
+  const { productos } = useContext(ProductContext);
+  const totalVenta = productos.reduce(
+    (total, producto) => total + producto.cantidad * producto.precio,
+    0
+  );
 
   const handleShippingChange = (event) => {
     setShippingMethod(event.target.value);
+    console.log("Nuevo método de envío seleccionado:", event.target.value);
   };
-  const [paymentMethod, setPaymentMethod] = useState("delivery");
+
+  const [paymentMethod, setPaymentMethod] = useState("delivery2");
 
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -34,13 +44,12 @@ function FormaPago() {
 
   return (
     <div className={k2d.className}>
-      
       <div className=" w-[500px] h-auto  p-6   py-4 ">
         <p className="font-bold text-[#F70073] text-2xl">FORMA DE PAGO</p>
         <div className=" flex ml-4 mt-10">
           <h3 className="text-black font-semibold text-xl">SUB-TOTAL:</h3>
           <p className="text-green-700 font-bold text-xl ml-16  ">
-            {/*total*/} $1900
+            {/*total*/}$ {totalVenta}
           </p>
         </div>
         {/*ENVÍO*/}
@@ -73,15 +82,15 @@ function FormaPago() {
         <div className=" flex mt-10 ml-4 ">
           <h3 className="text-black font-semibold text-xl">ORDEN-TOTAL:</h3>
           <p className="text-green-700 font-bold text-xl ml-12 ">
-            {/*total*/} $1900
+            ${shippingMethod === "pickup" ? totalVenta : totalVenta + envio}
           </p>
         </div>
         <div className="flex flex-col mt-10 ml-4">
           <label>
             <input
               type="checkbox"
-              value="delivery"
-              checked={paymentMethod === "delivery"}
+              value="delivery2"
+              checked={paymentMethod === "delivery2"}
               onChange={handlePaymentChange}
               className="form-checkbox text-[#F70073]"
             />
@@ -92,8 +101,8 @@ function FormaPago() {
           <label>
             <input
               type="checkbox"
-              value="pickup"
-              checked={paymentMethod === "pickup"}
+              value="pickup2"
+              checked={paymentMethod === "pickup2"}
               onChange={handlePaymentChange}
               className="form-checkbox text-[#F70073]"
             />

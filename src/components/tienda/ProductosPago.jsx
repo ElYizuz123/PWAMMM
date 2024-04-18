@@ -7,34 +7,41 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-function ProductosPago() {
+function ProductosPago({
+  id_producto,
+  imagen,
+  nombre,
+  marca,
+  precio,
+  ml,
+  cantidad
+}) {
+ 
   return (
     <div className={k2d.className}>
-      <div className="relative flex mt-2 ">
-        {/*tarjeta*/}
-        <div className=" w-[500px] h-auto mt-4 ">
-          <div className="border-b-2 border-opacity-20 w-[600px] border-[#F70073]  ">
+      <div className="relative flex mt-5 ">
+        <div className="border-b-2 border-opacity-20 w-[600px] h-[100px] border-[#F70073]  ">
+          <div>
             <img
-              className="  w-[150px] h-[200px] ml-5 rounded-md"
-              src="\productos\armonia_1.jpg"
-              alt="Botellas"
+              src={`/productos/${imagen}`}
+              className="w-20 h-20 object-cover rounded-md mr-4"
             />
+          </div>
 
-            {/*información */}
-            <div className="absolute top-8 left-[160px] ml-10">
-              <p className="text-black text-2xl font-bold">
-                MEZCAL PRIDE 750ML{" "}
-              </p>
-              <p className="mt-2 text-black text-xl">Marca: ARMONIA</p>
-            </div>
-            <div className="absolute top-44 left-[180px] flex ml-10">
-              <p className="text-[#F70073] text-xl font-semibold ">
-                {/*cantidad de productos*/} x1
-              </p>
-              <p className=" text-green-700 font-bold text-xl ml-48">
-                {/*precio productos*/} $399
-              </p>
-            </div>
+          {/*información */}
+          <div className="absolute top-3 left-[160px] ml-10">
+            <p className="text-black text-xl font-bold">
+              {nombre} {ml}ml
+            </p>
+            <p className="mt-2 text-black text-xl">Marca: {marca}</p>
+          </div>
+          <div className="absolute mt-2 left-[180px] flex ml-10">
+            <p className="text-[#F70073] text-xl font-semibold ">
+              {/*cantidad de productos*/} x{cantidad}
+            </p>
+            <p className=" text-green-700 font-bold text-xl ml-48">
+              {/*precio productos*/} ${precio}
+            </p>
           </div>
         </div>
       </div>

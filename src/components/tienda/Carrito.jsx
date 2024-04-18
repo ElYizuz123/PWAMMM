@@ -1,19 +1,29 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useContext } from "react";
 import { ProductContext } from "@/context/ProductContext";
+import { ShoppingCartIcon } from "@heroicons/react/outline";
+import { XIcon, TrashIcon } from "@heroicons/react/solid";
 
 const Carrito = () => {
-  const { productos } = useContext(ProductContext);
+  const { productos, total, cartCountAnimation, deleteProduct} = useContext(ProductContext);
+  const [isCartVisible, setIsCartVisible] = useState(false);
+  
+  const handleDelete = (id_producto, nombre) => {
+    deleteProduct(id_producto, nombre);
+  };
+
   return (
     <div className="relative">
-      <Link href={"/tienda/carrito"}>
+      <button onClick={() => setIsCartVisible(!isCartVisible)}>
         <div className="fixed bottom-4 right-4 flex items-center justify-center w-16 h-16 bg-[#F70073] rounded-full z-50 hover:scale-110 transition transform duration-300 ease-in-out">
           <div className="relative flex justify-center items-center">
             <img src="\emoticons\carrito.png" className="z-10 object-cover" />
 
-            <span className="absolute -top-5 -right-5 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gray-800 rounded-full z-20">
+            <span
+              className={`absolute -top-5 -right-5 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gray-800 rounded-full z-20 ${cartCountAnimation}`}
+            >
               {productos.reduce(
                 (total, producto) => total + producto.cantidad,
                 0
@@ -21,7 +31,80 @@ const Carrito = () => {
             </span>
           </div>
         </div>
-      </Link>
+      </button>
+
+      {isCartVisible && (
+        <div className="fixed top-0 right-0 w-96 h-full bg-white shadow-xl z-40 p-4">
+          <div className="flex justify-between items-center border-b">
+            <h2 className="text-lg font-bold">TU CARTA</h2>
+            <XIcon
+              className="h-6 w-6 cursor-pointer transition duration-300 ease-in-out hover:text-red-500 hover:rotate-180"
+              onClick={() => setIsCartVisible(false)}
+            />
+          </div>
+
+          {/* Contenido del carrito */}
+          <div className="flex flex-col h-full">
+            <div
+              className="overflow-y-auto p-4 custom-scrollbar"
+              style={{ height: "calc(100% - 160px)" }}
+            >
+              {productos.map((producto) => (
+                <div
+                  key={producto.id}
+                  className="flex items-start justify-between mb-6 bg-white p-4 rounded-lg shadow-md"
+                >
+                  <div className="flex">
+                    <img
+                      src={`/productos/${producto.imagen}`}
+                      alt={producto.nombre}
+                      className="w-20 h-20 object-cover rounded-md mr-4"
+                    />
+                    <div className="flex flex-col justify-between">
+                      <div>
+                        <h3 className="font-bold text-base">
+                          {producto.nombre}
+                        </h3>
+                        <p className="text-xs">{producto.marca}</p>
+                        <p className="text-xs">{producto.ml}ml</p>
+                      </div>
+                      <div>
+                        <p className="text-sm">Cantidad: {producto.cantidad}</p>
+                        <p className="text-md font-bold">
+                          Subtotal: ${producto.cantidad * producto.precio}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col justify-between items-end">
+                    <p className="text-md font-bold text-black">
+                      ${producto.precio}
+                    </p>
+                    <TrashIcon
+                      className="h-5 w-5 text-red-500 cursor-pointer transition duration-300 ease-in-out hover:text-red-700 hover:scale-110"
+                      onClick={() =>
+                        handleDelete(producto.id_producto, producto.nombre)
+                      }
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* Total */}
+            <div className="flex justify-between items-center font-bold border-t mt-4 pt-4">
+              <p>Total:</p>
+              <p className="border-b-2 border-red-500">${total}</p>
+            </div>
+
+            {/* Botón de ir al carrito y pagar */}
+            <a href="/tienda/carrito">
+              <button className="bg-[#F70073] font-bold text-white w-full py-2 mt-4 rounded transition duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:-translate-y-1">
+                VER CARTA & PAGAR →
+              </button>
+            </a>
+          </div>
+        </div>
+      )}
       {/* <div className=" flex justify-center items-center ">
         <div className=" w-[1250px]  mt-64">
           <Link href="/tienda">

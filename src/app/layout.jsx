@@ -14,9 +14,9 @@ const k2d = K2D({ subsets: ['latin'], weight: '400' })
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="custom-scrollbarL">
       <body className={k2d.className}>
-      <ProductProvider>
+        <ProductProvider>
           <div>{children}</div>
         </ProductProvider>
       </body>
