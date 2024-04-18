@@ -15,7 +15,6 @@ const DetallesPago = () => {
           PRODUCTOS
         </p>
         {productos.map((producto) => (
-        
           <ProductosPago
             id_producto={producto.id_producto}
             imagen={producto.imagen}
@@ -24,15 +23,19 @@ const DetallesPago = () => {
             precio={producto.precio}
             ml={producto.ml}
             cantidad={producto.cantidad}
-           
           />
-          
         ))}
       </div>
-
+     
       <div className="md:w-1/2 p-4 ml-36 border-t md:border-t-0 md:border-l">
         <div className="">
-          <FormaPago></FormaPago>
+          {/* {productos.map((producto) => ( */}
+            <FormaPago
+              // id_producto={producto.id_producto}
+              // precio={producto.precio}
+              // cantidad={producto.cantidad}
+            />
+          {/* ))} */}
         </div>
       </div>
     </div>
