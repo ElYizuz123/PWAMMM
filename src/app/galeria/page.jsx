@@ -1,24 +1,11 @@
 "use client"
-import CarruselGaleria from '@/components/CarruselGaleria/CarruselGaleria';
+import Galeria from '@/components/Galeria/Galeria';
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 
 // Página de galería
 function page() {
-
-    const [categorias, setCategorias] = useState(null);
-    const readData = async () => {
-        const res = await fetch('/api/read_categorias');
-        const resJSON = await res.json();
-        setCategorias(JSON.parse(resJSON));
-        console.log(resJSON);
-    };
-
-    useEffect(() => {
-        readData();
-    }, []);
-
 
     return (
         <LayoutPrincipal>
@@ -33,19 +20,9 @@ function page() {
                     />
                 </div> */}
 
+                <p className="text-5xl font-medium pb-6" style={{textAlign: 'center'}}>Galería</p>
 
-                <div className="items-center text-black justify-center mt-14 ml-6 lg:ml-24 md:ml-16 sm:ml-4">
-                    {categorias &&
-                        categorias.map((galeria_categoria) => (
-                            <div key={galeria_categoria.id_categoria}>
-                                <p className="text-5xl ml-3">{galeria_categoria.categoria}</p>
-                                <div className="mb-14">
-                                    <CarruselGaleria categorias={galeria_categoria.id_categoria}></CarruselGaleria>
-                                </div>
-                            </div>
-                        ))}
-
-                </div>
+                <Galeria/>
 
             </div>
             </div>

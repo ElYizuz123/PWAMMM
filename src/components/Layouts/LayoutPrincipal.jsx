@@ -1,3 +1,4 @@
+"use client"
 import IconoInicio from "@/components/navbar/iconoInicio";
 import IconoTienda from "@/components/navbar/iconoTienda";
 import IconoNosotras from "@/components/navbar/iconoNosotras";
@@ -9,6 +10,7 @@ import IconoMenu from "@/components/navbar/iconoMenu";
 import { Berkshire_Swash } from "next/font/google";
 import Carrito from "../tienda/Carrito";
 import Footer from "../Footer/Footer";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -17,10 +19,17 @@ const berkshire = Berkshire_Swash({
 });
 
 const LayoutPrincipal = ({ children }) => {
+  const { scrollY } = useScroll();
+  const scale = useTransform(scrollY, [0, 100], [1, 0.6]);
+
   return (
     <div>
       <div>
-        <nav className="bg-black w-full z-20 top-0 start-0 fixed">
+        <motion.nav className="bg-black w-full z-20 top-0 fixed"
+          style={{
+            scaleY: scale,
+            transformOrigin: "top",
+          }}>
           <div className="">
             <img className="h-8 w-full" src="\navbar\banner.jpg" />
           </div>
@@ -87,11 +96,11 @@ const LayoutPrincipal = ({ children }) => {
               </div>
             </div>
           </nav>
-        </nav>
+        </motion.nav>
       </div>
       <Carrito />
       <div>{children}</div>
-      <Footer/>
+      <Footer />
     </div>
 
   );
