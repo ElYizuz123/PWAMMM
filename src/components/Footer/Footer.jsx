@@ -6,9 +6,6 @@ import Image from 'next/image'
 const Footer = () => {
   return (
     <footer className="bg-black text-white w-screen">
-      <div className="bg-black z-50 top-0 left-0 w-screen">
-        <img className="h-8 w-full" src="\navbar\banner.jpg" alt="Banner" />
-      </div>
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="flex flex-wrap justify-between items-center">
           <div className="mb-4 lg:mb-0">

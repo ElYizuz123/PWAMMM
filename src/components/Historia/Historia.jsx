@@ -60,13 +60,12 @@ const Historia = () => {
                     </div>
                 <p className="mt-4 text-xl">
                 El pueblo purépecha Curicaueri nació en el oriente y tomaba la forma del sol, dios del fuego que recorría la bóveda celeste como un halcón. 
-                El aire, el agua, la tierra y el fuego son los cuatro elementos a los que les rendían reverencia y era Curicaueri "el gran dios del fuego", 
-                y son estos mismos elementos los indispensables para la elaboración del elixir de la vida, el mezcal. 
+                El aire, el agua, la tierra y el fuego son los cuatro elementos a los que les rendían reverencia...
                 </p>
               
                 <div className="mt-8">
-                    <a href="#"
-                       className="mx-auto block w-full text-center text-lg font-medium text-gray-100 bg-[#f70073] hover:bg-[#e39abd] hover:scale-105 hover:shadow-lg md:w-48 py-3 px-6 rounded-full">Ver más</a>
+                    <Link href="\historia-mezcal"
+                       className="mx-auto block w-full text-center text-lg font-medium text-gray-100 bg-[#f70073] hover:bg-[#e39abd] hover:scale-105 hover:shadow-lg md:w-48 py-3 px-6 rounded-full">Ver más</Link>
                 </div>
             </div>
             
