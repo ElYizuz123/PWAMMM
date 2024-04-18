@@ -66,7 +66,7 @@ const Editar_pregunta = ({onClose, isOpen, idPregunta}) => {
     return (
         <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[300px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
-                <p className='font-bold pl-5'>Producto</p>
+                <p className='font-bold pl-5'>Pregunta</p>
                 <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
             </div>
             <div className='w-full h-full flex justify-center'>
@@ -109,8 +109,8 @@ const Editar_pregunta = ({onClose, isOpen, idPregunta}) => {
                                 <div className='w-full flex justify-end items-end'>
                                     <button
                                         type='submit'
-                                        className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5'
-                                    >Agregar
+                                        className='bg-[#98E47D] w-48 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5'
+                                    >Guardar cambios
                                     </button>
                                 </div>
                             </form>

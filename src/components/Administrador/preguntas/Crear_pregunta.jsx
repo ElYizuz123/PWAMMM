@@ -68,7 +68,7 @@ const Crear_pregunta = () => {
             <div ref={createRef} hidden={!cPreguntaIsOpen} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${cPreguntaIsOpen ? "" : "pointer-events-none"}`}>
                 <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[300px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
-                        <p className='font-bold pl-5'>Producto</p>
+                        <p className='font-bold pl-5'>Pregunta</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
                     </div>
                     <div className='w-full h-full flex justify-center'>

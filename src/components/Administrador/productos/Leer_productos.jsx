@@ -16,6 +16,7 @@ const Leer_productos = ({ marcas }) => {
     const {update, page, setTotalPages} = useContext(contexto)
     const [totalBottles, setTotalBottles] = useState(0)
     const [acompanamientos, setAcompanamientos] = useState(null)
+    const [searchBar, setSearchBar] = useState(null)
     const searchParams = useSearchParams()
     const upRef = useRef(null)
 
@@ -76,15 +77,25 @@ const Leer_productos = ({ marcas }) => {
                     toma:sobrante,
                     pag:pagActual
                 }
-                const res = await fetch('/api/producto/read_acompanamientos',{
+                var dir = ''
+                if(searchBar && searchBar!=""){
+                    dir='/api/producto/read_acompanamientos_like'
+                    data['busqueda']=searchBar
+                }
+                else{
+                    dir='/api/producto/read_acompanamientos'
+                }
+                const res = await fetch(dir,{
                     method:'POST',
                     body:JSON.stringify(data)
                 })
                 const resJSON = await res.json()
-                setAcompanamientos(JSON.parse(resJSON))
+                setAcompanamientos(JSON.parse(resJSON))  
+                
             }
         }
     }
+
 
     useEffect(() =>{
         readAcomp()
@@ -118,6 +129,7 @@ const Leer_productos = ({ marcas }) => {
 
     //Cambio en la búsqueda
     const handleChange = (event) => {
+        setSearchBar(event.target.value)
         if(event.target.value==""){
             readData()
         }

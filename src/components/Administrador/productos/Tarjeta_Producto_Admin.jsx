@@ -100,9 +100,13 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
             </figure>
             <div className='absolute bottom-5 w-full flex justify-center'>
                 <div className="min-details text-center">
+                    {isAcompanamiento && 
                     <h1 className="text-xl font-semibold">
+                    {nombre} {ml} Gr <span className="text-">({marca})</span>
+                    </h1>}
+                    {!isAcompanamiento && <h1 className="text-xl font-semibold">
                         {nombre} {ml} ml <span className="text-">({marca})</span>
-                    </h1>
+                    </h1>}
                     <h1 className="price font-semibold">${precio}</h1>
                 </div>
             </div>

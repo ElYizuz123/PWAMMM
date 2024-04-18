@@ -73,7 +73,7 @@ const Editar_categoria = ({isOpen, onClose, idCategoria}) => {
         <div className='h-full'>
                 <div className='w-[40%] h-1/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[300px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
-                        <p className='font-bold pl-5'>Producto</p>
+                        <p className='font-bold pl-5'>Categoría</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
                     </div>
                     <div className='h-full w-full flex justify-center'>

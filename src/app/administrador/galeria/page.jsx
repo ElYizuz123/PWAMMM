@@ -10,7 +10,7 @@ import React from 'react'
 
 const Page = () => {
   return (
-    <LayoutCRUD title="Eventos">
+    <LayoutCRUD title="Galería">
       <UpdateProvider>
         <main className='flex flex-col items-center justify-between w-full min-h-[2300px]'>
           <div className='relative w-full min-h-[2300px] overflow-hidden'>

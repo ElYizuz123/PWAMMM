@@ -117,7 +117,7 @@ const Crear_evento = () => {
             <div ref={createRef} hidden={!cEventosIsOpen} className={`absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[1200px] ${cEventosIsOpen ? "" : "pointer-events-none"}`}>
                 <div className='w-[80%] h-2/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[600px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
-                        <p className='font-bold pl-5'>Producto</p>
+                        <p className='font-bold pl-5'>Evento</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
                     </div>
                     <div className='w-full h-full flex justify-between'>
