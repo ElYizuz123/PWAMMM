@@ -1,24 +1,11 @@
 "use client"
-import CarruselGaleria from '@/components/CarruselGaleria/CarruselGaleria';
 import Galeria from '@/components/Galeria/Galeria';
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 
 // Página de galería
 function page() {
-
-    const [categorias, setCategorias] = useState(null);
-    const readData = async () => {
-        const res = await fetch('/api/read_categorias');
-        const resJSON = await res.json();
-        setCategorias(JSON.parse(resJSON));
-        console.log(resJSON);
-    };
-
-    useEffect(() => {
-        readData();
-    }, []);
 
     return (
         <LayoutPrincipal>
