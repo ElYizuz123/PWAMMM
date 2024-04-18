@@ -102,7 +102,7 @@ const Leer_marcas = ({asociadas}) => {
                     <div className='flex justify-between w-full mt-0.5 pl-5 '>
                         <p className='font-bold w-44'>{marca.nombre}</p>
                         <p className='font-bold ml-[7%] text-left w-44'>{marca.asociada.nombre}</p>
-                        <p className='font-bold w-16 text-left ml-5'>{marca.tipo == 0 ? "Mezcal" : "Acompañamiento"}</p>
+                        <p className='font-bold w-16 text-left ml-5'>{marca.tipo == 1 ? "Mezcal" : "Acompañamiento"}</p>
                         <button className='w-12 h-6 font-bold flex justify-center items-center bg-[#91caf8]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'
                             onClick={() => openUMarca(marca.id_marca)}
                         >Editar</button>

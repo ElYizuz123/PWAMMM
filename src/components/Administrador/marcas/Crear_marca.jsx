@@ -82,8 +82,8 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                                     className='w-full border-2 border-black rounded-lg pl-1 mt-5'
                                 >
                                     <option></option>
-                                    <option value={0}>Mezcal</option>
-                                    <option value={1}>Acompañamiento</option>
+                                    <option value={1}>Mezcal</option>
+                                    <option value={2}>Acompañamiento</option>
                                 </select>
 
                                 <select
