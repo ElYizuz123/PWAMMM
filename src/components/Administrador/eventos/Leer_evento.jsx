@@ -1,20 +1,39 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Tarjeta_evento from './Tarjeta_evento'
 import { contexto } from '../UpdateProvider'
 import Editar_evento from './Editar_evento'
 import Paginacion from '../productos/Paginacion'
+import { useSearchParams } from 'next/navigation'
 
 const Leer_evento = () => {
-    const { update } = useContext(contexto)
+    const { update, page, setTotalPages} = useContext(contexto)
     const [eventos, setEventos] = useState(null)
     const [uEventoIsOpen, setUEventoIsOpen] = useState(false)
     const [updateEvento, setUpdateEvento] = useState(null)
+    const searchParams = useSearchParams()
+    const editRef = useRef(null)
 
     const readData = async () => {
-        const res = await fetch('/api/eventos/read_eventos')
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        const res = await fetch('/api/eventos/read_eventos',{
+            method:'POST',
+            body:JSON.stringify(search)
+        })
         const resJSON = await res.json()
         setEventos(JSON.parse(resJSON))
+    }
+
+    const countData = async () =>{
+        const res = await fetch('/api/eventos/count_eventos')
+        const resJSON = await res.json()
+        setTotalPages(Math.ceil((resJSON)/12))
     }
 
     const onClose = () => {
@@ -28,17 +47,18 @@ const Leer_evento = () => {
 
     useEffect(() => {
         if (uEventoIsOpen) {
-            window.scrollTo({ top: 230, behavior: 'smooth' });
+            editRef.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [uEventoIsOpen]);
 
     useEffect(() => {
         readData()
+        countData()
     }, [update])
 
     return (
         <div>
-            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uEventoIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={editRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uEventoIsOpen ? "" : "pointer-events-none"}`}>
                 {uEventoIsOpen && <Editar_evento
                     isOpen={uEventoIsOpen}
                     onClose={onClose}

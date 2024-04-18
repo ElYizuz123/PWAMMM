@@ -1,16 +1,9 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
-export async function POST(request){
+export async function GET(){
     try{
-        var datos = await request.json()
-        if(datos==null)
-        datos=1
-        const data = await db.asociada.findMany({
-            take:12,
-            skip:(datos-1)*12,
-        });
-        console.log(data);
+        const data = await db.galeria_categoria.count();
         return NextResponse.json(JSON.stringify(data));
 
     }catch(err){

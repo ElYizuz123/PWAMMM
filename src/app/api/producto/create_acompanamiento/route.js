@@ -6,18 +6,16 @@ export async function POST(request){
 
     console.log(data);
     try{
-        const newProducto = await db.producto.create({
+        const newProducto = await db.acompanamiento.create({
             data:{
                 nombre: data.nombre.toUpperCase(),
-                ml: Number(data.ml),
-                precio: Number(data.precio),
+                gr: data.gr,
+                //precio: Number(data.precio),
                 descripcion: data.descripcion,
                 foto: data.foto, 
                 marca_id_marca: parseInt(data.marca),
-                mercadoLibre: data.mercado_lib,
+                //mercadoLibre: data.mercado_lib,
                 cantidad: parseInt(data.cantidad),
-                tipo_agave: data.tipo_agave,
-                cantidad_alcohol: parseInt(data.cantidad_alcohol)
             }
         })
         return NextResponse.json("Registrado");

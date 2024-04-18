@@ -2,16 +2,20 @@ const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
 export async function POST(request){
+
     try{
         var datos = await request.json()
-        if(datos==null)
-        datos=1
-        const res = await db.evento.findMany({
-            take:12,
-            skip:(datos-1)*12,
-        })
-        console.log(res);
-        return NextResponse.json(JSON.stringify(res));
+        const data = await db.acompanamiento.findMany({
+            take:datos.toma,
+            skip:(datos.pag-1)*12,
+            include: {
+                marca: true
+            },
+            orderBy:{
+                id_acompanamiento:'asc'
+            }
+        });
+        return NextResponse.json(JSON.stringify(data));
 
     }catch(error){
         console.error('Error al leer los datos', error)

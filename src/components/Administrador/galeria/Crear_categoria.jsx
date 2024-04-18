@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 import { contexto } from '../UpdateProvider'
@@ -10,6 +10,7 @@ const Crear_categoria = () => {
     const { register, handleSubmit, reset, setValue } = useForm()
     const [cCategoria, setCCategoria] = useState(false)
     const {update, setUpdate} = useContext(contexto)
+    const createRef = useRef(null)
 
     const isOpen = () => {
         setCCategoria(true)
@@ -18,6 +19,12 @@ const Crear_categoria = () => {
     const onClose = () => {
         setCCategoria(false)
     }
+
+    useEffect(() => {
+        if (cCategoria) {
+            createRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+    }, [cCategoria]);
 
     const handleOnSubmit = async (data) => {
         const res = await fetch('/api/galeria/create_categoria', {
@@ -60,10 +67,10 @@ const Crear_categoria = () => {
                 <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-4'>Agregar categoría</p>
             </button>
-            <div hidden={!cCategoria} className={`absolute top-[15%] left-[40%] z-10 w-6/12 h-[1200px] ${cCategoria ? "" : "pointer-events-none"}`}>
+            <div ref={createRef} hidden={!cCategoria} className={`absolute top-[15%] left-[40%] z-10 w-6/12 h-[1200px] ${cCategoria ? "" : "pointer-events-none"}`}>
                 <div className='w-[40%] h-1/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[300px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
-                        <p className='font-bold pl-5'>Producto</p>
+                        <p className='font-bold pl-5'>Categoría</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
                     </div>
                     <div className='h-full w-full flex justify-center'>

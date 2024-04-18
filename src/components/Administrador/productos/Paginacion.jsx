@@ -5,38 +5,124 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { contexto } from '../UpdateProvider'
 
 
-const Paginacion = ({ totalPages }) => {
-    
+const Paginacion = () => {
+
 
     const [paginas, setPaginas] = useState()
-    const {setPage, update, setUpdate} = useContext(contexto)
+    const { setPage, update, setUpdate, page, totalPages } = useContext(contexto)
     const pathName = usePathname()
     const router = useRouter()
     const searchParams = useSearchParams()
 
-    const handleChange = (page) => {    
-        router.push('?pages='+page)
-        setPage(page)
-        const up= !update
-        setUpdate(up)
+    const handleChange = (newPage) => {
+        if (newPage <= totalPages) {
+            router.push('?pages=' + newPage)
+            setPage(newPage)
+            const up = !update
+            setUpdate(up)
+        }
     }
 
 
-        
 
-    
-        
-    useEffect(() =>{
-        if(totalPages<5){
-            console.log("hola")
+
+
+
+    useEffect(() => {
+        console.log(totalPages)
+        var search = 0
+        if (!page) {
+            search = parseInt(searchParams.get('pages'))
         }
-        else{
-            const arr = [1,2,3,4,5]
-            setPaginas(arr)
+        else {
+            search = page
+        }
+        if (search) {
+            if (totalPages < 5) {
+                var arr = []
+                for (var i = 0; i < totalPages; i++) {
+                    arr[i] = i + 1
+                }
+                setPaginas(arr)
+            }
+            else {
+                if (search > 4) {
+
+                    if((search+1)<=totalPages){
+                        var arr = []
+                        var it = 0
+                        for (var i = search - 4; i < search; i++) {
+                            arr[it] = i + 1
+                            console.log(i + 1)
+                            it++
+                        }
+                        arr[it] = search + 1
+                        setPaginas(arr)
+                    }
+                }
+                else {
+                    const arr = [1, 2, 3, 4, 5]
+                    setPaginas(arr)
+                }
+
+            }
+        }
+        else {
+            if (totalPages < 5) {
+                const arr = []
+                for (var i = 0; i < totalPages; i++) {
+                    arr[i] = i + 1
+                }
+                setPaginas(arr)
+            }
+            else {
+                const arr = [1, 2, 3, 4, 5]
+                setPaginas(arr)
+            }
         }
     }, [totalPages])
-    
-    useEffect(() =>{
+
+    const handleNext = () => {
+        var search = 0
+        if (!page) {
+            search = parseInt(searchParams.get('pages'))
+        }
+        else {
+            search = parseInt(page)
+        }
+        if (search) {
+            if ((search + 1) <= totalPages) {
+                router.push('?pages=' + (search + 1))
+                setPage(search + 1)
+                const up = !update
+                setUpdate(up)
+            }
+        } else {
+            if ((search + 1) <= totalPages) {
+                router.push('?pages=' + 1)
+                setPage(1)
+                const up = !update
+                setUpdate(up)
+            }
+        }
+    }
+    const handlePrev = () => {
+        var search = 0
+        if (!page) {
+            search = parseInt(searchParams.get('pages'))
+        }
+        else {
+            search = page
+        }
+        if (search && search != 1) {
+            router.push('?pages=' + (search - 1))
+            setPage(search - 1)
+            const up = !update
+            setUpdate(up)
+        }
+    }
+
+    useEffect(() => {
         // if(paginas[paginas.lenght()-1]==totalPages-1){
 
         // }
@@ -50,14 +136,14 @@ const Paginacion = ({ totalPages }) => {
     }, [paginas, totalPages])
     return (
         <div className="flex items-center justify-end space-x-1 mr-24">
-            <button className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
+            <button onClick={handlePrev} className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
                 Anterior
             </button>
-            {paginas && paginas.map((pagina, index) =>(<button key={pagina} onClick={() => handleChange(pagina)} className="px-3 py-1 rounded-md bg-slate-200 hover:bg-gray-300">
+            {paginas && paginas.map((pagina, index) => (<button key={pagina} onClick={() => handleChange(pagina)} className="px-3 py-1 rounded-md bg-slate-200 hover:bg-gray-300">
                 {pagina}
-                
+
             </button>))}
-            <button className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
+            <button onClick={handleNext} className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
                 Siguiente
             </button>
         </div>
