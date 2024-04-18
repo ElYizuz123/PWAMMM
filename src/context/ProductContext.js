@@ -6,12 +6,23 @@ import { createContext } from "react";
 export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
+  const [cartCountAnimation, setCartCountAnimation] = useState('');
   const [productos, setProductos] = useState(() => {
     const productosEnAlmacenamiento = localStorage.getItem("productos");
     return productosEnAlmacenamiento
       ? JSON.parse(productosEnAlmacenamiento)
       : [];
   });
+
+  const triggerCartCountAnimation = () => {
+    setCartCountAnimation('animate-bounce bg-green-600');
+    setTimeout(() => setCartCountAnimation(''), 3000);
+  };
+
+  const triggerCartCountAnimationDelete = () => {
+    setCartCountAnimation('animate-bounce bg-red-500');
+    setTimeout(() => setCartCountAnimation(''), 3000);
+  };
 
   const addProductos = (newProduct) => {
     const existe = productos.findIndex(
@@ -50,6 +61,7 @@ export const ProductProvider = ({ children }) => {
         localStorage.setItem("productos", JSON.stringify(updatedProductos));
       }
     }
+    triggerCartCountAnimation();
   };
 
   const deleteProduct = (idProducto, name) => {
@@ -59,6 +71,7 @@ export const ProductProvider = ({ children }) => {
 
     setProductos(updatedProductos);
     localStorage.setItem("productos", JSON.stringify(updatedProductos));
+    triggerCartCountAnimationDelete();
   };
 
   const updateQuantity = (tipo, newProduct) => {
@@ -82,6 +95,7 @@ export const ProductProvider = ({ children }) => {
     }
     setProductos(newProducts);
     localStorage.setItem("productos", JSON.stringify(newProducts));
+    triggerCartCountAnimation();
   };
 
   const total = productos.reduce(
@@ -93,6 +107,7 @@ export const ProductProvider = ({ children }) => {
     <ProductContext.Provider
       value={{
         productos,
+        cartCountAnimation,
         addProductos,
         deleteProduct,
         updateQuantity,

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Swal from 'sweetalert2'
 
 
-const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct }) => {
+const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct, isAcompanamiento}) => {
 
     //Data para el formulario
     const data = {
@@ -25,7 +25,13 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
         })
         const resDeletedImageJSON = await deletedImage.json()
         if (resDeletedImageJSON == 'Arhivo eliminado correctamente') {
-            const res = await fetch('/api/producto/delete_producto', {
+            var dir = ''
+            if(isAcompanamiento){
+                dir='/api/producto/delete_acompanamiento'
+            }else{
+                dir='/api/producto/delete_producto'
+            }
+            const res = await fetch(dir, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -37,7 +43,7 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
             if (resJSON == "Producto eliminado con éxito") {
                 Swal.fire({
                     title: "Eliminado!",
-                    text: "La marca fue eliminada",
+                    text: "El producto fue eliminado con éxito",
                     icon: "success"
                 });
                 updatePage()
@@ -94,9 +100,13 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
             </figure>
             <div className='absolute bottom-5 w-full flex justify-center'>
                 <div className="min-details text-center">
+                    {isAcompanamiento && 
                     <h1 className="text-xl font-semibold">
+                    {nombre} {ml} Gr <span className="text-">({marca})</span>
+                    </h1>}
+                    {!isAcompanamiento && <h1 className="text-xl font-semibold">
                         {nombre} {ml} ml <span className="text-">({marca})</span>
-                    </h1>
+                    </h1>}
                     <h1 className="price font-semibold">${precio}</h1>
                 </div>
             </div>

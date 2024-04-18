@@ -121,23 +121,27 @@ const Page = () => {
                   <MostrarItemsCarrito />
                 </div>
                 <div className="flex flex-col md:w-1/3 mt-[150px]">
-                  <div class="w-full bg-white shadow-md rounded p-4 ">
-                    {/* <div class="flex flex-col mt-4"> */}
-                    <div class="flex">
-                      <p class="font-semibold ml-4 text-2xl">Total :</p>
-
-                      <p className=" ml-[165px] font-semibold text-lg  border-b-2 border-red-500">
+                  <div class="bg-white shadow-md rounded-lg px-4 py-4 flex flex-col items-center justify-center">
+                    <div class="flex space-x-2">
+                      <p class="font-semibold text-2xl">Total:</p>
+                      <p className="text-2xl font-bold text-[#F70073]">
                         ${total}
                       </p>
                     </div>
 
+                    <div class="flex justify-between items-center mb-2">
+                      <p class="text-sm font-semibold">
+                        {productos.reduce((acc, producto) => acc + producto.cantidad, 0)} productos 
+                      </p>
+                    </div>
+                    
+
                     <Link
-                      className=" flex w-72 mx-5 justify-center mt-4 py-2 bg-green-500  text-white rounded  hover:shadow-lg hover:-translate-y-0.5 font-bold  "
+                      className="flex w-72 mx-5 justify-center py-2 bg-green-500 text-white rounded hover:shadow-lg hover:-translate-y-0.5 font-bold"
                       href={"/tienda/finalizar_compra"}
                     >
                       Finalizar compra
                     </Link>
-                    {/* </div> */}
                   </div>
                   <div class="w-full  bg-white shadow-md rounded p-4 mt-[15px] ">
                     <div className="mb-6">

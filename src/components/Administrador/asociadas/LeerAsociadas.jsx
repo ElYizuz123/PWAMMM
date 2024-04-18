@@ -1,20 +1,39 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { contexto } from '../UpdateProvider'
 import Tarjeta_Asociadas from './Tarjeta_Asociadas'
 import Update_Asociada from './Update_Asociada'
 import Paginacion from '../productos/Paginacion'
+import { useSearchParams } from 'next/navigation'
 
 const LeerAsociadas = () => {
-    const { update } = useContext(contexto)
+    const { update, page, setTotalPages} = useContext(contexto)
     const [asociadas, setAsociadas] = useState(null)
     const [uAsociadasIsOpen, setUAsociadasIsOpen] = useState(false)
     const [updateAsociada, setUpdateAsociada] = useState(null)
+    const searchParams = useSearchParams()
+    const editRef = useRef(null)
 
     const readData = async () => {
-        const res = await fetch('/api/asociadas/read_asociadas')
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        const res = await fetch('/api/asociadas/read_asociadas',{
+            method: 'POST',
+            body : JSON.stringify(search)
+        })
         const resJSON = await res.json()
         setAsociadas(JSON.parse(resJSON))
+    }
+
+    const countData = async () =>{
+        const res = await fetch('/api/asociadas/cont_asociadas')
+        const resJSON = await res.json()
+        setTotalPages(Math.ceil((resJSON)/12))
     }
 
     const onClose = () => {
@@ -28,17 +47,18 @@ const LeerAsociadas = () => {
 
     useEffect(() => {
         if (uAsociadasIsOpen) {
-            window.scrollTo({ top: 400, behavior: 'smooth' });
+            editRef.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [uAsociadasIsOpen]);
 
     useEffect(() => {
         readData()
+        countData()
     }, [update])
 
     return (
         <div>
-            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uAsociadasIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={editRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uAsociadasIsOpen ? "" : "pointer-events-none"}`}>
                 {uAsociadasIsOpen && <Update_Asociada
                     isOpen={uAsociadasIsOpen}
                     onClose={onClose}

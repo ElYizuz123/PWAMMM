@@ -1,9 +1,15 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
-export async function GET(){
+export async function POST(request){
     try{
-        const res = await db.evento.findMany()
+        var datos = await request.json()
+        if(datos==null)
+        datos=1
+        const res = await db.evento.findMany({
+            take:12,
+            skip:(datos-1)*12,
+        })
         console.log(res);
         return NextResponse.json(JSON.stringify(res));
 

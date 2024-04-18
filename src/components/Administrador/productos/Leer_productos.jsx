@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Tarjeta_Producto_Admin from './Tarjeta_Producto_Admin'
 import Editar_Producto from './Editar_Producto';
 import { contexto } from '../UpdateProvider';
@@ -10,13 +10,15 @@ import { useSearchParams } from 'next/navigation';
 const Leer_productos = ({ marcas }) => {
 
     const [filteredProducts, setFilteredProducts] = useState(null);
-    const [busqueda, setBusqueda] = useState(null);
     const [uProductIsOpen, setUProductIsOpen] = useState(false)
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
-    const {update, page} = useContext(contexto)
+    const {update, page, setTotalPages} = useContext(contexto)
+    const [totalBottles, setTotalBottles] = useState(0)
+    const [acompanamientos, setAcompanamientos] = useState(null)
+    const [searchBar, setSearchBar] = useState(null)
     const searchParams = useSearchParams()
-
+    const upRef = useRef(null)
 
     //Función para abrir pop-up editar productos
     const openUProduct = (id_producto) => {
@@ -39,7 +41,6 @@ const Leer_productos = ({ marcas }) => {
         else{
             search = page
         }
-        console.log(search)
         const res = await fetch('/api/producto/read_productos',{
             method:'POST',
             body: JSON.stringify(search)
@@ -47,28 +48,97 @@ const Leer_productos = ({ marcas }) => {
         const resJSON = await res.json()
         const parseado = JSON.parse(resJSON)
         setProductos(parseado)
-
+        setAcompanamientos(null)
     };
+
+    const countData = async () =>{
+        const res = await fetch('/api/producto/cont_productos')
+        const resJSON = await res.json()
+        setTotalPages(Math.ceil((resJSON)/12))
+        setTotalBottles(parseInt(resJSON))
+    }
+
+    const readAcomp = async () =>{
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        if(filteredProducts){
+            const sobrante = 12-(filteredProducts.length%12)
+            var pagActual = 1
+            if(search){
+                pagActual = parseInt(search)-(Math.ceil(totalBottles/12))+1
+            }
+            if(sobrante>0 && filteredProducts.length<12){
+                const data ={
+                    toma:sobrante,
+                    pag:pagActual
+                }
+                var dir = ''
+                if(searchBar && searchBar!=""){
+                    dir='/api/producto/read_acompanamientos_like'
+                    data['busqueda']=searchBar
+                }
+                else{
+                    dir='/api/producto/read_acompanamientos'
+                }
+                const res = await fetch(dir,{
+                    method:'POST',
+                    body:JSON.stringify(data)
+                })
+                const resJSON = await res.json()
+                setAcompanamientos(JSON.parse(resJSON))  
+                
+            }
+        }
+    }
+
+
+    useEffect(() =>{
+        readAcomp()
+    }, [filteredProducts])
 
     const closeUProduct = () => {
         setUProductIsOpen(false)
     };
 
     //Confirmación en la búsqueda
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit =  async (e) => {
+        e.preventDefault()
+        var search = ""
+        if(!page){
+            search = searchParams.get('pages')
+        }
+        else{
+            search = page
+        }
+        const data = {
+            busqueda:e.target[0].value,
+            page:search
+        }
+        const res = await fetch('/api/producto/read_producto_like',{
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+        const resJSON = await res.json()
+        setFilteredProducts(JSON.parse(resJSON))
     }
 
     //Cambio en la búsqueda
     const handleChange = (event) => {
-
-        setBusqueda(event.target.value);
+        setSearchBar(event.target.value)
+        if(event.target.value==""){
+            readData()
+        }
     };
 
     //Scroll automático a ventana emergente
     useEffect(() => {
         if (uProductIsOpen) {
-            window.scrollTo({ top: 230, behavior: 'smooth' })
+            upRef.current.scrollIntoView({ behavior: 'smooth' })
         }
 
     }, [uProductIsOpen])
@@ -76,17 +146,9 @@ const Leer_productos = ({ marcas }) => {
     //Actualización
     useEffect(()=>{
         readData()
+        countData()
     }, [update])
 
-    //Búsqueda
-    useEffect(() => {
-        if (productos) {
-            const filtered = productos.filter((producto) =>
-                producto.nombre.toLowerCase().includes(busqueda?.toLowerCase()),
-            );
-            setFilteredProducts(filtered);
-        }
-    }, [productos, busqueda]);
 
     //Set de los productos filtrados
     useEffect(() => {
@@ -95,7 +157,7 @@ const Leer_productos = ({ marcas }) => {
 
     return (
         <div >
-            <div className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={upRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
                 {uProductIsOpen && <Editar_Producto
                     isOpen={uProductIsOpen}
                     onClose={closeUProduct}
@@ -124,12 +186,26 @@ const Leer_productos = ({ marcas }) => {
             <div className='w-full flex flex-wrap gap-20 pl-44 pt-6 pb-36'>
                 {filteredProducts &&
                     filteredProducts.map((producto) => (<Tarjeta_Producto_Admin key={producto.id_producto}
+                        isAcompanamiento={false}
                         id_producto={producto.id_producto}
                         nombre={producto.nombre}
                         ml={producto.ml}
                         marca={producto.marca.nombre}
                         precio={producto.precio}
                         foto={producto.foto}
+                        updatePage={updatePage}
+                        editProduct={openUProduct}
+                    />))
+                }
+                {acompanamientos &&
+                    acompanamientos.map((acompanamiento) => (<Tarjeta_Producto_Admin key={acompanamiento.id_acompanamiento}
+                        isAcompanamiento={true}
+                        id_producto={acompanamiento.id_acompanamiento}
+                        nombre={acompanamiento.nombre}
+                        ml={acompanamiento.gr}
+                        marca={acompanamiento.marca.nombre}
+                        precio={acompanamiento.precio}
+                        foto={acompanamiento.foto}
                         updatePage={updatePage}
                         editProduct={openUProduct}
                     />))

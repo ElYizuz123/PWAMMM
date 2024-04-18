@@ -15,9 +15,7 @@ const ProductoCarrito = ({
   subtotal,
 }) => {
   const [quantity, setQuantity] = useState(cantidad);
-  const [total, setTotal] = useState(precio * cantidad);
-  const { productos } = useContext(ProductContext);
-
+  
   const incrementQuantity = () => {
     const newQuantity = quantity + 1;
     updateQuantityAndTotal(newQuantity, 1);
@@ -32,9 +30,7 @@ const ProductoCarrito = ({
 
   const updateQuantityAndTotal = (newQuantity, tipo) => {
     setQuantity(newQuantity);
-    const sumaCantidadProductos = Number(precio) * newQuantity;
-    setTotal(sumaCantidadProductos);
-
+    
     const newProduct = {
       id_producto,
       imagen,
@@ -59,7 +55,6 @@ const ProductoCarrito = ({
       <div className="flex items-center bg-white shadow rounded-lg p-4 my-4">
         {/* Product details with fixed width */}
         <div className="flex items-center space-x-4 flex-1 min-w-0">
-         
           {/* Ajusta el ancho mínimo según tus necesidades */}
           <img
             className="h-[100px] w-[100px] rounded"
@@ -78,14 +73,14 @@ const ProductoCarrito = ({
 
         <div className="flex items-center justify-center w-[120px]">
           <button
-            className="h-7 w-7 bg-[#f89586] rounded-full text-white font-semibold hover:text-gray-100  mx-3"
+            className="h-7 w-7 bg-[#f89586] rounded-full text-white font-semibold hover:bg-[#faa4a6] mx-3 transition-colors duration-200 ease-in-out transform active:scale-90 active:translate-y-1"
             onClick={decrementQuantity}
           >
             -
           </button>
           <span>{cantidad}</span>
           <button
-            className=" h-7 w-7 bg-[#F89586] rounded-full text-white font-semibold hover:text-gray-100  mx-3"
+            className="h-7 w-7 bg-[#F89586] rounded-full text-white font-semibold hover:bg-[#faa4a6] mx-3 transition-colors duration-200 ease-in-out transform active:scale-90 active:translate-y-1"
             onClick={incrementQuantity}
           >
             +
@@ -97,7 +92,10 @@ const ProductoCarrito = ({
         </div>
 
         <div className="w-[50px]">
-          <button class="bin-button" onClick={() => handleDelete(id_producto, nombre)}>
+          <button
+            class="bin-button"
+            onClick={() => handleDelete(id_producto, nombre)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

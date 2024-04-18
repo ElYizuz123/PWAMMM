@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { contexto } from '../UpdateProvider'
 import Editar_pregunta from './Editar_pregunta'
 import Swal from 'sweetalert2'
@@ -9,6 +9,7 @@ const Lector_pregunta = () => {
     const [preguntas, setPreguntas] = useState(null)
     const [uPreguntasIsOpen, setUPreguntasIsOpen] = useState(null)
     const [id_pregunta, setId_pregunta] = useState(null)
+    const editRef = useRef(null)
 
 
     const deletePregunta = async (data) =>{
@@ -69,7 +70,7 @@ const Lector_pregunta = () => {
 
     useEffect(() => {
         if (uPreguntasIsOpen) {
-          window.scrollTo({ top: 180, behavior: 'smooth' });
+            editRef.current.scrollIntoView({ behavior: 'smooth' })
         }
       }, [uPreguntasIsOpen]);
 
@@ -79,7 +80,7 @@ const Lector_pregunta = () => {
 
     return (
         <div className='w-full overflow-y-visible'>
-            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${uPreguntasIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={editRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${uPreguntasIsOpen ? "" : "pointer-events-none"}`}>
                 {uPreguntasIsOpen && <Editar_pregunta
                     isOpen={uPreguntasIsOpen}
                     onClose={closeUPregunta}

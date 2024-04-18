@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Editar_marca from './Editar_marca';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
@@ -9,6 +9,7 @@ const Leer_marcas = ({asociadas}) => {
     const [uMarcasIsOpen, setUMarcasIsOpen] = useState(false)
     const [updateMarca, setUpdateMarca] = useState(null)
     const {update} = useContext(contexto) 
+    const editarRef = useRef(null)
     //Leer marcas
     const readData = async () => {
         const res = await fetch('/api/marcas/read_marcas_admin')
@@ -82,13 +83,13 @@ const Leer_marcas = ({asociadas}) => {
 
     useEffect(() => {
         if (uMarcasIsOpen) {
-            window.scrollTo({ top: 180, behavior: 'smooth' });
+            editarRef.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [uMarcasIsOpen]);
 
     return (
         <div>
-            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${uMarcasIsOpen ? "" : "pointer-events-none"}`}>
+            <div ref={editarRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${uMarcasIsOpen ? "" : "pointer-events-none"}`}>
                 {uMarcasIsOpen && <Editar_marca
                     isOpen={uMarcasIsOpen}
                     onClose={closeUProduct}

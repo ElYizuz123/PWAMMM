@@ -178,9 +178,9 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
 
     if (!isOpen) return null;
     return (
-        <div className='w-full h-[850px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
+        <div className='w-full h-[850px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[550px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
-                <p className='font-bold pl-5'>Editar producto</p>
+                <p className='font-bold pl-5'>Botella</p>
                 <button className='mr-4 font-bold eye-icon' onClick={handleClose}>X</button>
             </div>
             <div className='w-full h-full flex justify-between'>
@@ -352,8 +352,8 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 <div className='w-full flex justify-end items-end'>
                                     <button
                                         type='submit'
-                                        className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[1%]'
-                                    >Editar
+                                        className='bg-[#98E47D] w-48 h-10 text-2xl font-bold rounded-xl mr-3 mt-[1%]'
+                                    >Guardar cambios
                                     </button>
                                 </div>
                             </form>
