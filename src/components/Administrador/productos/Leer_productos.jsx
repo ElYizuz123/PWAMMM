@@ -6,6 +6,7 @@ import Editar_Producto from './Editar_Producto';
 import { contexto } from '../UpdateProvider';
 import Paginacion from './Paginacion';
 import { useSearchParams } from 'next/navigation';
+import Modal from 'react-modal'
 
 const Leer_productos = ({ marcas }) => {
 
@@ -31,6 +32,23 @@ const Leer_productos = ({ marcas }) => {
         readData()
     }
 
+    const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: '60%',
+          bottom: '50%',
+          marginRight: '-50%',
+          marginBottom: '-50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#00000000',
+          border: 'none',
+          boxShadow: 'none',
+          overflow:'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        },
+      };
 
     //Función para leer productos
     const readData = async () => {
@@ -135,13 +153,7 @@ const Leer_productos = ({ marcas }) => {
         }
     };
 
-    //Scroll automático a ventana emergente
-    useEffect(() => {
-        if (uProductIsOpen) {
-            upRef.current.scrollIntoView({ behavior: 'smooth' })
-        }
 
-    }, [uProductIsOpen])
 
     //Actualización
     useEffect(()=>{
@@ -157,14 +169,17 @@ const Leer_productos = ({ marcas }) => {
 
     return (
         <div >
-            <div ref={upRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[700px] ${uProductIsOpen ? "" : "pointer-events-none"}`}>
-                {uProductIsOpen && <Editar_Producto
-                    isOpen={uProductIsOpen}
+            <Modal
+                isOpen={uProductIsOpen}
+                onRequestClose={closeUProduct}
+                style={customStyles}
+            >
+                <Editar_Producto 
                     onClose={closeUProduct}
                     marcas={marcas}
                     idProducto={productoEdit}
-                />}
-            </div>
+                />
+            </Modal>
             <form className='absolute top-10 w-full' onSubmit={handleSubmit}>
                 <div className="flex justify-center items-center">
                     <input
