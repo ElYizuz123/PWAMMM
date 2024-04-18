@@ -1,4 +1,3 @@
-"use client"
 import Galeria from '@/components/Galeria/Galeria';
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
 import React from 'react';
