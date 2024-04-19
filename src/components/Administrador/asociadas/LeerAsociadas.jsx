@@ -5,6 +5,7 @@ import Tarjeta_Asociadas from './Tarjeta_Asociadas'
 import Update_Asociada from './Update_Asociada'
 import Paginacion from '../productos/Paginacion'
 import { useSearchParams } from 'next/navigation'
+import Modal from 'react-modal'
 
 const LeerAsociadas = () => {
     const { update, page, setTotalPages} = useContext(contexto)
@@ -13,6 +14,25 @@ const LeerAsociadas = () => {
     const [updateAsociada, setUpdateAsociada] = useState(null)
     const searchParams = useSearchParams()
     const editRef = useRef(null)
+
+    const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: '60%',
+          bottom: '50%',
+          marginRight: '-50%',
+          marginBottom: '-50%',
+          height:'70%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#00000000',
+          border: 'none',
+          boxShadow: 'none',
+          overflow:'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        },
+      };
 
     const readData = async () => {
         var search = ""
@@ -45,11 +65,6 @@ const LeerAsociadas = () => {
         setUAsociadasIsOpen(true)
     }
 
-    useEffect(() => {
-        if (uAsociadasIsOpen) {
-            editRef.current.scrollIntoView({ behavior: 'smooth' })
-        }
-    }, [uAsociadasIsOpen]);
 
     useEffect(() => {
         readData()
@@ -58,14 +73,16 @@ const LeerAsociadas = () => {
 
     return (
         <div>
-            <div ref={editRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-3/6 ${uAsociadasIsOpen ? "" : "pointer-events-none"}`}>
-                {uAsociadasIsOpen && <Update_Asociada
-                    isOpen={uAsociadasIsOpen}
+            <Modal
+                isOpen={uAsociadasIsOpen}
+                onRequestClose={onClose}
+                style={customStyles}
+            >
+                <Update_Asociada 
                     onClose={onClose}
                     idAsociada={updateAsociada}
-                />}
-
-            </div>
+                />
+            </Modal>
             <div>
                 <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
                     {asociadas && asociadas.map((asociada) => (
