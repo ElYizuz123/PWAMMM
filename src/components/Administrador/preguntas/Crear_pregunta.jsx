@@ -4,39 +4,52 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Image from 'next/image';
+import Modal from 'react-modal'
 
 const Crear_pregunta = () => {
     const [cPreguntaIsOpen, setCPreguntaIsOpen] = useState(false)
     const { register, handleSubmit, reset } = useForm();
     const createRef = useRef(null)
-    const {update , setUpdate} = useContext(contexto)
-    
+    const { update, setUpdate } = useContext(contexto)
+
     //Abrir el pop up para crear pregunta
     const openCPregunta = () => {
         setCPreguntaIsOpen(true)
     }
 
     //Cerrar el pop up 
-    const onClose = () =>{
+    const onClose = () => {
         setCPreguntaIsOpen(false)
     }
 
-    //Scroll automático al formulario
-    useEffect(() => {
-        if (cPreguntaIsOpen) {
-            createRef.current.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, [cPreguntaIsOpen]);
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: '60%',
+            bottom: '50%',
+            marginRight: '-50%',
+            marginBottom: '-50%',
+            height:'40%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#00000000',
+            border: 'none',
+            boxShadow: 'none',
+            overflow: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+        },
+    };
 
 
     //Escribir pregunta en la DB
-    const handleOnSubmit = async (data) =>{
-        const res = await fetch('/api/preguntas/create_pregunta',{
-            method:'POST',
-            body: JSON.stringify(data) 
+    const handleOnSubmit = async (data) => {
+        const res = await fetch('/api/preguntas/create_pregunta', {
+            method: 'POST',
+            body: JSON.stringify(data)
         })
         const resJSON = await res.json()
-        if(resJSON == "Creado con éxito"){
+        if (resJSON == "Creado con éxito") {
             let timerInterval;
             Swal.fire({
                 title: "Pregunta añadida!",
@@ -51,13 +64,13 @@ const Crear_pregunta = () => {
                 const val = !update
                 setUpdate(val)
                 reset()
-            }); 
-        }else{
+            });
+        } else {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Algo salió mal!",
-              });
+            });
         }
 
 
@@ -65,7 +78,11 @@ const Crear_pregunta = () => {
 
     return (
         <div>
-            <div ref={createRef} hidden={!cPreguntaIsOpen} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${cPreguntaIsOpen ? "" : "pointer-events-none"}`}>
+            <Modal
+                isOpen={cPreguntaIsOpen}
+                onRequestClose={onClose}
+                style={customStyles}
+            >
                 <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[300px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                         <p className='font-bold pl-5'>Pregunta</p>
@@ -119,9 +136,9 @@ const Crear_pregunta = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Modal>
             <button onClick={openCPregunta} className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
-            <Image alt="mas" layout='intrinsic' width={40}  height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
+                <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-3'>Agregar pregunta</p>
             </button>
         </div>

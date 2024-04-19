@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import Editar_marca from './Editar_marca';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
+import Modal from 'react-modal'
 
 const Leer_marcas = ({asociadas}) => {
     const [marcas, setMarcas] = useState(null)
@@ -16,6 +17,25 @@ const Leer_marcas = ({asociadas}) => {
         const resJSON = await res.json()
         setMarcas(JSON.parse(resJSON))
     };
+
+    const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: '60%',
+          bottom: '50%',
+          height: '50%',
+          marginRight: '-50%',
+          marginBottom: '-50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#00000000',
+          border: 'none',
+          boxShadow: 'none',
+          overflow:'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        },
+      };
 
     //Leer datos al cargar
     useEffect(() => {
@@ -81,22 +101,20 @@ const Leer_marcas = ({asociadas}) => {
         setUMarcasIsOpen(true)
     }
 
-    useEffect(() => {
-        if (uMarcasIsOpen) {
-            editarRef.current.scrollIntoView({ behavior: 'smooth' })
-        }
-    }, [uMarcasIsOpen]);
 
     return (
         <div>
-            <div ref={editarRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${uMarcasIsOpen ? "" : "pointer-events-none"}`}>
-                {uMarcasIsOpen && <Editar_marca
-                    isOpen={uMarcasIsOpen}
+            <Modal
+                isOpen={uMarcasIsOpen}
+                onRequestClose={closeUProduct}
+                style={customStyles}
+            >
+                <Editar_marca 
                     onClose={closeUProduct}
                     asociadas={asociadas}
                     idMarca={updateMarca}
-                />}
-            </div>
+                />
+            </Modal>
             {marcas && marcas.map((marca) => (
                 <div key={marca.id_marca}>
                     <div className='flex justify-between w-full mt-0.5 pl-5 '>
