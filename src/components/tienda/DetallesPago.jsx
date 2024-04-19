@@ -9,11 +9,9 @@ const DetallesPago = () => {
   const { productos } = useContext(ProductContext);
 
   return (
-    <div className="mt-16 flex   justify-center bg-gray-50  mr-44 ml-44 shadow-2xl shadow-[#F70073]  ">
+    <div className="mt-16 flex   justify-center bg-white w-[1390px] mr-44 ml-44 shadow-2xl shadow-[#F70073]  ">
       <div className="ml-9">
-        <p className=" mt-8 ml-5 font-bold  text-[#F70073]  text-2xl">
-          PRODUCTOS
-        </p>
+        <p className=" mt-12  font-bold  text-[#F70073]  text-2xl">PRODUCTOS</p>
         {productos.map((producto) => (
           <ProductosPago
             id_producto={producto.id_producto}
@@ -26,16 +24,10 @@ const DetallesPago = () => {
           />
         ))}
       </div>
-     
-      <div className="md:w-1/2 p-4 ml-36 border-t md:border-t-0 md:border-l">
-        <div className="">
-          {/* {productos.map((producto) => ( */}
-            <FormaPago
-              // id_producto={producto.id_producto}
-              // precio={producto.precio}
-              // cantidad={producto.cantidad}
-            />
-          {/* ))} */}
+
+      <div className=" mt-10 ml-36 border-t md:border-t-0 md:border-l">
+        <div className="ml-20">
+          <FormaPago />
         </div>
       </div>
     </div>
