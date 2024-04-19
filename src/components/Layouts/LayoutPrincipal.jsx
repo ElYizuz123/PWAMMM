@@ -1,9 +1,9 @@
 "use client"
-import IconoInicio from "@/components/navbar/iconoInicio";
-import IconoTienda from "@/components/navbar/iconoTienda";
-import IconoNosotras from "@/components/navbar/iconoNosotras";
-import IconoContacto from "@/components/navbar/iconoContacto";
-import IconoGaleria from "@/components/navbar/iconoGaleria";
+import { HiHome } from "react-icons/hi2";
+import { HiShoppingBag } from "react-icons/hi2";
+import { HiInformationCircle } from "react-icons/hi2";
+import { HiEnvelope } from "react-icons/hi2";
+import { BsImages } from "react-icons/bs";
 import Link from "next/link";
 import logo from "@/components/navbar/logo";
 import IconoMenu from "@/components/navbar/iconoMenu";
@@ -12,6 +12,7 @@ import Carrito from "../tienda/Carrito";
 import Footer from "../Footer/Footer";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation"
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -19,7 +20,28 @@ const berkshire = Berkshire_Swash({
   subsets: ["latin"],
 });
 
+// colorcito de la página seleccionada ${buttonMap["/"]}
+const buttonMap = {
+  "/": "text-black bg-[#0000000]",
+  "/tienda": "text-black bg-[#0000000]",
+  "/nosotras": "text-black bg-[#0000000]",
+  "/galeria": "text-black bg-[#0000000]",
+  "/contacto": "text-black bg-[#0000000]",
+}
+
 const LayoutPrincipal = ({ children }) => {
+  //para cambiar los colorcitos
+  const pathName = usePathname()
+  const changeColor = () => {
+      for (const key in buttonMap) {
+          buttonMap[key] = 'text-black bg-[#0000000]';
+      }
+      
+      buttonMap[pathName] = 'text-[#F70073]';
+  }
+  changeColor()
+
+  //detectar el scroll
   const { scrollY } = useScroll();
   const scale = useTransform(scrollY, [0, 100], [1, 0.7]);
   const [styleNav, setStyleNav] = useState("size-12 top-6")
@@ -36,8 +58,6 @@ const LayoutPrincipal = ({ children }) => {
       }
     })
   }, [])
-
-
 
   return (
     <div>
@@ -73,41 +93,41 @@ const LayoutPrincipal = ({ children }) => {
               <div className="flex">
                 <Link
                   href="\"
-                  className="lg:mr-16 hover:text-[#F70073]">
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/"]}`}>
                   <div className={`mx-auto ${styleNav}`}>
-                    {IconoInicio}
+                    <HiHome className="w-full h-auto"/>
                   </div>
                   INICIO
                 </Link>
                 <Link
                   href="\tienda"
-                  className="lg:mr-16 hover:text-[#F70073]">
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/tienda"]}`}>
                   <div className={`mx-auto ${styleNav}`}>
-                    {IconoTienda}
+                    <HiShoppingBag className="w-full h-auto"/>
                   </div>
                   TIENDA
                 </Link>
                 <Link
                   href="\nosotras"
-                  className="lg:mr-16 hover:text-[#F70073]">
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/nosotras"]}`}>
                   <div className={`mx-auto ${styleNav}`}>
-                    {IconoNosotras}
+                    <HiInformationCircle className="w-full h-auto"/>
                   </div>
                   NOSOTRAS
                 </Link>
                 <Link
                   href="\galeria"
-                  className="lg:mr-16 hover:text-[#F70073]">
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/galeria"]}`}>
                   <div className={`mx-auto ${styleNav}`}>
-                    {IconoGaleria}
+                    <BsImages className="w-full h-auto"/>
                   </div>
                   GALERIA
                 </Link>
                 <Link
                   href="\contacto"
-                  className="hover:text-[#F70073]">
+                  className={`hover:text-[#F70073] ${buttonMap["/contacto"]}`}>
                   <div className={`mx-auto ${styleNav}`}>
-                    {IconoContacto}
+                    <HiEnvelope className="w-full h-auto"/>
                   </div>
                   CONTACTO
                 </Link>
