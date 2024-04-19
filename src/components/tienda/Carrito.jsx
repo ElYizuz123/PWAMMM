@@ -42,7 +42,7 @@ const Carrito = () => {
               onClick={() => setIsCartVisible(false)}
             />
           </div>
-
+          
           {/* Contenido del carrito */}
           <div className="flex flex-col h-full">
             <div

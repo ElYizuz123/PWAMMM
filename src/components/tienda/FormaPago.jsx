@@ -3,6 +3,8 @@ import React, { useContext, useState } from "react";
 import { K2D } from "next/font/google";
 import Link from "next/link";
 import { ProductContext } from "@/context/ProductContext";
+import TarjetaPaypal from "./TarjetaPaypal";
+import { IoClose } from 'react-icons/io5'; 
 
 const k2d = K2D({
   weight: ["400"],
@@ -11,28 +13,33 @@ const k2d = K2D({
 });
 
 function FormaPago() {
-  const [shippingMethod, setShippingMethod] = useState("delivery");
-  const envio = 199;
-
   const { productos } = useContext(ProductContext);
+
+  const [shippingMethod, setShippingMethod] = useState("delivery");
+  const [paymentMethod, setPaymentMethod] = useState("delivery2");
+  const [confirmMethod, setConfirmMethod] = useState([]);
+  const [payPal, setPaypal] = useState(false);
+
+  const envio = 199;
   const totalVenta = productos.reduce(
     (total, producto) => total + producto.cantidad * producto.precio,
     0
   );
 
+  const handleOpenPopup = () => {
+    if (paymentMethod == "pickup2") {
+      setPaypal(true);
+    }
+  };
+  const handleClosePopup = () => {
+    setPaypal(false);
+  };
   const handleShippingChange = (event) => {
     setShippingMethod(event.target.value);
-    console.log("Nuevo método de envío seleccionado:", event.target.value);
   };
-
-  const [paymentMethod, setPaymentMethod] = useState("delivery2");
-
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
   };
-
-  const [confirmMethod, setConfirmMethod] = useState([]);
-
   const handleConfirmChange = (event) => {
     const value = event.target.value;
     setConfirmMethod((prevMethods) =>
@@ -98,6 +105,7 @@ function FormaPago() {
               Transferencia bancaria directa BANAMEX/OXXO
             </span>
           </label>
+
           <label>
             <input
               type="checkbox"
@@ -109,6 +117,7 @@ function FormaPago() {
             <span className="ml-2 ">PAYPAL</span>
           </label>
         </div>
+
         <div className="bg-gray-100 opacity-80  -mr-6 ml-4 mt-10">
           <p className="text-black text-justify text-xs">
             Realiza tu pago directamente en nuestra cuenta bancaria de Banamex o
@@ -155,10 +164,85 @@ function FormaPago() {
           </label>
         </div>
         <div className=" mt-6 flex justify-center  ">
-          <button className="bg-[#F70073] ml-20 text-white font-bold rounded-xl py-2  w-64 h-10">
-            Finalizar pedido
+          {/* <button
+            className="bg-[#F70073] ml-20 text-white font-bold rounded-xl py-2  w-64 h-10"
+            onClick={handleOpenPopup}
+          > */}
+
+          <button class="Btn ml-20 py-2  " onClick={handleOpenPopup}>
+            <p>Pagar</p>
+
+            <svg viewBox="0 0 576 512" class="svgIcon">
+              <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
+            </svg>
           </button>
+
+          {/* </button> */}
         </div>
+        {payPal && (
+          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+            <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white mt-40">
+              <button
+                className="absolute top-0 right-0 m-3"
+                onClick={handleClosePopup}
+              >
+                <IoClose className="h-6 w-6 cursor-pointer transition duration-300 ease-in-out hover:text-red-500 hover:rotate-180" />
+              </button>
+              <div className="mt-3 text-center">
+                <div className=" flex items-center justify-center  ">
+                  <img src="/emoticons/comprobado.png" alt="PayPal Logo" />
+                </div>
+                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                  Completa tu pago
+                </h3>
+                <div className="mt-2 px-7 py-3">
+                  <p className="text-sm text-gray-500">
+                    Revisa tu pedido y da click en el botón PayPal para realizar
+                    el pago.
+                  </p>
+                </div>
+                <div className="flex flex-col px-7 py-3 space-y-3">
+                  <div className="flex justify-between">
+                    <span>Subtotal</span>
+                    <span>${totalVenta}</span>
+                  </div>
+
+                  <div className="flex justify-between">
+                    <span>Envío</span>${shippingMethod === "pickup" ? 0 : envio}
+                  </div>
+
+                  <div className="flex justify-between font-bold ">
+                    <span>Total</span>$
+                    {shippingMethod === "pickup"
+                      ? totalVenta
+                      : totalVenta + envio}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
+                >
+                  <svg
+                    class="w-4 h-4 me-2 -ms-1"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fab"
+                    data-icon="paypal"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 384 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M111.4 295.9c-3.5 19.2-17.4 108.7-21.5 134-.3 1.8-1 2.5-3 2.5H12.3c-7.6 0-13.1-6.6-12.1-13.9L58.8 46.6c1.5-9.6 10.1-16.9 20-16.9 152.3 0 165.1-3.7 204 11.4 60.1 23.3 65.6 79.5 44 140.3-21.5 62.6-72.5 89.5-140.1 90.3-43.4 .7-69.5-7-75.3 24.2zM357.1 152c-1.8-1.3-2.5-1.8-3 1.3-2 11.4-5.1 22.5-8.8 33.6-39.9 113.8-150.5 103.9-204.5 103.9-6.1 0-10.1 3.3-10.9 9.4-22.6 140.4-27.1 169.7-27.1 169.7-1 7.1 3.5 12.9 10.6 12.9h63.5c8.6 0 15.7-6.3 17.4-14.9 .7-5.4-1.1 6.1 14.4-91.3 4.6-22 14.3-19.7 29.3-19.7 71 0 126.4-28.8 142.9-112.3 6.5-34.8 4.6-71.4-23.8-92.6z"
+                    ></path>
+                  </svg>
+                  Pagar con PayPal
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
