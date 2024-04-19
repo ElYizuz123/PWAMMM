@@ -56,7 +56,7 @@ const Tarjeta = ({
   return (
     <div className={k2d.className}>
       <div className="card relative rounded-5 overflow-hidden">
-        <div className="relative">
+        
           <Link
             href={`/tienda/abrir_producto/${tipo}/${id_producto}`}
             // className="absolute top-0 right-0 m-2 p-1 z-0"
@@ -78,17 +78,17 @@ const Tarjeta = ({
               </div>
             </div>
           </Link>
-        </div>
 
-        <div className="flex justify-center items-center p-4">
-          <Image
-            src={`/productos/${imagen}`}
-            width={300}
-            height={450}
-            quality={100}
-            alt="Fondo"
-          />
-        </div>
+          <div className="flex justify-center items-center p-4 object-cover">
+            <Image
+              src={`/productos/${imagen}`}
+              width={300}
+              height={450}
+              quality={100}
+              alt="Fondo"
+            />
+          </div>
+        
 
         <section className="details">
           {tipo !== 2 ? (

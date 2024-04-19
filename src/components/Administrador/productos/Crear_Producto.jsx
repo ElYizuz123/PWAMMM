@@ -95,7 +95,7 @@ const Crear_Producto = ({ isOpen, onClose, marcas }) => {
 
 
 
-    if (!isOpen) return null;
+    //if (!isOpen) return null;
 
     return (
         <div className='w-full h-[850px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>

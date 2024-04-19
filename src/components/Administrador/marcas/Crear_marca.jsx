@@ -42,10 +42,8 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
     }
 
 
-
-    if (!isOpen) return null;
     return (
-        <div className='w-full h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-64'>
+        <div className='w-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-64'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>Marca</p>
                 <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
@@ -82,8 +80,8 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                                     className='w-full border-2 border-black rounded-lg pl-1 mt-5'
                                 >
                                     <option></option>
-                                    <option value={0}>Mezcal</option>
-                                    <option value={1}>Acompañamiento</option>
+                                    <option value={1}>Mezcal</option>
+                                    <option value={2}>Acompañamiento</option>
                                 </select>
 
                                 <select

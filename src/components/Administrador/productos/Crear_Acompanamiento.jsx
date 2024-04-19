@@ -95,7 +95,6 @@ const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
 
 
 
-    if (!isOpen) return null;
 
     return (
         <div className='w-full h-[700px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
