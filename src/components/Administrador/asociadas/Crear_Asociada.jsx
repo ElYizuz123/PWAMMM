@@ -4,15 +4,16 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 import { contexto } from '../UpdateProvider'
+import Modal from 'react-modal'
 
-const randomHexa = () =>{
+const randomHexa = () => {
     const randomNumber = Math.floor(Math.random() * 65536);
     const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
     return hexadecimalValue
 }
 
 const Crear_Asociada = () => {
-    const {update, setUpdate} = useContext(contexto)
+    const { update, setUpdate } = useContext(contexto)
     const [cAsociadasIsOpen, setCAsociadasIsOpen] = useState(false)
     const [asociadaPhoto, setAsociadaPhoto] = useState(null)
     const { register, handleSubmit, reset, setValue } = useForm();
@@ -20,27 +21,41 @@ const Crear_Asociada = () => {
     const hexa = randomHexa()
     const createRef = useRef(null)
 
+    const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: '60%',
+          bottom: '50%',
+          marginRight: '-50%',
+          marginBottom: '-50%',
+          height: '70%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#00000000',
+          border: 'none',
+          boxShadow: 'none',
+          overflow:'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        },
+      };
+
     useEffect(() => {
         register('foto');
         register('hexa')
     }, [register]);
 
-    const onClose = () =>{
+    const onClose = () => {
         setCAsociadasIsOpen(false)
     }
 
-    const isOpen = () =>{
+    const isOpen = () => {
         setCAsociadasIsOpen(true)
     }
 
-    useEffect(() => {
-        if (cAsociadasIsOpen) {
-            createRef.current.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, [cAsociadasIsOpen]);
 
 
-    const handleOnSubmit = async (data) =>{
+    const handleOnSubmit = async (data) => {
         console.log(data)
         if (asociadaPhoto) {
             const form = new FormData()
@@ -84,7 +99,7 @@ const Crear_Asociada = () => {
                         reset();
                     });
                 }
-                else{
+                else {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
@@ -92,7 +107,7 @@ const Crear_Asociada = () => {
                     });
                 }
             }
-            else{
+            else {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -112,8 +127,12 @@ const Crear_Asociada = () => {
                 <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-3'>Agregar asociada</p>
             </button>
-            <div ref={createRef} hidden={!cAsociadasIsOpen} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-4/6 ${cAsociadasIsOpen ? "" : "pointer-events-none"}`}>
-                <div className='w-full h-2/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[400px]'>
+            <Modal
+                isOpen={cAsociadasIsOpen}
+                onRequestClose={onClose}
+                style={customStyles}
+            >
+                <div className='w-full h-[430px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[400px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                         <p className='font-bold pl-5'>Asociada</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
@@ -150,7 +169,7 @@ const Crear_Asociada = () => {
                                             ref={fileInputRef}
                                             onChange={(e) => {
                                                 setAsociadaPhoto(e.target.files[0])
-                                                setValue('foto',e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1]:"")
+                                                setValue('foto', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
                                                 setValue('hexa', hexa)
                                             }}
                                         />
@@ -178,7 +197,7 @@ const Crear_Asociada = () => {
                                             })}
                                             className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-5'
                                             placeholder='Descripción'
-                                        />                              
+                                        />
                                         <div className='w-full flex justify-end items-end'>
                                             <button
                                                 type='submit'
@@ -192,7 +211,11 @@ const Crear_Asociada = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+
+            </Modal>
+
+
+
 
         </div>
 

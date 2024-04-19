@@ -134,9 +134,8 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
 
 
 
-    if (!isOpen) return null;
     return (
-        <div className='w-full h-3/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[400px]'>
+        <div className='w-full h-[430px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[400px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>Asociada</p>
                 <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>

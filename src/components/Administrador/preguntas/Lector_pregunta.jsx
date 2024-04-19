@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { contexto } from '../UpdateProvider'
 import Editar_pregunta from './Editar_pregunta'
 import Swal from 'sweetalert2'
+import Modal from 'react-modal'
 
 const Lector_pregunta = () => {
     let { update } = useContext(contexto)
@@ -11,6 +12,24 @@ const Lector_pregunta = () => {
     const [id_pregunta, setId_pregunta] = useState(null)
     const editRef = useRef(null)
 
+    const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: '60%',
+          bottom: '50%',
+          marginRight: '-50%',
+          marginBottom: '-50%',
+          height: '40%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#00000000',
+          border: 'none',
+          boxShadow: 'none',
+          overflow:'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        },
+      };
 
     const deletePregunta = async (data) =>{
         const res = await fetch('/api/preguntas/delete_pregunta',{
@@ -69,24 +88,22 @@ const Lector_pregunta = () => {
     }
 
     useEffect(() => {
-        if (uPreguntasIsOpen) {
-            editRef.current.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, [uPreguntasIsOpen]);
-
-    useEffect(() => {
         readData()
     }, [update])
 
     return (
+        
         <div className='w-full overflow-y-visible'>
-            <div ref={editRef} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${uPreguntasIsOpen ? "" : "pointer-events-none"}`}>
-                {uPreguntasIsOpen && <Editar_pregunta
-                    isOpen={uPreguntasIsOpen}
+            <Modal
+                isOpen={uPreguntasIsOpen}
+                onRequestClose={closeUPregunta}
+                style={customStyles}
+            >
+                <Editar_pregunta 
                     onClose={closeUPregunta}
                     idPregunta={id_pregunta}
-                />}
-            </div>
+                />
+            </Modal>
             {preguntas && preguntas.map((pregunta) => (
                 <div key={pregunta.id_pregunta_frencuente}>
                     <div className='flex justify-between w-full mt-0.5 pl-5 '>
