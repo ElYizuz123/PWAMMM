@@ -14,34 +14,34 @@ function ProductosPago({
   marca,
   precio,
   ml,
-  cantidad
+  cantidad,
 }) {
- 
   return (
     <div className={k2d.className}>
-      <div className="relative flex mt-5 ">
-        <div className="border-b-2 border-opacity-20 w-[600px] h-[100px] border-[#F70073]  ">
-          <div>
-            <img
-              src={`/productos/${imagen}`}
-              className="w-20 h-20 object-cover rounded-md mr-4"
-            />
-          </div>
-
-          {/*información */}
-          <div className="absolute top-3 left-[160px] ml-10">
-            <p className="text-black text-xl font-bold">
+      <div className="max-w-sm mx-auto ">
+        <div className="bg-white p-4 flex items-center space-x-4 shadow rounded-lg my-4">
+          <img
+            src={`/productos/${imagen}`}
+            
+            className="h-20 w-20 object-cover rounded-full"
+          />
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold">
               {nombre} {ml}ml
-            </p>
-            <p className="mt-2 text-black text-xl">Marca: {marca}</p>
-          </div>
-          <div className="absolute mt-2 left-[180px] flex ml-10">
-            <p className="text-[#F70073] text-xl font-semibold ">
-              {/*cantidad de productos*/} x{cantidad}
-            </p>
-            <p className=" text-green-700 font-bold text-xl ml-48">
-              {/*precio productos*/} ${precio}
-            </p>
+            </h3>
+            <p className="text-gray-600">Marca: {marca}</p>
+            <div className="flex justify-between items-center mt-2">
+              <span className="text-red-500">x{cantidad}</span>
+              <div className="text-right">
+                <span className="text-lg font-bold text-black">${cantidad*precio}</span>
+                <div className="w-full bg-pink-100 h-1 rounded-full mt-1">
+                  <div
+                    className="bg-pink-500 h-1 rounded-full"
+                    style={{ width: "100%" }}
+                  ></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

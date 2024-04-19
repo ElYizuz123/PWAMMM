@@ -1,6 +1,6 @@
 import React from "react";
 import { Berkshire_Swash } from "next/font/google";
-import Image from 'next/image';
+
 
 const berkshire = Berkshire_Swash({
     weight: ["400"],
