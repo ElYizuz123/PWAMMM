@@ -45,6 +45,7 @@ const LayoutPrincipal = ({ children }) => {
   const { scrollY } = useScroll();
   const scale = useTransform(scrollY, [0, 100], [1, 0.7]);
   const [styleNav, setStyleNav] = useState("size-12 top-6")
+  const [styleLogo, setSyleLogo] = useState("top-6")
 
 
   //Usamos use Effect x q si no vale madre despues
@@ -52,9 +53,11 @@ const LayoutPrincipal = ({ children }) => {
     window.addEventListener('scroll', function () {
       if (window.scrollY === 0) {
         setStyleNav("size-12 top-6 transition-size duration-200 ease-in-out")
+        setSyleLogo("top-6 transition-size duration-200 ease-in-out")
       }
       else {
         setStyleNav("size-10 top-2 transition-size duration-300 ease-in-out")
+        setSyleLogo("top-2 -translate-x-28 transition-all duration-300 ease-in-out")
       }
     })
   }, [])
@@ -73,24 +76,31 @@ const LayoutPrincipal = ({ children }) => {
           <p className="bg-white w-full text-white h-36 shadow-md" id="p-1">p</p>
         </motion.div>
         <nav className={`font-bold fixed z-20 w-full h-36 ${styleNav}`}>
-          <div className="container mx-auto flex">
-            <div>{logo}</div>
+          <div className="flex w-full ml-8">
+            <div className={styleLogo}>{logo}</div>
             <div className="text-black absolute w-full flex lg:hidden py-8 px-4 justify-center">
-              <div className={berkshire.className}>
-                <p1 className="text-xl">Mujeres Mezcaleras <br></br> De Michoacán</p1>
+
+              <div className="w-full ml-20">
+                <div className={styleLogo}>
+                  <div className={berkshire.className}>
+                    <p1 className="text-xl">Mujeres Mezcaleras <br></br> De Michoacán</p1>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="absolute right-0 flex lg:hidden">
+            <div className="absolute right-0 top-6 flex lg:hidden">
               {IconoMenu}
             </div>
-            <div className="text-black lg:flex hidden flex-grow justify-between py-8 text-center">
+            <div className="text-black lg:flex hidden flex-grow justify-between ml-5 py-8 text-center mr-24">
               <div className={berkshire.className}>
-                <p1 className="text-2xl">
-                  Mujeres Mezcaleras <br></br> De Michoacán
-                </p1>
+                <div className={styleLogo}>
+                  <p1 className="text-2xl">
+                    Mujeres Mezcaleras <br></br> De Michoacán
+                  </p1>
+                </div>
               </div>
-              <div className="flex">
+              <div className="flex ">
                 <Link
                   href="\"
                   className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/"]}`}>

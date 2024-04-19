@@ -2,10 +2,30 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Crear_marca from './Crear_marca'
 import Image from 'next/image'
+import Modal from 'react-modal'
 
 const Agregar_marca = ({asociadas}) => {
     const [cMarcasIsOpen, setCMarcasIsOpen] = useState(false)
-    const createMarca = useRef(null)
+
+    const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: '60%',
+          bottom: '50%',
+          height: '50%',
+          marginRight: '-50%',
+          marginBottom: '-50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#00000000',
+          border: 'none',
+          boxShadow: 'none',
+          overflow:'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        },
+      };
+
 
     //Abrir pop-up de agregar marca
     const openCMarca = () => {
@@ -16,12 +36,6 @@ const Agregar_marca = ({asociadas}) => {
         setCMarcasIsOpen(false)
     };
 
-    //Animación de scroll
-    useEffect(() => {
-        if (cMarcasIsOpen) {
-            createMarca.current.scrollIntoView({ behavior: 'smooth' })
-        }
-    }, [cMarcasIsOpen]);
 
     return (
         <div>
@@ -29,13 +43,16 @@ const Agregar_marca = ({asociadas}) => {
                 <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-3'>Agregar marca</p>
             </button>
-            <div ref={createMarca} className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-4/12 ${cMarcasIsOpen ? "" : "pointer-events-none"}`}>
-                {cMarcasIsOpen && <Crear_marca
-                    isOpen={cMarcasIsOpen}
+            <Modal
+                isOpen={cMarcasIsOpen}
+                onRequestClose={closeCProduct}
+                style={customStyles}
+            >
+                <Crear_marca 
                     onClose={closeCProduct}
                     asociadas={asociadas}
-                />}
-            </div>
+                />
+            </Modal>
 
         </div>
     )

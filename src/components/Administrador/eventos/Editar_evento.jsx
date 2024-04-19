@@ -151,7 +151,6 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
         fileInputRef.current.click();
     }
 
-    if (!isOpen) return null;
 
     return (
         <div className='h-full'>

@@ -149,6 +149,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
             const resJSON = await res.json()
             console.log(resJSON)
             if (resJSON == "Registrado") {
+                let timerInterval;
                 Swal.fire({
                     title: "Producto actualizado!",
                     icon: "success",
@@ -176,7 +177,6 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
         onClose()
     }
 
-    if (!isOpen) return null;
     return (
         <div className='w-full h-[850px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[550px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
