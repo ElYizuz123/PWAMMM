@@ -2,11 +2,13 @@
 import Link from "next/link";
 
 import MostrarProductos from "./MostrarProductos";
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { ProductContext } from "@/context/ProductContext";
 
-const Categoria = ({ selec }) => {
+const Categoria = () => {
+  const { marcaAsociada, idMarcaAsociada } = useContext(ProductContext);
   const [items, setItems] = useState([]);
-  const [selectedMarca, setSelectedMarca] = useState(selec);
+  const [selectedMarca, setSelectedMarca] = useState(marcaAsociada);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,8 +17,8 @@ const Categoria = ({ selec }) => {
 
       setItems(data); // Suponiendo que 'data' es un array de items.
     };
-
     fetchData();
+    idMarcaAsociada(0);
   }, []);
 
   return (
@@ -25,7 +27,7 @@ const Categoria = ({ selec }) => {
         <div className=" w-36 text-black z-10 mx-8 py-[75px]">
           <div className="flex flex-col">
             <span className="text-lg font-bold border-b-2 border-[#F70073] mb-2">
-              Default
+              Categorias
             </span>
 
             <div>

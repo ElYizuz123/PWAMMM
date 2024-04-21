@@ -7,6 +7,7 @@ export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [cartCountAnimation, setCartCountAnimation] = useState('');
+  const [marcaAsociada, setMarcaAsociada] = useState(0);
   const [productos, setProductos] = useState(() => {
     const productosEnAlmacenamiento = localStorage.getItem("productos");
     return productosEnAlmacenamiento
@@ -64,7 +65,7 @@ export const ProductProvider = ({ children }) => {
     triggerCartCountAnimation();
   };
 
-  const deleteProduct = (idProducto, name) => {
+  const deleteProduct = (name) => {
     const updatedProductos = productos.filter(
       (producto) => producto.nombre !== name
     );
@@ -103,6 +104,10 @@ export const ProductProvider = ({ children }) => {
     0
   );
 
+  const idMarcaAsociada = (idMarcaAsociada) => {
+    setMarcaAsociada(idMarcaAsociada);
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -112,6 +117,8 @@ export const ProductProvider = ({ children }) => {
         deleteProduct,
         updateQuantity,
         total,
+        idMarcaAsociada,
+        marcaAsociada,
       }}
     >
       <div>{children}</div>
