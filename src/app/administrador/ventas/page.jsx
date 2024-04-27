@@ -1,7 +1,7 @@
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image';
 import Leer_ventas from '@/components/Administrador/ventas/Leer_ventas';
-import { Read_ventas } from '@/app/api/read_ventas/route';
+import { Read_ventas } from '@/app/api/ventas/read_ventas/route';
 
 
 
@@ -35,6 +35,7 @@ const Page = async () => {
                 <p className='font-bold'>Fecha de venta</p>
                 <p className='font-bold'>Total</p>
                 <p className='font-bold'>Detalles</p>
+                <p className='mr-12 font-bold'>Cliente</p>
                 <p className='mr-16 font-bold'>Status</p>
               </div>
               <div className='w-10/12 h-[0.3%] bg-[#F70073] ' />
