@@ -1,4 +1,3 @@
-"use client"
 import React from 'react'
 import ProcesoMezcal from '@/components/ProcesoMezcal/ProcesoMezcal'
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
@@ -102,7 +101,6 @@ const page = () => {
       </div>
 
     </LayoutPrincipal>
-
 
   )
 }

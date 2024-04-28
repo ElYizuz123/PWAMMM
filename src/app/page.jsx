@@ -4,7 +4,8 @@ import Main from "@/components/Video/Main";
 import CarruselInicio from "@/components/CarruselInicio/CarruselInicio";
 import NuestrasMarcas from "@/components/NuestrasMarcas/NuestrasMarcas";
 import MensajeBienvenida from "@/components/MensajeBienvenida/MensajeBienvenida";
-import HistoriaMezcal from "@/components/HistoriaMezcal/HistoriaMezcal"; 
+import CarruselAsociadas from "@/components/CarruselAsociadas/CarruselAsociadas";
+
 
 
 export default function Home() {
@@ -16,10 +17,10 @@ export default function Home() {
       <Main />
       <div className="bg-cover bg-center w-full h-auto " style={{ backgroundImage: "url('/backgroundImagev2.png')" }}>
           <div className="bg-gradient-to-b  from-green-200 to-transparent">
-              <CarruselInicio />
+          <CarruselInicio />
           </div>
-       
-        
+          
+         
       
           <Historia />
 

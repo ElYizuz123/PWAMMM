@@ -1,8 +1,9 @@
+"use client"
 import React, { useState, useEffect, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ProductContext } from "@/context/ProductContext";
 import { XIcon } from "@heroicons/react/solid";
-import { motion } from 'framer-motion';
+
 import SwiperCore, {
   Navigation,
   Pagination,

@@ -68,8 +68,8 @@ const Historia = () => {
             animate={controls}
             variants={titleVariants}
           >
-            <h2 className="text-7xl text-black text-delinead">Historia</h2>
-            <h2 className="text-8xl text-[#C1D128] text-delineado ml-28">
+            <h2 className="text-7xl text-black text-delinead  ">Historia</h2>
+            <h2 className="text-8xl text-[#C1D128] text-delineado ml-28 ">
               del mezcal
             </h2>
           </motion.div>
@@ -98,7 +98,7 @@ const Historia = () => {
 
           <div className="mt-8">
             <Link
-              href="\historia-mezcal"
+              href="\historia"
               className="mx-auto block w-full text-center text-lg font-medium text-gray-100 bg-[#f70073] hover:bg-[#e39abd] hover:scale-105 hover:shadow-lg md:w-48 py-3 px-6 rounded-full"
             >
               Ver más
