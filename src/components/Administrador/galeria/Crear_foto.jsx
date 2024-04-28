@@ -147,7 +147,7 @@ const Crear_foto = () => {
                     <div className='w-full h-full flex justify-between'>
                         <div className='w-full flex flex-col justify-center items-center'>
                             {eventoPhoto && (
-                                <img src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='w-48' />
+                                <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                             )}
                             {eventoPhoto && (
                                 <p className='text-sm'>{eventoPhoto.name}</p>

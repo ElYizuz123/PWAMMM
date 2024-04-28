@@ -132,6 +132,7 @@ const Crear_evento = () => {
                 isOpen={cEventosIsOpen}
                 onRequestClose={onClose}
                 style={customStyles}
+                ariaHideApp={false}
             >
                 <div className='flex justify-center items-center'>
                     <div className='w-[80%] h-[400px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[600px]'>
@@ -142,7 +143,7 @@ const Crear_evento = () => {
                         <div className='w-full h-full flex justify-between'>
                             <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                                 {eventoPhoto && (
-                                    <img src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='w-48' />
+                                    <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                                 )}
                                 {eventoPhoto && (
                                     <p className='text-sm'>{eventoPhoto.name}</p>

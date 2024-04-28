@@ -131,6 +131,7 @@ const Crear_Asociada = () => {
                 isOpen={cAsociadasIsOpen}
                 onRequestClose={onClose}
                 style={customStyles}
+                ariaHideApp={false}
             >
                 <div className='w-full h-[430px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[400px]'>
                     <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
@@ -140,7 +141,7 @@ const Crear_Asociada = () => {
                     <div className='w-full h-full flex justify-between'>
                         <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                             {asociadaPhoto && (
-                                <img src={URL.createObjectURL(asociadaPhoto)} alt='Preview' className='w-48' />
+                                <Image height={400} width={400} src={URL.createObjectURL(asociadaPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                             )}
                             {asociadaPhoto && (
                                 <p className='text-sm'>{asociadaPhoto.name}</p>

@@ -78,6 +78,7 @@ const Leer_evento = () => {
                 isOpen={uEventoIsOpen}
                 onRequestClose={onClose}
                 style={customStyles}
+                ariaHideApp={false}
             >
                 <Editar_evento
                     onClose={onClose}

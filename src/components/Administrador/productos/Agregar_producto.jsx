@@ -50,6 +50,7 @@ const Agregar_producto = ({ marcas }) => {
                 isOpen={botellaIsOpen}
                 onRequestClose={closeBotella}
                 style={customStyles}
+                ariaHideApp={false}
             >
                 <Crear_Producto 
                     onClose={closeBotella}

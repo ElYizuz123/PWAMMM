@@ -173,6 +173,7 @@ const Leer_productos = ({ marcas }) => {
                 isOpen={uProductIsOpen}
                 onRequestClose={closeUProduct}
                 style={customStyles}
+                ariaHideApp={false}
             >
                 <Editar_Producto 
                     onClose={closeUProduct}
