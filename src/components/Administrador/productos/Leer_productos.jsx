@@ -8,9 +8,11 @@ import Paginacion from './Paginacion';
 import { useSearchParams } from 'next/navigation';
 import Modal from 'react-modal'
 
-const Leer_productos = ({ marcas }) => {
+const Leer_productos = () => {
 
-    const [filteredProducts, setFilteredProducts] = useState(null);
+    const [filteredProducts, setFilteredProducts] = useState(null)
+    const [marcasBotellas, setMarcasBotellas] = useState(null)
+    const [marcasAcompanamientos, setMarcasAcompanamientos] = useState(null)
     const [uProductIsOpen, setUProductIsOpen] = useState(false)
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
@@ -74,6 +76,24 @@ const Leer_productos = ({ marcas }) => {
         const resJSON = await res.json()
         setTotalPages(Math.ceil((resJSON)/12))
         setTotalBottles(parseInt(resJSON))
+    }
+
+    const readMarcasBotellas = async () =>{
+        const res = await fetch('/api/producto/read_marcas',{
+            method:'POST',
+            body: JSON.stringify(1)
+        })
+        const resJSON = await res.json()
+        console.log(resJSON)
+        setMarcasBotellas(resJSON)
+    }
+    const readMarcasAcompanamientos = async () =>{
+        const res = await fetch('/api/producto/read_marcas',{
+            method:'POST',
+            body:JSON.stringify(2)
+        })
+        const resJSON = await res.json()
+        setMarcasAcompanamientos(resJSON)
     }
 
     const readAcomp = async () =>{
@@ -161,6 +181,11 @@ const Leer_productos = ({ marcas }) => {
         countData()
     }, [update])
 
+    useEffect(() =>{
+        readMarcasBotellas()
+        readMarcasAcompanamientos()
+    },[])
+
 
     //Set de los productos filtrados
     useEffect(() => {
@@ -177,7 +202,7 @@ const Leer_productos = ({ marcas }) => {
             >
                 <Editar_Producto 
                     onClose={closeUProduct}
-                    marcas={marcas}
+                    marcas={marcasBotellas}
                     idProducto={productoEdit}
                 />
             </Modal>
