@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { contexto } from '../UpdateProvider'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
+import Modal from 'react-modal'
 
 
 const randomHexa = () => {
@@ -20,7 +21,25 @@ const Crear_foto = () => {
     const { register, handleSubmit, reset, setValue } = useForm()
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
-    const createRef = useRef(null)
+
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: '50%',
+            bottom: '50%',
+            marginRight: '-50%',
+            marginBottom: '-50%',
+            height: '65%',
+            transform: 'translate(-40%, -50%)',
+            backgroundColor: '#00000000',
+            border: 'none',
+            boxShadow: 'none',
+            overflow: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+        },
+    };
 
     useEffect(() => {
         register('foto');
@@ -35,12 +54,6 @@ const Crear_foto = () => {
     }
 
     useEffect(() => {
-        if (cFotoIsOpen) {
-            createRef.current.scrollIntoView({ behavior: 'smooth' })
-        }
-    }, [cFotoIsOpen]);
-
-    useEffect (() =>{
         readData()
     })
 
@@ -121,14 +134,18 @@ const Crear_foto = () => {
                 <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-4'>Agregar foto</p>
             </button>
-            <div ref={createRef} hidden={!cFotoIsOpen} className={`absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-6/12 h-[1200px] ${cFotoIsOpen ? "" : "pointer-events-none"}`}>
-                <div className='w-[80%] h-2/6 bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px]'>
-                    <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
+            <Modal
+                isOpen={cFotoIsOpen}
+                onRequestClose={onClose}
+                style={customStyles}
+            >
+                <div className='w-[80%] h-full bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[500px] max-h-[450px]'>
+                    <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between max-h-[450px]'>
                         <p className='font-bold pl-5'>Foto</p>
                         <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
                     </div>
                     <div className='w-full h-full flex justify-between'>
-                        <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
+                        <div className='w-full flex flex-col justify-center items-center'>
                             {eventoPhoto && (
                                 <img src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='w-48' />
                             )}
@@ -142,70 +159,36 @@ const Crear_foto = () => {
                             {!eventoPhoto && (
                                 <p className='text-sm mt-1 text-red-700'>Es necesario agregar una foto</p>
                             )}
+
+
                         </div>
-                        <div className='h-full w-[60%] flex justify-end'>
-                            <div className='flex flex-col items-start gap-y-6 mt-28 mr-2'>
-                                <p className='text-xl'>Descripción</p>
-                                <p className='text-xl'>Categoría</p>
+                        <form onSubmit={handleSubmit(handleOnSubmit)} className='w-full h-full'>
+                            <input
+                                type='file'
+                                name='foto'
+                                id='fotoSelecter'
+                                className='hidden'
+                                ref={fileInputRef}
+                                onChange={(e) => {
+                                    setEventoPhoto(e.target.files[0])
+                                    setValue('foto', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
+                                    setValue('hexa', hexa)
+                                }}
+                            />
+                            <div className='w-full h-full flex justify-end items-end'>
+                                <button
+                                    type='submit'
+                                    className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mb-11'
+                                >Agregar
+                                </button>
                             </div>
-                            <div>
-                                <div className='h-full flex flex-col items-start mt-28 mr-2'>
-                                    <form onSubmit={handleSubmit(handleOnSubmit)}>
-                                        <input
-                                            type='file'
-                                            name='foto'
-                                            id='fotoSelecter'
-                                            className='hidden'
-                                            ref={fileInputRef}
-                                            onChange={(e) => {
-                                                setEventoPhoto(e.target.files[0])
-                                                setValue('foto', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
-                                                setValue('hexa', hexa)
-                                            }}
-                                        />
-                                        <input
-                                            type='text'
-                                            name='descripcion'
-                                            id='descripcion'
-                                            required={true}
-                                            maxLength={20}
-                                            {...register('descripcion', {
-                                                required: true,
-                                                maxLength: 20,
-                                            })}
-                                            className='w-full h-7 border-2 border-black rounded-lg pl-1'
-                                            placeholder='Descripción de la foto'
-                                        />
-                                        <select
-                                            name='categoria'
-                                            id='categoria'
-                                            required={true}
-                                            {...register('categoria', {
-                                                required: true
-                                            })}
-                                            className='w-full border-2 border-black rounded-lg pl-1 mt-6'
-                                        >
-                                            <option></option>
-                                            {categorias && categorias.map((categoria) =>(
-                                                <option key={categoria.id_categoria} value={categoria.id_categoria}>
-                                                    {categoria.categoria}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        <div className='w-full flex justify-end items-end'>
-                                            <button
-                                                type='submit'
-                                                className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[50%]'
-                                            >Agregar
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </div>
+            </Modal>
+
+
+
 
         </div>
 

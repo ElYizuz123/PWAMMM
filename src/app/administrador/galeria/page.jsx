@@ -1,7 +1,5 @@
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
-import Carrusel_Admin from '@/components/Administrador/galeria/Carrusel_Admin'
 import Categorias from '@/components/Administrador/galeria/Categorias'
-import Crear_categoria from '@/components/Administrador/galeria/Crear_categoria'
 import Crear_foto from '@/components/Administrador/galeria/Crear_foto'
 import Paginacion from '@/components/Administrador/productos/Paginacion'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
@@ -24,7 +22,6 @@ const Page = () => {
             <div className='w-full h-auto relative'>
               <div className='w-full flex justify-center mt-5'>
                 <Crear_foto/>
-                <Crear_categoria/>
               </div>
               <div className="items-center justify-center">
                 <Categorias />

@@ -6,12 +6,9 @@ export async function POST(request){
         var datos = await request.json()
         if(datos==null)
         datos=1
-        const res = await db.galeria_categoria.findMany({
-            take:6,
-            skip:(datos-1)*6,
-            include:{
-                galeria_foto: true
-            }
+        const res = await db.galeria_foto.findMany({
+            take:12,
+            skip:(datos-1)*12
         });
         return NextResponse.json(JSON.stringify(res));
 
