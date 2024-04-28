@@ -472,8 +472,6 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 
 /* BOTON FINALIZAR PEDIDO */
 .Btn {
-  width: 400px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;

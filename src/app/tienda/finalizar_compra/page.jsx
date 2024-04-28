@@ -5,20 +5,30 @@ import Image from "next/image";
 
 const finalizar_compra = () => {
   return (
-    <LayoutPrincipal>
-      <div className="w-full relative ">
-        {/* imagen fondo */}
-        <div className=" h-full w-full z-0 opacity-45 ">
-          <Image
-            src="/backgroundImage.jpg"
-            layout="fill"
-            quality={100}
-            alt="Fondo"
-          />
-        </div>
-        <Formulario></Formulario>
-      </div>
-    </LayoutPrincipal>
+ 
+      <div className="realtive h-screen">
+              <div className="  absolute flex items-end  ">
+                  <Image
+                    src="/mezcal_background.png"
+                    alt="Imagen de fondo"
+                    width={1000}
+                    height={1000}
+                    objectFit="cover"
+                    className="  w-full  opacity-60"
+                  />
+                </div>
+                 <Formulario/> 
+                <div className="">
+                     
+                   <LayoutPrincipal/>
+                </div>
+                 
+            </div>
+       
+  
+     
+      
+      
   );
 };
 

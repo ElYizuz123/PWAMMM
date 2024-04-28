@@ -97,11 +97,11 @@ const Carrito = () => {
             </div>
 
             {/* Botón de ir al carrito y pagar */}
-            <a href="/tienda/carrito">
+            <Link href="/tienda/carrito">
               <button className="bg-[#F70073] font-bold text-white w-full py-2 mt-4 rounded transition duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:-translate-y-1">
                 VER CARTA & PAGAR →
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       )}
