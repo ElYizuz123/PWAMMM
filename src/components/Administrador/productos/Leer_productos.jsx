@@ -4,9 +4,9 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import Tarjeta_Producto_Admin from './Tarjeta_Producto_Admin'
 import Editar_Producto from './Editar_Producto';
 import { contexto } from '../UpdateProvider';
-import Paginacion from './Paginacion';
 import { useSearchParams } from 'next/navigation';
 import Modal from 'react-modal'
+import Editar_Acompanamiento from './Editar_Acompanamiento';
 
 const Leer_productos = () => {
 
@@ -14,20 +14,29 @@ const Leer_productos = () => {
     const [marcasBotellas, setMarcasBotellas] = useState(null)
     const [marcasAcompanamientos, setMarcasAcompanamientos] = useState(null)
     const [uProductIsOpen, setUProductIsOpen] = useState(false)
+    const [uAcompanamientosIsOpen, setUAcompanamientosIsOpen] = useState(false)
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
-    const {update, page, setTotalPages} = useContext(contexto)
+    const { update, page, setTotalPages } = useContext(contexto)
     const [totalBottles, setTotalBottles] = useState(0)
     const [acompanamientos, setAcompanamientos] = useState(null)
     const [searchBar, setSearchBar] = useState(null)
     const searchParams = useSearchParams()
-    const upRef = useRef(null)
 
     //Función para abrir pop-up editar productos
     const openUProduct = (id_producto) => {
-        setUProductIsOpen(true);
+        setUProductIsOpen(true)
         setProductoEdit(id_producto)
-    };
+    }
+
+    const openUAcompanamiento = (id_producto) => {
+        setUAcompanamientosIsOpen(true)
+        setProductoEdit(id_producto)
+    }
+
+    const closeUAcompanamientos = () => {
+        setUAcompanamientosIsOpen(false)
+    }
 
     //Función para actualizar la página después de eliminación
     const updatePage = () => {
@@ -36,33 +45,33 @@ const Leer_productos = () => {
 
     const customStyles = {
         content: {
-          top: '50%',
-          left: '50%',
-          right: '60%',
-          bottom: '50%',
-          marginRight: '-50%',
-          marginBottom: '-50%',
-          transform: 'translate(-50%, -50%)',
-          backgroundColor: '#00000000',
-          border: 'none',
-          boxShadow: 'none',
-          overflow:'auto',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
+            top: '50%',
+            left: '50%',
+            right: '60%',
+            bottom: '50%',
+            marginRight: '-50%',
+            marginBottom: '-50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#00000000',
+            border: 'none',
+            boxShadow: 'none',
+            overflow: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
         },
-      };
+    };
 
     //Función para leer productos
     const readData = async () => {
         var search = ""
-        if(!page){
+        if (!page) {
             search = searchParams.get('pages')
         }
-        else{
+        else {
             search = page
         }
-        const res = await fetch('/api/producto/read_productos',{
-            method:'POST',
+        const res = await fetch('/api/producto/read_productos', {
+            method: 'POST',
             body: JSON.stringify(search)
         })
         const resJSON = await res.json()
@@ -71,71 +80,72 @@ const Leer_productos = () => {
         setAcompanamientos(null)
     };
 
-    const countData = async () =>{
+    const countData = async () => {
         const res = await fetch('/api/producto/cont_productos')
         const resJSON = await res.json()
-        setTotalPages(Math.ceil((resJSON)/12))
+        setTotalPages(Math.ceil((resJSON) / 12))
         setTotalBottles(parseInt(resJSON))
     }
 
-    const readMarcasBotellas = async () =>{
-        const res = await fetch('/api/producto/read_marcas',{
-            method:'POST',
+    const readMarcasBotellas = async () => {
+        const res = await fetch('/api/producto/read_marcas', {
+            method: 'POST',
             body: JSON.stringify(1)
         })
         const resJSON = await res.json()
         console.log(resJSON)
         setMarcasBotellas(resJSON)
     }
-    const readMarcasAcompanamientos = async () =>{
-        const res = await fetch('/api/producto/read_marcas',{
-            method:'POST',
-            body:JSON.stringify(2)
+    const readMarcasAcompanamientos = async () => {
+        const res = await fetch('/api/producto/read_marcas', {
+            method: 'POST',
+            body: JSON.stringify(2)
         })
         const resJSON = await res.json()
         setMarcasAcompanamientos(resJSON)
     }
 
-    const readAcomp = async () =>{
+    const readAcomp = async () => {
         var search = ""
-        if(!page){
+        if (!page) {
             search = searchParams.get('pages')
         }
-        else{
+        else {
             search = page
         }
-        if(filteredProducts){
-            const sobrante = 12-(filteredProducts.length%12)
+        if (filteredProducts) {
+            const sobrante = 12 - (filteredProducts.length % 12)
             var pagActual = 1
-            if(search){
-                pagActual = parseInt(search)-(Math.ceil(totalBottles/12))+1
+            if (search) {
+                pagActual = parseInt(search) - (Math.ceil(totalBottles / 12)) + 1
             }
-            if(sobrante>0 && filteredProducts.length<12){
-                const data ={
-                    toma:sobrante,
-                    pag:pagActual
+            if (sobrante > 0 && filteredProducts.length < 12) {
+                const data = {
+                    toma: sobrante,
+                    pag: pagActual
                 }
-                var dir = ''
-                if(searchBar && searchBar!=""){
-                    dir='/api/producto/read_acompanamientos_like'
-                    data['busqueda']=searchBar
+                if (sobrante > 0 && pagActual >= 0) {
+                    var dir = ''
+                    if (searchBar && searchBar != "") {
+                        dir = '/api/producto/read_acompanamientos_like'
+                        data['busqueda'] = searchBar
+                    }
+                    else {
+                        dir = '/api/producto/read_acompanamientos'
+                    }
+                    const res = await fetch(dir, {
+                        method: 'POST',
+                        body: JSON.stringify(data)
+                    })
+                    const resJSON = await res.json()
+                    setAcompanamientos(JSON.parse(resJSON))
                 }
-                else{
-                    dir='/api/producto/read_acompanamientos'
-                }
-                const res = await fetch(dir,{
-                    method:'POST',
-                    body:JSON.stringify(data)
-                })
-                const resJSON = await res.json()
-                setAcompanamientos(JSON.parse(resJSON))  
-                
             }
         }
     }
 
 
-    useEffect(() =>{
+    useEffect(() => {
         readAcomp()
     }, [filteredProducts])
 
@@ -144,20 +154,20 @@ const Leer_productos = () => {
     };
 
     //Confirmación en la búsqueda
-    const handleSubmit =  async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         var search = ""
-        if(!page){
+        if (!page) {
             search = searchParams.get('pages')
         }
-        else{
+        else {
             search = page
         }
         const data = {
-            busqueda:e.target[0].value,
-            page:search
+            busqueda: e.target[0].value,
+            page: search
         }
-        const res = await fetch('/api/producto/read_producto_like',{
+        const res = await fetch('/api/producto/read_producto_like', {
             method: 'POST',
             body: JSON.stringify(data)
         })
@@ -168,7 +178,7 @@ const Leer_productos = () => {
     //Cambio en la búsqueda
     const handleChange = (event) => {
         setSearchBar(event.target.value)
-        if(event.target.value==""){
+        if (event.target.value == "") {
             readData()
         }
     };
@@ -176,21 +186,24 @@ const Leer_productos = () => {
 
 
     //Actualización
-    useEffect(()=>{
+    useEffect(() => {
         readData()
         countData()
+        readAcomp()
+        console.log("Hmmm")
     }, [update])
 
-    useEffect(() =>{
+    useEffect(() => {
         readMarcasBotellas()
         readMarcasAcompanamientos()
-    },[])
+    }, [])
 
 
     //Set de los productos filtrados
     useEffect(() => {
         setFilteredProducts(productos)
     }, [productos]);
+
 
     return (
         <div >
@@ -200,9 +213,21 @@ const Leer_productos = () => {
                 style={customStyles}
                 ariaHideApp={false}
             >
-                <Editar_Producto 
+                <Editar_Producto
                     onClose={closeUProduct}
                     marcas={marcasBotellas}
+                    idProducto={productoEdit}
+                />
+            </Modal>
+            <Modal
+                isOpen={uAcompanamientosIsOpen}
+                onRequestClose={closeUAcompanamientos}
+                style={customStyles}
+                ariaHideApp={false}
+            >
+                <Editar_Acompanamiento
+                    onClose={closeUAcompanamientos}
+                    marcas={marcasAcompanamientos}
                     idProducto={productoEdit}
                 />
             </Modal>
@@ -248,7 +273,7 @@ const Leer_productos = () => {
                         precio={acompanamiento.precio}
                         foto={acompanamiento.foto}
                         updatePage={updatePage}
-                        editProduct={openUProduct}
+                        editProduct={openUAcompanamiento}
                     />))
                 }
             </div>

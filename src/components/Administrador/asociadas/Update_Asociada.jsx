@@ -195,11 +195,11 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                                     type='text'
                                     name='historia'
                                     required={true}
-                                    maxLength={300}
+                                    maxLength={500}
                                     defaultValue={asociada ? asociada[0].historia:""}
                                     {...register('historia', {
                                         required: true,
-                                        maxLength: 300
+                                        maxLength: 500
                                     })}
                                     className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-5'
                                     placeholder='Descripción'
