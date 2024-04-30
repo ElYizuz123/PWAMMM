@@ -83,7 +83,7 @@ const Carrito = () => {
                     <TrashIcon
                       className="h-5 w-5 text-red-500 cursor-pointer transition duration-300 ease-in-out hover:text-red-700 hover:scale-110"
                       onClick={() =>
-                        handleDelete(producto.id_producto, producto.nombre)
+                        handleDelete(producto.nombre)
                       }
                     />
                   </div>

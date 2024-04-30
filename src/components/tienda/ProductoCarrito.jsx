@@ -94,7 +94,7 @@ const ProductoCarrito = ({
         <div className="w-[50px]">
           <button
             class="bin-button"
-            onClick={() => handleDelete(id_producto, nombre)}
+            onClick={() => handleDelete(nombre)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

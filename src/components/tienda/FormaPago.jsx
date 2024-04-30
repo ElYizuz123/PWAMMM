@@ -12,26 +12,30 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-function FormaPago({ triggerSubmit }) {
-  const sendEmail = async (data) => {
-    try {
-      const response = await fetch("/api/sendEmail_Ventas", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) {
-        throw new Error("Error al enviar el correo");
-      }
 
-      const responseData = await response.json();
-      console.log(responseData);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+//en esta funcion recibo el trigger
+function FormaPago({ triggerSubmit }) {
+  const { envioVenta } = useContext(ProductContext);
+
+  // const sendEmail = async (data) => {
+  //   try {
+  //     const response = await fetch("/api/sendEmail_Ventas", {
+  //       method: "POST",
+  //       headers: {
+  //         "content-type": "application/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error("Error al enviar el correo");
+  //     }
+
+  //     const responseData = await response.json();
+  //     console.log(responseData);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   const { productos } = useContext(ProductContext);
 
@@ -46,11 +50,33 @@ function FormaPago({ triggerSubmit }) {
     0
   );
 
-  const handleOpenPopup = () => {
+  const handleOpenPopup = async (data) => {
+    //aqui hace sus cosas
+     try {
     if (paymentMethod == "pickup2") {
       setPaypal(true);
     }
     {triggerSubmit}
+
+     const responseData = await fetch("/api/sendEmail_Ventas", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            
+          }),
+        });
+
+        if (!responseData.ok) {
+        throw new Error('Error al enviar el correo');
+      }
+       const response = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    
   };
   // const handleCondicion = () => {
   //   if (confirmMethod === "pickup3" || confirmMethod === "delivery3") {
@@ -63,8 +89,9 @@ function FormaPago({ triggerSubmit }) {
     setPaypal(false);
   };
   const handleShippingChange = (event) => {
+    envioVenta(event.target.value === "pickup" ? 0 : 1);
     setShippingMethod(event.target.value);
-  };
+};
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
   };
@@ -219,7 +246,8 @@ function FormaPago({ triggerSubmit }) {
                   confirmMethod.includes("pickup3")
                 )
               }
-              onClick={handleOpenPopup(sendEmail)}
+              onClick={handleOpenPopup}
+              //entonces cuando le pica al boton de pagar activa el openPopUp
             >
               <p>Pagar</p>
 

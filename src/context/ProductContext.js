@@ -1,19 +1,21 @@
 "use client";
-import React, { useState } from "react";
-import { useContext } from "react";
-import { createContext } from "react";
+import React, { useState, useEffect, createContext } from 'react';
+
 
 export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [cartCountAnimation, setCartCountAnimation] = useState('');
   const [marcaAsociada, setMarcaAsociada] = useState(0);
-  const [productos, setProductos] = useState(() => {
-    const productosEnAlmacenamiento = localStorage.getItem("productos");
-    return productosEnAlmacenamiento
-      ? JSON.parse(productosEnAlmacenamiento)
-      : [];
-  });
+  const [isEnvio, setIsEnvio] = useState(1);
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    const productosEnAlmacenamiento = localStorage.getItem('productos');
+    if (productosEnAlmacenamiento) {
+      setProductos(JSON.parse(productosEnAlmacenamiento));
+    }
+  }, []);
 
   const triggerCartCountAnimation = () => {
     setCartCountAnimation('animate-bounce bg-green-600');
@@ -26,44 +28,33 @@ export const ProductProvider = ({ children }) => {
   };
 
   const addProductos = (newProduct) => {
-    const existe = productos.findIndex(
-      (producto) =>
-        producto.id_producto === newProduct.id_producto &&
-        producto.nombre === newProduct.nombre
+    // Encuentra el índice del producto existente
+    const index = productos.findIndex(
+      (producto) => producto.id_producto === newProduct.id_producto && producto.nombre === newProduct.nombre
     );
 
-    if (existe !== -1) {
-      const newProducts = [...productos];
-      if (newProduct.count > 0) {
-        newProducts[existe] = {
-          ...newProducts[existe],
-          cantidad: (newProducts[existe].cantidad || 1) + newProduct.count,
-        };
-      } else {
-        newProducts[existe] = {
-          ...newProducts[existe],
-          cantidad: (newProducts[existe].cantidad || 1) + 1,
-        };
-      }
+    let newProducts = [...productos]; // Hace una copia del estado actual de los productos
 
-      setProductos(newProducts);
-      localStorage.setItem("productos", JSON.stringify(newProducts));
+    if (index !== -1) {
+        // Si el producto existe, actualiza su cantidad
+        const cantidadActual = newProducts[index].cantidad || 0;
+        newProducts[index] = {
+            ...newProducts[index],
+            cantidad: cantidadActual + (newProduct.count || 1),
+        };
     } else {
-      if (newProduct.count > 0) {
-        const updatedProductos = [
-          ...productos,
-          { ...newProduct, cantidad: newProduct.count },
-        ];
-        setProductos(updatedProductos);
-        localStorage.setItem("productos", JSON.stringify(updatedProductos));
-      } else {
-        const updatedProductos = [...productos, { ...newProduct, cantidad: 1 }];
-        setProductos(updatedProductos);
-        localStorage.setItem("productos", JSON.stringify(updatedProductos));
-      }
+        // Si el producto no existe, lo agrega
+        newProducts.push({
+            ...newProduct,
+            cantidad: newProduct.count || 1,
+        });
     }
-    triggerCartCountAnimation();
-  };
+
+    setProductos(newProducts); // Actualiza el estado de productos
+    localStorage.setItem("productos", JSON.stringify(newProducts)); // Guarda en localStorage
+    triggerCartCountAnimation(); // Activa la animación
+};
+
 
   const deleteProduct = (name) => {
     const updatedProductos = productos.filter(
@@ -76,33 +67,37 @@ export const ProductProvider = ({ children }) => {
   };
 
   const updateQuantity = (tipo, newProduct) => {
-    const newProducts = [...productos];
-    const existe = productos.findIndex(
+    const index = productos.findIndex(
       (producto) =>
         producto.id_producto === newProduct.id_producto &&
         producto.nombre === newProduct.nombre
     );
-    if (tipo == 1) {
-      newProducts[existe] = {
-        ...newProducts[existe],
-        cantidad: (newProducts[existe].cantidad || 0) + 1,
-      };
-    } else {
-      const newQuantity = (newProducts[existe].cantidad || 1) - 1;
-      newProducts[existe] = {
-        ...newProducts[existe],
-        cantidad: newQuantity >= 1 ? newQuantity : 1,
-      };
+
+    if (index !== -1) {
+        let cantidadActual = productos[index].cantidad || 1; // Aseguramos un mínimo de 1
+        // Incrementa o decrementa según el tipo
+        cantidadActual = tipo === 1 ? cantidadActual + 1 : Math.max(cantidadActual - 1, 1);
+        
+        const newProducts = [...productos];
+        newProducts[index] = {
+            ...newProducts[index],
+            cantidad: cantidadActual
+        };
+
+        setProductos(newProducts);
+        localStorage.setItem("productos", JSON.stringify(newProducts));
+        triggerCartCountAnimation();
     }
-    setProductos(newProducts);
-    localStorage.setItem("productos", JSON.stringify(newProducts));
-    triggerCartCountAnimation();
-  };
+};
 
   const total = productos.reduce(
     (sub, producto) => sub + producto.precio * producto.cantidad,
     0
   );
+
+  const envioVenta = (estado) => {
+    setIsEnvio(estado);
+  }
 
   const idMarcaAsociada = (idMarcaAsociada) => {
     setMarcaAsociada(idMarcaAsociada);
@@ -117,6 +112,8 @@ export const ProductProvider = ({ children }) => {
         deleteProduct,
         updateQuantity,
         total,
+        envioVenta,
+        isEnvio,
         idMarcaAsociada,
         marcaAsociada,
       }}

@@ -16,17 +16,18 @@ export async function POST(request) {
       secure: true, // Use `true` for port 465, `false` for all other ports
       auth: {
         user: "aguimtz.2003@gmail.com",
-        pass: "isii xgeq dooi szvw",
+        pass: "dwgt bnzs xygg bqpm",
       },
     });
 
     const mailOption = {
       from: "aguimtz.2003@gmail.com",
       to: "aguimtz.2003@gmail.com",
-      subject: "Venta",
+      subject: "VENTA NUEVA ASOCIACIÓN MEZCALERA",
       html: `
     <h3>Marca:  ${marca}</h3>
-    <h3>Datos del producto: ${nombreBotella}  ${ml} ${precioBotella} ${cantidad}</h3>
+    <h3>Datos del producto: 
+    ${nombreBotella}  ${ml} ${precioBotella} ${cantidad}</h3>
     <h3>Método envío: ${metodoEnvio}</h3>
     <h3>Total: ${total}</h3>
     <h3>Metodo del pago: ${metodoPago} 
