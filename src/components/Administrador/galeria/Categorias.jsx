@@ -109,7 +109,7 @@ const Categorias = () => {
 
     useEffect(() => {
         readData()
-        countData()
+        //countData()
     }, [update])
 
 

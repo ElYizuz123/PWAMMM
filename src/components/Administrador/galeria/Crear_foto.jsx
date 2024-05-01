@@ -55,7 +55,7 @@ const Crear_foto = () => {
 
     useEffect(() => {
         readData()
-    })
+    },[])
 
 
     const readData = async () => {
