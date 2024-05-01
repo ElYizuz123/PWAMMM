@@ -36,24 +36,24 @@ const GraficaPastel = ({productos}) => {
     if(productos){
         data = {
             labels: [
-                productos[0].nombre, 
-                productos[1].nombre, 
-                productos[2].nombre,
-                productos[3].nombre,
-                productos[4].nombre,
-                productos[5].nombre,
+                productos[0] ? productos[0].nombre:"No definido", 
+                productos[1] ? productos[1].nombre:"No definido", 
+                productos[2] ? productos[2].nombre:"No definido",
+                productos[3] ? productos[3].nombre:"No definido",
+                productos[4] ? productos[4].nombre:"No definido",
+                productos[5] ? productos[5].nombre:"No definido",
                 'Otros'
             ],
             datasets:[
                 {
                     label:'Texto de ejemplo',
                     data:[
-                        productos[0].cantidad,
-                        productos[1].cantidad,
-                        productos[2].cantidad,
-                        productos[3].cantidad,
-                        productos[4].cantidad,
-                        productos[5].cantidad,
+                        productos[0]?.cantidad,
+                        productos[1]?.cantidad,
+                        productos[2]?.cantidad,
+                        productos[3]?.cantidad,
+                        productos[4]?.cantidad,
+                        productos[5]?.cantidad,
                         cantidadOtros(productos)
                     ],
                     backgroundColor: [
@@ -64,7 +64,6 @@ const GraficaPastel = ({productos}) => {
                         'rgba(255, 255, 0, 0.8)',
                         'rgba(255, 165, 0, 0.8)',
                         'rgba(144, 238, 144, 0.8)',
-                        'rgba(173, 216, 230, 0.8)'
                     ],
                     
                     borderColor: [
@@ -75,7 +74,6 @@ const GraficaPastel = ({productos}) => {
                         'rgba(255, 255, 0, 0.8)',
                         'rgba(255, 165, 0, 0.8)',
                         'rgba(144, 238, 144, 0.8)',
-                        'rgba(173, 216, 230, 0.8)'
                     ],
                     borderWidht:1,
                 }
