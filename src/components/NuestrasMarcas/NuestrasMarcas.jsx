@@ -39,13 +39,13 @@ const NuestrasMarcas = () => {
     }
   }, [controls, inView]);
   return (
-    <div className="p-6 mt-36">
-      <div className={berkshire.className}>
-        <p className="text-black text-7xl ml-48 mt-36 text-delinead  ">
+    <div className="p-6 mt-36 sm:mt-5 md:mt-96 lg:mt-48 text-center ">
+      <div className={berkshire.className}> {/*Fuente Berksire para "Nuestras Marcas" */ }
+        <p className="text-4xl   md:text-6xl lg:text-6xl xl:text-7xl text-black text-delinead  ">
           {" "}
           Nuestras{" "}
         </p>
-        <p className="text-[#f70073]  text-8xl ml-96 text-delineado">
+        <p className="text-5xl sm:ml-56 md:text-7xl lg:text-7xl xl:text-8xl text-[#f70073] text-delineado">
           {" "}
           Marcas{" "}
         </p>
@@ -65,7 +65,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-MataVerde.png"}
                   width={100}
                   height={100}
-                  alt=""
+                  alt="Logo MataVerde"
                   className="imagen-componente"
                 />
               </Link>
@@ -76,7 +76,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-DonMateo.jpeg"}
                   width={70}
                   height={70}
-                  alt=""
+                  alt="Logo Don Mateo"
                   className="imagen-componente"
                 />
               </Link>
@@ -87,7 +87,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-MezcalArmoniaBla.png"}
                   width={100}
                   height={100}
-                  alt=""
+                  alt=" Logo Mezcal Armonia"
                   className="imagen-componente"
                 />
               </Link>
@@ -98,7 +98,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-RocioVega.jpg"}
                   width={90}
                   height={90}
-                  alt=""
+                  alt=" Logo Rocio Vega"
                   className="imagen-componente"
                 />
               </Link>
@@ -109,7 +109,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-MataVerde.png"}
                   width={100}
                   height={100}
-                  alt=""
+                  alt="Logo Mata verde"
                   className="imagen-componente"
                 />
               </Link>
@@ -120,7 +120,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-CieloNocturno.jpg"}
                   width={90}
                   height={90}
-                  alt=""
+                  alt="Logo Cielo nocturno"
                   className="imagen-componente"
                 />
               </Link>
@@ -131,7 +131,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-PurititoCora.png"}
                   width={100}
                   height={100}
-                  alt=""
+                  alt="Logo Puritito Corazon"
                   className="imagen-componente"
                 />
               </Link>
@@ -142,7 +142,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-EspinaRoja.png"}
                   width={100}
                   height={100}
-                  alt=""
+                  alt="Logo Espina Roja"
                   className="imagen-componente"
                 />
               </Link>
@@ -153,7 +153,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-TesoroMichoacano.png"}
                   width={100}
                   height={100}
-                  alt=""
+                  alt="Logo Tesoro Michoacano"
                   className="imagen-componente"
                 />
               </Link>
@@ -164,7 +164,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-MesonQueso.png"}
                   width={100}
                   height={100}
-                  alt=""
+                  alt="Logo Meson Queso"
                   className="imagen-componente"
                 />
               </Link>
@@ -175,7 +175,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-Qveela.jpeg"}
                   width={95}
                   height={95}
-                  alt=""
+                  alt="Logo Qveela"
                   className="imagen-componente"
                 />
               </Link>
@@ -186,7 +186,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-ElViejo.jpeg"}
                   width={95}
                   height={95}
-                  alt=""
+                  alt="Logo El viejo Alegre"
                   className="imagen-componente"
                 />
               </Link>
@@ -197,7 +197,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-CoronadePerlas.png"}
                   width={100}
                   height={100}
-                  alt=""
+                  alt="Logo corona de perlas"
                   className="imagen-componente"
                 />
               </Link>

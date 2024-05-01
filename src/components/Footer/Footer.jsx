@@ -15,6 +15,9 @@ const Footer = () => {
             <Link className="text-center mx-3 hover:underline" href={"/"}>
               INICIO
             </Link>
+            <Link className="text-center mx-3 hover:underline" href={"/historia"}>
+              HISTORIA
+            </Link>
             <Link className="text-center mx-3 hover:underline" href={"/tienda"}>
               TIENDA
             </Link>

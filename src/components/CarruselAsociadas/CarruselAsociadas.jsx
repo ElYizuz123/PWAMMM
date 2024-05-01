@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, useContext } from "react";
+import React, { Suspense,useState, useEffect, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ProductContext } from "@/context/ProductContext";
 import { XIcon } from "@heroicons/react/solid";
@@ -9,12 +9,15 @@ import SwiperCore, {
   Pagination,
   EffectCoverflow,
   Autoplay,
+  Scrollbar,
 } from "swiper/modules";
 import "swiper/scss/pagination";
 import "swiper/scss/navigation";
 import "swiper/scss";
 import Link from "next/link";
-import Image from "next/image";
+
+//import CardCarrusel from "../CardCarruselA/CardCarrusel";
+const CardCarrusel = React.lazy(() => import('../CardCarruselA/CardCarrusel'));
 
 const ruta = "/mezcaleras/";
 const tienda = "/tienda/";
@@ -40,11 +43,11 @@ const CarruselAsociadas = () => {
 
   useEffect(() => {
     const fetchAsociadas = async () => {
-      const response = await fetch("/api/read_asociadas");
+      const response = await fetch("/api/read_asociadas"); // Se leen los datos de las asociadas de la base de datos
       const data = await response.json();
       setAsociadas(data);
 
-      const responseMarca = await fetch("/api/read_marcas");
+      const responseMarca = await fetch("/api/read_marcas"); // Se leen las marcas de la base de datos
       const dataMarca = await responseMarca.json();
       setMarcas(dataMarca);
     };
@@ -55,66 +58,77 @@ const CarruselAsociadas = () => {
   return (
     <div>
       <Swiper
-        modules={[Navigation, Pagination, EffectCoverflow, Autoplay]}
+        modules={[Navigation, Pagination, EffectCoverflow, Autoplay,Scrollbar]} // Modulos necesarios para que funcione el swiper.
         navigation
         pagination={{
-          el: ".paginacionCarruselAsociadas",
-          clickable: true,
+          el: ".paginacionCarruselAsociadas",                         // Para la paginación, en globals.css se detalla más sobre esto(swiper-button-next,swiper-button-prev,)
+          clickable: true,                                            // en donde se va acomoda la posición de las flechas y su color.
           renderBullet: function (index, className) {
             return '<span class="' + className + '">' + (index + 1) + "</span>";
           },
+        
         }}
         effect="coverflow"
         coverflowEffect={{
-          rotate: 0,
+          rotate: 0,  // Sin efecto de rotación 
           slideShadows: false,
         }}
-        spaceBetween={20}
-        slidesPerView={3}
-        centeredSlides={true}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        spaceBetween={20} //Espacio entre cada fotografía de las mezcaleres
+        slidesPerView={3} // Número de fotografías visibles 
+        centeredSlides={true} //Centradas
+        autoplay={{ delay: 4000, disableOnInteraction: false }} // Reproducción automática cada 4 segundos 
         className="miSwiper"
+        
+        breakpoints={{
+          // Cuando el ancho de la pantalla sea igual o superior a 300px
+          300: {
+            slidesPerView: 1, // Mostrar 2 slides
+            spaceBetween: 2, // Espacio entre slides
+            scrollbar: {
+              el: '.swiper-scrollbar',
+              draggable: true,
+            },
+            
+          },
+          768: {
+            slidesPerView: 2, // Mostrar 2 slides
+            spaceBetween: 25, // Espacio entre slides
+            
+            
+          },
+          // Cuando el ancho de la pantalla sea igual o superior a 1024px
+          1024: {
+            slidesPerView: 2, // Mostrar 3 slides
+            spaceBetween: 20, // Espacio entre slides
+          },
+          1280: {
+            slidesPerView: 3, // Mostrar 3 slides
+            spaceBetween: 20, // Espacio entre slides
+          },
+        }}
       >
         {asociadas &&
           asociadas.map((asociada, index) => {
-            {
-              /*La informacion del carrusel como historia, nombre, etc*/
-            }
+            
             return (
-              <SwiperSlide key={asociada.id_asociada}>
-                <div className="bg-white mt-56  border-[#f70073] h-[533px] w-[395px]  text-black rounded-3xl border-t-2 border-l-2 border-b-2 border-r-2">
-                  <div className=" bg-white flex justify-center items-center rounded-t-3xl">
-                    <img
-                      src={`${ruta}${asociada.foto}`}
-                      alt=""
-                      className="h-64 w-11/12 rounded-t-3xl rounded-b-none mt-4 object-cover "
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center items-center gap-4 p-4 ">
-                    <p className="text-xl font-extrabold ">{asociada.nombre}</p>
-                    <div className=" flex justify-center items-center ">
-                      <hr className="w-[175px] border-t-2 border-[#f70073] custom-shadow " />
-                    </div>
-
-                    <p className="text-xs text-justify font-semibold ">
-                      {asociada.historia}
-                    </p>
-
-                    <button
-                      className="bg-[#f70073] hover:bg-[#e39abd] hover:scale-105 hover:shadow-lg hover:font-bold text-white text-lg px-6 py-1 rounded -xl"
-                      onClick={() =>
-                        handleAsociada(asociada.nombre, asociada.id_asociada)
-                      }
-                    >
-                      Productos
-                    </button>
-                  </div>
-                </div>
+              /* Sección de cada card del carrusel de las Asociadas
+              La informacion del carrusel como historia, nombre, etc*/
+              <SwiperSlide key={asociada.id_asociada}> 
+                <Suspense fallback={<div>Cargando...</div>} >
+                <CardCarrusel
+                  asociada={asociada}
+                  nombreA={asociada.nombre}
+                  foto={`${ruta}${asociada.foto}`}
+                  historia={asociada.historia}
+                  handleAsociada={handleAsociada}
+                />
+                </Suspense>
               </SwiperSlide>
             );
           })}
+
       </Swiper>
-      {isPopupOpen && (
+      {isPopupOpen && (   //El Popup al momento de dar clic en productos de cada mezcalera
         <div className="fixed inset-0 bg-gray-600 bg-opacity-70 overflow-y-auto h-full w-full flex items-center justify-center z-50">
           <div className="relative bg-white p-5 rounded shadow-lg w-full max-w-lg mt-16">
             {/* Título del popup y botón de cerrar */}
@@ -138,7 +152,7 @@ const CarruselAsociadas = () => {
                     className="flex justify-between items-center py-2"
                   >
                     <span>{marca.nombre}</span>
-                    <Link href="/tienda">
+                    <Link href="/tienda"> {/* Al momento de dar clic se redirecciona a la tienda, y se filtran los productos de cada asociada */}
                       <button
                         className="text-white bg-[#f70073] p-2 rounded-md hover:bg-[#e39abd] hover:scale-105 hover:shadow-lg"
                         onClick={() => handleMarca(marca.id_marca)}
