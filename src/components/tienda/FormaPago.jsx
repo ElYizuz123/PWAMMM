@@ -15,32 +15,11 @@ const k2d = K2D({
 
 //en esta funcion recibo el trigger
 function FormaPago({ triggerSubmit }) {
-  const { envioVenta } = useContext(ProductContext);
-
-  // const sendEmail = async (data) => {
-  //   try {
-  //     const response = await fetch("/api/sendEmail_Ventas", {
-  //       method: "POST",
-  //       headers: {
-  //         "content-type": "application/json",
-  //       },
-  //       body: JSON.stringify(data),
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error("Error al enviar el correo");
-  //     }
-
-  //     const responseData = await response.json();
-  //     console.log(responseData);
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
-
+  const { envioVenta, pago } = useContext(ProductContext);
   const { productos } = useContext(ProductContext);
 
-  const [shippingMethod, setShippingMethod] = useState("delivery");
-  const [paymentMethod, setPaymentMethod] = useState("delivery2");
+  const [shippingMethod, setShippingMethod] = useState("recogerTienda");
+  const [paymentMethod, setPaymentMethod] = useState("transferencia");
   const [confirmMethod, setConfirmMethod] = useState([]);
   const [payPal, setPaypal] = useState(false);
 
@@ -53,26 +32,13 @@ function FormaPago({ triggerSubmit }) {
   const handleOpenPopup = async (data) => {
     //aqui hace sus cosas
      try {
-    if (paymentMethod == "pickup2") {
+    if (paymentMethod == "payPal") {
       setPaypal(true);
     }
     {triggerSubmit}
 
-     const responseData = await fetch("/api/sendEmail_Ventas", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            
-          }),
-        });
-
-        if (!responseData.ok) {
-        throw new Error('Error al enviar el correo');
-      }
-       const response = await response.json();
-      console.log(responseData);
+    
+      
     } catch (error) {
       console.error('Error:', error);
     }
@@ -89,10 +55,12 @@ function FormaPago({ triggerSubmit }) {
     setPaypal(false);
   };
   const handleShippingChange = (event) => {
-    envioVenta(event.target.value === "pickup" ? 0 : 1);
+    envioVenta(event.target.value === "recogerTienda" ? 0 : 1);
     setShippingMethod(event.target.value);
-};
+  };
+
   const handlePaymentChange = (event) => {
+    pago(event.target.value === "payPal" ? 1 : 0);
     setPaymentMethod(event.target.value);
   };
   const handleConfirmChange = (event) => {
@@ -122,8 +90,8 @@ function FormaPago({ triggerSubmit }) {
             <label>
               <input
                 type="radio"
-                value="delivery"
-                checked={shippingMethod === "delivery"}
+                value="envio"
+                checked={shippingMethod === "envio"}
                 onChange={handleShippingChange}
                 className="form-radio text-[#F70073]"
               />
@@ -132,8 +100,8 @@ function FormaPago({ triggerSubmit }) {
             <label>
               <input
                 type="radio"
-                value="pickup"
-                checked={shippingMethod === "pickup"}
+                value="recogerTienda"
+                checked={shippingMethod === "recogerTienda"}
                 onChange={handleShippingChange}
                 className="form-radio text-[#F70073]"
               />
@@ -145,7 +113,7 @@ function FormaPago({ triggerSubmit }) {
         <div className="grid grid-cols-2 items-center">
           <h3 className="text-black font-semibold text-2xl">ORDEN-TOTAL:</h3>
           <p className="text-green-700 font-bold text-2xl justify-self-end">
-            ${shippingMethod === "pickup" ? totalVenta : totalVenta + envio}
+            ${shippingMethod === "recogerTienda" ? totalVenta : totalVenta + envio}
           </p>
         </div>
 
@@ -155,12 +123,12 @@ function FormaPago({ triggerSubmit }) {
             <label>
               <input
                 type="radio"
-                value="delivery2"
+                value="transferencia"
                 name="Transferencia bancaria"
-                checked={paymentMethod === "delivery2"}
+                checked={paymentMethod === "transferencia"}
                 onChange={handlePaymentChange}
                 className="form-radio text-[#F70073]"
-                // required {...register()}
+                
               />
               <span className="ml-2">
                 Transferencia bancaria directa BANAMEX/OXXO
@@ -170,8 +138,8 @@ function FormaPago({ triggerSubmit }) {
             <label>
               <input
                 type="radio"
-                value="pickup2"
-                checked={paymentMethod === "pickup2"}
+                value="payPal"
+                checked={paymentMethod === "payPal"}
                 onChange={handlePaymentChange}
                 className="form-radio text-[#F70073]"
               />
@@ -212,8 +180,8 @@ function FormaPago({ triggerSubmit }) {
             <label>
               <input
                 type="checkbox"
-                value="delivery3"
-                checked={confirmMethod.includes("delivery3")}
+                value="delivery"
+                checked={confirmMethod.includes("delivery")}
                 onChange={handleConfirmChange}
                 className="form-checkbox text-green-600"
               />
@@ -224,8 +192,8 @@ function FormaPago({ triggerSubmit }) {
             <label>
               <input
                 type="checkbox"
-                value="pickup3"
-                checked={confirmMethod.includes("pickup3")}
+                value="pickup"
+                checked={confirmMethod.includes("pickup")}
                 onChange={handleConfirmChange}
                 className="form-checkbox text-green-600"
               />
@@ -242,8 +210,8 @@ function FormaPago({ triggerSubmit }) {
               class="Btn py-2 w-full"
               disabled={
                 !(
-                  confirmMethod.includes("delivery3") &&
-                  confirmMethod.includes("pickup3")
+                  confirmMethod.includes("delivery") &&
+                  confirmMethod.includes("pickup")
                 )
               }
               onClick={handleOpenPopup}
@@ -255,13 +223,13 @@ function FormaPago({ triggerSubmit }) {
                 <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
               </svg>
             </button>
-            {!confirmMethod.includes("delivery3") && (
+            {!confirmMethod.includes("delivery") && (
               <span className="text-red-500 text-sm">
                 Aún no has aceptado los términos de uso y condiciones
               </span>
             )}
 
-            {!confirmMethod.includes("pickup3") && (
+            {!confirmMethod.includes("pickup") && (
               <span className="text-red-500 text-sm">
                 Aún no has confirmado el uso de tus datos personales
               </span>

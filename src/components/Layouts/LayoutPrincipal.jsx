@@ -14,6 +14,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+
 const berkshire = Berkshire_Swash({
   weight: ["400"],
   styles: ["italic", "normal"],

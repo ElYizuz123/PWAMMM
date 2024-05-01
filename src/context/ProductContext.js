@@ -9,6 +9,7 @@ export const ProductProvider = ({ children }) => {
   const [marcaAsociada, setMarcaAsociada] = useState(0);
   const [isEnvio, setIsEnvio] = useState(1);
   const [productos, setProductos] = useState([]);
+  const [metodoPago,setMetodopago] =useState(1);
 
   useEffect(() => {
     const productosEnAlmacenamiento = localStorage.getItem('productos');
@@ -99,6 +100,10 @@ export const ProductProvider = ({ children }) => {
     setIsEnvio(estado);
   }
 
+ const pago=(estado) =>{
+  setMetodopago(estado);
+ }
+
   const idMarcaAsociada = (idMarcaAsociada) => {
     setMarcaAsociada(idMarcaAsociada);
   };
@@ -116,6 +121,7 @@ export const ProductProvider = ({ children }) => {
         isEnvio,
         idMarcaAsociada,
         marcaAsociada,
+        pago,
       }}
     >
       <div>{children}</div>

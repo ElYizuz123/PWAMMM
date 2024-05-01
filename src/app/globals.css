@@ -517,3 +517,54 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   transform: translateY(4px);
   transition-duration: .3s;
 }
+
+.text-error {
+  color: #ff0000; /* Rojo brillante */
+  font-size: 12px; /* Tamaño mayor */
+  font-weight: bold; /* Más grueso */
+  border: 1px solid #ff0000; /* Borde que hace contraste */
+  background-color: #fff4f4; /* Fondo sutil para más contraste */
+  padding: 4px; /* Espaciado para no sentirse apretado */
+  border-radius: 5px; /* Bordes redondeados para suavidad */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para profundidad */
+}
+
+/* Estilo básico para el contenedor */
+.datos-personales-container {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(247, 0, 115, 0.3); /* Sombra con un toque de color */
+  padding: 16px 48px; /* Espaciado interior */
+  margin-top: 16px;
+  margin-left: 64px;
+  margin-right: 64px;
+  border-radius: 8px; /* Bordes redondeados */
+  transition: all 0.3s ease-in-out; /* Transición suave para efectos hover */
+}
+
+/* Hover efecto para aumentar la sombra */
+.datos-personales-container:hover {
+  box-shadow: 0 8px 15px rgba(247, 0, 115, 0.5);
+}
+
+.datos-personales-container:hover .header-container h2 {
+  color: #f70073; /* Cambia el color del texto a rosa cuando el mouse está sobre el contenedor */
+}
+
+/* Estilo para el encabezado y el botón de expansión */
+.header-container {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s ease-in-out; /* Transición suave del color */
+}
+
+.header-container h2 {
+  font-size: 24px; /* Tamaño del texto */
+  font-weight: 600; /* Peso de la fuente */
+  color: #333; /* Color del texto */
+}
+
+.header-container h2:hover {
+  color: #f70073; /* Color al pasar el mouse, un rosa fuerte */
+}

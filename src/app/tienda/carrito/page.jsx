@@ -17,7 +17,7 @@ const k2d = K2D({
 
 const Page = () => {
   const { productos, total } = useContext(ProductContext);
-
+  const totalProductos = productos.reduce((acc, producto) => acc + producto.cantidad, 0);
   return (
     <LayoutPrincipal>
       <div className={k2d.className}>
@@ -131,17 +131,25 @@ const Page = () => {
 
                     <div class="flex justify-between items-center mb-2">
                       <p class="text-sm font-semibold">
-                        {productos.reduce((acc, producto) => acc + producto.cantidad, 0)} productos 
+                        {totalProductos} productos 
                       </p>
                     </div>
                     
-
-                    <Link
+                    {totalProductos ===0 ?(
+                     <div
+                      className="flex w-72 mx-5 justify-center py-2 bg-red-500 text-white rounded font-bold"
+                    >
+                      AGREGA PRODUCTOS 
+                    </div>
+                    ):( 
+                      
+                      <Link
                       className="flex w-72 mx-5 justify-center py-2 bg-green-500 text-white rounded hover:shadow-lg hover:-translate-y-0.5 font-bold"
                       href={"/tienda/finalizar_compra"}
                     >
                       Finalizar compra
-                    </Link>
+                    </Link>)}
+                  
                   </div>
                   <div class="w-full  bg-white shadow-md rounded p-4 mt-[15px] ">
                     <div className="mb-6">

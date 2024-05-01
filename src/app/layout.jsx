@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="custom-scrollbarL">
       <body className={k2d.className}>
+        
         <ProductProvider>
           <div>{children}</div>
         </ProductProvider>

@@ -91,15 +91,23 @@ const Carrito = () => {
               ))}
             </div>
             {/* Total */}
-            <div className="flex justify-between items-center font-bold border-t mt-4 pt-4">
+            <div className="flex justify-between items-center font-bold border-t mt-2 pt-2">
               <p>Total:</p>
               <p className="border-b-2 border-red-500">${total}</p>
             </div>
 
             {/* Botón de ir al carrito y pagar */}
+
+
+              
             <Link href="/tienda/carrito">
-              <button className="bg-[#F70073] font-bold text-white w-full py-2 mt-4 rounded transition duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:-translate-y-1">
+              <button className="bg-[#F70073] font-bold text-white w-full py-2 mt-6 rounded transition duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:-translate-y-1">
                 VER CARTA & PAGAR →
+              </button>
+            </Link>
+            <Link href="/tienda/finalizar_compra">
+              <button className="bg-green-500 font-bold text-white w-full py-2 mt-2 rounded transition duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:-translate-y-1">
+               Finalizar compra
               </button>
             </Link>
           </div>
