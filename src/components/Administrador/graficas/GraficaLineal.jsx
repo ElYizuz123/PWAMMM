@@ -38,9 +38,6 @@ var data = {
 var options = {
     responsive:true,
     maintainAspectRatio: false,
-    scales:{
-        min:0
-    },
     x:{
         ticks:{
             color: {color: 'blue'}
@@ -53,7 +50,7 @@ var options = {
     } 
 }
 
-const GraficaLineal = () => {
+const GraficaLineal = ({formato}) => {
   return (
     <Line data={data} options={options}/>
   )

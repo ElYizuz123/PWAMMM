@@ -32,7 +32,6 @@ const GraficaPastel = ({productos}) => {
             
         ] 
     }
-    console.log(productos)
     if(productos){
         data = {
             labels: [

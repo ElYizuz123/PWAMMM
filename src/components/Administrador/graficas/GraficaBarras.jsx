@@ -1,5 +1,5 @@
 "use client"
-import { BarElement, CategoryScale, Chart, Filler, Legend, LinearScale, PointElement, Title, Tooltip, scales } from 'chart.js'
+import { BarElement, CategoryScale, Chart, Filler, Legend, LinearScale, PointElement, Title, Tooltip } from 'chart.js'
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
 
@@ -13,9 +13,6 @@ Chart.register(
     Legend,
     Filler
 )
-
-var valores = [72,56,20,36, 90]
-var etiquetas = ["Ejemplo 1", "Ejemplo 2", "Ejemplo 3", "Ejemplo 4", "Ejemplo 5"]
 
 var options = {
     responsive:true,
@@ -37,17 +34,53 @@ var options = {
     }
 }
 
-var data = {
-    labels:etiquetas,
-    datasets: [
-        {
-            label:'Valores',
-            data:valores,
-            backgroundColor: 'rgba(0,220,195,0.5)'
+const otrosCantidad = (ventas) =>{
+    var cantidad=0
+    ventas.forEach((element, index) => {
+        if(index>6){
+            cantidad+=element.cantidad
         }
-    ]
+    })
+    return cantidad
 }
-const GraficaBarras = () => {
+
+
+const GraficaBarras = ({ventas}) => {
+
+
+    var data = {
+        labels:[],
+        datasets: [ ]
+    }
+    if(ventas){
+        data = {
+            labels:[
+                ventas[0] ? ventas[0].ciudad:"No registrada",
+                ventas[1] ? ventas[1].ciudad:"No registrada",
+                ventas[2] ? ventas[1].ciudad:"No registrada",
+                ventas[3] ? ventas[1].ciudad:"No registrada",
+                ventas[4] ? ventas[1].ciudad:"No registrada",
+                ventas[5] ? ventas[1].ciudad:"No registrada",
+                "Otras",
+            ],
+            datasets: [
+                {
+                    label:'Ventas',
+                    data:[
+                        ventas[0]?.cantidad,
+                        ventas[1]?.cantidad,
+                        ventas[2]?.cantidad,
+                        ventas[3]?.cantidad,
+                        ventas[4]?.cantidad,
+                        ventas[5]?.cantidad,
+                        otrosCantidad(ventas)
+                    ],
+                    backgroundColor: 'rgba(0,220,195,0.5)'
+                }
+            ]
+        }
+    }
+    
   return (
     <Bar className='w-full' data={data} options={options}/>
   )
