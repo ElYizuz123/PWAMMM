@@ -8,8 +8,7 @@ import { UpdateProvider } from '../UpdateProvider'
 
 const obtenerDiasEntreFechas = (fechaInicio, fechaFin) => {
     const dias = []
-    const diaActual = new Date(fechaInicio)
-
+    const diaActual = fechaInicio
     while (diaActual <= fechaFin) {
         const day = diaActual.getDate()
         const month = diaActual.getMonth() + 1
@@ -25,22 +24,16 @@ const obtenerMesesEntreFechas = (fechaInicio, fechaFin) => {
     // Arreglo para almacenar los meses
     const meses = [];
 
-    // Obtener el año y el mes de la fecha de inicio y de la fecha de fin
-    const yearInicio = fechaInicio.getFullYear()
-    const mesInicio = fechaInicio.getMonth()
-    const yearFin = fechaFin.getFullYear()
-    const mesFin = fechaFin.getMonth()
+    const fechaActual = fechaInicio
 
-    // Iterar desde la fecha de inicio hasta la fecha de fin
-    for (let year = yearInicio; year <= yearFin; year++) {
-        const mesInicial = (year === yearInicio) ? mesInicio : 0
-        const mesFinal = (year === yearFin) ? mesFin : 11
-
-        // Iterar sobre los meses del año actual
-        for (let mes = mesInicial; mes <= mesFinal; mes++) {
-            meses.push(mes+1+"/"+year) // Se agrega 1 porque los meses comienzan desde 0
-        }
+    while (fechaActual <= fechaFin) {
+        const mes = fechaActual.getMonth() +1
+        const year = fechaActual.getFullYear()
+        meses.push(mes+"/"+year) // Se agrega 1 porque los meses comienzan desde 0
+        fechaActual.setMonth(fechaActual.getMonth()+1)
+        console.log(fechaActual)
     }
+
 
     return meses;
 }
@@ -136,11 +129,11 @@ const LecturaDatos = () => {
                 <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaBarras ventas={ventasCiudades} /></div>
             </div>
             <div className='max-w-[780px] min-w-[500px] w-[75%]'>
-                <UpdateProvider>
-                    <p className='font-bold text-xl mb-3'>Número de ventas</p>
-                    <RangePicker className='mb-3' onChange={handleDateChange}/>
-                    <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaLineal formato={formatoVentasTotales}/></div>
-                </UpdateProvider>
+                
+                <p className='font-bold text-xl mb-3'>Número de ventas</p>
+                <RangePicker className='mb-3' onChange={handleDateChange}/>
+                <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaLineal formato={formatoVentasTotales}/></div>
+            
             </div>
         </div>
     )
