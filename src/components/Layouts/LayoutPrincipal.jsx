@@ -1,5 +1,6 @@
 "use client";
 import { HiHome } from "react-icons/hi2";
+import { GiAgave } from "react-icons/gi";
 import { HiShoppingBag } from "react-icons/hi2";
 import { HiInformationCircle } from "react-icons/hi2";
 import { HiEnvelope } from "react-icons/hi2";
@@ -114,6 +115,15 @@ const LayoutPrincipal = ({ children }) => {
                     <HiHome className="w-full h-auto" />
                   </div>
                   INICIO
+                </Link>
+                <Link
+                  href="\historia"
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/historia"]}`}
+                >
+                   <div className={`mx-auto ${styleNav}`}>
+                    <GiAgave className="w-full h-auto" />
+                  </div> 
+                  HISTORIA
                 </Link>
                 <Link
                   href="\tienda"

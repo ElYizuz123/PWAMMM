@@ -60,6 +60,9 @@ const Barra_Lateral = () => {
                 <Link href="/administrador/galeria" className={`w-11/12 ${buttonMap["/administrador/galeria"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">GALERÍA</p>
                 </Link>
+                <Link href="/administrador/graficas" className={`w-11/12 ${buttonMap["/administrador/graficas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
+                    <p className="font-bold text-2xl pr-3 pt-1 pb-1">GRÁFICAS</p>
+                </Link>
                 
                 <button className="w-11/12 hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8">
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">AYUDA</p>

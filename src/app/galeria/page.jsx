@@ -8,8 +8,9 @@ function page() {
 
     return (
         <LayoutPrincipal>
-            <div className="bg-[#F5F5F5] mt-40 h-max relative w-full overflow-x-hidden">
             <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+            <div className="mt-40 h-max relative w-full overflow-x-hidden">
+            
 
                 {/* <div className="absolute inset-0 ">
                     <img

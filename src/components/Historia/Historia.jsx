@@ -18,25 +18,28 @@ const lineVariants = {
 };
 
 const Historia = () => {
-  const controls = useAnimation();
+  const controls = useAnimation();// Para el manejo de las animaciones 
   const { ref, inView } = useInView({
-    triggerOnce: true,
+    triggerOnce: true,          // Se activará solo una vez cuando el elemento entre en el viewport
     rootMargin: "-100px 0px", // Se activará cuando el título esté cerca del viewport
   });
+  //Iniciar la animación cuando el elemento es visible
   React.useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
+
+//Animación del titulo
   const titleVariants = {
     hidden: { x: -100, opacity: 0 },
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 1.5, ease: "easeOut" },
+      transition: { duration: 1.5, ease: "easeOut" }, // duración 
     },
   };
-
+  //Lineas del texto (historia del mezcal versión simplificada)
   const lines = [
     "El pueblo purépecha Curicaueri nació en el oriente y",
     "tomaba la forma del sol, dios del fuego que recorría la",
@@ -59,30 +62,33 @@ const Historia = () => {
 
       <div
         ref={ref}
-        className="max-w-lg bg-[#f1f1f1] shadow-2xl md:max-w-2xl md:z-10 md:shadow-lg md:absolute md:top-0 md:mt-48 lg:w-3/5 lg:left-0 lg:mt-20 lg:ml-20 xl:mt-24 xl:ml-12"
+        className=" w-full   bg-[#f1f1f1] shadow-2xl md:max-w-2xl md:z-10 md:shadow-lg md:absolute md:top-0 md:mt-48 lg:w-3/5 lg:left-0 lg:mt-20 lg:ml-20 xl:mt-24 xl:ml-12"
       >
         <div className="flex flex-col p-12 md:px-16">
-          <motion.div
+           {/*Aqui inicia la animación del título (Aparece de izquierda a derecha)*/}
+          <motion.div 
             className={berkshire.className}
             initial="hidden"
             animate={controls}
             variants={titleVariants}
           >
-            <h2 className="text-7xl text-black text-delinead">Historia</h2>
-            <h2 className="text-8xl text-[#C1D128] text-delineado ml-28">
+            <h2 className="text-4xl mx-1 md:text-6xl lg:text-6xl xl:text-7xl text-black text-delinead  ">Historia</h2>
+            <h2 className="text-5xl md:text-7xl lg:text-7xl xl:text-8xl text-[#C1D128] text-delineado ml-28 ">
               del mezcal
             </h2>
           </motion.div>
 
-          <div className="mt-4 text-xl">
+          <div className="mx-1 md:text-base lg:text-xl xl:text-xl text-justify ">
+             {/*Aqui inicia la animación del texto (Va apareciendo poco a poco)*/}
             {lines.map((line, index) => (
+              
               <motion.div
                 key={line}
                 variants={lineVariants}
                 initial="hidden"
                 animate="visible"
                 transition={{
-                  delay: index * 3, // Delay each line, increase by 1 second for each line
+                  delay: index * 3, // Retraso de cada linea, incrementa  1 segundo por cada linea
                   duration: 3,
                   ease: "linear",
                 }}
@@ -97,8 +103,9 @@ const Historia = () => {
           </div>
 
           <div className="mt-8">
+            {/*Botón con Link a historia*/}
             <Link
-              href="\historia-mezcal"
+              href="\historia"
               className="mx-auto block w-full text-center text-lg font-medium text-gray-100 bg-[#f70073] hover:bg-[#e39abd] hover:scale-105 hover:shadow-lg md:w-48 py-3 px-6 rounded-full"
             >
               Ver más
@@ -106,6 +113,7 @@ const Historia = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

@@ -162,12 +162,12 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                 <div className='w-full h-full flex justify-between'>
                     <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                         {eventoPhoto && (
-                            <img src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='w-48' />
+                            <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                         )}
                         {eventoPhoto && (
                             <p className='text-sm'>{eventoPhoto.name}</p>
                         )}
-                        {!eventoPhoto && (<Image width={400} height={400} src={`/eventos/${evento ? evento[0].foto : ""}`} alt='Preview' className='w-64' />)}
+                        {!eventoPhoto && (<Image width={400} height={400} src={`/eventos/${evento ? evento[0].foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
                         {!eventoPhoto && (
                             <p className='text-sm'>{evento ? evento[0].foto : ""}</p>
                         )}

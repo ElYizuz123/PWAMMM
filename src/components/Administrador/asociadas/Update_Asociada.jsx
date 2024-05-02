@@ -143,12 +143,12 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
             <div className='w-full h-full flex justify-between'>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                     {asociadaPhoto && (
-                        <Image width={400} height={400} src={URL.createObjectURL(asociadaPhoto)} alt='Preview' className='w-64' />
+                        <Image width={400} height={400} src={URL.createObjectURL(asociadaPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                     )}
                     {asociadaPhoto && (
                         <p className='text-sm'>{asociadaPhoto.name}</p>
                     )}
-                    {!asociadaPhoto && (<Image layout='restrictive' width={400} height={400} src={`/mezcaleras/${asociada ? asociada[0].foto : ""}`} alt='Preview' className='w-64' />)}
+                    {!asociadaPhoto && (<Image width={400} height={400} src={`/mezcaleras/${asociada ? asociada[0].foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
                     {!asociadaPhoto && (
                         <p className='text-sm'>{asociada ? asociada[0].foto : ""}</p>
                     )}
@@ -195,11 +195,11 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                                     type='text'
                                     name='historia'
                                     required={true}
-                                    maxLength={300}
+                                    maxLength={500}
                                     defaultValue={asociada ? asociada[0].historia:""}
                                     {...register('historia', {
                                         required: true,
-                                        maxLength: 300
+                                        maxLength: 500
                                     })}
                                     className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-5'
                                     placeholder='Descripción'

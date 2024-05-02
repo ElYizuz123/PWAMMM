@@ -2,18 +2,18 @@ const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
 export async function POST(request){
+
     try{
         var datos = await request.json()
-        if(datos==null)
-        datos=1
-        const res = await db.galeria_categoria.findMany({
-            take:6,
-            skip:(datos-1)*6,
+        const data = await db.acompanamiento.findUnique({
+            where: {
+                id_acompanamiento:datos
+            },
             include:{
-                galeria_foto: true
+                marca:true
             }
         });
-        return NextResponse.json(JSON.stringify(res));
+        return NextResponse.json(data);
 
     }catch(error){
         console.error('Error al leer los datos', error)
