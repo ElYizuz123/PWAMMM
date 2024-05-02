@@ -30,6 +30,7 @@ const Tarjeta = ({
   const { addProductos } = useContext(ProductContext);
   const [buttonState, setButtonState] = useState("idle");
   const [showTooltip, setShowTooltip] = useState(false);
+  const existencia = cantidad !== 0;
 
   const handleAddToCart = () => {
     setButtonState("loading");
@@ -54,41 +55,46 @@ const Tarjeta = ({
   };
 
   return (
-    <div className={k2d.className}>
+    <div className={`${k2d.className} ${existencia ? "" : "opacity-80 "}`}>
       <div className="card relative rounded-5 overflow-hidden">
-        
-          <Link
-            href={`/tienda/abrir_producto/${tipo}/${id_producto}`}
-            // className="absolute top-0 right-0 m-2 p-1 z-0"
-            className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded"
-          >
-            <div className="absolute top-0 right-0 mt-2 mr-2 hover:scale-110 transition transform duration-300 ease-in-out">
-              <div
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
-                className="relative cursor-pointer"
-              >
-                <EyeIcon className="h-8 w-8 text-pink-600" />
-
-                {showTooltip && (
-                  <div className="absolute -bottom-10 left-0 transform -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded tooltip">
-                    Ver más detalles
-                  </div>
-                )}
-              </div>
-            </div>
-          </Link>
-
-          <div className="flex justify-center items-center p-4 object-cover">
-            <Image
-              src={`/productos/${imagen}`}
-              width={300}
-              height={450}
-              quality={100}
-              alt="Fondo"
-            />
+        {!existencia && (
+          <div className="absolute inset-0 flex justify-center items-center ">
+            <p className="bg-red-700  px-60 text-white font-semibold text-2xl text-center rotate-45">
+              Sin existencia
+            </p>
           </div>
-        
+        )}
+        <Link
+          href={`/tienda/abrir_producto/${tipo}/${id_producto}`}
+          // className="absolute top-0 right-0 m-2 p-1 z-0"
+          className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded"
+        >
+          <div className="absolute top-0 right-0 mt-2 mr-2 hover:scale-110 transition transform duration-300 ease-in-out">
+            <div
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+              className="relative cursor-pointer"
+            >
+              <EyeIcon className="h-8 w-8 text-pink-600" />
+
+              {showTooltip && (
+                <div className="absolute -bottom-10 left-0 transform -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded tooltip">
+                  Ver más detalles
+                </div>
+              )}
+            </div>
+          </div>
+        </Link>
+
+        <div className="flex justify-center items-center p-4 object-cover">
+          <Image
+            src={`/productos/${imagen}`}
+            width={300}
+            height={450}
+            quality={100}
+            alt="Fondo"
+          />
+        </div>
 
         <section className="details">
           {tipo !== 2 ? (

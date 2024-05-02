@@ -568,3 +568,16 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 .header-container h2:hover {
   color: #f70073; /* Color al pasar el mouse, un rosa fuerte */
 }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+  20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+.animate-shake {
+  animation: shake 1s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}

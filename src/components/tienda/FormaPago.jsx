@@ -22,6 +22,8 @@ function FormaPago({ triggerSubmit }) {
   const [paymentMethod, setPaymentMethod] = useState("transferencia");
   const [confirmMethod, setConfirmMethod] = useState([]);
   const [payPal, setPaypal] = useState(false);
+  const [transferencia,setTransferencia] = useState(false);
+
 
   const envio = 199;
   const totalVenta = productos.reduce(
@@ -34,6 +36,9 @@ function FormaPago({ triggerSubmit }) {
      try {
     if (paymentMethod == "payPal") {
       setPaypal(true);
+    }else
+ {
+      setTransferencia(true);
     }
     {triggerSubmit}
 
@@ -53,6 +58,7 @@ function FormaPago({ triggerSubmit }) {
   // };
   const handleClosePopup = () => {
     setPaypal(false);
+    setTransferencia(false);
   };
   const handleShippingChange = (event) => {
     envioVenta(event.target.value === "recogerTienda" ? 0 : 1);
@@ -237,7 +243,7 @@ function FormaPago({ triggerSubmit }) {
           </div>
           {/* </button> */}
         </div>
-        {payPal && (
+        {payPal &&(
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
             <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white mt-40">
               <button
@@ -301,6 +307,56 @@ function FormaPago({ triggerSubmit }) {
               </div>
             </div>
           </div>
+        )}
+        {transferencia &&(
+            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+            <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white mt-40">
+              <button
+                className="absolute top-0 right-0 m-3"
+                onClick={handleClosePopup}
+              >
+                <IoClose className="h-6 w-6 cursor-pointer transition duration-300 ease-in-out hover:text-red-500 hover:rotate-180" />
+              </button>
+              <div className="mt-3 text-center">
+                <div className=" flex items-center justify-center  ">
+                  <img src="/emoticons/comprobado.png" alt="PayPal Logo" />
+                </div>
+                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                   Transferencia bancaria 
+                </h3>
+                <div className="mt-2 px-7 py-3">
+                  <p className="text-sm text-gray-600">
+                    En breve un asesor se comunicará contigo
+                  
+                  </p>
+                  <p className= "text-sm text-[#F70073]"  >
+                   GRACIAS POR TU COMPRA 
+
+                  </p>
+                </div>
+                <div className="flex flex-col px-7 py-3 space-y-3">
+                  <div className="flex justify-between">
+                    <span>Subtotal</span>
+                    <span>${totalVenta}</span>
+                  </div>
+
+                  <div className="flex justify-between">
+                    <span>Envío</span>${shippingMethod === "pickup" ? 0 : envio}
+                  </div>
+
+                  <div className="flex justify-between font-bold ">
+                    <span>Total</span>$
+                    {shippingMethod === "pickup"
+                      ? totalVenta
+                      : totalVenta + envio}
+                  </div>
+                </div>
+
+                
+              </div>
+            </div>
+          </div>
+
         )}
       </div>
     </div>

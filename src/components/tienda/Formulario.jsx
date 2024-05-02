@@ -3,6 +3,7 @@ import { Berkshire_Swash } from "next/font/google";
 import { useContext } from "react";
 import { ProductContext } from "@/context/ProductContext";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import ProductosPago from "./ProductosPago";
 import FormaPago from "./FormaPago";
 import {
@@ -57,7 +58,15 @@ function Formulario() {
   const { productos, total, isEnvio, pago } = useContext(ProductContext);
   const [isFormVisiblePersonales, setIsFormVisiblePersonales] = useState(false);
   const [isFormVisibleDireccion, setIsFormVisibleDireccion] = useState(false);
-  
+
+  const {
+    register,
+    handleSubmit,
+    trigger,
+    getValues,
+    watch,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
 
   const toggleFormPersonales = () => {
     setIsFormVisiblePersonales(!isFormVisiblePersonales);
@@ -66,9 +75,12 @@ function Formulario() {
     setIsFormVisibleDireccion(!isFormVisibleDireccion);
   };
 
-  const { register, handleSubmit, getValues, watch } = useForm();
-  const [personalError, setPersonalError] = useState("");
-  const [direccionError, setDireccionError] = useState("");
+  const [personalError, setPersonalError] = useState(
+    "Falta por llenar datos personales"
+  );
+  const [direccionError, setDireccionError] = useState(
+    "Falta por llenar datos de dirección"
+  );
 
   const validatePersonales = () => {
     const values = getValues(["nombre", "apellidos", "telefono", "email"]);
@@ -203,10 +215,7 @@ function Formulario() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div class="datos-personales-container">
           {/* Botón para desplegar el formulario */}
-          <div
-            class="header-container"
-            onClick={toggleFormPersonales}
-          >
+          <div class="header-container" onClick={toggleFormPersonales}>
             <h2 className="text-3xl font-semibold">DATOS PERSONALES</h2>
             {isFormVisiblePersonales ? (
               <ChevronUpIcon className="h-8 w-8 text-pink-700" />
@@ -230,12 +239,26 @@ function Formulario() {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
+                  onAnimationComplete={() =>
+                    isFormVisiblePersonales ? trigger() : null
+                  }
                 >
                   {/* DATOS PERSONALES NOMBRE APELLIDOS */}
                   <div className="grid md:grid-cols-2 md:gap-[100px]">
                     <div className="relative z-0 mb-5 mt-4 group">
                       <input
-                        {...register("nombre")}
+                        {...register("nombre", {
+                          required: "Este campo no puede ir vacío",
+                          maxLength: {
+                            value: 30,
+                            message:
+                              "El nombre no puede exceder los 30 caracteres", // Máxima longitud
+                          },
+                          pattern: {
+                            value: /^[A-Za-z\s]+$/i,
+                            message: "El nombre solo puede contener letras", // Patrón regex para solo letras
+                          },
+                        })}
                         type="text"
                         name="nombre"
                         id="nombre"
@@ -247,8 +270,8 @@ function Formulario() {
                           : "border-[#C1D128]"
                       }`}
                         placeholder=" "
-                        onClick={validatePersonales}
                       />
+
                       <label
                         htmlFor="nombre"
                         className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
@@ -261,14 +284,25 @@ function Formulario() {
                         Nombre
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
-                      {/* {errors.nombre && (
-                      <p className="text-red-600">{errors.nombre.message}</p>
-                    )} */}
+                      {errors.nombre && (
+                        <p className="text-red-600">{errors.nombre.message}</p>
+                      )}
                     </div>
 
                     <div className="relative z-0 mb-5 mt-4 group">
                       <input
-                        {...register("apellidos")}
+                        {...register("apellidos", {
+                          required: "Este campo no puede ir vacío",
+                          maxLength: {
+                            value: 45,
+                            message:
+                              "El nombre no puede exceder los 45 caracteres", // Máxima longitud
+                          },
+                          pattern: {
+                            value: /^[A-Za-z\s]+$/i,
+                            message: "Los apellidos solo puede contener letras", // Patrón regex para solo letras
+                          },
+                        })}
                         type="text"
                         name="apellidos"
                         id="apellidos"
@@ -280,7 +314,6 @@ function Formulario() {
                           : "border-[#C1D128]"
                       }`}
                         placeholder=" "
-                        onInput={validatePersonales}
                       />
                       <label
                         htmlFor="apellidos"
@@ -294,13 +327,24 @@ function Formulario() {
                         Apellidos
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
+                      {errors.apellidos && (
+                        <p className="text-red-600">
+                          {errors.apellidos.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   {/* DATOS PERSONALES EMPRESA */}
 
                   <div className=" flex relative z-0 mb-5 mt-4 group ">
                     <input
-                      {...register("empresa")}
+                      {...register("empresa", {
+                        maxLength: {
+                          value: 40,
+                          message:
+                            "El nombre de la empresa no puede exceder los 45 caracteres", // Máxima longitud
+                        },
+                      })}
                       type="text"
                       name="empresa"
                       id="empresa"
@@ -327,13 +371,26 @@ function Formulario() {
                         (Opcional)
                       </p>
                     </label>
+                    {errors.empresa && (
+                      <p className="text-red-600">{errors.empresa.message}</p>
+                    )}
                   </div>
                   {/* DATOS PERSONALES telefono correo */}
 
                   <div className="grid md:grid-cols-2 md:gap-[100px]">
                     <div className="relative z-0 w-full mb-5 mt-4 group">
                       <input
-                        {...register("telefono")}
+                        {...register("telefono", {
+                          required: "Este campo no puede ir vacío",
+                          maxLength: {
+                            value: 10,
+                            message: "Escribe el número en formato: 4433000000", // Máxima longitud
+                          },
+                          pattern: {
+                            value: /^[0-9]*$/, // Esta regex permite solo números
+                            message: "Escribe el número en formato: 4433000000",
+                          },
+                        })}
                         type="tel"
                         pattern="[0-9]{10}"
                         name="telefono"
@@ -346,7 +403,6 @@ function Formulario() {
                           : "border-[#C1D128]"
                       }`}
                         placeholder=" "
-                        onInput={validatePersonales}
                       />
                       <label
                         htmlFor="telefono"
@@ -360,11 +416,22 @@ function Formulario() {
                         Teléfono
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
+                      {errors.telefono && (
+                        <p className="text-red-600">
+                          {errors.telefono.message}
+                        </p>
+                      )}
                     </div>
 
                     <div className="relative z-0 w-full mb-5 mt-4 group">
                       <input
-                        {...register("email")}
+                        {...register("email", {
+                          required: "Este campo no puede ir vacío",
+                          pattern: {
+                            value: /^\S+@\S+$/i,
+                            message: "Formato de correo electrónico inválido",
+                          },
+                        })}
                         type="email"
                         name="email"
                         id="email"
@@ -374,7 +441,6 @@ function Formulario() {
                         watch("email") ? "border-[#F70073]" : "border-[#C1D128]"
                       }`}
                         placeholder=" "
-                        onInput={validatePersonales}
                       />
                       <label
                         htmlFor="email"
@@ -388,6 +454,9 @@ function Formulario() {
                         Correo
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
+                      {errors.email && (
+                        <p className="text-red-600">{errors.email.message}</p>
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -400,10 +469,7 @@ function Formulario() {
 
         <div class="datos-personales-container">
           {/* Botón para desplegar el formulario */}
-          <div
-            class="header-container"
-            onClick={toggleFormDireccion}
-          >
+          <div class="header-container" onClick={toggleFormDireccion}>
             <h2 className="text-3xl font-semibold">DIRECCION</h2>
             {isFormVisibleDireccion ? (
               <ChevronUpIcon className="h-8 w-8 text-pink-700" />
@@ -428,11 +494,21 @@ function Formulario() {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
+                  onAnimationComplete={() =>
+                    isFormVisibleDireccion ? trigger() : null
+                  }
                 >
                   <div className="grid md:grid-cols-3 md:gap-[100px]">
                     <div className="relative z-0 mb-5 mt-4 group">
                       <input
-                        {...register("calle")}
+                        {...register("calle", {
+                          required: "Este campo no puede ir vacío",
+                          maxLength: {
+                            value: 45,
+                            message:
+                              "La calle no puede exceder los 45 caracteres", // Máxima longitud
+                          },
+                        })}
                         type="text"
                         name="calle"
                         id="calle"
@@ -455,11 +531,21 @@ function Formulario() {
                         Calle
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
+                      {errors.calle && (
+                        <p className="text-red-600">{errors.calle.message}</p>
+                      )}
                     </div>
 
                     <div className="relative z-0 mb-5 mt-4 group">
                       <input
-                        {...register("colonia")}
+                        {...register("colonia", {
+                          required: "Este campo no puede ir vacío",
+                          maxLength: {
+                            value: 45,
+                            message:
+                              "La colonia no puede exceder los 45 caracteres", // Máxima longitud
+                          },
+                        })}
                         type="text"
                         name="colonia"
                         id="colonia"
@@ -484,11 +570,25 @@ function Formulario() {
                         Colonia
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
+                      {errors.colonia && (
+                        <p className="text-red-600">{errors.colonia.message}</p>
+                      )}
                     </div>
 
                     <div className="relative z-0 mb-5 mt-4 group">
                       <input
-                        {...register("ciudad")}
+                        {...register("ciudad", {
+                          required: "Este campo no puede ir vacío",
+                          maxLength: {
+                            value: 45,
+                            message:
+                              "La ciudad no puede exceder los 45 caracteres", // Máxima longitud
+                          },
+                          pattern: {
+                            value: /^[A-Za-z\s]+$/i,
+                            message: "La ciudad solo puede contener letras", // Patrón regex para solo letras
+                          },
+                        })}
                         type="text"
                         name="ciudad"
                         id="ciudad"
@@ -513,13 +613,28 @@ function Formulario() {
                         Ciudad
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
+                      {errors.ciudad && (
+                        <p className="text-red-600">{errors.ciudad.message}</p>
+                      )}
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-3 md:gap-[100px]">
                     <div className="relative z-0 mb-5 mt-4 group">
                       <input
-                        {...register("cp")}
+                        {...register("cp", {
+                          required: "Este campo no puede ir vacío",
+                          maxLength: {
+                            value: 5,
+                            message:
+                              "El codigo postal no puede exceder los 5 caracteres", // Máxima longitud
+                          },
+                          pattern: {
+                            value: /^[0-9]*$/,
+                            message:
+                              "El codigo postal solo puede contener números", // Patrón regex para solo letras
+                          },
+                        })}
                         type="text"
                         name="cp"
                         id="cp"
@@ -542,10 +657,20 @@ function Formulario() {
                         Código postal
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
+                      {errors.cp && (
+                        <p className="text-red-600">{errors.cp.message}</p>
+                      )}
                     </div>
                     <div className="relative z-0 mb-5 mt-4 group">
                       <input
-                        {...register("num_ext")}
+                        {...register("num_ext", {
+                          required: "Este campo no puede ir vacío",
+                          maxLength: {
+                            value: 10,
+                            message:
+                              "El número exterior no puede exceder los 10 caracteres", // Máxima longitud
+                          },
+                        })}
                         type="text"
                         name="num_ext"
                         id="num_ext"
@@ -570,11 +695,20 @@ function Formulario() {
                         Núm.Exterior
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
+                      {errors.num_ext && (
+                        <p className="text-red-600">{errors.num_ext.message}</p>
+                      )}
                     </div>
 
                     <div className="relative z-0 mb-5 mt-4 group">
                       <input
-                        {...register("num_int")}
+                        {...register("num_int", {
+                          maxLength: {
+                            value: 10,
+                            message:
+                              "El número interior no puede exceder los 10 caracteres", // Máxima longitud
+                          },
+                        })}
                         type="text"
                         name="num_int"
                         id="num_int"
@@ -601,6 +735,9 @@ function Formulario() {
                           (Opcional)
                         </p>
                       </label>
+                      {errors.num_int && (
+                        <p className="text-red-600">{errors.num_int.message}</p>
+                      )}
                     </div>
                   </div>
 
