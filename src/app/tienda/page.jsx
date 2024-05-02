@@ -26,31 +26,6 @@ const Page = () => {
           </div>
 
           <Categoria/>
-
-          {/* SECCION */}
-          <div className="relative z-10 pb-3 pr-28">
-            <div className="flex items-center justify-end space-x-1 mr-24">
-              <button className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
-                Anterior
-              </button>
-              <button className="px-4 py-1 text-white rounded-md bg-[#F70073] hover:bg-[#F70073]">
-                1
-              </button>
-              <button className="px-4 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
-                2
-              </button>
-              <button className="px-4 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
-                3
-              </button>
-              <span className="px-4 py-1">...</span>
-              <button className="px-4 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
-                7
-              </button>
-              <button className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300">
-                Siguiente
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </LayoutPrincipal>

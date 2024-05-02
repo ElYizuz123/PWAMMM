@@ -18,7 +18,7 @@ function ProductosPago({
 }) {
   return (
     <div className={k2d.className}>
-      <div className="max-w-sm mx-auto ">
+      <div className="">
         <div className="bg-white p-4 flex items-center space-x-4 shadow rounded-lg my-4">
           <img
             src={`/productos/${imagen}`}

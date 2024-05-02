@@ -39,8 +39,7 @@ const Ficha = ({
   return (
     <div className={k2d.className}>
       <div className="relative">
-        {/* imagen fondo */}
-
+  
         <div className=" pt-5 items-center relative h-screen">
           <div className=" flex justify-center items-center">
             <div className=" relative  py-44  z-10 flex items-start  w-[1250px]">
@@ -267,17 +266,12 @@ const Ficha = ({
             <h3 className="text-black  font-bold">DESCRIPCIÓN</h3>
             <h3 className=" mt-2 text-justify mx-4">
               {descripcion}
-              {descripcion}
+             
             </h3>
           </div>
         </div>
         <div>
-          {/*productos relacionados*/}
-          <div className="   w-full flex justify-center items-center mt-40">
-            <p className="text-[#dd6c5a] text-3xl font-bold  bg-white px-9 rounded-lg ">
-              PRODUCTOS RELACIONADOS
-            </p>
-          </div>
+         
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { K2D } from "next/font/google";
 import Link from "next/link";
 import { ProductContext } from "@/context/ProductContext";
 import TarjetaPaypal from "./TarjetaPaypal";
-import { IoClose } from 'react-icons/io5'; 
+import { IoClose } from "react-icons/io5";
 
 const k2d = K2D({
   weight: ["400"],
@@ -12,13 +12,18 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-function FormaPago() {
+
+//en esta funcion recibo el trigger
+function FormaPago({ triggerSubmit }) {
+  const { envioVenta, pago } = useContext(ProductContext);
   const { productos } = useContext(ProductContext);
 
-  const [shippingMethod, setShippingMethod] = useState("delivery");
-  const [paymentMethod, setPaymentMethod] = useState("delivery2");
+  const [shippingMethod, setShippingMethod] = useState("recogerTienda");
+  const [paymentMethod, setPaymentMethod] = useState("transferencia");
   const [confirmMethod, setConfirmMethod] = useState([]);
   const [payPal, setPaypal] = useState(false);
+  const [transferencia,setTransferencia] = useState(false);
+
 
   const envio = 199;
   const totalVenta = productos.reduce(
@@ -26,18 +31,42 @@ function FormaPago() {
     0
   );
 
-  const handleOpenPopup = () => {
-    if (paymentMethod == "pickup2") {
+  const handleOpenPopup = async (data) => {
+    //aqui hace sus cosas
+     try {
+    if (paymentMethod == "payPal") {
       setPaypal(true);
+    }else
+ {
+      setTransferencia(true);
     }
+    {triggerSubmit}
+
+    
+      
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    
   };
+  // const handleCondicion = () => {
+  //   if (confirmMethod === "pickup3" || confirmMethod === "delivery3") {
+  //     setPaypal(true);
+  //   }else{
+  //      <span className="text-red-500 text-sm">Acepta terminos y condiciones</span>
+  //   }
+  // };
   const handleClosePopup = () => {
     setPaypal(false);
+    setTransferencia(false);
   };
   const handleShippingChange = (event) => {
+    envioVenta(event.target.value === "recogerTienda" ? 0 : 1);
     setShippingMethod(event.target.value);
   };
+
   const handlePaymentChange = (event) => {
+    pago(event.target.value === "payPal" ? 1 : 0);
     setPaymentMethod(event.target.value);
   };
   const handleConfirmChange = (event) => {
@@ -50,24 +79,25 @@ function FormaPago() {
   };
 
   return (
-    <div className={k2d.className}>
-      <div className=" w-[500px] h-auto  p-6   py-4 ">
-        <p className="font-bold text-[#F70073] text-2xl">FORMA DE PAGO</p>
-        <div className=" flex ml-4 mt-10">
-          <h3 className="text-black font-semibold text-xl">SUB-TOTAL:</h3>
-          <p className="text-green-700 font-bold text-xl ml-16  ">
-            {/*total*/}$ {totalVenta}
-          </p>
+    <div className=" px-4 items-center space-x-4 my-4">
+      <div className="">
+        <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-2 items-center">
+            <h3 className="text-black font-semibold">SUB-TOTAL:</h3>
+            <p className="text-green-700 font-bold justify-self-end">
+              ${totalVenta}
+            </p>
+          </div>
         </div>
         {/*ENVÍO*/}
-        <div className="mt-4 flex ml-4">
-          <h3 className="text-black font-semibold text-xl">ENVÍO</h3>
-          <div className="flex flex-col px-9">
+        <div className="grid grid-cols-1 gap-4 my-4">
+          {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
+          <div className="grid grid-cols-1 gap-2">
             <label>
               <input
                 type="radio"
-                value="delivery"
-                checked={shippingMethod === "delivery"}
+                value="envio"
+                checked={shippingMethod === "envio"}
                 onChange={handleShippingChange}
                 className="form-radio text-[#F70073]"
               />
@@ -76,8 +106,8 @@ function FormaPago() {
             <label>
               <input
                 type="radio"
-                value="pickup"
-                checked={shippingMethod === "pickup"}
+                value="recogerTienda"
+                checked={shippingMethod === "recogerTienda"}
                 onChange={handleShippingChange}
                 className="form-radio text-[#F70073]"
               />
@@ -86,100 +116,134 @@ function FormaPago() {
           </div>
         </div>
         {/*subtotal + btnradio*/}
-        <div className=" flex mt-10 ml-4 ">
-          <h3 className="text-black font-semibold text-xl">ORDEN-TOTAL:</h3>
-          <p className="text-green-700 font-bold text-xl ml-12 ">
-            ${shippingMethod === "pickup" ? totalVenta : totalVenta + envio}
+        <div className="grid grid-cols-2 items-center">
+          <h3 className="text-black font-semibold text-2xl">ORDEN-TOTAL:</h3>
+          <p className="text-green-700 font-bold text-2xl justify-self-end">
+            ${shippingMethod === "recogerTienda" ? totalVenta : totalVenta + envio}
           </p>
         </div>
-        <div className="flex flex-col mt-10 ml-4">
-          <label>
-            <input
-              type="checkbox"
-              value="delivery2"
-              checked={paymentMethod === "delivery2"}
-              onChange={handlePaymentChange}
-              className="form-checkbox text-[#F70073]"
-            />
-            <span className="ml-2">
-              Transferencia bancaria directa BANAMEX/OXXO
-            </span>
-          </label>
 
-          <label>
-            <input
-              type="checkbox"
-              value="pickup2"
-              checked={paymentMethod === "pickup2"}
-              onChange={handlePaymentChange}
-              className="form-checkbox text-[#F70073]"
-            />
-            <span className="ml-2 ">PAYPAL</span>
-          </label>
+        <div className="grid grid-cols-1 gap-4 my-4">
+          {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
+          <div className="grid grid-cols-1 gap-2">
+            <label>
+              <input
+                type="radio"
+                value="transferencia"
+                name="Transferencia bancaria"
+                checked={paymentMethod === "transferencia"}
+                onChange={handlePaymentChange}
+                className="form-radio text-[#F70073]"
+                
+              />
+              <span className="ml-2">
+                Transferencia bancaria directa BANAMEX/OXXO
+              </span>
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                value="payPal"
+                checked={paymentMethod === "payPal"}
+                onChange={handlePaymentChange}
+                className="form-radio text-[#F70073]"
+              />
+              <span className="ml-2 ">PAYPAL</span>
+            </label>
+          </div>
         </div>
 
-        <div className="bg-gray-100 opacity-80  -mr-6 ml-4 mt-10">
-          <p className="text-black text-justify text-xs">
-            Realiza tu pago directamente en nuestra cuenta bancaria de Banamex o
-            a traves de PayPal. Por favor usa la referencia del pedido como
-            referencia de pago. Tu pedido no será enviado hasta que el importe
-            haya sido recibido en nuestra cuenta. Enviar comprobante de pago a
-            asociaciondemujeres@gmail.com o Whatsapp (443) 1-86-16-94 o (443)
-            1-16-08-00
-          </p>
+        <div className="bg-gray-100 grid grid-cols-1 gap-4 my-4">
+          {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
+          <div className="grid grid-cols-1 gap-2">
+            <p className="text-black text-justify text-xs">
+              Realiza tu pago directamente en nuestra cuenta bancaria de Banamex
+              o a traves de PayPal. Por favor usa la referencia del pedido como
+              referencia de pago. Tu pedido no será enviado hasta que el importe
+              haya sido recibido en nuestra cuenta. Enviar comprobante de pago a
+              asociaciondemujeres@gmail.com o Whatsapp (443) 1-86-16-94 o (443)
+              1-16-08-00
+            </p>
+          </div>
         </div>
-        <div className=" ml-4 mt-10 -mr-6 ">
-          <p className="text-black text-justify font-semibold ">
-            Tus datos personales se utilizarán para procesar tu pedido, mejorar
-            tu experiencia en esta web y otros propósitos descritos en nuestra
-            <span className="text-[#F70073] font-semibold ml-2">
-              <Link href={"/"}>política de privacidad</Link>
-            </span>
-          </p>
+        <div className="grid grid-cols-1 gap-4 my-4">
+          {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
+          <div className="grid grid-cols-1 gap-2">
+            <p className="text-black text-justify font-semibold ">
+              Tus datos personales se utilizarán para procesar tu pedido,
+              mejorar tu experiencia en esta web y otros propósitos descritos en
+              nuestra
+              <span className="text-[#F70073] font-semibold ml-2">
+                <Link href={"/"}>política de privacidad</Link>
+              </span>
+            </p>
+          </div>
         </div>
-        <div className=" flex flex-col mt-8 ml-4">
-          <label>
-            <input
-              type="checkbox"
-              value="delivery"
-              checked={confirmMethod.includes("delivery")}
-              onChange={handleConfirmChange}
-              className="form-checkbox text-green-600"
-            />
-            <span className="ml-2 text-xs">
-              Acepto los términos de uso y condiciones
-            </span>
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value="pickup"
-              checked={confirmMethod.includes("pickup")}
-              onChange={handleConfirmChange}
-              className="form-checkbox text-green-600"
-            />
-            <span className="ml-2 text-xs">
-              Confirmo el uso de mis datos personales
-            </span>
-          </label>
+        <div className="grid grid-cols-1 gap-4 my-4">
+          {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
+          <div className="grid grid-cols-1 gap-2">
+            <label>
+              <input
+                type="checkbox"
+                value="delivery"
+                checked={confirmMethod.includes("delivery")}
+                onChange={handleConfirmChange}
+                className="form-checkbox text-green-600"
+              />
+              <span className="ml-2 text-xs">
+                Acepto los términos de uso y condiciones
+              </span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="pickup"
+                checked={confirmMethod.includes("pickup")}
+                onChange={handleConfirmChange}
+                className="form-checkbox text-green-600"
+              />
+              <span className="ml-2 text-xs">
+                Confirmo el uso de mis datos personales
+              </span>
+            </label>
+          </div>
         </div>
-        <div className=" mt-6 flex justify-center  ">
-          {/* <button
-            className="bg-[#F70073] ml-20 text-white font-bold rounded-xl py-2  w-64 h-10"
-            onClick={handleOpenPopup}
-          > */}
+        <div className="grid grid-cols-1 gap-4 my-4">
+          <div className="grid grid-cols-1">
+            <button
+              type="submit"
+              class="Btn py-2 w-full"
+              disabled={
+                !(
+                  confirmMethod.includes("delivery") &&
+                  confirmMethod.includes("pickup")
+                )
+              }
+              onClick={handleOpenPopup}
+              //entonces cuando le pica al boton de pagar activa el openPopUp
+            >
+              <p>Pagar</p>
 
-          <button class="Btn ml-20 py-2  " onClick={handleOpenPopup}>
-            <p>Pagar</p>
+              <svg viewBox="0 0 576 512" class="svgIcon">
+                <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
+              </svg>
+            </button>
+            {!confirmMethod.includes("delivery") && (
+              <span className="text-red-500 text-sm">
+                Aún no has aceptado los términos de uso y condiciones
+              </span>
+            )}
 
-            <svg viewBox="0 0 576 512" class="svgIcon">
-              <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
-            </svg>
-          </button>
-
+            {!confirmMethod.includes("pickup") && (
+              <span className="text-red-500 text-sm">
+                Aún no has confirmado el uso de tus datos personales
+              </span>
+            )}
+          </div>
           {/* </button> */}
         </div>
-        {payPal && (
+        {payPal &&(
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
             <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white mt-40">
               <button
@@ -218,6 +282,7 @@ function FormaPago() {
                       : totalVenta + envio}
                   </div>
                 </div>
+
                 <button
                   type="button"
                   class="text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
@@ -242,6 +307,56 @@ function FormaPago() {
               </div>
             </div>
           </div>
+        )}
+        {transferencia &&(
+            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+            <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white mt-40">
+              <button
+                className="absolute top-0 right-0 m-3"
+                onClick={handleClosePopup}
+              >
+                <IoClose className="h-6 w-6 cursor-pointer transition duration-300 ease-in-out hover:text-red-500 hover:rotate-180" />
+              </button>
+              <div className="mt-3 text-center">
+                <div className=" flex items-center justify-center  ">
+                  <img src="/emoticons/comprobado.png" alt="PayPal Logo" />
+                </div>
+                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                   Transferencia bancaria 
+                </h3>
+                <div className="mt-2 px-7 py-3">
+                  <p className="text-sm text-gray-600">
+                    En breve un asesor se comunicará contigo
+                  
+                  </p>
+                  <p className= "text-sm text-[#F70073]"  >
+                   GRACIAS POR TU COMPRA 
+
+                  </p>
+                </div>
+                <div className="flex flex-col px-7 py-3 space-y-3">
+                  <div className="flex justify-between">
+                    <span>Subtotal</span>
+                    <span>${totalVenta}</span>
+                  </div>
+
+                  <div className="flex justify-between">
+                    <span>Envío</span>${shippingMethod === "pickup" ? 0 : envio}
+                  </div>
+
+                  <div className="flex justify-between font-bold ">
+                    <span>Total</span>$
+                    {shippingMethod === "pickup"
+                      ? totalVenta
+                      : totalVenta + envio}
+                  </div>
+                </div>
+
+                
+              </div>
+            </div>
+          </div>
+
         )}
       </div>
     </div>
