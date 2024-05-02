@@ -77,6 +77,7 @@ const LeerAsociadas = () => {
                 isOpen={uAsociadasIsOpen}
                 onRequestClose={onClose}
                 style={customStyles}
+                ariaHideApp={false}
             >
                 <Update_Asociada 
                     onClose={onClose}

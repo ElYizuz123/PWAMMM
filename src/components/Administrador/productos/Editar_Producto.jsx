@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
+import Image from 'next/image';
 
 const randomHexa = () => {
     const randomNumber = Math.floor(Math.random() * 65536);
@@ -186,12 +187,12 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
             <div className='w-full h-full flex justify-between'>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                     {productPhoto && (
-                        <img src={URL.createObjectURL(productPhoto)} alt='Preview' className='w-48' />
+                        <Image height={400} width={400} src={URL.createObjectURL(productPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                     )}
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
                     )}
-                    {!productPhoto && (<img src={`/productos/${producto ? producto[0].foto : ""}`} alt='Preview' className='w-48' />)}
+                    {!productPhoto && (<Image height={400} width={400} src={`/productos/${producto ? producto[0].foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
                     {!productPhoto && (
                         <p className='text-sm'>{producto ? producto[0].foto : ""}</p>
                     )}

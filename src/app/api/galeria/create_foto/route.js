@@ -9,8 +9,8 @@ export async function POST(request){
         const newAsociada = await db.galeria_foto.create({
             data:{
                 foto: data.foto,
-                descripcion: data.descripcion,
-                fk_id_categoria: parseInt(data.categoria)
+                descripcion: "data.descripcion",
+                fk_id_categoria: 12
             }
         })
         return NextResponse.json("Registrado");

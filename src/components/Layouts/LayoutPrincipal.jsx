@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import { HiHome } from "react-icons/hi2";
+import { GiAgave } from "react-icons/gi";
 import { HiShoppingBag } from "react-icons/hi2";
 import { HiInformationCircle } from "react-icons/hi2";
 import { HiEnvelope } from "react-icons/hi2";
@@ -12,7 +13,7 @@ import Carrito from "../tienda/Carrito";
 import Footer from "../Footer/Footer";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation"
+import { usePathname } from "next/navigation";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -27,40 +28,39 @@ const buttonMap = {
   "/nosotras": "text-black bg-[#0000000]",
   "/galeria": "text-black bg-[#0000000]",
   "/contacto": "text-black bg-[#0000000]",
-}
-
+};
 const LayoutPrincipal = ({ children }) => {
   //para cambiar los colorcitos
-  const pathName = usePathname()
+  const pathName = usePathname();
   const changeColor = () => {
-      for (const key in buttonMap) {
-          buttonMap[key] = 'text-black bg-[#0000000]';
-      }
-      
-      buttonMap[pathName] = 'text-[#F70073]';
-  }
-  changeColor()
+    for (const key in buttonMap) {
+      buttonMap[key] = "text-black bg-[#0000000]";
+    }
+
+    buttonMap[pathName] = "text-[#F70073]";
+  };
+  changeColor();
 
   //detectar el scroll
   const { scrollY } = useScroll();
   const scale = useTransform(scrollY, [0, 100], [1, 0.7]);
-  const [styleNav, setStyleNav] = useState("size-12 top-6")
-  const [styleLogo, setSyleLogo] = useState("top-6")
-
+  const [styleNav, setStyleNav] = useState("size-12 top-6");
+  const [styleLogo, setSyleLogo] = useState("top-6");
 
   //Usamos use Effect x q si no vale madre despues
   useEffect(() => {
-    window.addEventListener('scroll', function () {
+    window.addEventListener("scroll", function () {
       if (window.scrollY === 0) {
-        setStyleNav("size-12 top-6 transition-size duration-200 ease-in-out")
-        setSyleLogo("top-6 transition-size duration-200 ease-in-out")
+        setStyleNav("size-12 top-6 transition-size duration-200 ease-in-out");
+        setSyleLogo("top-6 transition-size duration-200 ease-in-out");
+      } else {
+        setStyleNav("size-10 top-2 transition-size duration-300 ease-in-out");
+        setSyleLogo(
+          "top-2 -translate-x-28 transition-all duration-300 ease-in-out"
+        );
       }
-      else {
-        setStyleNav("size-10 top-2 transition-size duration-300 ease-in-out")
-        setSyleLogo("top-2 -translate-x-28 transition-all duration-300 ease-in-out")
-      }
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <div>
@@ -68,22 +68,27 @@ const LayoutPrincipal = ({ children }) => {
         <div className="w-full z-20 top-0 fixed">
           <img className="h-8 w-full" src="\navbar\banner.jpg" />
         </div>
-        <motion.div className="w-full z-20 top-6 fixed border-[#1E1E1E] border-opacity-50 dark:border-gray-600"
+        <motion.div
+          className="w-full z-20 top-6 fixed border-[#1E1E1E] border-opacity-50 dark:border-gray-600"
           style={{
             scaleY: scale,
             transformOrigin: "top",
-          }}>
-          <p className="bg-white w-full text-white h-36 shadow-md" id="p-1">p</p>
+          }}
+        >
+          <p className="bg-white w-full text-white h-36 shadow-md" id="p-1">
+            p
+          </p>
         </motion.div>
         <nav className={`font-bold fixed z-20 w-full h-36 ${styleNav}`}>
           <div className="flex w-full ml-8">
             <div className={styleLogo}>{logo}</div>
             <div className="text-black absolute w-full flex lg:hidden py-8 px-4 justify-center">
-
               <div className="w-full ml-20">
                 <div className={styleLogo}>
                   <div className={berkshire.className}>
-                    <p1 className="text-xl">Mujeres Mezcaleras <br></br> De Michoacán</p1>
+                    <p1 className="text-xl">
+                      Mujeres Mezcaleras <br></br> De Michoacán
+                    </p1>
                   </div>
                 </div>
               </div>
@@ -103,41 +108,55 @@ const LayoutPrincipal = ({ children }) => {
               <div className="flex ">
                 <Link
                   href="\"
-                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/"]}`}>
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/"]}`}
+                >
                   <div className={`mx-auto ${styleNav}`}>
-                    <HiHome className="w-full h-auto"/>
+                    <HiHome className="w-full h-auto" />
                   </div>
                   INICIO
                 </Link>
                 <Link
+                  href="\historia"
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/historia"]}`}
+                >
+                   <div className={`mx-auto ${styleNav}`}>
+                    <GiAgave className="w-full h-auto" />
+                  </div> 
+                  HISTORIA
+                </Link>
+                <Link
                   href="\tienda"
-                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/tienda"]}`}>
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/tienda"]}`}
+                >
                   <div className={`mx-auto ${styleNav}`}>
-                    <HiShoppingBag className="w-full h-auto"/>
+                    <HiShoppingBag className="w-full h-auto" />
                   </div>
                   TIENDA
                 </Link>
                 <Link
                   href="\nosotras"
-                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/nosotras"]}`}>
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/nosotras"]}`}
+                >
                   <div className={`mx-auto ${styleNav}`}>
-                    <HiInformationCircle className="w-full h-auto"/>
+                    <HiInformationCircle className="w-full h-auto" />
                   </div>
                   NOSOTRAS
                 </Link>
                 <Link
                   href="\galeria"
-                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/galeria"]}`}>
+                  className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/galeria"]}`}
+                >
                   <div className={`mx-auto ${styleNav}`}>
-                    <BsImages className="w-full h-auto"/>
+                    <BsImages className="w-full h-auto" />
                   </div>
                   GALERIA
                 </Link>
                 <Link
                   href="\contacto"
-                  className={`hover:text-[#F70073] ${buttonMap["/contacto"]}`}>
+                  className={`hover:text-[#F70073] ${buttonMap["/contacto"]}`}
+                >
                   <div className={`mx-auto ${styleNav}`}>
-                    <HiEnvelope className="w-full h-auto"/>
+                    <HiEnvelope className="w-full h-auto" />
                   </div>
                   CONTACTO
                 </Link>
@@ -150,7 +169,6 @@ const LayoutPrincipal = ({ children }) => {
       <div>{children}</div>
       <Footer />
     </div>
-
   );
 };
 

@@ -22,7 +22,6 @@ function MostrarProductos({ idMarca }) {
       setProductos(data);
       setAcompanamientos(data2);
     };
-
     fetchProductos();
   }, []);
 

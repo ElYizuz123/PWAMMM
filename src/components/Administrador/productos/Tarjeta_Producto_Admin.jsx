@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import Swal from 'sweetalert2'
 
@@ -85,16 +86,18 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
     return (
         <div className="relative rounded-5 overflow-hidden card-reduced">
             <button onClick={handleEdit} className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
-                <img src="\emoticons\editar.png" alt="Icono" width="32" height="32" />
+                <Image src="/emoticons/editar.png" alt="Icono" width={32} height={32} />
             </button>
             <button onClick={handleDelete} className="absolute top-10 right-0 m-2 p-2 text-pink-600 rounded eye-icon">
-                <img src="\emoticons\eliminar.png" alt="Icono" width="32" height="32" />
+                <Image src="/emoticons/eliminar.png" alt="Icono" width={32} height={32} />
             </button>
             <figure className='flex justify-center'>
-                <img
-                    className="w-48 max-h-72"
+                <Image
+                    className="object-cover w-48 h-72"
+                    height={400}
+                    width={400}
                     id='foto_botella'
-                    src={"\\productos\\" + foto}
+                    src={"/productos/" + foto}
                     alt="botella"
                 />
             </figure>

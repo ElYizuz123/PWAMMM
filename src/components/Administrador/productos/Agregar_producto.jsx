@@ -7,6 +7,31 @@ import Modal from 'react-modal'
 const Agregar_producto = ({ marcas }) => {
     const [botellaIsOpen, setBotellaIsOpen] = useState(false)
     const [acompanIsOpen, setAcompanIsOpen] = useState(false)
+    const [marcasBotellas, setMarcasBotellas] = useState(null)
+    const [marcasAcompanamientos, setMarcasAcompanamientos] = useState(null)
+
+    const readMarcasBotellas =async () =>{
+        const res = await fetch('/api/producto/read_marcas',{
+            method:'POST',
+            body:JSON.stringify(1)
+        })
+        const resJSON = await res.json()
+        setMarcasBotellas(resJSON)
+    }
+
+    const readMarcasAcompanamientos =async () =>{
+        const res = await fetch('/api/producto/read_marcas',{
+            method:'POST',
+            body:JSON.stringify(2)
+        })
+        const resJSON = await res.json()
+        setMarcasAcompanamientos(resJSON)
+    }
+
+    useEffect(() =>{
+        readMarcasBotellas()
+        readMarcasAcompanamientos()
+    },[])
 
     //Función para abrir pop-up crear productos
 
@@ -50,10 +75,11 @@ const Agregar_producto = ({ marcas }) => {
                 isOpen={botellaIsOpen}
                 onRequestClose={closeBotella}
                 style={customStyles}
+                ariaHideApp={false}
             >
                 <Crear_Producto 
                     onClose={closeBotella}
-                    marcas={marcas}
+                    marcas={marcasBotellas}
                 />
             </Modal>
             <Modal
@@ -63,7 +89,7 @@ const Agregar_producto = ({ marcas }) => {
             >
                 <Crear_Acompanamiento 
                     onClose={closeAcompan}
-                    marcas={marcas}
+                    marcas={marcasAcompanamientos}
                 />
             </Modal>
             
