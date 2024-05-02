@@ -23,11 +23,6 @@ const Paginacion = () => {
         }
     }
 
-
-
-
-
-
     useEffect(() => {
         console.log(totalPages)
         var search = 0
