@@ -51,6 +51,7 @@ const LecturaDatos = () => {
     const [ventasAcompanamientos, setVentasAcompanamientos] = useState(null)
     const [ventasCiudades, setVentasCiudades] = useState(null)
     const [formatoVentasTotales, setFormatoVentasTotales] = useState(null)
+    const [fechaVentas, setFechaVentas] = useState(null)
     const { RangePicker } = DatePicker
     const readProductos = async () => {
         const res = await fetch('/api/graficas/productos')
@@ -93,6 +94,7 @@ const LecturaDatos = () => {
     }, [])
 
     const handleDateChange = (e) =>{
+        setFechaVentas(e)
         if(e){
             const fechaIni = e[0]['$d']
             const fechaFin = e[1]['$d']
