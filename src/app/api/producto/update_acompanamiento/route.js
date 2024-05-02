@@ -6,12 +6,21 @@ export async function POST(request){
 
     console.log(data);
     try{
-        const newAsociada = await db.galeria_foto.create({
+        const newProducto = await db.acompanamiento.update({
+            where: {
+                id_acompanamiento: data.id_producto,
+            },
             data:{
+                nombre: data.nombre,
+                gr: data.gr,
+                //precio: Number(data.precio),
+                descripcion: data.descripcion,
+                marca_id_marca: parseInt(data.marca),
+                mercadoLibre: data.mercado_lib,
+                cantidad: parseInt(data.cantidad),
                 foto: data.foto,
-                descripcion: "data.descripcion",
-                fk_id_categoria: 12
             }
+
         })
         return NextResponse.json("Registrado");
     }catch(error){

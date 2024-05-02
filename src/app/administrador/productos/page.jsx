@@ -1,4 +1,4 @@
-import { Read_marcas } from '@/app/api/producto/read_marcas/Read_marcas'
+import { Read_marcas } from '@/app/api/producto/read_marcas/route'
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Agregar_producto from '@/components/Administrador/productos/Agregar_producto'
 import Leer_productos from '@/components/Administrador/productos/Leer_productos'
@@ -7,10 +7,6 @@ import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
 
 const Page = async () => {
-
-  const res = await Read_marcas()
-  const resJSON = await res.json()
-  const marcas = (JSON.parse(resJSON))
 
   return (
     <LayoutCRUD title="Productos">
@@ -26,10 +22,10 @@ const Page = async () => {
                 <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Productos</p>
               </div>
               <div className='w-full flex justify-start ml-[10%] mt-[80px]'>
-                <Agregar_producto marcas={marcas} />
+                <Agregar_producto/>
               </div>
               <div>
-                <Leer_productos marcas={marcas}/>
+                <Leer_productos/>
               </div>
             </div>
             <div className='absolute bottom-5 right-0'>

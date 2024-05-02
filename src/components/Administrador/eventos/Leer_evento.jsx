@@ -19,12 +19,12 @@ const Leer_evento = () => {
         content: {
             top: '50%',
             left: '50%',
-            right: '60%',
+            right: '50%',
             bottom: '50%',
             marginRight: '-50%',
             marginBottom: '-50%',
             height: '65%',
-            transform: 'translate(-50%, -50%)',
+            transform: 'translate(-40%, -50%)',
             backgroundColor: '#00000000',
             border: 'none',
             boxShadow: 'none',
@@ -78,6 +78,7 @@ const Leer_evento = () => {
                 isOpen={uEventoIsOpen}
                 onRequestClose={onClose}
                 style={customStyles}
+                ariaHideApp={false}
             >
                 <Editar_evento
                     onClose={onClose}
