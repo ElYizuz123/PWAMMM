@@ -28,7 +28,7 @@ const Galeria = () => {
     }
 
     return (
-        <>
+        <div>
             <div className={model ? "model open" : "model"}>
                 <Image src={tempImgSrc} width={1000} height={1000} />
                 <VscChromeClose onClick={() => setModel(false)} />
@@ -41,13 +41,13 @@ const Galeria = () => {
                     foto.map((foto, index) => {
                         return (
                             <div className="pics" key={index} onClick={() => getImg("/galeria/" + foto.foto)}>
-                                <Image className="rounded-lg cursor-pointer"
+                                <Image className="animate-fade-in rounded-lg cursor-pointer" loading="lazy"
                                 src={"/galeria/" + foto.foto} width={1000} height={1000} style={{ width: '100%' }}></Image>
                             </div>
                         )
                     })}
             </div>
-        </>
+        </div>
     )
 }
 

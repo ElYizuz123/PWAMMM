@@ -8,31 +8,35 @@ import React from 'react';
 function page() {
   return (
     <LayoutPrincipal>
-
-<div className="bg-[#F5F5F5] mt-40 h-max relative w-full overflow-x-hidden">
-
-      <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+      <div className="animate-fade-in bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+        <div className="mt-40 h-max relative w-full overflow-x-hidden">
 
 
-        <div className="mt-12">
-          <ContactoForm></ContactoForm>
-        </div>
-
-        <div>
-          <p className="text-6xl mb-2 ml-20">Preguntas Frecuentes</p>
-          <br />
-          <div className="flex items-center align-middle object-center">
-            <PreguntasFrecuentes></PreguntasFrecuentes>
+          {/* responsive hecho, a mejorar */}
+          {/* REDUCIR CÓDIGO JS AL HOOK FORM */}
+          <div className="w-full mb-16">
+            <ContactoForm></ContactoForm>
           </div>
-        </div>
+
+          {/* PREGUNTAS FRECUENTES ESTAS YA JALA BONITO LO RESPONSIVE CREO */}
+          <div>
+            <p className="lg:mb-2 mb-1
+          lg:text-6xl md:text-4xl text-3xl">
+              Preguntas Frecuentes</p>
+            <br />
+            <div className="flex items-center align-middle object-center">
+              <PreguntasFrecuentes></PreguntasFrecuentes>
+            </div>
+          </div>
 
 
-        <div>
+          {/* FALTA TODA RESPONSIVIDAD */}
+          {/* <div>
           <p className="text-6xl mb-8 ml-20">Tiendas Físicas</p>
           <ListaUbicaciones />
-        </div>
+        </div> */}
 
-        <br />
+          <br />
 
         </div>
       </div>
