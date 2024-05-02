@@ -42,3 +42,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 * Carrusel Nosotras: npm i swiper
 * Usuario: npm i next-auth
 * Encriptación: npm i bcrypt
+* Gráficas: npm install --save chart.js react-chartjs-2

@@ -5,11 +5,15 @@ import { useContext } from "react";
 import { ProductContext } from "@/context/ProductContext";
 import { ShoppingCartIcon } from "@heroicons/react/outline";
 import { XIcon, TrashIcon } from "@heroicons/react/solid";
+import { FaShoppingCart } from 'react-icons/fa';
+import { MdRemoveShoppingCart } from 'react-icons/md';
+import { EmojiSadIcon } from '@heroicons/react/outline';
 
 const Carrito = () => {
-  const { productos, total, cartCountAnimation, deleteProduct} = useContext(ProductContext);
+  const { productos, total, cartCountAnimation, deleteProduct } =
+    useContext(ProductContext);
   const [isCartVisible, setIsCartVisible] = useState(false);
-  
+
   const handleDelete = (id_producto, nombre) => {
     deleteProduct(id_producto, nombre);
   };
@@ -42,124 +46,90 @@ const Carrito = () => {
               onClick={() => setIsCartVisible(false)}
             />
           </div>
-          
+
           {/* Contenido del carrito */}
           <div className="flex flex-col h-full">
-            <div
-              className="overflow-y-auto p-4 custom-scrollbar"
-              style={{ height: "calc(100% - 160px)" }}
-            >
-              {productos.map((producto) => (
-                <div
-                  key={producto.id}
-                  className="flex items-start justify-between mb-6 bg-white p-4 rounded-lg shadow-md"
-                >
-                  <div className="flex">
-                    <img
-                      src={`/productos/${producto.imagen}`}
-                      alt={producto.nombre}
-                      className="w-20 h-20 object-cover rounded-md mr-4"
-                    />
-                    <div className="flex flex-col justify-between">
-                      <div>
-                        <h3 className="font-bold text-base">
-                          {producto.nombre}
-                        </h3>
-                        <p className="text-xs">{producto.marca}</p>
-                        <p className="text-xs">{producto.ml}ml</p>
-                      </div>
-                      <div>
-                        <p className="text-sm">Cantidad: {producto.cantidad}</p>
-                        <p className="text-md font-bold">
-                          Subtotal: ${producto.cantidad * producto.precio}
-                        </p>
+            {productos.length === 0 ? (
+              <div
+                className="overflow-y-auto p-4 custom-scrollbar "
+                style={{ height: "calc(100% - 160px)" }}
+              >
+                <div className="flex justify-center mt-48">
+                  <MdRemoveShoppingCart className="w-20 h-20 text-gray-500" />
+                  <EmojiSadIcon className="w-6 h-6 text-gray-500" />
+                </div>
+              </div>
+            ) : (
+              <div>
+                {productos.map((producto) => (
+                  <div
+                    key={producto.id}
+                    className="flex items-start justify-between mb-6 bg-white p-4 rounded-lg shadow-md"
+                  >
+                    <div className="flex">
+                      <img
+                        src={`/productos/${producto.imagen}`}
+                        alt={producto.nombre}
+                        className="w-20 h-20 object-cover rounded-md mr-4"
+                      />
+                      <div className="flex flex-col justify-between">
+                        <div>
+                          <h3 className="font-bold text-base">
+                            {producto.nombre}
+                          </h3>
+                          <p className="text-xs">{producto.marca}</p>
+                          <p className="text-xs">{producto.ml}ml</p>
+                        </div>
+                        <div>
+                          <p className="text-sm">
+                            Cantidad: {producto.cantidad}
+                          </p>
+                          <p className="text-md font-bold">
+                            Subtotal: ${producto.cantidad * producto.precio}
+                          </p>
+                        </div>
                       </div>
                     </div>
+                    <div className="flex flex-col justify-between items-end">
+                      <p className="text-md font-bold text-black">
+                        ${producto.precio}
+                      </p>
+                      <TrashIcon
+                        className="h-5 w-5 text-red-500 cursor-pointer transition duration-300 ease-in-out hover:text-red-700 hover:scale-110"
+                        onClick={() => handleDelete(producto.nombre)}
+                      />
+                    </div>
                   </div>
-                  <div className="flex flex-col justify-between items-end">
-                    <p className="text-md font-bold text-black">
-                      ${producto.precio}
-                    </p>
-                    <TrashIcon
-                      className="h-5 w-5 text-red-500 cursor-pointer transition duration-300 ease-in-out hover:text-red-700 hover:scale-110"
-                      onClick={() =>
-                        handleDelete(producto.id_producto, producto.nombre)
-                      }
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
             {/* Total */}
-            <div className="flex justify-between items-center font-bold border-t mt-4 pt-4">
+            <div className="flex justify-between items-center font-bold border-t  pt-2">
               <p>Total:</p>
               <p className="border-b-2 border-red-500">${total}</p>
             </div>
 
             {/* Botón de ir al carrito y pagar */}
-            <a href="/tienda/carrito">
-              <button className="bg-[#F70073] font-bold text-white w-full py-2 mt-4 rounded transition duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:-translate-y-1">
+
+            <Link href="/tienda/carrito">
+              <button className="bg-[#F70073] font-bold text-white w-full py-2 mt-2 rounded transition duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:-translate-y-1">
                 VER CARTA & PAGAR →
               </button>
-            </a>
+            </Link>
+            {productos.length === 0 ? (
+              <button className="bg-green-500 opacity-30 font-bold text-white w-full py-2 mt-2 rounded transition duration-300 ease-in-out hover:bg-green-500 hover:shadow-lg hover:-translate-y-1">
+                AGREGA PRODUCTOS
+              </button>
+            ) : (
+              <Link href="/tienda/finalizar_compra">
+                <button className="bg-green-500 font-bold text-white w-full py-2 mt-2 rounded transition duration-300 ease-in-out hover:bg-green-500 hover:shadow-lg hover:-translate-y-1">
+                  FINALIZAR COMPRA
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       )}
-      {/* <div className=" flex justify-center items-center ">
-        <div className=" w-[1250px]  mt-64">
-          <Link href="/tienda">
-            <button class="enter-button">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 40 27"
-                class="arrow"
-              >
-                <line
-                  stroke-width="2"
-                  stroke="white"
-                  y2="14"
-                  x2="40"
-                  y1="14"
-                  x1="1"
-                ></line>
-                <line
-                  stroke-width="2"
-                  stroke="white"
-                  y2="1.41537"
-                  x2="10.4324"
-                  y1="14.2433"
-                  x1="1.18869"
-                ></line>
-                <line
-                  stroke-width="2"
-                  stroke="white"
-                  y2="13.6007"
-                  x2="1.20055"
-                  y1="26.2411"
-                  x1="10.699"
-                ></line>
-                <line
-                  stroke="white"
-                  y2="14.3133"
-                  x2="1.07325"
-                  y1="13.6334"
-                  x1="0.33996"
-                ></line>
-                <line
-                  stroke-width="2"
-                  stroke="white"
-                  y2="13"
-                  x2="39"
-                  y1="8"
-                  x1="39"
-                ></line>
-              </svg>
-              <p className="font-semibold ">REGRESAR</p>
-            </button>
-          </Link>
-        </div>
-      </div> */}
     </div>
   );
 };

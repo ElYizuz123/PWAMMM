@@ -78,7 +78,6 @@ const Tarjeta_Asociadas = ({ id_asociada, nombre, foto, openEdit}) => {
             <div className="relative rounded-5 overflow-hidden card-reduced-as rounded-t-[120px]">
                 <figure className='flex justify-center items-center'>
                     <Image
-                        layout='restrict'
                         width={400}
                         height={400}
                         className="object-top object-cover rounded-t-[100px] w-full h-64"
@@ -92,10 +91,10 @@ const Tarjeta_Asociadas = ({ id_asociada, nombre, foto, openEdit}) => {
                             {nombre}
                         </h1>
                         <button className="absolute bottom-0 right-48 m-2 p-2 text-pink-600 rounded eye-icon">
-                            <Image onClick={() => openEdit(id_asociada)} layout='intrinsic' width={40} height={40} src="/emoticons/editar.png" alt="Icono" className='w-8 h-8' />
+                            <Image onClick={() => openEdit(id_asociada)} width={40} height={40} src="/emoticons/editar.png" alt="Icono" className='object-contain w-8 h-8' />
                         </button>
                         <button className="absolute bottom-0 right-24 m-2 p-2 text-pink-600 rounded eye-icon">
-                            <Image onClick={handleDelete} layout='intrinsic' width={40} height={40} src="/emoticons/eliminar.png" alt="Icono" className='w-8 h-8' />
+                            <Image onClick={handleDelete} width={40} height={40} src="/emoticons/eliminar.png" alt="Icono" className='object-contain w-8 h-8' />
                         </button>
                     </div>
                 </div>

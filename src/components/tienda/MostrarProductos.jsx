@@ -4,6 +4,9 @@ import Tarjeta from "./Tarjeta";
 import { FiSearch } from "react-icons/fi";
 
 function MostrarProductos({ idMarca }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(10);
+
   const [productos, setProductos] = useState([]);
   const [acompanamientos, setAcompanamientos] = useState([]);
   const [searchTerm, setSearchTerm] = useState();
@@ -14,15 +17,14 @@ function MostrarProductos({ idMarca }) {
 
   useEffect(() => {
     const fetchProductos = async () => {
-      const response = await fetch("/api/read_producto");
-      const data = await response.json();
-      const response2 = await fetch("/api/read_acompanamientos");
-      const data2 = await response2.json();
+      const responseProducts = await fetch("/api/read_producto");
+      const dataProducts = await responseProducts.json();
+      const responseAcompanamientos = await fetch("/api/read_acompanamientos");
+      const dataAcompanamientos = await responseAcompanamientos.json();
 
-      setProductos(data);
-      setAcompanamientos(data2);
+      setProductos(dataProducts);
+      setAcompanamientos(dataAcompanamientos);
     };
-
     fetchProductos();
   }, []);
 
@@ -58,16 +60,36 @@ function MostrarProductos({ idMarca }) {
       );
   }, [searchTerm, acompanamientos, idMarca]);
 
+  const currentProducts = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * productsPerPage;
+    const lastPageIndex = firstPageIndex + productsPerPage;
+    return filteredProducts.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, productsPerPage, filteredProducts]);
+
+  const currentAcompanamientos = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * productsPerPage;
+    const lastPageIndex = firstPageIndex + productsPerPage;
+    return filteredAcompanamientos.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, productsPerPage, filteredAcompanamientos]);
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
   return (
     <div>
       <div className="my-8">
-        <div className="flex justify-between md:mx-8 lg:mr-24 lg:ml-[100px]">
-          <div className="relative top-7 text-black font-semibold text-sm rounded-full z-10 text-center ">
-            Mostrando {filteredProducts.length + filteredAcompanamientos.length}{" "}
+        <div className="flex justify-between lg:mr-24 lg:ml-[100px]">
+          <span className="text-black font-semibold text-sm rounded-full z-10 text-center">
+            Mostrando {currentProducts.length + currentAcompanamientos.length}{" "}
             resultados...
-          </div>
+          </span>
 
-          <div className="flex justify-end items-center">
+          <div className="justify-end items-center">
             <form className="relative">
               <input
                 className="w-full pl-4 pr-10 py-2 text-sm border border-gray-300 rounded-full transition ease-out duration-300 focus:border-[#F70073] focus:outline-none focus:ring-[#F70073]"
@@ -89,46 +111,91 @@ function MostrarProductos({ idMarca }) {
         </div>
       </div>
 
-      {/* Componente que maneje su estado propio */}
-      <div>
-        <div className="flex flex-wrap gap-8 justify-start px-24 pb-8">
-          {filteredProducts.map(
-            (
-              producto // Cambia productos a filteredProducts
-            ) => (
-              <Tarjeta
-                id_producto={producto.id_producto}
-                nombre={producto.nombre}
-                marca={producto.marca.nombre}
-                agave={producto.tipo_agave}
-                precio={producto.precio}
-                alcohol={producto.cantidad_alcohol}
-                ml={producto.ml}
-                imagen={producto.foto}
-                mercadoLibre={producto?.mercadoLibre || "NULL"}
-                cantidad={producto.cantidad}
-                tipo={1}
-              />
-            )
-          )}
+      <div className="flex flex-wrap gap-8 justify-start px-24 pb-8">
+        {currentProducts.map((producto) => (
+          <Tarjeta
+            id_producto={producto.id_producto}
+            nombre={producto.nombre}
+            marca={producto.marca.nombre}
+            agave={producto.tipo_agave}
+            precio={producto.precio}
+            alcohol={producto.cantidad_alcohol}
+            ml={producto.ml}
+            imagen={producto.foto}
+            mercadoLibre={producto?.mercadoLibre || "NULL"}
+            cantidad={producto.cantidad}
+            tipo={1}
+          />
+        ))}
+        {currentAcompanamientos.map((acompanamiento) => (
+          <Tarjeta
+            id_producto={acompanamiento.id_acompanamiento}
+            nombre={acompanamiento.nombre}
+            marca={acompanamiento.marca.nombre}
+            precio={"200"}
+            ml={acompanamiento.gr}
+            imagen={acompanamiento.foto}
+            mercadoLibre={"NULL"}
+            cantidad={acompanamiento.cantidad}
+            tipo={2}
+          />
+        ))}
+      </div>
 
-          {filteredAcompanamientos.map(
-            (
-              acompanamiento // Cambia productos a filteredProducts
-            ) => (
-              <Tarjeta
-                id_producto={acompanamiento.id_acompanamiento}
-                nombre={acompanamiento.nombre}
-                marca={acompanamiento.marca.nombre}
-                precio={"200"}
-                ml={acompanamiento.gr}
-                imagen={acompanamiento.foto}
-                mercadoLibre={"NULL"}
-                cantidad={acompanamiento.cantidad}
-                tipo={2}
-              />
-            )
-          )}
+      <div className="relative z-10 flex items-center justify-center my-8">
+        <div className="space-x-1 mr-24">
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className={`px-3 py-1 rounded-md ${
+              currentPage === 1
+                ? "bg-gray-200 cursor-not-allowed"
+                : "bg-gray-200 hover:bg-gray-300"
+            }`}
+          >
+            Anterior
+          </button>
+          {[
+            ...Array(
+              Math.ceil(
+                (filteredProducts.length + filteredAcompanamientos.length) /
+                  productsPerPage
+              )
+            ).keys(),
+          ].map((number) => (
+            <button
+              key={number + 1}
+              onClick={() => setCurrentPage(number + 1)}
+              className={`px-4 py-1 rounded-md ${
+                currentPage === number + 1
+                  ? "bg-[#F70073] text-white"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              {number + 1}
+            </button>
+          ))}
+          <button
+            onClick={handleNextPage}
+            disabled={
+              currentPage ===
+              Math.ceil(
+                (filteredProducts.length + filteredAcompanamientos.length) /
+                  productsPerPage
+              )
+            }
+            className={`px-3 py-1 rounded-md ${
+              currentPage ===
+              Math.ceil(
+                (filteredProducts.length + filteredAcompanamientos.length) /
+                  productsPerPage
+              )
+                ? "bg-gray-200 cursor-not-allowed"
+                : "bg-gray-200 hover:bg-gray-300"
+            }`}
+          >
+            Siguiente
+          </button>
         </div>
       </div>
     </div>
