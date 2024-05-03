@@ -1,20 +1,30 @@
 import db from '@/libs/db'
+import { decrypt } from '@/libs/decrypt';
 import { NextResponse } from 'next/server'
 
-const masVentasCiudades = (ciudades, ventas) =>{
+const masVentasCiudades = (ventas) =>{
+    var ciudades = []
     var ventasPorCiudad = []
-    ciudades.forEach((element, index) => {
-        let ciudadVenta = {
-            id:index,
-            ciudad:element.poblacion.toUpperCase(),
-            cantidad:0
+    ventas.forEach((element, index) => {
+        let data = {iv:element.iv_poblacion, data:element.poblacion}
+        const poblacion = decrypt(data)
+        if (!ciudades.includes(poblacion)){ 
+            ciudades.push(poblacion)
+            let ciudadVenta = {
+                id:index,
+                ciudad: poblacion,
+                cantidad:0
+            }
+            ventasPorCiudad[index] = ciudadVenta
         }
-        ventasPorCiudad[index] = ciudadVenta
-    });
+    })
     ventas.forEach(element => {
-        const ciudadEncontrada = ventasPorCiudad.find(venta => venta.ciudad === element.poblacion.toUpperCase())
+        let data = {iv:element.iv_poblacion, data:element.poblacion}
+        const poblacion = decrypt(data)
+        const ciudadEncontrada = ventasPorCiudad.find(venta => venta.ciudad === poblacion.toUpperCase())
         if(ciudadEncontrada){
             ciudadEncontrada.cantidad+=1
+            console.log(ciudadEncontrada.cantidad)
         }
     });
     ventasPorCiudad.sort((a,b) => b.cantidad - a.cantidad)
@@ -22,11 +32,8 @@ const masVentasCiudades = (ciudades, ventas) =>{
 }
 export async function GET(){
     try{
-        const ciudades = await db.venta_total.findMany({
-            distinct: ['poblacion']
-        })
         const ventas = await db.venta_total.findMany()
-        var ventasCiudades = masVentasCiudades(ciudades, ventas)
+        var ventasCiudades = masVentasCiudades(ventas)
         return NextResponse.json(ventasCiudades)
     }catch(error){
         console.log(error)
