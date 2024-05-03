@@ -14,11 +14,13 @@ var options ={
 
 const cantidadOtros = (productos) =>{
     var cantidad=0
-    productos.forEach((element, index) => {
-        if(index>5){
-            cantidad+=element.cantidad
-        }
-    })
+    if(productos.length !=0){
+        productos.forEach((element, index) => {
+            if(index>5){
+                cantidad+=element.cantidad
+            }
+        })
+    }
     return cantidad
 }
 

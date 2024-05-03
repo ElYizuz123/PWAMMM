@@ -36,11 +36,15 @@ var options = {
 
 const otrosCantidad = (ventas) =>{
     var cantidad=0
-    ventas.forEach((element, index) => {
-        if(index>6){
-            cantidad+=element.cantidad
-        }
-    })
+    console.log(ventas)
+    if(ventas.length !=0 ){
+        console.log(ventas.length)
+        ventas.forEach((element, index) => {
+            if(index>6){
+                cantidad+=element.cantidad
+            }
+        })
+    }
     return cantidad
 }
 

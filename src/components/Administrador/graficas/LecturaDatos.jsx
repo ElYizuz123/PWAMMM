@@ -8,7 +8,7 @@ import { UpdateProvider } from '../UpdateProvider'
 
 const obtenerDiasEntreFechas = (fechaInicio, fechaFin) => {
     const dias = []
-    const diaActual = fechaInicio
+    const diaActual = new Date(fechaInicio)
     while (diaActual <= fechaFin) {
         const day = diaActual.getDate()
         const month = diaActual.getMonth() + 1
@@ -24,7 +24,7 @@ const obtenerMesesEntreFechas = (fechaInicio, fechaFin) => {
     // Arreglo para almacenar los meses
     const meses = [];
 
-    const fechaActual = fechaInicio
+    const fechaActual =new Date(fechaInicio) 
 
     while (fechaActual <= fechaFin) {
         const mes = fechaActual.getMonth() +1
@@ -95,14 +95,14 @@ const LecturaDatos = () => {
 
     const handleDateChange = (e) =>{
         setFechaVentas(e)
-        if(e){
-            const fechaIni = e[0]['$d']
-            const fechaFin = e[1]['$d']
+         if(e){
+             const fechaIni = e[0]['$d']
+             const fechaFin = e[1]['$d']
 
-            const diferenciaFechas = fechaFin-fechaIni
-            const diferenciaDias = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
-            var fechas =null
-            if(diferenciaDias<=31){
+             const diferenciaFechas = fechaFin-fechaIni
+             const diferenciaDias = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
+             var fechas =null
+             if(diferenciaDias<=31){
                 fechas = obtenerDiasEntreFechas(fechaIni, fechaFin)
             }
             else if(diferenciaDias<=365){
@@ -112,8 +112,8 @@ const LecturaDatos = () => {
 
             }
             console.log(fechas)
-        }
-        readVentasTotales(e)
+         }
+         readVentasTotales(e)
     }
 
     return (

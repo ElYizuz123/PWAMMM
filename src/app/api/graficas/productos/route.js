@@ -26,8 +26,10 @@ export async function GET(){
     try{
         const productos = await db.producto.findMany()
         const ventas = await db.venta_individual.findMany()
-
-        const productosVentas = listProductosVentas(productos, ventas)
+        var productosVentas = null
+        if(ventas){
+            productosVentas = listProductosVentas(productos, ventas)
+        }
         return NextResponse.json(productosVentas)
         
     }catch(error){

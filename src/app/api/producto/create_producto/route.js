@@ -20,6 +20,7 @@ export async function POST(request){
                 cantidad_alcohol: parseInt(data.cantidad_alcohol)
             }
         })
+        console.log(newProducto)
         return NextResponse.json("Registrado");
     }catch(error){
         console.error('Error al leer los datos', error)
