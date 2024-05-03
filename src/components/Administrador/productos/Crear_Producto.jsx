@@ -11,7 +11,7 @@ const randomHexa = () => {
     const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
     return hexadecimalValue
 }
-const Crear_Producto = ({ isOpen, onClose, marcas }) => {
+const Crear_Producto = ({ onClose, marcas }) => {
     const [productPhoto, setProductPhoto] = useState(null)
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)

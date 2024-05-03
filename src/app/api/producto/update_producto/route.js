@@ -3,8 +3,6 @@ import db from '@/libs/db'
 
 export async function POST(request){
     const data = await request.json();
-
-    console.log(data);
     try{
         const newProducto = await db.producto.update({
             where: {
@@ -12,17 +10,24 @@ export async function POST(request){
             },
             data:{
                 nombre: data.nombre,
-                ml: Number(data.ml),
                 precio: Number(data.precio),
                 descripcion: data.descripcion,
                 marca_id_marca: parseInt(data.marca),
                 mercadoLibre: data.mercado_lib,
                 cantidad: parseInt(data.cantidad),
                 foto: data.foto,
+            }
+
+        })
+        const newBotella = await db.botella.update({
+            where: {
+                id_botella: data.id_botella,
+            },
+            data:{
+                ml: Number(data.ml),
                 tipo_agave: data.tipo_agave,
                 cantidad_alcohol: parseInt(data.cantidad_alcohol)
             }
-
         })
         return NextResponse.json("Registrado");
     }catch(error){

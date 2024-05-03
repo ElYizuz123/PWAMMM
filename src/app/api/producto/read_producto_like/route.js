@@ -15,7 +15,9 @@ export async function POST(request){
                 },
             },
             include: {
-                marca: true
+                marca: true,
+                botella: true,
+                acompanamiento:true
             },
             orderBy:{
                 id_producto:'asc'

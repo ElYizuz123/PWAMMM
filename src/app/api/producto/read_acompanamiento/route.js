@@ -5,12 +5,13 @@ export async function POST(request){
 
     try{
         var datos = await request.json()
-        const data = await db.acompanamiento.findUnique({
+        const data = await db.producto.findUnique({
             where: {
-                id_acompanamiento:datos
+                id_producto:datos
             },
             include:{
-                marca:true
+                marca:true,
+                acompanamiento:true
             }
         });
         return NextResponse.json(data);

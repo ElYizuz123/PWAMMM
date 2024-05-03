@@ -11,13 +11,13 @@ const randomHexa = () => {
     return hexadecimalValue
 }
 
-const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) => {
+const Editar_Producto = ({ onClose, marcas, idProducto }) => {
     const [productPhoto, setProductPhoto] = useState(null)
     const [defaultData, setDefaultData] = useState(false)
     const [producto, setProducto] = useState(null)
     const { register, handleSubmit, setValue } = useForm();
     const fileInputRef = useRef(null)
-    const {udpate, setUpdate} = useContext(contexto)
+    const {update, setUpdate} = useContext(contexto)
     const hexa = randomHexa()
 
     //Default data
@@ -35,13 +35,15 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
         register('cantidad_alcohol')
         register('foto')
         register('hexa')
+        register('id_botella')
 
         setValue('foto', data[0].foto)
-        setValue('tipo_agave', data[0].tipo_agave)
-        setValue('cantidad_alcohol', data[0].cantidad_alcohol)
+        setValue('id_botella', data[0].botella[0].id_botella)
+        setValue('tipo_agave', data[0].botella[0].tipo_agave)
+        setValue('cantidad_alcohol', data[0].botella[0].cantidad_alcohol)
         setValue('id_producto', idProducto)
         setValue('nombre', data[0].nombre)
-        setValue('ml', data[0].ml)
+        setValue('ml', data[0].botella[0].ml)
         setValue('precio', data[0].precio)
         setValue('marca', data[0].marca.id_marca)
         setValue('cantidad', data[0].cantidad)
@@ -126,7 +128,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                             clearInterval(timerInterval);
                         }
                     })
-                    const up = !udpate
+                    const up = !update
                     setUpdate(up)
                 }
                 else {
@@ -161,7 +163,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                         clearInterval(timerInterval);
                     }
                 })
-                const up = !udpate
+                const up = !update
                 setUpdate(up)
             } else {
                 Swal.fire({
@@ -230,8 +232,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 />
                                 <input
                                     type='text'
-                                    name='nombre'
-                                    defaultValue={producto ? producto[0].nombre : ""}
+                                    name='nombre'  
                                     required={true}
                                     maxLength={30}
                                     id='campo_nombre'
@@ -244,8 +245,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                 />
                                 <input
                                     type='number'
-                                    name='ml'
-                                    defaultValue={producto ? producto[0].ml : ""}
+                                    name='ml' 
                                     required={true}
                                     max={5000}
                                     min={0}
@@ -261,8 +261,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     name='precio'
                                     required={true}
                                     max={5000}
-                                    min={0}
-                                    defaultValue={producto ? producto[0].precio : ""}
+                                    min={0}                                   
                                     {...register('precio', {
                                         required: true,
                                         maxLength: 10
@@ -278,7 +277,6 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     {...register('marca', {
                                         required: true
                                     })}
-
                                 >
                                     {defaultData ? opcionDefault() : ""}
                                     {marcas && (
@@ -297,7 +295,6 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     max={5000}
                                     min={0}
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-6'
-                                    defaultValue={producto ? producto[0].cantidad : ""}
                                     {...register('cantidad', {
                                         required: true
                                     })}
@@ -309,7 +306,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     {...register('mercado_lib', {
                                         maxLength: 255
                                     })}
-                                    defaultValue={producto ? producto[0].mercadoLibre : ""}
+                                    
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-7'
                                     placeholder='Link a mercado libre'
                                 />
@@ -318,7 +315,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     name='tipo_agave'
                                     maxLength={20}
                                     required={true}
-                                    defaultValue={producto ? producto[0].tipo_agave : ""}
+                                    
                                     {...register('tipo_agave', {
                                         maxLength: 20
                                     })}
@@ -331,7 +328,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                     max={70}
                                     min={0}
                                     required={true}
-                                    defaultValue={producto ? producto[0].cantidad_alcohol : ""}
+                                    
                                     {...register('cantidad_alcohol', {
                                         maxLength: 255
                                     })}
@@ -347,7 +344,7 @@ const Editar_Producto = ({ isOpen, onClose, marcas, nProductos, idProducto }) =>
                                         required: true,
                                         maxLength: 3000
                                     })}
-                                    defaultValue={producto ? producto[0].descripcion : ""}
+                                    
                                     className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-8 pt-1'
                                 />
                                 <div className='w-full flex justify-end items-end'>
