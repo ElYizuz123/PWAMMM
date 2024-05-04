@@ -22,6 +22,7 @@ const Crear_pregunta = () => {
         setCPreguntaIsOpen(false)
     }
 
+    //Configuración de los modales
     const customStyles = {
         content: {
             top: '50%',

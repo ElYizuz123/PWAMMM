@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 
 const VerVentas = ({ onClose, idVenta }) => {
     const [detalles, setDetalles] = useState(null)
+
+    //Leer ventas individuales
     const readData =async () =>{
         const res = await fetch('/api/ventas/read_detalles',{
             method:'POST',
@@ -12,11 +14,13 @@ const VerVentas = ({ onClose, idVenta }) => {
         setDetalles(resJSON)
     }
 
+    //Alternar colores de las ventas
     const back ={
         0:"bg-pink-100 text-black",
         1:"bg-pink-200 text-black"
     }
 
+    //Inicializar lectura
     useEffect(()=>{
         readData()
     },[])

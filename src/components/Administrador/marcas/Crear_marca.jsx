@@ -7,6 +7,7 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
     const { register, handleSubmit, reset } = useForm();
     const {update, setUpdate} = useContext(contexto)
 
+    //Crear una nueva marca
     const handleOnSubmit = async (data) => {
         const res = await fetch('/api/marcas/create_marca', {
             method: 'POST',

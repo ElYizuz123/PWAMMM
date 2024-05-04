@@ -18,6 +18,7 @@ const Leer_marcas = ({asociadas}) => {
         setMarcas(JSON.parse(resJSON))
     };
 
+    //Configuración del modal
     const customStyles = {
         content: {
           top: '50%',

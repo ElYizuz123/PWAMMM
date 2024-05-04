@@ -7,6 +7,7 @@ import Modal from 'react-modal'
 const Agregar_marca = ({asociadas}) => {
     const [cMarcasIsOpen, setCMarcasIsOpen] = useState(false)
 
+    //Configuraciones del modal
     const customStyles = {
         content: {
           top: '50%',

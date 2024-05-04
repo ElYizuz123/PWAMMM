@@ -21,6 +21,7 @@ const Crear_foto = () => {
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
 
+    //Configuración del modal
     const customStyles = {
         content: {
             top: '50%',
@@ -40,20 +41,23 @@ const Crear_foto = () => {
         },
     };
 
+    //Añadir el campo foto al form
     useEffect(() => {
         register('foto');
     }, [register]);
 
+    //Cerrar el popup
     const onClose = () => {
         setCFotoIsOpen(false)
     }
 
+    //Abrir el popup
     const isOpen = () => {
         setCFotoIsOpen(true)
     }
 
 
-
+    //Manejar la creación de una foto
     const handleOnSubmit = async (data) => {
         if (eventoPhoto) {
             const form = new FormData()
@@ -136,6 +140,7 @@ const Crear_foto = () => {
                     </div>
                     <div className='w-full h-full flex justify-between'>
                         <div className='w-full flex flex-col justify-center items-center'>
+                            {/* Visualizador de fotografía */}
                             {eventoPhoto && (
                                 <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                             )}

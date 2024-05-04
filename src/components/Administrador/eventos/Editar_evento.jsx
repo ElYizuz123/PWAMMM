@@ -19,6 +19,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
 
+    //Inicialización de datos en el form
     const setForm = (data) => {
         console.log(data)
         register('id_evento')
@@ -34,6 +35,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
             setValue('fecha_fin', data[0].fecha_fin.split(".")[0].slice(0, -3))
     }
 
+    //Lectura de eventos 
     const readData = async () => {
         const res = await fetch('/api/eventos/read_evento', {
             method: 'POST',
@@ -45,18 +47,21 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
         setForm(JSON.parse(resJSON))
     }
 
+    //Inicialización de lectura de datos
     useEffect(() => {
         readData()
     }, [])
 
+    //Ingreso de campos de foto y hexadecimal en el form
     useEffect(() => {
         register('foto')
         register('hexa')
     }, [register]);
 
 
-
+    //Manejo de actualización de datos 
     const handleOnSubmit = async (data) => {
+        //Manejo de la fecha para la DB
         data.fecha_fin = data.fecha_fin + ":00.000Z"
         console.log(data)
         if (eventoPhoto) {
@@ -73,7 +78,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
             const fotoResJSON = await fotoRes.json()
             console.log(fotoResJSON)
 
-            //Registrar producto en la DB
+            //Registrar evento en la DB
             if (fotoResJSON == "Archivo subido correctamente") {
                 const res = await fetch('/api/eventos/update_evento', {
                     method: 'POST',
@@ -116,6 +121,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                 });
             }
         } else {
+            //Modificación sin fotografía
             const res = await fetch('/api/eventos/update_evento', {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -151,6 +157,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
         }
     }
 
+    //Ingreso de foto en el input del form
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
@@ -165,12 +172,14 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                 </div>
                 <div className='w-full h-full flex justify-between'>
                     <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
+                        {/* Visualizador de la imagen */}
                         {eventoPhoto && (
                             <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-44 h-56' />
                         )}
                         {eventoPhoto && (
                             <p className='text-sm'>{eventoPhoto.name}</p>
                         )}
+                        {/* Visualizador por defecto de la imagen */}
                         {!eventoPhoto && (<Image width={400} height={400} src={`/eventos/${evento ? evento[0].foto : ""}`} alt='Preview' className='object-contain w-44 h-56' />)}
                         {!eventoPhoto && (
                             <p className='text-sm'>{evento ? evento[0].foto : ""}</p>

@@ -14,6 +14,7 @@ const Categorias = () => {
   const [tempImgSrc, settempImgSrc] = useState('')
   const searchParams = useSearchParams()
 
+  //Lectura de fotografías
   const readData = async () => {
     var search = ""
     if (!page) {
@@ -31,13 +32,14 @@ const Categorias = () => {
   }
 
 
-
-  const deleteEvento = (async (idFoto, foto) => {
+  //Eliminación de fotografía
+  const deleteFoto = (async (idFoto, foto) => {
     const data = {
       "id_producto": idFoto,
       "foto": foto,
       "source": "galeria"
     }
+    //Eliminación de imagen
     const deletedImage = await fetch('/api/delete_image', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -56,7 +58,7 @@ const Categorias = () => {
       if (resJSON == "Foto eliminada con éxito") {
         Swal.fire({
           title: "Eliminado!",
-          text: "El evento fue eliminado",
+          text: "La foto fue eliminada",
           icon: "success"
         });
         const up = !update
@@ -94,23 +96,26 @@ const Categorias = () => {
       confirmButtonText: "Si, borrar!"
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteEvento(idFoto, foto)
+        deleteFoto(idFoto, foto)
       }
     });
   }
 
+  //Conteo de fotografías para la paginación
   const countData =async () =>{
     const res = await fetch('/api/galeria/count_fotos')
     const resJSON = await res.json()
     setTotalPages(Math.ceil((resJSON) / 12))
   }
 
+  //Inicialización de lecturas de datos
   useEffect(() => {
     readData()
     countData()
   }, [update])
 
 
+  //Configuración de la imagen
   const getImg = (imgSrc) => {
     settempImgSrc(imgSrc);
     setModel(true);

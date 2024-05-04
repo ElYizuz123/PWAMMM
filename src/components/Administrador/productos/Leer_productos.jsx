@@ -76,11 +76,14 @@ const Leer_productos = () => {
         setProductos(parseado)
     };
 
+    //Función para contar las páginas a utilizar
     const countData = async () => {
         const res = await fetch('/api/producto/cont_productos')
         const resJSON = await res.json()
         setTotalPages(Math.ceil((resJSON) / 12))
     }
+
+    //Función para leer las marcas de las botellas
 
     const readMarcasBotellas = async () => {
         const res = await fetch('/api/producto/read_marcas', {
@@ -91,6 +94,8 @@ const Leer_productos = () => {
         console.log(resJSON)
         setMarcasBotellas(resJSON)
     }
+
+    //Función para leer las marcas de los acompañamientos
     const readMarcasAcompanamientos = async () => {
         const res = await fetch('/api/producto/read_marcas', {
             method: 'POST',
@@ -101,7 +106,7 @@ const Leer_productos = () => {
     }
 
 
-
+    //Cerrar el popup para actualizar botellas 
     const closeUProduct = () => {
         setUProductIsOpen(false)
     };
@@ -143,6 +148,7 @@ const Leer_productos = () => {
         countData()
     }, [update])
 
+    //Inicializar lecturas de las marcas 
     useEffect(() => {
         readMarcasBotellas()
         readMarcasAcompanamientos()

@@ -10,8 +10,8 @@ const Lector_pregunta = () => {
     const [preguntas, setPreguntas] = useState(null)
     const [uPreguntasIsOpen, setUPreguntasIsOpen] = useState(null)
     const [id_pregunta, setId_pregunta] = useState(null)
-    const editRef = useRef(null)
 
+    //Configuración de los modales
     const customStyles = {
         content: {
           top: '50%',
@@ -31,6 +31,7 @@ const Lector_pregunta = () => {
         },
       };
 
+    //Manejo de eliminación de una pregunta 
     const deletePregunta = async (data) =>{
         const res = await fetch('/api/preguntas/delete_pregunta',{
             method:'POST',
@@ -53,6 +54,7 @@ const Lector_pregunta = () => {
         }
     }
 
+    //Manejo de alerta en eliminación
     const handleDelete = async (data) =>{
         Swal.fire({
             title: "Eliminar marca",
@@ -71,22 +73,26 @@ const Lector_pregunta = () => {
         
     }
 
+    //Abir popup de pregunta
     const upenUPregunta = (data) =>{
         setId_pregunta(data)
         setUPreguntasIsOpen(true)
     }
 
+    //Cerrar popup de pregunta
     const closeUPregunta = () =>{
         setUPreguntasIsOpen(false)
         readData()
     }
 
+    //Leer las preguntas 
     const readData = async () => {
         const res = await fetch('/api/preguntas/read_preguntas')
         const resJSON = await res.json()
         setPreguntas(JSON.parse(resJSON))
     }
 
+    //Leer los datos de las preguntas
     useEffect(() => {
         readData()
     }, [update])

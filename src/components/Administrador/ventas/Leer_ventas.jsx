@@ -13,6 +13,7 @@ const Leer_ventas = ({ventas}) => {
     const [idVenta, setIdVenta]= useState(null)
     const [clientData, setClientData] = useState(null)
 
+    //Configuraciones del modal
     const customStyles = {
         content: {
             top: '50%',
@@ -32,25 +33,29 @@ const Leer_ventas = ({ventas}) => {
         },
     };
 
+    //Cerrar modal de detalles
     const onClose = () => {
         setDetallesIsOpen(false)
     }
 
+    //Abrir modal de detalles
     const isOpen = (venta) => {
         setIdVenta(venta)
         setDetallesIsOpen(true)
     }
 
+    //Cerrar modal de datos del cliente
     const onClienteClose = () => {
         setDetallesCliente(false)
     }
 
+    //Abrir modal de datos del cliente
     const isClienteOpen = (cliente) => {
         setClientData(cliente)
         setDetallesCliente(true)
     }
 
-
+    //Cambiar orden de visualización de ventas
     const handleChange = (e) => {
         if (e.target.value == "antiguo") {
             setVentasOr(ventas.reverse());

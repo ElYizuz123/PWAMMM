@@ -10,6 +10,7 @@ const Agregar_producto = ({ marcas }) => {
     const [marcasBotellas, setMarcasBotellas] = useState(null)
     const [marcasAcompanamientos, setMarcasAcompanamientos] = useState(null)
 
+    //Leer las marcas de las botellas
     const readMarcasBotellas =async () =>{
         const res = await fetch('/api/producto/read_marcas',{
             method:'POST',
@@ -19,6 +20,7 @@ const Agregar_producto = ({ marcas }) => {
         setMarcasBotellas(resJSON)
     }
 
+    //Leer las marcas de los acompañamientos
     const readMarcasAcompanamientos =async () =>{
         const res = await fetch('/api/producto/read_marcas',{
             method:'POST',
@@ -28,16 +30,19 @@ const Agregar_producto = ({ marcas }) => {
         setMarcasAcompanamientos(resJSON)
     }
 
+    //Inicializar lecturas
     useEffect(() =>{
         readMarcasBotellas()
         readMarcasAcompanamientos()
     },[])
 
-    //Función para abrir pop-up crear productos
+    //Función para abrir pop-up crear botellas
 
     function openBotella() {
         setBotellaIsOpen(true);
     }
+
+    //Función para cerrar pop-up crear productos
 
     function closeBotella() {
         setBotellaIsOpen(false);
@@ -51,6 +56,7 @@ const Agregar_producto = ({ marcas }) => {
         setAcompanIsOpen(false);
     }
 
+    //Configuración del modal
     const customStyles = {
         content: {
           top: '50%',

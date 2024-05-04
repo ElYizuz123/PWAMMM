@@ -21,12 +21,13 @@ const Crear_evento = () => {
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
-    const createRef = useRef(null)
 
+    //Registrar el campo de foto en el formulario
     useEffect(() => {
         register('foto');
     }, [register]);
 
+    //Configuración de los modales 
     const customStyles = {
         content: {
             top: '50%',
@@ -46,19 +47,23 @@ const Crear_evento = () => {
         },
     };
 
+    //Cerrar el popup de eventos
     const onClose = () => {
         setCEventosIsOpen(false)
     }
 
+    //Abrir el popup de eventos
     const isOpen = () => {
         setCEventosIsOpen(true)
     }
 
 
+    //Manejar el ingreso de un evento
     const handleOnSubmit = async (data) => {
+        //Manejar la fecha para su ingreso a la base de datos 
         data.fecha_fin = data.fecha_fin + ":00.000Z"
-        console.log(data)
         if (eventoPhoto) {
+            //Form para enviar a la base de datos 
             const form = new FormData()
             form.set('file', eventoPhoto)
             form.set('source', "eventos")
@@ -118,6 +123,7 @@ const Crear_evento = () => {
         }
     }
 
+    //Ingresar la fotografía en el input del form
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
@@ -142,6 +148,7 @@ const Crear_evento = () => {
                         </div>
                         <div className='w-full h-full flex justify-between'>
                             <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
+                                {/* Visualizador de imagen */}
                                 {eventoPhoto && (
                                     <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-44 h-56' />
                                 )}

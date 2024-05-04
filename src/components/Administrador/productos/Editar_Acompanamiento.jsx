@@ -190,6 +190,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
                     )}
+                    {/* Imagen por default */}
                     {!productPhoto && (<Image height={400} width={400} src={`/productos/${producto ? producto.foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
                     {!productPhoto && (
                         <p className='text-sm'>{producto ? producto.foto : ""}</p>
