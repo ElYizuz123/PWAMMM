@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Swal from 'sweetalert2'
 
 
-const randomHexa = () =>{
+const randomHexa = () => {
     const randomNumber = Math.floor(Math.random() * 65536);
     const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
     return hexadecimalValue
@@ -21,13 +21,17 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
 
     const setForm = (data) => {
         console.log(data)
-        register('id_evento'),
-            register('foto'),
-            register('fecha_fin'),
+        register('id_evento')
+            register('foto')
+            register('fecha_fin')
+            register('nombre')
+            register('descripcion')
 
-            setValue('id_evento', idEvento),
-            setValue('foto', data[0].foto),
-            setValue('fecha_fin', data[0].fecha_fin.split(".")[0].slice(0,-3))
+            setValue('id_evento', idEvento)
+            setValue('nombre', data[0].nombre)
+            setValue('descripcion', data[0].descripcion)
+            setValue('foto', data[0].foto)
+            setValue('fecha_fin', data[0].fecha_fin.split(".")[0].slice(0, -3))
     }
 
     const readData = async () => {
@@ -162,12 +166,12 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                 <div className='w-full h-full flex justify-between'>
                     <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
                         {eventoPhoto && (
-                            <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-48 h-56' />
+                            <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-44 h-56' />
                         )}
                         {eventoPhoto && (
                             <p className='text-sm'>{eventoPhoto.name}</p>
                         )}
-                        {!eventoPhoto && (<Image width={400} height={400} src={`/eventos/${evento ? evento[0].foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
+                        {!eventoPhoto && (<Image width={400} height={400} src={`/eventos/${evento ? evento[0].foto : ""}`} alt='Preview' className='object-contain w-44 h-56' />)}
                         {!eventoPhoto && (
                             <p className='text-sm'>{evento ? evento[0].foto : ""}</p>
                         )}
@@ -178,12 +182,14 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
 
                     </div>
                     <div className='h-[1000px] w-[60%] flex justify-end'>
-                        <div className='flex flex-col items-start gap-y-6 mt-36 mr-2'>
+                        <div className='flex flex-col justify-start gap-y-6 mr-1 mt-[100px]'>
                             <p className='text-xl'>Fecha fin</p>
+                            <p className='text-xl'>Nombre</p>
+                            <p className='text-xl'>Descripción</p>
                         </div>
                         <div>
-                            <div className='h-full flex flex-col items-start mt-36 mr-2'>
-                                <form onSubmit={handleSubmit(handleOnSubmit)}>
+                            <div >
+                                <form onSubmit={handleSubmit(handleOnSubmit)} className='h-full flex flex-col items-start mr-2 gap-y-6 mt-[100px]'>
                                     <input
                                         type='file'
                                         name='foto'
@@ -210,10 +216,36 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                                         className='w-full h-7 border-2 border-black rounded-lg pl-1'
                                         placeholder='Fecha fin'
                                     />
+                                    <input
+                                            type='text'
+                                            name='nombre'
+                                            id='nombre'
+                                            required={true}
+                                            maxLength={30}
+                                            {...register('nombre', {
+                                                required: true,
+                                                maxLength: 30,
+                                            })}
+                                            className='w-full h-7 border-2 border-black rounded-lg pl-1'
+                                            placeholder='Nombre'
+                                        />
+                                        <input
+                                            type='text'
+                                            name='descripcion'
+                                            id='descripcion'
+                                            required={true}
+                                            maxLength={50}
+                                            {...register('descripcion', {
+                                                required: true,
+                                                maxLength: 50,
+                                            })}
+                                            className='w-full h-7 border-2 border-black rounded-lg pl-1'
+                                            placeholder='Descripción'
+                                        />
                                     <div className='w-full flex justify-end items-end'>
                                         <button
                                             type='submit'
-                                            className='bg-[#98E47D] w-48 h-10 text-2xl font-bold rounded-xl mr-3 mt-[58%]'
+                                            className='bg-[#98E47D] w-56 h-10 text-2xl font-bold rounded-xl mr-3 mt-[10%]'
                                         >Guardar cambios
                                         </button>
                                     </div>

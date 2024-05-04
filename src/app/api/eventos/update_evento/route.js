@@ -12,7 +12,9 @@ export async function POST(request){
             },
             data:{
                 fecha_fin: data.fecha_fin,
-                foto: data.foto
+                foto: data.foto,
+                nombre: data.nombre,
+                descripcion: data.descripcion
             }
         })
         return NextResponse.json("Registrada");
