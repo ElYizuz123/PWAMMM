@@ -4,27 +4,35 @@ import { NextResponse } from "next/server"
 
 const listProductosVentas = (productos, ventas) =>{
     
-    var listProductos = []
-    productos.forEach((element, index) => {
-        let productoVenta = {
-            id:element.id_producto,
-            nombre:element.nombre,
-            cantidad:0
+    var listProductos=[]
+    var cont = 0
+    productos.forEach((element) => {
+        if(element.botella[0]){
+            let productoVenta = {
+                id:element.id_producto,
+                nombre:element.nombre,
+                cantidad:0
+            }
+            listProductos[cont] = productoVenta
+            cont++
         }
-        listProductos[index] = productoVenta
-    });
+    })
     ventas.forEach(element => {
         const productoEncontrado = listProductos.find(producto => producto.id === element.producto_id_producto)
         if(productoEncontrado){
             productoEncontrado.cantidad+=element.cantidad_producto
         }
-    });
+    })
     listProductos.sort((a,b) => b.cantidad - a.cantidad)
     return listProductos
 }
 export async function GET(){
     try{
-        const productos = await db.producto.findMany()
+        const productos = await db.producto.findMany({
+            include:{
+                botella:true
+            }
+        })
         const ventas = await db.venta_individual.findMany()
         var productosVentas = null
         if(ventas){

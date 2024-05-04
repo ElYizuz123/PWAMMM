@@ -8,11 +8,11 @@ const masVentasCiudades = (ventas) =>{
     ventas.forEach((element, index) => {
         let data = {iv:element.iv_poblacion, data:element.poblacion}
         const poblacion = decrypt(data)
-        if (!ciudades.includes(poblacion)){ 
-            ciudades.push(poblacion)
+        if (!ciudades.includes(poblacion.toUpperCase())){ 
+            ciudades.push(poblacion.toUpperCase())
             let ciudadVenta = {
                 id:index,
-                ciudad: poblacion,
+                ciudad: poblacion.toUpperCase(),
                 cantidad:0
             }
             ventasPorCiudad[index] = ciudadVenta
@@ -24,7 +24,6 @@ const masVentasCiudades = (ventas) =>{
         const ciudadEncontrada = ventasPorCiudad.find(venta => venta.ciudad === poblacion.toUpperCase())
         if(ciudadEncontrada){
             ciudadEncontrada.cantidad+=1
-            console.log(ciudadEncontrada.cantidad)
         }
     });
     ventasPorCiudad.sort((a,b) => b.cantidad - a.cantidad)
