@@ -79,7 +79,7 @@ const Leer_ventas = ({ventas}) => {
                 style={customStyles}
                 ariaHideApp={false}
             >
-               <DetallesCliente onClose={onClienteClose} data={clientData}/>
+               <DetallesCliente onClose={onClienteClose} cliente={clientData}/>
             </Modal>
             <select id="orden" className='absolute right-32 top-14 border border-[#F70073]' onChange={handleChange}>
                 <option value="reciente">Mas reciente</option>

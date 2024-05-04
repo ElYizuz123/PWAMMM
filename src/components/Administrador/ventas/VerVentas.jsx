@@ -54,8 +54,8 @@ const VerVentas = ({ onClose, idVenta }) => {
                             detalles.map((detalle, index)=>(
                                 <tr key={detalle.id_venta_individual} className={`${back[index%2]}}`}>
                                     {console.log(index%2)}
-                                    <td className="border px-4 py-2">{detalle.producto ? detalle.producto.nombre: detalle.acompanamiento.nombre}</td>
-                                    <td className="border px-4 py-2">{detalle.producto ? detalle.producto.marca.nombre: detalle.acompanamiento.marca.nombre}</td>
+                                    <td className="border px-4 py-2">{detalle.producto.nombre}</td>
+                                    <td className="border px-4 py-2">{detalle.producto.marca.nombre}</td>
                                     <td className="border px-4 py-2">{detalle.cantidad_producto}</td>
                                     <td className="border px-4 py-2">{detalle.subtotal}</td>
                                 </tr>

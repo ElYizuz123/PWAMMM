@@ -11,17 +11,11 @@ export async function POST(request){
             include:{
                 producto:{
                     include:{
-                        marca:true
-                    }
-                },
-                acompanamiento:{
-                    include:{
-                        marca:true
+                        marca:true,
                     }
                 }
             }
         })
-        console.log(detalles)
         return NextResponse.json(detalles)
     }catch(error){
         console.log(error)

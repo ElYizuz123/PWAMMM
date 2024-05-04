@@ -1,7 +1,8 @@
+import { decrypt } from '@/libs/decrypt'
 import React from 'react'
 
 
-const DetallesCliente = ({ onClose, data }) => {
+const DetallesCliente = ({ onClose, cliente }) => {
     return (
         <div className='w-[80%] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[600px] overflow-x-hidden'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
@@ -28,7 +29,7 @@ const DetallesCliente = ({ onClose, data }) => {
                 <tbody>
                     <tr>
                         <td className="border py-2 text-center">Nombre y apellidos</td>
-                        <td colSpan="2" className="text-center border px-4 py-2">{data.nombre_cliente+" "+data.apellidos_cliente}</td>
+                        <td colSpan="2" className="text-center border px-4 py-2">{cliente.nombre_cliente +" "+cliente.apellidos_cliente}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -37,7 +38,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Envío</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.envio==0 ? "Domicilio":"Tienda"}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.envio==0 ? "Domicilio":"Tienda"}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -46,7 +47,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Empresa</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.empresa ? data.empresa:"No aplica"}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.empresa ? cliente.empresa:"No aplica"}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -55,7 +56,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Teléfono</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.telefono}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.telefono}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -64,7 +65,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Email</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.email}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.email}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -73,7 +74,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Código postal</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.cp}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.cp}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -82,7 +83,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Calle</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.calle}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.calle}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -91,7 +92,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Número exterior</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.num_ext}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.num_ext}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -100,7 +101,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Número interior</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.num_int? data.num_int:"No aplica"}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.num_int? cliente.num_int:"No aplica"}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -109,7 +110,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Colonia</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.colonia}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.colonia}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -118,7 +119,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Población</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.poblacion}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.poblacion}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
@@ -127,7 +128,7 @@ const DetallesCliente = ({ onClose, data }) => {
                     </tr>
                     <tr>
                         <td className="border py-2 text-center">Región</td>
-                        <td colSpan="2" className="border px-4 py-2 text-center">{data.region}</td>
+                        <td colSpan="2" className="border px-4 py-2 text-center">{cliente.region}</td>
                     </tr>
                     <tr>
                         <th colSpan="2">
