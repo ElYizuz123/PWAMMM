@@ -17,7 +17,6 @@ const Crear_foto = () => {
     const { update, setUpdate } = useContext(contexto)
     const [cFotoIsOpen, setCFotoIsOpen] = useState(false)
     const [eventoPhoto, setEventoPhoto] = useState(null)
-    const [categorias, setCategorias] = useState(null)
     const { register, handleSubmit, reset, setValue } = useForm()
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
@@ -53,16 +52,7 @@ const Crear_foto = () => {
         setCFotoIsOpen(true)
     }
 
-    useEffect(() => {
-        readData()
-    },[])
 
-
-    const readData = async () => {
-        const res = await fetch('/api/galeria/read_only_categorias')
-        const resJSON = await res.json()
-        setCategorias(JSON.parse(resJSON))
-    }
 
     const handleOnSubmit = async (data) => {
         if (eventoPhoto) {
