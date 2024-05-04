@@ -36,9 +36,7 @@ var options = {
 
 const otrosCantidad = (ventas) =>{
     var cantidad=0
-    console.log(ventas)
     if(ventas.length !=0 ){
-        console.log(ventas.length)
         ventas.forEach((element, index) => {
             if(index>6){
                 cantidad+=element.cantidad
