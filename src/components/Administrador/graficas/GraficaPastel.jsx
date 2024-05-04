@@ -3,15 +3,19 @@ import { ArcElement, Chart, Legend, Tooltip } from 'chart.js'
 import React from 'react'
 import { Pie } from 'react-chartjs-2';
 
+//Elemento necesario para librería de las gráficas
 Chart.register(
     ArcElement, Tooltip, Legend
 );
 
+
+//Configuración de las gráficas
 var options ={
     responsive: true,
     maintainAspectRatio: false,
 }
 
+//Función para sumar los productos sobrantes 
 const cantidadOtros = (productos) =>{
     var cantidad=0
     if(productos.length !=0){
@@ -26,6 +30,7 @@ const cantidadOtros = (productos) =>{
 
 
 const GraficaPastel = ({productos}) => {
+    //Inicialización vacía por si no hay productos
     var data = {
         labels:[
             
@@ -34,6 +39,7 @@ const GraficaPastel = ({productos}) => {
             
         ] 
     }
+    //Insertado de datos en la gráfica 
     if(productos){
         data = {
             labels: [

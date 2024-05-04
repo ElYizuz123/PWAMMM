@@ -4,8 +4,9 @@ import GraficaPastel from './GraficaPastel'
 import GraficaBarras from './GraficaBarras'
 import GraficaLineal from './GraficaLineal'
 import { DatePicker } from 'antd'
-import { UpdateProvider } from '../UpdateProvider'
 
+
+//Función para obtener los días entre las fechas seleccionadas
 const obtenerDiasEntreFechas = (fechaInicio, fechaFin) => {
     const dias = []
     const diaActual = new Date(fechaInicio)
@@ -20,6 +21,7 @@ const obtenerDiasEntreFechas = (fechaInicio, fechaFin) => {
     return dias;
 }
 
+//Función para obtener los meses entre las fechas seleccionadas
 const obtenerMesesEntreFechas = (fechaInicio, fechaFin) => {
     // Arreglo para almacenar los meses
     const meses = [];
@@ -37,6 +39,7 @@ const obtenerMesesEntreFechas = (fechaInicio, fechaFin) => {
     return meses;
 }
 
+//Función para obtener los años entre las fechas seleccionadas
 const obtenerYearEntreFechas = (fechaInicio, fechaFin) => {
     console.log("entre")
     const years = []
@@ -58,12 +61,15 @@ const LecturaDatos = () => {
     const [formatoVentasTotales, setFormatoVentasTotales] = useState(null)
     const [ventasTotales, setVentarTotales] = useState(null)
     const { RangePicker } = DatePicker
+
+    //Función para leer los productos mas vendidos
     const readProductos = async () => {
         const res = await fetch('/api/graficas/productos')
         const resJSON = await res.json()
         setVentasProductos(resJSON)
     }
 
+    //Función para leer los acompañamientos mas vendidos
 
     const readAcompanamientos = async () => {
         const res = await fetch('/api/graficas/acompanamientos')
@@ -71,11 +77,15 @@ const LecturaDatos = () => {
         setVentasAcompanamientos(resJSON)
     }
 
+    //Función para leer las ciudades con mas ventas
+
     const readCiudades = async () => {
         const res = await fetch('/api/graficas/ciudades')
         const resJSON = await res.json()
         setVentasCiudades(resJSON)
     }
+
+    //Función para leer las ventas en el periodo de tiempo seleccionado
 
     const readVentasTotales = async (fechas) => {
         let fechasJSON = null
@@ -97,12 +107,16 @@ const LecturaDatos = () => {
         setVentarTotales(resJSON)
     }
 
+    //Lectura de datos
+
     useEffect(() => {
         readProductos()
         readAcompanamientos()
         readCiudades()
         readVentasTotales()
     }, [])
+
+    //Manejo de los cambios de fecha
 
     const handleDateChange = (e) => {
         if (e) {
@@ -121,10 +135,12 @@ const LecturaDatos = () => {
             else {
                 fechas = obtenerYearEntreFechas(fechaIni, fechaFin)
             }
+            //Variable con el formato de fechas a mostrar
             setFormatoVentasTotales(fechas)
         } else {
             setFormatoVentasTotales(null)
         }
+        //Arreglo de ventas 
         readVentasTotales(e)
     }
 

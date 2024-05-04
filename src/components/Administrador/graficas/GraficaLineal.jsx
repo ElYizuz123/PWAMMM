@@ -3,6 +3,7 @@ import { CategoryScale, Chart, Filler, Legend, LineElement, LinearScale, PointEl
 import React from 'react'
 import { Line } from 'react-chartjs-2'
 
+//Elemento necesario para el funcionamiento de la librería
 Chart.register(
     CategoryScale,
     LinearScale,
@@ -14,12 +15,7 @@ Chart.register(
     Filler
 )
 
-var ventas = [0,56,34,45,23]
-
-var fechas= ["Enero", "Febrero", "Marzo", "Abril", "Mayo"]
-
-
-
+//Configuraciones de la gráfica
 var options = {
     responsive:true,
     maintainAspectRatio: false,
@@ -39,10 +35,14 @@ var options = {
 }
 
 const GraficaLineal = ({formato, ventas}) => {
+
+    //Inicialización vacía
     var data = {
         labels: [],
         datasets:[]
     }
+
+    //Inicialización sin fecha definida
     if(!formato){
         formato = []
         const fechaAcutal = new Date()
@@ -51,9 +51,12 @@ const GraficaLineal = ({formato, ventas}) => {
             formato.push(i+"/"+yearActual)
         }
     }
+
+    //Inicialización con datos 
     
     if(ventas){
         var cantVentas=[]
+        //Sumado de datos por rango de fecha
         formato.forEach((element, index) => {
             const findVenta = ventas.filter(venta => venta.fecha.includes(element))
             if(findVenta[0]){
