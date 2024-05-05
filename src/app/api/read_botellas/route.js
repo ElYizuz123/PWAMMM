@@ -3,10 +3,14 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const producto = await db.producto.findMany({
+    const producto = await db.botella.findMany({
       include: {
-        marca: true,
-      },
+        producto: {
+          include: {
+            marca: true
+          }
+        }
+      }
     });
 
     console.log(producto);

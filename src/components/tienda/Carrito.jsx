@@ -14,8 +14,8 @@ const Carrito = () => {
     useContext(ProductContext);
   const [isCartVisible, setIsCartVisible] = useState(false);
 
-  const handleDelete = (id_producto, nombre) => {
-    deleteProduct(id_producto, nombre);
+  const handleDelete = (id_producto) => {
+    deleteProduct(id_producto);
   };
 
   return (
@@ -96,7 +96,7 @@ const Carrito = () => {
                       </p>
                       <TrashIcon
                         className="h-5 w-5 text-red-500 cursor-pointer transition duration-300 ease-in-out hover:text-red-700 hover:scale-110"
-                        onClick={() => handleDelete(producto.nombre)}
+                        onClick={() => handleDelete(producto.id_producto)}
                       />
                     </div>
                   </div>

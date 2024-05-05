@@ -24,17 +24,6 @@ const Ficha = ({
   cantidad,
   alcohol,
 }) => {
-  const [productos, setProductos] = useState([]);
-
-  useEffect(() => {
-    const fetchProductos = async () => {
-      const response = await fetch("/api/read_producto");
-      const data = await response.json();
-      setProductos(data);
-    };
-
-    fetchProductos();
-  }, []);
 
   return (
     <div className={k2d.className}>

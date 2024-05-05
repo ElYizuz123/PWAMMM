@@ -3,27 +3,19 @@ import React, { useContext, useState } from "react";
 import { K2D } from "next/font/google";
 import Link from "next/link";
 import { ProductContext } from "@/context/ProductContext";
-import TarjetaPaypal from "./TarjetaPaypal";
 import { IoClose } from "react-icons/io5";
-
-const k2d = K2D({
-  weight: ["400"],
-  styles: ["normal"],
-  subsets: ["latin"],
-});
-
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 //en esta funcion recibo el trigger
-function FormaPago({ triggerSubmit }) {
+function FormaPago({ triggerSubmit, errors }) {
   const { envioVenta, pago } = useContext(ProductContext);
   const { productos } = useContext(ProductContext);
 
-  const [shippingMethod, setShippingMethod] = useState("recogerTienda");
+  const [shippingMethod, setShippingMethod] = useState("envio");
   const [paymentMethod, setPaymentMethod] = useState("transferencia");
   const [confirmMethod, setConfirmMethod] = useState([]);
   const [payPal, setPaypal] = useState(false);
-  const [transferencia,setTransferencia] = useState(false);
-
+  const [transferencia, setTransferencia] = useState(false);
 
   const envio = 199;
   const totalVenta = productos.reduce(
@@ -31,23 +23,24 @@ function FormaPago({ triggerSubmit }) {
     0
   );
 
-  const handleOpenPopup = async (data) => {
-    //aqui hace sus cosas
-     try {
-    if (paymentMethod == "payPal") {
-      setPaypal(true);
-    }else
- {
-      setTransferencia(true);
-    }
-    {triggerSubmit}
+  const pagoTotal =
+    shippingMethod === "recogerTienda" ? totalVenta : totalVenta + envio;
 
-    
-      
+  const handleOpenPopup = async () => {
+    //aqui hace sus cosas
+    console.log(errors)
+    try {
+      if (Object.keys(errors).length === 0) {
+        if (paymentMethod == "payPal") {
+          setPaypal(true);
+        } else {
+          setTransferencia(true);
+        }
+      }
+      {triggerSubmit}
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
-    
   };
   // const handleCondicion = () => {
   //   if (confirmMethod === "pickup3" || confirmMethod === "delivery3") {
@@ -119,7 +112,7 @@ function FormaPago({ triggerSubmit }) {
         <div className="grid grid-cols-2 items-center">
           <h3 className="text-black font-semibold text-2xl">ORDEN-TOTAL:</h3>
           <p className="text-green-700 font-bold text-2xl justify-self-end">
-            ${shippingMethod === "recogerTienda" ? totalVenta : totalVenta + envio}
+            $ {pagoTotal}
           </p>
         </div>
 
@@ -134,7 +127,6 @@ function FormaPago({ triggerSubmit }) {
                 checked={paymentMethod === "transferencia"}
                 onChange={handlePaymentChange}
                 className="form-radio text-[#F70073]"
-                
               />
               <span className="ml-2">
                 Transferencia bancaria directa BANAMEX/OXXO
@@ -221,7 +213,7 @@ function FormaPago({ triggerSubmit }) {
                 )
               }
               onClick={handleOpenPopup}
-              //entonces cuando le pica al boton de pagar activa el openPopUp
+            
             >
               <p>Pagar</p>
 
@@ -243,7 +235,7 @@ function FormaPago({ triggerSubmit }) {
           </div>
           {/* </button> */}
         </div>
-        {payPal &&(
+        {payPal && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
             <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white mt-40">
               <button
@@ -272,44 +264,59 @@ function FormaPago({ triggerSubmit }) {
                   </div>
 
                   <div className="flex justify-between">
-                    <span>Envío</span>${shippingMethod === "pickup" ? 0 : envio}
+                    <span>Envío</span>$
+                    {shippingMethod === "recogerTienda" ? 0 : envio}
                   </div>
 
                   <div className="flex justify-between font-bold ">
-                    <span>Total</span>$
-                    {shippingMethod === "pickup"
-                      ? totalVenta
-                      : totalVenta + envio}
+                    <span>Total</span>${pagoTotal}
                   </div>
                 </div>
-
-                <button
-                  type="button"
-                  class="text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
+                {/*PAYPAL  CUENTA*/}
+                <PayPalScriptProvider
+                  options={{
+                    clientId:
+                      "AWIpFlQyOiGrgDk6kZbFbU2GNEBStOsMAJsnS6IrgeeoRlLSZtpFDP54h9II6vB0StAcv_7H9KFyvSH8",
+                  }}
                 >
-                  <svg
-                    class="w-4 h-4 me-2 -ms-1"
-                    aria-hidden="true"
-                    focusable="false"
-                    data-prefix="fab"
-                    data-icon="paypal"
-                    role="img"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 384 512"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M111.4 295.9c-3.5 19.2-17.4 108.7-21.5 134-.3 1.8-1 2.5-3 2.5H12.3c-7.6 0-13.1-6.6-12.1-13.9L58.8 46.6c1.5-9.6 10.1-16.9 20-16.9 152.3 0 165.1-3.7 204 11.4 60.1 23.3 65.6 79.5 44 140.3-21.5 62.6-72.5 89.5-140.1 90.3-43.4 .7-69.5-7-75.3 24.2zM357.1 152c-1.8-1.3-2.5-1.8-3 1.3-2 11.4-5.1 22.5-8.8 33.6-39.9 113.8-150.5 103.9-204.5 103.9-6.1 0-10.1 3.3-10.9 9.4-22.6 140.4-27.1 169.7-27.1 169.7-1 7.1 3.5 12.9 10.6 12.9h63.5c8.6 0 15.7-6.3 17.4-14.9 .7-5.4-1.1 6.1 14.4-91.3 4.6-22 14.3-19.7 29.3-19.7 71 0 126.4-28.8 142.9-112.3 6.5-34.8 4.6-71.4-23.8-92.6z"
-                    ></path>
-                  </svg>
-                  Pagar con PayPal
-                </button>
+                  {/* BOTÓN PAYPAL */}
+                  <PayPalButtons
+                    style={{ layout: "horizontal" }}
+                    //PAGO (TOTAL)
+                    createOrder={async (data, actions) => {
+                      const res = await fetch("/api/payPal", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ pagoTotal }),
+                      });
+                      const order = await res.json();
+                      return order.id;
+                    }}
+
+                    //El SDK de PayPal proporciona automáticamente los parámetros data y actions
+                    //data:  monto a pagar, la moneda utilizada 
+                    //actions:métodos para capturar el pago, actualizar la orden, mostrar mensajes al usuario
+
+                    // CANCELAR PAGO/COMPRA
+                    onCancel={(data) => {
+                      //AQUI DEBE DE MANDAR ALGO PARA NO ACEPTAR COMPRA
+                    }}
+                    //APROBAR COMPRA
+                    onApprove={(data, actions) => {
+                      actions.order.capture();
+                      //AQUI DEBE DE MANDAR ALGO PARA ACEPTAR COMPRAR Y SUBIR A BD -- DESCONTAR STOCK
+                    }}
+                
+                  />
+                </PayPalScriptProvider>
               </div>
             </div>
           </div>
         )}
-        {transferencia &&(
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        {transferencia && (
+          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
             <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white mt-40">
               <button
                 className="absolute top-0 right-0 m-3"
@@ -322,16 +329,14 @@ function FormaPago({ triggerSubmit }) {
                   <img src="/emoticons/comprobado.png" alt="PayPal Logo" />
                 </div>
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
-                   Transferencia bancaria 
+                  Transferencia bancaria
                 </h3>
                 <div className="mt-2 px-7 py-3">
                   <p className="text-sm text-gray-600">
                     En breve un asesor se comunicará contigo
-                  
                   </p>
-                  <p className= "text-sm text-[#F70073]"  >
-                   GRACIAS POR TU COMPRA 
-
+                  <p className="text-sm text-[#F70073]">
+                    GRACIAS POR TU COMPRA
                   </p>
                 </div>
                 <div className="flex flex-col px-7 py-3 space-y-3">
@@ -341,22 +346,20 @@ function FormaPago({ triggerSubmit }) {
                   </div>
 
                   <div className="flex justify-between">
-                    <span>Envío</span>${shippingMethod === "pickup" ? 0 : envio}
+                    <span>Envío</span>$
+                    {shippingMethod === "recogerTienda" ? 0 : envio}
                   </div>
 
                   <div className="flex justify-between font-bold ">
                     <span>Total</span>$
-                    {shippingMethod === "pickup"
+                    {shippingMethod === "recogerTienda"
                       ? totalVenta
                       : totalVenta + envio}
                   </div>
                 </div>
-
-                
               </div>
             </div>
           </div>
-
         )}
       </div>
     </div>

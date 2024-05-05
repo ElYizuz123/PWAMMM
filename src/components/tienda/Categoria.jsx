@@ -29,7 +29,7 @@ const Categoria = () => {
             <span className="text-lg font-bold border-b-2 border-[#F70073] mb-2">
               Categorias
             </span>
-
+            
             <div>
               <div
                 className={`cursor-pointer mb-2 p-2 px-4 hover:underline  ${

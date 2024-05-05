@@ -77,22 +77,19 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
           </div>
         )}
       </div>
- {productos
-  .filter(
-    (item) =>
-      item.marca_id_marca === idMarca.marca_id_marca &&
-      item.id_producto !== Number(idProducto)
-  )
-  .length > 0 && (
-  <div className="relative w-full flex justify-center items-center mt-40">
-    <p className="text-[#dd6c5a] text-3xl font-bold bg-white px-9 rounded-lg">
-      PRODUCTOS RELACIONADOS
-    </p>
-  </div>
-)}
+      {productos.filter(
+        (item) =>
+          item.marca_id_marca === idMarca.marca_id_marca &&
+          item.id_producto !== Number(idProducto)
+      ).length > 0 && (
+        <div className="relative w-full flex justify-center items-center mt-40">
+          <p className="text-[#dd6c5a] text-3xl font-bold bg-white px-9 rounded-lg">
+            PRODUCTOS RELACIONADOS
+          </p>
+        </div>
+      )}
       {tipo == 1 ? (
         <div className="z-0  w-full flex flex-wrap gap-10 justify-center items-center top-11 pt-11">
-         
           {productos
             .filter(
               (item) =>
@@ -100,9 +97,8 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
                 item.id_producto !== Number(idProducto)
             )
             .slice(0, 3)
-            
+
             .map((producto) => (
-         
               <Tarjeta
                 id_producto={producto.id_producto}
                 nombre={producto.nombre}
@@ -118,10 +114,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             ))}
         </div>
       ) : (
-        
         <div className="z-0  w-full flex flex-wrap gap-10 justify-center items-center top-11 pt-11">
-          
-           
           {acompanamientos
             .filter((item) => item.id_acompanamiento !== Number(idProducto))
             .slice(0, 3)
@@ -137,15 +130,9 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
                 cantidad={acompanamiento.cantidad}
                 tipo={2}
               ></Tarjeta>
-            )
-          
-          )
-            
-            }
+            ))}
         </div>
       )}
-     
-     
     </div>
   );
 };

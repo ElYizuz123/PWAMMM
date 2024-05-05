@@ -17,29 +17,38 @@ model asociada {
 }
 
 model evento {
-  id_evento Int      @id @default(autoincrement())
-  foto      String   @db.VarChar(45)
-  fecha_fin DateTime @db.Timestamp(6)
+  id_evento   Int      @id @default(autoincrement())
+  foto        String   @db.VarChar(45)
+  nombre      String   @db.VarChar(45)
+  descripcion String   @db.VarChar(45)
+  fecha_fin   DateTime @db.Timestamp(6)
 }
 
 model marca {
-  id_marca             Int              @id @default(autoincrement())
-  nombre               String           @unique(map: "nombre_UNIQUE") @db.VarChar(45)
+  id_marca             Int        @id @default(autoincrement())
+  nombre               String     @unique(map: "nombre_UNIQUE") @db.VarChar(45)
   Asociada_id_asociada Int
   tipo                 Int
-  acompanamiento       acompanamiento[]
-  asociada             asociada         @relation(fields: [Asociada_id_asociada], references: [id_asociada], onDelete: Cascade, onUpdate: NoAction, map: "fk_marca_Asociada1")
+  asociada             asociada   @relation(fields: [Asociada_id_asociada], references: [id_asociada], onDelete: Cascade, onUpdate: NoAction, map: "fk_marca_Asociada1")
   producto             producto[]
 
   @@index([Asociada_id_asociada], map: "fk_marca_Asociada1_idx")
 }
 
-model producto {
-  id_producto      Int                @id @default(autoincrement())
-  nombre           String             @db.VarChar(45)
+model botella {
+  id_botella       Int      @id @default(autoincrement())
   tipo_agave       String
   cantidad_alcohol Int
   ml               Int
+  id_producto      Int
+  producto         producto @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade, onUpdate: NoAction, map: "fk_botella_producto1")
+
+  @@index([id_producto], map: "fk_botella_producto_idx")
+}
+
+model producto {
+  id_producto      Int                @id @default(autoincrement())   
+  nombre           String             @db.VarChar(45)
   precio           Decimal            @db.Decimal(10, 2)
   descripcion      String
   foto             String             @db.VarChar(45)
@@ -48,22 +57,19 @@ model producto {
   cantidad         Int?
   marca            marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: Cascade, onUpdate: NoAction, map: "fk_producto_marca1")
   venta_individual venta_individual[]
+  botella          botella[]
+  acompanamiento   acompanamiento[]
 
   @@index([marca_id_marca], map: "fk_producto_marca1_idx")
 }
 
 model acompanamiento {
-  id_acompanamiento Int                @id @default(autoincrement())
-  nombre            String             @db.VarChar(45)
+  id_acompanamiento Int      @id @default(autoincrement())
   gr                String
-  descripcion       String
-  foto              String             @db.VarChar(45)
-  marca_id_marca    Int
-  cantidad          Int?
-  marca             marca              @relation(fields: [marca_id_marca], references: [id_marca], onDelete: Cascade, onUpdate: NoAction, map: "fk_acompanamiento_marca1")
-  venta_individual  venta_individual[]
+  id_producto       Int
+  producto          producto @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade, onUpdate: NoAction, map: "fk_acompanamiento_producto1")
 
-  @@index([marca_id_marca], map: "fk_acompanamiento_marca1_idx")
+  @@index([id_producto], map: "fk_acompanamiento_producto1_idx")
 }
 
 model user {
@@ -72,72 +78,57 @@ model user {
 }
 
 model venta_individual {
-  id_venta_individual              Int             @id @default(autoincrement())
-  cantidad_producto                Int
-  subtotal                         Decimal         @db.Decimal(10, 2)
-  venta_total_id_venta             Int
-  producto_id_producto             Int?
-  acompanamiento_id_acompanamiento Int?
-  producto                         producto?       @relation(fields: [producto_id_producto], references: [id_producto], onUpdate: NoAction, map: "fk_venta_individual_producto1")
-  venta_total                      venta_total     @relation(fields: [venta_total_id_venta], references: [id_venta], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_venta_total")
-  acompanamiento                   acompanamiento? @relation(fields: [acompanamiento_id_acompanamiento], references: [id_acompanamiento], onUpdate: NoAction)
-
+  id_venta_individual  Int         @id @default(autoincrement())
+  cantidad_producto    Int
+  subtotal             Decimal     @db.Decimal(10, 2)
+  venta_total_id_venta Int
+  producto_id_producto Int?
+  producto             producto?   @relation(fields: [producto_id_producto], references: [id_producto], onUpdate: NoAction, map: "fk_venta_individual_producto1")
+  venta_total          venta_total @relation(fields: [venta_total_id_venta], references: [id_venta], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_venta_total")
+  
   @@index([producto_id_producto], map: "fk_venta_individual_producto1_idx")
   @@index([venta_total_id_venta], map: "fk_venta_individual_venta_total_idx")
-  @@index([acompanamiento_id_acompanamiento], map: "fk_venta_individual_acompanamiento_idx")
 }
 
 model venta_total {
-  id_venta          Int                @id
-  fecha_venta       DateTime           @default(now())
-  total             Decimal            @db.Decimal(10, 2)
-  status            String             @default("Pendiente") @db.VarChar(45)
-  envio             Int
-  nombre_cliente    String             @db.VarChar(45)
-  apellidos_cliente String             @db.VarChar(45)
-  empresa           String?            @db.VarChar(45)
-  telefono          String             @db.VarChar(10)
-  email             String             @db.VarChar(45)
-  cp                String             @db.VarChar(5)
-  calle             String             @db.VarChar(45)
-  num_ext           String             @db.VarChar(10)
-  num_int           String?            @db.VarChar(10)
-  colonia           String             @db.VarChar(45)
-  poblacion         String             @db.VarChar(45)
-  region            String             @db.VarChar(45)
-  venta_individual  venta_individual[]
-}
-
-model galeria_categoria {
-  id_categoria Int            @id @default(autoincrement())
-  categoria    String         @db.VarChar(30)
-  galeria_foto galeria_foto[]
+  id_venta             Int                @id @default(autoincrement())
+  fecha_venta          DateTime           @default(now())
+  total                Decimal            @db.Decimal(10, 2)
+  status               String             @default("Pendiente") @db.VarChar(45)
+  envio                Int
+  nombre_cliente       String
+  apellidos_cliente    String
+  empresa              String?
+  telefono             String
+  email                String
+  cp                   String
+  calle                String
+  num_ext              String
+  num_int              String?
+  colonia              String
+  poblacion            String
+  region               String
+  iv_nombre_cliente    String
+  iv_apellidos_cliente String
+  iv_telefono          String
+  iv_email             String
+  iv_cp                String
+  iv_calle             String
+  iv_num_ext           String
+  iv_num_int           String?
+  iv_colonia           String
+  iv_poblacion         String
+  iv_region            String
+  venta_individual     venta_individual[]
 }
 
 model galeria_foto {
-  id_foto           Int               @id(map: "galeria_foto_pk") @default(autoincrement())
-  foto              String            @db.VarChar(45)
-  descripcion       String            @db.VarChar(45)
-  fk_id_categoria   Int
-  galeria_categoria galeria_categoria @relation(fields: [fk_id_categoria], references: [id_categoria], onDelete: Cascade, onUpdate: NoAction, map: "fk_foto_categoria1")
-
-  @@index([fk_id_categoria], map: "fk_foto_categoria1_idx")
+  id_foto Int    @id(map: "galeria_foto_pk") @default(autoincrement())
+  foto    String @db.VarChar(45)
 }
 
 model pregunta_frecuente {
   id_pregunta_frencuente Int    @id @default(autoincrement())
   pregunta               String
   respuesta              String
-}
-
-model producto_informacion {
-  id_producto_informacion Int     @id @default(autoincrement())
-  tipo_agave              String? @db.VarChar(45)
-  tipo_cosecha            String? @db.VarChar(45)
-  tipo_elaboracion        String? @db.VarChar(45)
-  tipo_horno              String? @db.VarChar(45)
-  tipo_molienda           String? @db.VarChar(45)
-  tipo_fermentacion       String? @db.VarChar(45)
-  tipo_destilador         String? @db.VarChar(45)
-  riquezaAlcoholica       String? @db.VarChar(45)
 }
