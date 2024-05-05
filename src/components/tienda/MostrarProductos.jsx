@@ -66,13 +66,13 @@ function MostrarProductos({ idMarca }) {
     const lastPageIndex = firstPageIndex + productsPerPage;
     return filteredBotellas.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, productsPerPage, filteredBotellas]);
-
+  
   const currentAcompanamientos = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * productsPerPage;
     const lastPageIndex = firstPageIndex + productsPerPage;
     return filteredAcompanamientos.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, productsPerPage, filteredAcompanamientos]);
-
+  
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
   };
@@ -187,7 +187,7 @@ function MostrarProductos({ idMarca }) {
                 (filteredBotellas.length + filteredAcompanamientos.length) /
                   productsPerPage
               )
-            }
+            }   
             className={`px-3 py-1 rounded-md ${
               currentPage ===
               Math.ceil(

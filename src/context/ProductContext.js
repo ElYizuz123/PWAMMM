@@ -31,8 +31,7 @@ export const ProductProvider = ({ children }) => {
     // Encuentra el índice del producto existente
     const index = productos.findIndex(
       (producto) =>
-        producto.id_producto === newProduct.id_producto &&
-        producto.nombre === newProduct.nombre
+        producto.id_producto === newProduct.id_producto
     );
 
     let newProducts = [...productos]; // Hace una copia del estado actual de los productos
@@ -80,7 +79,7 @@ export const ProductProvider = ({ children }) => {
     if (index !== -1) {
       let cantidadActual = productos[index].cantidad || 1; // Aseguramos un mínimo de 1
       // Incrementa o decrementa según el tipo
-      cantidadActual = operacion === "SUMA" ? cantidadActual + "RESTA" : Math.max(cantidadActual - 1, 1);
+      cantidadActual = operacion === "SUMA" ? cantidadActual + 1 : Math.max(cantidadActual - 1, 1);
 
       const newProducts = [...productos];
       newProducts[index] = {

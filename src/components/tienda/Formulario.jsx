@@ -56,9 +56,11 @@ const estados = [
 ];
 
 function Formulario() {
-  const { productos, total, isEnvio, pago, limpiarProductos } = useContext(ProductContext);
+  const { productos, total, isEnvio, pago, limpiarProductos } =
+    useContext(ProductContext);
   const [isFormVisiblePersonales, setIsFormVisiblePersonales] = useState(false);
   const [isFormVisibleDireccion, setIsFormVisibleDireccion] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const {
     register,
@@ -68,6 +70,11 @@ function Formulario() {
     watch,
     formState: { errors },
   } = useForm({ mode: "onChange" });
+
+  useEffect(() => {
+    const formErrors = Object.keys(errors).length === 0;
+    setIsFormValid(formErrors);
+  }, [errors]);
 
   const toggleFormPersonales = () => {
     setIsFormVisiblePersonales(!isFormVisiblePersonales);
@@ -150,7 +157,7 @@ function Formulario() {
       }, 300); // Tiempo para comenzar el desplazamiento
     }
 
-    if(!validatePersonales() && !validateDireccion()) {
+    if (!validatePersonales() && !validateDireccion()) {
       data.envio = isEnvio;
       data.total = isEnvio === 1 ? total + 199 : total;
       console.log(data);
@@ -158,7 +165,7 @@ function Formulario() {
       try {
         const response = await fetch("/api/ventas/create_venta", {
           method: "POST",
-          body: JSON.stringify({ data: data, productos: productos}),
+          body: JSON.stringify({ data: data, productos: productos }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -198,7 +205,6 @@ function Formulario() {
         const responseEmail = await responseData.json();
         console.log(result, responseEmail);
         limpiarProductos();
-
       } catch (error) {
         console.error("Error en el proceso:", error); // Maneja cualquier error que ocurra durante el fetch
       }
@@ -400,7 +406,7 @@ function Formulario() {
                           ? "border-[#F70073]"
                           : "border-[#C1D128]"
                       }`}
-                        placeholder=" "
+                        placeholder=""
                       />
                       <label
                         htmlFor="telefono"
@@ -815,7 +821,10 @@ function Formulario() {
                   {/* Columna de forma de pago */}
                   <div className="px-[17px]">
                     {/* Se llama a forma pago. Mandando el triggerSubmit y le digo que va activar */}
-                    <FormaPago triggerSubmit={handleSubmit(onSubmit)} errors={errors} />
+                    <FormaPago
+                      triggerSubmit={handleSubmit(onSubmit)}
+                      isFormValid={isFormValid} 
+                    />
                   </div>
                 </div>
                 <div>

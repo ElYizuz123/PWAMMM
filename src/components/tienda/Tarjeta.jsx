@@ -47,7 +47,7 @@ const Tarjeta = ({
       };
 
       addProductos(newProduct);
-
+      
       setTimeout(() => {
         setButtonState("idle");
       }, 3000);
@@ -65,7 +65,7 @@ const Tarjeta = ({
             </p>
           </div>
         )}
-          {/* DISEÑO VER MÁS DETALLES */}
+        {/* DISEÑO VER MÁS DETALLES */}
         <Link
           href={`/tienda/abrir_producto/${tipo}/${id_producto}`}
           className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded"
@@ -85,7 +85,7 @@ const Tarjeta = ({
             </div>
           </div>
         </Link>
-        
+
         <div className="flex justify-center items-center p-4 object-cover">
           <Image
             src={`/productos/${imagen}`}
@@ -160,7 +160,7 @@ const Tarjeta = ({
               SIN EXISTENCIA
             </div>
           )}
-            {/* DISEÑO BOTÓN MERCADO LIBRE (SOLO SI HAY EN PAGINA) */}
+          {/* DISEÑO BOTÓN MERCADO LIBRE (SOLO SI HAY EN PAGINA) */}
           {mercadoLibre !== "NULL" && (
             <button className="btn2 mt-1 flex items-center justify-center">
               <a href={mercadoLibre} target="_blank" className="font-semibold">

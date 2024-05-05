@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 //en esta funcion recibo el trigger
-function FormaPago({ triggerSubmit, errors }) {
+function FormaPago({ triggerSubmit, isFormValid }) {
   const { envioVenta, pago } = useContext(ProductContext);
   const { productos } = useContext(ProductContext);
 
@@ -28,9 +28,8 @@ function FormaPago({ triggerSubmit, errors }) {
 
   const handleOpenPopup = async () => {
     //aqui hace sus cosas
-    console.log(errors)
     try {
-      if (Object.keys(errors).length === 0) {
+      if (!isFormValid) {
         if (paymentMethod == "payPal") {
           setPaypal(true);
         } else {

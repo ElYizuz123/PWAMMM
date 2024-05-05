@@ -15,7 +15,7 @@ const Categoria = () => {
       const response = await fetch("/api/read_marcas");
       const data = await response.json();
 
-      setItems(data); // Suponiendo que 'data' es un array de items.
+      setItems(data); 
     };
     fetchData();
     idMarcaAsociada(0);
@@ -48,7 +48,7 @@ const Categoria = () => {
             </span>
 
             {items
-              .filter((item) => item.tipo === 1) // Asegúrate de que la comparación sea con el tipo correcto
+              .filter((item) => item.tipo === 1) 
               .map((marca) => (
                 <div key={marca.id_marca}>
                   <div
@@ -72,7 +72,7 @@ const Categoria = () => {
               Acompañamientos
             </span>
             {items
-              .filter((item) => item.tipo === 2) // Asegúrate de que la comparación sea con el tipo correcto
+              .filter((item) => item.tipo === 2) 
               .map((marca) => (
                 <div key={marca.id_marca}>
                   <div
@@ -85,7 +85,7 @@ const Categoria = () => {
                       setSelectedMarca(
                         selectedMarca === marca.id_marca ? null : marca.id_marca
                       )
-                    } // Toggle la selección al hacer clic
+                    } 
                   >
                     {marca.nombre}
                   </div>
