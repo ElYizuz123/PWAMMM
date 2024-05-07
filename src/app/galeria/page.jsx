@@ -10,15 +10,6 @@ function page() {
         <LayoutPrincipal>
             <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
             <div className="mt-40 h-max relative w-full overflow-x-hidden">
-            
-
-                {/* <div className="absolute inset-0 ">
-                    <img
-                        className="w-full h-full object-cover opacity-60"
-                        src="\multimedia\agave 2.jpeg"
-                        alt="Background"
-                    />
-                </div> */}
 
                 <p className="text-5xl font-medium pb-6" style={{textAlign: 'center'}}>Galería</p>
 

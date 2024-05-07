@@ -15,7 +15,7 @@ function page() {
           {/* responsive hecho, a mejorar */}
           {/* REDUCIR CÓDIGO JS AL HOOK FORM */}
           <div className="w-full mb-16">
-            <ContactoForm></ContactoForm>
+            <ContactoForm/>
           </div>
 
           {/* PREGUNTAS FRECUENTES ESTAS YA JALA BONITO LO RESPONSIVE CREO */}
@@ -25,16 +25,16 @@ function page() {
               Preguntas Frecuentes</p>
             <br />
             <div className="flex items-center align-middle object-center">
-              <PreguntasFrecuentes></PreguntasFrecuentes>
+              <PreguntasFrecuentes/>
             </div>
           </div>
 
 
           {/* FALTA TODA RESPONSIVIDAD */}
-          {/* <div>
+          <div>
           <p className="text-6xl mb-8 ml-20">Tiendas Físicas</p>
           <ListaUbicaciones />
-        </div> */}
+          </div>
 
           <br />
 
