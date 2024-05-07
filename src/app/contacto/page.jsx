@@ -8,7 +8,7 @@ import React from 'react';
 function page() {
   return (
     <LayoutPrincipal>
-      <div className="animate-fade-in bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+      <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
         <div className="mt-40 h-max relative w-full overflow-x-hidden">
 
 

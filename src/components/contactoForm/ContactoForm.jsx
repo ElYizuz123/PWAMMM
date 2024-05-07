@@ -6,6 +6,7 @@ const ContactoForm = () => {
 
   const { register, handleSubmit } = useForm();
 
+  //cambiar por resend
   const sendEmail = async (data) => {
     try {
       const response = await fetch('/api/sendEmail', {
@@ -21,52 +22,15 @@ const ContactoForm = () => {
 
       const responseData = await response.json();
       console.log(responseData);
+      setIsOpen(true) ////AGREGAR A LA FUNCIÓN DE MANDAR EL CORREO
     } catch (error) {
       console.error('Error:', error);
+      setIsError(true) ////AGREGAR A LA FUNCIÓN DE MANDAR EL CORREO
     }
   };
 
-  useEffect(() => {
-    //cerrar ventana modal
-    const btnCerrarModal = document.getElementById('btn-cerrar-modal');
-    function cerrarModal() {
-      const modal = document.querySelector('.container-modal');
-      modal.style.display = 'none';
-    }
-    if (btnCerrarModal) {
-      btnCerrarModal.addEventListener('click', cerrarModal);
-    }
-
-    //abrir ventana modal
-    const btnAbrirModal = document.getElementById('btn-abrir-modal');
-    function abrirModal() {
-      // Verifica si el formulario está lleno y si el correo tiene un formato válido
-      const inputs = document.querySelectorAll('input[required]');
-      const emailInput = document.querySelector('input[type="email"]');
-      const emailValue = emailInput.value.trim();
-      const formIsFilled = Array.from(inputs).every(input => input.value.trim() !== '');
-      const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
-
-      // Muestra el modal si todo está correcto y validado
-      if (formIsFilled && isEmailValid) {
-        const modal = document.querySelector('.container-modal');
-        modal.style.display = 'flex';
-      }
-    }
-    if (btnAbrirModal) {
-      btnAbrirModal.addEventListener('click', abrirModal);
-    }
-
-    // Limpia los event listeners cuando el componente se desmonta
-    return () => {
-      if (btnCerrarModal) {
-        btnCerrarModal.removeEventListener('click', cerrarModal);
-      }
-      if (btnAbrirModal) {
-        btnAbrirModal.removeEventListener('click', abrirModal);
-      }
-    };
-  }, []);
+  const [isOpen, setIsOpen] = useState(false)
+  const [isError, setIsError] = useState(false)
 
   return (
     <div className="flex justify-center items-start w-full">
@@ -119,8 +83,7 @@ const ContactoForm = () => {
           </div>
 
           <div className="flex justify-center items-center">
-            <button id="btn-abrir-modal" type='submit'
-              className="bg-[#D60064] border-2 border-black hover:bg-[#d60064c9] lg:w-1/4 md:w-1/4 w-2/4 lg:h-16 md:h-14 sm:h-12 lg:rounded-3xl sm:rounded-2xl rounded-md">
+            <button type='submit' className="bg-[#D60064] border-2 border-black hover:bg-[#d60064c9] lg:w-1/4 md:w-1/4 w-2/4 lg:h-16 md:h-14 sm:h-12 lg:rounded-3xl sm:rounded-2xl rounded-md">
               <p className="font-semibold text-white text-center lg:text-4xl md:text-3xl sm:text-2xl text-lg">
                 Enviar
               </p>
@@ -130,17 +93,41 @@ const ContactoForm = () => {
       </div>
 
       {/* cuadro de confirmación */}
-      <div className="container-modal rounded-lg border-2 border-[#D60064] shadow-lg w-full">
-        <div className="content-modal lg:ml-5 lg:mr-5 lg:mt-2 lg:mb-2 md:ml-5 md:mr-5 md:mt-2 md:mb-2 ml-1 mr-1 mt-2 mb-2">
-          <p className="lg:text-3xl md:lg:text-3xl text-lg font-bold">Se ha enviado un correo con tus datos a la asociación</p>
-          <p>*Nos comprometemos a mantener privada la información proporcionada y utilizarla únicamente de manera profesional*</p>
-          <div className='flex justify-center items-center'>
-            <button id="btn-cerrar-modal" className='w-auto bg-[#D60064] border-2 border-black hover:bg-[#d60064c9] h-auto rounded-lg p-2 shadow-md'>
-              <p className="text-white">Cerrar</p>
-            </button>
+      {
+        isOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center p-2 animate-fade-in">
+            <div className="bg-[#F3E8E8] sm:w-11/12 md:w-11/12 lg:w-auto w-auto border-2 border-[#D60064] p-5 rounded-lg flex flex-col justify-center items-center gap-5">
+              <div className="content-modal lg:ml-5 lg:mr-5 lg:mt-2 lg:mb-2 md:ml-5 md:mr-5 md:mt-2 md:mb-2 ml-1 mr-1 mt-2 mb-2">
+                <p className="lg:text-3xl md:lg:text-3xl text-xl font-bold">Se ha enviado un correo con tus datos a la asociación</p>
+                <p>*Nos comprometemos a mantener privada la información proporcionada y utilizarla únicamente de manera profesional*</p>
+                <div className='flex justify-center items-center mt-2'>
+                  <button onClick={() => setIsOpen(false)}
+                    className='w-1/4 bg-[#D60064] border-2 border-black hover:bg-[#d60064c9] h-auto rounded-lg p-2 shadow-md'>
+                    <p className="text-white">Cerrar</p>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+
+      {
+        isError && (
+          <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center p-2 animate-fade-in">
+            <div className="bg-[#F3E8E8] sm:w-11/12 md:w-11/12 lg:w-auto w-auto border-2 border-[#D60064] p-5 rounded-lg flex flex-col justify-center items-center gap-5">
+              <div className="content-modal lg:ml-5 lg:mr-5 lg:mt-2 lg:mb-2 md:ml-5 md:mr-5 md:mt-2 md:mb-2 ml-1 mr-1 mt-2 mb-2">
+                <p className="lg:text-3xl md:lg:text-3xl text-xl font-bold">Ha ocurrido un error</p>
+                <p>*Ha ocurrido un error en el envío, inténtelo de nuevo*</p>
+                <div className='flex justify-center items-center mt-2'>
+                  <button onClick={() => setIsError(false)}
+                    className='w-1/4 bg-[#D60064] border-2 border-black hover:bg-[#d60064c9] h-auto rounded-lg p-2 shadow-md'>
+                    <p className="text-white">Cerrar</p>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
     </div>
 
