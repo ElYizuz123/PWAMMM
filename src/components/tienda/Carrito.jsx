@@ -49,18 +49,21 @@ const Carrito = () => {
 
           {/* Contenido del carrito */}
           <div className="flex flex-col h-full">
-            {productos.length === 0 ? (
-              <div
+             <div
                 className="overflow-y-auto p-4 custom-scrollbar "
                 style={{ height: "calc(100% - 160px)" }}
               >
+            {productos.length === 0 ? (
+              
                 <div className="flex justify-center mt-48">
                   <MdRemoveShoppingCart className="w-20 h-20 text-gray-500" />
                   <EmojiSadIcon className="w-6 h-6 text-gray-500" />
                 </div>
-              </div>
-            ) : (
+             
+             ) : ( 
               <div>
+
+               
                 {productos.map((producto) => (
                   <div
                     key={producto.id}
@@ -102,7 +105,8 @@ const Carrito = () => {
                   </div>
                 ))}
               </div>
-            )}
+              
+             )} 
             {/* Total */}
             <div className="flex justify-between items-center font-bold border-t  pt-2">
               <p>Total:</p>
@@ -128,6 +132,7 @@ const Carrito = () => {
               </Link>
             )}
           </div>
+        </div>
         </div>
       )}
     </div>

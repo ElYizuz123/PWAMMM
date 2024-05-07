@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import Tarjeta from "./Tarjeta";
+import Tarjeta_Botella from "./Tarjeta_Botella";
+import Tarjeta_Acompañamiento from "./Tarjeta_Acompañamiento";
 import { FiSearch } from "react-icons/fi";
 
 function MostrarProductos({ idMarca }) {
@@ -15,7 +16,7 @@ function MostrarProductos({ idMarca }) {
     setSearchTerm(e.target.value);
   };
 
-//LLAMA API PARA MOSTRAR LA INFORMACIÓN DE BOTELLAS Y ACOMPAÑAMIENTOS EN LAS TARJETAS
+  //LLAMA API PARA MOSTRAR LA INFORMACIÓN DE BOTELLAS Y ACOMPAÑAMIENTOS EN LAS TARJETAS
   useEffect(() => {
     const fetchProductos = async () => {
       const responseBotellas = await fetch("/api/read_botellas");
@@ -29,12 +30,14 @@ function MostrarProductos({ idMarca }) {
     fetchProductos();
   }, []);
 
-  //FILTRAR POR BOTELLAS 
+  //FILTRAR POR BOTELLAS
   const filteredBotellas = useMemo(() => {
     return botellas
       .filter((botella) =>
         searchTerm
-          ? botella.producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+          ? botella.producto.nombre
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
           : true
       )
       .filter((botella) =>
@@ -46,7 +49,6 @@ function MostrarProductos({ idMarca }) {
 
   const filteredAcompanamientos = useMemo(() => {
     return acompanamientos
-
       .filter((acompanamiento) =>
         searchTerm
           ? acompanamiento.producto.nombre
@@ -66,13 +68,13 @@ function MostrarProductos({ idMarca }) {
     const lastPageIndex = firstPageIndex + productsPerPage;
     return filteredBotellas.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, productsPerPage, filteredBotellas]);
-  
+
   const currentAcompanamientos = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * productsPerPage;
     const lastPageIndex = firstPageIndex + productsPerPage;
     return filteredAcompanamientos.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, productsPerPage, filteredAcompanamientos]);
-  
+
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
   };
@@ -113,11 +115,11 @@ function MostrarProductos({ idMarca }) {
           </div>
         </div>
       </div>
-        {/* LLAMA COMPOTENENTE TARJETA ENVIANDO LA INFORMACIÓN OBTENIDA EN API  */}
+      {/* LLAMA COMPOTENENTE TARJETA ENVIANDO LA INFORMACIÓN OBTENIDA EN API  */}
 
       <div className="flex flex-wrap gap-8 justify-start px-24 pb-8">
         {currentBotellas.map((botella) => (
-          <Tarjeta
+          <Tarjeta_Botella
             id_producto={botella.producto.id_producto}
             nombre={botella.producto.nombre}
             marca={botella.producto.marca.nombre}
@@ -130,14 +132,15 @@ function MostrarProductos({ idMarca }) {
             cantidad={botella.producto.cantidad}
             tipo={1}
           />
+        
         ))}
         {currentAcompanamientos.map((acompanamiento) => (
-          <Tarjeta
+          <Tarjeta_Acompañamiento
             id_producto={acompanamiento.producto.id_producto}
             nombre={acompanamiento.producto.nombre}
             marca={acompanamiento.producto.marca.nombre}
             precio={acompanamiento.producto.precio}
-            ml={acompanamiento.gr}
+            gr={acompanamiento.gr}
             imagen={acompanamiento.producto.foto}
             mercadoLibre={acompanamiento.producto?.mercadoLibre || "NULL"}
             cantidad={acompanamiento.producto.cantidad}
@@ -187,7 +190,7 @@ function MostrarProductos({ idMarca }) {
                 (filteredBotellas.length + filteredAcompanamientos.length) /
                   productsPerPage
               )
-            }   
+            }
             className={`px-3 py-1 rounded-md ${
               currentPage ===
               Math.ceil(

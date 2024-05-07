@@ -56,11 +56,12 @@ const estados = [
 ];
 
 function Formulario() {
-  const { productos, total, isEnvio, pago, limpiarProductos } =
-    useContext(ProductContext);
+  const { productos, total, isEnvio, pago, limpiarProductos } = useContext(ProductContext);
   const [isFormVisiblePersonales, setIsFormVisiblePersonales] = useState(false);
   const [isFormVisibleDireccion, setIsFormVisibleDireccion] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [personalError, setPersonalError] = useState("");
+  const [direccionError, setDireccionError] = useState("");
+  const [transferencia, setTransferencia] = useState(false);
 
   const {
     register,
@@ -71,22 +72,12 @@ function Formulario() {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
-  useEffect(() => {
-    const formErrors = Object.keys(errors).length === 0;
-    setIsFormValid(formErrors);
-  }, [errors]);
-
   const toggleFormPersonales = () => {
     setIsFormVisiblePersonales(!isFormVisiblePersonales);
   };
   const toggleFormDireccion = () => {
     setIsFormVisibleDireccion(!isFormVisibleDireccion);
-  };
-
-  const [personalError, setPersonalError] = useState("");
-  const [direccionError, setDireccionError] = useState("");
-  const [isPersonales, setIsPersonales] = useState(false);
-  const [isDireccion, setIsDireccion] = useState(false);
+  }; 
 
   const validatePersonales = () => {
     const values = getValues(["nombre", "apellidos", "telefono", "email"]);
@@ -96,7 +87,6 @@ function Formulario() {
       return false;
     } else {
       setPersonalError("");
-      setIsPersonales(true);
       return true;
     }
   };
@@ -123,7 +113,6 @@ function Formulario() {
       return false;
     } else {
       setDireccionError("");
-      setIsDireccion(true);
       return true;
     }
   };
@@ -157,7 +146,7 @@ function Formulario() {
       }, 300); // Tiempo para comenzar el desplazamiento
     }
 
-    if (!validatePersonales() && !validateDireccion()) {
+    if (validatePersonales() && validateDireccion()) {
       data.envio = isEnvio;
       data.total = isEnvio === 1 ? total + 199 : total;
       console.log(data);
@@ -204,7 +193,13 @@ function Formulario() {
         const result = await response.json();
         const responseEmail = await responseData.json();
         console.log(result, responseEmail);
+        
         limpiarProductos();
+
+        if(pago!==1){
+          setTransferencia(true)
+        }
+        
       } catch (error) {
         console.error("Error en el proceso:", error); // Maneja cualquier error que ocurra durante el fetch
       }
@@ -822,8 +817,8 @@ function Formulario() {
                   <div className="px-[17px]">
                     {/* Se llama a forma pago. Mandando el triggerSubmit y le digo que va activar */}
                     <FormaPago
-                      triggerSubmit={handleSubmit(onSubmit)}
-                      isFormValid={isFormValid} 
+                      transferencia={transferencia}
+                      setTransferencia={setTransferencia}
                     />
                   </div>
                 </div>

@@ -7,11 +7,7 @@ import Link from "next/link";
 
 const Contador = ({
   id_producto,
-  imagen,
-  nombre,
-  marca,
-  precio,
-  ml,
+  
   cantidad2,
 }) => {
   const [count, setCount] = useState(1);
@@ -33,11 +29,6 @@ const Contador = ({
       setButtonState("success");
     const newProduct = {
       id_producto,
-      imagen,
-      nombre,
-      marca,
-      precio,
-      ml,
       count,
     };
     console.log({ id_producto });

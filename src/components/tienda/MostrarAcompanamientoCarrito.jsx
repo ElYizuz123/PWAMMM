@@ -37,7 +37,6 @@ const MostrarAcompanamientoCarrito = ({
         setButtonState("idle");
       }, 2000);
     }, 1500);
-    
   };
   return (
     <div className="space-y-4 mt-4">

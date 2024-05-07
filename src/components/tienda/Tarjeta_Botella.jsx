@@ -14,11 +14,10 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-const Tarjeta = ({
+const Tarjeta_Botella = ({
   id_producto,
   nombre,
   marca,
-  agave,
   precio,
   alcohol,
   ml,
@@ -95,10 +94,9 @@ const Tarjeta = ({
             alt="Fondo"
           />
         </div>
-        {/* DISEÑO TARJETAS DIFERENTE ACOMPAÑAMIENTOS/MEZCAL */}
+        {/* DISEÑO TARJETAS MEZCAL */}
         <section className="details">
-          {tipo !== 2 ? (
-            <div>
+          <div className="pb-4">
               <div className="min-details">
                 <h1 className="text-xl flex justify-between font-bold">
                   {nombre}
@@ -106,7 +104,6 @@ const Tarjeta = ({
                     <h1>${precio}</h1>
                   </div>
                 </h1>
-
                 <span className="font-normal text-sm">{marca}</span>
               </div>
               <div className="options">
@@ -125,20 +122,8 @@ const Tarjeta = ({
                   </div>
                 </div>
               </div>
+          
             </div>
-          ) : (
-            <div className="pb-4">
-              <div className="min-details ">
-                <h1 className="text-xl flex justify-between font-semibold">
-                  {nombre} {ml}gr
-                  <div>
-                    <h1 className="price text-green-700">${precio}</h1>
-                  </div>
-                </h1>
-                <span className="font-normal">{marca}</span>
-              </div>
-            </div>
-          )}
           {/*DISEÑO BOTÓN SIN EXISTENCIAS  */}
           {cantidad !== 0 ? (
             <button
@@ -179,4 +164,4 @@ const Tarjeta = ({
   );
 };
 
-export default Tarjeta;
+export default Tarjeta_Botella;

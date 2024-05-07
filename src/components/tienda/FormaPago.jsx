@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 //en esta funcion recibo el trigger
-function FormaPago({ triggerSubmit, isFormValid }) {
+function FormaPago({ transferencia, setTransferencia }) {
   const { envioVenta, pago } = useContext(ProductContext);
   const { productos } = useContext(ProductContext);
 
@@ -15,39 +15,24 @@ function FormaPago({ triggerSubmit, isFormValid }) {
   const [paymentMethod, setPaymentMethod] = useState("transferencia");
   const [confirmMethod, setConfirmMethod] = useState([]);
   const [payPal, setPaypal] = useState(false);
-  const [transferencia, setTransferencia] = useState(false);
-
+  
   const envio = 199;
   const totalVenta = productos.reduce(
     (total, producto) => total + producto.cantidad * producto.precio,
     0
   );
 
-  const pagoTotal =
-    shippingMethod === "recogerTienda" ? totalVenta : totalVenta + envio;
+  const pagoTotal = shippingMethod === "recogerTienda" ? totalVenta : totalVenta + envio;
 
-  const handleOpenPopup = async () => {
-    //aqui hace sus cosas
-    try {
-      if (!isFormValid) {
-        if (paymentMethod == "payPal") {
-          setPaypal(true);
-        } else {
-          setTransferencia(true);
-        }
-      }
-      {triggerSubmit}
-    } catch (error) {
-      console.error("Error:", error);
+  const handleOpenPopup = () => {
+    if(paymentMethod === "transferencia"){
+      
     }
-  };
-  // const handleCondicion = () => {
-  //   if (confirmMethod === "pickup3" || confirmMethod === "delivery3") {
-  //     setPaypal(true);
-  //   }else{
-  //      <span className="text-red-500 text-sm">Acepta terminos y condiciones</span>
-  //   }
-  // };
+    else{
+      setPaypal(true)
+    }
+  }
+  
   const handleClosePopup = () => {
     setPaypal(false);
     setTransferencia(false);
@@ -211,8 +196,6 @@ function FormaPago({ triggerSubmit, isFormValid }) {
                   confirmMethod.includes("pickup")
                 )
               }
-              onClick={handleOpenPopup}
-            
             >
               <p>Pagar</p>
 
@@ -293,9 +276,8 @@ function FormaPago({ triggerSubmit, isFormValid }) {
                       const order = await res.json();
                       return order.id;
                     }}
-
                     //El SDK de PayPal proporciona automáticamente los parámetros data y actions
-                    //data:  monto a pagar, la moneda utilizada 
+                    //data:  monto a pagar, la moneda utilizada
                     //actions:métodos para capturar el pago, actualizar la orden, mostrar mensajes al usuario
 
                     // CANCELAR PAGO/COMPRA
@@ -307,7 +289,6 @@ function FormaPago({ triggerSubmit, isFormValid }) {
                       actions.order.capture();
                       //AQUI DEBE DE MANDAR ALGO PARA ACEPTAR COMPRAR Y SUBIR A BD -- DESCONTAR STOCK
                     }}
-                
                   />
                 </PayPalScriptProvider>
               </div>

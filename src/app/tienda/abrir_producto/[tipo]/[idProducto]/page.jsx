@@ -1,6 +1,4 @@
-import Ficha from "@/components/tienda/Ficha";
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
-import Tarjeta from "@/components/tienda/Tarjeta";
 import Image from "next/image";
 import MostrarProductosFicha from "@/components/tienda/MostrarProductosFicha";
 

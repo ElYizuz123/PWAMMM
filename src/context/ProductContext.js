@@ -30,8 +30,7 @@ export const ProductProvider = ({ children }) => {
   const addProductos = (newProduct) => {
     // Encuentra el índice del producto existente
     const index = productos.findIndex(
-      (producto) =>
-        producto.id_producto === newProduct.id_producto
+      (producto) => producto.id_producto === newProduct.id_producto
     );
 
     let newProducts = [...productos]; // Hace una copia del estado actual de los productos
@@ -57,7 +56,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   //FUNCIÓN PARA ELIMINAR PRODUCTO DEL CARRITO
-   //GUARDA LOS PRODUCTOS DIFERENTES A ID_PRODUCTO 
+  //GUARDA LOS PRODUCTOS DIFERENTES A ID_PRODUCTO
   const deleteProduct = (id_producto) => {
     const updatedProductos = productos.filter(
       (producto) => producto.id_producto !== id_producto
@@ -68,30 +67,30 @@ export const ProductProvider = ({ children }) => {
     triggerCartCountAnimationDelete();
   };
 
-    //FUNCION PARA EDITAR LA CANTIDAD DEL PRODUCTO QUE ESTA EN CARRITO 
-      //BUSCA EL INDICE POR MEDIO DEL ID_PRODUCTO Y EDITAR SU CANTIDAD
+  //FUNCION PARA EDITAR LA CANTIDAD DEL PRODUCTO QUE ESTA EN CARRITO
+  //BUSCA EL INDICE POR MEDIO DEL ID_PRODUCTO Y EDITAR SU CANTIDAD
   const updateQuantity = (operacion, newProduct) => {
     const index = productos.findIndex(
-      (producto) =>
-        producto.id_producto === newProduct.id_producto 
+      (producto) => producto.id_producto === newProduct.id_producto
     );
 
-    if (index !== -1) {
-      let cantidadActual = productos[index].cantidad || 1; // Aseguramos un mínimo de 1
-      // Incrementa o decrementa según el tipo
-      cantidadActual = operacion === "SUMA" ? cantidadActual + 1 : Math.max(cantidadActual - 1, 1);
+    let cantidadActual = productos[index].cantidad || 1; // Aseguramos un mínimo de 1
+    // Incrementa o decrementa según el tipo
+    cantidadActual =
+      operacion === "SUMA"
+        ? cantidadActual + 1
+        : Math.max(cantidadActual - 1, 1);
 
-      const newProducts = [...productos];
-      newProducts[index] = {
-        //REDUCIR CODIGO AL IGUALAR 
-        ...newProducts[index],
-        cantidad: cantidadActual,
-      };
+    const newProducts = [...productos];
+    newProducts[index] = {
+      //REDUCIR CODIGO AL IGUALAR
+      ...newProducts[index],
+      cantidad: cantidadActual,
+    };
 
-      setProductos(newProducts);
-      localStorage.setItem("productos", JSON.stringify(newProducts));
-      triggerCartCountAnimation();
-    }
+    setProductos(newProducts);
+    localStorage.setItem("productos", JSON.stringify(newProducts));
+    triggerCartCountAnimation();
   };
 
   const total = productos.reduce(
