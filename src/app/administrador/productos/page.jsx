@@ -26,7 +26,7 @@ const Page = async () => {
                 <Agregar_producto/>
               </div>
               <div>
-                <Suspense>
+                <Suspense fallback={<div>Cargando...</div>}>
                   <Leer_productos/>
                 </Suspense>
               </div>
