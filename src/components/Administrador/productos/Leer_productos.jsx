@@ -18,7 +18,7 @@ const Leer_productos = () => {
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
     const { update, page, setTotalPages } = useContext(contexto)
-    var searchParams = null
+    const searchParams = useSearchParams()
 
     //Función para abrir pop-up editar productos
     const openUProduct = (id_producto) => {
@@ -160,16 +160,8 @@ const Leer_productos = () => {
         setFilteredProducts(productos)
     }, [productos]);
 
-    function Response (){
-        searchParams = useSearchParams()
-        console.log(searchParams.get('pages'))
-    }
-
     return (
         <div >
-            <Suspense>
-                <Response/>
-            </Suspense>
             <Modal
                 isOpen={uProductIsOpen}
                 onRequestClose={closeUProduct}

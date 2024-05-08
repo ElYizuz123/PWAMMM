@@ -32,7 +32,9 @@ const Page = async () => {
               </div>
             </div>
             <div className='absolute bottom-5 right-0'>
-                  <Paginacion totalPages={10}/>
+              <Suspense fallback={<div>Cargando...</div>}>
+                <Paginacion totalPages={10}/>
+              </Suspense>
               </div>
           </div>
         </main>
