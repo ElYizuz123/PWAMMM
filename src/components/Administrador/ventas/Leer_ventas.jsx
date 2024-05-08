@@ -68,7 +68,7 @@ const Leer_ventas = ({ventas}) => {
         }
     }
     return (
-        <div className='w-full flex justify-center'>
+        <div className='w-full flex justify-center overflow-y-auto'>
             
             <Modal
                 isOpen={detallesIsOpen}
@@ -90,7 +90,7 @@ const Leer_ventas = ({ventas}) => {
                 <option value="reciente">Mas reciente</option>
                 <option value="antiguo">Mas antiguo</option>
             </select>
-            <div className='w-10/12 overflow-y-visible'>
+            <div className='w-10/12 overflow-y-auto h-full'>
                 {ventasOr &&
                   ventasOr.map((venta) => (<div key={venta.id_venta}>
                     <div className='flex justify-between w-full mt-0.5 pl-12 pr-12'>
