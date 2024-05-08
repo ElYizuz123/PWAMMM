@@ -119,7 +119,7 @@ const Leer_marcas = ({ asociadas }) => {
             <table className='table-auto font-bold w-full'>
                 <thead>
                     <tr>
-                        <th colSpan="6">
+                        <th colSpan="5">
                             <hr className='border border-black w-full' />
                         </th>
                     </tr>
@@ -129,7 +129,7 @@ const Leer_marcas = ({ asociadas }) => {
                         <th className='px-4 py-2 text-left'>Tipo</th>
                     </tr>
                     <tr>
-                        <th colSpan="6">
+                        <th colSpan="5">
                             <hr className='border border-[#F70073] w-full' />
                         </th>
                     </tr>
