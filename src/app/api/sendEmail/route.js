@@ -3,7 +3,7 @@
   import { NextResponse } from "next/server";
 
 const nodemailer = require("nodemailer");
-
+export const revalidate = 0;
 export async function POST(request) {
   try {
     const { motivo, nombre, apellidos, correo, telefono, comentarios } = await request.json();

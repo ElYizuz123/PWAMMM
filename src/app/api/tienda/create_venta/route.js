@@ -2,7 +2,7 @@ const { NextResponse } = require("next/server");
 const crypto = require('crypto');
 import db from '@/libs/db'; // Asegúrate de que la importación es correcta
 
-
+export const revalidate = 0;
 function encryptData(data) {
   const algorithm = 'aes-256-cbc';
   const secretKey = process.env.ENCRYPTION_KEY; // Asegúrate de que esta clave está segura y configurada en las variables de entorno

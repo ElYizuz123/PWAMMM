@@ -13,8 +13,8 @@ const LeerAsociadas = () => {
     const [uAsociadasIsOpen, setUAsociadasIsOpen] = useState(false)
     const [updateAsociada, setUpdateAsociada] = useState(null)
     const searchParams = useSearchParams()
-    const editRef = useRef(null)
 
+    //Configuración de los modales
     const customStyles = {
         content: {
           top: '50%',
@@ -34,6 +34,7 @@ const LeerAsociadas = () => {
         },
       };
 
+    //Lectura de asociadas
     const readData = async () => {
         var search = ""
         if(!page){
@@ -50,22 +51,26 @@ const LeerAsociadas = () => {
         setAsociadas(JSON.parse(resJSON))
     }
 
+    //Conteo de asociadas para paginación 
     const countData = async () =>{
         const res = await fetch('/api/asociadas/cont_asociadas')
         const resJSON = await res.json()
         setTotalPages(Math.ceil((resJSON)/12))
     }
 
+    //Cerrar popup de editar asociadas
     const onClose = () => {
         setUAsociadasIsOpen(false)
     }
 
+    //Abrir popup de editar asociadas
     const isOpen = (data) => {
         setUpdateAsociada(data)
         setUAsociadasIsOpen(true)
     }
 
 
+    //Inicializar la lectura de datos de asociadas
     useEffect(() => {
         readData()
         countData()

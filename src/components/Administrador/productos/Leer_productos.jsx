@@ -18,9 +18,6 @@ const Leer_productos = () => {
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
     const { update, page, setTotalPages } = useContext(contexto)
-    const [totalBottles, setTotalBottles] = useState(0)
-    const [acompanamientos, setAcompanamientos] = useState(null)
-    const [searchBar, setSearchBar] = useState(null)
     const searchParams = useSearchParams()
 
     //Función para abrir pop-up editar productos
@@ -77,15 +74,16 @@ const Leer_productos = () => {
         const resJSON = await res.json()
         const parseado = JSON.parse(resJSON)
         setProductos(parseado)
-        setAcompanamientos(null)
     };
 
+    //Función para contar las páginas a utilizar
     const countData = async () => {
         const res = await fetch('/api/producto/cont_productos')
         const resJSON = await res.json()
         setTotalPages(Math.ceil((resJSON) / 12))
-        setTotalBottles(parseInt(resJSON))
     }
+
+    //Función para leer las marcas de las botellas
 
     const readMarcasBotellas = async () => {
         const res = await fetch('/api/producto/read_marcas', {
@@ -96,6 +94,8 @@ const Leer_productos = () => {
         console.log(resJSON)
         setMarcasBotellas(resJSON)
     }
+
+    //Función para leer las marcas de los acompañamientos
     const readMarcasAcompanamientos = async () => {
         const res = await fetch('/api/producto/read_marcas', {
             method: 'POST',
@@ -105,50 +105,8 @@ const Leer_productos = () => {
         setMarcasAcompanamientos(resJSON)
     }
 
-    const readAcomp = async () => {
-        var search = ""
-        if (!page) {
-            search = searchParams.get('pages')
-        }
-        else {
-            search = page
-        }
-        if (filteredProducts) {
-            const sobrante = 12 - (filteredProducts.length % 12)
-            var pagActual = 1
-            if (search) {
-                pagActual = parseInt(search) - (Math.ceil(totalBottles / 12)) + 1
-            }
-            if (sobrante > 0 && filteredProducts.length < 12) {
-                const data = {
-                    toma: sobrante,
-                    pag: pagActual
-                }
-                if (sobrante > 0 && pagActual >= 0) {
-                    var dir = ''
-                    if (searchBar && searchBar != "") {
-                        dir = '/api/producto/read_acompanamientos_like'
-                        data['busqueda'] = searchBar
-                    }
-                    else {
-                        dir = '/api/producto/read_acompanamientos'
-                    }
-                    const res = await fetch(dir, {
-                        method: 'POST',
-                        body: JSON.stringify(data)
-                    })
-                    const resJSON = await res.json()
-                    setAcompanamientos(JSON.parse(resJSON))
-                }
-            }
-        }
-    }
 
-
-    useEffect(() => {
-        readAcomp()
-    }, [filteredProducts])
-
+    //Cerrar el popup para actualizar botellas 
     const closeUProduct = () => {
         setUProductIsOpen(false)
     };
@@ -177,7 +135,6 @@ const Leer_productos = () => {
 
     //Cambio en la búsqueda
     const handleChange = (event) => {
-        setSearchBar(event.target.value)
         if (event.target.value == "") {
             readData()
         }
@@ -189,10 +146,9 @@ const Leer_productos = () => {
     useEffect(() => {
         readData()
         countData()
-        readAcomp()
-        console.log("Hmmm")
     }, [update])
 
+    //Inicializar lecturas de las marcas 
     useEffect(() => {
         readMarcasBotellas()
         readMarcasAcompanamientos()
@@ -252,28 +208,15 @@ const Leer_productos = () => {
             <div className='w-full flex flex-wrap gap-20 pl-44 pt-6 pb-36'>
                 {filteredProducts &&
                     filteredProducts.map((producto) => (<Tarjeta_Producto_Admin key={producto.id_producto}
-                        isAcompanamiento={false}
+                        isAcompanamiento={producto.acompanamiento[0] ? true:false}
                         id_producto={producto.id_producto}
                         nombre={producto.nombre}
-                        ml={producto.ml}
+                        ml={producto.botella[0] ? producto.botella[0].ml : producto.acompanamiento[0].gr}
                         marca={producto.marca.nombre}
                         precio={producto.precio}
                         foto={producto.foto}
                         updatePage={updatePage}
-                        editProduct={openUProduct}
-                    />))
-                }
-                {acompanamientos &&
-                    acompanamientos.map((acompanamiento) => (<Tarjeta_Producto_Admin key={acompanamiento.id_acompanamiento}
-                        isAcompanamiento={true}
-                        id_producto={acompanamiento.id_acompanamiento}
-                        nombre={acompanamiento.nombre}
-                        ml={acompanamiento.gr}
-                        marca={acompanamiento.marca.nombre}
-                        precio={acompanamiento.precio}
-                        foto={acompanamiento.foto}
-                        updatePage={updatePage}
-                        editProduct={openUAcompanamiento}
+                        editProduct={producto.botella[0] ? openUProduct:openUAcompanamiento}
                     />))
                 }
             </div>
