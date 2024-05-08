@@ -5,32 +5,29 @@ import { useForm } from 'react-hook-form'
 const ContactoForm = () => {
 
   const { register, handleSubmit } = useForm();
+  const [isOpen, setIsOpen] = useState(false)
+  const [isError, setIsError] = useState(false)
 
   //cambiar por resend
   const sendEmail = async (data) => {
     try {
-      const response = await fetch('/api/sendEmail', {
+      const res = await fetch('/api/sendEmail', {
         method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
-      if (!response.ok) {
+  
+      if (!res.ok) {
         throw new Error('Error al enviar el correo');
       }
-
-      const responseData = await response.json();
+  
+      const responseData = await res.json();
       console.log(responseData);
-      setIsOpen(true) ////AGREGAR A LA FUNCIÓN DE MANDAR EL CORREO
+      setIsOpen(true); //en caso de enviarse, abrir cuadro confirm
     } catch (error) {
       console.error('Error:', error);
-      setIsError(true) ////AGREGAR A LA FUNCIÓN DE MANDAR EL CORREO
+      setIsError(true); //en caso de error, abrir cuadro error
     }
   };
-
-  const [isOpen, setIsOpen] = useState(false)
-  const [isError, setIsError] = useState(false)
 
   return (
     <div className="flex justify-center items-start w-full">
@@ -111,6 +108,7 @@ const ContactoForm = () => {
           </div>
         )}
 
+      {/* cuadro de error */}
       {
         isError && (
           <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center p-2 animate-fade-in">
