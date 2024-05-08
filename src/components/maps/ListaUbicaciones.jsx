@@ -48,7 +48,7 @@ function ListaUbicaciones () {
         </button>
         
         {isOpen && (
-            <div className="bg-white border-2 border-[#D60064] absolute flex flex-col items-start rounded-lg p-2 w-[300px] shadow-2xl">
+            <div className="bg-white border-2 border-[#D60064] absolute flex flex-col items-start rounded-lg p-2 w-full shadow-2xl">
                 {list.map((item, i) => (
                     <div className="flex w-full p-2 justify-between hover:bg-[#D60064] hover:text-white cursor-pointer rounded-md border-l-transparent" 
                     key={i} onClick={() => handleBrandClick(item.marca)}>
