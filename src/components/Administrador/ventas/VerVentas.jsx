@@ -34,7 +34,7 @@ const VerVentas = ({ onClose, idVenta }) => {
             </div>
             <div>
                 <table className="table-auto w-full font-bold">
-                    <thead>
+                    <thead className='text-xl'>
                         <tr>
                             <th colSpan="4">
                             <hr className=' border border-black w-full' />
