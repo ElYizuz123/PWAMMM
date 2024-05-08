@@ -14,38 +14,38 @@ const Lector_pregunta = () => {
     //Configuración de los modales
     const customStyles = {
         content: {
-          top: '50%',
-          left: '50%',
-          right: '60%',
-          bottom: '50%',
-          marginRight: '-50%',
-          marginBottom: '-50%',
-          height: '40%',
-          transform: 'translate(-50%, -50%)',
-          backgroundColor: '#00000000',
-          border: 'none',
-          boxShadow: 'none',
-          overflow:'auto',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
+            top: '50%',
+            left: '50%',
+            right: '60%',
+            bottom: '50%',
+            marginRight: '-50%',
+            marginBottom: '-50%',
+            height: '40%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#00000000',
+            border: 'none',
+            boxShadow: 'none',
+            overflow: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
         },
-      };
+    };
 
     //Manejo de eliminación de una pregunta 
-    const deletePregunta = async (data) =>{
-        const res = await fetch('/api/preguntas/delete_pregunta',{
-            method:'POST',
+    const deletePregunta = async (data) => {
+        const res = await fetch('/api/preguntas/delete_pregunta', {
+            method: 'POST',
             body: data
         })
         const resJSON = await res.json()
-        if(resJSON=="Pregunta eliminada con éxito"){
+        if (resJSON == "Pregunta eliminada con éxito") {
             Swal.fire({
                 title: "Eliminado!",
                 text: "La pregunta fue eliminada",
                 icon: "success"
-              });
-              readData()
-        }else{
+            });
+            readData()
+        } else {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -55,32 +55,32 @@ const Lector_pregunta = () => {
     }
 
     //Manejo de alerta en eliminación
-    const handleDelete = async (data) =>{
+    const handleDelete = async (data) => {
         Swal.fire({
-            title: "Eliminar marca",
-            text: "Todos los productos asociados a esta marca serán eliminados y no hay forma de revertir la acción!",
+            title: "Eliminar pregunta",
+            text: "La pregunta será eliminada y esta acción es irreversible!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             cancelButtonText: "Cancelar",
             confirmButtonText: "Si, borrar!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 deletePregunta(data)
             }
-          });
-        
+        });
+
     }
 
     //Abir popup de pregunta
-    const upenUPregunta = (data) =>{
+    const openUPregunta = (data) => {
         setId_pregunta(data)
         setUPreguntasIsOpen(true)
     }
 
     //Cerrar popup de pregunta
-    const closeUPregunta = () =>{
+    const closeUPregunta = () => {
         setUPreguntasIsOpen(false)
         readData()
     }
@@ -98,39 +98,56 @@ const Lector_pregunta = () => {
     }, [update])
 
     return (
-        
-        <div className='w-full overflow-y-visible'>
+
+        <div className='w-10/12 flex justify-center overflow-y-auto'>
             <Modal
                 isOpen={uPreguntasIsOpen}
                 onRequestClose={closeUPregunta}
                 style={customStyles}
             >
-                <Editar_pregunta 
+                <Editar_pregunta
                     onClose={closeUPregunta}
                     idPregunta={id_pregunta}
                 />
             </Modal>
-            {preguntas && preguntas.map((pregunta) => (
-                <div key={pregunta.id_pregunta_frencuente}>
-                    <div className='flex justify-between w-full mt-0.5 pl-5 '>
-                        <p className='font-bold w-44'>{pregunta.pregunta}</p>
-                        <p className='font-bold ml-[7%] text-left w-44'>{pregunta.respuesta}</p>
-                        <div className='flex items-center'>
-                            <button className='w-12 h-6 font-bold flex justify-center items-center bg-[#91caf8]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'
-                                onClick={() => upenUPregunta(pregunta.id_pregunta_frencuente)}
-                            >Editar</button>
-                        </div>
+            <table className='table-auto font-bold w-full'>
+                <thead>
+                    <tr>
+                        <th colSpan="4">
+                            <hr className='border border-black w-full' />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th className='px-4 py-2 text-left'>Pregunta</th>
+                        <th className='px-4 py-2 text-left'>Respuesta</th>
+                    </tr>
+                    <tr>
+                        <th colSpan="4">
+                            <hr className='border border-[#F70073] w-full' />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {preguntas &&
+                        preguntas.map((pregunta) => (
+                            <tr key={pregunta.id_pregunta_frencuente}>
+                                <td className='px-4 py-2 border-b border-gray-500'>{pregunta.pregunta}</td>
+                                <td className='px-4 py-2 border-b border-gray-500'>{pregunta.respuesta}</td>
+                                <td className='px-4 py-2 border-b border-gray-500'>
+                                    <button onClick={() => openUPregunta(pregunta.id_pregunta_frencuente)} className='w-12 h-6 font-bold flex justify-center items-center bg-[#91caf8] text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'>
+                                        Editar
+                                    </button>
+                                </td>
+                                <td className='px-4 py-2 border-b border-gray-500'>
+                                    <button onClick={() => handleDelete(pregunta.id_pregunta_frencuente)} className='w-16 h-6 font-bold flex justify-center items-center bg-[#f89191] text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'>
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                </tbody>
+            </table>
 
-                        <div className='flex items-center'>
-                            <button className='w-16 h-6 font-bold flex justify-center items-center bg-[#f89191]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'
-                                onClick={() => handleDelete(pregunta.id_pregunta_frencuente)}
-                            >Eliminar</button>
-                        </div>
-                    </div>
-                    <div className='w-full h-0.5 bg-[#B1A8A8] mt-0.5' />
-                </div>
-
-            ))}
         </div>
     )
 }
