@@ -5,11 +5,11 @@ import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Modal from 'react-modal'
 
-const Leer_marcas = ({asociadas}) => {
+const Leer_marcas = ({ asociadas }) => {
     const [marcas, setMarcas] = useState(null)
     const [uMarcasIsOpen, setUMarcasIsOpen] = useState(false)
     const [updateMarca, setUpdateMarca] = useState(null)
-    const {update} = useContext(contexto) 
+    const { update } = useContext(contexto)
     const editarRef = useRef(null)
     //Leer marcas
     const readData = async () => {
@@ -21,22 +21,22 @@ const Leer_marcas = ({asociadas}) => {
     //Configuración del modal
     const customStyles = {
         content: {
-          top: '50%',
-          left: '50%',
-          right: '60%',
-          bottom: '50%',
-          height: '50%',
-          marginRight: '-50%',
-          marginBottom: '-50%',
-          transform: 'translate(-50%, -50%)',
-          backgroundColor: '#00000000',
-          border: 'none',
-          boxShadow: 'none',
-          overflow:'auto',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
+            top: '50%',
+            left: '50%',
+            right: '60%',
+            bottom: '50%',
+            height: '50%',
+            marginRight: '-50%',
+            marginBottom: '-50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#00000000',
+            border: 'none',
+            boxShadow: 'none',
+            overflow: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
         },
-      };
+    };
 
     //Leer datos al cargar
     useEffect(() => {
@@ -104,35 +104,58 @@ const Leer_marcas = ({asociadas}) => {
 
 
     return (
-        <div>
+        <div className='flex justify-center w-10/12 overflow-y-auto'>
             <Modal
                 isOpen={uMarcasIsOpen}
                 onRequestClose={closeUProduct}
                 style={customStyles}
             >
-                <Editar_marca 
+                <Editar_marca
                     onClose={closeUProduct}
                     asociadas={asociadas}
                     idMarca={updateMarca}
                 />
             </Modal>
-            {marcas && marcas.map((marca) => (
-                <div key={marca.id_marca}>
-                    <div className='flex justify-between w-full mt-0.5 pl-5 '>
-                        <p className='font-bold w-44'>{marca.nombre}</p>
-                        <p className='font-bold ml-[7%] text-left w-44'>{marca.asociada.nombre}</p>
-                        <p className='font-bold w-16 text-left ml-5'>{marca.tipo == 1 ? "Mezcal" : "Acompañamiento"}</p>
-                        <button className='w-12 h-6 font-bold flex justify-center items-center bg-[#91caf8]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'
-                            onClick={() => openUMarca(marca.id_marca)}
-                        >Editar</button>
-                        <button className='w-16 h-6 font-bold flex justify-center items-center bg-[#f89191]  text-black border border-black hover:border-[#F70073] py-2 px-4 rounded'
-                            onClick={() => handleDelete(marca.id_marca)}
-                        >Eliminar</button>
-                    </div>
-                    <div className='w-full h-0.5 bg-[#B1A8A8] mt-0.5' />
-                </div>
+            <table className='table-auto font-bold w-full'>
+                <thead>
+                    <tr>
+                        <th colSpan="6">
+                            <hr className='border border-black w-full' />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th className='px-4 py-2 text-left'>Nombre</th>
+                        <th className='px-4 py-2 text-left'>Asociada</th>
+                        <th className='px-4 py-2 text-left'>Tipo</th>
+                    </tr>
+                    <tr>
+                        <th colSpan="6">
+                            <hr className='border border-[#F70073] w-full' />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {marcas &&
+                        marcas.map((marca) => (
+                            <tr key={marca.id_marca}>
+                                <td className='px-4 py-2 border-b border-gray-500'>{marca.nombre}</td>
+                                <td className='px-4 py-2 border-b border-gray-500'>{marca.asociada.nombre}</td>
+                                <td className='px-4 py-2 border-b border-gray-500'>{marca.tipo === 1 ? "Mezcal" : "Acompañamiento"}</td>
+                                <td className='px-4 py-2 border-b border-gray-500'>
+                                    <button onClick={() => openUMarca(marca.id_marca)} className='w-12 h-6 font-bold bg-[#91caf8] text-black border border-black hover:border-[#F70073] rounded'>
+                                        Editar
+                                    </button>
+                                </td>
+                                <td className='px-4 py-2 border-b border-gray-500'>
+                                    <button onClick={() => handleDelete(marca.id_marca)} className='w-16 h-6 font-bold bg-[#f89191] text-black border border-black hover:border-[#F70073] rounded'>
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                </tbody>
+            </table>
 
-            ))}
         </div>
     )
 }
