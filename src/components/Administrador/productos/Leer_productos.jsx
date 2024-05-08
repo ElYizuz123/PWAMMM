@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { Suspense, useContext, useEffect, useRef, useState } from 'react'
 import Tarjeta_Producto_Admin from './Tarjeta_Producto_Admin'
 import Editar_Producto from './Editar_Producto';
 import { contexto } from '../UpdateProvider';
@@ -18,7 +18,7 @@ const Leer_productos = () => {
     const [productos, setProductos] = useState(null)
     const [productoEdit, setProductoEdit] = useState(null)
     const { update, page, setTotalPages } = useContext(contexto)
-    const searchParams = useSearchParams()
+    var searchParams = null
 
     //Función para abrir pop-up editar productos
     const openUProduct = (id_producto) => {
@@ -61,7 +61,7 @@ const Leer_productos = () => {
     //Función para leer productos
     const readData = async () => {
         var search = ""
-        if (!page) {
+        if (!page && searchParams) {
             search = searchParams.get('pages')
         }
         else {
@@ -115,7 +115,7 @@ const Leer_productos = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         var search = ""
-        if (!page) {
+        if (!page && searchParams) {
             search = searchParams.get('pages')
         }
         else {
@@ -160,9 +160,16 @@ const Leer_productos = () => {
         setFilteredProducts(productos)
     }, [productos]);
 
+    function Response (){
+        searchParams = useSearchParams()
+        console.log(searchParams.get('pages'))
+    }
 
     return (
         <div >
+            <Suspense>
+                <Response/>
+            </Suspense>
             <Modal
                 isOpen={uProductIsOpen}
                 onRequestClose={closeUProduct}
