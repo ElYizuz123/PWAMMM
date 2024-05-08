@@ -17,7 +17,7 @@ const images = [
   ];
 
 
-const page = () => {
+const Page = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     useEffect(() => {
@@ -120,4 +120,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
