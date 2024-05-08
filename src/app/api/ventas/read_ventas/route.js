@@ -2,6 +2,7 @@ const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 import { decrypt } from '@/libs/decrypt';
 
+export const revalidate = 0;
 export async function Read_ventas(){
     try{
         const ventas = await db.venta_total.findMany();

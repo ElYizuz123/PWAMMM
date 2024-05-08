@@ -2,6 +2,7 @@ import db from '@/libs/db'
 import { decrypt } from '@/libs/decrypt';
 import { NextResponse } from 'next/server'
 
+export const revalidate = 0;
 const masVentasCiudades = (ventas) =>{
     var ciudades = []
     var ventasPorCiudad = []

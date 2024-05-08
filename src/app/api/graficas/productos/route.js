@@ -1,7 +1,7 @@
 import db from "@/libs/db"
 import { NextResponse } from "next/server"
 
-
+export const revalidate = 0;
 const listProductosVentas = (productos, ventas) =>{
     
     var listProductos=[]

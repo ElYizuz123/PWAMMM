@@ -1,6 +1,7 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
+export const revalidate = 0;
 export async function POST(request){
 
     try{
