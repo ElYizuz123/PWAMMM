@@ -24,7 +24,9 @@ const Page = () => {
                 <Crear_Asociada/>
               </div>
               <div >
-                <LeerAsociadas/>
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <LeerAsociadas/>
+                </Suspense>
               </div>
             </div>
             <div className='absolute bottom-5 right-0'>
