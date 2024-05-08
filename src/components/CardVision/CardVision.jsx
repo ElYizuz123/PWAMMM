@@ -158,7 +158,7 @@ const CardVision = () => {
             <hr className=" border-b-4  border-[#F70073] my-4 ml-10 mr-14 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10 2xl:ml-10" />
 
             <p className="text-sm sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl text-justify"> {/* MISIÓN*/}
-              Proteger, regular y promover la Denominación de Origen Mezcal
+             {'"'}Proteger, regular y promover la Denominación de Origen Mezcal
               dentro de los municipios comprendidos en el estado de
               Michoacán de Ocampo. Asimismo, vigilar y observar las
               especificaciones contenidas en la Norma Oficial Mexicana
@@ -168,7 +168,7 @@ const CardVision = () => {
               También fomentaremos las formas tradicionales de producción,
               resguardando su identidad regional, con el objetivo de
               conservar y consolidar al Mezcal Michoacano como parte de
-              nuestra cultura líquida de México.
+              nuestra cultura líquida de México.{'"'}
             </p>
           </motion.div>
         </motion.div>

@@ -34,7 +34,7 @@ const page = () => {
                     dios del fuego que recorría la bóveda celeste como un halcón. El aire, el agua,
                     la tierra y el fuego son los cuatro elementos a los que rendían reverencia, y Curicaueri era {'"el gran dios del fuego"'}.
                     Estos mismos elementos son indispensables para la
-                    elaboración del elixir de la vida, el Mezcal. Curicaueri,el gran dios del fuego, y Xaratanga, {'"diosa de la luna"'},
+                    elaboración del elixir de la vida, el Mezcal. Curicaueri,{'"el gran dios del fuego"'}, y Xaratanga, {'"diosa de la luna"'},
                     son los principales dioses en la mitología purépecha; de la unión de ellos nació la armonía y la felicidad, y con ello,
                     todo lo que conocemos en la tierra.</p>
                 </div>

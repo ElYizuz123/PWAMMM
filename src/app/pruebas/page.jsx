@@ -49,9 +49,9 @@ const Page = () => {
                     </div>
                 <p className="mt-4">
                 El pueblo purépecha Curicaueri nació en el oriente y tomaba la forma del sol, dios del fuego que recorría la bóveda celeste como un halcón. 
-                El aire, el agua, la tierra y el fuego son los cuatro elementos a los que les rendían reverencia y era Curicaueri "el gran dios del fuego", 
-                y son estos mismos elementos los indispensables para la elaboración del elixir de la vida, el mezcal. Curicaueri "el gran dios del fuego" y 
-                Xaratanga "diosa de la luna" son los dioses principales en la mitología purépecha; de la unión de ellos, nació la armonía y la felicidad, y 
+                El aire, el agua, la tierra y el fuego son los cuatro elementos a los que les rendían reverencia y era Curicaueri el gran dios del fuego, 
+                y son estos mismos elementos los indispensables para la elaboración del elixir de la vida, el mezcal. Curicaueri el gran dios del fuego y 
+                Xaratanga diosa de la luna son los dioses principales en la mitología purépecha; de la unión de ellos, nació la armonía y la felicidad, y 
                 con ello, todo lo que conocemos en la tierra.
                 </p>
               
