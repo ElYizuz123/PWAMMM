@@ -33,7 +33,7 @@ const Page = async () => {
             </div>
             <div className='absolute bottom-5 right-0'>
               <Suspense fallback={<div>Cargando...</div>}>
-                <Paginacion totalPages={10}/>
+                <Paginacion/>
               </Suspense>
               </div>
           </div>
