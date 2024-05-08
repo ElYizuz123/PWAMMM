@@ -58,7 +58,7 @@ const Lector_pregunta = () => {
     const handleDelete = async (data) => {
         Swal.fire({
             title: "Eliminar pregunta",
-            text: "La pregunta será eliminada y esta acción es irreversible!",
+            text: "Esta acción no puede ser revertida!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
