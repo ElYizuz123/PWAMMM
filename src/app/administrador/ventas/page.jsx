@@ -8,7 +8,7 @@ import { Read_ventas } from '@/app/api/ventas/read_ventas/route';
 const Page = async () => {
   const res = await Read_ventas();
   const resJSON = await res.json();
-  const ventas = (JSON.parse(resJSON));  
+  const ventas = (JSON.parse(resJSON));
 
 
   return (
@@ -23,17 +23,7 @@ const Page = async () => {
               <p className='mt-6 text-3xl font-bold'>Bienvenido,</p>
               <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Ventas</p>
             </div>
-            <div className='w-full h-full flex flex-col items-center '>
-              <div className='w-10/12 h-[0.3%] bg-black mt-10' />
-              <div className='flex justify-between w-10/12'>
-                <p className='ml-5 font-bold'>N° de venta</p>
-                <p className='font-bold'>Fecha de venta</p>
-                <p className='font-bold'>Total</p>
-                <p className='font-bold'>Detalles</p>
-                <p className='mr-12 font-bold'>Cliente</p>
-                <p className='mr-16 font-bold'>Status</p>
-              </div>
-              <hr className='w-10/12 h-[3px] bg-[#F70073]' />
+            <div className='w-full h-[720px] flex flex-col items-center mt-12'>
               <Leer_ventas ventas={ventas}/>
             </div>
           </div>

@@ -5,12 +5,12 @@ import Modal from 'react-modal'
 import VerVentas from './VerVentas'
 import DetallesCliente from './DetallesCliente'
 
-const Leer_ventas = ({ventas}) => {
+const Leer_ventas = ({ ventas }) => {
     const [orden, setOrden] = useState("reciente")
     const [ventasOr, setVentasOr] = useState(ventas)
     const [detallesIsOpen, setDetallesIsOpen] = useState(false)
     const [detallesCliente, setDetallesCliente] = useState(false)
-    const [idVenta, setIdVenta]= useState(null)
+    const [idVenta, setIdVenta] = useState(null)
     const [clientData, setClientData] = useState(null)
 
     //Configuraciones del modal
@@ -68,15 +68,15 @@ const Leer_ventas = ({ventas}) => {
         }
     }
     return (
-        <div className='w-full flex justify-center overflow-y-auto'>
-            
+        <div className='flex justify-center overflow-y-auto h-[800px] w-10/12'>
+
             <Modal
                 isOpen={detallesIsOpen}
                 onRequestClose={onClose}
                 style={customStyles}
                 ariaHideApp={false}
             >
-               <VerVentas onClose={onClose} idVenta={idVenta}/>
+                <VerVentas onClose={onClose} idVenta={idVenta} />
             </Modal>
             <Modal
                 isOpen={detallesCliente}
@@ -84,26 +84,59 @@ const Leer_ventas = ({ventas}) => {
                 style={customStyles}
                 ariaHideApp={false}
             >
-               <DetallesCliente onClose={onClienteClose} cliente={clientData}/>
+                <DetallesCliente onClose={onClienteClose} cliente={clientData} />
             </Modal>
             <select id="orden" className='absolute right-32 top-14 border border-[#F70073]' onChange={handleChange}>
                 <option value="reciente">Mas reciente</option>
                 <option value="antiguo">Mas antiguo</option>
             </select>
-            <div className='w-10/12 overflow-y-auto h-full'>
-                {ventasOr &&
-                  ventasOr.map((venta) => (<div key={venta.id_venta}>
-                    <div className='flex justify-between w-full mt-0.5 pl-12 pr-12'>
-                      <p className='font-bold w-6 text-center'>{venta.id_venta}</p>
-                      <p className='font-bold ml-12 text-left w-40'>{venta.fecha_venta.slice(0, 10) + " " + venta.fecha_venta.slice(11, 16)}</p>
-                      <p className='font-bold w-16 text-left mr-4'>{"$ " + venta.total}</p>
-                      <button onClick={()=>isOpen(venta.id_venta)} className='w-12 h-6 mr-8 font-bold flex justify-center items-center bg-white text-[#F70073] border border-black hover:border-[#F70073] py-2 px-4 rounded'>Ver</button>
-                      <button onClick={()=>isClienteOpen(venta)} className='w-12 h-6 mr-20 font-bold flex justify-center items-center bg-white text-[#F70073] border border-black hover:border-[#F70073] py-2 px-4 rounded'>Ver</button>
-                      <p className='font-bold'>{venta.status}</p>
-                    </div>
-                    <div className='w-full h-0.5 bg-[#B1A8A8] mt-0.5' />
-                  </div>))}
-              </div>
+            <div className='w-full  h-[800px] flex justify-center'>
+                <table className='table-auto h-[800px] font-bold w-full'>
+                    <thead>
+                        <tr>
+                            <th colSpan="6">
+                            <hr className=' border border-black w-full' />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th className='px-4 py-2 text-left'>N° de venta</th>
+                            <th className='px-4 py-2 text-left'>Fecha de venta</th>
+                            <th className='px-4 py-2 text-left'>Total</th>
+                            <th className='px-4 py-2 text-left'>Detalles</th>
+                            <th className='px-4 py-2 text-left'>Cliente</th>
+                            <th className='px-4 py-2 text-left'>Status</th>
+                        </tr>
+                        <tr>
+                            <th colSpan="6">
+                            <hr className=' border border-[#F70073] w-full' />
+                            </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        
+                        {ventasOr &&
+                            ventasOr.map((venta) => (
+                                <tr key={venta.id_venta}>
+                                    <td className='px-4 py-2 border-b border-gray-500'>{venta.id_venta}</td>
+                                    <td className='px-4 py-2 border-b border-gray-500'>{venta.fecha_venta.slice(0, 10) + " " + venta.fecha_venta.slice(11, 16)}</td>
+                                    <td className='px-4 py-2 border-b border-gray-500'>{"$ " + venta.total}</td>
+                                    <td className='px-4 py-2 border-b border-gray-500'>
+                                        <button onClick={() => isOpen(venta.id_venta)} className='w-12 h-6 mr-8 font-bold flex justify-center items-center bg-white text-[#F70073] border border-black hover:border-[#F70073] py-2 px-4 rounded'>Ver</button>
+                                    </td>
+                                    <td className='px-4 py-2 border-b border-gray-500'>
+                                        <button onClick={() => isClienteOpen(venta)} className='w-12 h-6 mr-20 font-bold flex justify-center items-center bg-white text-[#F70073] border border-black hover:border-[#F70073] py-2 px-4 rounded'>Ver</button>
+                                    </td>
+
+                                    <td className='px-4 py-2 border-b border-gray-500'>{venta.status}</td>
+                                </tr>
+                                
+                                
+                            ))}
+                            
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     )
