@@ -9,7 +9,7 @@ const MostrarItemsCarrito = () => {
   return (
     <div>
       {productos.map((producto) => (
-        <ProductoCarrito
+        <ProductoCarrito key={producto.id_producto}
           id_producto={producto.id_producto}
           nombre={producto.nombre}
           marca={producto.marca}

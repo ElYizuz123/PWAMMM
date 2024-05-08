@@ -40,7 +40,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             {productos
               .filter((item) => item.id_producto === Number(idProducto))
               .map((producto) => (
-                <Ficha
+                <Ficha key={producto.id_producto}
                   id_producto={producto.id_producto}
                   tipo={1}
                   nombre={producto.nombre}
@@ -61,7 +61,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             {acompanamientos
               .filter((item) => item.id_acompanamiento === Number(idProducto))
               .map((acompanamiento) => (
-                <Ficha
+                <Ficha key={acompanamiento.id_acompanamiento}
                   tipo={2}
                   id_producto={acompanamiento.id_acompanamiento}
                   nombre={acompanamiento.nombre}
@@ -103,7 +103,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             
             .map((producto) => (
          
-              <Tarjeta
+              <Tarjeta key={producto.id_producto}
                 id_producto={producto.id_producto}
                 nombre={producto.nombre}
                 marca={producto.marca.nombre}
@@ -126,7 +126,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             .filter((item) => item.id_acompanamiento !== Number(idProducto))
             .slice(0, 3)
             .map((acompanamiento) => (
-              <Tarjeta
+              <Tarjeta key={acompanamiento.id_acompanamiento}
                 id_producto={acompanamiento.id_acompanamiento}
                 nombre={acompanamiento.nombre}
                 marca={acompanamiento.marca.nombre}

@@ -113,7 +113,7 @@ function MostrarProductos({ idMarca }) {
 
       <div className="flex flex-wrap gap-8 justify-start px-24 pb-8">
         {currentProducts.map((producto) => (
-          <Tarjeta
+          <Tarjeta key={producto.id_producto}
             id_producto={producto.id_producto}
             nombre={producto.nombre}
             marca={producto.marca.nombre}
@@ -128,7 +128,7 @@ function MostrarProductos({ idMarca }) {
           />
         ))}
         {currentAcompanamientos.map((acompanamiento) => (
-          <Tarjeta
+          <Tarjeta key={acompanamiento.id_producto}
             id_producto={acompanamiento.id_acompanamiento}
             nombre={acompanamiento.nombre}
             marca={acompanamiento.marca.nombre}
