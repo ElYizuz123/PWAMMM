@@ -5,6 +5,7 @@ import React from 'react';
 
 const berkshire = Berkshire_Swash({
     weight: ["400"],
+    styles: ["italic", "normal"],
     subsets: ["latin"],
   });
 
@@ -17,7 +18,7 @@ function page() {
             <div className="mt-40 h-max relative w-full overflow-x-hidden">
 
             <div className={berkshire.className}>
-                <p className="text-6xl pb-6 -tracking-tighter" style={{textAlign: 'center'}}>Galería</p>
+                <p className="text-6xl pb-6 -tracking-tighter text-center" >Galería</p>
             </div>
 
                 <Galeria/>
