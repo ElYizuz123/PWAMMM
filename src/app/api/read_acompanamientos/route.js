@@ -6,8 +6,12 @@ export async function GET() {
   try {
     const acompanamiento = await db.acompanamiento.findMany({
       include: {
-        marca: true,
-      },
+        producto: {
+          include: {
+            marca: true
+          }
+        }
+      }
     });
 
     console.log(acompanamiento);

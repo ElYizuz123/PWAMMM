@@ -109,7 +109,7 @@ const NuestrasMarcas = () => {
                   src={"/logos/Logo-MataVerde.png"}
                   width={100}
                   height={100}
-                  alt="Logo Mata verde"
+                  alt="Logo Mata verde 2"
                   className="imagen-componente"
                 />
               </Link>
