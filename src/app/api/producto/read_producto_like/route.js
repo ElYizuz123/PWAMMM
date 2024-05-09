@@ -1,6 +1,7 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
+export const revalidate = 0;
 export async function POST(request){
     try{
         var datos = await request.json()
@@ -15,7 +16,9 @@ export async function POST(request){
                 },
             },
             include: {
-                marca: true
+                marca: true,
+                botella: true,
+                acompanamiento:true
             },
             orderBy:{
                 id_producto:'asc'

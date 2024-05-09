@@ -1,9 +1,10 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
+export const revalidate = 0;
 export async function GET(){
     try{
-        const data = await db.galeria_categoria.count();
+        const data = await db.galeria_foto.count();
         return NextResponse.json(JSON.stringify(data));
 
     }catch(err){

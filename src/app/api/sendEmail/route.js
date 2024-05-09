@@ -2,6 +2,7 @@
 
 import { Resend } from 'resend';
 
+
 const resend = new Resend("re_XfQDaeQe_PsGLmAgSS8BWPnHhy98yd4Q2");
 
 export async function POST(request) {

@@ -29,7 +29,7 @@ const Page = async () => {
               </div>
             </div>
             <div className='absolute bottom-5 right-0'>
-                    <Paginacion totalPages={10}/>
+                  <Paginacion totalPages={10}/>
               </div>
           </div>
         </main>

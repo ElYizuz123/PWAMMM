@@ -6,6 +6,7 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
     const { register, handleSubmit, setValue } = useForm()
     const [pregunta, setPregunta] = useState(null)
 
+    //Ingresar la información por defecto
     const setForm = (data) => {
 
         register('id_pregunta_frecuente'),
@@ -17,6 +18,7 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
             setValue('respuesta', data[0].respuesta)
     }
 
+    //Actualizar la pregunta
     const handleOnSubmit = async (data) => {
         console.log(data)
         const res = await fetch('/api/preguntas/update_pregunta', {
@@ -47,6 +49,7 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
         }
     }
 
+    //Leer las preguntas de la base de datos
     const readData = async () => {
         const res = await fetch('/api/preguntas/read_pregunta', {
             method: 'POST',
@@ -58,6 +61,7 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
     }
 
 
+    //Inicializar lecturas 
     useEffect(() => {
         readData()
     }, [])

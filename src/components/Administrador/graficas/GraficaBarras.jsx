@@ -3,6 +3,7 @@ import { BarElement, CategoryScale, Chart, Filler, Legend, LinearScale, PointEle
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
 
+//Elemento necesario para funcionamiento de la librería 
 Chart.register(
     CategoryScale,
     LinearScale,
@@ -14,6 +15,7 @@ Chart.register(
     Filler
 )
 
+//Configuraciones de la gráfica
 var options = {
     responsive:true,
     maintainAspectRatio: false,
@@ -34,24 +36,29 @@ var options = {
     }
 }
 
+//Sumado de datos sobrantes
 const otrosCantidad = (ventas) =>{
     var cantidad=0
-    ventas.forEach((element, index) => {
-        if(index>6){
-            cantidad+=element.cantidad
-        }
-    })
+    if(ventas.length !=0 ){
+        ventas.forEach((element, index) => {
+            if(index>6){
+                cantidad+=element.cantidad
+            }
+        })
+    }
     return cantidad
 }
 
 
 const GraficaBarras = ({ventas}) => {
 
-
+    //Inicialización vacía
     var data = {
         labels:[],
         datasets: [ ]
     }
+
+    //Inicializaón con datos
     if(ventas){
         data = {
             labels:[

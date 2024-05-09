@@ -141,3 +141,4 @@ model ubicacion {
   telefono              String
   qrImagen              String
 }
+

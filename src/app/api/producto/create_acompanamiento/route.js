@@ -1,21 +1,27 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
+export const revalidate = 0;
 export async function POST(request){
     const data = await request.json();
 
     console.log(data);
     try{
-        const newProducto = await db.acompanamiento.create({
+        const newProducto = await db.producto.create({
             data:{
                 nombre: data.nombre.toUpperCase(),
-                gr: data.gr,
-                //precio: Number(data.precio),
+                precio: Number(data.precio),
                 descripcion: data.descripcion,
                 foto: data.foto, 
                 marca_id_marca: parseInt(data.marca),
-                //mercadoLibre: data.mercado_lib,
+                mercadoLibre: data.mercado_lib,
                 cantidad: parseInt(data.cantidad),
+            }
+        })
+        const newAcompanamiento = await db.acompanamiento.create({
+            data:{
+                id_producto: newProducto.id_producto,
+                gr: data.gr,
             }
         })
         return NextResponse.json("Registrado");

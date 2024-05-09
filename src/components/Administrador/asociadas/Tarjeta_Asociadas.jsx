@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 const Tarjeta_Asociadas = ({ id_asociada, nombre, foto, openEdit}) => {
     const {update, setUpdate} = useContext(contexto)
 
+    //Objeto para eliminar las fotografías de asociadas  
     const data = {
         "id_producto": id_asociada,
         "foto": foto,
@@ -14,13 +15,16 @@ const Tarjeta_Asociadas = ({ id_asociada, nombre, foto, openEdit}) => {
     }
 
 
+    //Elminar uns asociada
     const deleteAsociada = (async () => {
+        //Elminar las imágenes de la base de datos
         const deletedImage = await fetch('/api/delete_image', {
             method: 'POST',
             body: JSON.stringify(data),
         })
         const resDeletedImageJSON = await deletedImage.json()
         if (resDeletedImageJSON == 'Arhivo eliminado correctamente') {
+            //Elminar a la asociada de la base de datos
             const res = await fetch('/api/asociadas/delete_asociada', {
                 method: 'POST',
                 body: JSON.stringify(id_asociada),
