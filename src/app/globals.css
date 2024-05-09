@@ -586,6 +586,7 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   background-image: url('/backgroundImagev2.png'); 
   background-size: cover; 
   background-position: center; /* Para centrar el fondo */
+  z-index: 0;
 }
 .fondo-pictograma-carrusel {
   background-image: url('/multimedia/pictogramas2.png'); 
@@ -593,3 +594,9 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   background-position: center; /* Para centrar el fondo */
 }
 
+
+.responsive-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}

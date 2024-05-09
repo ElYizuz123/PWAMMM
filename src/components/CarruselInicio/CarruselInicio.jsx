@@ -2,12 +2,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import React, { useState, useEffect } from 'react';
 import SwiperCore, { Navigation, Pagination, EffectCoverflow, Autoplay } from "swiper/modules";
-import Image from "next/image";
+
 
 // Import Swiper styles
 import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
 import 'swiper/scss';
+import CardCarruselnicio from "../CardCarruselInicio/CardCarruselnicio";
 
 const ruta = '/eventos/';
 
@@ -31,7 +32,11 @@ const CarruselInicio = () => {
 
 
   return (
-    <div className="relative z-10 p-8 mb-16  ">
+    <div className="relative z-1 p-8  ">
+      <div className="w-[600px] h-[1000px] overflow-hidden absolute bottom-0 right-0 mr-0 -z-10">
+          <div className=" w-[1000px] h-[1000px] rounded-full bg-[#f70073] bg-opacity-40 flex justify-center items-center absolute left-0 "></div>
+        </div>
+      
       <Swiper
         modules={[Navigation, Pagination, EffectCoverflow, Autoplay]}
         navigation
@@ -40,9 +45,9 @@ const CarruselInicio = () => {
         coverflowEffect={{
           rotate: 50,   //Efecto similar 3D
           stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: false,
+          depth: 100, //Controla la profundidad o la distancia entre las imágenes en el carrusel
+          modifier: 1, //efecto de transición entre las imágenes.
+          slideShadows: false,// Sombras en los bordes
           spaceBetween: 10  //Espacio entre cada Imagen
         }}
         slidesPerView={3} // Por defecto se ven 3 imagenes 
@@ -74,9 +79,13 @@ const CarruselInicio = () => {
           return (
             <div className="bg-gray-600" key={evento.id_evento}> {/*De llave se asigna el id del evento*/}
               <SwiperSlide key={evento.id_evento}>
-              <div className="bg-gray-600 w-[250px] h-[350px] sm:w-[150px] sm:h-[500px]  md:w-[300px] md:h-[600px] lg:w-[480px] lg:h-[500px] xl:w-[250px] xl:h-[500px] " > {/*Tamaño de la imagen segun el dispositivo*/}
-                <Image src={ruta + evento.foto} alt=""  layout="fill" objectFit="cover" />
-                </div>
+             <CardCarruselnicio 
+             nombre={evento.nombre}
+             descripcion={evento.descripcion}
+            foto={ruta + evento.foto}
+            alte={index}
+            />
+               
               </SwiperSlide >
             </div>
           );

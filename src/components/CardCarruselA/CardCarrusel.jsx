@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-const CardCarrusel = ({ asociada,nombreA,foto,historia, handleAsociada }) => {
+const CardCarrusel = ({ asociada,nombreA,foto,historia, handleAsociada,alt }) => {
     const ruta = "/mezcaleras/";
    
     return (
@@ -9,7 +9,7 @@ const CardCarrusel = ({ asociada,nombreA,foto,historia, handleAsociada }) => {
             <div className=" bg-white flex justify-center items-center rounded-t-3xl">
                 <Image
                     src={foto}
-                    alt="Asociación de Mujeres Mezcaleras de Michoacán"
+                    alt={"Asociación de Mujeres Mezcaleras de Michoacán"+alt}
                     width={300}
                     height={350}
                     className="h-64 w-11/12 rounded-t-3xl rounded-b-none mt-4 object-cover "
