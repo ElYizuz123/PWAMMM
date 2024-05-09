@@ -47,7 +47,7 @@ model botella {
 }
 
 model producto {
-  id_producto      Int                @id @default(autoincrement())   
+  id_producto      Int                @id @default(autoincrement())
   nombre           String             @db.VarChar(45)
   precio           Decimal            @db.Decimal(10, 2)
   descripcion      String
@@ -85,7 +85,7 @@ model venta_individual {
   producto_id_producto Int?
   producto             producto?   @relation(fields: [producto_id_producto], references: [id_producto], onUpdate: NoAction, map: "fk_venta_individual_producto1")
   venta_total          venta_total @relation(fields: [venta_total_id_venta], references: [id_venta], onDelete: NoAction, onUpdate: NoAction, map: "fk_venta_individual_venta_total")
-  
+
   @@index([producto_id_producto], map: "fk_venta_individual_producto1_idx")
   @@index([venta_total_id_venta], map: "fk_venta_individual_venta_total_idx")
 }
@@ -132,3 +132,13 @@ model pregunta_frecuente {
   pregunta               String
   respuesta              String
 }
+
+model ubicacion {
+  id_ubicacion          Int         @id @default(autoincrement())
+  marca                 String
+  mapa                  String
+  ubicacion             String
+  telefono              String
+  qrImagen              String
+}
+
