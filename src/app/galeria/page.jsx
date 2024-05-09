@@ -10,7 +10,7 @@ const berkshire = Berkshire_Swash({
   });
 
 // Página de galería
-function page() {
+function Page() {
 
     return (
         <LayoutPrincipal>
@@ -30,4 +30,4 @@ function page() {
     )
 }
 
-export default page
+export default Page
