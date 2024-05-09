@@ -18,6 +18,7 @@ const k2d = K2D({
 const Page = () => {
   const { productos, total } = useContext(ProductContext);
   const totalProductos = productos.reduce((acc, producto) => acc + producto.cantidad, 0);
+  
   return (
     <LayoutPrincipal>
       <div className={k2d.className}>

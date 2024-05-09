@@ -1,10 +1,9 @@
 import db from "@/libs/db";
 import { NextResponse } from "next/server";
 
-export const revalidate = 0;
 export async function GET() {
   try {
-    const acompanamiento = await db.acompanamiento.findMany({
+    const producto = await db.botella.findMany({
       include: {
         producto: {
           include: {
@@ -14,8 +13,8 @@ export async function GET() {
       }
     });
 
-    console.log(acompanamiento);
-    return NextResponse.json(acompanamiento);
+    console.log(producto);
+    return NextResponse.json(producto);
   } catch (error) {
     console.error("Error al leer los datos", error);
     return {

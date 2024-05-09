@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import ProductosPago from "./ProductosPago";
 import FormaPago from "./FormaPago";
+
 import {
   ChevronDownIcon,
   ChevronUpIcon,
@@ -55,9 +56,12 @@ const estados = [
 ];
 
 function Formulario() {
-  const { productos, total, isEnvio, pago } = useContext(ProductContext);
+  const { productos, total, isEnvio, pago, limpiarProductos } = useContext(ProductContext);
   const [isFormVisiblePersonales, setIsFormVisiblePersonales] = useState(false);
   const [isFormVisibleDireccion, setIsFormVisibleDireccion] = useState(false);
+  const [personalError, setPersonalError] = useState("");
+  const [direccionError, setDireccionError] = useState("");
+  const [transferencia, setTransferencia] = useState(false);
 
   const {
     register,
@@ -73,14 +77,7 @@ function Formulario() {
   };
   const toggleFormDireccion = () => {
     setIsFormVisibleDireccion(!isFormVisibleDireccion);
-  };
-
-  const [personalError, setPersonalError] = useState(
-    "Falta por llenar datos personales"
-  );
-  const [direccionError, setDireccionError] = useState(
-    "Falta por llenar datos de dirección"
-  );
+  }; 
 
   const validatePersonales = () => {
     const values = getValues(["nombre", "apellidos", "telefono", "email"]);
@@ -150,25 +147,26 @@ function Formulario() {
     }
 
     if (validatePersonales() && validateDireccion()) {
+      data.envio = isEnvio;
+      data.total = isEnvio === 1 ? total + 199 : total;
       console.log(data);
 
       try {
-        const response = await fetch("/api/tienda/create_venta", {
+        const response = await fetch("/api/ventas/create_venta", {
           method: "POST",
+          body: JSON.stringify({ data: data, productos: productos }),
           headers: {
             "Content-Type": "application/json",
-            // Si necesitas autenticación, como un token, también deberías incluirlo aquí.
-            // 'Authorization': `Bearer ${token}`,
           },
-          body: JSON.stringify(data),
         });
 
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         // MANDA LOS DATOS NECESARIOS PARA EL CORREO
-        const responseData = await fetch("/api/sendEmail_Ventas", {
+        const responseData = await fetch("/api/send_emailVenta", {
           method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
           body: JSON.stringify({
             nombreCliente: data.nombre,
             apellidoCliente: data.apellidos,
@@ -189,16 +187,21 @@ function Formulario() {
           }),
         });
 
-        if (!response.ok && !responseData.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`); // Lanza un error si la respuesta no es satisfactoria
+        if (!responseData.ok) {
+          throw new Error(`HTTP error! status: ${responseData.status}`);
         }
-        const responseD = await responseData.json();
-        console.log(responseD);
+        const result = await response.json();
+        const responseEmail = await responseData.json();
+        console.log(result, responseEmail);
+        
+        limpiarProductos();
 
-        const result = await response.json(); // Espera y convierte la respuesta del servidor en JSON
-        console.log(result); // Muestra el resultado en la consola para depuración
+        if(pago!==1){
+          setTransferencia(true)
+        }
+        
       } catch (error) {
-        console.error("Error al enviar los datos:", error); // Maneja cualquier error que ocurra durante el fetch
+        console.error("Error en el proceso:", error); // Maneja cualquier error que ocurra durante el fetch
       }
     }
   };
@@ -255,7 +258,7 @@ function Formulario() {
                               "El nombre no puede exceder los 30 caracteres", // Máxima longitud
                           },
                           pattern: {
-                            value: /^[A-Za-z\s]+$/i,
+                            value: /^[A-Za-z\sáéíóúÁÉÍÓÚñÑüÜ]+$/i,
                             message: "El nombre solo puede contener letras", // Patrón regex para solo letras
                           },
                         })}
@@ -299,7 +302,7 @@ function Formulario() {
                               "El nombre no puede exceder los 45 caracteres", // Máxima longitud
                           },
                           pattern: {
-                            value: /^[A-Za-z\s]+$/i,
+                            value: /^[A-Za-z\sáéíóúÁÉÍÓÚñÑüÜ]+$/i,
                             message: "Los apellidos solo puede contener letras", // Patrón regex para solo letras
                           },
                         })}
@@ -382,12 +385,8 @@ function Formulario() {
                       <input
                         {...register("telefono", {
                           required: "Este campo no puede ir vacío",
-                          maxLength: {
-                            value: 10,
-                            message: "Escribe el número en formato: 4433000000", // Máxima longitud
-                          },
                           pattern: {
-                            value: /^[0-9]*$/, // Esta regex permite solo números
+                            value: /^\d{10}$/, // Esta regex permite solo números y exactamente 10 dígitos
                             message: "Escribe el número en formato: 4433000000",
                           },
                         })}
@@ -402,7 +401,7 @@ function Formulario() {
                           ? "border-[#F70073]"
                           : "border-[#C1D128]"
                       }`}
-                        placeholder=" "
+                        placeholder=""
                       />
                       <label
                         htmlFor="telefono"
@@ -585,7 +584,7 @@ function Formulario() {
                               "La ciudad no puede exceder los 45 caracteres", // Máxima longitud
                           },
                           pattern: {
-                            value: /^[A-Za-z\s]+$/i,
+                            value: /^[A-Za-z\sáéíóúÁÉÍÓÚñÑüÜ]+$/i,
                             message: "La ciudad solo puede contener letras", // Patrón regex para solo letras
                           },
                         })}
@@ -624,15 +623,10 @@ function Formulario() {
                       <input
                         {...register("cp", {
                           required: "Este campo no puede ir vacío",
-                          maxLength: {
-                            value: 5,
-                            message:
-                              "El codigo postal no puede exceder los 5 caracteres", // Máxima longitud
-                          },
                           pattern: {
-                            value: /^[0-9]*$/,
+                            value: /^\d{5}$/,
                             message:
-                              "El codigo postal solo puede contener números", // Patrón regex para solo letras
+                              "El codigo postal solo puede contener números y deben ser 5", // Patrón regex para solo letras
                           },
                         })}
                         type="text"
@@ -822,7 +816,10 @@ function Formulario() {
                   {/* Columna de forma de pago */}
                   <div className="px-[17px]">
                     {/* Se llama a forma pago. Mandando el triggerSubmit y le digo que va activar */}
-                    <FormaPago triggerSubmit={handleSubmit(onSubmit)} />
+                    <FormaPago
+                      transferencia={transferencia}
+                      setTransferencia={setTransferencia}
+                    />
                   </div>
                 </div>
                 <div>

@@ -14,11 +14,10 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-const Tarjeta = ({
+const Tarjeta_Botella = ({
   id_producto,
   nombre,
   marca,
-  agave,
   precio,
   alcohol,
   ml,
@@ -47,7 +46,7 @@ const Tarjeta = ({
       };
 
       addProductos(newProduct);
-
+      
       setTimeout(() => {
         setButtonState("idle");
       }, 3000);
@@ -56,6 +55,7 @@ const Tarjeta = ({
 
   return (
     <div className={`${k2d.className} ${existencia ? "" : "opacity-80 "}`}>
+      {/* DISEÑO TARJETA SIN EXISTENCIA */}
       <div className="card relative rounded-5 overflow-hidden">
         {!existencia && (
           <div className="absolute inset-0 flex justify-center items-center ">
@@ -64,9 +64,9 @@ const Tarjeta = ({
             </p>
           </div>
         )}
+        {/* DISEÑO VER MÁS DETALLES */}
         <Link
           href={`/tienda/abrir_producto/${tipo}/${id_producto}`}
-          // className="absolute top-0 right-0 m-2 p-1 z-0"
           className="absolute top-0 right-0 m-2 p-2 text-pink-600 rounded"
         >
           <div className="absolute top-0 right-0 mt-2 mr-2 hover:scale-110 transition transform duration-300 ease-in-out">
@@ -76,7 +76,6 @@ const Tarjeta = ({
               className="relative cursor-pointer"
             >
               <EyeIcon className="h-8 w-8 text-pink-600" />
-
               {showTooltip && (
                 <div className="absolute -bottom-10 left-0 transform -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded tooltip">
                   Ver más detalles
@@ -95,10 +94,9 @@ const Tarjeta = ({
             alt="Fondo"
           />
         </div>
-
+        {/* DISEÑO TARJETAS MEZCAL */}
         <section className="details">
-          {tipo !== 2 ? (
-            <div>
+          <div className="pb-4">
               <div className="min-details">
                 <h1 className="text-xl flex justify-between font-bold">
                   {nombre}
@@ -106,7 +104,6 @@ const Tarjeta = ({
                     <h1>${precio}</h1>
                   </div>
                 </h1>
-
                 <span className="font-normal text-sm">{marca}</span>
               </div>
               <div className="options">
@@ -125,21 +122,9 @@ const Tarjeta = ({
                   </div>
                 </div>
               </div>
+          
             </div>
-          ) : (
-            <div className="pb-4">
-              <div className="min-details ">
-                <h1 className="text-xl flex justify-between font-semibold">
-                  {nombre} {ml}gr
-                  <div>
-                    <h1 className="price text-green-700">${precio}</h1>
-                  </div>
-                </h1>
-                <span className="font-normal">{marca}</span>
-              </div>
-            </div>
-          )}
-
+          {/*DISEÑO BOTÓN SIN EXISTENCIAS  */}
           {cantidad !== 0 ? (
             <button
               className={`mt-2 btn font-semibold ${
@@ -160,7 +145,7 @@ const Tarjeta = ({
               SIN EXISTENCIA
             </div>
           )}
-
+          {/* DISEÑO BOTÓN MERCADO LIBRE (SOLO SI HAY EN PAGINA) */}
           {mercadoLibre !== "NULL" && (
             <button className="btn2 mt-1 flex items-center justify-center">
               <a href={mercadoLibre} target="_blank" className="font-semibold">
@@ -179,4 +164,4 @@ const Tarjeta = ({
   );
 };
 
-export default Tarjeta;
+export default Tarjeta_Botella;
