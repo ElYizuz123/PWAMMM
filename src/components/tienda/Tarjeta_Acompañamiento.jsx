@@ -42,7 +42,7 @@ const Tarjeta_Acompañamiento =({
         nombre,
         marca,
         precio,
-        ml,
+        gr,
       };
 
       addProductos(newProduct);

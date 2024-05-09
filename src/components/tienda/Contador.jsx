@@ -7,7 +7,13 @@ import Link from "next/link";
 
 const Contador = ({
   id_producto,
-  
+  nombre,
+  marca,
+  precio,
+  imagen,
+  mercadoLibre,
+  ml,
+  alcohol,
   cantidad2,
 }) => {
   const [count, setCount] = useState(1);
@@ -21,20 +27,25 @@ const Contador = ({
   const decrement = () => {
     setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : prevCount));
   };
-  
+
   const { addProductos } = useContext(ProductContext);
- const handleAddToCart = () => {
+  const handleAddToCart = () => {
     setButtonState("loading");
     setTimeout(() => {
       setButtonState("success");
-    const newProduct = {
-      id_producto,
-      count,
-    };
-    console.log({ id_producto });
-    addProductos(newProduct);
+      const newProduct = {
+        id_producto,
+        count,
+        nombre,
+        marca,
+        precio,
+        imagen,
+        ml,
+      };
 
-     setTimeout(() => {
+      addProductos(newProduct);
+
+      setTimeout(() => {
         setButtonState("idle");
       }, 3000);
     }, 2500);
@@ -58,9 +69,6 @@ const Contador = ({
           )}
         </button>
       </div>
-
-
-
 
       <div className="flex items-center justify-center w-[120px] ml-[95px] mt-4">
         <button

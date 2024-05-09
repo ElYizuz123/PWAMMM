@@ -5,9 +5,9 @@ import { useContext } from "react";
 import { ProductContext } from "@/context/ProductContext";
 import { ShoppingCartIcon } from "@heroicons/react/outline";
 import { XIcon, TrashIcon } from "@heroicons/react/solid";
-import { FaShoppingCart } from 'react-icons/fa';
-import { MdRemoveShoppingCart } from 'react-icons/md';
-import { EmojiSadIcon } from '@heroicons/react/outline';
+import { FaShoppingCart } from "react-icons/fa";
+import { MdRemoveShoppingCart } from "react-icons/md";
+import { EmojiSadIcon } from "@heroicons/react/outline";
 
 const Carrito = () => {
   const { productos, total, cartCountAnimation, deleteProduct } =
@@ -49,64 +49,60 @@ const Carrito = () => {
 
           {/* Contenido del carrito */}
           <div className="flex flex-col h-full">
-             <div
-                className="overflow-y-auto p-4 custom-scrollbar "
-                style={{ height: "calc(100% - 160px)" }}
-              >
-            {productos.length === 0 ? (
-              
+            <div
+              className="overflow-y-auto p-4 custom-scrollbar "
+              style={{ height: "calc(100% - 160px)" }}
+            >
+              {productos.length === 0 ? (
                 <div className="flex justify-center mt-48">
                   <MdRemoveShoppingCart className="w-20 h-20 text-gray-500" />
                   <EmojiSadIcon className="w-6 h-6 text-gray-500" />
                 </div>
-             
-             ) : ( 
-              <div>
-
-               
-                {productos.map((producto) => (
-                  <div
-                    key={producto.id}
-                    className="flex items-start justify-between mb-6 bg-white p-4 rounded-lg shadow-md"
-                  >
-                    <div className="flex">
-                      <img
-                        src={`/productos/${producto.imagen}`}
-                        alt={producto.nombre}
-                        className="w-20 h-20 object-cover rounded-md mr-4"
-                      />
-                      <div className="flex flex-col justify-between">
-                        <div>
-                          <h3 className="font-bold text-base">
-                            {producto.nombre}
-                          </h3>
-                          <p className="text-xs">{producto.marca}</p>
-                          <p className="text-xs">{producto.ml}ml</p>
-                        </div>
-                        <div>
-                          <p className="text-sm">
-                            Cantidad: {producto.cantidad}
-                          </p>
-                          <p className="text-md font-bold">
-                            Subtotal: ${producto.cantidad * producto.precio}
-                          </p>
+              ) : (
+                <div>
+                  {productos.map((producto) => (
+                    <div
+                      key={producto.id}
+                      className="flex items-start justify-between mb-6 bg-white p-4 rounded-lg shadow-md"
+                    >
+                      <div className="flex">
+                        <img
+                          src={`/productos/${producto.imagen}`}
+                          alt={producto.nombre}
+                          className="w-20 h-20 object-cover rounded-md mr-4"
+                        />
+                        <div className="flex flex-col justify-between">
+                          <div>
+                            <h3 className="font-bold text-base">
+                              {producto.nombre}
+                            </h3>
+                            <p className="text-xs">{producto.marca}</p>
+                            <p className="text-xs">{producto.ml}ml</p>
+                          </div>
+                          <div>
+                            <p className="text-sm">
+                              Cantidad: {producto.cantidad}
+                            </p>
+                            <p className="text-md font-bold">
+                              Subtotal: ${producto.cantidad * producto.precio}
+                            </p>
+                          </div>
                         </div>
                       </div>
+                      <div className="flex flex-col justify-between items-end">
+                        <p className="text-md font-bold text-black">
+                          ${producto.precio}
+                        </p>
+                        <TrashIcon
+                          className="h-5 w-5 text-red-500 cursor-pointer transition duration-300 ease-in-out hover:text-red-700 hover:scale-110"
+                          onClick={() => handleDelete(producto.id_producto)}
+                        />
+                      </div>
                     </div>
-                    <div className="flex flex-col justify-between items-end">
-                      <p className="text-md font-bold text-black">
-                        ${producto.precio}
-                      </p>
-                      <TrashIcon
-                        className="h-5 w-5 text-red-500 cursor-pointer transition duration-300 ease-in-out hover:text-red-700 hover:scale-110"
-                        onClick={() => handleDelete(producto.id_producto)}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-             )} 
+                  ))}
+                </div>
+              )}
+            </div>
             {/* Total */}
             <div className="flex justify-between items-center font-bold border-t  pt-2">
               <p>Total:</p>
@@ -132,7 +128,6 @@ const Carrito = () => {
               </Link>
             )}
           </div>
-        </div>
         </div>
       )}
     </div>

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Ficha_Botella from "./Ficha_Botella";
 import Ficha_Acompañamiento from "./Ficha_Acompañamiento";
+import Tarjeta_Botella from "./Tarjeta_Botella";
+import Tarjeta_Acompañamiento from "./Tarjeta_Acompañamiento";
 
 const MostrarProductosFicha = ({ tipo, idProducto }) => {
   const [botellas, setBotellas] = useState([]);
@@ -32,10 +34,12 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
   );
 
   return (
-    <div className="pb-16">
+    <div
+      className="  pb-16  flex justify-center"
+    >
       <div className="pt-5 items-center relative h-screen">
         <div className="flex justify-center items-center">
-          <div className="relative  py-44  z-10 flex items-start  w-[1250px]">
+          <div className="relative  py-44   flex items-start  w-[1250px]">
             <Link href="/tienda">
               <button class="enter-button">
                 <svg
@@ -102,13 +106,13 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
               mercadoLibre={botellaEncontrada.producto?.mercadoLibre || "NULL"}
               descripcion={botellaEncontrada.producto.descripcion}
               cantidad={botellaEncontrada.producto.cantidad}
-              alcohol={botellaEncontrada.producto.cantidad_alcohol}
-              agave={botellaEncontrada.producto.tipo_agave}
+              alcohol={botellaEncontrada.cantidad_alcohol}
+              agave={botellaEncontrada.tipo_agave}
             />
           ) : Number(tipo) === 2 && acompanamientoEncontrado ? (
             <Ficha_Acompañamiento
               id_producto={acompanamientoEncontrado.producto.id_producto}
-              nombre={acompanamientoEncontrado.nombre}
+              nombre={acompanamientoEncontrado.producto.nombre}
               marca={acompanamientoEncontrado.producto.marca.nombre}
               precio={acompanamientoEncontrado.producto.precio}
               gr={acompanamientoEncontrado.gr}
@@ -123,64 +127,70 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             <p>No se encontró el producto solicitado.</p>
           )}
         </div>
-        {/* {productos.filter(
-        (item) =>
-          item.marca_id_marca === idMarca.marca_id_marca &&
-          item.id_producto !== Number(id_producto)
-      ).length > 0 && (
-        <div className="relative w-full flex justify-center items-center mt-40">
-          <p className="text-[#dd6c5a] text-3xl font-bold bg-white px-9 rounded-lg">
-            PRODUCTOS RELACIONADOS
-          </p>
-        </div>
-      )} */}
-        {/* {tipo == 1 ? (
-        <div className="z-0  w-full flex flex-wrap gap-10 justify-center items-center top-11 pt-11">
-          {productos
-            .filter(
-              (item) =>
-                item.marca_id_marca === idMarca.marca_id_marca &&
-                item.id_producto !== Number(idProducto)
-            )
-            .slice(0, 3)
 
-            .map((producto) => (
-              <Tarjeta
-                id_producto={botella.producto.id_producto}
-                    nombre={botella.producto.nombre}
-                    marca={botella.producto.marca.nombre}
-                    precio={botella.producto.precio}
-                    ml={botella.ml}
-                    foto={botella.producto.foto}
-                    mercadoLibre={botella.producto?.mercadoLibre || "NULL"}
-                    alcohol={botella.producto.cantidad_alcohol}
-                    agave={botella.producto.tipo_agave}
-              ></Tarjeta>
-            ))}
+        {botellas.filter(
+          (item) =>
+            item.producto.marca_id_marca === item.producto.marca.id_marca &&
+            item.id_roducto !== botellaEncontrada
+        ).length > 0 && (
+          <div className=" w-full flex justify-center items-center mt-40 ">
+            <p className="text-[#dd6c5a] text-3xl font-bold bg-white px-9 rounded-lg  ">
+              PRODUCTOS RELACIONADOS
+            </p>
+          </div>
+        )}
+        <div className="w-full flex flex-wrap gap-10 justify-center items-center top-11 pt-11  ">
+          {Number(tipo) === 1 && botellaEncontrada ? (
+            botellas
+              .filter(
+                (item) =>
+                  item.producto.marca_id_marca ===
+                    botellaEncontrada.producto.marca.id_marca &&
+                  item.id_producto !== botellaEncontrada.producto.id_producto
+              )
+              .slice(0, 3)
+              .map((filteredItem) => (
+                <Tarjeta_Botella
+                  id_producto={filteredItem.producto.id_producto}
+                  nombre={filteredItem.producto.nombre}
+                  marca={filteredItem.producto.marca.nombre}
+                  precio={filteredItem.producto.precio}
+                  ml={filteredItem.ml}
+                  imagen={filteredItem.producto.foto}
+                  mercadoLibre={filteredItem.producto?.mercadoLibre || "NULL"}
+                  descripcion={filteredItem.producto.descripcion}
+                  cantidad={filteredItem.producto.cantidad}
+                  alcohol={filteredItem.cantidad_alcohol}
+                  agave={filteredItem.tipo_agave}
+                />
+              ))
+          ) : Number(tipo) === 2 && acompanamientoEncontrado ? (
+            acompanamientos
+              .filter(
+                (item) =>
+                  item.producto.marca_id_marca ===
+                    acompanamientoEncontrado.producto.marca.id_marca &&
+                  item.id_producto !==
+                    acompanamientoEncontrado.producto.id_producto
+              )
+              .slice(0, 3)
+              .map((filteredItem) => (
+                <Tarjeta_Acompañamiento
+                  id_producto={filteredItem.producto.id_producto}
+                  nombre={filteredItem.producto.nombre}
+                  marca={filteredItem.producto.marca.nombre}
+                  precio={filteredItem.producto.precio}
+                  gr={filteredItem.gr}
+                  imagen={filteredItem.producto.foto}
+                  mercadoLibre={filteredItem.producto?.mercadoLibre || "NULL"}
+                  descripcion={filteredItem.producto.descripcion}
+                  cantidad={filteredItem.producto.cantidad}
+                />
+              ))
+          ) : (
+            <p>No se encontró el producto solicitado.</p>
+          )}
         </div>
-      ) : (
-        <div className="z-0  w-full flex flex-wrap gap-10 justify-center items-center top-11 pt-11">
-          {acompanamientos
-            .filter((item) => item.id_acompanamiento !== Number(id_producto))
-            .slice(0, 3)
-            .map((acompanamiento) => (
-              <Tarjeta_Acompa
-otneima
-               <Ficha_Acompañamiento
-                    id_producto={acompanamiento.producto.id_producto}
-                    nombre={acompanamiento.nombre}
-                    marca={acompanamiento.marca.nombre}
-                    precio={acompanamiento.producto.precio}
-                    gr={acompanamiento.gr}
-                    foto={acompanamiento.producto.foto}
-                    mercadoLibre={
-                      acompanamiento.producto?.mercadoLibre || "NULL"
-                    }
-                    cantidad={acompanamiento.producto.cantidad}
-              ></Tarjeta>
-            ))}
-        </div>
-      )} */}
       </div>
     </div>
   );
