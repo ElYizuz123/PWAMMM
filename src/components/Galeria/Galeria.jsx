@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import galeria from '/src/components/Galeria/galeria.css'
+import galeria from '@/components/Galeria/galeria.css'
 import { VscChromeClose } from "react-icons/vsc";
 import React, { useEffect, useState } from 'react';
 
