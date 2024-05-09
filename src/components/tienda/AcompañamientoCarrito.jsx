@@ -21,13 +21,13 @@ const AcompañamientoCarrito = () => {
     <div>
       {acompanamientos 
        .map((acompanamiento) => (
-          <MostrarAcompanamientoCarrito
-            id_producto={acompanamiento.id_acompanamiento}
-            nombre={acompanamiento.nombre}
-            precio={"200"}
+          <MostrarAcompanamientoCarrito key={acompanamiento.id_acompanamiento}
+            id_producto={acompanamiento.producto.id_producto}
+            nombre={acompanamiento.producto.nombre}
+            precio={acompanamiento.producto.precio}
+            imagen={acompanamiento.producto.foto}
             ml={acompanamiento.gr}
-            imagen={acompanamiento.foto}
-           marca={acompanamiento.marca.nombre}
+            marca={acompanamiento.producto.marca.nombre}
           ></MostrarAcompanamientoCarrito>
         ))}
     </div>

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Image from 'next/image';
 
-
+//Hexadecimal para evitar imágenes repetidas 
 const randomHexa = () => {
     const randomNumber = Math.floor(Math.random() * 65536);
     const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
@@ -105,6 +105,7 @@ const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
             </div>
             <div className='w-full h-full flex justify-between'>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
+                    {/* Mostrar imagen previa */}
                     {productPhoto && (
                         <Image height={400} width={400} src={URL.createObjectURL(productPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                     )}

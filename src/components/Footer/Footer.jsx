@@ -77,7 +77,7 @@ const Footer = () => {
 
         <div className="text-center text-gray-500 text-xs border-t border-gray-700 pt-4 mt-4 font-bold">
           ARISTEO MERCADO NO. 161, LOCAL 4, COL. DEL EMPLEADO, MORELIA, MICH,
-          PLAZA COMERCIAL "TAKAMBA"
+          PLAZA COMERCIAL TAKAMBA
           <div className="mt-2">
             © 2024 MUJERES MEZCALERAS DE MICHOACÁN A.C.
           </div>

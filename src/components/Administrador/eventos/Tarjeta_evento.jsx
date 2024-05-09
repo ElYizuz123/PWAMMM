@@ -6,13 +6,14 @@ import Swal from 'sweetalert2'
 const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit}) => {
     const {update, setUpdate} = useContext(contexto)
 
+    //Data para borrar imagen del servidor 
     const data = {
         "id_producto": id_evento,
         "foto": foto,
         "source": "eventos"
     }
 
-
+    //Manejo de la eliminación del evento
     const deleteEvento = (async () => {
         const deletedImage = await fetch('/api/delete_image', {
             method: 'POST',

@@ -22,7 +22,7 @@ const Login = () => {
             setError(res.error)
         }
         else {
-            router.push('/administrador/ventas')
+            router.push('/administrador/graficas')
         }
     }
 

@@ -4,8 +4,7 @@ import { Preahvihear } from "next/font/google";
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { PlusIcon, CheckIcon } from "@heroicons/react/solid"; // o @heroicons/react/solid para un estilo lleno
-import { CheckCircleIcon, RefreshIcon } from "@heroicons/react/solid";
+import { PlusIcon, CheckIcon, RefreshIcon } from "@heroicons/react/solid"; // o @heroicons/react/solid para un estilo lleno
 
 const MostrarAcompanamientoCarrito = ({
   id_producto,
@@ -38,7 +37,6 @@ const MostrarAcompanamientoCarrito = ({
         setButtonState("idle");
       }, 2000);
     }, 1500);
-    
   };
   return (
     <div className="space-y-4 mt-4">

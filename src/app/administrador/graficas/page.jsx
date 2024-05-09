@@ -13,7 +13,7 @@ const Page = () => {
             <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Gráficas</p>
           </div>
           <div className='absolute bottom-0 w-full -z-10'>
-            <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />
+            <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} className='object-cover w-full opacity-60' />
           </div>
           <LecturaDatos/>
         </div>

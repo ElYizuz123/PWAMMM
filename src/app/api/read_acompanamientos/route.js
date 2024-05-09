@@ -1,12 +1,17 @@
 import db from "@/libs/db";
 import { NextResponse } from "next/server";
 
+export const revalidate = 0;
 export async function GET() {
   try {
     const acompanamiento = await db.acompanamiento.findMany({
       include: {
-        marca: true,
-      },
+        producto: {
+          include: {
+            marca: true
+          }
+        }
+      }
     });
 
     console.log(acompanamiento);

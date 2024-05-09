@@ -4,7 +4,7 @@ import LeerAsociadas from '@/components/Administrador/asociadas/LeerAsociadas'
 import Paginacion from '@/components/Administrador/productos/Paginacion'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const Page = () => {
   return (
@@ -24,11 +24,15 @@ const Page = () => {
                 <Crear_Asociada/>
               </div>
               <div >
-                <LeerAsociadas/>
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <LeerAsociadas/>
+                </Suspense>
               </div>
             </div>
             <div className='absolute bottom-5 right-0'>
-                    <Paginacion totalPages={10}/>
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <Paginacion/>
+                </Suspense>
               </div>
           </div>
         </main>

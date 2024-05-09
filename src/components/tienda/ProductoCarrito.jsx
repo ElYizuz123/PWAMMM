@@ -15,20 +15,22 @@ const ProductoCarrito = ({
   subtotal,
 }) => {
   const [quantity, setQuantity] = useState(cantidad);
-  
+  const { updateQuantity, deleteProduct } = useContext(ProductContext);
+
+  // FUNCIÓN PARA INCREMENTAR LA CANTIDAD DE PRODUCTOS
   const incrementQuantity = () => {
     const newQuantity = quantity + 1;
-    updateQuantityAndTotal(newQuantity, 1);
+    updateQuantityAndTotal(newQuantity, "SUMA");
   };
-
+  // FUNCIÓN PARA DECREMENTAR LA CANTIDAD DE PRODUCTOS
   const decrementQuantity = () => {
     const newQuantity = Math.max(1, quantity - 1);
-    updateQuantityAndTotal(newQuantity, 2);
+    updateQuantityAndTotal(newQuantity, "RESTA");
   };
 
-  const { updateQuantity } = useContext(ProductContext);
+  //EDITA LA CANTIDAD DEL PRODUCTO A COMPRAR 
 
-  const updateQuantityAndTotal = (newQuantity, tipo) => {
+  const updateQuantityAndTotal = (newQuantity, operacion) => {
     setQuantity(newQuantity);
     
     const newProduct = {
@@ -41,21 +43,18 @@ const ProductoCarrito = ({
       cantidad: newQuantity,
     };
 
-    updateQuantity(tipo, newProduct);
+    updateQuantity(operacion, newProduct);
   };
-
-  const { deleteProduct } = useContext(ProductContext);
-
-  const handleDelete = (id_producto, nombre) => {
-    deleteProduct(id_producto, nombre);
+  //FUNCIÓN PARA ELIMINAR UN PRODUCTO 
+  const handleDelete = (id_producto) => {
+    deleteProduct(id_producto);
   };
 
   return (
     <div>
       <div className="flex items-center bg-white shadow rounded-lg p-4 my-4">
-        {/* Product details with fixed width */}
         <div className="flex items-center space-x-4 flex-1 min-w-0">
-          {/* Ajusta el ancho mínimo según tus necesidades */}
+          {/* DISEÑO TARJETA PRODUCTOS EN CARRITO */}
           <img
             className="h-[100px] w-[100px] rounded"
             src={`/productos/${imagen}`}
@@ -68,10 +67,9 @@ const ProductoCarrito = ({
             <div className="text-xs text-gray-500">{marca}</div>
           </div>
         </div>
-
         <div className="flex-grow text-center ">${precio}</div>
-
         <div className="flex items-center justify-center w-[120px]">
+          {/* BOTÓN DECREMENTAR PRODUCTO CARRITO */}
           <button
             className="h-7 w-7 bg-[#f89586] rounded-full text-white font-semibold hover:bg-[#faa4a6] mx-3 transition-colors duration-200 ease-in-out transform active:scale-90 active:translate-y-1"
             onClick={decrementQuantity}
@@ -79,6 +77,7 @@ const ProductoCarrito = ({
             -
           </button>
           <span>{cantidad}</span>
+          {/* BOTÓN INCREMENTAR PRODUCTO CARRITO */}
           <button
             className="h-7 w-7 bg-[#F89586] rounded-full text-white font-semibold hover:bg-[#faa4a6] mx-3 transition-colors duration-200 ease-in-out transform active:scale-90 active:translate-y-1"
             onClick={incrementQuantity}
@@ -90,12 +89,9 @@ const ProductoCarrito = ({
         <div className="flex-grow text-center font-semibold text-green-600">
           ${subtotal}
         </div>
-
+        {/* BOTÓN ELIMINAR PRODUCTO CARRITO */}
         <div className="w-[50px]">
-          <button
-            class="bin-button"
-            onClick={() => handleDelete(nombre)}
-          >
+          <button class="bin-button" onClick={() => handleDelete(id_producto)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

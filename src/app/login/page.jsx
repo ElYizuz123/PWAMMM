@@ -1,4 +1,4 @@
-import Login from '@/components/Administrador/login';
+import Login from '@/components/Administrador/Login';
 import React from 'react'
 import Image from 'next/image'
 import { Berkshire_Swash } from "next/font/google"
