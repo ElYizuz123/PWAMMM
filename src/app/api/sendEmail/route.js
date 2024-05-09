@@ -1,39 +1,39 @@
 "use server"
 
-  import { NextResponse } from "next/server";
+import { Resend } from 'resend';
 
-const nodemailer = require("nodemailer");
-export const revalidate = 0;
+
+const resend = new Resend("re_XfQDaeQe_PsGLmAgSS8BWPnHhy98yd4Q2");
+
 export async function POST(request) {
   try {
-    const { motivo, nombre, apellidos, correo, telefono, comentarios } = await request.json();
+    const data = await request.json();
+    const { motivo, nombre, apellidos, correo, telefono, comentarios } = data;
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // Use `true` for port 465, `false` for all other ports
-      auth: {
-        user: "carlosgascac@gmail.com",
-        pass: "isii xgeq dooi szvw",
-      },
-    });
 
-    const mailOption = {
-      from: "carlosgascac@gmail.com",
+    const emailResponse = await resend.emails.send({
+      from: "Asociación de Mujeres Mezcaleras de Michoacán <onboarding@resend.dev>",
       to: "carlosgascac@gmail.com",
       subject: motivo,
+
       html: `
-    <h3>Nombre: ${nombre} ${apellidos}</h3>
-    <h3>Correo: ${correo}</h3>
-    <h3>Teléfono: ${telefono}</h3>
-    <h3>Comentarios extra: ${comentarios}</h3>
-    `
-    }
+      <h2 className="font-bold text-blue-400">Datos de Contacto:</h2>
+      <h3>Nombre: ${nombre} ${apellidos}</h3>
+      <h3>Correo: ${correo}</h3>
+      <h3>Teléfono: ${telefono}</h3>
+      <h3>Comentarios extra: ${comentarios}</h3>
+      `,
+    });
 
-    await transporter.sendMail(mailOption)
-
-    return NextResponse.json({ message: "Correo enviado correctamente." }, { status: 200 })
+    return new Response(JSON.stringify({ message: "Email enviado" }), {
+      headers: { "Content-Type": "application/json" },
+      status: 200,
+    });
   } catch (error) {
-    return NextResponse.json({ message: "Ha ocurrido un error al enviar el correo." }, { status: 500 })
+    // Si ocurrió un error, devuelve una respuesta de error
+    return new Response(JSON.stringify({ error: "Error en email" }), {
+      headers: { "Content-Type": "application/json" },
+      status: 500,
+    });
   }
 }

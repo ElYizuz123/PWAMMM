@@ -132,3 +132,13 @@ model pregunta_frecuente {
   pregunta               String
   respuesta              String
 }
+
+model ubicacion {
+  id_ubicacion          Int         @id @default(autoincrement())
+  marca                 String
+  mapa                  String
+  ubicacion             String
+  telefono              String
+  qrImagen              String
+}
+

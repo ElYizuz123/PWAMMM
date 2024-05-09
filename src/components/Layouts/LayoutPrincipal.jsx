@@ -48,7 +48,6 @@ const LayoutPrincipal = ({ children }) => {
   const [styleNav, setStyleNav] = useState("size-12 top-6");
   const [styleLogo, setSyleLogo] = useState("top-6");
 
-  //Usamos use Effect x q si no vale madre despues
   useEffect(() => {
     window.addEventListener("scroll", function () {
       if (window.scrollY === 0) {

@@ -8,14 +8,14 @@ import React from 'react';
 function page() {
   return (
     <LayoutPrincipal>
-      <div className="animate-fade-in bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+      <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
         <div className="mt-40 h-max relative w-full overflow-x-hidden">
 
 
           {/* responsive hecho, a mejorar */}
           {/* REDUCIR CÓDIGO JS AL HOOK FORM */}
           <div className="w-full mb-16">
-            <ContactoForm></ContactoForm>
+            <ContactoForm/>
           </div>
 
           {/* PREGUNTAS FRECUENTES ESTAS YA JALA BONITO LO RESPONSIVE CREO */}
@@ -25,16 +25,16 @@ function page() {
               Preguntas Frecuentes</p>
             <br />
             <div className="flex items-center align-middle object-center">
-              <PreguntasFrecuentes></PreguntasFrecuentes>
+              <PreguntasFrecuentes/>
             </div>
           </div>
 
 
           {/* FALTA TODA RESPONSIVIDAD */}
-          {/* <div>
+          <div>
           <p className="text-6xl mb-8 ml-20">Tiendas Físicas</p>
           <ListaUbicaciones />
-        </div> */}
+          </div>
 
           <br />
 
