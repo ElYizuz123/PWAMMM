@@ -5,7 +5,6 @@ import React from 'react';
 
 const berkshire = Berkshire_Swash({
     weight: ["400"],
-    styles: ["italic", "normal"],
     subsets: ["latin"],
   });
 
