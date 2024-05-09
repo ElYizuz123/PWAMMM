@@ -96,7 +96,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
 
         <div>
           {Number(tipo) === 1 && botellaEncontrada ? (
-            <Ficha_Botella
+            <Ficha_Botella key={botellaEncontrada.producto.id_producto}
               id_producto={botellaEncontrada.producto.id_producto}
               nombre={botellaEncontrada.producto.nombre}
               marca={botellaEncontrada.producto.marca.nombre}
@@ -110,7 +110,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
               agave={botellaEncontrada.tipo_agave}
             />
           ) : Number(tipo) === 2 && acompanamientoEncontrado ? (
-            <Ficha_Acompañamiento
+            <Ficha_Acompañamiento key={acompanamientoEncontrado.producto.id_producto}
               id_producto={acompanamientoEncontrado.producto.id_producto}
               nombre={acompanamientoEncontrado.producto.nombre}
               marca={acompanamientoEncontrado.producto.marca.nombre}
@@ -150,7 +150,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
               )
               .slice(0, 3)
               .map((filteredItem) => (
-                <Tarjeta_Botella
+                <Tarjeta_Botella key={filteredItem.producto.id_producto}
                   id_producto={filteredItem.producto.id_producto}
                   nombre={filteredItem.producto.nombre}
                   marca={filteredItem.producto.marca.nombre}
@@ -175,7 +175,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
               )
               .slice(0, 3)
               .map((filteredItem) => (
-                <Tarjeta_Acompañamiento
+                <Tarjeta_Acompañamiento key={filteredItem.producto.id_producto}
                   id_producto={filteredItem.producto.id_producto}
                   nombre={filteredItem.producto.nombre}
                   marca={filteredItem.producto.marca.nombre}

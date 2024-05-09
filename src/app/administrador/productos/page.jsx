@@ -5,6 +5,7 @@ import Leer_productos from '@/components/Administrador/productos/Leer_productos'
 import Paginacion from '@/components/Administrador/productos/Paginacion'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
+import { Suspense } from 'react'
 
 const Page = async () => {
 
@@ -25,11 +26,15 @@ const Page = async () => {
                 <Agregar_producto/>
               </div>
               <div>
-                <Leer_productos/>
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <Leer_productos/>
+                </Suspense>
               </div>
             </div>
             <div className='absolute bottom-5 right-0'>
-                  <Paginacion totalPages={10}/>
+              <Suspense fallback={<div>Cargando...</div>}>
+                <Paginacion/>
+              </Suspense>
               </div>
           </div>
         </main>

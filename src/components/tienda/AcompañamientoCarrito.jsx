@@ -21,7 +21,7 @@ const AcompañamientoCarrito = () => {
     <div>
       {acompanamientos 
        .map((acompanamiento) => (
-          <MostrarAcompanamientoCarrito
+          <MostrarAcompanamientoCarrito key={acompanamiento.id_acompanamiento}
             id_producto={acompanamiento.producto.id_producto}
             nombre={acompanamiento.producto.nombre}
             precio={acompanamiento.producto.precio}

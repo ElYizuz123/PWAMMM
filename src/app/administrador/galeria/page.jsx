@@ -4,7 +4,7 @@ import Crear_foto from '@/components/Administrador/galeria/Crear_foto'
 import Paginacion from '@/components/Administrador/productos/Paginacion'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const Page = () => {
   return (
@@ -24,12 +24,16 @@ const Page = () => {
                 <Crear_foto/>
               </div>
               <div className="items-center justify-center">
+              <Suspense fallback={<div>Cargando...</div>}>
                 <Categorias />
+              </Suspense>
               </div>
               
             </div>
             <div className='absolute bottom-5 right-0'>
-                    <Paginacion totalPages={10}/>
+              <Suspense fallback={<div>Cargando...</div>}>
+                <Paginacion/>
+              </Suspense> 
               </div>
           </div>
         </main>
