@@ -13,8 +13,8 @@ const Leer_evento = () => {
     const [uEventoIsOpen, setUEventoIsOpen] = useState(false)
     const [updateEvento, setUpdateEvento] = useState(null)
     const searchParams = useSearchParams()
-    const editRef = useRef(null)
 
+    //Configuración de los modales
     const customStyles = {
         content: {
             top: '50%',
@@ -34,6 +34,7 @@ const Leer_evento = () => {
         },
     };
 
+    //Lectura de los eventos
     const readData = async () => {
         var search = ""
         if (!page) {
@@ -50,22 +51,26 @@ const Leer_evento = () => {
         setEventos(JSON.parse(resJSON))
     }
 
+    //Conteo de eventos para paginación
     const countData = async () => {
         const res = await fetch('/api/eventos/count_eventos')
         const resJSON = await res.json()
         setTotalPages(Math.ceil((resJSON) / 12))
     }
 
+    //Cerrado del popup para editar eventos
     const onClose = () => {
         setUEventoIsOpen(false)
     }
 
+    //Abrir el popup para editar eventos
     const isOpen = (data) => {
         setUpdateEvento(data)
         setUEventoIsOpen(true)
     }
 
 
+    //Inicialización de lectura de datos 
     useEffect(() => {
         readData()
         countData()

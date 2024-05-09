@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
@@ -6,7 +6,9 @@ import { contexto } from '../UpdateProvider';
 const Crear_marca = ({ isOpen, onClose, asociadas }) => {
     const { register, handleSubmit, reset } = useForm();
     const {update, setUpdate} = useContext(contexto)
+    const [inputValue, setInputValue] = useState('');
 
+    //Crear una nueva marca
     const handleOnSubmit = async (data) => {
         const res = await fetch('/api/marcas/create_marca', {
             method: 'POST',
@@ -32,12 +34,19 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
 
             }); 
         }
+        else if(resJSON == "Marca ya existente"){
+            Swal.fire({
+                icon: "warning",
+                title: "Marca ya registrada",
+                text: "La marca que esta intentando registrar ya existe, intente con otra",
+              })
+        }
         else{
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Algo salió mal!",
-              });
+              })
         }
     }
 

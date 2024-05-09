@@ -33,11 +33,13 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
         register('id_producto')
         register('foto')
         register('hexa')
+        register('id_acompanamiento')
 
         setValue('foto', data.foto)
+        setValue('id_acompanamiento', data.acompanamiento[0].id_acompanamiento)
         setValue('id_producto', idProducto)
         setValue('nombre', data.nombre)
-        setValue('gr', data.gr)
+        setValue('gr', data.acompanamiento[0].gr)
         setValue('precio', data.precio)
         setValue('marca', data.marca.id_marca)
         setValue('cantidad', data.cantidad)
@@ -188,6 +190,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
                     )}
+                    {/* Imagen por default */}
                     {!productPhoto && (<Image height={400} width={400} src={`/productos/${producto ? producto.foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
                     {!productPhoto && (
                         <p className='text-sm'>{producto ? producto.foto : ""}</p>

@@ -23,6 +23,7 @@ const ruta = "/mezcaleras/";
 const tienda = "/tienda/";
 
 const CarruselAsociadas = () => {
+  
   const { idMarcaAsociada } = useContext(ProductContext);
   const [asociadas, setAsociadas] = useState([]);
   const [marcas, setMarcas] = useState([]);
@@ -31,16 +32,17 @@ const CarruselAsociadas = () => {
   const [nombreMezcalera, setNombreMezcalera] = useState();
   const [idMezcalera, setIdMezcalera] = useState();
 
+    //Para manejar la apertura del popup
   const handleAsociada = (nombre, id_asociada) => {
     setNombreMezcalera(nombre);
     setIdMezcalera(id_asociada);
     setIsPopupOpen(true);
   };
-
+    //Cambio de la marca asociada
   const handleMarca = (id_marca) => {
     idMarcaAsociada(id_marca);
   };
-
+    //Efecto para cargar los datos de las asociadas y las marcas desde la BD
   useEffect(() => {
     const fetchAsociadas = async () => {
       const response = await fetch("/api/read_asociadas"); // Se leen los datos de las asociadas de la base de datos
@@ -121,6 +123,7 @@ const CarruselAsociadas = () => {
                   foto={`${ruta}${asociada.foto}`}
                   historia={asociada.historia}
                   handleAsociada={handleAsociada}
+                  alt={index}
                 />
                 </Suspense>
               </SwiperSlide>

@@ -19,6 +19,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
 
+    //Datos por default en la ventana de edición
     const setForm = (data) => {
         console.log(data)
             register('id_asociada')
@@ -33,10 +34,12 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
             setValue('historia', data[0].historia)
     }
 
+    //Ingresar la fotografía al input del form
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
 
+    //Modificar imagen
     const handleOnSubmit = async (data) =>{
         if (asociadaPhoto) {
             const form = new FormData()
@@ -118,6 +121,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
 
     
 
+    //Leer datos de las asociadas
     const readData = async () =>{
         const res = await fetch('/api/asociadas/read_asociada',{
             method:'POST',
@@ -128,6 +132,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
         setForm(JSON.parse(resJSON))
     }
 
+    //Inicializar lectura de datos
     useEffect(() => {
         readData()
     }, [])
@@ -142,12 +147,14 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
             </div>
             <div className='w-full h-full flex justify-between'>
                 <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
+                    {/* Visualizador de imagen */}
                     {asociadaPhoto && (
                         <Image width={400} height={400} src={URL.createObjectURL(asociadaPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                     )}
                     {asociadaPhoto && (
                         <p className='text-sm'>{asociadaPhoto.name}</p>
                     )}
+                    {/* Visualizador de imagen por defecto */}
                     {!asociadaPhoto && (<Image width={400} height={400} src={`/mezcaleras/${asociada ? asociada[0].foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
                     {!asociadaPhoto && (
                         <p className='text-sm'>{asociada ? asociada[0].foto : ""}</p>

@@ -1,6 +1,7 @@
 const { NextResponse } = require("next/server")
 import db from '@/libs/db'
 
+export const revalidate = 0;
 export async function POST(request){
     const data = await request.json();
 
@@ -12,7 +13,9 @@ export async function POST(request){
             },
             data:{
                 fecha_fin: data.fecha_fin,
-                foto: data.foto
+                foto: data.foto,
+                nombre: data.nombre,
+                descripcion: data.descripcion
             }
         })
         return NextResponse.json("Registrada");

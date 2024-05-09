@@ -1,7 +1,13 @@
 import Galeria from '@/components/Galeria/Galeria';
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
+import { Berkshire_Swash } from "next/font/google";
 import React from 'react';
 
+const berkshire = Berkshire_Swash({
+    weight: ["400"],
+    styles: ["italic", "normal"],
+    subsets: ["latin"],
+  });
 
 // Página de galería
 function page() {
@@ -10,17 +16,10 @@ function page() {
         <LayoutPrincipal>
             <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
             <div className="mt-40 h-max relative w-full overflow-x-hidden">
-            
 
-                {/* <div className="absolute inset-0 ">
-                    <img
-                        className="w-full h-full object-cover opacity-60"
-                        src="\multimedia\agave 2.jpeg"
-                        alt="Background"
-                    />
-                </div> */}
-
-                <p className="text-5xl font-medium pb-6" style={{textAlign: 'center'}}>Galería</p>
+            <div className={berkshire.className}>
+                <p className="text-6xl pb-6 -tracking-tighter" style={{textAlign: 'center'}}>Galería</p>
+            </div>
 
                 <Galeria/>
 

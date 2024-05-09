@@ -1,6 +1,7 @@
 import db from '@/libs/db'
 import { NextResponse } from 'next/server'
 
+export const revalidate = 0;
 export async function POST(request){
     try{
         const data = await request.json()
@@ -11,17 +12,11 @@ export async function POST(request){
             include:{
                 producto:{
                     include:{
-                        marca:true
-                    }
-                },
-                acompanamiento:{
-                    include:{
-                        marca:true
+                        marca:true,
                     }
                 }
             }
         })
-        console.log(detalles)
         return NextResponse.json(detalles)
     }catch(error){
         console.log(error)

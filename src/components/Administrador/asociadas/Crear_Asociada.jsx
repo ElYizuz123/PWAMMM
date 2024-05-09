@@ -19,8 +19,9 @@ const Crear_Asociada = () => {
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
-    const createRef = useRef(null)
+  
 
+    //Configuración de los modales
     const customStyles = {
         content: {
           top: '50%',
@@ -40,21 +41,26 @@ const Crear_Asociada = () => {
         },
       };
 
+
+    //Establecer los campos de foto y hexadecimal en el form
     useEffect(() => {
         register('foto');
         register('hexa')
     }, [register]);
 
+    //Cerrar la ventana modal
     const onClose = () => {
         setCAsociadasIsOpen(false)
     }
 
+    //Abrir la ventana modal
     const isOpen = () => {
         setCAsociadasIsOpen(true)
     }
 
 
 
+    //Manejar la creación de una nueva asociada
     const handleOnSubmit = async (data) => {
         console.log(data)
         if (asociadaPhoto) {
@@ -117,6 +123,7 @@ const Crear_Asociada = () => {
         }
     }
 
+    //Manejar el input de la foto 
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
@@ -140,6 +147,7 @@ const Crear_Asociada = () => {
                     </div>
                     <div className='w-full h-full flex justify-between'>
                         <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
+                            {/* Previsualización de la imagen */}
                             {asociadaPhoto && (
                                 <Image height={400} width={400} src={URL.createObjectURL(asociadaPhoto)} alt='Preview' className='object-contain w-48 h-56' />
                             )}

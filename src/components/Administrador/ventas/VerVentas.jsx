@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 
 const VerVentas = ({ onClose, idVenta }) => {
     const [detalles, setDetalles] = useState(null)
+
+    //Leer ventas individuales
     const readData =async () =>{
         const res = await fetch('/api/ventas/read_detalles',{
             method:'POST',
@@ -12,11 +14,13 @@ const VerVentas = ({ onClose, idVenta }) => {
         setDetalles(resJSON)
     }
 
+    //Alternar colores de las ventas
     const back ={
         0:"bg-pink-100 text-black",
         1:"bg-pink-200 text-black"
     }
 
+    //Inicializar lectura
     useEffect(()=>{
         readData()
     },[])
@@ -30,7 +34,7 @@ const VerVentas = ({ onClose, idVenta }) => {
             </div>
             <div>
                 <table className="table-auto w-full font-bold">
-                    <thead>
+                    <thead className='text-xl'>
                         <tr>
                             <th colSpan="4">
                             <hr className=' border border-black w-full' />
@@ -54,8 +58,8 @@ const VerVentas = ({ onClose, idVenta }) => {
                             detalles.map((detalle, index)=>(
                                 <tr key={detalle.id_venta_individual} className={`${back[index%2]}}`}>
                                     {console.log(index%2)}
-                                    <td className="border px-4 py-2">{detalle.producto ? detalle.producto.nombre: detalle.acompanamiento.nombre}</td>
-                                    <td className="border px-4 py-2">{detalle.producto ? detalle.producto.marca.nombre: detalle.acompanamiento.marca.nombre}</td>
+                                    <td className="border px-4 py-2">{detalle.producto.nombre}</td>
+                                    <td className="border px-4 py-2">{detalle.producto.marca.nombre}</td>
                                     <td className="border px-4 py-2">{detalle.cantidad_producto}</td>
                                     <td className="border px-4 py-2">{detalle.subtotal}</td>
                                 </tr>

@@ -1,9 +1,8 @@
 "use client"
 import React, { useState, useEffect, useCallback } from "react";
-import { Berkshire_Swash } from "next/font/google";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
+import { Berkshire_Swash } from "next/font/google";
 
 //Tipo de letra
 const berkshire = Berkshire_Swash({
