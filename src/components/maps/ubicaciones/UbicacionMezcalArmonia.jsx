@@ -16,11 +16,11 @@ const UbicacionMezcalArmonia = () => {
 
         <div className="w-full lg:w-1/2 lg:mr-20 ml-2">
           <div className="bg-white bg-opacity-70 rounded-lg">
-            <div className="flex mb-8">
-              <div> <SlLocationPin className="lg:w-[50px] lg:h-[50px] md:w-[40px] md:h-[40px] w-[32px] h-[32px]" />  </div>
+            <div className="flex mb-8 p-2">
+              <div> <SlLocationPin className=" lg:w-[50px] lg:h-[50px] md:w-[40px] md:h-[40px] w-[32px] h-[32px]" />  </div>
               <p className="ml-2 lg:text-3xl md:text-3xl sm:text-xl text-xl">Gob. Aristeo Mercado 161-local 4, Col del Empleado, 58020 Morelia, Mich., México</p>
             </div>
-            <div className="flex">
+            <div className="flex mb-2 p-2">
               <div> <SlPhone className="lg:w-[50px] lg:h-[50px] md:w-[40px] md:h-[40px] w-[32px] h-[32px]" /> </div>
               <p className="ml-2 lg:text-3xl md:text-3xl sm:text-xl text-xl">+52 443 186 1694</p>
             </div>
