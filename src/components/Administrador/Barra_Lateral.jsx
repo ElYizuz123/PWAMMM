@@ -38,8 +38,11 @@ const Barra_Lateral = () => {
             <div className="flex justify-center mt-5">
                 <img src="/mezcaleras_logo.png" className="w-20" />
             </div>
-            <div className="w-full flex flex-col justify-end items-end pt-8">
-                <Link href="/administrador/ventas" className={`w-11/12 ${buttonMap["/administrador/ventas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full`}>
+            <div className="w-full flex flex-col justify-end items-end">
+                <Link href="/administrador/graficas" className={`w-11/12 ${buttonMap["/administrador/graficas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-6`}>
+                    <p className="font-bold text-2xl pr-3 pt-1 pb-1">GRÁFICAS</p>
+                </Link>
+                <Link href="/administrador/ventas" className={`w-11/12 ${buttonMap["/administrador/ventas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">VENTAS</p>
                 </Link>
                 <Link href="/administrador/marcas" className={`w-11/12 ${buttonMap["/administrador/marcas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
@@ -60,9 +63,7 @@ const Barra_Lateral = () => {
                 <Link href="/administrador/galeria" className={`w-11/12 ${buttonMap["/administrador/galeria"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">GALERÍA</p>
                 </Link>
-                <Link href="/administrador/graficas" className={`w-11/12 ${buttonMap["/administrador/graficas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
-                    <p className="font-bold text-2xl pr-3 pt-1 pb-1">GRÁFICAS</p>
-                </Link>
+                
                 
                 <button className="w-11/12 hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8">
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">AYUDA</p>

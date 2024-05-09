@@ -21,12 +21,13 @@ const Crear_evento = () => {
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
-    const createRef = useRef(null)
 
+    //Registrar el campo de foto en el formulario
     useEffect(() => {
         register('foto');
     }, [register]);
 
+    //Configuración de los modales 
     const customStyles = {
         content: {
             top: '50%',
@@ -46,19 +47,23 @@ const Crear_evento = () => {
         },
     };
 
+    //Cerrar el popup de eventos
     const onClose = () => {
         setCEventosIsOpen(false)
     }
 
+    //Abrir el popup de eventos
     const isOpen = () => {
         setCEventosIsOpen(true)
     }
 
 
+    //Manejar el ingreso de un evento
     const handleOnSubmit = async (data) => {
+        //Manejar la fecha para su ingreso a la base de datos 
         data.fecha_fin = data.fecha_fin + ":00.000Z"
-        console.log(data)
         if (eventoPhoto) {
+            //Form para enviar a la base de datos 
             const form = new FormData()
             form.set('file', eventoPhoto)
             form.set('source', "eventos")
@@ -118,6 +123,7 @@ const Crear_evento = () => {
         }
     }
 
+    //Ingresar la fotografía en el input del form
     const handleFileButton = () => {
         fileInputRef.current.click();
     }
@@ -142,8 +148,9 @@ const Crear_evento = () => {
                         </div>
                         <div className='w-full h-full flex justify-between'>
                             <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
+                                {/* Visualizador de imagen */}
                                 {eventoPhoto && (
-                                    <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-48 h-56' />
+                                    <Image width={400} height={400} src={URL.createObjectURL(eventoPhoto)} alt='Preview' className='object-contain w-44 h-56' />
                                 )}
                                 {eventoPhoto && (
                                     <p className='text-sm'>{eventoPhoto.name}</p>
@@ -157,47 +164,75 @@ const Crear_evento = () => {
                                 )}
                             </div>
                             <div className='h-full w-[60%] flex justify-end'>
-                                <div className='flex flex-col items-start gap-y-6 mt-36 mr-2'>
+                                <div className='flex flex-col justify-start gap-y-6 mr-2 mt-[100px]'>
                                     <p className='text-xl'>Fecha fin</p>
+                                    <p className='text-xl'>Nombre</p>
+                                    <p className='text-xl'>Descripción</p>
                                 </div>
+
                                 <div>
-                                    <div className='h-full flex flex-col items-start mt-36 mr-2'>
-                                        <form onSubmit={handleSubmit(handleOnSubmit)}>
-                                            <input
-                                                type='file'
-                                                name='foto'
-                                                id='fotoSelecter'
-                                                className='hidden'
-                                                ref={fileInputRef}
-                                                onChange={(e) => {
-                                                    setEventoPhoto(e.target.files[0])
-                                                    setValue('foto', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
-                                                    setValue('hexa', hexa)
-                                                }}
-                                            />
-                                            <input
-                                                type='datetime-local'
-                                                name='fecha_fin'
-                                                id='fecha_fin'
-                                                required={true}
-                                                maxLength={45}
-                                                {...register('fecha_fin', {
-                                                    required: true,
-                                                    maxLength: 45,
-                                                })}
-                                                className='w-full h-7 border-2 border-black rounded-lg pl-1'
-                                                placeholder='Fecha fin'
-                                            />
-                                            <div className='w-full flex justify-end items-end'>
-                                                <button
-                                                    type='submit'
-                                                    className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[60%]'
-                                                >Agregar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <form onSubmit={handleSubmit(handleOnSubmit)} className='h-full flex flex-col items-start mr-2 gap-y-6 mt-[100px]'>
+                                        <input
+                                            type='file'
+                                            name='foto'
+                                            id='fotoSelecter'
+                                            className='hidden'
+                                            ref={fileInputRef}
+                                            onChange={(e) => {
+                                                setEventoPhoto(e.target.files[0])
+                                                setValue('foto', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
+                                                setValue('hexa', hexa)
+                                            }}
+                                        />
+                                        <input
+                                            type='datetime-local'
+                                            name='fecha_fin'
+                                            id='fecha_fin'
+                                            required={true}
+                                            maxLength={45}
+                                            {...register('fecha_fin', {
+                                                required: true,
+                                                maxLength: 45,
+                                            })}
+                                            className='w-full h-7 border-2 border-black rounded-lg pl-1'
+                                            placeholder='Fecha fin'
+                                        />
+                                        <input
+                                            type='text'
+                                            name='nombre'
+                                            id='nombre'
+                                            required={true}
+                                            maxLength={30}
+                                            {...register('nombre', {
+                                                required: true,
+                                                maxLength: 30,
+                                            })}
+                                            className='w-full h-7 border-2 border-black rounded-lg pl-1'
+                                            placeholder='Nombre'
+                                        />
+                                        <input
+                                            type='text'
+                                            name='descripcion'
+                                            id='descripcion'
+                                            required={true}
+                                            maxLength={50}
+                                            {...register('descripcion', {
+                                                required: true,
+                                                maxLength: 50,
+                                            })}
+                                            className='w-full h-7 border-2 border-black rounded-lg pl-1'
+                                            placeholder='Descripción'
+                                        />
+                                        <div className='w-full flex justify-end items-end'>
+                                            <button
+                                                type='submit'
+                                                className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[10%]'
+                                            >Agregar
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>

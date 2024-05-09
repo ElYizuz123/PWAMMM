@@ -14,6 +14,7 @@ const Paginacion = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
 
+    //Mnejo del cambio de página
     const handleChange = (newPage) => {
         if (newPage <= totalPages) {
             router.push('?pages=' + newPage)
@@ -23,6 +24,7 @@ const Paginacion = () => {
         }
     }
 
+    //Cambio de números al insertar mas o menos páginas
     useEffect(() => {
         console.log(totalPages)
         var search = 0
@@ -77,6 +79,7 @@ const Paginacion = () => {
         }
     }, [totalPages])
 
+    //Cambio a siguiente página
     const handleNext = () => {
         var search = 0
         if (!page) {
@@ -101,6 +104,8 @@ const Paginacion = () => {
             }
         }
     }
+
+    //Cambio a página anterior
     const handlePrev = () => {
         var search = 0
         if (!page) {
@@ -117,18 +122,6 @@ const Paginacion = () => {
         }
     }
 
-    useEffect(() => {
-        // if(paginas[paginas.lenght()-1]==totalPages-1){
-
-        // }
-        // else{
-        //     var arr = []
-        //     for(var i =0; i<totalPages-paginas[paginas.lenght()-1]; i++){
-        //         arr.push(paginas[paginas.lenght()-1]+i)
-        //     }
-        //     setPaginas(arr)
-        // }
-    }, [paginas, totalPages])
     return (
         <div className="flex items-center justify-end space-x-1 mr-24">
             <button onClick={handlePrev} className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300">

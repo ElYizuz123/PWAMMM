@@ -210,8 +210,6 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 
 }
 
-
-
 .card-logo:hover {
 
   transition: all 0.2s ease-in-out;
@@ -222,7 +220,6 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   
 
   }
-
 
 .imagen-componente {
   width: 100%; 
@@ -459,6 +456,7 @@ border-2 border-black object-cover shadow-white/35 shadow-md
   margin-left: 480px !important;
 }
 
+/* Animación para aparecer un objeto */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -471,6 +469,7 @@ border-2 border-black object-cover shadow-white/35 shadow-md
 .animate-fade-in {
   animation: fade-in 1s ease-out;
 }
+
 /* BOTON FINALIZAR PEDIDO */
 .Btn {
   display: flex;

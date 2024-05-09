@@ -8,6 +8,8 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
     const [marca, setMarca] = useState(null)
     const {update, setUpdate} = useContext(contexto)
     const [updated, setUpdated] = useState(false)
+
+    //Ingresar datos por default a la ventana de edición 
     const setForm = (data) =>{
         console.log(data)
         register('nombre'),
@@ -21,6 +23,7 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
         setValue('tipo', data[0].tipo)
     }
 
+    //Seleccionar por default el tipo de marca
     const opcionDefault = () => {
         if(marca&&!updated){
             document.getElementById("select_tipo").value = marca[0].tipo;
@@ -29,6 +32,7 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
         
     }
 
+    //Actualizar los datos de la marca
     const handleOnSubmit = async (data) => {
         const res = await fetch('/api/marcas/update_marca', {
             method: 'POST',
@@ -62,6 +66,7 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
         }
     }
 
+    //Leer los datos especificos de la marca seleccionada
     const readData = async () =>{
         const res = await fetch('/api/marcas/read_marca', {
             method: 'POST',
@@ -73,6 +78,7 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
         console.log(resJSON)
     }
 
+    //Inicializar la lectura de los datos
     useEffect(() =>{
         readData()
     }, [])
