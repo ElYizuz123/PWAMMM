@@ -1,9 +1,9 @@
+"use server"
 import { NextResponse } from "next/server";
 import {writeFile} from 'fs/promises'
 import { unlink } from "fs/promises";
 import path from 'path'
 
-export const revalidate = 0;
 export async function POST(request){
 
     const data = await request.formData()
