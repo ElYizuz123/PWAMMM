@@ -12,6 +12,7 @@
     "@coreui/coreui": "^5.0.0",
     "@coreui/react": "^5.0.0",
     "@heroicons/react": "^1.0.6",
+    "@next/third-parties": "^14.2.3",
     "@paypal/checkout-server-sdk": "^1.0.3",
     "@paypal/react-paypal-js": "^8.3.0",
     "@prisma/client": "^5.12.0",
