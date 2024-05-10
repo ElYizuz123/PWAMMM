@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { signOut } from 'next-auth/react'
+import { IoNotificationsOutline } from 'react-icons/io5'
 
 const Barra_Superior = ({title}) => {
     return (
@@ -16,7 +17,7 @@ const Barra_Superior = ({title}) => {
                 <p className="font-bold">Administrador</p>
                 <div className="bg-black w-[0.2%] opacity-50 ml-4 mr-4"></div>
                 <Link href="/administrador/ventas">
-                    <img src="/notification.png" className="w-7 h-"></img>
+                    <IoNotificationsOutline className="w-7 h-10"/> 
                 </Link>
                 <div className="bg-black w-[0.2%] opacity-50 ml-4 mr-4"></div>
                 <button onClick={() => signOut()}>

@@ -10,7 +10,7 @@ export async function POST(request){
         const newAsociada = await db.evento.create({
             data:{
                 fecha_fin: data.fecha_fin,
-                foto: data.foto,
+                foto: data.foto? data.foto: null,
                 nombre: data.nombre, 
                 descripcion: data.descripcion
             }
