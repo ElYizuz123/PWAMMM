@@ -90,8 +90,8 @@ const Leer_ventas = ({ ventas }) => {
                 <option value="reciente">Mas reciente</option>
                 <option value="antiguo">Mas antiguo</option>
             </select>
-            <div className='w-full  h-[800px] flex justify-center'>
-                <table className='table-auto h-[800px] font-bold w-full'>
+            <div className='w-full flex justify-center'>
+                <table className='table-auto font-bold w-full'>
                     <thead>
                         <tr>
                             <th colSpan="6">
