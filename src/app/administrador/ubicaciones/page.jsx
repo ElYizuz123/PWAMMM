@@ -8,13 +8,13 @@ import React, { Suspense } from 'react'
 
 const Page = () => {
     return (
-        <LayoutCRUD>
+        <LayoutCRUD title={"Ubicaciones"}>
             <UpdateProvider>
                 <main className='flex flex-col items-center justify-between w-full min-h-[2300px]'>
                     <div className='relative w-full min-h-[2300px] overflow-hidden'>
                         <div className='w-full flex justify-center'>
                             <p className='mt-6 text-3xl font-bold'>Bienvenido,</p>
-                            <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Asociadas</p>
+                            <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Ubicaciones</p>
                         </div>
                         <div className='absolute bottom-0 w-full'>
                             <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />
