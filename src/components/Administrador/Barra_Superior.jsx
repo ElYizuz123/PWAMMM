@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { signOut } from 'next-auth/react'
-import { IoNotificationsOutline } from 'react-icons/io5'
+import { IoLogOutOutline, IoNotificationsOutline } from 'react-icons/io5'
 
 const Barra_Superior = ({title}) => {
     return (
@@ -13,15 +13,15 @@ const Barra_Superior = ({title}) => {
                     <p className="ml-1 text-[#C71E78] font-bold">{title}</p>
                 </div>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center items-center">
                 <p className="font-bold">Administrador</p>
-                <div className="bg-black w-[0.2%] opacity-50 ml-4 mr-4"></div>
+                <hr className="bg-black w-[1px] h-10 opacity-50 ml-4 mr-4"></hr>
                 <Link href="/administrador/ventas">
                     <IoNotificationsOutline className="w-7 h-10"/> 
                 </Link>
-                <div className="bg-black w-[0.2%] opacity-50 ml-4 mr-4"></div>
+                <hr className="bg-black w-[1px] h-10 opacity-50 ml-4 mr-4"></hr>
                 <button onClick={() => signOut()}>
-                    <img src="/logout.png" className="w-7 h-7"></img>
+                    <IoLogOutOutline className="w-8 h-10"/>
                 </button>
             </div>
         </div>

@@ -57,6 +57,9 @@ const Barra_Lateral = () => {
                 <Link href="/administrador/preguntas" className={`w-11/12 ${buttonMap["/administrador/preguntas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">PREGUNTAS</p>
                 </Link>
+                <Link href="/administrador/ubicaciones" className={`w-11/12 ${buttonMap["/administrador/ubicaciones"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
+                    <p className="font-bold text-2xl pr-3 pt-1 pb-1">UBICACIONES</p>
+                </Link>
                 <Link href="/administrador/asociadas" className={`w-11/12 ${buttonMap["/administrador/asociadas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl  pr-3 pt-1 pb-1">ASOCIADAS</p>
                 </Link>
