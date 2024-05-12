@@ -36,7 +36,8 @@ function ListaUbicaciones () {
 
   return (
     <div className="lg:ml-20 w-full rounded-lg mb-10">
-        <button className="mb-2 bg-white border-2 border-[#D60064] active:border-black w-[300px] h-full shadow-lg duration-0 active:text-[#D60064] p-2 flex items-center justify-between font-bold text-lg rounded-lg tracking-wider"
+        <button className="mb-2 bg-white border-2 border-[#D60064] active:border-black h-full shadow-lg duration-0 active:text-[#D60064] p-2 flex items-center justify-between font-bold text-lg rounded-lg tracking-wider
+        lg:w-[300px] sm:w-[250px] md:w-[250px] w-[250px]"
         onClick={() => setIsOpen((prev) => !prev)}
         >
             {currentBrand}
@@ -48,7 +49,8 @@ function ListaUbicaciones () {
         </button>
         
         {isOpen && (
-            <div className="bg-white border-2 border-[#D60064] absolute flex flex-col items-start rounded-lg p-2 w-full shadow-2xl">
+            <div className="bg-white border-2 border-[#D60064] absolute flex flex-col items-start rounded-lg p-2 shadow-2xl
+            lg:w-[300px] sm:w-[250px] md:w-[250px] w-[250px]">
                 {list.map((item, i) => (
                     <div className="flex w-full p-2 justify-between hover:bg-[#D60064] hover:text-white cursor-pointer rounded-md border-l-transparent" 
                     key={i} onClick={() => handleBrandClick(item.marca)}>
