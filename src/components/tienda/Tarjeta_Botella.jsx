@@ -54,9 +54,9 @@ const Tarjeta_Botella = ({
   };
 
   return (
-    <div className={`${k2d.className} ${existencia ? "" : "opacity-80 "}`}>
+    <div className= {`${k2d.className} ${existencia ? "" : "opacity-80 "}` }>
       {/* DISEÑO TARJETA SIN EXISTENCIA */}
-      <div className="card relative rounded-5 overflow-hidden">
+      <div className="card relative rounded-5 overflow-hidden ">
         {!existencia && (
           <div className="absolute inset-0 flex justify-center items-center ">
             <p className="bg-red-700  px-60 text-white font-semibold text-2xl text-center rotate-45">
@@ -91,7 +91,7 @@ const Tarjeta_Botella = ({
             width={300}
             height={450}
             quality={100}
-            alt="Fondo"
+            alt="Botellas_Tarjeta"
           />
         </div>
         {/* DISEÑO TARJETAS MEZCAL */}
