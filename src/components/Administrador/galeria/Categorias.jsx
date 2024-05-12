@@ -128,7 +128,7 @@ const Categorias = () => {
         <Image alt='Visualizador' src={tempImgSrc} width={1000} height={1000} />
         <VscChromeClose onClick={() => setModel(false)} />
       </div>
-      <div className="gallery mt-10 ml-2 mr-2">
+      <div className="columns-1 gap-1 lg:columns-3 lg:gap-3 md:columns-2 md:gap-2 sm:columns-1 sm:gap-1 ml-5 mr-5 mt-5">
         {imagenes &&
           imagenes.map((foto, index) =>
           (

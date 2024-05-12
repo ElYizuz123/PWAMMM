@@ -68,7 +68,7 @@ const Leer_ventas = ({ ventas }) => {
         }
     }
     return (
-        <div className='flex justify-center overflow-y-auto h-[800px] w-10/12'>
+        <div className='flex justify-center overflow-y-auto w-10/12'>
 
             <Modal
                 isOpen={detallesIsOpen}
