@@ -7,50 +7,88 @@ h1 {
   text-transform: capitalize;
 }
 
-.card {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  height: 460px;
-  width: 350px;
-  background-color: #fff;
-  z-index: 0;
-}
-
 .slider-container-admin {
   width: 1000px;
   height: 200px;
 }
 
-.card-reduced {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  height: 410px;
-  width: 350px;
-  background-color: #fff
-}
-.card-reduced > figure {
-  width: 90%;
-  margin: 20px auto 0 auto;
+.card:hover .details {
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
+  top: 40%;
 }
 
-.card-reduced-as {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  height: 370px;
-  width: 350px;
-  background-color: #fff
-}
-
-.card-reduced-as > figure {
-  width: 90%;
-  margin: 20px auto 0 auto;
-}
-
-.card > figure {
-  width: 90%;
-  margin: 20px auto 0 auto;
-}
-
-.card > figure > img {
+.btnTarjeta {
+  background-color: #f70073;
+  border-radius: 5px;
+  color: #fff;
+  display: block;
+  padding: 16px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
   width: 100%;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
+
+.btnTarjeta:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.btnMercadoLibre {
+  background-color: #ffe500;
+  border-radius: 5px;
+  color: #000000;
+  display: flex;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+  width: 100%;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btnMercadoLibre:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Media Queries para dispositivos pequeños (menos de 600px) */
+@media (max-width: 600px) {
+  .btnTarjeta {
+    padding: 8px; /* Reducir el padding para dispositivos más pequeños */
+    font-size: 14px; /* Reducir el tamaño de la fuente para mantener la proporcionalidad */
+  }
+  .btnMercadoLibre {
+    padding: 2px; /* Reducir el padding para dispositivos más pequeños */
+    font-size: 14px; /* Reducir el tamaño de la fuente para mantener la proporcionalidad */
+  }
+}
+
+/* Media Queries para tabletas (600px - 900px) */
+@media (min-width: 600px) and (max-width: 900px) {
+  .btnTarjeta {
+    padding: 10px; /* Ajustar el padding para tabletas */
+    font-size: 16px; /* Ajustar el tamaño de la fuente para mejor legibilidad */
+  }
+  .btnMercadoLibre {
+    padding: 4px; /* Ajustar el padding para tabletas */
+    font-size: 16px; /* Ajustar el tamaño de la fuente para mejor legibilidad */
+  }
+}
+
+/* Media Queries para pantallas grandes (más de 900px) */
+@media (min-width: 900px) {
+  .btnTarjeta {
+    padding: 12px; /* Mantener un padding mayor para pantallas grandes */
+    font-size: 18px; /* Incrementar el tamaño de la fuente para una mejor visualización */
+  }
+  .btnMercadoLibre {
+    padding: 6px; /* Mantener un padding mayor para pantallas grandes */
+    font-size: 18px; /* Incrementar el tamaño de la fuente para una mejor visualización */
+  }
+}
+
 
 .slick-slide>div {
   margin: 0 10px;
@@ -72,24 +110,6 @@ h1 {
 
 }
 
-.details {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  position: absolute;
-  top: 82%;
-  width: 100%;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 0;
-  transition: box-shadow 0.3s ease-in-out, top 0.3s ease-in-out;
-}
-
-.card:hover .details {
-  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
-  top: 40%;
-}
 .text-delineado {
   text-shadow: 
     -1px -1px 0 #000,  
@@ -103,61 +123,6 @@ h1 {
      1px -1px 0 #ffffff,
     -1px  1px 0 #ffffff,
      1px  1px 0 #ffffff; 
-}
-
-
-.details > .min-details,
-.details > .options,
-.details > .options > .options-colors {
-  margin-bottom: 10px;
-}
-
-.details > .min-details {
-  display: flex;
-  justify-content: space-between;
-}
-
-.details > .min-details > h1 > span {
-  color: #7b7b7b;
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 400;
-}
-
-.btn {
-  background-color: #f70073;
-  border-radius: 5px;
-  color: #fff;
-  display: block;
-  padding: 16px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: capitalize;
-  width: 100%;
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.btn:hover {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
-}
-
-.btn2 {
-  background-color: #ffe500;
-  border-radius: 5px;
-  color: #000000;
-  display: flex;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: capitalize;
-  width: 100%;
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.btn2:hover {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
 }
 
 .align-right {

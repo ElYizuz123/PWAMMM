@@ -24,7 +24,7 @@ const tienda = "/tienda/";
 
 const CarruselAsociadas = () => {
   
-  const { idMarcaAsociada } = useContext(ProductContext);
+  const { setMarcaAsociada, setMarcaNombreAsociada } = useContext(ProductContext);
   const [asociadas, setAsociadas] = useState([]);
   const [marcas, setMarcas] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -39,8 +39,9 @@ const CarruselAsociadas = () => {
     setIsPopupOpen(true);
   };
     //Cambio de la marca asociada
-  const handleMarca = (id_marca) => {
-    idMarcaAsociada(id_marca);
+  const handleMarca = (id_marca, nombre) => {
+    setMarcaAsociada(id_marca);
+    setMarcaNombreAsociada(nombre)
   };
     //Efecto para cargar los datos de las asociadas y las marcas desde la BD
   useEffect(() => {
@@ -158,7 +159,7 @@ const CarruselAsociadas = () => {
                     <Link href="/tienda"> {/* Al momento de dar clic se redirecciona a la tienda, y se filtran los productos de cada asociada */}
                       <button
                         className="text-white bg-[#f70073] p-2 rounded-md hover:bg-[#e39abd] hover:scale-105 hover:shadow-lg"
-                        onClick={() => handleMarca(marca.id_marca)}
+                        onClick={() => handleMarca(marca.id_marca, marca.nombre)}
                       >
                         Ver
                       </button>

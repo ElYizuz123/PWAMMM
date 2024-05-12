@@ -6,9 +6,11 @@ export const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const [cartCountAnimation, setCartCountAnimation] = useState("");
   const [marcaAsociada, setMarcaAsociada] = useState(0);
+  const [marcaNombreAsociada, setMarcaNombreAsociada] = useState("Todos");
   const [isEnvio, setIsEnvio] = useState(1);
   const [productos, setProductos] = useState([]);
-  const [metodoPago, setMetodopago] = useState(1);
+  const [dataFormulario, setDataFormulario] = useState({});
+  const [metodoPago, setMetodoPago] = useState(0);
 
   useEffect(() => {
     const productosEnAlmacenamiento = localStorage.getItem("productos");
@@ -93,6 +95,59 @@ export const ProductProvider = ({ children }) => {
     triggerCartCountAnimation();
   };
 
+  const enviarDataApi = async () => {
+    try {
+      console.log(dataFormulario)
+      const response = await fetch("/api/ventas/create_venta", {
+        method: "POST",
+        body: JSON.stringify({ data: dataFormulario, productos: productos }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // MANDA LOS DATOS NECESARIOS PARA EL CORREO
+      const responseData = await fetch("/api/send_emailVenta", {
+        method: "POST",
+        body: JSON.stringify({
+          nombreCliente: dataFormulario.nombre,
+          apellidoCliente: dataFormulario.apellidos,
+          telefono: dataFormulario.telefono,
+          correo: dataFormulario.email,
+          nombreEmpresa: dataFormulario.empresa,
+          pais: "México",
+          ciudad: dataFormulario.ciudad,
+          colonia: dataFormulario.colonia,
+          calle: dataFormulario.calle,
+          numExterior: dataFormulario.num_ext,
+          numInterior: dataFormulario.num_int,
+          cp: dataFormulario.cp,
+          productos: productos,
+          metodoEnvio: isEnvio === 0 ? "Envío" : "Recoger en tienda",
+          total: dataFormulario.total,
+          metodoPago: metodoPago === 1 ? "Paypal" : "Tranferencia bancaria",
+        }),
+      });
+
+      if (!responseData.ok) {
+        throw new Error(`HTTP error! status: ${responseData.status}`);
+      }
+      const result = await response.json();
+      const responseEmail = await responseData.json();
+
+      console.log(result, responseEmail);
+
+      limpiarProductos();
+      
+    } catch (error) {
+      console.error("Error en el proceso:", error); // Maneja cualquier error que ocurra durante el fetch
+    }
+  };
+
   const total = productos.reduce(
     (sub, producto) => sub + producto.precio * producto.cantidad,
     0
@@ -100,14 +155,6 @@ export const ProductProvider = ({ children }) => {
 
   const envioVenta = (estado) => {
     setIsEnvio(estado);
-  };
-
-  const pago = (estado) => {
-    setMetodopago(estado);
-  };
-
-  const idMarcaAsociada = (idMarcaAsociada) => {
-    setMarcaAsociada(idMarcaAsociada);
   };
 
   const limpiarProductos = () => {
@@ -122,13 +169,17 @@ export const ProductProvider = ({ children }) => {
         addProductos,
         deleteProduct,
         updateQuantity,
-        limpiarProductos,
         total,
         envioVenta,
         isEnvio,
-        idMarcaAsociada,
         marcaAsociada,
-        pago,
+        setMarcaAsociada,
+        marcaNombreAsociada,
+        setMarcaNombreAsociada,
+        metodoPago,
+        setMetodoPago,
+        setDataFormulario,
+        enviarDataApi
       }}
     >
       <div>{children}</div>
