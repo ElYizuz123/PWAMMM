@@ -429,7 +429,7 @@ function MostrarProductos({
             precio={botella.producto.precio}
             alcohol={botella.cantidad_alcohol}
             ml={botella.ml}
-            imagen={botella.producto.foto}
+            imagen={botella.producto.fotoUri}
             mercadoLibre={botella.producto?.mercadoLibre || "NULL"}
             cantidad={botella.producto.cantidad}
             tipo={1}
@@ -443,7 +443,7 @@ function MostrarProductos({
             marca={acompanamiento.producto.marca.nombre}
             precio={acompanamiento.producto.precio}
             gr={acompanamiento.gr}
-            imagen={acompanamiento.producto.foto}
+            imagen={acompanamiento.producto.fotoUri}
             mercadoLibre={acompanamiento.producto?.mercadoLibre || "NULL"}
             cantidad={acompanamiento.producto.cantidad}
             tipo={2}

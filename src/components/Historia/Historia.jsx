@@ -43,9 +43,9 @@ const Historia = () => {
   const lines = [
     "El pueblo purépecha Curicaueri nació en el oriente y",
     "tomaba la forma del sol, dios del fuego que recorría la",
-    "bóveda celeste como un halcón. El aire, el agua, la tierra",
-    "y el fuego son los cuatro elementos a los que les rendían",
-    "reverencia...",
+    "bóveda celeste como un halcón. El aire, el agua,",
+    "la tierra y el fuego son los cuatro elementos",
+    "a los que les rendían reverencia...",
   ];
 
   return (
@@ -78,7 +78,7 @@ const Historia = () => {
             </h2>
           </motion.div>
 
-          <div className="mx-1 md:text-base lg:text-xl xl:text-xl text-justify ">
+          <div className="mx-1 mt-5 sm:ml-20 lg:ml-0 xl:ml-10  text-xs sm:text-base md:text-base lg:text-xl xl:text-xl 2xl:text-xl text-justify ">
              {/*Aqui inicia la animación del texto (Va apareciendo poco a poco)*/}
             {lines.map((line, index) => (
               

@@ -90,7 +90,7 @@ const Tarjeta_Acompañamiento = ({
             width={300}
             height={450}
             quality={100}
-            alt="Fondo"
+            alt="Acompañamiento_tarjeta"
           />
         </div>
         {/* DISEÑO TARJETAS DIFERENTE ACOMPAÑAMIENTOS/MEZCAL */}

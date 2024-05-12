@@ -15,6 +15,8 @@ import { HiX, HiMenu } from "react-icons/hi";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import MayorEdad from "../MayorEdad/MayorEdad";
+import UsoCookies from "../UsoCookies/UsoCookies";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -92,6 +94,11 @@ const LayoutPrincipal = ({ children }) => {
 
   return (
     <div>
+      {/* ERES MAYOR DE 18 AÑOS? */}
+      <MayorEdad/>
+
+      {/* ACEPTAR USO DE COOKIES */}
+      <UsoCookies />
       <div>
         <div className="w-full z-20 top-0 fixed">
           <img className="h-8 w-full" src="\navbar\banner.jpg" />
@@ -273,6 +280,7 @@ const LayoutPrincipal = ({ children }) => {
       </div>
       <Carrito />
       <div>{children}</div>
+
       <Footer />
     </div>
   );
