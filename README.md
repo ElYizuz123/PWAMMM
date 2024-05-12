@@ -43,3 +43,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 * Usuario: npm i next-auth
 * Encriptación: npm i bcrypt
 * Gráficas: npm install --save chart.js react-chartjs-2
+* Animaciones: npm i tailwindcss-animated

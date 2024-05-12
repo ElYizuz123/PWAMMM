@@ -1,0 +1,8 @@
+
+#aviso-cookies {
+    display: none;
+}
+
+#aviso-cookies.activo {
+    display: block;
+}

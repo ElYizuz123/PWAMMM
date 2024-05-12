@@ -1,4 +1,4 @@
-
+/* 
 .gallery {
     -webkit-column-count: 3;
     -moz-column-count: 3;
@@ -7,19 +7,19 @@
     -moz-column-width: 33%;
     column-width: 33%;
     padding: 0 12px;
-}
+} */
 
-.gallery .pics {
+/* .gallery .pics {
     -webkit-transition: all 350ms ease;
     transition: all 350ms ease;
     margin-bottom: 12px;
-}
+} */
 
 .gallery .pics:hover {
     filter: brightness(130%);
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
     .gallery{
         -webkit-column-count: 2;
         -moz-column-count: 2;
@@ -36,7 +36,7 @@
         -moz-column-width: 100%;
         column-width: 100%;
     }
-}
+} */
 
 .model {
     width: 100%;

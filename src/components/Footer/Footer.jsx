@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="flex flex-wrap justify-between items-center">
           <div className="flex">
-            <img src="/footer/fondoLetrasBlancas.png" className="h-20" />
+            {/*LOGO*/}
           </div>
 
           <div className="flex flex-wrap justify-center items-center mb-4 sm:mb-0">
@@ -43,9 +43,7 @@ const Footer = () => {
 
           <div className="flex flex-wrap">
             <div className="text-gray-500 flex space-x-4">
-              <img src="/footer/mexico.png" className="w-5 h-5"/>
-              <div>|</div>
-              <img src="/footer/estados-unidos.png" className="w-5 h-5" />
+              {/*BANDERAS*/}
             </div>
           </div>
         </div>
