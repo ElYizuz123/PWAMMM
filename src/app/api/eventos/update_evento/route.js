@@ -13,7 +13,8 @@ export async function POST(request){
             },
             data:{
                 fecha_fin: data.fecha_fin,
-                foto: data.foto,
+                fotoUri: data.foto,
+                fotoId: data.fotoId,
                 nombre: data.nombre,
                 descripcion: data.descripcion
             }

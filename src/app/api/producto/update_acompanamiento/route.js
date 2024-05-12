@@ -13,13 +13,13 @@ export async function POST(request){
             },
             data:{
                 nombre: data.nombre,
-                
                 precio: Number(data.precio),
                 descripcion: data.descripcion,
                 marca_id_marca: parseInt(data.marca),
                 mercadoLibre: data.mercado_lib,
                 cantidad: parseInt(data.cantidad),
-                foto: data.foto,
+                fotoUri: data.foto,
+                fotoId: data.fotoId
             }
 
         })

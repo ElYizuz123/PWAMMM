@@ -16,7 +16,6 @@ model asociada {
   fotoId      String
   marca       marca[]
 }
-
 model evento {
   id_evento   Int      @id @default(autoincrement())
   fotoUri     String?
@@ -141,4 +140,3 @@ model ubicacion {
   id_ubicacion Int    @id @default(autoincrement())
   json_marca   String
 }
-

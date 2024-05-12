@@ -62,6 +62,7 @@ const Crear_evento = () => {
     const handleOnSubmit = async (data) => {
         //Manejar la fecha para su ingreso a la base de datos 
         data.fecha_fin = data.fecha_fin + ":00.000Z"
+        var fotoResJSON = null
         if (eventoPhoto) {
             //Form para enviar a la base de datos 
             const form = new FormData()
@@ -73,45 +74,42 @@ const Crear_evento = () => {
                 method: 'POST',
                 body: form
             })
-            const fotoResJSON = await fotoRes.json()
+            fotoResJSON = await fotoRes.json()
             console.log(fotoResJSON)
-
-            //Registrar producto en la DB
-            if (fotoResJSON == "Archivo subido correctamente") {
-                const res = await fetch('/api/eventos/create_evento', {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'aplication/json'
+        }
+        else {
+            fotoResJSON = "Archivo subido correctamente"
+        }
+        //Registrar producto en la DB
+        if (fotoResJSON != "Error") {
+            data["foto"] = fotoResJSON.picUri
+            data["fotoId"] = fotoResJSON.picId
+            const res = await fetch('/api/eventos/create_evento', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'aplication/json'
+                }
+            })
+            const resJSON = await res.json()
+            console.log(resJSON)
+            if (resJSON == "Registrado") {
+                let timerInterval;
+                Swal.fire({
+                    title: "Evento añadido!",
+                    icon: "success",
+                    timer: 2000,
+                    timerProgressBar: true,
+                    confirmButtonText: "Ok",
+                    willClose: () => {
+                        clearInterval(timerInterval);
                     }
-                })
-                const resJSON = await res.json()
-                console.log(resJSON)
-                if (resJSON == "Registrado") {
-                    let timerInterval;
-                    Swal.fire({
-                        title: "Evento añadido!",
-                        icon: "success",
-                        timer: 2000,
-                        timerProgressBar: true,
-                        confirmButtonText: "Ok",
-                        willClose: () => {
-                            clearInterval(timerInterval);
-                        }
-                    }).then(() => {
-                        setEventoPhoto()
-                        const up = !update
-                        setUpdate(up)
-                        reset();
-                    });
-                }
-                else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Algo salió mal!",
-                    });
-                }
+                }).then(() => {
+                    setEventoPhoto()
+                    const up = !update
+                    setUpdate(up)
+                    reset();
+                });
             }
             else {
                 Swal.fire({
@@ -121,6 +119,14 @@ const Crear_evento = () => {
                 });
             }
         }
+        else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo salió mal!",
+            });
+        }
+
     }
 
     //Ingresar la fotografía en el input del form
@@ -159,9 +165,6 @@ const Crear_evento = () => {
                                     className='bg-gray-300 w-36 rounded-lg border-[1px] border-black text-sm mt-3'
                                     onClick={handleFileButton}
                                 >Seleccionar Archivo</button>
-                                {!eventoPhoto && (
-                                    <p className='text-sm mt-1 text-red-700'>Es necesario agregar una foto</p>
-                                )}
                             </div>
                             <div className='h-full w-[60%] flex justify-end'>
                                 <div className='flex flex-col justify-start gap-y-6 mr-2 mt-[100px]'>

@@ -16,7 +16,7 @@ const masVentasCiudades = (ventas) =>{
                 ciudad: poblacion.toUpperCase(),
                 cantidad:0
             }
-            ventasPorCiudad[index] = ciudadVenta
+            ventasPorCiudad.push(ciudadVenta)
         }
     })
     ventas.forEach(element => {

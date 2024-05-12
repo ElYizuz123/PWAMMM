@@ -1,13 +1,24 @@
+"use server"
 import { NextResponse } from "next/server";
 import {writeFile} from 'fs/promises'
 import { unlink } from "fs/promises";
 import path from 'path'
+import { deleteImageFile, uploadImageFile } from "@/libs/cloudinary";
 
-export const revalidate = 0;
 export async function POST(request){
-
-    const data = await request.formData()
-    const file = data.get('file')
+    try{
+        const data = await request.formData()
+        const file = data.get('file')
+        await deleteImageFile(data.get('nombre'))
+        const name = file.name.split('.')[0]+data.get('modifier')
+        const foto = await uploadImageFile(file, name, data.get('source'))
+        console.log("Archivo guardado en el servidor")
+        return NextResponse.json(foto)
+    }catch(err){
+        console.log(err)
+        return NextResponse.json("Error")
+    }
+    
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
     const filePath = path.join(process.cwd(), 'public', data.get('source'), data.get('nombre'))
@@ -16,7 +27,5 @@ export async function POST(request){
     writeFile(filePath2, buffer)
 
 
-    console.log("Archivo guardado en el servidor")
-
-    return NextResponse.json("Archivo subido correctamente")
+    
 }

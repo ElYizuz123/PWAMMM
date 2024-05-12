@@ -3,13 +3,13 @@ import React, { useContext } from 'react'
 import { contexto } from '../UpdateProvider'
 import Swal from 'sweetalert2'
 
-const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit}) => {
+const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit, fotoId}) => {
     const {update, setUpdate} = useContext(contexto)
 
     //Data para borrar imagen del servidor 
     const data = {
         "id_producto": id_evento,
-        "foto": foto,
+        "foto": fotoId,
         "source": "eventos"
     }
 
@@ -81,7 +81,7 @@ const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit}) => {
                         width={400}
                         height={400}
                         className="object-top object-cover rounded-t-[100px] w-full h-64"
-                        src={"/eventos/" + foto}
+                        src={foto}
                         alt="t-shirt"
                     />
                 </figure>

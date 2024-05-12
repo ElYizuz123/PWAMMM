@@ -95,7 +95,8 @@ const LeerAsociadas = () => {
                         <Tarjeta_Asociadas key={asociada.id_asociada}
                             id_asociada={asociada.id_asociada}
                             nombre={asociada.nombre}
-                            foto={asociada.foto}
+                            foto={asociada.fotoUri}
+                            fotoId={asociada.fotoId}
                             openEdit={isOpen}
                         />
                     ))}

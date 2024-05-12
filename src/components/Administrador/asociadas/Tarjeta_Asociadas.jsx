@@ -4,13 +4,13 @@ import React, { useContext, useState } from 'react'
 import { contexto } from '../UpdateProvider'
 import Swal from 'sweetalert2'
 
-const Tarjeta_Asociadas = ({ id_asociada, nombre, foto, openEdit}) => {
+const Tarjeta_Asociadas = ({ id_asociada, nombre, foto, openEdit, fotoId}) => {
     const {update, setUpdate} = useContext(contexto)
 
     //Objeto para eliminar las fotografías de asociadas  
     const data = {
         "id_producto": id_asociada,
-        "foto": foto,
+        "foto": fotoId,
         "source": "mezcaleras"
     }
 
@@ -37,7 +37,7 @@ const Tarjeta_Asociadas = ({ id_asociada, nombre, foto, openEdit}) => {
             if (resJSON == "Asociada eliminada con éxito") {
                 Swal.fire({
                     title: "Eliminado!",
-                    text: "La marca fue eliminada",
+                    text: "La asociada fue eliminada",
                     icon: "success"
                 });
                 const up =!update
@@ -62,7 +62,7 @@ const Tarjeta_Asociadas = ({ id_asociada, nombre, foto, openEdit}) => {
     //Alerta para evitar borrado accidental 
     const handleDelete = () => {
         Swal.fire({
-            title: "Eliminar producto",
+            title: "Eliminar",
             text: "Esta acción no puede ser revertida!",
             icon: "warning",
             showCancelButton: true,
@@ -85,7 +85,7 @@ const Tarjeta_Asociadas = ({ id_asociada, nombre, foto, openEdit}) => {
                         width={400}
                         height={400}
                         className="object-top object-cover rounded-t-[100px] w-full h-64"
-                        src={"/mezcaleras/" + foto}
+                        src={foto}
                         alt="t-shirt"
                     />
                 </figure>
