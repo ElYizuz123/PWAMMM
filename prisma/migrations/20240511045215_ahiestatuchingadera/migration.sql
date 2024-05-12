@@ -11,9 +11,9 @@ CREATE TABLE "asociada" (
 -- CreateTable
 CREATE TABLE "evento" (
     "id_evento" SERIAL NOT NULL,
-    "foto" VARCHAR(45) NOT NULL,
+    "foto" VARCHAR(45),
     "nombre" VARCHAR(45) NOT NULL,
-    "descripcion" VARCHAR(45) NOT NULL,
+    "descripcion" VARCHAR(100) NOT NULL,
     "fecha_fin" TIMESTAMP(6) NOT NULL,
 
     CONSTRAINT "evento_pkey" PRIMARY KEY ("id_evento")
@@ -131,6 +131,14 @@ CREATE TABLE "pregunta_frecuente" (
     "respuesta" TEXT NOT NULL,
 
     CONSTRAINT "pregunta_frecuente_pkey" PRIMARY KEY ("id_pregunta_frencuente")
+);
+
+-- CreateTable
+CREATE TABLE "ubicacion" (
+    "id_ubicacion" SERIAL NOT NULL,
+    "json_marca" TEXT NOT NULL,
+
+    CONSTRAINT "ubicacion_pkey" PRIMARY KEY ("id_ubicacion")
 );
 
 -- CreateIndex
