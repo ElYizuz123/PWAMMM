@@ -1,0 +1,8 @@
+
+#mayor-edad {
+    display: none;
+}
+
+#mayor-edad.activo {
+    display: block;
+}

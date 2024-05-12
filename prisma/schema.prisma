@@ -18,9 +18,9 @@ model asociada {
 
 model evento {
   id_evento   Int      @id @default(autoincrement())
-  foto        String   @db.VarChar(45)
+  foto        String?   @db.VarChar(45)
   nombre      String   @db.VarChar(45)
-  descripcion String   @db.VarChar(45)
+  descripcion String   @db.VarChar(100)
   fecha_fin   DateTime @db.Timestamp(6)
 }
 
@@ -137,4 +137,3 @@ model ubicacion {
   id_ubicacion          Int         @id @default(autoincrement())
   json_marca            String
 }
-

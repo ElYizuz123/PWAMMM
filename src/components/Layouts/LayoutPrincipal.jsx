@@ -14,6 +14,8 @@ import Footer from "../Footer/Footer";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import MayorEdad from "../MayorEdad/MayorEdad";
+import UsoCookies from "../UsoCookies/UsoCookies";
 
 
 const berkshire = Berkshire_Swash({
@@ -64,6 +66,11 @@ const LayoutPrincipal = ({ children }) => {
 
   return (
     <div>
+      {/* ERES MAYOR DE 18 AÑOS? */}
+      <MayorEdad/>
+
+      {/* ACEPTAR USO DE COOKIES */}
+      <UsoCookies />
       <div>
         <div className="w-full z-20 top-0 fixed">
           <img className="h-8 w-full" src="\navbar\banner.jpg" />
@@ -119,9 +126,9 @@ const LayoutPrincipal = ({ children }) => {
                   href="\historia"
                   className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/historia"]}`}
                 >
-                   <div className={`mx-auto ${styleNav}`}>
+                  <div className={`mx-auto ${styleNav}`}>
                     <GiAgave className="w-full h-auto" />
-                  </div> 
+                  </div>
                   HISTORIA
                 </Link>
                 <Link
@@ -167,6 +174,7 @@ const LayoutPrincipal = ({ children }) => {
       </div>
       <Carrito />
       <div>{children}</div>
+
       <Footer />
     </div>
   );
