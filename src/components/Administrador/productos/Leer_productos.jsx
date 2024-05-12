@@ -213,7 +213,8 @@ const Leer_productos = () => {
                         ml={producto.botella[0] ? producto.botella[0].ml : producto.acompanamiento[0].gr}
                         marca={producto.marca.nombre}
                         precio={producto.precio}
-                        foto={producto.foto}
+                        foto={producto.fotoUri}
+                        fotoId={producto.fotoId}
                         updatePage={updatePage}
                         editProduct={producto.botella[0] ? openUProduct:openUAcompanamiento}
                     />))

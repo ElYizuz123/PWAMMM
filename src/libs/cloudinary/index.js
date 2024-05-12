@@ -1,8 +1,8 @@
 "use server"
-import { cloudinary } from "@/lib/cloudinary"
+import { cloudinary } from "./config"
 
 //  Funciona con File, lado del servidor
-export const uploadImageFile = async (image, publicId) => {
+export const uploadImageFile = async (image, publicId, folder) => {
   const fileBuffer = await image.arrayBuffer()
   const mime = image.type
   const encoding = "base64"
@@ -13,7 +13,7 @@ export const uploadImageFile = async (image, publicId) => {
       return await new Promise((resolve, reject) => {
         cloudinary.uploader
           .upload(fileUri, {
-            folder: publicId === undefined ? "/mezcaleras/" : undefined,
+            folder:"/mezcaleras/"+folder,
             public_id: publicId,
           })
           .then((result) => {

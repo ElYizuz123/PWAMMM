@@ -3,7 +3,8 @@ CREATE TABLE "asociada" (
     "id_asociada" SERIAL NOT NULL,
     "nombre" VARCHAR(45) NOT NULL,
     "historia" TEXT NOT NULL,
-    "foto" VARCHAR(45) NOT NULL,
+    "fotoUri" TEXT NOT NULL,
+    "fotoId" TEXT NOT NULL,
 
     CONSTRAINT "asociada_pkey" PRIMARY KEY ("id_asociada")
 );
@@ -11,7 +12,8 @@ CREATE TABLE "asociada" (
 -- CreateTable
 CREATE TABLE "evento" (
     "id_evento" SERIAL NOT NULL,
-    "foto" VARCHAR(45),
+    "fotoUri" TEXT,
+    "fotoId" TEXT,
     "nombre" VARCHAR(45) NOT NULL,
     "descripcion" VARCHAR(100) NOT NULL,
     "fecha_fin" TIMESTAMP(6) NOT NULL,
@@ -46,7 +48,8 @@ CREATE TABLE "producto" (
     "nombre" VARCHAR(45) NOT NULL,
     "precio" DECIMAL(10,2) NOT NULL,
     "descripcion" TEXT NOT NULL,
-    "foto" VARCHAR(45) NOT NULL,
+    "fotoUri" TEXT NOT NULL,
+    "fotoId" TEXT NOT NULL,
     "marca_id_marca" INTEGER NOT NULL,
     "mercadoLibre" TEXT,
     "cantidad" INTEGER,
@@ -119,7 +122,8 @@ CREATE TABLE "venta_total" (
 -- CreateTable
 CREATE TABLE "galeria_foto" (
     "id_foto" SERIAL NOT NULL,
-    "foto" VARCHAR(45) NOT NULL,
+    "fotoUri" TEXT NOT NULL,
+    "fotoId" TEXT NOT NULL,
 
     CONSTRAINT "galeria_foto_pk" PRIMARY KEY ("id_foto")
 );

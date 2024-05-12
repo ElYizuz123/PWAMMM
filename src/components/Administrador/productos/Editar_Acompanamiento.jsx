@@ -35,7 +35,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
         register('hexa')
         register('id_acompanamiento')
 
-        setValue('foto', data.foto)
+        setValue('foto', data.fotoId)
         setValue('id_acompanamiento', data.acompanamiento[0].id_acompanamiento)
         setValue('id_producto', idProducto)
         setValue('nombre', data.nombre)
@@ -91,7 +91,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
             const form = new FormData()
             form.set('file', productPhoto)
             form.set('source', "productos")
-            form.set('nombre', producto.foto)
+            form.set('nombre', producto.fotoId)
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/update_image', {
@@ -102,7 +102,9 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
             console.log(fotoResJSON)
 
             //Registrar producto en la DB
-            if (fotoResJSON == "Archivo subido correctamente") {
+            if (fotoResJSON != "Error") {
+                data["foto"] = fotoResJSON.picUri
+                data["fotoId"] = fotoResJSON.picId
                 const res = await fetch('/api/producto/update_acompanamiento', {
                     method: 'POST',
                     body: JSON.stringify(data),
@@ -191,9 +193,9 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
                         <p className='text-sm'>{productPhoto.name}</p>
                     )}
                     {/* Imagen por default */}
-                    {!productPhoto && (<Image height={400} width={400} src={`/productos/${producto ? producto.foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
+                    {!productPhoto && (<Image height={400} width={400} src={producto ? producto.fotoUri : ""} alt='Preview' className='object-contain w-48 h-56' />)}
                     {!productPhoto && (
-                        <p className='text-sm'>{producto ? producto.foto : ""}</p>
+                        <p className='text-sm'>{producto ? producto.fotoId : ""}</p>
                     )}
                     <button
                         className='bg-gray-300 w-36 rounded-lg border-[1px] border-black text-sm mt-3'
@@ -220,8 +222,8 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
                                     className='hidden'
                                     ref={fileInputRef}
                                     onChange={(e) => {
-                                        setProductPhoto(e.target.files)
-                                        setValue('foto', e.target.files ? e.target.files.name.split(".") + hexa + "." + e.target.files.name.split(".")[1] : "")
+                                        setProductPhoto(e.target.files[0])
+                                        setValue('foto', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
                                         setValue('hexa', hexa)
                                     }}
                                 />
