@@ -5,7 +5,7 @@ const CardCarrusel = ({ asociada,nombreA,foto,historia, handleAsociada,alt }) =>
     const ruta = "/mezcaleras/";
    
     return (
-        <div className="bg-white mt-32 border-[#f70073] sm:h-[533px] sm:w-[395px]   text-black rounded-3xl border-t-2 border-l-2 border-b-2 border-r-2">
+        <div className="bg-white mt-32 border-[#f70073] sm:h-[533px] sm:w-[395px]   text-black rounded-3xl border-t-2 border-l-2 border-b-2 border-r-2 ">
             <div className=" bg-white flex justify-center items-center rounded-t-3xl">
                 <Image
                     src={foto}

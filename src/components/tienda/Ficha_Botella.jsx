@@ -28,7 +28,7 @@ const Ficha_Botella = ({
      
     
       <div className=" bg-white 
-      w-[1250px]  sm:w-[600px] md:w-[10px] lg:w-[1000px] xl:w-[50px] xl:bg-red-500  2xl:w-[1300px] 
+      w-[1250px]  sm:w-[600px] md:w-[10px] lg:w-[1000px] xl:w-[1250px] xl:bg-green-700  2xl:w-[1300px] 
       h-auto sm:h-[100px] rounded-lg shadow-2xl"> 
         {/* imagen botellas */}
         <div className="ml-4 md:ml-20 py-4  ">

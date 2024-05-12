@@ -1,5 +1,5 @@
 "use client"
-import React, { Suspense,useState, useEffect, useContext } from "react";
+import React, { Suspense, useState, useEffect, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ProductContext } from "@/context/ProductContext";
 import { XIcon } from "@heroicons/react/solid";
@@ -23,7 +23,7 @@ const ruta = "/mezcaleras/";
 const tienda = "/tienda/";
 
 const CarruselAsociadas = () => {
-  
+
   const { idMarcaAsociada } = useContext(ProductContext);
   const [asociadas, setAsociadas] = useState([]);
   const [marcas, setMarcas] = useState([]);
@@ -32,17 +32,17 @@ const CarruselAsociadas = () => {
   const [nombreMezcalera, setNombreMezcalera] = useState();
   const [idMezcalera, setIdMezcalera] = useState();
 
-    //Para manejar la apertura del popup
+  //Para manejar la apertura del popup
   const handleAsociada = (nombre, id_asociada) => {
     setNombreMezcalera(nombre);
     setIdMezcalera(id_asociada);
     setIsPopupOpen(true);
   };
-    //Cambio de la marca asociada
+  //Cambio de la marca asociada
   const handleMarca = (id_marca) => {
     idMarcaAsociada(id_marca);
   };
-    //Efecto para cargar los datos de las asociadas y las marcas desde la BD
+  //Efecto para cargar los datos de las asociadas y las marcas desde la BD
   useEffect(() => {
     const fetchAsociadas = async () => {
       const response = await fetch("/api/read_asociadas"); // Se leen los datos de las asociadas de la base de datos
@@ -60,7 +60,7 @@ const CarruselAsociadas = () => {
   return (
     <div>
       <Swiper
-        modules={[Navigation, Pagination, EffectCoverflow, Autoplay,Scrollbar]} // Modulos necesarios para que funcione el swiper.
+        modules={[Navigation, Pagination, EffectCoverflow, Autoplay, Scrollbar]} // Modulos necesarios para que funcione el swiper.
         navigation
         pagination={{
           el: ".paginacionCarruselAsociadas",                         // Para la paginación, en globals.css se detalla más sobre esto(swiper-button-next,swiper-button-prev,)
@@ -68,7 +68,7 @@ const CarruselAsociadas = () => {
           renderBullet: function (index, className) {
             return '<span class="' + className + '">' + (index + 1) + "</span>";
           },
-        
+
         }}
         effect="coverflow"
         coverflowEffect={{
@@ -80,7 +80,7 @@ const CarruselAsociadas = () => {
         centeredSlides={true} //Centradas
         autoplay={{ delay: 4000, disableOnInteraction: false }} // Reproducción automática cada 4 segundos 
         className="miSwiper"
-        
+
         breakpoints={{
           // Cuando el ancho de la pantalla sea igual o superior a 300px
           300: {
@@ -90,13 +90,13 @@ const CarruselAsociadas = () => {
               el: '.swiper-scrollbar',
               draggable: true,
             },
-            
+
           },
           768: {
             slidesPerView: 2, // Mostrar 2 slides
             spaceBetween: 25, // Espacio entre slides
-            
-            
+
+
           },
           // Cuando el ancho de la pantalla sea igual o superior a 1024px
           1024: {
@@ -111,20 +111,20 @@ const CarruselAsociadas = () => {
       >
         {asociadas &&
           asociadas.map((asociada, index) => {
-            
+
             return (
               /* Sección de cada card del carrusel de las Asociadas
               La informacion del carrusel como historia, nombre, etc*/
-              <SwiperSlide key={asociada.id_asociada}> 
+              <SwiperSlide key={asociada.id_asociada}>
                 <Suspense fallback={<div>Cargando...</div>} >
-                <CardCarrusel
-                  asociada={asociada}
-                  nombreA={asociada.nombre}
-                  foto={`${ruta}${asociada.foto}`}
-                  historia={asociada.historia}
-                  handleAsociada={handleAsociada}
-                  alt={index}
-                />
+                  <CardCarrusel
+                    asociada={asociada}
+                    nombreA={asociada.nombre}
+                    foto={`${ruta}${asociada.foto}`}
+                    historia={asociada.historia}
+                    handleAsociada={handleAsociada}
+                    alt={index}
+                  />
                 </Suspense>
               </SwiperSlide>
             );
@@ -132,11 +132,17 @@ const CarruselAsociadas = () => {
 
       </Swiper>
       {isPopupOpen && (   //El Popup al momento de dar clic en productos de cada mezcalera
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-70 overflow-y-auto h-full w-full flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-70 overflow-y-auto h-full w-full flex items-center justify-center z-50 ">
           <div className="relative bg-white p-5 rounded shadow-lg w-full max-w-lg mt-16">
             {/* Título del popup y botón de cerrar */}
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-semibold space-x-2">
+              <h3 className="text-lg font-bold space-x-2">
+                <span >{'"'}Te invito a descubrir el auténtico sabor de Michoacán{'"'}</span>
+                {/* <span className="text-[#C1D128]" >de Michoacán{'"'} </span> */}
+              </h3>
+              
+              <br />
                 <span>MARCAS DE</span>
                 <span className="text-[#f70073]">{nombreMezcalera}</span>
               </h3>
