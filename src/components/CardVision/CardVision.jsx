@@ -3,6 +3,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Berkshire_Swash } from "next/font/google";
+import Image from "next/image";
+
 
 //Tipo de letra
 const berkshire = Berkshire_Swash({
@@ -113,7 +115,7 @@ const CardVision = () => {
       }
     }, [controlsVision, inViewVision]);
   return (
-    <div className="w-full h-auto  ">
+    <div className=" w-full h-auto    ">
     <div className="w-11/12 m-auto ">
       <div className="text-center ">
         <motion.div
@@ -125,18 +127,13 @@ const CardVision = () => {
         >
           <div className="w-full md:w-3/5 lg:w-1/2 px-4">
             
-            <AnimatePresence mode="wait"> {/*Al cambiar entre imágenes tambien se presenta una pequeña animación*/}
-              <motion.img
-                key={images[cambiarImagen]} // La clave aquí es la URL de la imagen, lo que asegura que el componente se recrea en cada cambio
-                src={images[cambiarImagen]} // Arreglo de imagenes, se encuentra en la sección superior
+            <Image src={images[cambiarImagen]} // Arreglo de imagenes, se encuentra en la sección superior
                 alt="Mujeres Mezcaleras de Michoacán"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }} //Duración
+               width={1000}
+               height={1000}
+             
                 className="w-11/12 inline-block rounded shadow-lg border border-merino-400" // Características de la imagen.
-              />
-            </AnimatePresence>
+          />
           </div>
 
           <motion.div
@@ -147,9 +144,9 @@ const CardVision = () => {
             className="w-full md:w-2/5 lg:w-1/2 px-4 text-center md:text-left lg:pl-12"
           >
             <div
-              className={berkshire.className} // Asegúrate de que esta clase se aplica correctamente
+              className={berkshire.className} 
             >
-              <p className="text-center md:text-start text-4xl mx-1 md:text-6xl lg:text-6xl xl:text-7xl text-black font-bold mt-8 ml-8 md:mt-0 sm:text-5xl"> {/*Tamaño de letra responsivo*/}
+              <p className="text-center md:text-start text-4xl mx-1 md:text-6xl lg:text-6xl xl:text-7xl text-black font-bold mt-8 ml-8 md:mt-0 sm:text-5xl   "> {/*Tamaño de letra responsivo*/}
                 Misión
               </p>
             </div>
@@ -180,18 +177,16 @@ const CardVision = () => {
           className="flex flex-wrap items-center mt-28 p-6 bg-white rounded-lg shadow-lg"
         >
           <div className="w-full md:w-3/5 lg:w-1/2 px-4">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={imagesVision[cambiarFoto]} // La clave aquí es la URL de la imagen, lo que asegura que el componente se recrea en cada cambio
+         
+              <Image
+               // La clave aquí es la URL de la imagen, lo que asegura que el componente se recrea en cada cambio
                 src={imagesVision[cambiarFoto]}
-                alt="Mujeres Mezcaleras de Michoacán"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
+                alt="Mujeres Mezcaleras de Michoacán Vision"
+                width={1000}
+                height={1000}
                 className="w-11/12 inline-block rounded shadow-lg border border-merino-400"
               />
-            </AnimatePresence>
+        
           </div>
           <motion.div
             ref={refVision} // Utiliza la misma referencia para el texto

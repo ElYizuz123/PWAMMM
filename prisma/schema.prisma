@@ -141,3 +141,4 @@ model ubicacion {
   id_ubicacion Int    @id @default(autoincrement())
   json_marca   String
 }
+

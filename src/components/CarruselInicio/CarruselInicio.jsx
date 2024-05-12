@@ -82,8 +82,8 @@ const CarruselInicio = () => {
              <CardCarruselnicio 
              nombre={evento.nombre}
              descripcion={evento.descripcion}
-            foto={ruta + evento.foto}
-            alte={index}
+              foto={ruta + evento.foto}
+              alte={index}
             />
                
               </SwiperSlide >
