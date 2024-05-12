@@ -81,7 +81,7 @@ const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit, fotoId}) => {
                         width={400}
                         height={400}
                         className="object-top object-cover rounded-t-[100px] w-full h-64"
-                        src={foto}
+                        src={foto? foto:""}
                         alt="t-shirt"
                     />
                 </figure>
