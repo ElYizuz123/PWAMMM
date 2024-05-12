@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import AcompañamientoCarrito from "@/components/tienda/AcompañamientoCarrito";
 import { ProductContext } from "@/context/ProductContext";
 import Link from "next/link";
-
+import IrFormulario from "@/components/tienda/IrFormulario";
 
 const IrFormulario = () => {
   const { productos, total } = useContext(ProductContext);

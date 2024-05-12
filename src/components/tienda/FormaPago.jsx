@@ -7,32 +7,22 @@ import { IoClose } from "react-icons/io5";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 //en esta funcion recibo el trigger
-function FormaPago({ transferencia, setTransferencia }) {
-  const { envioVenta, pago } = useContext(ProductContext);
-  const { productos } = useContext(ProductContext);
+function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
+  const { productos, envioVenta, setMetodoPago, enviarDataApi } = useContext(ProductContext);
 
   const [shippingMethod, setShippingMethod] = useState("envio");
   const [paymentMethod, setPaymentMethod] = useState("transferencia");
   const [confirmMethod, setConfirmMethod] = useState([]);
-  const [payPal, setPaypal] = useState(false);
-  
+
   const envio = 199;
   const totalVenta = productos.reduce(
     (total, producto) => total + producto.cantidad * producto.precio,
     0
   );
 
-  const pagoTotal = shippingMethod === "recogerTienda" ? totalVenta : totalVenta + envio;
+  const pagoTotal =
+    shippingMethod === "recogerTienda" ? totalVenta : totalVenta + envio;
 
-  const handleOpenPopup = () => {
-    if(paymentMethod === "transferencia"){
-      
-    }
-    else{
-      setPaypal(true)
-    }
-  }
-  
   const handleClosePopup = () => {
     setPaypal(false);
     setTransferencia(false);
@@ -43,7 +33,7 @@ function FormaPago({ transferencia, setTransferencia }) {
   };
 
   const handlePaymentChange = (event) => {
-    pago(event.target.value === "payPal" ? 1 : 0);
+    setMetodoPago(event.target.value === "payPal" ? 1 : 0);
     setPaymentMethod(event.target.value);
   };
   const handleConfirmChange = (event) => {
@@ -217,7 +207,7 @@ function FormaPago({ transferencia, setTransferencia }) {
           </div>
           {/* </button> */}
         </div>
-        {payPal && (
+        {paypal && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
             <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white mt-40">
               <button
@@ -286,7 +276,12 @@ function FormaPago({ transferencia, setTransferencia }) {
                     }}
                     //APROBAR COMPRA
                     onApprove={(data, actions) => {
-                      actions.order.capture();
+                      actions.order.capture().then((details) => {
+                        console.log("Pago aprobado:", details);
+                        enviarDataApi()
+                        
+                      }); 
+                      setPaypal(false);
                       //AQUI DEBE DE MANDAR ALGO PARA ACEPTAR COMPRAR Y SUBIR A BD -- DESCONTAR STOCK
                     }}
                   />

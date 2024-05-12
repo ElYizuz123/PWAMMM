@@ -114,7 +114,7 @@ const Page = () => {
                   {/* Product row */}
                   <MostrarItemsCarrito />
                 </div>
-                <IrFormulario/>
+                <IrFormulario />
               </div>
             </div>
           </div>

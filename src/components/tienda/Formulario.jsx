@@ -56,12 +56,21 @@ const estados = [
 ];
 
 function Formulario() {
-  const { productos, total, isEnvio, pago, limpiarProductos } = useContext(ProductContext);
+  const {
+    productos,
+    total,
+    isEnvio,
+    setDataFormulario,
+    metodoPago,
+    enviarDataApi,
+  } = useContext(ProductContext);
   const [isFormVisiblePersonales, setIsFormVisiblePersonales] = useState(false);
   const [isFormVisibleDireccion, setIsFormVisibleDireccion] = useState(false);
   const [personalError, setPersonalError] = useState("");
   const [direccionError, setDireccionError] = useState("");
   const [transferencia, setTransferencia] = useState(false);
+  const [paypal, setPaypal] = useState(false);
+  const [isDataReadyForApi, setIsDataReadyForApi] = useState(false);
 
   const {
     register,
@@ -77,7 +86,7 @@ function Formulario() {
   };
   const toggleFormDireccion = () => {
     setIsFormVisibleDireccion(!isFormVisibleDireccion);
-  }; 
+  };
 
   const validatePersonales = () => {
     const values = getValues(["nombre", "apellidos", "telefono", "email"]);
@@ -117,7 +126,7 @@ function Formulario() {
     }
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     if (!validatePersonales()) {
       setTimeout(() => {
         const section = document.getElementById("datos-personales");
@@ -147,64 +156,36 @@ function Formulario() {
     }
 
     if (validatePersonales() && validateDireccion()) {
+      console.log(metodoPago);
+
       data.envio = isEnvio;
       data.total = isEnvio === 1 ? total + 199 : total;
-      console.log(data);
 
-      try {
-        const response = await fetch("/api/ventas/create_venta", {
-          method: "POST",
-          body: JSON.stringify({ data: data, productos: productos }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+      setDataFormulario(data);
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        // MANDA LOS DATOS NECESARIOS PARA EL CORREO
-        const responseData = await fetch("/api/send_emailVenta", {
-          method: "POST",
-          body: JSON.stringify({
-            nombreCliente: data.nombre,
-            apellidoCliente: data.apellidos,
-            telefono: data.telefono,
-            correo: data.email,
-            nombreEmpresa: data.empresa,
-            pais: "México",
-            ciudad: data.ciudad,
-            colonia: data.colonia,
-            calle: data.calle,
-            numExterior: data.num_ext,
-            numInterior: data.num_int,
-            cp: data.cp,
-            productos: productos,
-            metodoEnvio: isEnvio === 0 ? "Envío" : "Recoger en tienda",
-            total: total,
-            metodoPago: pago === 1 ? "Paypal" : "Tranferencia bancaria",
-          }),
-        });
-
-        if (!responseData.ok) {
-          throw new Error(`HTTP error! status: ${responseData.status}`);
-        }
-        const result = await response.json();
-        const responseEmail = await responseData.json();
-        console.log(result, responseEmail);
-        
-        limpiarProductos();
-
-        if(pago!==1){
-          setTransferencia(true)
-        }
-        
-      } catch (error) {
-        console.error("Error en el proceso:", error); // Maneja cualquier error que ocurra durante el fetch
+      if (metodoPago === 0) {
+        setIsDataReadyForApi(true);
+      } else {
+        setPaypal(true);
       }
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (isDataReadyForApi) {
+        try {
+          await enviarDataApi(); // Intenta ejecutar enviarDataApi y espera su finalización
+          setTransferencia(true); // Solo se ejecuta si no hay errores
+        } catch (error) {
+          console.error("Error en enviarDataApi:", error); // Maneja el error, por ejemplo, mostrando un mensaje en consola
+        }
+        setIsDataReadyForApi(false);
+      }
+    };
+
+    fetchData();
+  }, [isDataReadyForApi]);
 
   return (
     <div className="relative my-[150px]">
@@ -819,6 +800,8 @@ function Formulario() {
                     <FormaPago
                       transferencia={transferencia}
                       setTransferencia={setTransferencia}
+                      paypal={paypal}
+                      setPaypal={setPaypal}
                     />
                   </div>
                 </div>

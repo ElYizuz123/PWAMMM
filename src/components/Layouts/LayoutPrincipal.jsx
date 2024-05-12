@@ -11,18 +11,28 @@ import IconoMenu from "@/components/navbar/iconoMenu";
 import { Berkshire_Swash } from "next/font/google";
 import Carrito from "../tienda/Carrito";
 import Footer from "../Footer/Footer";
+import { HiX, HiMenu } from "react-icons/hi";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import MayorEdad from "../MayorEdad/MayorEdad";
 import UsoCookies from "../UsoCookies/UsoCookies";
 
-
 const berkshire = Berkshire_Swash({
   weight: ["400"],
   styles: ["italic", "normal"],
   subsets: ["latin"],
 });
+
+//animacion de hover en menu
+const hoverEffect = {
+  scale: 1.2, // Escala el icono al 120% de su tamaño original
+  rotate: 90, // Rota el icono 90 grados
+  transition: {
+    duration: 0.3, // Duración de 0.3 segundos para la transición
+    ease: "easeInOut", // Tipo de easing
+  },
+};
 
 // colorcito de la página seleccionada ${buttonMap["/"]}
 const buttonMap = {
@@ -33,6 +43,24 @@ const buttonMap = {
   "/contacto": "text-black bg-[#0000000]",
 };
 const LayoutPrincipal = ({ children }) => {
+  //animaciones del menu
+  const menuVariants = {
+    open: {
+      x: 0,
+      transition: { type: "spring", stiffness: 100, damping: 10 },
+    },
+    closed: {
+      x: "100%",
+      transition: { type: "spring", stiffness: 100, damping: 10 },
+    },
+  };
+
+  //para el submenu de la derecha
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   //para cambiar los colorcitos
   const pathName = usePathname();
   const changeColor = () => {
@@ -101,9 +129,87 @@ const LayoutPrincipal = ({ children }) => {
               </div>
             </div>
 
-            <div className="absolute right-0 top-6 flex lg:hidden">
-              {IconoMenu}
+            <motion.div
+              className="menu bg-white fixed top-0 right-0 h-full shadow-lg z-50 opacity-95"
+              initial="closed"
+              animate={isMenuOpen ? "open" : "closed"}
+              variants={menuVariants}
+            >
+              <div className="flex justify-end p-4">
+                <button onClick={toggleMenu} className="text-xl">
+                  <HiX className="h-6 w-6 cursor-pointer transition duration-300 ease-in-out hover:text-red-500 hover:rotate-180" />{" "}
+                </button>
+              </div>
+              <ul className="flex flex-col">
+                <li className="py-8 px-4 border-b border-[#F70073]">
+                  <Link
+                    className={`flex justify-end items-center space-x-3 hover:text-[#F70073] ${buttonMap["/"]}`}
+                    href="/"
+                  >
+                    <span className="text-xl"> INICIO</span>
+                    <HiHome className="h-6 w-6" />
+                  </Link>
+                </li>
+                <li className="py-8 px-4 border-b border-[#F70073]">
+                  <Link
+                    className={`flex justify-end items-center space-x-3 hover:text-[#F70073] ${buttonMap["/historia"]}`}
+                    href="/historia"
+                  >
+                    <span className="text-xl">HISTORIA</span>
+                    <GiAgave className="h-6 w-6" />
+                  </Link>
+                </li>
+                <li className="py-8 px-4 border-b border-[#F70073]">
+                  <Link
+                    className={`flex justify-end items-center space-x-3 hover:text-[#F70073] ${buttonMap["/tienda"]}`}
+                    href="/tienda"
+                  >
+                    <span className="text-xl">TIENDA</span>
+                    <HiShoppingBag className="h-6 w-6" />
+                  </Link>
+                </li>
+                <li className="py-8 px-4 border-b border-[#F70073]">
+                  <Link
+                    className={`flex justify-end items-center space-x-3 hover:text-[#F70073] ${buttonMap["/nosotras"]}`}
+                    href="/nosotras"
+                  >
+                    <span className="text-xl">NOSOTRAS</span>
+                    <HiInformationCircle className="h-6 w-6" />
+                  </Link>
+                </li>
+                <li className="py-8 px-4 border-b border-[#F70073]">
+                  <Link
+                    className={`flex justify-end items-center space-x-3 hover:text-[#F70073] ${buttonMap["/galeria"]}`}
+                    href="/galeria"
+                  >
+                    <span className="text-xl">GALERIA</span>
+                    <BsImages className="h-6 w-6" />
+                  </Link>
+                </li>
+                <li className="py-8 px-4">
+                  <Link
+                    className={`flex justify-end items-center space-x-3  hover:text-[#F70073] ${buttonMap["/contacto"]}`}
+                    href="/contacto"
+                  >
+                    <span className="text-xl">CONTACTO</span>
+                    <HiEnvelope className="h-6 w-6" />
+                  </Link>
+                </li>
+              </ul>
+            </motion.div>
+
+            <div className="absolute right-0 top-8 flex items-center lg:hidden p-4">
+              <button onClick={toggleMenu}>
+                {isMenuOpen ? (
+                  <HiX className="h-8 w-8 hidden" />
+                ) : (
+                  <motion.div whileHover={hoverEffect}>
+                    <HiMenu className="h-10 w-10" />
+                  </motion.div>
+                )}
+              </button>
             </div>
+
             <div className="text-black lg:flex hidden flex-grow justify-between ml-5 py-8 text-center mr-24">
               <div className={berkshire.className}>
                 <div className={styleLogo}>
