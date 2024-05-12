@@ -27,8 +27,10 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
             register('historia')
             register('foto')
             register('hexa')
+            register('fotoId')
 
-            setValue('foto', data[0].foto)
+            setValue('foto', data[0].fotoUri)
+            setValue('fotoId', data[0].fotoId)
             setValue('id_asociada', idAsociada)
             setValue('nombre', data[0].nombre)
             setValue('historia', data[0].historia)
@@ -45,7 +47,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
             const form = new FormData()
             form.set('file', asociadaPhoto)
             form.set('source', "mezcaleras")
-            form.set('nombre', asociada[0].foto)
+            form.set('nombre', asociada[0].fotoId)
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/update_image', {
@@ -56,7 +58,9 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
             console.log(fotoResJSON)
 
             //Registrar producto en la DB
-            if (fotoResJSON == "Archivo subido correctamente") {
+            if (fotoResJSON != "Error") {
+                data["foto"] = fotoResJSON.picUri
+                data["fotoId"] = fotoResJSON.picId
                 const res = await fetch('/api/asociadas/update_asociada', {
                     method: 'POST',
                     body: JSON.stringify(data),
@@ -155,9 +159,9 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                         <p className='text-sm'>{asociadaPhoto.name}</p>
                     )}
                     {/* Visualizador de imagen por defecto */}
-                    {!asociadaPhoto && (<Image width={400} height={400} src={`/mezcaleras/${asociada ? asociada[0].foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
+                    {!asociadaPhoto && (<Image width={400} height={400} src={asociada ? asociada[0].fotoUri : ""} alt='Preview' className='object-contain w-48 h-56' />)}
                     {!asociadaPhoto && (
-                        <p className='text-sm'>{asociada ? asociada[0].foto : ""}</p>
+                        <p className='text-sm'>{asociada ? asociada[0].fotoId : ""}</p>
                     )}
                     <button
                         className='bg-gray-300 w-36 rounded-lg border-[1px] border-black text-sm mt-3'

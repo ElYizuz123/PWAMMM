@@ -34,7 +34,9 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
         register('foto')
         register('hexa')
         register('id_acompanamiento')
+        register('fotoId')
 
+        setValue('foto', data.fotoUri)
         setValue('foto', data.fotoId)
         setValue('id_acompanamiento', data.acompanamiento[0].id_acompanamiento)
         setValue('id_producto', idProducto)

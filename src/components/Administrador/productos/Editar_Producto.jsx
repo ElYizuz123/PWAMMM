@@ -36,8 +36,10 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
         register('foto')
         register('hexa')
         register('id_botella')
+        register('fotoId')
 
-        setValue('foto', data[0].fotoId)
+        setValue('foto', data[0].fotoUri)
+        setValue('fotoId', data[0].fotoId)
         setValue('id_botella', data[0].botella[0].id_botella)
         setValue('tipo_agave', data[0].botella[0].tipo_agave)
         setValue('cantidad_alcohol', data[0].botella[0].cantidad_alcohol)

@@ -3,58 +3,39 @@ import React, { useContext } from 'react'
 import Swal from 'sweetalert2'
 import { contexto } from '../UpdateProvider'
 
-const TarjetaUbicacion = ({idUbicacion,marca, mapa, openEdit, foto}) => {
+const TarjetaUbicacion = ({ idUbicacion, marca, mapa, openEdit, foto }) => {
 
-    const {update, setUpdate} = useContext(contexto)
+    const { update, setUpdate } = useContext(contexto)
 
-    //Objeto para eliminar las fotografías de asociadas  
-    const data = {
-        "id_producto": idUbicacion,
-        "foto": foto,
-        "source": "qrImagen"
-    }
 
-    const deleteUbicacion = async () =>{
-         //Elminar las imágenes de la base de datos
-         const deletedImage = await fetch('/api/delete_image', {
+    const deleteUbicacion = async () => {
+        //Elminar a la asociada de la base de datos
+        const res = await fetch('/api/ubicaciones/delete_ubicacion', {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(idUbicacion),
+            headers: {
+                'Content-Type': 'aplication/json'
+            }
         })
-        const resDeletedImageJSON = await deletedImage.json()
-        if (resDeletedImageJSON == 'Arhivo eliminado correctamente') {
-            //Elminar a la asociada de la base de datos
-            const res = await fetch('/api/ubicaciones/delete_ubicacion', {
-                method: 'POST',
-                body: JSON.stringify(idUbicacion),
-                headers: {
-                    'Content-Type': 'aplication/json'
-                }
-            })
-            const resJSON = await res.json()
-            console.log(resJSON)
-            if (resJSON == "Ubicación eliminada con éxito") {
-                Swal.fire({
-                    title: "Eliminado!",
-                    text: "La ubicación fue eliminada",
-                    icon: "success"
-                });
-                const up =!update
-                setUpdate(up)
-            }
-            else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Algo salió mal!",
-                });
-            }
-        } else {
+        const resJSON = await res.json()
+        console.log(resJSON)
+        if (resJSON == "Ubicación eliminada con éxito") {
+            Swal.fire({
+                title: "Eliminado!",
+                text: "La ubicación fue eliminada",
+                icon: "success"
+            });
+            const up = !update
+            setUpdate(up)
+        }
+        else {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Algo salió mal!",
             });
         }
+
     }
 
     const handleDelete = () => {
@@ -75,11 +56,11 @@ const TarjetaUbicacion = ({idUbicacion,marca, mapa, openEdit, foto}) => {
     }
 
 
-  return (
-    <div>
+    return (
+        <div>
             <div className="relative rounded-5 overflow-hidden card-reduced-as rounded-t-[120px]">
                 <figure className='flex justify-center items-center'>
-                    <iframe src={mapa} 
+                    <iframe src={mapa}
                         width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className='h-64 rounded-t-[100px] border-2 border-pink-600'>
                     </iframe>
                 </figure>
@@ -99,7 +80,7 @@ const TarjetaUbicacion = ({idUbicacion,marca, mapa, openEdit, foto}) => {
 
             </div>
         </div>
-  )
+    )
 }
 
 export default TarjetaUbicacion

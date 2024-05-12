@@ -81,7 +81,9 @@ const Crear_evento = () => {
             fotoResJSON = "Archivo subido correctamente"
         }
         //Registrar producto en la DB
-        if (fotoResJSON == "Archivo subido correctamente") {
+        if (fotoResJSON != "Error") {
+            data["foto"] = fotoResJSON.picUri
+            data["fotoId"] = fotoResJSON.picId
             const res = await fetch('/api/eventos/create_evento', {
                 method: 'POST',
                 body: JSON.stringify(data),

@@ -13,7 +13,6 @@ const randomHexa = () => {
 const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
 
     const { update, setUpdate } = useContext(contexto)
-    const [qrImagen, setQrImagen] = useState(null)
     const [ubicacion, setUbicacion] = useState(null)
     const [defaultData, setDefaultData] = useState(false)
     const { register, handleSubmit, setValue } = useForm()
@@ -28,7 +27,7 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
         register('mapa')
         register('ubicacion')
         register('telefono')
-        register('qrImagen')
+        register('pagina')
         register('hexa')
 
 
@@ -37,7 +36,7 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
         setValue('mapa', JSON.parse(data.json_marca).mapa)
         setValue('ubicacion', JSON.parse(data.json_marca).ubicacion)
         setValue('telefono', JSON.parse(data.json_marca).telefono)
-        setValue('qrImagen', JSON.parse(data.json_marca).qrImagen)
+        setValue('pagina', JSON.parse(data.json_marca).pagina)
     }
 
     //Ingresar la qrImagen al input del form
@@ -56,83 +55,33 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
 
     //Modificar imagen
     const handleOnSubmit = async (data) => {
-        if (qrImagen) {
-            const form = new FormData()
-            form.set('file', qrImagen)
-            form.set('source', "qrUbicaciones")
-            form.set('nombre', ubicacion.qrImagen)
-            form.set('modifier', data.hexa)
-            //Registrar qrImagen en el servidor
-            const qrImagenRes = await fetch('/api/update_image', {
-                method: 'POST',
-                body: form
-            })
-            const qrImagenResJSON = await qrImagenRes.json()
-            console.log("La imagen si cambia")
-            console.log(data)
-            //Registrar producto en la DB
-            if (qrImagenResJSON == "Archivo subido correctamente") {
-                const res = await fetch('/api/ubicaciones/update_ubicacion', {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'aplication/json'
-                    }
-                })
-                const resJSON = await res.json()
-                console.log(resJSON)
-                if (resJSON == "Registrada") {
-                    Swal.fire({
-                        title: "ubicacion actualizado!",
-                        icon: "success",
-                        timer: 2000,
-                        timerProgressBar: true,
-                        confirmButtonText: "Ok",
-                    })
-                    const up = !update
-                    setUpdate(up)
-                }
-                else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Algo salió mal!",
-                    })
-                    const up = !update
-                    setUpdate(up)
-                }
+        console.log("La imagen no cambia")
+        console.log(data)
+        const res = await fetch('/api/ubicaciones/update_ubicacion', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'aplication/json'
             }
-        }
-        //No se cambio la qrImagengrafía
-        else {
-            console.log("La imagen no cambia")
-            console.log(data)
-            const res = await fetch('/api/ubicaciones/update_ubicacion', {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'aplication/json'
-                }
+        })
+        const resJSON = await res.json()
+        console.log(resJSON)
+        if (resJSON == "Registrada") {
+            const up = !update
+            setUpdate(up)
+            Swal.fire({
+                title: "ubicacion actualizado!",
+                icon: "success",
+                timer: 2000,
+                timerProgressBar: true,
+                confirmButtonText: "Ok",
             })
-            const resJSON = await res.json()
-            console.log(resJSON)
-            if (resJSON == "Registrada") {
-                const up = !update
-                setUpdate(up)
-                Swal.fire({
-                    title: "ubicacion actualizado!",
-                    icon: "success",
-                    timer: 2000,
-                    timerProgressBar: true,
-                    confirmButtonText: "Ok",
-                })
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Algo salió mal!",
-                });
-            }
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo salió mal!",
+            });
         }
     }
 
@@ -157,32 +106,15 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
 
 
     return (
-        <div className='w-full h-[350px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[400px]'>
+        <div className='w-full h-[420px] bg-[#f3e0e0] rounded-3xl border-2 border-[#F70073] min-w-[400px]'>
             <div className='w-full bg-[#F70073] rounded-t-2xl flex justify-between'>
                 <p className='font-bold pl-5'>ubicacion</p>
                 <button className='mr-4 font-bold eye-icon' onClick={onClose}>X</button>
             </div>
-            <div className='w-full h-full flex justify-between'>
-                <div className='h-[90%] w-[40%] flex flex-col justify-center items-center'>
-                    {/* Visualizador de imagen */}
-                    {qrImagen && (
-                        <Image width={400} height={400} src={URL.createObjectURL(qrImagen)} alt='Preview' className='object-contain w-48 h-56' />
-                    )}
-                    {qrImagen && (
-                        <p className='text-sm'>{qrImagen.name}</p>
-                    )}
-                    {/* Visualizador de imagen por defecto */}
-                    {!qrImagen && (<Image width={400} height={400} src={`/qrUbicaciones/${ubicacion ? ubicacion.qrImagen : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
-                    {!qrImagen && (
-                        <p className='text-sm'>{ubicacion ? ubicacion.qrImagen : ""}</p>
-                    )}
-                    <button
-                        className='bg-gray-300 w-36 rounded-lg border-[1px] border-black text-sm mt-3'
-                        onClick={handleFileButton}
-                    >Seleccionar Archivo</button>
-                </div>
+            <div className='w-full h-full flex justify-center'>
                 <div className='h-full w-[60%] flex justify-between'>
                     <div className='flex flex-col items-start gap-y-6 mt-4 mr-2'>
+                        <p className='text-xl mt-2'>Página</p>
                         <p className='text-xl mt-2'>Marca</p>
                         <p className='text-xl mt-3'>Mapa</p>
                         <p className='text-xl mt-2'>Ubicación</p>
@@ -192,23 +124,24 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
                         <div className='h-full flex flex-col items-start mt-5 mr-2'>
                             <form onSubmit={handleSubmit(handleOnSubmit)}>
                                 <input
-                                    type='file'
-                                    name='qrImagen'
-                                    id='fotoSelecter'
-                                    className='hidden'
+                                    type='text'
+                                    name='pagina'
                                     ref={fileInputRef}
-                                    onChange={(e) => {
-                                        setQrImagen(e.target.files[0])
-                                        setValue('qrImagen', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
-                                        setValue('hexa', hexa)
-                                    }}
+                                    required={true}
+                                    maxLength={300}
+                                    placeholder='Página'
+                                    className='w-full border-2 border-black rounded-lg pl-1'
+                                    {...register('pagina', {
+                                        required: true,
+                                        maxLength: 300
+                                    })}
                                 />
                                 <select
                                     name='marca'
-                                    className='w-full border-2 border-black rounded-lg pl-1'
+                                    className='w-full border-2 border-black rounded-lg pl-1 mt-5'
                                     id="select_marca"
                                     required={true}
-                                    
+
                                     {...register('marca', {
                                         required: true
                                     })}
