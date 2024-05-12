@@ -52,7 +52,7 @@ const CrearUbicacion = () => {
 
   //Establecer los campos de foto y hexadecimal en el form
   useEffect(() => {
-    register('foto');
+    register('qrImagen');
     register('hexa')
   }, [register]);
 
@@ -187,13 +187,13 @@ const CrearUbicacion = () => {
                   <form onSubmit={handleSubmit(handleOnSubmit)}>
                     <input
                       type='file'
-                      name='foto'
+                      name='qrImagen'
                       id='fotoSelecter'
                       className='hidden'
                       ref={fileInputRef}
                       onChange={(e) => {
                         setMarcaQR(e.target.files[0])
-                        setValue('foto', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
+                        setValue('qrImagen', e.target.files[0] ? e.target.files[0].name.split(".")[0] + hexa + "." + e.target.files[0].name.split(".")[1] : "")
                         setValue('hexa', hexa)
                       }}
                     />
@@ -209,7 +209,7 @@ const CrearUbicacion = () => {
                       <option></option>
                       {marcas && (
                         marcas.map((marca) => (
-                          <option value={marca.id_marca} key={marca.id_marca}>{marca.nombre}</option>
+                          <option value={marca.nombre} key={marca.id_marca}>{marca.nombre}</option>
                         ))
                       )}
                     </select>
@@ -217,10 +217,10 @@ const CrearUbicacion = () => {
                       type='text'
                       name='mapa'
                       required={true}
-                      maxLength={45}
+                      maxLength={500}
                       {...register('mapa', {
                         required: true,
-                        maxLength: 300
+                        maxLength: 500
                       })}
                       className='w-full h-10 border-2 border-black rounded-lg pl-1 mt-5'
                       placeholder='Link del mapa'
@@ -241,10 +241,10 @@ const CrearUbicacion = () => {
                       type='text'
                       name='telefono'
                       required={true}
-                      maxLength={45}
+                      maxLength={10}
                       {...register('telefono', {
                         required: true,
-                        maxLength: 300
+                        maxLength: 10
                       })}
                       className='w-full h-10 border-2 border-black rounded-lg pl-1 mt-5'
                       placeholder='Teléfono'
