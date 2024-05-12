@@ -7,16 +7,30 @@ h1 {
   text-transform: capitalize;
 }
 
-.card-reduced-as > figure {
+
+.card-reduced {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  height: 410px;
+  width: 350px;
+  background-color: #fff
+}
+.card-reduced > figure {
   width: 90%;
   margin: 20px auto 0 auto;
 }
 
 .card-reduced-as {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   height: 370px;
   width: 350px;
   background-color: #fff
 }
+
+.card-reduced-as > figure {
+  width: 90%;
+  margin: 20px auto 0 auto;
+}
+
 
 .slider-container-admin {
   width: 1000px;
