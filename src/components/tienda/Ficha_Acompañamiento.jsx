@@ -31,7 +31,7 @@ const Ficha_Acompañamiento = ({
             <Image
               className=" rounded-md translate-x-[40%]  absolute
                sm:mt-4 sm:translate-x-32 sm:w-[250px] sm:absolute
-               md:-mt-10 md:ml-2 md:translate-x-0  md:h-[300px] 
+               md:mt-20 md:ml-2 md:translate-x-0 md:w-[200px]  md:h-[200px] 
                lg:-mt-24 lg:py-12  lg:translate-x-10  lg:h-[350px] 
                2xl:-mt-20 2xl:translate-x-28 2xl:h-[350px] 2xl:ml-10"
               src={`/productos/${foto}`}
@@ -60,8 +60,8 @@ const Ficha_Acompañamiento = ({
               <div className="text-black mt-4">
                 <strong
                   className="text-xl 
-                sm:text-2xl 
-                md:text-3xl 
+                sm:text-xl 
+                md:text-2xl 
                 lg:text-3xl
                 2xl:text-4xl"
                 >

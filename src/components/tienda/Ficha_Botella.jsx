@@ -59,9 +59,9 @@ const Ficha_Botella = ({
             <div
               className="absolute right-0  g-green-200 rounded-full w-auto h-20 p-4 text-center 
                    translate-x-3    -translate-y-96
-                   sm:-translate-x-7 sm:-translate-y-80 sm:-mt-20
+                   sm:-translate-x-2 sm:-translate-y-80 sm:-mt-20
                    md:translate-x-1 md:translate-y-20 
-                   lg:-translate-x-8  
+                   lg:-translate-x-2  
                    2xl:-translate-x-10"
             >
               <div
@@ -72,9 +72,9 @@ const Ficha_Botella = ({
               >
                 <p
                   className="  font-bold text-lg text-green-700
-                  sm:text-2xl   sm:text-black
-                  md:text-3xl   md:text-black
-                  lg:text-3xl    lg:text-black   
+                  sm:text-xl   sm:text-black
+                  md:text-2xl   md:text-black
+                  lg:text-2xl    lg:text-black   
                   2xl:text-3xl   2xl:text-black"
                 >
                   ${precio}
