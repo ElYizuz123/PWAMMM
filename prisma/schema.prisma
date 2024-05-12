@@ -12,15 +12,17 @@ model asociada {
   id_asociada Int     @id @default(autoincrement())
   nombre      String  @db.VarChar(45)
   historia    String
-  foto        String  @db.VarChar(45)
+  fotoUri     String
+  fotoId      String
   marca       marca[]
 }
 
 model evento {
   id_evento   Int      @id @default(autoincrement())
-  foto        String   @db.VarChar(45)
+  fotoUri     String?
+  fotoId      String?
   nombre      String   @db.VarChar(45)
-  descripcion String   @db.VarChar(45)
+  descripcion String   @db.VarChar(100)
   fecha_fin   DateTime @db.Timestamp(6)
 }
 
@@ -51,7 +53,8 @@ model producto {
   nombre           String             @db.VarChar(45)
   precio           Decimal            @db.Decimal(10, 2)
   descripcion      String
-  foto             String             @db.VarChar(45)
+  fotoUri          String
+  fotoId           String
   marca_id_marca   Int
   mercadoLibre     String?
   cantidad         Int?
@@ -124,7 +127,8 @@ model venta_total {
 
 model galeria_foto {
   id_foto Int    @id(map: "galeria_foto_pk") @default(autoincrement())
-  foto    String @db.VarChar(45)
+  fotoUri     String 
+  fotoId      String
 }
 
 model pregunta_frecuente {
@@ -134,7 +138,6 @@ model pregunta_frecuente {
 }
 
 model ubicacion {
-  id_ubicacion          Int         @id @default(autoincrement())
-  json_marca            String
+  id_ubicacion Int    @id @default(autoincrement())
+  json_marca   String
 }
-
