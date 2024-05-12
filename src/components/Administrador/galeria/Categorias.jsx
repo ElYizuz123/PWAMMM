@@ -1,7 +1,7 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
 import { contexto } from '../UpdateProvider'
-import galeria from '/src/components/Galeria/galeria.css'
+import galeria from '@/components/Galeria/galeria.css'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
 import { useSearchParams } from 'next/navigation'
