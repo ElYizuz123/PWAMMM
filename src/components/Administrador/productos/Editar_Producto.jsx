@@ -36,8 +36,10 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
         register('foto')
         register('hexa')
         register('id_botella')
+        register('fotoId')
 
-        setValue('foto', data[0].foto)
+        setValue('foto', data[0].fotoUri)
+        setValue('fotoId', data[0].fotoId)
         setValue('id_botella', data[0].botella[0].id_botella)
         setValue('tipo_agave', data[0].botella[0].tipo_agave)
         setValue('cantidad_alcohol', data[0].botella[0].cantidad_alcohol)
@@ -95,7 +97,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
             const form = new FormData()
             form.set('file', productPhoto)
             form.set('source', "productos")
-            form.set('nombre', producto[0].foto)
+            form.set('nombre', producto[0].fotoId)
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/update_image', {
@@ -106,7 +108,9 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
             console.log(fotoResJSON)
 
             //Registrar producto en la DB
-            if (fotoResJSON == "Archivo subido correctamente") {
+            if (fotoResJSON !="Error") {
+                data["foto"] = fotoResJSON.picUri
+                data["fotoId"] = fotoResJSON.picId
                 const res = await fetch('/api/producto/update_producto', {
                     method: 'POST',
                     body: JSON.stringify(data),
@@ -194,9 +198,9 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
                     {productPhoto && (
                         <p className='text-sm'>{productPhoto.name}</p>
                     )}
-                    {!productPhoto && (<Image height={400} width={400} src={`/productos/${producto ? producto[0].foto : ""}`} alt='Preview' className='object-contain w-48 h-56' />)}
+                    {!productPhoto && (<Image height={400} width={400} src={producto ? producto[0].fotoUri : ""} alt='Preview' className='object-contain w-48 h-56' />)}
                     {!productPhoto && (
-                        <p className='text-sm'>{producto ? producto[0].foto : ""}</p>
+                        <p className='text-sm'>{producto ? producto[0].fotoId : ""}</p>
                     )}
                     <button
                         className='bg-gray-300 w-36 rounded-lg border-[1px] border-black text-sm mt-3'

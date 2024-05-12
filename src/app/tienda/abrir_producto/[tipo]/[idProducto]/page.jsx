@@ -4,31 +4,26 @@ import MostrarProductosFicha from "@/components/tienda/MostrarProductosFicha";
 
 const abrir_producto = ({ params }) => {
   return (
-    
-    <LayoutPrincipal >
-      {/* <div
-        className="bg-cover bg-center w-full h-full p-10 relative bottom-0"
-        style={{ backgroundImage: "url('/backgroundImage.jpg')" }}
-      > */}
-        <div className="absolute  bottom-0 w-full z-0 ">
+    <LayoutPrincipal>
+      <div className="relative h-full">
+        <div className="absolute bottom-0 w-full ">
           <Image
-          src="/mezcal_background.png"
+            src="/mezcal_background.png"
             alt="Imagen de fondo"
             width={1000}
-           height={1000}
-           objectFit="cover"
-           className="w-full opacity-60"
-         />
+            height={1000} 
+            objectFit="cover"
+            className="w-full opacity-60 h-full"
+          />
         </div>
-        <div className="">
+        <div className=" z-20">
           <MostrarProductosFicha
             tipo={params.tipo}
             idProducto={params.idProducto}
           ></MostrarProductosFicha>
         </div>
-      {/* </div> */}
+      </div>
     </LayoutPrincipal>
-    
   );
 };
 

@@ -35,14 +35,20 @@ const Galeria = () => {
             </div>
 
 
-            <div className="gallery">
-
+            <div className="columns-1 gap-1 lg:columns-3 lg:gap-3 md:columns-2 md:gap-2 sm:columns-1 sm:gap-1">
                 {foto &&
                     foto.map((foto, index) => {
                         return (
-                            <div className="pics" key={index} onClick={() => getImg("/galeria/" + foto.foto)}>
-                                <Image className="animate-fade-in rounded-lg cursor-pointer" loading="lazy"
-                                src={"/galeria/" + foto.foto} width={1000} height={1000} style={{ width: '100%' }}></Image>
+                            <div
+                                className="w-full transition-all hover:brightness-125 mb-3 hover:cursor-pointer"
+                                key={index}
+                                onClick={() => getImg("/galeria/" + foto.foto)}
+                            >
+                                <img
+                                    className="w-full rounded-xl"
+                                    src={"/galeria/" + foto.foto}
+                                    style={{ width: "100%" }}
+                                ></img>
                             </div>
                         )
                     })}

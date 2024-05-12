@@ -11,7 +11,9 @@
   "dependencies": {
     "@coreui/coreui": "^5.0.0",
     "@coreui/react": "^5.0.0",
+    "@headlessui/react": "^2.0.3",
     "@heroicons/react": "^1.0.6",
+    "@next/third-parties": "^14.2.3",
     "@paypal/checkout-server-sdk": "^1.0.3",
     "@paypal/react-paypal-js": "^8.3.0",
     "@prisma/client": "^5.12.0",
@@ -21,6 +23,7 @@
     "chart.js": "^4.4.2",
     "classname": "^0.0.0",
     "classnames": "^2.5.1",
+    "cloudinary": "^2.2.0",
     "crypto-js": "^4.2.0",
     "framer-motion": "^11.1.5",
     "next": "^14.2.3",
@@ -41,7 +44,8 @@
     "sass": "^1.74.1",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.6.13",
-    "swiper": "^11.1.0"
+    "swiper": "^11.1.0",
+    "tailwindcss-animated": "^1.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

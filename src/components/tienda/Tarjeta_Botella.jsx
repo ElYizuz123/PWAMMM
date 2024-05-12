@@ -46,7 +46,7 @@ const Tarjeta_Botella = ({
       };
 
       addProductos(newProduct);
-      
+
       setTimeout(() => {
         setButtonState("idle");
       }, 3000);
@@ -54,9 +54,9 @@ const Tarjeta_Botella = ({
   };
 
   return (
-    <div className={`${k2d.className} ${existencia ? "" : "opacity-80 "}`}>
+    <div className= {`${k2d.className} ${existencia ? "" : "opacity-80 "}` }>
       {/* DISEÑO TARJETA SIN EXISTENCIA */}
-      <div className="card relative rounded-5 overflow-hidden">
+      <div className="card w-5/12 sm:w-1/2 md:w-3/5 lg:w-4/5 bg-white shadow-xl z-0 relative rounded-lg overflow-hidden border-2 ">
         {!existencia && (
           <div className="absolute inset-0 flex justify-center items-center ">
             <p className="bg-red-700  px-60 text-white font-semibold text-2xl text-center rotate-45">
@@ -91,43 +91,37 @@ const Tarjeta_Botella = ({
             width={300}
             height={450}
             quality={100}
-            alt="Fondo"
+            alt="Botellas_Tarjeta"
           />
         </div>
         {/* DISEÑO TARJETAS MEZCAL */}
-        <section className="details">
+        <section className="details  bg-white rounded-[10px] p-[20px] absolute top-[82%] w-full bottom-0 right-0 left-0 z-0 transition-all">
           <div className="pb-4">
-              <div className="min-details">
-                <h1 className="text-xl flex justify-between font-bold">
-                  {nombre}
-                  <div className="price text-green-700 font-bold">
-                    <h1>${precio}</h1>
-                  </div>
-                </h1>
-                <span className="font-normal text-sm">{marca}</span>
+            <h1 className="text-xl flex justify-between font-bold">
+              {nombre}
+              <div className="price text-green-700 font-bold">
+                <h1>${precio}</h1>
               </div>
-              <div className="options">
-                <div>
-                  <div class="gap-2 py-2">
-                    <div class="col-span-1 flex items-start justify-start">
-                      <ul>
-                        <li>{ml} ML </li>
-                      </ul>
-                    </div>
-                    <div class="col-span-1 flex items-start justify-start">
-                      <ul>
-                        <li>{alcohol}% ALCOHOL</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+            </h1>
+            <span className="font-normal text-sm">{marca}</span>
+
+            <div class="gap-2 py-2">
+              <div class="col-span-1 flex items-start justify-start">
+                <ul>
+                  <li>{ml} ML </li>
+                </ul>
               </div>
-          
+              <div class="col-span-1 flex items-start justify-start">
+                <ul>
+                  <li>{alcohol}% ALCOHOL</li>
+                </ul>
+              </div>
             </div>
+          </div>
           {/*DISEÑO BOTÓN SIN EXISTENCIAS  */}
           {cantidad !== 0 ? (
             <button
-              className={`mt-2 btn font-semibold ${
+              className={`mt-2 btnTarjeta font-semibold ${
                 buttonState === "loading" && "bg-pink-300"
               }`}
               onClick={handleAddToCart}
@@ -147,7 +141,7 @@ const Tarjeta_Botella = ({
           )}
           {/* DISEÑO BOTÓN MERCADO LIBRE (SOLO SI HAY EN PAGINA) */}
           {mercadoLibre !== "NULL" && (
-            <button className="btn2 mt-1 flex items-center justify-center">
+            <button className="btnMercadoLibre mt-1 flex items-center justify-center">
               <a href={mercadoLibre} target="_blank" className="font-semibold">
                 Comprar en mercado libre
               </a>

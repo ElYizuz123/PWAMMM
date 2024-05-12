@@ -12,7 +12,8 @@ export async function POST(request){
             data:{
                 nombre: data.nombre,
                 historia: data.historia,
-                foto: data.foto
+                fotoUri: data.foto,
+                fotoId: data.fotoId
             }
         })
         return NextResponse.json("Registrado");

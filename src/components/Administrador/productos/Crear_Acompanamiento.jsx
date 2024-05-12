@@ -48,7 +48,9 @@ const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
             console.log(fotoResJSON)
 
             //Registrar producto en la DB
-            if (fotoResJSON == "Archivo subido correctamente") {
+            if (fotoResJSON != "Error") {
+                data["foto"] = fotoResJSON.picUri
+                data["fotoId"] = fotoResJSON.picId
                 const res = await fetch('/api/producto/create_acompanamiento', {
                     method: 'POST',
                     body: JSON.stringify(data),

@@ -27,11 +27,13 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
             register('fecha_fin')
             register('nombre')
             register('descripcion')
+            register('fotoId')
 
             setValue('id_evento', idEvento)
             setValue('nombre', data[0].nombre)
             setValue('descripcion', data[0].descripcion)
-            setValue('foto', data[0].foto)
+            setValue('foto', data[0].fotoUri)
+            setValue('fotoId', data[0].fotoId)
             setValue('fecha_fin', data[0].fecha_fin.split(".")[0].slice(0, -3))
     }
 
@@ -68,7 +70,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
             const form = new FormData()
             form.set('file', eventoPhoto)
             form.set('source', "eventos")
-            form.set('nombre', evento[0].foto)
+            form.set('nombre', evento[0].fotoId)
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
             const fotoRes = await fetch('/api/update_image', {
@@ -79,7 +81,9 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
             console.log(fotoResJSON)
 
             //Registrar evento en la DB
-            if (fotoResJSON == "Archivo subido correctamente") {
+            if (fotoResJSON != "Error") {
+                data["foto"] = fotoResJSON.picUri
+                data["fotoId"] = fotoResJSON.picId
                 const res = await fetch('/api/eventos/update_evento', {
                     method: 'POST',
                     body: JSON.stringify(data),
@@ -180,9 +184,9 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                             <p className='text-sm'>{eventoPhoto.name}</p>
                         )}
                         {/* Visualizador por defecto de la imagen */}
-                        {!eventoPhoto && (<Image width={400} height={400} src={`/eventos/${evento ? evento[0].foto : ""}`} alt='Preview' className='object-contain w-44 h-56' />)}
+                        {!eventoPhoto && (<Image width={400} height={400} src={evento ? evento[0].fotoUri : ""} alt='Preview' className='object-contain w-44 h-56' />)}
                         {!eventoPhoto && (
-                            <p className='text-sm'>{evento ? evento[0].foto : ""}</p>
+                            <p className='text-sm'>{evento ? evento[0].fotoId : ""}</p>
                         )}
                         <button
                             className='bg-gray-300 w-36 rounded-lg border-[1px] border-black text-sm mt-3'

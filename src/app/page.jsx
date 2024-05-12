@@ -20,7 +20,7 @@ export default function Home() {
        
       
       <Promociones/>                                                                             {/*fondo-nosotras es el fondo principal*/}
-        <div className="bg-transparent  mt-80 sm:mt-24 md:mt-24 lg:mt-24  xl:mt-36 2xl:mt-24  mb-5">                                            {/*Se aplica un efecto de desvanecido de la sección del video */} 
+        <div className="bg-transparent  mt-96 sm:mt-96 md:mt-[390px] lg:mt-10 xl:mt-36 2xl:mt-24  mb-5">                                            {/*Se aplica un efecto de desvanecido de la sección del video */} 
                                   
           <Suspense fallback={<div>Cargando...</div>} >
           <CarruselInicio />

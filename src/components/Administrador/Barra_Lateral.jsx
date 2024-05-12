@@ -1,5 +1,6 @@
 "use client"
 import { Berkshire_Swash } from "next/font/google"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -13,6 +14,8 @@ const buttonMap = {
     "/administrador/eventos": "text-black bg-[#0000000]",
     "/administrador/galeria": "text-black bg-[#0000000]",
     "/administrador/preguntas": "text-black bg-[#0000000]",
+    "/administrador/graficas": "text-black bg-[#0000000]",
+    "/administrador/ubicaciones": "text-black bg-[#0000000]",
 }
 
 
@@ -36,7 +39,7 @@ const Barra_Lateral = () => {
                 </div>
             </div>
             <div className="flex justify-center mt-5">
-                <img src="/mezcaleras_logo.png" className="w-20" />
+                <Image width={500} height={500} alt={"MezcalerasLogoAdmin"} src="/mezcaleras_logo.png" className="w-20" />
             </div>
             <div className="w-full flex flex-col justify-end items-end">
                 <Link href="/administrador/graficas" className={`w-11/12 ${buttonMap["/administrador/graficas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-6`}>
@@ -53,6 +56,9 @@ const Barra_Lateral = () => {
                 </Link>
                 <Link href="/administrador/preguntas" className={`w-11/12 ${buttonMap["/administrador/preguntas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl pr-3 pt-1 pb-1">PREGUNTAS</p>
+                </Link>
+                <Link href="/administrador/ubicaciones" className={`w-11/12 ${buttonMap["/administrador/ubicaciones"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
+                    <p className="font-bold text-2xl pr-3 pt-1 pb-1">UBICACIONES</p>
                 </Link>
                 <Link href="/administrador/asociadas" className={`w-11/12 ${buttonMap["/administrador/asociadas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-8`}>
                     <p className="font-bold text-2xl  pr-3 pt-1 pb-1">ASOCIADAS</p>

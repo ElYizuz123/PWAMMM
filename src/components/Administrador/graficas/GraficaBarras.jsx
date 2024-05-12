@@ -64,10 +64,10 @@ const GraficaBarras = ({ventas}) => {
             labels:[
                 ventas[0] ? ventas[0].ciudad:"No registrada",
                 ventas[1] ? ventas[1].ciudad:"No registrada",
-                ventas[2] ? ventas[1].ciudad:"No registrada",
-                ventas[3] ? ventas[1].ciudad:"No registrada",
-                ventas[4] ? ventas[1].ciudad:"No registrada",
-                ventas[5] ? ventas[1].ciudad:"No registrada",
+                ventas[2] ? ventas[2].ciudad:"No registrada",
+                ventas[3] ? ventas[3].ciudad:"No registrada",
+                ventas[4] ? ventas[4].ciudad:"No registrada",
+                ventas[5] ? ventas[5].ciudad:"No registrada",
                 "Otras",
             ],
             datasets: [

@@ -14,8 +14,7 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
-
-const Tarjeta_Acompañamiento =({
+const Tarjeta_Acompañamiento = ({
   id_producto,
   nombre,
   marca,
@@ -38,7 +37,7 @@ const Tarjeta_Acompañamiento =({
 
       const newProduct = {
         id_producto,
-       imagen,
+        imagen,
         nombre,
         marca,
         precio,
@@ -46,7 +45,7 @@ const Tarjeta_Acompañamiento =({
       };
 
       addProductos(newProduct);
-      
+
       setTimeout(() => {
         setButtonState("idle");
       }, 3000);
@@ -56,7 +55,7 @@ const Tarjeta_Acompañamiento =({
   return (
     <div className={`${k2d.className} ${existencia ? "" : "opacity-80 "}`}>
       {/* DISEÑO TARJETA SIN EXISTENCIA */}
-      <div className="card relative rounded-5 overflow-hidden">
+      <div className="card bg-white shadow-md w-[350px] h-[460px] relative rounded-5 overflow-hidden">
         {!existencia && (
           <div className="absolute inset-0 flex justify-center items-center ">
             <p className="bg-red-700  px-60 text-white font-semibold text-2xl text-center rotate-45">
@@ -91,27 +90,26 @@ const Tarjeta_Acompañamiento =({
             width={300}
             height={450}
             quality={100}
-            alt="Fondo"
+            alt="Acompañamiento_tarjeta"
           />
         </div>
         {/* DISEÑO TARJETAS DIFERENTE ACOMPAÑAMIENTOS/MEZCAL */}
-        <section className="details">
-          
-            <div className="pb-4">
-              <div className="min-details ">
-                <h1 className="text-xl flex justify-between font-semibold">
-                  {nombre} {gr}gr
-                  <div>
-                    <h1 className="price text-green-700">${precio}</h1>
-                  </div>
-                </h1>
-                <span className="font-normal">{marca}</span>
-              </div>
+        <section className="details bg-white rounded-[10px] p-[20px] absolute top-[82%] w-full bottom-0 right-0 left-0 z-0 transition-all">
+          <div className="pb-4">
+            <div className="min-details ">
+              <h1 className="text-xl flex justify-between font-semibold">
+                {nombre} {gr}gr
+                <div>
+                  <h1 className="price text-green-700">${precio}</h1>
+                </div>
+              </h1>
+              <span className="font-normal">{marca}</span>
             </div>
+          </div>
           {/*DISEÑO BOTÓN SIN EXISTENCIAS  */}
           {cantidad !== 0 ? (
             <button
-              className={`mt-2 btn font-semibold ${
+              className={`mt-2 btnTarjeta font-semibold ${
                 buttonState === "loading" && "bg-pink-300"
               }`}
               onClick={handleAddToCart}
@@ -131,7 +129,7 @@ const Tarjeta_Acompañamiento =({
           )}
           {/* DISEÑO BOTÓN MERCADO LIBRE (SOLO SI HAY EN PAGINA) */}
           {mercadoLibre !== "NULL" && (
-            <button className="btn2 mt-1 flex items-center justify-center">
+            <button className="btnMercadoLibre mt-1 flex items-center justify-center">
               <a href={mercadoLibre} target="_blank" className="font-semibold">
                 Comprar en mercado libre
               </a>

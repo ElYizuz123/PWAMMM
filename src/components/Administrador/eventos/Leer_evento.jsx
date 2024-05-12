@@ -94,7 +94,8 @@ const Leer_evento = () => {
                 {eventos && eventos.map((evento) => (
                     <Tarjeta_evento key={evento.id_evento}
                         id_evento={evento.id_evento}
-                        foto={evento.foto}
+                        foto={evento.fotoUri}
+                        fotoId ={evento.fotoId}
                         duracion={evento.fecha_fin}
                         openEdit={isOpen}
                     />

@@ -133,11 +133,11 @@ const Categorias = () => {
           imagenes.map((foto, index) =>
           (
             <div className="pics relative" key={index} >
-              <button onClick={() => handleDelete(foto.id_foto, foto.foto)} className="absolute top-0 right-0 m-2 ml-12 p-2 text-pink-600 rounded eye-icon w-12 h-12">
+              <button onClick={() => handleDelete(foto.id_foto, foto.fotoId)} className="absolute top-0 right-0 m-2 ml-12 p-2 text-pink-600 rounded eye-icon w-12 h-12">
                 <Image src="/emoticons/eliminar.png" alt="Icono" width="50" height="50" className='w-10 h-8' />
               </button>
-              <Image onClick={() => getImg("/galeria/" + foto.foto)} alt='Imagen' className="rounded-lg cursor-pointer"
-                src={"/galeria/" + foto.foto} width={1000} height={1000} style={{ width: '100%' }} />
+              <Image onClick={() => getImg(foto.fotoUri)} alt='Imagen' className="rounded-lg cursor-pointer"
+                src={foto.fotoUri} width={1000} height={1000} style={{ width: '100%' }} />
 
             </div>
           )

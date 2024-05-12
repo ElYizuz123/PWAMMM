@@ -3,12 +3,12 @@ import Link from 'next/link'
 import Swal from 'sweetalert2'
 
 
-const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct, isAcompanamiento}) => {
+const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, updatePage, editProduct, isAcompanamiento, fotoId}) => {
 
     //Data para el formulario
     const data = {
         "id_producto": id_producto,
-        "foto": foto,
+        "foto": fotoId,
         "source": "productos"
     }
 
@@ -91,7 +91,7 @@ const Tarjeta_Producto_Admin = ({ id_producto, nombre, ml, marca, precio, foto, 
                     height={400}
                     width={400}
                     id='foto_botella'
-                    src={"/productos/" + foto}
+                    src={foto}
                     alt="botella"
                 />
             </figure>

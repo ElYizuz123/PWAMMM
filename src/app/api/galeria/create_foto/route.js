@@ -9,7 +9,8 @@ export async function POST(request){
     try{
         const newAsociada = await db.galeria_foto.create({
             data:{
-                foto: data.foto,
+                fotoUri: data.foto,
+                fotoId: data.fotoId
             }
         })
         return NextResponse.json("Registrado");

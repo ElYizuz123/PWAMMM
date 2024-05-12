@@ -73,7 +73,9 @@ const Crear_foto = () => {
             console.log(fotoResJSON)
 
             //Registrar producto en la DB
-            if (fotoResJSON == "Archivo subido correctamente") {
+            if (fotoResJSON != "Error") {
+                data["foto"] = fotoResJSON.picUri
+                data["fotoId"] = fotoResJSON.picId
                 const res = await fetch('/api/galeria/create_foto', {
                     method: 'POST',
                     body: JSON.stringify(data),

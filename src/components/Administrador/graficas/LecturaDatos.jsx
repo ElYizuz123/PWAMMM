@@ -59,8 +59,29 @@ const LecturaDatos = () => {
     const [ventasAcompanamientos, setVentasAcompanamientos] = useState(null)
     const [ventasCiudades, setVentasCiudades] = useState(null)
     const [formatoVentasTotales, setFormatoVentasTotales] = useState(null)
+    const [formatoVentasIndividuales, setFormatoVentasIndividuales] = useState(null)
     const [ventasTotales, setVentarTotales] = useState(null)
+    const [ventasIndividuales, setVentasIndividuales] = useState(null)
+    const [marcas, setMarcas] = useState(null)
+    const [selectedMarca, setSelectedMarca] = useState(-1)
+    const [selectedProduct, setSelectedProduct] = useState(null)
+    const [productos, setProductos] = useState(null)
     const { RangePicker } = DatePicker
+
+    const readMarcas = async () =>{
+        const res = await fetch('/api/ubicaciones/read_marcas')
+        const resJSON = await res.json()
+        setMarcas(resJSON)
+    }
+
+    const readProductosList = async () =>{
+        const res = await fetch('/api/graficas/read_productos_marca',{
+            method:'POST',
+            body: JSON.stringify(selectedMarca)   
+        })
+        const resJSON = await res.json()
+        setProductos(resJSON)
+    }
 
     //Función para leer los productos mas vendidos
     const readProductos = async () => {
@@ -114,7 +135,34 @@ const LecturaDatos = () => {
         readAcompanamientos()
         readCiudades()
         readVentasTotales()
+        readMarcas()
     }, [])
+
+    const handleDataChangePerProduct = (e) =>{
+        if (e) {
+            
+            const fechaIni = e[0]['$d']
+            const fechaFin = e[1]['$d']
+            const diferenciaFechas = fechaFin - fechaIni
+            const diferenciaDias = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
+            var fechas = null
+            if (diferenciaDias <= 31) {
+                fechas = obtenerDiasEntreFechas(fechaIni, fechaFin)
+            }
+            else if (diferenciaDias <= 365) {
+                fechas = obtenerMesesEntreFechas(fechaIni, fechaFin)
+            }
+            else {
+                fechas = obtenerYearEntreFechas(fechaIni, fechaFin)
+            }
+            //Variable con el formato de fechas a mostrar
+            setFormatoVentasTotales(fechas)
+        } else {
+            setFormatoVentasTotales(null)
+        }
+        //Arreglo de ventas 
+        readVentasTotales(e)
+    }
 
     //Manejo de los cambios de fecha
 
@@ -144,6 +192,26 @@ const LecturaDatos = () => {
         readVentasTotales(e)
     }
 
+    useEffect(()=>{
+        if(selectedMarca!=-1){
+            readProductosList()
+        }else{
+            setProductos(null)
+        }
+    }, [selectedMarca])
+
+
+
+    const handleChangeMarca = (e) =>{
+        setSelectedMarca(e.target.value)
+    }
+
+    const handleChangeProduct = (e) =>{
+        if(e.target.value!=-1){
+            setSelectedProduct(e.target.value)
+        }
+    }
+
     return (
         <div className="flex flex-wrap justify-center items-center gap-10 mt-8 mb-8">
             <div>
@@ -159,13 +227,36 @@ const LecturaDatos = () => {
                 <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaBarras ventas={ventasCiudades} /></div>
             </div>
             <div className='max-w-[780px] min-w-[500px] w-[75%]'>
-
                 <p className='font-bold text-xl mb-3'>Número de ventas</p>
                 <RangePicker className='mb-3' onChange={handleDateChange} />
                 <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl">
                     <GraficaLineal formato={formatoVentasTotales} ventas={ventasTotales} />
                 </div>
-
+            </div>
+            <div className='max-w-[780px] min-w-[500px] w-[75%]'>
+                <p className='font-bold text-xl mb-3'>Número de ventas por producto</p>
+                <RangePicker className='mb-3' onChange={handleDataChangePerProduct} />
+                <div className='mb-3'>
+                    <select onChange={handleChangeMarca}>
+                        <option value={-1}>MARCA</option>
+                        {marcas &&
+                            marcas.map((marca) => (
+                                <option value={marca.id_marca} key={marca.id_marca}>{marca.nombre}</option>
+                            ))}
+                    </select>
+                </div>
+                <div className='mb-3'>
+                    <select onChange={handleChangeProduct}>
+                        <option value={-1}>PRODUCTO</option>
+                        {productos &&
+                            productos.map((producto) => (
+                                <option value={producto.id_producto} key={producto.id_producto}>{producto.nombre}</option>
+                            ))}
+                    </select>
+                </div>
+                <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl">
+                    <GraficaLineal formato={formatoVentasTotales} ventas={ventasTotales} />
+                </div>
             </div>
         </div>
     )
