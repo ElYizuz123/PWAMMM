@@ -6,7 +6,7 @@ export const revalidate = 0;
 const masVentasCiudades = (ventas) =>{
     var ciudades = []
     var ventasPorCiudad = []
-    ventas.forEach((element, index) => {
+    ventas.map((element, index) => {
         let data = {iv:element.iv_poblacion, data:element.poblacion}
         const poblacion = decrypt(data)
         if (!ciudades.includes(poblacion.toUpperCase())){ 
@@ -19,7 +19,7 @@ const masVentasCiudades = (ventas) =>{
             ventasPorCiudad.push(ciudadVenta)
         }
     })
-    ventas.forEach(element => {
+    ventas.map(element => {
         let data = {iv:element.iv_poblacion, data:element.poblacion}
         const poblacion = decrypt(data)
         const ciudadEncontrada = ventasPorCiudad.find(venta => venta.ciudad === poblacion.toUpperCase())

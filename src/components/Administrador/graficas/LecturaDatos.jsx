@@ -66,6 +66,7 @@ const LecturaDatos = () => {
     const [selectedMarca, setSelectedMarca] = useState(-1)
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [productos, setProductos] = useState(null)
+    const [fechasInd, setFechasInd] = useState(null)
     const { RangePicker } = DatePicker
 
     const readMarcas = async () =>{
@@ -135,17 +136,44 @@ const LecturaDatos = () => {
         readAcompanamientos()
         readCiudades()
         readVentasTotales()
+        readVentasIndividuales()
         readMarcas()
     }, [])
 
+    const readVentasIndividuales = async (fechas) =>{
+        let datosJSON = null
+        let fechaIni = null
+        let fechaFin = null
+        if (fechas) {
+            fechaIni = new Date(fechas[0]['$d'])
+            fechaFin = new Date(fechas[1]['$d'])
+            fechaIni.setDate(fechaIni.getDate()-1)
+            fechaFin.setDate(fechaFin.getDate()+1)
+        }
+        datosJSON = {
+            fechaIni: fechaIni,
+            fechaFin: fechaFin,
+            marca: selectedMarca == -1 ? null:selectedMarca,
+            producto: selectedProduct == -1 ? null:selectedProduct
+        }
+        
+        const res = await fetch('/api/graficas/read_ventas_ind', {
+            method: 'POST',
+            body: JSON.stringify(datosJSON)
+        })
+        const resJSON = await res.json()
+        setVentasIndividuales(resJSON)
+    }
+
+
     const handleDataChangePerProduct = (e) =>{
+        setFechasInd(e)
         if (e) {
-            
             const fechaIni = e[0]['$d']
             const fechaFin = e[1]['$d']
             const diferenciaFechas = fechaFin - fechaIni
             const diferenciaDias = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
-            var fechas = null
+            let fechas = null
             if (diferenciaDias <= 31) {
                 fechas = obtenerDiasEntreFechas(fechaIni, fechaFin)
             }
@@ -156,24 +184,23 @@ const LecturaDatos = () => {
                 fechas = obtenerYearEntreFechas(fechaIni, fechaFin)
             }
             //Variable con el formato de fechas a mostrar
-            setFormatoVentasTotales(fechas)
+            setFormatoVentasIndividuales(fechas)
         } else {
-            setFormatoVentasTotales(null)
+            setFormatoVentasIndividuales(null)
         }
         //Arreglo de ventas 
-        readVentasTotales(e)
+        readVentasIndividuales(e)
     }
 
     //Manejo de los cambios de fecha
 
     const handleDateChange = (e) => {
         if (e) {
-            
             const fechaIni = e[0]['$d']
             const fechaFin = e[1]['$d']
             const diferenciaFechas = fechaFin - fechaIni
             const diferenciaDias = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
-            var fechas = null
+            let fechas = null
             if (diferenciaDias <= 31) {
                 fechas = obtenerDiasEntreFechas(fechaIni, fechaFin)
             }
@@ -191,6 +218,8 @@ const LecturaDatos = () => {
         //Arreglo de ventas 
         readVentasTotales(e)
     }
+
+
 
     useEffect(()=>{
         if(selectedMarca!=-1){
@@ -200,16 +229,18 @@ const LecturaDatos = () => {
         }
     }, [selectedMarca])
 
+    useEffect(()=>{
+        readVentasIndividuales(fechasInd)
+    },[selectedMarca, selectedProduct])
 
 
     const handleChangeMarca = (e) =>{
         setSelectedMarca(e.target.value)
+        setSelectedProduct(null)
     }
 
     const handleChangeProduct = (e) =>{
-        if(e.target.value!=-1){
-            setSelectedProduct(e.target.value)
-        }
+        setSelectedProduct(e.target.value)
     }
 
     return (
@@ -235,7 +266,7 @@ const LecturaDatos = () => {
             </div>
             <div className='max-w-[780px] min-w-[500px] w-[75%]'>
                 <p className='font-bold text-xl mb-3'>Número de ventas por producto</p>
-                <RangePicker className='mb-3' onChange={handleDataChangePerProduct} />
+                <RangePicker id={"rangeSelecter"} className='mb-3' onChange={handleDataChangePerProduct} />
                 <div className='mb-3'>
                     <select onChange={handleChangeMarca}>
                         <option value={-1}>MARCA</option>
@@ -255,7 +286,7 @@ const LecturaDatos = () => {
                     </select>
                 </div>
                 <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl">
-                    <GraficaLineal formato={formatoVentasTotales} ventas={ventasTotales} />
+                    <GraficaLineal formato={formatoVentasIndividuales} ventas={ventasIndividuales} />
                 </div>
             </div>
         </div>
