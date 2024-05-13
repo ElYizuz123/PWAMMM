@@ -5,11 +5,6 @@ import QRCode from "react-qr-code";
 
 const DatosUbicacion = ({ mapaUrl, ubi, telefono, qrImagen }) => {
 
-  // console.log("map:"+mapaUrl);
-  // console.log("ubi:"+ubi);
-  // console.log("cel:"+telefono);
-  // console.log("qr:"+qrImagen);
-
   return (
     <div className="w-full">
       {/* mapa */}
@@ -23,7 +18,7 @@ const DatosUbicacion = ({ mapaUrl, ubi, telefono, qrImagen }) => {
           <div className="bg-white bg-opacity-70 rounded-lg">
             <div className="flex mb-8 p-2">
               <div> <SlLocationPin className=" lg:w-[50px] lg:h-[50px] md:w-[40px] md:h-[40px] w-[32px] h-[32px]" />  </div>
-              <p className="ml-2 lg:text-3xl md:text-3xl sm:text-xl text-xl">{ ubi }</p>
+              <p className="ml-2 lg:text-3xl md:text-3xl sm:text-xl text-xl overflow-wrap break-word">{ ubi }</p>
             </div>
             <div className="flex mb-2 p-2">
               <div> <SlPhone className="lg:w-[50px] lg:h-[50px] md:w-[40px] md:h-[40px] w-[32px] h-[32px]" /> </div>

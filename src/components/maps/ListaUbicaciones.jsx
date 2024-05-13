@@ -1,13 +1,12 @@
 "use client"
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
-import list from "@/components/maps/list.json";
 import { useState, useEffect } from "react";
 import DatosUbicacion from "./DatosUbicacion";
 
 
 function ListaUbicaciones() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentBrand, setCurrentBrand] = useState("Seleccionar");
+  const [currentBrand, setCurrentBrand] = useState("");
 
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [mapaUrl, setMapaUrl] = useState(null);
@@ -18,26 +17,29 @@ function ListaUbicaciones() {
   const [ubicacion, setUbicacion] = useState(null);
   const readData = async () => {
     try {
-    const res = await fetch('/api/read_ubicaciones');
-    const resJSON = await res.json();
-    setUbicacion(resJSON);
-    console.log(resJSON);
+      const res = await fetch('/api/read_ubicaciones');
+      const resJSON = await res.json();
+      setUbicacion(resJSON);
+      console.log(resJSON);
 
-    // setMapaUrl(resJSON[0].mapa);
-    // setUbi(resJSON[0].ubicacion);
-    // setTelefono(resJSON[0].telefono);
-    // setQRImagen(resJSON[0].pagina);
-
-    } catch(error) {
+    } catch (error) {
       console.error("error al leer los datos", error);
     }
   };
 
   useEffect(() => {
     readData();
-    // setSelectedComponent("Mezcal Armonía");
   }, []);
 
+  useEffect(() => {
+    if (ubicacion) {
+      setCurrentBrand(JSON.parse(ubicacion[0].json_marca).marca);
+      setMapaUrl(JSON.parse(ubicacion[0].json_marca).mapa);
+      setUbi(JSON.parse(ubicacion[0].json_marca).ubicacion);
+      setTelefono(JSON.parse(ubicacion[0].json_marca).telefono);
+      setQRImagen(JSON.parse(ubicacion[0].json_marca).pagina);
+    }
+  }, [ubicacion]);
 
 
   const handleBrandClick = (marca, mapaUrl, ubi, telefono, qrImagen) => {
@@ -53,14 +55,14 @@ function ListaUbicaciones() {
   const renderSelectedComponent = () => {
 
     if (mapaUrl && ubi && telefono && qrImagen) {
-    return <DatosUbicacion 
-    mapaUrl={ mapaUrl }
-    ubi={ ubi }
-    telefono={ telefono }
-    qrImagen={ qrImagen }
-    />
+      return <DatosUbicacion
+        mapaUrl={mapaUrl}
+        ubi={ubi}
+        telefono={telefono}
+        qrImagen={qrImagen}
+      />
     }
-    
+
   };
 
   return (
@@ -90,7 +92,7 @@ function ListaUbicaciones() {
                   JSON.parse(ubicacion.json_marca).ubicacion,
                   JSON.parse(ubicacion.json_marca).telefono,
                   JSON.parse(ubicacion.json_marca).pagina
-                  )}>
+                )}>
                 <h3>{JSON.parse(ubicacion.json_marca).marca}</h3>
               </div>
             ))}
