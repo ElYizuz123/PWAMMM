@@ -33,7 +33,7 @@ function page() {
           {/* FALTA TODA RESPONSIVIDAD */}
           <div>
           <p className="lg:mb-4 mb-2
-          lg:text-6xl md:text-4xl text-3xl">Tiendas Físicas</p>
+          lg:text-6xl md:text-4xl text-3xl">Nuestras Tiendas</p>
           <ListaUbicaciones />
           </div>
 
