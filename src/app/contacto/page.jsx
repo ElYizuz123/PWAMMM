@@ -1,7 +1,7 @@
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
 import ContactoForm from '@/components/contactoForm/ContactoForm';
 import ListaUbicaciones from '@/components/maps/ListaUbicaciones';
-import PreguntasFrecuentes from '@/components/preguntasFrecuentes/PreguntasFrecuentes';
+import PreguntasFrecuentes from '@/components/PreguntasFrecuentes/PreguntasFrecuentes';
 import React from 'react';
 // Página de contacto
 

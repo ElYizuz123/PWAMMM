@@ -2,64 +2,101 @@
 import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai";
 import list from "@/components/maps/list.json";
 import { useState, useEffect } from "react";
-import UbicacionMezcalArmonia from "./ubicaciones/UbicacionMezcalArmonia";
-import UbicacionMezcalQveela from "./ubicaciones/UbicacionQveela";
-import UbicacionDonMateo from "./ubicaciones/UbicacionDonMateo";
+import DatosUbicacion from "./DatosUbicacion";
 
-function ListaUbicaciones () {
+
+function ListaUbicaciones() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentBrand, setCurrentBrand] = useState("Mezcal Armonía");
+  const [currentBrand, setCurrentBrand] = useState("Seleccionar");
+
   const [selectedComponent, setSelectedComponent] = useState(null);
+  const [mapaUrl, setMapaUrl] = useState(null);
+  const [ubi, setUbi] = useState(null);
+  const [telefono, setTelefono] = useState(null);
+  const [qrImagen, setQRImagen] = useState(null);
+
+  const [ubicacion, setUbicacion] = useState(null);
+  const readData = async () => {
+    try {
+    const res = await fetch('/api/read_ubicaciones');
+    const resJSON = await res.json();
+    setUbicacion(resJSON);
+    console.log(resJSON);
+
+    // setMapaUrl(resJSON[0].mapa);
+    // setUbi(resJSON[0].ubicacion);
+    // setTelefono(resJSON[0].telefono);
+    // setQRImagen(resJSON[0].pagina);
+
+    } catch(error) {
+      console.error("error al leer los datos", error);
+    }
+  };
 
   useEffect(() => {
-    setSelectedComponent("Mezcal Armonía");
+    readData();
+    // setSelectedComponent("Mezcal Armonía");
   }, []);
 
-  const handleBrandClick = (marca) => {
+
+
+  const handleBrandClick = (marca, mapaUrl, ubi, telefono, qrImagen) => {
     setCurrentBrand(marca);
     setIsOpen(false);
     setSelectedComponent(marca);
+    setMapaUrl(mapaUrl);
+    setUbi(ubi);
+    setTelefono(telefono);
+    setQRImagen(qrImagen);
   };
-  
+
   const renderSelectedComponent = () => {
-    switch (selectedComponent) {
-      case "Mezcal Armonía":
-        return <UbicacionMezcalArmonia />;
-      case "Qveela":
-        return <UbicacionMezcalQveela />;
-      case "Don Mateo":
-        return <UbicacionDonMateo />;
-      default:
-        return null;
+
+    if (mapaUrl && ubi && telefono && qrImagen) {
+    return <DatosUbicacion 
+    mapaUrl={ mapaUrl }
+    ubi={ ubi }
+    telefono={ telefono }
+    qrImagen={ qrImagen }
+    />
     }
+    
   };
 
   return (
     <div className="lg:ml-20 w-full rounded-lg mb-10">
-        <button className="mb-2 bg-white border-2 border-[#D60064] active:border-black h-full shadow-lg duration-0 active:text-[#D60064] p-2 flex items-center justify-between font-bold text-lg rounded-lg tracking-wider
+      <button className="mb-2 bg-white border-2 border-[#D60064] active:border-black h-full shadow-lg duration-0 active:text-[#D60064] p-2 flex items-center justify-between font-bold text-lg rounded-lg tracking-wider
         lg:w-[300px] sm:w-[250px] md:w-[250px] w-[250px]"
         onClick={() => setIsOpen((prev) => !prev)}
-        >
-            {currentBrand}
-            {!isOpen ? (
-                <AiOutlineCaretDown className="h-8"/>
-            ): (
-                <AiOutlineCaretUp className="h-8"/>
-            )}
-        </button>
-        
-        {isOpen && (
-            <div className="bg-white border-2 border-[#D60064] absolute flex flex-col items-start rounded-lg p-2 shadow-2xl
-            lg:w-[300px] sm:w-[250px] md:w-[250px] w-[250px]">
-                {list.map((item, i) => (
-                    <div className="flex w-full p-2 justify-between hover:bg-[#D60064] hover:text-white cursor-pointer rounded-md border-l-transparent" 
-                    key={i} onClick={() => handleBrandClick(item.marca)}>
-                        <h3>{item.marca}</h3>
-                    </div>
-                ))}
-            </div>
+      >
+        {currentBrand}
+        {!isOpen ? (
+          <AiOutlineCaretDown className="h-8" />
+        ) : (
+          <AiOutlineCaretUp className="h-8" />
         )}
-        {renderSelectedComponent()}
+      </button>
+
+
+      {isOpen && (
+        <div className="bg-white border-2 border-[#D60064] absolute flex flex-col items-start rounded-lg p-2 shadow-2xl
+            lg:w-[300px] sm:w-[250px] md:w-[250px] w-[250px]">
+          {ubicacion &&
+            ubicacion.map((ubicacion) => (
+              <div className="flex w-full p-2 justify-between hover:bg-[#D60064] hover:text-white cursor-pointer rounded-md border-l-transparent"
+                key={ubicacion.id_ubicacion} onClick={() => handleBrandClick(
+                  JSON.parse(ubicacion.json_marca).marca,
+                  JSON.parse(ubicacion.json_marca).mapa,
+                  JSON.parse(ubicacion.json_marca).ubicacion,
+                  JSON.parse(ubicacion.json_marca).telefono,
+                  JSON.parse(ubicacion.json_marca).pagina
+                  )}>
+                <h3>{JSON.parse(ubicacion.json_marca).marca}</h3>
+              </div>
+            ))}
+        </div>
+      )}
+      {renderSelectedComponent()}
 
     </div>
   );

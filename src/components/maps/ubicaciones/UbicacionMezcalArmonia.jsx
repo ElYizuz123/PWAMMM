@@ -1,7 +1,7 @@
 import React from 'react'
 import { SlPhone } from "react-icons/sl";
 import { SlLocationPin } from "react-icons/sl";
-import Image from 'next/image'
+import QRCode from "react-qr-code";
 
 const UbicacionMezcalArmonia = () => {
 
@@ -26,7 +26,9 @@ const UbicacionMezcalArmonia = () => {
             </div>
           </div>
           <div className="mt-8">
-            <Image src={"/qrUbicaciones/mezcalArmonia.png"} width={380} height={380} className="rounded-md"></Image>
+            <div className="bg-white w-[370px] h-[370px] flex justify-center items-center rounded-lg">
+              <QRCode value="https://mezcalarmonia.com/" className="w-[350px] h-[350px]"/>
+            </div>
           </div>
         </div>
       </div>
