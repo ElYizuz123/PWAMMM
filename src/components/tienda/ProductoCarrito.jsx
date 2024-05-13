@@ -16,7 +16,7 @@ const ProductoCarrito = ({
 }) => {
   const [quantity, setQuantity] = useState(cantidad);
   const { updateQuantity, deleteProduct } = useContext(ProductContext);
-
+  
   // FUNCIÓN PARA INCREMENTAR LA CANTIDAD DE PRODUCTOS
   const incrementQuantity = () => {
     const newQuantity = quantity + 1;

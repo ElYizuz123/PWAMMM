@@ -11,9 +11,7 @@ const Contador = ({
   marca,
   precio,
   imagen,
-
   ml,
-
   cantidad2,
 }) => {
   const [count, setCount] = useState(1);

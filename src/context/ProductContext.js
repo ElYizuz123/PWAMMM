@@ -95,6 +95,11 @@ export const ProductProvider = ({ children }) => {
     triggerCartCountAnimation();
   };
 
+  const limpiarProductos = () => {
+    setProductos([]);
+    localStorage.setItem("productos", JSON.stringify(newProducts));
+  };
+
   const enviarDataApi = async () => {
     try {
       console.log(dataFormulario)
@@ -153,13 +158,7 @@ export const ProductProvider = ({ children }) => {
     0
   );
 
-  const envioVenta = (estado) => {
-    setIsEnvio(estado);
-  };
 
-  const limpiarProductos = () => {
-    setProductos([]);
-  };
 
   return (
     <ProductContext.Provider
@@ -170,8 +169,8 @@ export const ProductProvider = ({ children }) => {
         deleteProduct,
         updateQuantity,
         total,
-        envioVenta,
         isEnvio,
+        setIsEnvio,
         marcaAsociada,
         setMarcaAsociada,
         marcaNombreAsociada,

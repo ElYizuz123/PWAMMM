@@ -13,7 +13,6 @@ export async function GET() {
       }
     });
 
-    console.log(producto);
     return NextResponse.json(producto);
   } catch (error) {
     console.error("Error al leer los datos", error);

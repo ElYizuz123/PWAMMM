@@ -113,7 +113,7 @@ const Carrito = () => {
 
             <Link href="/tienda/carrito">
               <button className="bg-[#F70073] font-bold text-white w-full py-2 mt-2 rounded transition duration-300 ease-in-out hover:bg-pink-600 hover:shadow-lg hover:-translate-y-1">
-                VER CARTA & PAGAR →
+                VER CARRITO →
               </button>
             </Link>
             {productos.length === 0 ? (

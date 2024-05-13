@@ -12,6 +12,8 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { AdjustmentsIcon } from "@heroicons/react/solid";
 import { motion, AnimatePresence } from "framer-motion";
+import { CantidadContext } from "@/context/CantidadContext";
+import { useContext } from "react";
 
 function MostrarProductos({
   selectedMarca,
@@ -20,6 +22,8 @@ function MostrarProductos({
   setSelectedMarcaNombre,
   marcas,
 }) {
+  const { stock, setStock } = useContext(CantidadContext);
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(10);
 
@@ -50,6 +54,12 @@ function MostrarProductos({
       const responseAcompanamientos = await fetch("/api/read_acompanamientos");
       const dataAcompanamientos = await responseAcompanamientos.json();
 
+      const stockInicial = dataBotellas.reduce((acc, botella) => {
+        acc[botella.producto.id_producto] = botella.producto.cantidad; // Asume que cada botella tiene un 'id' y una 'cantidad'
+        return acc;
+      }, {});
+      
+      setStock(stockInicial);
       setBotellas(dataBotellas);
       setAcompanamientos(dataAcompanamientos);
     };
@@ -418,7 +428,7 @@ function MostrarProductos({
       </div>
 
       {/* LLAMA COMPOTENENTE TARJETA ENVIANDO LA INFORMACIÓN OBTENIDA EN API  */}
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-3 justify-center">
         {currentBotellas.map((botella) => (
           <Tarjeta_Botella
             key={botella.id_producto}

@@ -1,6 +1,5 @@
 "use client";
 import React, { useContext, useState } from "react";
-import { K2D } from "next/font/google";
 import Link from "next/link";
 import { ProductContext } from "@/context/ProductContext";
 import { IoClose } from "react-icons/io5";
@@ -8,7 +7,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 //en esta funcion recibo el trigger
 function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
-  const { productos, envioVenta, setMetodoPago, enviarDataApi } = useContext(ProductContext);
+  const { productos, setIsEnvio, setMetodoPago, enviarDataApi } = useContext(ProductContext);
 
   const [shippingMethod, setShippingMethod] = useState("envio");
   const [paymentMethod, setPaymentMethod] = useState("transferencia");
@@ -28,7 +27,7 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
     setTransferencia(false);
   };
   const handleShippingChange = (event) => {
-    envioVenta(event.target.value === "recogerTienda" ? 0 : 1);
+    setIsEnvio(event.target.value === "recogerTienda" ? 0 : 1);
     setShippingMethod(event.target.value);
   };
 
@@ -46,10 +45,13 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
   };
 
   return (
-    <div className=" px-4 items-center space-x-4 my-4">
+    <div className=" px-4 items-center space-x-4 mt-4">
       <div className="">
         <div className="grid grid-cols-1 gap-6">
-          <div className="grid grid-cols-2 items-center">
+          <div className="grid grid-cols-2 items-center
+            text-xs sm:text-xs md:text-xs
+            lg:text-bsm xl:text-sm 2xl:text-sm
+            ">
             <h3 className="text-black font-semibold">SUB-TOTAL:</h3>
             <p className="text-green-700 font-bold justify-self-end">
               ${totalVenta}
@@ -60,23 +62,29 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
         <div className="grid grid-cols-1 gap-4 my-4">
           {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
           <div className="grid grid-cols-1 gap-2">
-            <label>
+            <label className="text-xs sm:text-xs md:text-xs
+              lg:text-sm xl:text-sm 2xl:text-sm">
               <input
                 type="radio"
                 value="envio"
                 checked={shippingMethod === "envio"}
                 onChange={handleShippingChange}
-                className="form-radio text-[#F70073]"
+                className="form-radio text-[#F70073]
+                w-[13px] sm:w-[13px] md:w-[13px] lg:w-4 xl:text-w-4 2xl:w-4
+                h-[13px] sm:h-[13px] md:h-[13px] lg:h-4 xl:text-h-4 2xl:h-4"
               />
               <span className="ml-2">Envío (Todo México) : $199.00</span>
             </label>
-            <label>
+            <label className="text-xs sm:text-xs md:text-xs
+              lg:text-sm xl:text-sm 2xl:text-sm">
               <input
                 type="radio"
                 value="recogerTienda"
                 checked={shippingMethod === "recogerTienda"}
                 onChange={handleShippingChange}
-                className="form-radio text-[#F70073]"
+                className="form-radio text-[#F70073]
+                w-[13px] sm:w-[13px] md:w-[13px] lg:w-4 xl:text-w-4 2xl:w-4
+                h-[13px] sm:h-[13px] md:h-[13px] lg:h-4 xl:text-h-4 2xl:h-4"
               />
               <span className="ml-2">Recoger en tienda (Morelia, Mich.)</span>
             </label>
@@ -84,8 +92,13 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
         </div>
         {/*subtotal + btnradio*/}
         <div className="grid grid-cols-2 items-center">
-          <h3 className="text-black font-semibold text-2xl">ORDEN-TOTAL:</h3>
-          <p className="text-green-700 font-bold text-2xl justify-self-end">
+          <h3 className="text-black font-semibold
+          text-lg sm:text-lg md:text-lg
+          lg:text-xl xl:text-xl 2xl:text-xl
+          ">ORDEN-TOTAL:</h3>
+          <p className="text-green-700 font-bold justify-self-end
+           text-lg sm:text-lg md:text-lg
+           lg:text-xl xl:text-xl 2xl:text-xl">
             $ {pagoTotal}
           </p>
         </div>
@@ -93,27 +106,33 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
         <div className="grid grid-cols-1 gap-4 my-4">
           {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
           <div className="grid grid-cols-1 gap-2">
-            <label>
+            <label className="text-xs sm:text-xs md:text-xs
+              lg:text-sm xl:text-sm 2xl:text-sm">
               <input
                 type="radio"
                 value="transferencia"
                 name="Transferencia bancaria"
                 checked={paymentMethod === "transferencia"}
                 onChange={handlePaymentChange}
-                className="form-radio text-[#F70073]"
+                className="form-radio text-[#F70073]
+                w-[13px] sm:w-[13px] md:w-[13px] lg:w-4 xl:text-w-4 2xl:w-4
+                h-[13px] sm:h-[13px] md:h-[13px] lg:h-4 xl:text-h-4 2xl:h-4"
               />
               <span className="ml-2">
-                Transferencia bancaria directa BANAMEX/OXXO
+                Transferencia bancaria BANAMEX/OXXO
               </span>
             </label>
 
-            <label>
+            <label className="text-xs sm:text-xs md:text-xs
+              lg:text-sm xl:text-sm 2xl:text-sm">
               <input
                 type="radio"
                 value="payPal"
                 checked={paymentMethod === "payPal"}
                 onChange={handlePaymentChange}
-                className="form-radio text-[#F70073]"
+                className="form-radio text-[#F70073]
+                w-[13px] sm:w-[13px] md:w-[13px] lg:w-4 xl:text-w-4 2xl:w-4
+                h-[13px] sm:h-[13px] md:h-[13px] lg:h-4 xl:text-h-4 2xl:h-4"
               />
               <span className="ml-2 ">PAYPAL</span>
             </label>
@@ -123,7 +142,9 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
         <div className="bg-gray-100 grid grid-cols-1 gap-4 my-4">
           {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
           <div className="grid grid-cols-1 gap-2">
-            <p className="text-black text-justify text-xs">
+            <p className="text-black text-justify 
+            text-[10px] sm:text-[10px] md:text-[10px]
+            lg:text-xs xl:text-xs 2xl:text-xs p-1">
               Realiza tu pago directamente en nuestra cuenta bancaria de Banamex
               o a traves de PayPal. Por favor usa la referencia del pedido como
               referencia de pago. Tu pedido no será enviado hasta que el importe
@@ -136,11 +157,14 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
         <div className="grid grid-cols-1 gap-4 my-4">
           {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
           <div className="grid grid-cols-1 gap-2">
-            <p className="text-black text-justify font-semibold ">
+            <p className="text-black text-justify font-semibold 
+              text-xs sm:text-xs md:text-xs
+              lg:text-sm xl:text-sm 2xl:text-sm">
               Tus datos personales se utilizarán para procesar tu pedido,
               mejorar tu experiencia en esta web y otros propósitos descritos en
               nuestra
-              <span className="text-[#F70073] font-semibold ml-2">
+              <span className="text-[#F70073] 
+                font-semibold ml-2">
                 <Link href={"/"}>política de privacidad</Link>
               </span>
             </p>
@@ -149,25 +173,31 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
         <div className="grid grid-cols-1 gap-4 my-4">
           {/* <h3 className="text-black font-semibold text-xl">ENVÍO</h3> */}
           <div className="grid grid-cols-1 gap-2">
-            <label>
+            <label className="text-xs sm:text-xs md:text-xs
+              lg:text-sm xl:text-sm 2xl:text-sm">
               <input
                 type="checkbox"
                 value="delivery"
                 checked={confirmMethod.includes("delivery")}
                 onChange={handleConfirmChange}
-                className="form-checkbox text-green-600"
+                className="form-checkbox text-green-600
+                w-[13px] sm:w-[13px] md:w-[13px] lg:w-4 xl:text-w-4 2xl:w-4
+                h-[13px] sm:h-[13px] md:h-[13px] lg:h-4 xl:text-h-4 2xl:h-4"
               />
               <span className="ml-2 text-xs">
                 Acepto los términos de uso y condiciones
               </span>
             </label>
-            <label>
+            <label className="text-xs sm:text-xs md:text-xs
+              lg:text-sm xl:text-sm 2xl:text-sm">
               <input
                 type="checkbox"
                 value="pickup"
                 checked={confirmMethod.includes("pickup")}
                 onChange={handleConfirmChange}
-                className="form-checkbox text-green-600"
+                className="form-checkbox text-green-600
+                w-[13px] sm:w-[13px] md:w-[13px] lg:w-4 xl:text-w-4 2xl:w-4
+                h-[13px] sm:h-[13px] md:h-[13px] lg:h-4 xl:text-h-4 2xl:h-4"
               />
               <span className="ml-2 text-xs">
                 Confirmo el uso de mis datos personales
@@ -179,7 +209,9 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
           <div className="grid grid-cols-1">
             <button
               type="submit"
-              class="Btn py-2 w-full"
+              className="Btn py-2 w-full
+              text-xs sm:text-xs md:text-xs
+              lg:text-sm xl:text-sm 2xl:text-sm"
               disabled={
                 !(
                   confirmMethod.includes("delivery") &&
@@ -194,13 +226,17 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
               </svg>
             </button>
             {!confirmMethod.includes("delivery") && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-500 pt-2
+              text-[10px] sm:text-[10px] md:text-[10px]
+              lg:text-xs xl:text-xs 2xl:text-xs">
                 Aún no has aceptado los términos de uso y condiciones
               </span>
             )}
 
             {!confirmMethod.includes("pickup") && (
-              <span className="text-red-500 text-sm">
+              <span className="text-red-500 
+              text-[10px] sm:text-[10px] md:text-[10px]
+              lg:text-xs xl:text-xs 2xl:text-xs">
                 Aún no has confirmado el uso de tus datos personales
               </span>
             )}

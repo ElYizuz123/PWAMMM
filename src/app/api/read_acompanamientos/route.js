@@ -14,7 +14,6 @@ export async function GET() {
       }
     });
 
-    console.log(acompanamiento);
     return NextResponse.json(acompanamiento);
   } catch (error) {
     console.error("Error al leer los datos", error);

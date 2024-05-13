@@ -41,7 +41,7 @@ const Tarjeta_Acompañamiento = ({
         nombre,
         marca,
         precio,
-        gr,
+        ml: gr,
       };
 
       addProductos(newProduct);
@@ -50,12 +50,12 @@ const Tarjeta_Acompañamiento = ({
         setButtonState("idle");
       }, 3000);
     }, 2500);
-  };
+  }; 
 
   return (
     <div className={`${k2d.className} ${existencia ? "" : "opacity-80 "}`}>
       {/* DISEÑO TARJETA SIN EXISTENCIA */}
-      <div className="card bg-white shadow-md w-[350px] h-[460px] relative rounded-5 overflow-hidden">
+      <div className="card h-[240px] sm:h-[240px] md:h-[240px] lg:h-[450px] xl:h-[450px] 2xl:h-[450px] w-40 sm:w-40 md:w-40 lg:full xl:w-full 2xl:w-full bg-white shadow-xl z-0 relative rounded-lg overflow-hidden border-2 ">
         {!existencia && (
           <div className="absolute inset-0 flex justify-center items-center ">
             <p className="bg-red-700  px-60 text-white font-semibold text-2xl text-center rotate-45">
@@ -94,18 +94,15 @@ const Tarjeta_Acompañamiento = ({
           />
         </div>
         {/* DISEÑO TARJETAS DIFERENTE ACOMPAÑAMIENTOS/MEZCAL */}
-        <section className="details bg-white rounded-[10px] p-[20px] absolute top-[82%] w-full bottom-0 right-0 left-0 z-0 transition-all">
-          <div className="pb-4">
-            <div className="min-details ">
-              <h1 className="text-xl flex justify-between font-semibold">
-                {nombre} {gr}gr
-                <div>
-                  <h1 className="price text-green-700">${precio}</h1>
-                </div>
-              </h1>
-              <span className="font-normal">{marca}</span>
+        <section className="details bg-white rounded-[10px] px-[20px] pt-2 sm:pt-2 md:pt-2 lg:py-[25px] xl:py-[25px] 2xl:py-[25px] absolute top-[80%] w-full bottom-0 z-0 transition-all">
+          <h1 className="text-[9px] sm:text-[9px] md:text-[9px] lg:text-lg xl:text-lg 2xl:text-lg flex justify-between font-bold">
+            {nombre} {gr}gr
+            <div className=" text-green-700 font-bold">
+              <span>${precio}</span>
             </div>
-          </div>
+          </h1>
+          <span className="text-[6px] sm:text-[6px] md:text-[6px] lg:text-sm xl:text-sm 2xl:text-sm">{marca}</span>
+
           {/*DISEÑO BOTÓN SIN EXISTENCIAS  */}
           {cantidad !== 0 ? (
             <button
@@ -123,7 +120,7 @@ const Tarjeta_Acompañamiento = ({
               )}
             </button>
           ) : (
-            <div className="mt-2 bg-red-600 text-white font-semibold flex justify-center items-center">
+            <div className="text-[8px] sm:text-[8px] md:text-[8px] lg:text-base xl:text-base 2xl:text-base mt-2 bg-red-600 text-white font-semibold flex justify-center items-center">
               SIN EXISTENCIA
             </div>
           )}

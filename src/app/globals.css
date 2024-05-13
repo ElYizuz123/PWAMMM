@@ -56,24 +56,24 @@ h1 {
 /* Media Queries para dispositivos pequeños (menos de 600px) */
 @media (max-width: 600px) {
   .btnTarjeta {
-    padding: 8px; /* Reducir el padding para dispositivos más pequeños */
-    font-size: 14px; /* Reducir el tamaño de la fuente para mantener la proporcionalidad */
+    padding: 4px; /* Reducir el padding para dispositivos más pequeños */
+    font-size: 8px; /* Reducir el tamaño de la fuente para mantener la proporcionalidad */
   }
   .btnMercadoLibre {
-    padding: 2px; /* Reducir el padding para dispositivos más pequeños */
-    font-size: 14px; /* Reducir el tamaño de la fuente para mantener la proporcionalidad */
+    padding: 1px; /* Reducir el padding para dispositivos más pequeños */
+    font-size: 7px; /* Reducir el tamaño de la fuente para mantener la proporcionalidad */
   }
 }
 
 /* Media Queries para tabletas (600px - 900px) */
 @media (min-width: 600px) and (max-width: 900px) {
   .btnTarjeta {
-    padding: 10px; /* Ajustar el padding para tabletas */
-    font-size: 16px; /* Ajustar el tamaño de la fuente para mejor legibilidad */
+    padding: 4px; /* Ajustar el padding para tabletas */
+    font-size: 8px; /* Ajustar el tamaño de la fuente para mejor legibilidad */
   }
   .btnMercadoLibre {
-    padding: 4px; /* Ajustar el padding para tabletas */
-    font-size: 16px; /* Ajustar el tamaño de la fuente para mejor legibilidad */
+    padding: 1px; /* Ajustar el padding para tabletas */
+    font-size: 7px; /* Ajustar el tamaño de la fuente para mejor legibilidad */
   }
 }
 
@@ -499,14 +499,7 @@ border-2 border-black object-cover shadow-white/35 shadow-md;
 
 /* Estilo básico para el contenedor */
 .datos-personales-container {
-  background-color: white;
   box-shadow: 0 4px 6px rgba(247, 0, 115, 0.3); /* Sombra con un toque de color */
-  padding: 16px 48px; /* Espaciado interior */
-  margin-top: 16px;
-  margin-left: 64px;
-  margin-right: 64px;
-  border-radius: 8px; /* Bordes redondeados */
-  transition: all 0.3s ease-in-out; /* Transición suave para efectos hover */
 }
 
 /* Hover efecto para aumentar la sombra */
@@ -514,8 +507,10 @@ border-2 border-black object-cover shadow-white/35 shadow-md;
   box-shadow: 0 8px 15px rgba(247, 0, 115, 0.5);
 }
 
-.datos-personales-container:hover .header-container h2 {
-  color: #f70073; /* Cambia el color del texto a rosa cuando el mouse está sobre el contenedor */
+.datos-personales-container:hover .header-container span,
+.datos-personales-container:hover .iconPersonalForm,
+.datos-personales-container:hover .iconDireccionForm {
+  color: #f70073; /* Cambia el color del texto y del ícono a rosa cuando el mouse está sobre el contenedor */
 }
 
 /* Estilo para el encabezado y el botón de expansión */
