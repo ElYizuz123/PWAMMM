@@ -97,7 +97,7 @@ const Promociones = () => {
       <div className="lg:w-1/2 bg-transparent items-end relative z-10 sm:w-2/3  ">
 
         <Image
-          src="/multimedia/Promo7.png"
+          src="/multimedia/Promo8.png"
           alt="Promoción"
           width={1000}
           height={1000}

@@ -121,7 +121,7 @@ const CarruselAsociadas = () => {
                   <CardCarrusel
                     asociada={asociada}
                     nombreA={asociada.nombre}
-                    foto={`${ruta}${asociada.foto}`}
+                    foto={asociada.fotoUri}
                     historia={asociada.historia}
                     handleAsociada={handleAsociada}
                     alt={index}
