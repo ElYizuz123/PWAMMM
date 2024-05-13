@@ -25,7 +25,7 @@ const AcompañamientoCarrito = () => {
             id_producto={acompanamiento.producto.id_producto}
             nombre={acompanamiento.producto.nombre}
             precio={acompanamiento.producto.precio}
-            imagen={acompanamiento.producto.foto}
+            imagen={acompanamiento.producto.fotoUri}
             ml={acompanamiento.gr}
             marca={acompanamiento.producto.marca.nombre}
           ></MostrarAcompanamientoCarrito>

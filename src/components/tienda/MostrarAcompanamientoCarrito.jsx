@@ -41,14 +41,16 @@ const MostrarAcompanamientoCarrito = ({
   return (
     <div className="space-y-4 mt-4">
       {/* Product 1 */}
-      <div className="flex justify-between items-center bg-white shadow rounded-lg p-4 ">
+      <div className="flex justify-between items-center bg-white shadow rounded-lg p-4 
+      ">
         <img
           className="h-12 w-12 rounded"
           src={`/productos/${imagen}`}
           alt="Queso"
         />
         <div className="flex-grow px-6">
-          <h3 className="font-medium">
+          <h3 className="font-medium
+          md:text-sm">
             {nombre} {ml}gr
           </h3>
           <p className="text-sm text-gray-500">${precio}</p>
