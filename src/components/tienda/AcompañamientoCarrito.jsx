@@ -28,6 +28,7 @@ const AcompañamientoCarrito = () => {
             imagen={acompanamiento.producto.fotoUri}
             ml={acompanamiento.gr}
             marca={acompanamiento.producto.marca.nombre}
+            cantidad={acompanamiento.producto.cantidad}
           ></MostrarAcompanamientoCarrito>
         ))}
     </div>

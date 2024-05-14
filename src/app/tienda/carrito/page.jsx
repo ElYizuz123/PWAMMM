@@ -27,17 +27,23 @@ const Page = () => {
             />
           </div>
 
-          <div className=" container reltive w-full py-48 ">
-            <div class="container mx-auto p-6">
+          <div className="  reltive w-full py-48 ">
+            <div class="container mx-auto p-6
+            lg:w-[720px] lg:-translate-x-44
+            xl:w-[1200px] xl:translate-x-10
+            2xl:w-[1400px] 2xl:translate-x-5">
               <div
                 class="flex flex-col md:flex-row justify-between gap-6 
+                lg:flex-row 2xl:flex-row
                "
                >
                 <div className="container mx-auto p-6  ">
                   {/* Title */}
                   <div
-                    className=" flex mb-4
-                  sm:h-8 sm:w-10 sm:ml-16"
+                    className=" flex h-8 w-10
+                  md:ml-2
+                  sm:h-8 sm:w-10 sm:ml-16
+                  lg:mb-4 2xl:mb-4"
                   >
                     <Image
                       src="/emoticons/carrito2.png"
@@ -47,26 +53,28 @@ const Page = () => {
                       alt="Fondo"
                     ></Image>
                     <h1
-                      className="ml-4 text-3xl font-bold text-gray-700
-                    sm:text-xl sm:absolute sm:ml-12"
+                      className="ml-12 text-xl font-bold text-gray-700 absolute 
+                    sm:text-xl sm:absolute sm:ml-12
+                    md:ml-12 md:text-2xl
+                    lg:text-3xl 2xl:text-3xl"
                     >
                       BOLSA DE COMPRAS
                     </h1>
-                    <hr className="my-2 hidden sm:hidden lg:block" />
+                    <hr className="my-2 hidden sm:hidden  lg:block" />
                   </div>
 
                   <div
                     className="hidden text-gray-600 font-bold text-sm py-2 rounded-t-lg 
-                  sm:hidden lg:block"
+                  sm:hidden  lg:flex 2xl:flex "
                   >
                     <h3 className="">PRODUCTO</h3>
-                    <h3 className="ml-[320px]">PRECIO</h3>
-                    <h3 className="ml-[140px]">CANTIDAD</h3>
-                    <h3 className="ml-[158px]">TOTAL</h3>
+                    <h3 className="lg:ml-[240px] xl:ml-[280px] 2xl:ml-[320px]">PRECIO</h3>
+                    <h3 className="lg:ml-[30px] 2xl:ml-[150px]">CANTIDAD</h3>
+                    <h3 className="lg:ml-[35px] 2xl:ml-[120px]">TOTAL</h3>
                   </div>
 
                   <div className="my-4 "></div>
-                  <hr className="sm:hidden lg:block" />
+                  <hr className="sm:hidden  lg:block" />
 
                   {/* Product row */}
                   <MostrarItemsCarrito />
