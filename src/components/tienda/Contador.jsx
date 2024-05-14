@@ -62,7 +62,7 @@ const Contador = ({
         hidden sm:block md:block lg:block 2xl:block"
       >
         <button
-          className={`  btn font-semibold ${
+          className={`  btnTarjeta font-semibold ${
             buttonState === "loading" && "bg-pink-300"
           }`}
           onClick={handleAddToCart}
@@ -87,7 +87,7 @@ const Contador = ({
       </div>
 
       <div
-        className=" flex -mt-5 
+        className=" flex -mt-0 
          px-8 -translate-x-5 -translate-y-[280px]
          sm:-translate-x-20 sm:-translate-y-[280px]
          md:translate-x-4  md:translate-y-3

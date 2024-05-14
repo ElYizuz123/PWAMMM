@@ -21,7 +21,7 @@ const Carrito = () => {
   return (
     <div className="relative">
       <button onClick={() => setIsCartVisible(!isCartVisible)}>
-        <div className="fixed bottom-4 right-4 flex items-center justify-center w-16 h-16 bg-[#F70073] rounded-full z-50 hover:scale-110 transition transform duration-300 ease-in-out">
+        <div className="fixed bottom-4 right-4 flex items-center justify-center w-16 h-16 bg-[#F70073] rounded-full z-40 hover:scale-110 transition transform duration-300 ease-in-out">
           <div className="relative flex justify-center items-center">
             <img src="\emoticons\carrito.png" className="z-10 object-cover" />
 
