@@ -55,13 +55,19 @@ const GraficaLineal = ({formato, ventas}) => {
     //Inicialización con datos 
     
     if(ventas){
-        var cantVentas=[]
+        let cantVentas=[]
         //Sumado de datos por rango de fecha
-        formato.forEach((element, index) => {
-            const findVenta = ventas.filter(venta => venta.fecha.includes(element))
+        formato.map((element, index) => {
+            let findVenta = 0
+            if(element.split("/").length>2){
+                findVenta = ventas.filter(venta => venta.fecha === (element))
+            }
+            else{
+                findVenta = ventas.filter(venta => venta.fecha.includes(element))
+            }   
             if(findVenta[0]){
                 cantVentas[index]=0
-                findVenta.forEach(element => {
+                findVenta.map(element => {
                     cantVentas[index]+=element.cantidad
                 });
                 

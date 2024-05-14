@@ -32,8 +32,8 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
             setValue('id_evento', idEvento)
             setValue('nombre', data[0].nombre)
             setValue('descripcion', data[0].descripcion)
-            setValue('foto', data[0].fotoUri)
-            setValue('fotoId', data[0].fotoId)
+            setValue('foto', data[0].fotoUri? data[0].fotoUri:null)
+            setValue('fotoId', data[0].fotoId ?  data[0].fotoId:null)
             setValue('fecha_fin', data[0].fecha_fin.split(".")[0].slice(0, -3))
     }
 
@@ -184,7 +184,8 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                             <p className='text-sm'>{eventoPhoto.name}</p>
                         )}
                         {/* Visualizador por defecto de la imagen */}
-                        {!eventoPhoto && (<Image width={400} height={400} src={evento ? evento[0].fotoUri : ""} alt='Preview' className='object-contain w-44 h-56' />)}
+                        {!eventoPhoto && (<Image width={400} height={400} src={evento ? evento[0].fotoUri ? evento[0].fotoUri: "" : ""} alt='Preview' className={`object-contain w-44 h-56 
+                        ${evento? evento[0].fotoUri ? "show":"hidden" :"hidden"}`} />)}
                         {!eventoPhoto && (
                             <p className='text-sm'>{evento ? evento[0].fotoId : ""}</p>
                         )}
