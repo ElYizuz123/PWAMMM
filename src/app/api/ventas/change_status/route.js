@@ -12,7 +12,6 @@ export async function POST(request){
                 status:data.statusA
             }
         })
-        console.log(status)
         return NextResponse.json("Exito")
     }catch(err){
         console.log(err)
