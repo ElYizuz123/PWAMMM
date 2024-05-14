@@ -59,8 +59,10 @@ const titleVariantsMision = {
   const images = ["/multimedia/15.jpeg", "/multimedia/agave 2.jpeg"]; //Imagenes de la parte de Misiòn 
   const imagesVision = [                                              //Imagenes de Visión
     "/multimedia/7.jpeg",
-    "/multimedia/fondoAsociadas.jpeg",
-    "/multimedia/2.jpeg",
+    "/multimedia/imgVision.jpeg",
+    "/multimedia/imgVision2.jpeg",
+    "/multimedia/imgVision3.jpeg"
+    
   ];
 
 const CardVision = () => {
@@ -82,7 +84,7 @@ const CardVision = () => {
   //visual.
     useEffect(() => {
       const interval = setInterval(() => {
-        setCambiarFoto((prevIndex) => (prevIndex + 1) % images.length);
+        setCambiarFoto((prevIndex) => (prevIndex + 1) % imagesVision.length);
       }, 9000);
   
       return () => clearInterval(interval);
