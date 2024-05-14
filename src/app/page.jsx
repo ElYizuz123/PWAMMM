@@ -18,15 +18,17 @@ export default function Home() {
       <Main />                                                                                   {/*Componente Video*/}
       <div className=" w-full h-auto fondo-nosotras " >   
        
-      
-      <Promociones/>                                                                             {/*fondo-nosotras es el fondo principal*/}
-        <div className="bg-transparent  mt-96 sm:mt-96 md:mt-[390px] lg:mt-10 xl:mt-36 2xl:mt-24  mb-5">                                            {/*Se aplica un efecto de desvanecido de la sección del video */} 
+      <div className="md:mb-10">
+      <Promociones/> 
+      </div>
+                                                                                 {/*fondo-nosotras es el fondo principal*/}
+        <div className="bg-transparent  mt-96 sm:mt-96 md:mt-96  lg:mt-10 xl:mt-10 2xl:mt-1  mb-5">                                            {/*Se aplica un efecto de desvanecido de la sección del video */} 
                                   
           <Suspense fallback={<div>Cargando...</div>} >
           <CarruselInicio />
           </Suspense>                                                                                     {/*al carrusel de eventos */}
         </div>
-        <div className="mt-24">
+        <div className="mt-24 ">
         <Historia />  
         </div>
          

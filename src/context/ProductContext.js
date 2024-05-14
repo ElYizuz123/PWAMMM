@@ -13,7 +13,7 @@ export const ProductProvider = ({ children }) => {
   const [metodoPago, setMetodoPago] = useState(0);
 
   useEffect(() => {
-    const productosEnAlmacenamiento = localStorage.getItem("productos");
+    const productosEnAlmacenamiento = sessionStorage.getItem("productos");
     if (productosEnAlmacenamiento) {
       setProductos(JSON.parse(productosEnAlmacenamiento));
     }
@@ -53,7 +53,7 @@ export const ProductProvider = ({ children }) => {
     }
 
     setProductos(newProducts); // Actualiza el estado de productos
-    localStorage.setItem("productos", JSON.stringify(newProducts)); // Guarda en localStorage
+    sessionStorage.setItem("productos", JSON.stringify(newProducts)); // Guarda en localStorage
     triggerCartCountAnimation(); // Activa la animación
   };
 
@@ -65,7 +65,7 @@ export const ProductProvider = ({ children }) => {
     );
 
     setProductos(updatedProductos);
-    localStorage.setItem("productos", JSON.stringify(updatedProductos));
+    sessionStorage.setItem("productos", JSON.stringify(updatedProductos));
     triggerCartCountAnimationDelete();
   };
 
@@ -89,10 +89,15 @@ export const ProductProvider = ({ children }) => {
       ...newProducts[index],
       cantidad: cantidadActual,
     };
-
+    
     setProductos(newProducts);
-    localStorage.setItem("productos", JSON.stringify(newProducts));
+    sessionStorage.setItem("productos", JSON.stringify(newProducts));
     triggerCartCountAnimation();
+  };
+
+  const limpiarProductos = () => {
+    setProductos([]);
+    sessionStorage.setItem("productos", JSON.stringify(newProducts));
   };
 
   const enviarDataApi = async () => {
@@ -153,14 +158,6 @@ export const ProductProvider = ({ children }) => {
     0
   );
 
-  const envioVenta = (estado) => {
-    setIsEnvio(estado);
-  };
-
-  const limpiarProductos = () => {
-    setProductos([]);
-  };
-
   return (
     <ProductContext.Provider
       value={{
@@ -170,8 +167,8 @@ export const ProductProvider = ({ children }) => {
         deleteProduct,
         updateQuantity,
         total,
-        envioVenta,
         isEnvio,
+        setIsEnvio,
         marcaAsociada,
         setMarcaAsociada,
         marcaNombreAsociada,

@@ -4,6 +4,7 @@ import { ProductContext } from "@/context/ProductContext";
 import { CheckCircleIcon, RefreshIcon } from "@heroicons/react/solid";
 import { useContext, useState } from "react";
 import Link from "next/link";
+import { CantidadContext } from "@/context/CantidadContext";
 
 const Contador = ({
   id_producto,
@@ -11,11 +12,10 @@ const Contador = ({
   marca,
   precio,
   imagen,
-
   ml,
-
   cantidad2,
 }) => {
+  const { decrementStock } = useContext(CantidadContext);
   const [count, setCount] = useState(1);
   const [buttonState, setButtonState] = useState("idle");
   const maxCount = cantidad2;
@@ -44,6 +44,8 @@ const Contador = ({
       };
 
       addProductos(newProduct);
+      decrementStock(id_producto, count);
+      setCount(1);
 
       setTimeout(() => {
         setButtonState("idle");
@@ -62,7 +64,7 @@ const Contador = ({
         hidden sm:block md:block lg:block 2xl:block"
       >
         <button
-          className={`  btn font-semibold ${
+          className={`  btnTarjeta font-semibold ${
             buttonState === "loading" && "bg-pink-300"
           }`}
           onClick={handleAddToCart}
@@ -87,7 +89,7 @@ const Contador = ({
       </div>
 
       <div
-        className=" flex -mt-5 
+        className=" flex -mt-0 
          px-8 -translate-x-5 -translate-y-[280px]
          sm:-translate-x-20 sm:-translate-y-[280px]
          md:translate-x-4  md:translate-y-3

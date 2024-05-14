@@ -23,7 +23,7 @@ const Page = () => {
           
           <CarruselAsociadas /> {/*Carrusel de Asociadas*/}
         </div>
-        <div className="w-11/12 m-auto ">
+        <div className="w-11/12 m-auto mb-10  ">
           <CardVision />  {/*Visión y Misión*/}
         </div>
       </div>

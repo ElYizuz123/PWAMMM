@@ -15,6 +15,7 @@ const Ficha_Acompañamiento = ({
   mercadoLibre,
   descripcion,
   cantidad,
+  cantidadOficial
 }) => {
   return (
     <div>
@@ -91,7 +92,7 @@ const Ficha_Acompañamiento = ({
                 <p className=" text-xl  text-black font-light mt-2">
                   Existencia:
                   <span className=" ml-3 text-xl text-[#F70073] font-light">
-                    {cantidad}
+                    {cantidadOficial}
                   </span>
                 </p>
 
@@ -113,15 +114,15 @@ const Ficha_Acompañamiento = ({
                       </div>
                     </div>
                   ) : (
-                    <div
-                      className="w-5  mt-2 bg-red-600 text-white font-semibold 
-                           sm:w-96 sm:text-center
-                           md:w-80 md:mr-5
-                           lg:w-56 lg:mr-80
+                    <p
+                      className=" relative w-48  mt-2 bg-red-600 text-white font-semibold text-center
+                           sm:w-72 sm:text-center  
+                           md:w-80 md:text-center
+                           lg:w-56 lg:text-center 
                            2xl:w-72 "
                     >
                       SIN EXISTENCIA
-                    </div>
+                    </p>
                   )}
 
                   <div className="relative mt-3">

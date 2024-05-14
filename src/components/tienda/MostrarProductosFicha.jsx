@@ -5,8 +5,11 @@ import Ficha_Botella from "./Ficha_Botella";
 import Ficha_Acompañamiento from "./Ficha_Acompañamiento";
 import Tarjeta_Botella from "./Tarjeta_Botella";
 import Tarjeta_Acompañamiento from "./Tarjeta_Acompañamiento";
+import { CantidadContext } from "@/context/CantidadContext";
+import { useContext } from "react";
 
 const MostrarProductosFicha = ({ tipo, idProducto }) => {
+  const { stock } = useContext(CantidadContext);
   const [botellas, setBotellas] = useState([]);
   const [acompanamientos, setAcompanamientos] = useState([]);
 
@@ -104,7 +107,8 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
               foto={botellaEncontrada.producto.fotoUri}
               mercadoLibre={botellaEncontrada.producto?.mercadoLibre || "NULL"}
               descripcion={botellaEncontrada.producto.descripcion}
-              cantidad={botellaEncontrada.producto.cantidad}
+              cantidad={stock[idProducto]}
+              cantidadOficial={botellaEncontrada.producto.cantidad}
               alcohol={botellaEncontrada.cantidad_alcohol}
               agave={botellaEncontrada.tipo_agave}
             />
@@ -121,10 +125,11 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
                 acompanamientoEncontrado.producto?.mercadoLibre || "NULL"
               }
               descripcion={acompanamientoEncontrado.producto.descripcion}
-              cantidad={acompanamientoEncontrado.producto.cantidad}
+              cantidad={stock[idProducto]}
+              cantidadOficial={acompanamientoEncontrado.producto.cantidad}
             />
           ) : (
-            <p>No se encontró el producto solicitado.</p>
+            <p></p>
           )}
         </div>
         
@@ -160,7 +165,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
                     imagen={filteredItem.producto.fotoUri}
                     mercadoLibre={filteredItem.producto?.mercadoLibre || "NULL"}
                     descripcion={filteredItem.producto.descripcion}
-                    cantidad={filteredItem.producto.cantidad}
+                    cantidad={stock[filteredItem.producto.id_producto]}
                     alcohol={filteredItem.cantidad_alcohol}
                     agave={filteredItem.tipo_agave}
                   />
@@ -186,11 +191,11 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
                     imagen={filteredItem.producto.fotoUri}
                     mercadoLibre={filteredItem.producto?.mercadoLibre || "NULL"}
                     descripcion={filteredItem.producto.descripcion}
-                    cantidad={filteredItem.producto.cantidad}
+                    cantidad={stock[filteredItem.producto.id_producto]}
                   />
                 ))
             ) : (
-              <p>No se encontró el producto solicitado.</p>
+              <p></p>
             )}
           </div>
         

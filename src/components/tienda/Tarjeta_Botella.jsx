@@ -7,6 +7,7 @@ import { ProductContext } from "@/context/ProductContext";
 import { useContext, useState } from "react";
 import { CheckCircleIcon, RefreshIcon } from "@heroicons/react/solid";
 import { EyeIcon } from "@heroicons/react/solid";
+import { CantidadContext } from "@/context/CantidadContext";
 
 const k2d = K2D({
   weight: ["400"],
@@ -24,8 +25,10 @@ const Tarjeta_Botella = ({
   imagen,
   cantidad,
   mercadoLibre,
+  cantidadOficial,
   tipo,
 }) => {
+  const { decrementStock } = useContext(CantidadContext);
   const { addProductos } = useContext(ProductContext);
   const [buttonState, setButtonState] = useState("idle");
   const [showTooltip, setShowTooltip] = useState(false);
@@ -46,6 +49,7 @@ const Tarjeta_Botella = ({
       };
 
       addProductos(newProduct);
+      decrementStock(id_producto, 1);
 
       setTimeout(() => {
         setButtonState("idle");
@@ -54,9 +58,9 @@ const Tarjeta_Botella = ({
   };
 
   return (
-    <div className= {`${k2d.className} ${existencia ? "" : "opacity-80 "}` }>
+    <div className={`${k2d.className} ${existencia ? "" : "opacity-80 "}`}>
       {/* DISEÑO TARJETA SIN EXISTENCIA */}
-      <div className="card w-5/12 sm:w-1/2 md:w-3/5 lg:w-4/5 bg-white shadow-xl z-0 relative rounded-lg overflow-hidden border-2 ">
+      <div className="card h-[240px] sm:h-[240px] md:h-[240px] lg:h-[450px] xl:h-[450px] 2xl:h-[450px] w-40 sm:w-40 md:w-40 lg:full xl:w-full 2xl:w-full bg-white shadow-xl z-0 relative rounded-lg overflow-hidden border-2 ">
         {!existencia && (
           <div className="absolute inset-0 flex justify-center items-center ">
             <p className="bg-red-700  px-60 text-white font-semibold text-2xl text-center rotate-45">
@@ -95,29 +99,36 @@ const Tarjeta_Botella = ({
           />
         </div>
         {/* DISEÑO TARJETAS MEZCAL */}
-        <section className="details  bg-white rounded-[10px] p-[20px] absolute top-[82%] w-full bottom-0 right-0 left-0 z-0 transition-all">
-          <div className="pb-4">
-            <h1 className="text-xl flex justify-between font-bold">
-              {nombre}
-              <div className="price text-green-700 font-bold">
-                <h1>${precio}</h1>
-              </div>
-            </h1>
-            <span className="font-normal text-sm">{marca}</span>
-
-            <div class="gap-2 py-2">
-              <div class="col-span-1 flex items-start justify-start">
-                <ul>
-                  <li>{ml} ML </li>
-                </ul>
-              </div>
-              <div class="col-span-1 flex items-start justify-start">
-                <ul>
-                  <li>{alcohol}% ALCOHOL</li>
-                </ul>
-              </div>
+        <section className="details bg-white rounded-[10px] px-[20px] pt-2 sm:pt-2 md:pt-2 lg:py-[25px] xl:py-[25px] 2xl:py-[25px] absolute top-[80%] w-full bottom-0 z-0 transition-all">
+          <div className="text-[7px] sm:text-[7px] md:text-[7px] lg:text-[11px] xl:text-[11px] 2xl:text-[11px] space-x-2">
+            <span>DISPONIBLE:</span>
+            <span>{cantidadOficial}</span>
+          </div>
+          <h1 className="text-[9px] sm:text-[9px] md:text-[9px] lg:text-base xl:text-base 2xl:text-base flex justify-between font-bold">
+            {nombre}
+            <div className=" text-green-700 font-bold">
+              <span>${precio}</span>
+            </div>
+          </h1>
+          <div>
+            <div className="text-[8px] sm:text-[8px] md:text-[8px] lg:text-xs xl:text-xs 2xl:text-xs">
+              <span>{marca}</span>
             </div>
           </div>
+
+          <div class="py-2 text-[8px] sm:text-[8px] md:text-[8px] lg:text-base xl:text-base 2xl:text-base">
+            <div class="col-span-1 flex items-start justify-start">
+              <ul>
+                <li>{ml} ML </li>
+              </ul>
+            </div>
+            <div class="col-span-1 flex items-start justify-start">
+              <ul>
+                <li>{alcohol}% ALCOHOL</li>
+              </ul>
+            </div>
+          </div>
+
           {/*DISEÑO BOTÓN SIN EXISTENCIAS  */}
           {cantidad !== 0 ? (
             <button
@@ -128,14 +139,24 @@ const Tarjeta_Botella = ({
             >
               {buttonState === "idle" && "Añadir A Carrito"}
               {buttonState === "loading" && (
-                <RefreshIcon className="h-5 w-5 animate-spin mx-auto" />
+                <RefreshIcon
+                  className="animate-spin mx-auto
+                w-3 sm:w-3 md:w-3 lg:w-5 xl:text-w-5 2xl:w-5
+                h-3 sm:h-3 md:h-3 lg:h-5 xl:text-h-5 2xl:h-5
+                "
+                />
               )}
               {buttonState === "success" && (
-                <CheckCircleIcon className="h-5 w-5 text-green-500 mx-auto" />
+                <CheckCircleIcon
+                  className="
+                w-3 sm:w-3 md:w-3 lg:w-5 xl:text-w-5 2xl:w-5
+                h-3 sm:h-3 md:h-3 lg:h-5 xl:text-h-5 2xl:h-5
+                text-green-500 mx-auto"
+                />
               )}
             </button>
           ) : (
-            <div className="mt-2 bg-red-600 text-white font-semibold flex justify-center items-center">
+            <div className="text-[8px] sm:text-[8px] md:text-[8px] lg:text-base xl:text-base 2xl:text-base mt-2 bg-red-600 text-white font-semibold flex justify-center items-center">
               SIN EXISTENCIA
             </div>
           )}
@@ -146,7 +167,7 @@ const Tarjeta_Botella = ({
                 Comprar en mercado libre
               </a>
               <img
-                className="w-8 h-8"
+                className="w-4 sm:w-4 md:w-4 lg:w-8 xl:w-8 2xl:w-8 h-4 sm:h-4 md:h-4 lg:h-8 xl:h-8 2xl:h-8"
                 src="\emoticons\mercado_libre_logo.webp"
                 alt="Mercado Libre"
               />

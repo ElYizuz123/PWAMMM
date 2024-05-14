@@ -17,7 +17,7 @@ const Page = () => {
             />
           </div>
 
-          <Categoria/>
+          <Categoria />
         </div>
       </div>
     </LayoutPrincipal>

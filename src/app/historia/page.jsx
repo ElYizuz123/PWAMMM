@@ -51,7 +51,7 @@ const page = () => {
                            
                               <Image src="/multimedia/historia.jpg" alt="Mujeres Mezcaleras de Michoacán 1" width={300} height={600} style={{width: '100%',height: '100%', objectFit: 'cover',  objectPosition: 'center', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}/>
                             </div>
-                            <div className="h-64 w-44 overflow-hidden rounded-lg">
+                            <div className="h-64 w-44 overflow-hidden rounded-lg md:translate-y-10">
                              
                               <Image src="/multimedia/fondo-historia.jpeg" alt="Mujeres Mezcaleras de Michoacán 2" width={300} height={600} style={{width: '100%',height: '100%', objectFit: 'cover',  objectPosition: 'center', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
                             </div>

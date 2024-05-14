@@ -6,7 +6,7 @@ const formatVentas = (ventas) =>{
     const formatedVentas = []
     const formatedCountVentas = []
     if(ventas){
-        ventas.forEach(element => {
+        ventas.map(element => {
             const fVenta = element.fecha_venta.getDate()+"/"+
             (element.fecha_venta.getMonth()+1)+"/"+
             element.fecha_venta.getFullYear()

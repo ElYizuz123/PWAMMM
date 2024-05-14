@@ -1,13 +1,16 @@
 import React from 'react'
 import Image from "next/image";
+
+
+
 const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
   const nombreMay = nombre.toUpperCase();
   return (
 
-    <div className="max-w-sm bg-white rounded overflow-hidden shadow-lg">
-      {foto !== '/eventos/null' ? (
+    <div className="max-w-sm bg-white rounded overflow-hidden shadow-lg  mt-10 sm:mt-20 md:mt-20 lg:mt-20 xl:mt-20 2xl:mt-0 md:translate-x-44 ">
+      {foto !== null ? (
 
-        <div className="relative w-full h-96">
+        <div className="relative w-full h-[400px] ">
 
 
           <Image
@@ -22,7 +25,7 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
 
 
       ) : (
-        <div className="flex items-center justify-center relative w-full h-96">
+        <div className="flex items-center justify-center relative w-full h-[400px] ">
           <Image
             className="object-cover w-full h-full"
             src="/multimedia/cardEvento6.png"
@@ -30,6 +33,7 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
             layout="fill"
           />
           <div className="absolute inset-0 flex flex-col justify-center items-center">
+            
         <div className="font-bold text-center text-2xl mb-2">{nombreMay}</div>
         <hr className="w-1/2 border-gray-300 my-2 shadow-sm"  />
         <p className="text-gray-700 text-base mr-7 ml-7 text-center">
