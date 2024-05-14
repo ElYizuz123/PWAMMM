@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { contexto } from '../UpdateProvider'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 
 const randomHexa = () => {
@@ -15,6 +16,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
     const { update, setUpdate } = useContext(contexto)
     const [eventoPhoto, setEventoPhoto] = useState(null)
     const [evento, setEvento] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
@@ -63,6 +65,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
 
     //Manejo de actualización de datos 
     const handleOnSubmit = async (data) => {
+        setIsLoading(true)
         //Manejo de la fecha para la DB
         data.fecha_fin = data.fecha_fin + ":00.000Z"
         console.log(data)
@@ -107,6 +110,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                     }).then(() => {
                         const up = !update
                         setUpdate(up)
+                        onClose()
                     });
                 }
                 else {
@@ -149,6 +153,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                 }).then(() => {
                     const up = !update
                     setUpdate(up)
+                    onClose()
                 });
             }
             else {
@@ -159,6 +164,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                 });
             }
         }
+        setIsLoading(false)
     }
 
     //Ingreso de foto en el input del form
@@ -258,9 +264,19 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
                                         />
                                     <div className='w-full flex justify-end items-end'>
                                         <button
+                                            disabled={isLoading}
                                             type='submit'
                                             className='bg-[#98E47D] w-56 h-10 text-2xl font-bold rounded-xl mr-3 mt-[10%]'
-                                        >Guardar cambios
+                                        >
+                                            {!isLoading &&
+                                            "Guardar cambios"
+                                        }
+                                        {
+                                            isLoading &&
+                                            <div className='flex justify-center'>
+                                                <AiOutlineLoading3Quarters className='animate-spin'/>
+                                            </div>
+                                        }
                                         </button>
                                     </div>
                                 </form>

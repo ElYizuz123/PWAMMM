@@ -5,6 +5,7 @@ import { contexto } from '../UpdateProvider'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
 import Modal from 'react-modal'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 
 const randomHexa = () => {
@@ -17,6 +18,7 @@ const Crear_foto = () => {
     const { update, setUpdate } = useContext(contexto)
     const [cFotoIsOpen, setCFotoIsOpen] = useState(false)
     const [eventoPhoto, setEventoPhoto] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, reset, setValue } = useForm()
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
@@ -60,6 +62,7 @@ const Crear_foto = () => {
     //Manejar la creación de una foto
     const handleOnSubmit = async (data) => {
         if (eventoPhoto) {
+            setIsLoading(true)
             const form = new FormData()
             form.set('file', eventoPhoto)
             form.set('source', "galeria")
@@ -117,6 +120,7 @@ const Crear_foto = () => {
                     text: "Algo salió mal!",
                 });
             }
+            setIsLoading(false)
         }
     }
 
@@ -174,9 +178,19 @@ const Crear_foto = () => {
                             />
                             <div className='w-full h-full flex justify-end items-end'>
                                 <button
+                                    disabled={isLoading}
                                     type='submit'
                                     className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mb-11'
-                                >Agregar
+                                >
+                                    {!isLoading &&
+                                        "Agregar"
+                                    }
+                                    {
+                                        isLoading &&
+                                        <div className='flex justify-center'>
+                                            <AiOutlineLoading3Quarters className='animate-spin' />
+                                        </div>
+                                    }
                                 </button>
                             </div>
                         </form>
