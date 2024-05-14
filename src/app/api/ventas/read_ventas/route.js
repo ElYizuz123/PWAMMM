@@ -3,7 +3,7 @@ import db from '@/libs/db'
 import { decrypt } from '@/libs/decrypt';
 
 export const revalidate = 0;
-export async function Read_ventas(){
+export async function GET(){
     try{
         const ventas = await db.venta_total.findMany();
         
@@ -23,7 +23,7 @@ export async function Read_ventas(){
             element.region = decrypt({data:element.region, iv:element.iv_region})
             element.cp = decrypt({data:element.cp, iv:element.iv_cp})
         });
-        return NextResponse.json(JSON.stringify(dataReversed));
+        return NextResponse.json(dataReversed);
 
     }catch(error){
         console.error('Error al leer los datos', error)

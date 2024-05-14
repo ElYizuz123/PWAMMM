@@ -7,6 +7,31 @@ h1 {
   text-transform: capitalize;
 }
 
+
+.card-reduced {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  height: 410px;
+  width: 350px;
+  background-color: #fff
+}
+.card-reduced > figure {
+  width: 90%;
+  margin: 20px auto 0 auto;
+}
+
+.card-reduced-as {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  height: 370px;
+  width: 350px;
+  background-color: #fff
+}
+
+.card-reduced-as > figure {
+  width: 90%;
+  margin: 20px auto 0 auto;
+}
+
+
 .slider-container-admin {
   width: 1000px;
   height: 200px;
@@ -31,6 +56,23 @@ h1 {
 }
 
 .btnTarjeta:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.btnMayor {
+  background-color: #f70073;
+  border-radius: 5px;
+  color: #fff;
+  display: block;
+  padding: 16px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btnMayor:hover {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
@@ -171,7 +213,7 @@ h1 {
 }
 
 .card-logo {
-@apply bg-white w-24 h-24 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-32 lg:h-32 2xl:w-32 2xl:h-32   grid place-content-center rounded-lg text-black
+@apply bg-white w-20 h-20 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-32 lg:h-32 2xl:w-32 2xl:h-32   grid place-content-center rounded-lg text-black
 border-2 border-black object-cover shadow-white/35 shadow-md;
 
 

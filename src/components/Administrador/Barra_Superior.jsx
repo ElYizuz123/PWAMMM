@@ -16,10 +16,6 @@ const Barra_Superior = ({title}) => {
             <div className="flex justify-center items-center">
                 <p className="font-bold">Administrador</p>
                 <hr className="bg-black w-[1px] h-10 opacity-50 ml-4 mr-4"></hr>
-                <Link href="/administrador/ventas">
-                    <IoNotificationsOutline className="w-7 h-10"/> 
-                </Link>
-                <hr className="bg-black w-[1px] h-10 opacity-50 ml-4 mr-4"></hr>
                 <button onClick={() => signOut()}>
                     <IoLogOutOutline className="w-8 h-10"/>
                 </button>

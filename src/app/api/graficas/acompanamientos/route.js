@@ -6,7 +6,7 @@ const listProductosVentas = (productos, ventas) =>{
     
     var listProductos = []
     var cont = 0
-    productos.forEach((element) => {
+    productos.map((element) => {
         if(element.acompanamiento[0]){
             let productoVenta = {
                 id:element.id_producto,
@@ -18,7 +18,7 @@ const listProductosVentas = (productos, ventas) =>{
         }
         
     })
-    ventas.forEach(element => {
+    ventas.map(element => {
         const productoEncontrado = listProductos.find(producto => producto.id === element.producto_id_producto)
         if(productoEncontrado){
             productoEncontrado.cantidad+=element.cantidad_producto

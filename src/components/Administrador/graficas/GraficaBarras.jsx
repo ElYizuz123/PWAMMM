@@ -40,7 +40,7 @@ var options = {
 const otrosCantidad = (ventas) =>{
     var cantidad=0
     if(ventas.length !=0 ){
-        ventas.forEach((element, index) => {
+        ventas.map((element, index) => {
             if(index>6){
                 cantidad+=element.cantidad
             }

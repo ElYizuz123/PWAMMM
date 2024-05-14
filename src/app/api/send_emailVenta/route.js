@@ -31,7 +31,7 @@ export async function POST(request) {
       
         <li>
         <strong>Marca:</strong> ${producto.marca} <br>
-        <strong>Producto:</strong> ${producto.nombre} ${producto.ml}ml <br>
+        <strong>Producto:</strong> ${producto.nombre} ${producto.ml} <br>
         <strong>Precio:</strong> $${producto.precio} <br>
         <strong>Cantidad:</strong> x${producto.cantidad} <br>
          </li>
@@ -47,7 +47,7 @@ export async function POST(request) {
       subject: "NUEVA VENTA",
 
       html: `
-        <h2 style="color: #F70073;">Detalles del Pedido</h2>
+        <h2 style="color: #F70073">Detalles del Pedido</h2>
         <ul>
           ${productosHTML}
 
@@ -55,7 +55,7 @@ export async function POST(request) {
           <li><strong>Total:</strong> $${total}</li>
           <li><strong>Método de pago:</strong> ${metodoPago}</li>
         </ul>
-       <h3 style="color: #F70073;">Datos del Cliente</h3>
+       <h3 style="color: #F70073">Datos del Cliente</h3>
         <ul>
           <li><strong>Nombre:</strong> ${nombreCliente} ${apellidoCliente}</li>
           <li><strong>Teléfono:</strong> ${telefono}</li>
@@ -66,7 +66,7 @@ export async function POST(request) {
               : ""
           }
         </ul>
-       <h3 style="color:#F70073;">Datos de Dirección</h3>
+       <h3 style="color:#F70073">Datos de Dirección</h3>
         <ul>
           
           <li><strong>País:</strong>${pais}</li>

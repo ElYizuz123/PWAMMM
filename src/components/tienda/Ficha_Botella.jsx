@@ -28,19 +28,20 @@ const Ficha_Botella = ({
     <div>
       <div className="flex justify-center w-full">
         <div
-          className="flex justify-between bg-white rounded-lg shadow-2xl w-[80%] h-[780px] 
-          sm:h-[865px] sm:w-[80%]
-          md:h-auto  md:w-[80%]
+          className=" bg-white rounded-lg shadow-2xl w-[80%] h-[780px] 
+          sm:h-[865px] sm:w-[450px]
+          md:h-auto  md:w-[80%] md:-translate-x-14
           lg:h-auto lg:w-[80%]
           2xl:h-auto  2xl:w-[80%] "
-         >
+        >
           {/* imagen botellas */}
-          <div className=" mt-20  ">
+          <div className=" mt-24 flex justify-center align-middle">
             <Image
-              className=" rounded-md translate-x-[40%]  absolute
-               sm:mt-4 sm:translate-x-40 sm:w-[220px] sm:absolute
-               md:-mt-10 md:ml-2 md:translate-x-0  md:h-[300px] 
-               lg:-mt-24 lg:py-12  lg:translate-x-10  lg:h-[350px] 
+              className=" rounded-md 
+              object-cover 
+               sm:mt-4 sm:w-[220px] 
+               md:-mt-10 md:ml-2 md:-translate-x-48 md:absolute  md:h-[300px] 
+               lg:-mt-24 lg:py-12  lg:-translate-x-60  lg:h-[450px] lg:absolute
                2xl:-mt-20 2xl:translate-x-28 2xl:h-[350px] 2xl:ml-10"
               src={`/productos/${foto}`}
               width={170}
@@ -51,17 +52,17 @@ const Ficha_Botella = ({
           </div>
           {/*información */}
           <div
-            className="w-full px-12  translate-y-[50%] 
-             sm:translate-y-[50%] 
-             md:translate-y-0  
-             lg:translate-y-0 
+            className="w-full px-12  -translate-y-5
+             sm:translate-y-0 sm:-translate-x-20
+             md:-translate-y-20
+             lg:-translate-y-12 
              2xl:translate-y-0"
-           >
+          >
             <div
-              className="absolute right-0  g-green-200 rounded-full w-auto h-20 p-4 text-center 
-                   translate-x-3    -translate-y-96
-                   sm:-translate-x-2 sm:-translate-y-80 sm:-mt-20
-                   md:translate-x-1 md:translate-y-20 
+              className="right-0  g-green-200 rounded-full w-auto h-20 p-4 text-center 
+                   translate-x-24    -translate-y-[360px]
+                   sm:translate-x-80 sm:-translate-y-[350px] sm:-mt-20 sm:flex
+                   md:translate-x-1 md:-translate-y-4 md:absolute
                    lg:-translate-x-2  
                    2xl:-translate-x-10"
             >
@@ -85,13 +86,13 @@ const Ficha_Botella = ({
             </div>
 
             <div
-              className="w-full flex justify-end mt-16
+              className="w-full flex justify-end mt-12
              sm:mt-36 sm:-translate-x-4
              md:translate-x-12 md:mt-20
              lg:mt-10
              2xl:-translate-x-10 2xl:-translate-y-10"
-             >
-              <div className="text-black mt-4">
+            >
+              <div className="text-black mt-0">
                 <strong
                   className="text-xl 
                 sm:text-2xl 
@@ -101,7 +102,7 @@ const Ficha_Botella = ({
                 >
                   {nombre}
                   <span
-                    className=" ml-3  text-xl 
+                    className=" ml-3  text-sm 
                   sm:text-xl 
                   md:text-2xl 
                   lg:text-2xl"
@@ -152,22 +153,18 @@ const Ficha_Botella = ({
                       </div>
                     </div>
                   ) : (
-                   
-                      <div
-                        className="w-5  mt-2 bg-red-600 text-white font-semibold 
-                           sm:w-96 sm:text-center
-                           md:w-80 md:mr-5
-                           lg:w-56 lg:mr-80
+                    <p
+                      className=" relative w-48  mt-2 bg-red-600 text-white font-semibold text-center
+                           sm:w-72 sm:text-center  
+                           md:w-80 md:text-center
+                           lg:w-56 lg:text-center 
                            2xl:w-72 "
-                      >
-                        SIN EXISTENCIA
-                      </div>
-                   
+                    >
+                      SIN EXISTENCIA
+                    </p>
                   )}
 
-                  <div
-                    className="relative mt-3"
-                  >
+                  <div className="relative mt-3">
                     {mercadoLibre !== "NULL" && (
                       <button
                         className="bg-[#ffe500] hover:shadow-lg hover:-translate-y-0.5 text-black font-bold  
@@ -205,7 +202,11 @@ const Ficha_Botella = ({
       </div>
       {/*descripcion*/}
       <div className="flex justify-center w-full">
-        <div className=" w-[80%] rounded-lg shadow-2xl bg-white p-4 mt-4">
+        <div
+          className=" w-[80%] rounded-lg shadow-2xl bg-white p-4 mt-4
+        sm:w-[450px] 
+        md:w-[80%] md:-translate-x-14"
+        >
           <h3 className="text-[#F70073] font-bold">DESCRIPCIÓN</h3>
           <h3 className=" mt-2 text-justify mx-4">{descripcion}</h3>
         </div>

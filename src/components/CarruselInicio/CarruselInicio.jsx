@@ -32,7 +32,7 @@ const CarruselInicio = () => {
 
 
   return (
-    <div className="relative z-1 p-8  ">
+    <div className="relative z-1 p-8   ">
       <div className="w-[600px] h-[1000px] overflow-hidden absolute bottom-0 right-0 mr-0 -z-10">
           <div className=" w-[1000px] h-[1000px] rounded-full bg-[#f70073] bg-opacity-40 flex justify-center items-center absolute left-0 "></div>
         </div>
@@ -51,26 +51,30 @@ const CarruselInicio = () => {
           spaceBetween: 10  //Espacio entre cada Imagen
         }}
         slidesPerView={3} // Por defecto se ven 3 imagenes 
-        centeredSlides
+        centeredSlides={true}
         
         autoplay={{ delay: 3500, disableOnInteraction: false }} breakpoints={{  //Cada imagen/evento cambia cada 3.5s 
           // Cuando el ancho de la pantalla sea igual o superior a 300px
           300: {
             slidesPerView: 1, // Mostrar 2 slides
             spaceBetween: 2, // Espacio entre slides
+            
           },
           768: {
             slidesPerView: 1, // Mostrar 2 slides
             spaceBetween: 20, // Espacio entre slides
+           
           },
           // Cuando el ancho de la pantalla sea igual o superior a 1024px
           1024: {
             slidesPerView: 2, // Mostrar 3 slides
             spaceBetween: 20, // Espacio entre slides
+            
           },
           1280: {
             slidesPerView: 3, // Mostrar 3 slides
             spaceBetween: 20, // Espacio entre slides
+           
           },
         }}
 
@@ -82,7 +86,7 @@ const CarruselInicio = () => {
              <CardCarruselnicio 
              nombre={evento.nombre}
              descripcion={evento.descripcion}
-              foto={ruta + evento.foto}
+              foto={evento.fotoUri}
               alte={index}
             />
                

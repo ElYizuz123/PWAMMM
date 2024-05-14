@@ -5,6 +5,7 @@ import { HiShoppingBag } from "react-icons/hi2";
 import { HiInformationCircle } from "react-icons/hi2";
 import { HiEnvelope } from "react-icons/hi2";
 import { BsImages } from "react-icons/bs";
+import { MdFace3 } from "react-icons/md";
 import Link from "next/link";
 import logo from "@/components/navbar/logo";
 import IconoMenu from "@/components/navbar/iconoMenu";
@@ -175,7 +176,7 @@ const LayoutPrincipal = ({ children }) => {
                     href="/nosotras"
                   >
                     <span className="text-xl">NOSOTRAS</span>
-                    <HiInformationCircle className="h-6 w-6" />
+                    <MdFace3  className="h-6 w-6" />
                   </Link>
                 </li>
                 <li className="py-8 px-4 border-b border-[#F70073]">
@@ -214,7 +215,7 @@ const LayoutPrincipal = ({ children }) => {
             <div className="text-black lg:flex hidden flex-grow justify-between ml-5 py-8 text-center mr-24">
               <div className={berkshire.className}>
                 <div className={styleLogo}>
-                  <p1 className="text-2xl">
+                  <p1 className="text-2xl sm:text-2xl md:text-2xl lg:text-xs xl:text-2xl 2xl:text-2xl">
                     Mujeres Mezcaleras <br></br> De Michoacán
                   </p1>
                 </div>
@@ -252,7 +253,9 @@ const LayoutPrincipal = ({ children }) => {
                   className={`lg:mr-16 hover:text-[#F70073] ${buttonMap["/nosotras"]}`}
                 >
                   <div className={`mx-auto ${styleNav}`}>
-                    <HiInformationCircle className="w-full h-auto" />
+                    
+                 
+                  <MdFace3 className="w-full h-auto"/>
                   </div>
                   NOSOTRAS
                 </Link>
