@@ -4,10 +4,13 @@ import React, { useState, useEffect, createContext } from "react";
 export const CantidadContext = createContext();
 
 export const CantidadProvider = ({ children }) => {
-  const [stock, setStock] = useState(() => {
+
+  const [stock, setStock] = useState({})
+
+  /*const [stock, setStock] = useState(() => {
     const savedStock = sessionStorage.getItem("stock");
     return savedStock ? JSON.parse(savedStock) : {};
-  });
+  });*/
   
   useEffect(() => {
     // Verifica si el código se está ejecutando en un entorno de navegador
