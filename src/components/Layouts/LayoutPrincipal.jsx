@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import MayorEdad from "../MayorEdad/MayorEdad";
 import UsoCookies from "../UsoCookies/UsoCookies";
+import { CantidadProvider } from "@/context/CantidadContext";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -95,7 +96,7 @@ const LayoutPrincipal = ({ children }) => {
   return (
     <div>
       {/* ERES MAYOR DE 18 AÑOS? */}
-      <MayorEdad/>
+      <MayorEdad />
 
       {/* ACEPTAR USO DE COOKIES */}
       <UsoCookies />
@@ -278,10 +279,11 @@ const LayoutPrincipal = ({ children }) => {
           </div>
         </nav>
       </div>
-      <Carrito />
-      <div>{children}</div>
-
-      <Footer />
+      <CantidadProvider>
+        <Carrito />
+        <div>{children}</div>
+        <Footer />
+      </CantidadProvider>
     </div>
   );
 };

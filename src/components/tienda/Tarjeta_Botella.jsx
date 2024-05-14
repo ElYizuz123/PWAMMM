@@ -7,6 +7,7 @@ import { ProductContext } from "@/context/ProductContext";
 import { useContext, useState } from "react";
 import { CheckCircleIcon, RefreshIcon } from "@heroicons/react/solid";
 import { EyeIcon } from "@heroicons/react/solid";
+import { CantidadContext } from "@/context/CantidadContext";
 
 const k2d = K2D({
   weight: ["400"],
@@ -24,8 +25,10 @@ const Tarjeta_Botella = ({
   imagen,
   cantidad,
   mercadoLibre,
+  cantidadOficial,
   tipo,
 }) => {
+  const { decrementStock } = useContext(CantidadContext);
   const { addProductos } = useContext(ProductContext);
   const [buttonState, setButtonState] = useState("idle");
   const [showTooltip, setShowTooltip] = useState(false);
@@ -46,6 +49,7 @@ const Tarjeta_Botella = ({
       };
 
       addProductos(newProduct);
+      decrementStock(id_producto, 1);
 
       setTimeout(() => {
         setButtonState("idle");
@@ -96,13 +100,21 @@ const Tarjeta_Botella = ({
         </div>
         {/* DISEÑO TARJETAS MEZCAL */}
         <section className="details bg-white rounded-[10px] px-[20px] pt-2 sm:pt-2 md:pt-2 lg:py-[25px] xl:py-[25px] 2xl:py-[25px] absolute top-[80%] w-full bottom-0 z-0 transition-all">
-          <h1 className="text-[9px] sm:text-[9px] md:text-[9px] lg:text-lg xl:text-lg 2xl:text-lg flex justify-between font-bold">
+          <div className="text-[7px] sm:text-[7px] md:text-[7px] lg:text-[11px] xl:text-[11px] 2xl:text-[11px] space-x-2">
+            <span>DISPONIBLE:</span>
+            <span>{cantidadOficial}</span>
+          </div>
+          <h1 className="text-[9px] sm:text-[9px] md:text-[9px] lg:text-base xl:text-base 2xl:text-base flex justify-between font-bold">
             {nombre}
             <div className=" text-green-700 font-bold">
               <span>${precio}</span>
             </div>
           </h1>
-          <span className="text-[6px] sm:text-[6px] md:text-[6px] lg:text-sm xl:text-sm 2xl:text-sm">{marca}</span>
+          <div>
+            <div className="text-[8px] sm:text-[8px] md:text-[8px] lg:text-xs xl:text-xs 2xl:text-xs">
+              <span>{marca}</span>
+            </div>
+          </div>
 
           <div class="py-2 text-[8px] sm:text-[8px] md:text-[8px] lg:text-base xl:text-base 2xl:text-base">
             <div class="col-span-1 flex items-start justify-start">
@@ -116,7 +128,7 @@ const Tarjeta_Botella = ({
               </ul>
             </div>
           </div>
-          
+
           {/*DISEÑO BOTÓN SIN EXISTENCIAS  */}
           {cantidad !== 0 ? (
             <button
@@ -127,10 +139,20 @@ const Tarjeta_Botella = ({
             >
               {buttonState === "idle" && "Añadir A Carrito"}
               {buttonState === "loading" && (
-                <RefreshIcon className="h-5 w-5 animate-spin mx-auto" />
+                <RefreshIcon
+                  className="animate-spin mx-auto
+                w-3 sm:w-3 md:w-3 lg:w-5 xl:text-w-5 2xl:w-5
+                h-3 sm:h-3 md:h-3 lg:h-5 xl:text-h-5 2xl:h-5
+                "
+                />
               )}
               {buttonState === "success" && (
-                <CheckCircleIcon className="h-5 w-5 text-green-500 mx-auto" />
+                <CheckCircleIcon
+                  className="
+                w-3 sm:w-3 md:w-3 lg:w-5 xl:text-w-5 2xl:w-5
+                h-3 sm:h-3 md:h-3 lg:h-5 xl:text-h-5 2xl:h-5
+                text-green-500 mx-auto"
+                />
               )}
             </button>
           ) : (

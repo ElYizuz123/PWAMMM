@@ -3,7 +3,6 @@ import Formulario from "@/components/tienda/Formulario";
 import React from "react";
 import Image from "next/image";
 
-
 const finalizar_compra = () => {
   return (
     <div className="relative ">
