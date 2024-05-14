@@ -42,11 +42,11 @@ const Galeria = () => {
                             <div
                                 className="w-full transition-all hover:brightness-125 mb-3 hover:cursor-pointer"
                                 key={index}
-                                onClick={() => getImg("/galeria/" + foto.foto)}
+                                onClick={() => getImg(foto.fotoUri)}
                             >
                                 <img
                                     className="w-full rounded-xl"
-                                    src={"/galeria/" + foto.foto}
+                                    src={foto.fotoUri}
                                     style={{ width: "100%" }}
                                 ></img>
                             </div>

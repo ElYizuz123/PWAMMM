@@ -60,6 +60,23 @@ h1 {
   transform: translateY(-2px);
 }
 
+.btnMayor {
+  background-color: #f70073;
+  border-radius: 5px;
+  color: #fff;
+  display: block;
+  padding: 16px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btnMayor:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
 .btnMercadoLibre {
   background-color: #ffe500;
   border-radius: 5px;
