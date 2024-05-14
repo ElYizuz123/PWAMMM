@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 
 const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
     const { register, handleSubmit, setValue } = useForm()
     const [pregunta, setPregunta] = useState(null)
+    const [isLoading, setIsLoading] = useState(null)
 
     //Ingresar la información por defecto
     const setForm = (data) => {
@@ -20,7 +22,8 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
 
     //Actualizar la pregunta
     const handleOnSubmit = async (data) => {
-        console.log(data)
+
+        setIsLoading(true)
         const res = await fetch('/api/preguntas/update_pregunta', {
             method: 'POST',
             body: JSON.stringify(data)
@@ -38,6 +41,7 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
                     clearInterval(timerInterval);
                 }
             }).then(() => {
+                onClose()
             });
         }
         else {
@@ -47,6 +51,7 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
                 text: "Algo salió mal!",
             });
         }
+        setIsLoading(false)
     }
 
     //Leer las preguntas de la base de datos
@@ -113,7 +118,16 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
                                         <button
                                             type='submit'
                                             className='bg-[#98E47D] w-48 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5'
-                                        >Guardar cambios
+                                        >
+                                            {!isLoading &&
+                                                "Guardar cambios"
+                                            }
+                                            {
+                                                isLoading &&
+                                                <div className='flex justify-center'>
+                                                    <AiOutlineLoading3Quarters className='animate-spin' />
+                                                </div>
+                                            }
                                         </button>
                                     </div>
                                 </form>

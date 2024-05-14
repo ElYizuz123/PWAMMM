@@ -3,21 +3,17 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { contexto } from '../UpdateProvider'
 import Swal from 'sweetalert2'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
-const randomHexa = () => {
-    const randomNumber = Math.floor(Math.random() * 65536);
-    const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
-    return hexadecimalValue
-}
 
 const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
 
     const { update, setUpdate } = useContext(contexto)
     const [ubicacion, setUbicacion] = useState(null)
     const [defaultData, setDefaultData] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, setValue } = useForm()
     const fileInputRef = useRef(null)
-    const hexa = randomHexa()
 
     //Datos por default en la ventana de edición
     const setForm = (data) => {
@@ -39,10 +35,6 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
         setValue('pagina', JSON.parse(data.json_marca).pagina)
     }
 
-    //Ingresar la qrImagen al input del form
-    const handleFileButton = () => {
-        fileInputRef.current.click();
-    }
 
     //Ingresar ubicación
     const opcionDefault = () => {
@@ -55,6 +47,7 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
 
     //Modificar imagen
     const handleOnSubmit = async (data) => {
+        setIsLoading(true)
         console.log("La imagen no cambia")
         console.log(data)
         const res = await fetch('/api/ubicaciones/update_ubicacion', {
@@ -76,6 +69,7 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
                 timerProgressBar: true,
                 confirmButtonText: "Ok",
             })
+            onClose()
         } else {
             Swal.fire({
                 icon: "error",
@@ -83,6 +77,7 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
                 text: "Algo salió mal!",
             });
         }
+        setIsLoading(false)
     }
 
 
@@ -193,7 +188,16 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
                                     <button
                                         type='submit'
                                         className='bg-[#98E47D] w-56 h-10 text-2xl font-bold rounded-xl mr-3 mt-6'
-                                    >Guardar cambios
+                                    >
+                                        {!isLoading &&
+                                            "Guardar cambios"
+                                        }
+                                        {
+                                            isLoading &&
+                                            <div className='flex justify-center'>
+                                                <AiOutlineLoading3Quarters className='animate-spin'/>
+                                            </div>
+                                        }
                                     </button>
                                 </div>
                             </form>
