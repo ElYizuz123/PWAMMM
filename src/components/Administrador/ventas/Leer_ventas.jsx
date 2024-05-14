@@ -1,13 +1,15 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import VerVentas from './VerVentas'
 import DetallesCliente from './DetallesCliente'
+import Swal from 'sweetalert2'
+import { contexto } from '../UpdateProvider'
 
-const Leer_ventas = ({ ventas }) => {
+const Leer_ventas = () => {
     const [orden, setOrden] = useState("reciente")
-    const [ventasOr, setVentasOr] = useState(ventas)
+    const [ventasOr, setVentasOr] = useState(null)
     const [detallesIsOpen, setDetallesIsOpen] = useState(false)
     const [detallesCliente, setDetallesCliente] = useState(false)
     const [idVenta, setIdVenta] = useState(null)
@@ -32,6 +34,16 @@ const Leer_ventas = ({ ventas }) => {
             msOverflowStyle: 'none'
         },
     };
+
+    const readData = async () =>{
+        const res = await fetch('/api/ventas/read_ventas')
+        const resJSOn = await res.json()
+        setVentasOr(resJSOn)
+    }
+
+    useEffect(()=>{
+        readData()
+    },[])
 
     //Cerrar modal de detalles
     const onClose = () => {
@@ -58,15 +70,51 @@ const Leer_ventas = ({ ventas }) => {
     //Cambiar orden de visualización de ventas
     const handleChange = (e) => {
         if (e.target.value == "antiguo") {
-            setVentasOr(ventas.reverse());
+            setVentasOr(ventasOr.reverse());
             setOrden("antiguo");
-            console.log(ventas);
+            console.log(ventasOr);
         }
         else {
             setOrden("reciente");
-            setVentasOr(ventas.reverse());
+            setVentasOr(ventasOr.reverse());
         }
     }
+
+    const changeStatus = async (stat, idVenta) => {
+        let data = {
+            statusA: stat == "Pendiente" ? "Atendida":"Pendiente",
+            id: idVenta
+        }
+        const res = await fetch('/api/ventas/change_status', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+        const resJSON = await res.json()
+        if (resJSON == "Exito") {
+            let timerInterval;
+            Swal.fire({
+                title: "Status cambiado!",
+                icon: "success",
+                timer: 2000,
+                timerProgressBar: true,
+                confirmButtonText: "Ok",
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then(() => {
+                readData()
+            });
+        }
+        else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo salió mal!",
+            });
+        }
+
+    }
+
     return (
         <div className='flex justify-center overflow-y-auto w-10/12'>
 
@@ -94,8 +142,8 @@ const Leer_ventas = ({ ventas }) => {
                 <table className='table-auto font-bold w-full'>
                     <thead>
                         <tr>
-                            <th colSpan="6">
-                            <hr className=' border border-black w-full' />
+                            <th colSpan="7">
+                                <hr className=' border border-black w-full' />
                             </th>
                         </tr>
                         <tr>
@@ -105,16 +153,17 @@ const Leer_ventas = ({ ventas }) => {
                             <th className='px-4 py-2 text-left'>Detalles</th>
                             <th className='px-4 py-2 text-left'>Cliente</th>
                             <th className='px-4 py-2 text-left'>Status</th>
+                            <th className='px-4 py-2 text-left'>Revisada</th>
                         </tr>
                         <tr>
-                            <th colSpan="6">
-                            <hr className=' border border-[#F70073] w-full' />
+                            <th colSpan="7">
+                                <hr className=' border border-[#F70073] w-full' />
                             </th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
-                        
+
                         {ventasOr &&
                             ventasOr.map((venta) => (
                                 <tr key={venta.id_venta}>
@@ -129,11 +178,17 @@ const Leer_ventas = ({ ventas }) => {
                                     </td>
 
                                     <td className='px-4 py-2 border-b border-gray-500'>{venta.status}</td>
+                                    <td className='px-4 py-2 border-b border-gray-500'>
+                                        <div className='flex justify-center'>
+                                            <input type='checkbox' checked={venta.status == "Pendiente" ? false:true} className='w-5 h-5 border-b border-gray-500 flex' onClick={() => changeStatus(venta.status, venta.id_venta)} />
+                                        </div>
+                                    </td>
+
                                 </tr>
-                                
-                                
+
+
                             ))}
-                            
+
                     </tbody>
                 </table>
             </div>
