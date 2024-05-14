@@ -4,7 +4,6 @@ import AcompañamientoCarrito from "@/components/tienda/AcompañamientoCarrito";
 import { ProductContext } from "@/context/ProductContext";
 import Link from "next/link";
 
-
 const IrFormulario = () => {
   const { productos, total } = useContext(ProductContext);
   const totalProductos = productos.reduce(

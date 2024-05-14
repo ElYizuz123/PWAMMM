@@ -12,6 +12,8 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { AdjustmentsIcon } from "@heroicons/react/solid";
 import { motion, AnimatePresence } from "framer-motion";
+import { CantidadContext } from "@/context/CantidadContext";
+import { useContext } from "react";
 
 function MostrarProductos({
   selectedMarca,
@@ -20,6 +22,8 @@ function MostrarProductos({
   setSelectedMarcaNombre,
   marcas,
 }) {
+  const { stock, setStock } = useContext(CantidadContext);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(10);
 
@@ -50,6 +54,22 @@ function MostrarProductos({
       const responseAcompanamientos = await fetch("/api/read_acompanamientos");
       const dataAcompanamientos = await responseAcompanamientos.json();
 
+      if (Object.keys(stock).length === 0) {
+        // Reducir botellas para crear un stock inicial
+      const stockBotellas = dataBotellas.reduce((acc, botella) => {
+        acc[botella.producto.id_producto] = botella.producto.cantidad; // Asume que cada botella tiene un 'id' y una 'cantidad'
+        return acc;
+      }, {});
+
+      // Reducir acompañamientos para agregar al stock inicial
+      const stockAcompanamientos = dataAcompanamientos.reduce((acc, acompanamiento) => {
+        acc[acompanamiento.producto.id_producto] = acompanamiento.producto.cantidad; // Asume que cada acompañamiento tiene un 'id' y una 'cantidad'
+        return acc;
+      }, {});
+
+      // Combinar ambos stocks en uno solo y actualizar el estado
+      setStock({ ...stockBotellas, ...stockAcompanamientos });
+      }
       setBotellas(dataBotellas);
       setAcompanamientos(dataAcompanamientos);
     };
@@ -418,7 +438,7 @@ function MostrarProductos({
       </div>
 
       {/* LLAMA COMPOTENENTE TARJETA ENVIANDO LA INFORMACIÓN OBTENIDA EN API  */}
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-3 justify-center">
         {currentBotellas.map((botella) => (
           <Tarjeta_Botella
             key={botella.id_producto}
@@ -431,7 +451,8 @@ function MostrarProductos({
             ml={botella.ml}
             imagen={botella.producto.fotoUri}
             mercadoLibre={botella.producto?.mercadoLibre || "NULL"}
-            cantidad={botella.producto.cantidad}
+            cantidad={stock[botella.producto.id_producto]}
+            cantidadOficial={botella.producto.cantidad}
             tipo={1}
           />
         ))}
@@ -445,7 +466,8 @@ function MostrarProductos({
             gr={acompanamiento.gr}
             imagen={acompanamiento.producto.fotoUri}
             mercadoLibre={acompanamiento.producto?.mercadoLibre || "NULL"}
-            cantidad={acompanamiento.producto.cantidad}
+            cantidad={stock[acompanamiento.producto.id_producto]}
+            cantidadOficial={acompanamiento.producto.cantidad}
             tipo={2}
           />
         ))}

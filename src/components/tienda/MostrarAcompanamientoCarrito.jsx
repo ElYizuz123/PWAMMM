@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { PlusIcon, CheckIcon, RefreshIcon } from "@heroicons/react/solid"; // o @heroicons/react/solid para un estilo lleno
+import { CantidadContext } from "@/context/CantidadContext";
 
 const MostrarAcompanamientoCarrito = ({
   id_producto,
@@ -17,6 +18,7 @@ const MostrarAcompanamientoCarrito = ({
 }) => {
   const [buttonState, setButtonState] = useState("idle");
   const { addProductos } = useContext(ProductContext);
+  const { decrementStock } = useContext(CantidadContext);
 
   const handleAddToCart = () => {
     setButtonState("loading");
@@ -33,6 +35,7 @@ const MostrarAcompanamientoCarrito = ({
       };
 
       addProductos(newProduct);
+      decrementStock(id_producto, 1)
 
       setTimeout(() => {
         setButtonState("idle");

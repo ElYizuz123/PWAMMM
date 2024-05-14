@@ -21,6 +21,7 @@ const Ficha_Botella = ({
   ml,
   agave,
   cantidad,
+  cantidadOficial,
   alcohol,
 }) => {
   return (
@@ -132,7 +133,7 @@ const Ficha_Botella = ({
                 <p className=" text-xl  text-black font-light mt-2">
                   Existencia:
                   <span className=" ml-3 text-sm text-[#F70073] font-light">
-                    {cantidad}
+                    {cantidadOficial}
                   </span>
                 </p>
                 {/*botones*/}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ProductContext } from "@/context/ProductContext";
 import { useContext } from "react";
+import { CantidadContext } from "@/context/CantidadContext";
 import Image from "next/image";
 
 const ProductoCarrito = ({
@@ -15,18 +16,26 @@ const ProductoCarrito = ({
   cantidad,
   subtotal,
 }) => {
+  const { decrementStock, stock } = useContext(CantidadContext);
   const [quantity, setQuantity] = useState(cantidad);
   const { updateQuantity, deleteProduct } = useContext(ProductContext);
 
+  let maxStock = stock[id_producto];
+
   // FUNCIÓN PARA INCREMENTAR LA CANTIDAD DE PRODUCTOS
   const incrementQuantity = () => {
-    const newQuantity = quantity + 1;
-    updateQuantityAndTotal(newQuantity, "SUMA");
+    if (quantity < (maxStock+cantidad)) {
+      const newQuantity = quantity + 1;
+      updateQuantityAndTotal(newQuantity, "SUMA");
+      decrementStock(id_producto, 1);
+      maxStock = stock[id_producto];
+    }
   };
   // FUNCIÓN PARA DECREMENTAR LA CANTIDAD DE PRODUCTOS
   const decrementQuantity = () => {
     const newQuantity = Math.max(1, quantity - 1);
     updateQuantityAndTotal(newQuantity, "RESTA");
+    //incrementStock(id_producto, 1);
   };
 
   //EDITA LA CANTIDAD DEL PRODUCTO A COMPRAR

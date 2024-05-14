@@ -4,6 +4,7 @@ import { ProductContext } from "@/context/ProductContext";
 import { CheckCircleIcon, RefreshIcon } from "@heroicons/react/solid";
 import { useContext, useState } from "react";
 import Link from "next/link";
+import { CantidadContext } from "@/context/CantidadContext";
 
 const Contador = ({
   id_producto,
@@ -11,11 +12,10 @@ const Contador = ({
   marca,
   precio,
   imagen,
-
   ml,
-
   cantidad2,
 }) => {
+  const { decrementStock } = useContext(CantidadContext);
   const [count, setCount] = useState(1);
   const [buttonState, setButtonState] = useState("idle");
   const maxCount = cantidad2;
@@ -44,6 +44,8 @@ const Contador = ({
       };
 
       addProductos(newProduct);
+      decrementStock(id_producto, count);
+      setCount(1);
 
       setTimeout(() => {
         setButtonState("idle");

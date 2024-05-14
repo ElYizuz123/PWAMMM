@@ -11,7 +11,12 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   ExclamationCircleIcon,
-} from "@heroicons/react/outline";
+  IdentificationIcon,
+  LocationMarkerIcon,
+  CreditCardIcon,
+  CashIcon,
+  CurrencyDollarIcon,
+} from "@heroicons/react/solid";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -188,23 +193,54 @@ function Formulario() {
   }, [isDataReadyForApi]);
 
   return (
-    <div className="relative my-[150px]">
+    <div className="relative my-[160px]">
       {/* Sección del título */}
 
       <div id="datos-personales" className="border-b-8 border-[#F70073] py-8">
         <div className={berkshire_swash.className}>
-          <h1 className="text-5xl font-bold text-center">Finalizar Compra</h1>
+          <h1 className="text-4xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-5xl font-bold text-center">
+            Finalizar Compra
+          </h1>
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div class="datos-personales-container">
+        <div
+          className="datos-personales-container bg-white p-4 mt-4 rounded-lg transition-all duration-300 ease-in-out
+          px-4 sm:px-4 md:px-4 lg:px-16 xl:px-16 2xl:px-16
+          mx-8 sm:mx-8 md:mx-8 lg:mx-16 xl:mx-16 2xl:mx-16"
+        >
           {/* Botón para desplegar el formulario */}
-          <div class="header-container" onClick={toggleFormPersonales}>
-            <h2 className="text-3xl font-semibold">DATOS PERSONALES</h2>
+          <div
+            className="header-container flex items-center justify-between w-full "
+            onClick={toggleFormPersonales}
+          >
+            <div className="flex items-center space-x-2">
+              <IdentificationIcon
+                className="iconPersonalForm 
+              w-5 sm:w-5 md:w-5 lg:w-6 xl:w-6 2xl:w-6
+              h-5 sm:h-5 md:h-5 lg:h-6 xl:h-6 2xl:h-6"
+              />
+              <span
+                className="
+              font-semibold
+              text-lg sm:text-lg md:text-lg 
+              lg:text-xl xl:text-xl 2xl:text-xl"
+              >
+                DATOS PERSONALES
+              </span>
+            </div>
             {isFormVisiblePersonales ? (
-              <ChevronUpIcon className="h-8 w-8 text-pink-700" />
+              <ChevronUpIcon
+                className="text-pink-700
+              w-6 sm:w-6 md:w-6 lg:w-8 xl:text-w-8 2xl:w-8
+              h-6 sm:h-6 md:h-6 lg:h-8 xl:text-h-8 2xl:h-8"
+              />
             ) : (
-              <ChevronDownIcon className="h-8 w-8 text-pink-700" />
+              <ChevronDownIcon
+                className="text-pink-700
+              w-7 sm:w-7 md:w-7 lg:w-8 xl:text-w-8 2xl:w-8
+              h-7 sm:h-7 md:h-7 lg:h-8 xl:text-h-8 2xl:h-8"
+              />
             )}
           </div>
 
@@ -246,30 +282,41 @@ function Formulario() {
                         type="text"
                         name="nombre"
                         id="nombre"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("nombre")
-                          ? "border-[#F70073]"
-                          : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full ext-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        appearance-none dark:text-black 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("nombre")
+                            ? "border-[#F70073]"
+                            : "border-[#C1D128]"
+                        }`}
                         placeholder=" "
                       />
 
                       <label
                         htmlFor="nombre"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("nombre")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl
+                        ${
+                          watch("nombre")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Nombre
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
                       {errors.nombre && (
-                        <p className="text-red-600">{errors.nombre.message}</p>
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
+                          {errors.nombre.message}
+                        </p>
                       )}
                     </div>
 
@@ -290,29 +337,37 @@ function Formulario() {
                         type="text"
                         name="apellidos"
                         id="apellidos"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("apellidos")
-                          ? "border-[#F70073]"
-                          : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        appearance-none dark:text-black 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("apellidos")
+                            ? "border-[#F70073]"
+                            : "border-[#C1D128]"
+                        }`}
                         placeholder=" "
                       />
                       <label
                         htmlFor="apellidos"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("apellidos")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl${
+                          watch("apellidos")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Apellidos
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
                       {errors.apellidos && (
-                        <p className="text-red-600">
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
                           {errors.apellidos.message}
                         </p>
                       )}
@@ -332,8 +387,10 @@ function Formulario() {
                       type="text"
                       name="empresa"
                       id="empresa"
-                      className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                      className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
                       appearance-none dark:text-black 
+                      text-sm sm:text-sm md:text-sm
+                      lg:text-lg xl:text-lg 2xl:text-lg
                       focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
                         watch("empresa")
                           ? "border-[#F70073]"
@@ -343,20 +400,31 @@ function Formulario() {
                     />
                     <label
                       htmlFor="empresa"
-                      className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
+                      className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] 
+                      text-base sm:text-base md:text-base
+                      lg:text-xl xl:text-xl 2xl:text-xl${
                         watch("empresa")
                           ? "text-[#F70073] dark:text-[#F70073]"
                           : "text-gray-500 dark:text-gray-400"
                       } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                     >
-                      Nombre de la empresa
-                      <p className=" text-xl px-0 text-[#f7a3ca] ml-2">
+                      Empresa
+                      <p
+                        className="text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl px-0 text-[#f7a3ca] ml-2"
+                      >
                         (Opcional)
                       </p>
                     </label>
                     {errors.empresa && (
-                      <p className="text-red-600">{errors.empresa.message}</p>
+                      <p
+                        className="text-red-600
+                      text-xs sm:text-xs md:text-xs
+                      lg:text-base xl:text-base 2xl:text-base"
+                      >
+                        {errors.empresa.message}
+                      </p>
                     )}
                   </div>
                   {/* DATOS PERSONALES telefono correo */}
@@ -375,29 +443,37 @@ function Formulario() {
                         pattern="[0-9]{10}"
                         name="telefono"
                         id="telefono"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("telefono")
-                          ? "border-[#F70073]"
-                          : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        appearance-none dark:text-black 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("telefono")
+                            ? "border-[#F70073]"
+                            : "border-[#C1D128]"
+                        }`}
                         placeholder=""
                       />
                       <label
                         htmlFor="telefono"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("telefono")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl${
+                          watch("telefono")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Teléfono
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
                       {errors.telefono && (
-                        <p className="text-red-600">
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
                           {errors.telefono.message}
                         </p>
                       )}
@@ -415,27 +491,39 @@ function Formulario() {
                         type="email"
                         name="email"
                         id="email"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("email") ? "border-[#F70073]" : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        appearance-none dark:text-black 
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("email")
+                            ? "border-[#F70073]"
+                            : "border-[#C1D128]"
+                        }`}
                         placeholder=" "
                       />
                       <label
                         htmlFor="email"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("email")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl${
+                          watch("email")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Correo
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
                       {errors.email && (
-                        <p className="text-red-600">{errors.email.message}</p>
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
+                          {errors.email.message}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -447,14 +535,42 @@ function Formulario() {
 
         {/* SEGUNDO FORMULARIO */}
 
-        <div class="datos-personales-container">
+        <div
+          className="datos-personales-container datos-personales-container bg-white p-4 mt-4 rounded-lg transition-all duration-300 ease-in-out
+          px-4 sm:px-4 md:px-4 lg:px-16 xl:px-16 2xl:px-16
+          mx-8 sm:mx-8 md:mx-8 lg:mx-16 xl:mx-16 2xl:mx-16"
+        >
           {/* Botón para desplegar el formulario */}
-          <div class="header-container" onClick={toggleFormDireccion}>
-            <h2 className="text-3xl font-semibold">DIRECCION</h2>
+          <div
+            className="header-container flex items-center justify-between w-full"
+            onClick={toggleFormDireccion}
+          >
+            <div className="flex items-center space-x-2">
+              <LocationMarkerIcon
+                className="iconDireccionForm 
+              w-5 sm:w-5 md:w-5 lg:w-6 xl:w-6 2xl:w-6
+              h-5 sm:h-5 md:h-5 lg:h-6 xl:h-6 2xl:h-6"
+              />
+              <span
+                className="font-semibold
+              text-lg sm:text-lg md:text-lg 
+              lg:text-xl xl:text-xl 2xl:text-xl"
+              >
+                DIRECCION
+              </span>
+            </div>
             {isFormVisibleDireccion ? (
-              <ChevronUpIcon className="h-8 w-8 text-pink-700" />
+              <ChevronUpIcon
+                className="text-pink-700
+              w-6 sm:w-6 md:w-6 lg:w-8 xl:text-w-8 2xl:w-8
+              h-6 sm:h-6 md:h-6 lg:h-8 xl:text-h-8 2xl:h-8"
+              />
             ) : (
-              <ChevronDownIcon className="h-8 w-8 text-pink-700" />
+              <ChevronDownIcon
+                className="text-pink-700
+              w-7 sm:w-7 md:w-7 lg:w-8 xl:text-w-8 2xl:w-8
+              h-7 sm:h-7 md:h-7 lg:h-8 xl:text-h-8 2xl:h-8"
+              />
             )}
           </div>
 
@@ -492,27 +608,39 @@ function Formulario() {
                         type="text"
                         name="calle"
                         id="calle"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("calle") ? "border-[#F70073]" : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        appearance-none dark:text-black 
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("calle")
+                            ? "border-[#F70073]"
+                            : "border-[#C1D128]"
+                        }`}
                         placeholder=" "
                       />
                       <label
                         htmlFor="calle"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("calle")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
+                          watch("calle")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Calle
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
                       {errors.calle && (
-                        <p className="text-red-600">{errors.calle.message}</p>
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
+                          {errors.calle.message}
+                        </p>
                       )}
                     </div>
 
@@ -529,29 +657,39 @@ function Formulario() {
                         type="text"
                         name="colonia"
                         id="colonia"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("colonia")
-                          ? "border-[#F70073]"
-                          : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        appearance-none dark:text-black 
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("colonia")
+                            ? "border-[#F70073]"
+                            : "border-[#C1D128]"
+                        }`}
                         placeholder=" "
                       />
                       <label
                         htmlFor="colonia"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("colonia")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
+                          watch("colonia")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Colonia
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
                       {errors.colonia && (
-                        <p className="text-red-600">{errors.colonia.message}</p>
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
+                          {errors.colonia.message}
+                        </p>
                       )}
                     </div>
 
@@ -572,29 +710,39 @@ function Formulario() {
                         type="text"
                         name="ciudad"
                         id="ciudad"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("ciudad")
-                          ? "border-[#F70073]"
-                          : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        appearance-none dark:text-black 
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("ciudad")
+                            ? "border-[#F70073]"
+                            : "border-[#C1D128]"
+                        }`}
                         placeholder=" "
                       />
                       <label
                         htmlFor="ciudad"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("ciudad")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
+                          watch("ciudad")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Ciudad
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
                       {errors.ciudad && (
-                        <p className="text-red-600">{errors.ciudad.message}</p>
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
+                          {errors.ciudad.message}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -613,27 +761,37 @@ function Formulario() {
                         type="text"
                         name="cp"
                         id="cp"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("cp") ? "border-[#F70073]" : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        appearance-none dark:text-black 
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("cp") ? "border-[#F70073]" : "border-[#C1D128]"
+                        }`}
                         placeholder=" "
                       />
                       <label
                         htmlFor="cp"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("cp")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
+                          watch("cp")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Código postal
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
                       {errors.cp && (
-                        <p className="text-red-600">{errors.cp.message}</p>
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
+                          {errors.cp.message}
+                        </p>
                       )}
                     </div>
                     <div className="relative z-0 mb-5 mt-4 group">
@@ -649,29 +807,39 @@ function Formulario() {
                         type="text"
                         name="num_ext"
                         id="num_ext"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("num_ext")
-                          ? "border-[#F70073]"
-                          : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        appearance-none dark:text-black 
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("num_ext")
+                            ? "border-[#F70073]"
+                            : "border-[#C1D128]"
+                        }`}
                         placeholder=" "
                       />
                       <label
                         htmlFor="num_ext"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("num_ext")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
+                          watch("num_ext")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Núm.Exterior
-                        <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
+                        <p className="text-xl px-0 text-[#f7a3ca]  ">*</p>
                       </label>
                       {errors.num_ext && (
-                        <p className="text-red-600">{errors.num_ext.message}</p>
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
+                          {errors.num_ext.message}
+                        </p>
                       )}
                     </div>
 
@@ -687,31 +855,44 @@ function Formulario() {
                         type="text"
                         name="num_int"
                         id="num_int"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("num_int")
-                          ? "border-[#F70073]"
-                          : "border-[#C1D128]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        appearance-none dark:text-black 
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("num_int")
+                            ? "border-[#F70073]"
+                            : "border-[#C1D128]"
+                        }`}
                         placeholder=" "
                       />
                       <label
                         htmlFor="num_Int"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("num_int")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-gray-500 dark:text-gray-400"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
+                          watch("num_int")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-gray-500 dark:text-gray-400"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Núm.Interior
-                        <p className=" text-xl px-0 text-[#f7a3ca] ml-2">
+                        <p
+                          className="text-base sm:text-base md:text-base
+                          lg:text-xl xl:text-xl 2xl:text-xl px-0 text-[#f7a3ca] ml-2"
+                        >
                           (Opcional)
                         </p>
                       </label>
                       {errors.num_int && (
-                        <p className="text-red-600">{errors.num_int.message}</p>
+                        <p
+                          className="text-red-600
+                        text-xs sm:text-xs md:text-xs
+                        lg:text-base xl:text-base 2xl:text-base"
+                        >
+                          {errors.num_int.message}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -721,13 +902,15 @@ function Formulario() {
                       <select
                         {...register("region")}
                         defaultValue="Michoacán"
-                        className={`py-3 mt-4 px-0 w-full text-lg text-[#F70073] bg-transparent border-0 border-b-[3px] 
-                      appearance-none dark:text-black 
-                      focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
-                        watch("region")
-                          ? "border-[#F70073]"
-                          : "border-[#F70073]"
-                      }`}
+                        className={`py-3 mt-4 px-0 w-full text-[#F70073] bg-transparent border-0 border-b-[3px] 
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        appearance-none dark:text-black 
+                        focus:outline-none focus:ring-0 focus:border-[#F70073] peer ${
+                          watch("region")
+                            ? "border-[#F70073]"
+                            : "border-[#F70073]"
+                        }`}
                       >
                         {estados.map((estado, index) => (
                           <option key={index} value={estado}>
@@ -737,12 +920,14 @@ function Formulario() {
                       </select>
                       <label
                         for="region"
-                        className={`flex peer-focus:font-medium absolute text-xl font-semibold text-[#F70073] dark:text-[#F70073] duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
-                        watch("region")
-                          ? "text-[#F70073] dark:text-[#F70073]"
-                          : "text-[#F70073] dark:text-[#F70073]"
-                      } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`flex peer-focus:font-medium absolute font-semibold text-[#F70073] dark:text-[#F70073] duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] ${
+                          watch("region")
+                            ? "text-[#F70073] dark:text-[#F70073]"
+                            : "text-[#F70073] dark:text-[#F70073]"
+                        } peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Region/Provincia
                         <p className=" text-xl px-0 text-[#f7a3ca]  ">*</p>
@@ -757,8 +942,10 @@ function Formulario() {
                         type="text"
                         name="pais"
                         id="pais"
-                        className="block py-3 mt-4 px-0 w-full font-semibold text-#F70073 text-lg  bg-transparent border-0 border-b-[3px]
-                    border-[#F70073] appearance-none dark:text-black dark:border-[#F70073]  focus:outline-none focus:ring-0 focus:border-[#F70073] peer"
+                        className="block py-3 mt-4 px-0 w-full font-semibold text-#F70073 bg-transparent border-0 border-b-[3px]
+                        text-sm sm:text-sm md:text-sm
+                        lg:text-lg xl:text-lg 2xl:text-lg
+                        border-[#F70073] appearance-none dark:text-black dark:border-[#F70073]  focus:outline-none focus:ring-0 focus:border-[#F70073] peer"
                         placeholder=" "
                         defaultValue="México"
                         readOnly
@@ -766,8 +953,10 @@ function Formulario() {
                       />
                       <label
                         htmlFor="pais"
-                        className="flex     peer-focus:font-medium absolute text-xl font-semibold text-[#F70073] dark:text-[#F70073] duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
-                      origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] peer-focus:dark:text-[#F70073] 
+                        className="flex peer-focus:font-medium absolute font-semibold text-[#F70073] dark:text-[#F70073] duration-300 transform -translate-y-6 scale-75 top-3 -z-10 
+                        text-base sm:text-base md:text-base
+                        lg:text-xl xl:text-xl 2xl:text-xl
+                        origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#F70073] peer-focus:dark:text-[#F70073] 
                        peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                       >
                         País
@@ -781,36 +970,40 @@ function Formulario() {
           </div>
         </div>
 
-        <div className="bg-white shadow-2xl shadow-[#F70073] py-4 px-[43px] flex flex-col mt-4 mx-16 rounded-2xl justify-between items-center">
+        <div
+          className="bg-white shadow-2xl shadow-[#F70073] py-4 flex flex-col mt-4 rounded-2xl justify-between items-center
+          px-4 sm:px-4 md:px-4 lg:px-16 xl:px-16 2xl:px-16
+          mx-8 sm:mx-8 md:mx-8 lg:mx-16 xl:mx-16 2xl:mx-16"
+        >
           {/* Botón para desplegar el formulario */}
-          <div className="p-4 ">
-            <h2 className="text-3xl font-semibold ">DETALLES DE PAGO</h2>
+          <div className="flex items-center space-x-2 py-4">
+            <CreditCardIcon
+              className="iconDireccionForm 
+              w-5 sm:w-5 md:w-5 lg:w-6 xl:w-6 2xl:w-6
+              h-5 sm:h-5 md:h-5 lg:h-6 xl:h-6 2xl:h-6"
+            />
+            <span
+              className="
+              font-semibold
+              text-lg sm:text-lg md:text-lg 
+              lg:text-xl xl:text-xl 2xl:text-xl"
+            >
+              DETALLES DE PAGO
+            </span>
           </div>
+
           <div>
             <div className="mt-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* Columna de productos */}
                 <div>
-                  <p className="font-bold text-[#F70073] text-2xl text-center">
-                    FORMA DE PAGO
-                  </p>
-                  {/* Columna de forma de pago */}
-                  <div className="px-[17px]">
-                    {/* Se llama a forma pago. Mandando el triggerSubmit y le digo que va activar */}
-                    <FormaPago
-                      transferencia={transferencia}
-                      setTransferencia={setTransferencia}
-                      paypal={paypal}
-                      setPaypal={setPaypal}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-[#F70073] text-2xl text-center">
+                  <p className="font-bold text-[#F70073] px-4
+                    text-base sm:text-base md:text-base 
+                    lg:text-lg xl:text-lg 2xl:text-lg
+                    text-center">
                     PRODUCTOS
                   </p>
 
-                  <div className="px-[17px]">
+                  <div className="px-4">
                     {productos.map((producto) => (
                       <ProductosPago
                         key={producto.id_producto}
@@ -823,6 +1016,28 @@ function Formulario() {
                         cantidad={producto.cantidad}
                       />
                     ))}
+                  </div>
+                </div>
+                {/* Columna de productos */}
+                <div>
+                  <p
+                    className="px-4
+                    font-bold text-[#F70073]
+                    text-base sm:text-base md:text-base 
+                    lg:text-lg xl:text-lg 2xl:text-lg
+                    text-center"
+                  >
+                    FORMA DE PAGO
+                  </p>
+                  {/* Columna de forma de pago */}
+                  <div>
+                    {/* Se llama a forma pago. Mandando el triggerSubmit y le digo que va activar */}
+                    <FormaPago
+                      transferencia={transferencia}
+                      setTransferencia={setTransferencia}
+                      paypal={paypal}
+                      setPaypal={setPaypal}
+                    />
                   </div>
                 </div>
               </div>

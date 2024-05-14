@@ -15,6 +15,7 @@ const Ficha_Acompañamiento = ({
   mercadoLibre,
   descripcion,
   cantidad,
+  cantidadOficial
 }) => {
   return (
     <div>
@@ -91,7 +92,7 @@ const Ficha_Acompañamiento = ({
                 <p className=" text-xl  text-black font-light mt-2">
                   Existencia:
                   <span className=" ml-3 text-xl text-[#F70073] font-light">
-                    {cantidad}
+                    {cantidadOficial}
                   </span>
                 </p>
 
