@@ -54,13 +54,13 @@ const Promociones = () => {
   return (
 
     <div className="h-screen flex flex-col lg:flex-row ">
-      <div className="lg:w-1/2 lg:bg-transparent bg-white justify-center items-center -z-0 "  ref={ref}>
-      <motion.div 
-            className={berkshire.className}
-            initial="hidden"
-            animate={controls}
-            variants={titleVariants}
-          >
+      <div className="lg:w-1/2 lg:bg-transparent bg-white justify-center items-center -z-0 " ref={ref}>
+        <motion.div
+          className={berkshire.className}
+          initial="hidden"
+          animate={controls}
+          variants={titleVariants}
+        >
           <p className="text-[#f70073] text-4xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-7xl mt-20  text-center ">{'"'}Siente el alma de México</p>
           <p className="text-black text-4xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-7xl  text-center ">en tu paladar{'"'}</p>
           <div className="w-3/4 my-4 flex items-center justify-end ">
@@ -80,17 +80,25 @@ const Promociones = () => {
         </Link>
         <h2 className="text-xl text-[#f70073] mt-10 lg:ml-0 text-center font-extralight">Nuestro top 3 productos más vendidos: </h2>
         <div className="flex flex-wrap justify-center mt-5">
-          {ventasProductos.map((producto,index) => (
-            <div key={producto.id} className="m-4 p-4 bg-white bg-opacity-75 rounded-lg animate-bounce animate-thrice">
-
-              <Link
-                href="\tienda">
-                <h2 className="text-xl font-semibold">#{index +1 }. {producto.nombre}</h2>
-              
-              </Link>
-            </div>
-
-          ))}
+          {ventasProductos.map((producto, index) => {
+            let tamaño;
+            if (index === 0) {
+              tamaño = 'text-4xl';
+            } else if (index === 1) {
+              tamaño = 'text-2xl';
+            } else if (index === 2) {
+              tamaño = 'text-xl';
+            } else {
+              tamaño= 'text-lg'; 
+            }
+            return (
+              <div key={producto.id} className="m-4 p-4 bg-white bg-opacity-75 rounded-lg ">
+                <Link href="\tienda">
+                  <h2 className={`font-semibold ${tamaño} animate-jump-in animate-once`}>#{index + 1}. {producto.nombre}</h2>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -101,16 +109,16 @@ const Promociones = () => {
           alt="Promoción"
           width={1000}
           height={1000}
-          className="max-w-full max-h-full z-50 "
+          className="max-w-full max-h-full z-50 md:w-[700px] "
         />
 
- 
+
 
 
       </div>
 
     </div>
-    
+
   );
 
 
