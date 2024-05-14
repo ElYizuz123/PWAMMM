@@ -16,7 +16,11 @@ const PreguntasFrecuentes = () => {
     }, []);
 
     return (
-        <div className="flex justify-center items-start mb-10 w-full">
+        <div className="mb-10 w-full lg:ml-20">
+            <p className="lg:mb-2 mb-1
+          lg:text-6xl md:text-4xl text-3xl">
+                Preguntas Frecuentes</p>
+            <br />
 
             <div className="w-full h-full">
                 {preguntas &&
@@ -24,9 +28,9 @@ const PreguntasFrecuentes = () => {
                         <div key={pregunta_frecuente.id_pregunta_frecuente}
                             className="bg-[#FFFFFF] border border-black rounded-lg mb-5 flex shadow-lg w-11/12">
                             <div class="ml-5 mt-3 mb-5 mr-5 flex flex-col">
-                                <p className="lg:text-3xl text-2xl font-bold">-{pregunta_frecuente.pregunta}</p>
-                                    <br/>
-                                <p className="lg:text-2xl text-xl">R-{pregunta_frecuente.respuesta}</p>
+                                <p className="lg:text-3xl md:text-2xl text-xl font-bold">-{pregunta_frecuente.pregunta}</p>
+                                <br />
+                                <p className="lg:text-2xl md:text-xl text-lg">R-{pregunta_frecuente.respuesta}</p>
                             </div>
                         </div>
                     ))}

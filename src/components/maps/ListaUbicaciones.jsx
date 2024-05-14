@@ -67,6 +67,9 @@ function ListaUbicaciones() {
 
   return (
     <div className="lg:ml-20 w-full rounded-lg mb-10">
+      <p className="lg:mb-4 mb-2 lg:text-6xl md:text-4xl text-3xl">
+        Nuestras Tiendas
+      </p>
       <button className="mb-2 bg-white border-2 border-[#D60064] active:border-black h-full shadow-lg duration-0 active:text-[#D60064] p-2 flex items-center justify-between font-bold text-lg rounded-lg tracking-wider
         lg:w-[300px] sm:w-[250px] md:w-[250px] w-[250px]"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -93,7 +96,7 @@ function ListaUbicaciones() {
                   JSON.parse(ubicacion.json_marca).telefono,
                   JSON.parse(ubicacion.json_marca).pagina
                 )}>
-                <h3>{JSON.parse(ubicacion.json_marca).marca}</h3>
+                <p>{JSON.parse(ubicacion.json_marca).marca}</p>
               </div>
             ))}
         </div>

@@ -27,20 +27,19 @@ const MayorEdad = () => {
                     <div className="bg-[#F3E8E8BF] w-svw h-svh p-5 rounded-lg flex flex-col md:flex-row items-center justify-center sm:pb-32 gap-5">
                         <div className="flex justify-center md:order-2">
                             <div className="flex">
-                                <Image src={"/navbar/logo.png"} width={1000} height={1000} className="lg:w-[550px] md:w-[550px] sm:w-64 w-64" />
+                                <Image src={"/navbar/logo.png"} width={1000} height={1000} className="lg:w-[520px] md:w-[520px] sm:w-64 w-64" />
                             </div>
                         </div>
                         <div className="content-modal lg:w-2/4 lg:ml-5 lg:mr-5 lg:mb-2 md:ml-5 md:mr-5 md:mb-2 ml-1 mr-1 mb-2 md:order-1">
-                            <p className="lg:text-3xl md:lg:text-3xl text-2xl font-bold text-center">Verificación de edad</p>
-                            <p className="lg:text-2xl md:lg:text-2xl text-xl text-center mb-4">Nuestra prioridad son nuestros clientes, por lo que es importante verificar que seas mayor de edad</p>
-                            <p className="lg:text-3xl md:lg:text-3xl text-2xl text-center">¿Eres mayor de edad?</p>
+                            <p className="lg:text-4xl md:lg:text-3xl text-2xl font-bold text-center">Verificación de edad</p>
+                            <p className="lg:text-3xl md:lg:text-2xl text-xl text-center mb-4">Nuestra prioridad son nuestros clientes, por lo que es importante verificar que seas mayor de edad</p>
+                            <p className="lg:text-4xl md:lg:text-3xl text-2xl text-center">¿Eres mayor de edad?</p>
                             <div className='flex justify-center items-center mt-2'>
-                                <button id="btn-mayor" className="w-1/4 m-2 bg-[#D60064] border-2 border-black hover:bg-[#d60064c9] h-auto rounded-lg p-2 shadow-md">
+                                <button id="btn-mayor" className="w-1/4 m-2 btnMayor">
                                     <p className="text-white">Si</p>
                                 </button>
                                 <Link href={"https://www.google.com/"} className="w-1/4">
-                                    <button
-                                        className="w-full m-2 bg-[#D60064] border-2 border-black hover:bg-[#d60064c9] h-auto rounded-lg p-2 shadow-md">
+                                    <button className="w-full m-2 btnMayor">
                                         <p className="text-white">No</p>
                                     </button>
                                 </Link>

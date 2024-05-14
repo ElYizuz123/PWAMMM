@@ -13,27 +13,22 @@ function page() {
 
 
           {/* responsive hecho, a mejorar */}
-          {/* REDUCIR CÓDIGO JS AL HOOK FORM */}
+          {/* FORM DE CONTACTO */}
           <div className="w-full mb-16">
             <ContactoForm/>
           </div>
 
-          {/* PREGUNTAS FRECUENTES ESTAS YA JALA BONITO LO RESPONSIVE CREO */}
+          {/* PREGUNTAS FRECUENTES */}
           <div>
-            <p className="lg:mb-2 mb-1
-          lg:text-6xl md:text-4xl text-3xl">
-              Preguntas Frecuentes</p>
-            <br />
             <div className="flex items-center align-middle object-center">
               <PreguntasFrecuentes/>
             </div>
           </div>
 
 
-          {/* FALTA TODA RESPONSIVIDAD */}
+          {/* LISTA DESPLEGABLE CON UBICACIONES */}
           <div>
-          <p className="lg:mb-4 mb-2
-          lg:text-6xl md:text-4xl text-3xl">Nuestras Tiendas</p>
+          
           <ListaUbicaciones />
           </div>
 
