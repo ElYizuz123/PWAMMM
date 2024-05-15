@@ -109,7 +109,7 @@ const Promociones = () => {
           alt="Promoción"
           width={1000}
           height={1000}
-          className="max-w-full max-h-full z-50 md:w-[700px] "
+          className="max-w-full max-h-full z-50 md:w-[700px] -translate-y-6 md:translate-x-14"
         />
 
 
