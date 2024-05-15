@@ -46,6 +46,7 @@ export const CantidadProvider = ({ children }) => {
     <CantidadContext.Provider
       value={{
         decrementStock,
+        incrementStock,
         setStock,
         stock,
       }}

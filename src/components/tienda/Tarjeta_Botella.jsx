@@ -32,7 +32,7 @@ const Tarjeta_Botella = ({
   const { addProductos } = useContext(ProductContext);
   const [buttonState, setButtonState] = useState("idle");
   const [showTooltip, setShowTooltip] = useState(false);
-  const existencia = cantidad !== 0;
+  const existencia = cantidadOficial !== 0;
 
   const handleAddToCart = () => {
     setButtonState("loading");
@@ -91,7 +91,7 @@ const Tarjeta_Botella = ({
 
         <div className="flex justify-center items-center p-4 object-cover">
           <Image
-            src={`/productos/${imagen}`}
+            src={imagen}
             width={300}
             height={450}
             quality={100}

@@ -16,7 +16,6 @@ const Page = () => {
               className="w-full opacity-60 object-cover"
             />
           </div>
-
           <Categoria />
         </div>
       </div>
