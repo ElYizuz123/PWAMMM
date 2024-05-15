@@ -18,7 +18,7 @@ const Page = () => {
     
       
       <div
-        className=" w-full h-auto  p-10 fondo-pictograma-carrusel   ">
+        className=" w-full h-auto  fondo-pictograma-carrusel   ">
         <div className="w-11/12 ml-auto mr-auto  mb-10  ">
           
           <CarruselAsociadas /> {/*Carrusel de Asociadas*/}
