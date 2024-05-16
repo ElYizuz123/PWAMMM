@@ -91,7 +91,7 @@ const Tarjeta_Botella = ({
 
         <div className="flex justify-center items-center p-4 object-cover">
           <Image
-            src={`/productos/${imagen}`}
+            src={imagen}
             width={300}
             height={450}
             quality={100}

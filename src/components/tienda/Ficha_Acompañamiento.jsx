@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-import Contador from "./Contador";
+import Contador from "./BotonesFicha";
 import Image from "next/image";
-
 
 const Ficha_Acompañamiento = ({
   id_producto,
@@ -15,7 +14,7 @@ const Ficha_Acompañamiento = ({
   mercadoLibre,
   descripcion,
   cantidad,
-  cantidadOficial
+  cantidadOficial,
 }) => {
   return (
     <div>
@@ -35,7 +34,7 @@ const Ficha_Acompañamiento = ({
                md:mt-20 md:ml-2 md:translate-x-0 md:w-[200px]  md:h-[200px] 
                lg:-mt-24 lg:py-12  lg:translate-x-10  lg:h-[350px] 
                2xl:-mt-20 2xl:translate-x-28 2xl:h-[350px] 2xl:ml-10"
-              src={`/productos/${foto}`}
+              src={foto}
               width={170}
               height={320}
               quality={100}
@@ -170,6 +169,5 @@ const Ficha_Acompañamiento = ({
     </div>
   );
 };
-
 
 export default Ficha_Acompañamiento;
