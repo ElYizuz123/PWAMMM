@@ -33,6 +33,7 @@ const Promociones = () => {
     }
   }, [controls, inView]);
 
+  // Para cargar los productos más vendidos al montar el componente
   useEffect(() => {
     const readProductos = async () => {
       const res = await fetch('/api/graficas/productos')
@@ -41,7 +42,7 @@ const Promociones = () => {
     };
     readProductos();
   }, []);
-
+//Para la animación del titulo)desplazamiento de izq a derecha
   const titleVariants = {
     hidden: { x: -100, opacity: 0 },
     visible: {
@@ -67,6 +68,7 @@ const Promociones = () => {
             <hr className="m-0 border-t-4 border-black w-1/2" />
           </div>
         </motion.div>
+     
         <p className="text-black text-base sm:text-xl md:text-xl lg:text-xl 2xl:text-xl ml-10 sm:ml-36 md:ml-56 lg:ml-20 xl:ml-52 2xl:ml-52 text-justify mt-5 animate-fade-up animate-once">Nuestros productos son el reflejo de la </p>
         <p className="text-black text-base sm:text-xl md:text-xl lg:text-xl 2xl:text-xl ml-10 sm:ml-36 md:ml-56 lg:ml-20 xl:ml-52 2xl:ml-52 text-justify animate-fade-up animate-once ">riqueza y la diversidad de nuestra </p>
         <p className="text-black text-base sm:text-xl md:text-xl lg:text-xl 2xl:text-xl ml-10 sm:ml-36 md:ml-56 lg:ml-20 xl:ml-52 2xl:ml-52 text-justify animate-fade-up animate-once">cultura. Descubre nuestros productos </p>
@@ -80,7 +82,9 @@ const Promociones = () => {
         </Link>
         <h2 className="text-xl text-[#f70073] mt-10 lg:ml-0 text-center font-extralight">Nuestro top 3 productos más vendidos: </h2>
         <div className="flex flex-wrap justify-center mt-5">
+           
           {ventasProductos.map((producto, index) => {
+            //Segun el index(índice) le corresponde un tamaño para lograr el efecto de más grande a mas pequeño
             let tamaño;
             if (index === 0) {
               tamaño = 'text-4xl';
@@ -89,7 +93,7 @@ const Promociones = () => {
             } else if (index === 2) {
               tamaño = 'text-xl';
             } else {
-              tamaño= 'text-lg'; 
+              tamaño = 'text-lg';
             }
             return (
               <div key={producto.id} className="m-4 p-4 bg-white bg-opacity-75 rounded-lg ">
