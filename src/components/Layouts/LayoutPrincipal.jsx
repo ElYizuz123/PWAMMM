@@ -10,7 +10,7 @@ import Link from "next/link";
 import logo from "@/components/navbar/logo";
 import IconoMenu from "@/components/navbar/iconoMenu";
 import { Berkshire_Swash } from "next/font/google";
-import Carrito from "../tienda/Carrito";
+import Carrito from "../Tienda/Carrito/Carrito";
 import Footer from "../Footer/Footer";
 import { HiX, HiMenu } from "react-icons/hi";
 import { motion, useScroll, useTransform } from "framer-motion";

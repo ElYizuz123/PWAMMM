@@ -1,5 +1,5 @@
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
-import Categoria from "@/components/tienda/Categoria";
+import Categoria from "@/components/Tienda/Principal/Categoria";
 import Image from "next/image";
 
 const Page = () => {

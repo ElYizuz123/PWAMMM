@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ProductoCarrito from "@/components/tienda/ProductoCarrito";
+import ProductoCarrito from "@/components/Tienda/Carrito/ProductoCarrito";
 import { ProductContext } from "@/context/ProductContext";
 import { useContext } from "react";
 
