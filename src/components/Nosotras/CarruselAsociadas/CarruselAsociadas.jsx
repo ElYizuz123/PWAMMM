@@ -15,9 +15,10 @@ import "swiper/scss/pagination";
 import "swiper/scss/navigation";
 import "swiper/scss";
 import Link from "next/link";
+const CardCarrusel = React.lazy(() => import ('../CardCarruselA/CardCarrusel'))
 
 //import CardCarrusel from "../CardCarruselA/CardCarrusel";
-const CardCarrusel = React.lazy(() => import('../Nosotras/CardCarruselA/CardCarrusel'));
+//const CardCarrusel = React.lazy(() => import('./Nosotras/CardCarruselA/CardCarrusel'));
 
 const ruta = "/mezcaleras/";
 const tienda = "/tienda/";

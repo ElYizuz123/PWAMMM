@@ -11,7 +11,6 @@ import logo from "@/components/Layouts/navbar/logo";
 import IconoMenu from "@/components/Layouts/navbar/iconoMenu";
 import { Berkshire_Swash } from "next/font/google";
 import Carrito from "../Tienda/Carrito/Carrito";
-import Footer from "../Footer/Footer";
 import { HiX, HiMenu } from "react-icons/hi";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -19,6 +18,7 @@ import { usePathname } from "next/navigation";
 import MayorEdad from "../Inicio/MayorEdad/MayorEdad";
 import UsoCookies from "../Inicio/UsoCookies/UsoCookies";
 import { CantidadProvider } from "@/context/CantidadContext";
+import Footer from "./Footer/Footer";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
