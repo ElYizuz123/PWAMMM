@@ -15,7 +15,7 @@ function Page() {
     return (
         <LayoutPrincipal>
             <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
-            <div className="mt-40 h-max relative w-full overflow-x-hidden">
+            <div className="mt-32 lg:mt-32 md:mt-28 sm:mt-20 h-max relative w-full overflow-x-hidden">
 
             <div className={berkshire.className}>
                 <p className="text-6xl pb-6 -tracking-tighter text-center" >Galería</p>
