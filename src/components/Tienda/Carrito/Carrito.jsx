@@ -10,6 +10,7 @@ import { MdRemoveShoppingCart } from "react-icons/md";
 import { EmojiSadIcon } from "@heroicons/react/outline";
 import { CantidadContext } from "@/context/CantidadContext";
 
+
 const Carrito = () => {
   const { productos, total, cartCountAnimation, deleteProduct } = useContext(ProductContext);
   const { incrementStock } = useContext(CantidadContext);
@@ -26,8 +27,8 @@ const Carrito = () => {
       <button onClick={() => setIsCartVisible(!isCartVisible)}>
         <div className="fixed bottom-4 right-4 flex items-center justify-center w-16 h-16 bg-[#F70073] rounded-full z-40 hover:scale-110 transition transform duration-300 ease-in-out">
           <div className="relative flex justify-center items-center">
-            <img src="\emoticons\carrito.png" className="z-10 object-cover" />
-
+            
+            <FaShoppingCart className="h-6 w-6 text-white z-10"/>
             <span
               className={`absolute -top-5 -right-5 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gray-800 rounded-full z-20 ${cartCountAnimation}`}
             >

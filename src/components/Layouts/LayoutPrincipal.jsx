@@ -8,7 +8,6 @@ import { BsImages } from "react-icons/bs";
 import { MdFace3 } from "react-icons/md";
 import Link from "next/link";
 import logo from "@/components/Layouts/navbar/logo";
-import IconoMenu from "@/components/Layouts/navbar/iconoMenu";
 import { Berkshire_Swash } from "next/font/google";
 import Carrito from "../Tienda/Carrito/Carrito";
 import { HiX, HiMenu } from "react-icons/hi";
@@ -103,7 +102,7 @@ const LayoutPrincipal = ({ children }) => {
       <UsoCookies />
       <div>
         <div className="w-full z-20 top-0 fixed">
-          <img className="h-8 w-full" src="\navbar\banner.jpg" />
+          <img className="h-8 w-full" src="\fondos\banner.jpg" />
         </div>
         <motion.div
           className="w-full z-20 top-6 fixed border-[#1E1E1E] border-opacity-50 dark:border-gray-600"

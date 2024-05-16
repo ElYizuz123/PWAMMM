@@ -9,7 +9,7 @@ const Page = () => {
         <div className="relative  min-h-screen  ">
           <div className="absolute bottom-0 w-full ">
             <Image
-              src="/mezcal_background.png"
+              src="/fondos/mezcal_background.png"
               alt="Imagen de fondo"
               width={1000}
               height={1000}
