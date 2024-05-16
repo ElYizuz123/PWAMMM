@@ -1,4 +1,4 @@
-import { Read_marcas } from '@/app/api/producto/read_marcas/route'
+import { Read_marcas } from '@/app/api/administrador/producto/read_marcas/route'
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Agregar_producto from '@/components/Administrador/productos/Agregar_producto'
 import Leer_productos from '@/components/Administrador/productos/Leer_productos'
@@ -15,7 +15,7 @@ const Page = async () => {
         <main className='flex flex-col items-center justify-between w-full min-h-[2300px]'>
           <div className='relative h-full w-full overflow-hidden min-h-[2300px]'>
             <div className='absolute bottom-0 w-full'>
-              <Image src="/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />
+              <Image src="/fondos/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} objectFit='cover' className='w-full opacity-60' />
             </div>
             <div className='w-full h-auto relative'>
               <div className='w-full flex justify-center'>

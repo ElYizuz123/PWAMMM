@@ -1,7 +1,7 @@
 import React from "react";
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
-import CarruselAsociadas from "@/components/CarruselAsociadas/CarruselAsociadas";
-import CardVision from "@/components/CardVision/CardVision";
+import CarruselAsociadas from "@/components/Nosotras/CarruselAsociadas/CarruselAsociadas";
+import CardVision from "@/components/Nosotras/CardVision/CardVision";
 
 
 
@@ -18,12 +18,12 @@ const Page = () => {
     
       
       <div
-        className=" w-full h-auto  p-10 fondo-pictograma-carrusel   ">
+        className=" w-full h-auto  p-10 fondo-pictograma-carrusel overflow-x-hidden   ">
         <div className="w-11/12 ml-auto mr-auto  mb-10  ">
           
           <CarruselAsociadas /> {/*Carrusel de Asociadas*/}
         </div>
-        <div className="w-11/12 m-auto mb-10  ">
+        <div className="w-11/12 m-auto mb-10 overflow-x-hidden ">
           <CardVision />  {/*Visión y Misión*/}
         </div>
       </div>

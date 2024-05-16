@@ -7,18 +7,17 @@ import { HiEnvelope } from "react-icons/hi2";
 import { BsImages } from "react-icons/bs";
 import { MdFace3 } from "react-icons/md";
 import Link from "next/link";
-import logo from "@/components/navbar/logo";
-import IconoMenu from "@/components/navbar/iconoMenu";
+import logo from "@/components/Layouts/navbar/logo";
 import { Berkshire_Swash } from "next/font/google";
-import Carrito from "../tienda/Carrito";
-import Footer from "../Footer/Footer";
+import Carrito from "../Tienda/Carrito/Carrito";
 import { HiX, HiMenu } from "react-icons/hi";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import MayorEdad from "../MayorEdad/MayorEdad";
-import UsoCookies from "../UsoCookies/UsoCookies";
+import MayorEdad from "../Inicio/MayorEdad/MayorEdad";
+import UsoCookies from "../Inicio/UsoCookies/UsoCookies";
 import { CantidadProvider } from "@/context/CantidadContext";
+import Footer from "./Footer/Footer";
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -103,7 +102,7 @@ const LayoutPrincipal = ({ children }) => {
       <UsoCookies />
       <div>
         <div className="w-full z-20 top-0 fixed">
-          <img className="h-8 w-full" src="\navbar\banner.jpg" />
+          <img className="h-8 w-full" src="\fondos\banner.jpg" />
         </div>
         <motion.div
           className="w-full z-20 top-6 fixed border-[#1E1E1E] border-opacity-50 dark:border-gray-600"

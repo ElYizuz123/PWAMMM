@@ -2,13 +2,14 @@ import { ConfigProvider } from "antd"
 import Barra_Lateral from "../Administrador/Barra_Lateral"
 import Barra_Superior from "../Administrador/Barra_Superior"
 import es_ES from 'antd/locale/es_ES'
+import Image from "next/image"
 
 const LayoutCRUD = ({ children, title }) => {
     return (
         <div className="w-full h-auto">
             <ConfigProvider locale={es_ES}>
                 <div className="w-full h-5">
-                    <img className="h-full w-full" src="/color_banner.png" />
+                    <Image alt="ImageBannerCrudAdmin" width={1000} height={1000} className="h-full w-full" src="/fondos/color_banner.png" />
                 </div>
                 <div className="h-auto w-full flex justify-start">
                     <Barra_Lateral />
@@ -20,7 +21,7 @@ const LayoutCRUD = ({ children, title }) => {
                     </div>
                 </div>
                 <div className="w-full h-9">
-                    <img className="h-full w-full" src="/color_banner.png" />
+                    <Image alt="ImageBannerCrudAdminAbajo" width={1000} height={1000} className="h-full w-full" src="/fondos/color_banner.png" />
                 </div>
             </ConfigProvider>
         </div>

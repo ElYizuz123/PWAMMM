@@ -1,16 +1,16 @@
 import React, { Suspense } from "react";
 import Historia from "@/components/Historia/Historia";
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
-import Main from "@/components/Video/Main";
-import Promociones from "@/components/Promociones/Promociones";
+import Main from "@/components/Inicio/Video/Main";
+import Promociones from "@/components/Inicio/Promociones/Promociones";
 
 //import CarruselInicio from "@/components/CarruselInicio/CarruselInicio";
 //import NuestrasMarcas from "@/components/NuestrasMarcas/NuestrasMarcas";
 
 
-const CarruselInicio = React.lazy(() => import("@/components/CarruselInicio/CarruselInicio"));
+const CarruselInicio = React.lazy(() => import("@/components/Inicio/CarruselInicio/CarruselInicio"));
 //const Historia = React.lazy(() => import("@/components/Historia/Historia"));
-const NuestrasMarcas = React.lazy(() => import("@/components/NuestrasMarcas/NuestrasMarcas"));
+const NuestrasMarcas = React.lazy(() => import("@/components/Inicio/NuestrasMarcas/NuestrasMarcas"));
 
 export default function Home() {
   return (
@@ -22,7 +22,7 @@ export default function Home() {
       <Promociones/> 
       </div>
                                                                                  {/*fondo-nosotras es el fondo principal*/}
-        <div className="bg-transparent  mt-96 sm:mt-96 md:mt-96  lg:mt-10 xl:mt-10 2xl:mt-1  mb-5">                                            {/*Se aplica un efecto de desvanecido de la sección del video */} 
+        <div className="bg-transparent  mt-96 sm:mt-96 md:mt-56 lg:mt-10 xl:mt-20 2xl:mt-1  mb-5">                                            {/*Se aplica un efecto de desvanecido de la sección del video */} 
                                   
           <Suspense fallback={<div>Cargando...</div>} >
           <CarruselInicio />

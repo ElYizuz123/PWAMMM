@@ -1,5 +1,5 @@
 import React from "react";
-import ProcesoMezcal from '@/components/ProcesoMezcal/ProcesoMezcal'
+import ProcesoMezcal from '@/components/Historia/ProcesoMezcal/ProcesoMezcal'
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
 import Image from 'next/image';
 import { Berkshire_Swash } from "next/font/google";

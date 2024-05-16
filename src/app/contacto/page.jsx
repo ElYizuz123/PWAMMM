@@ -1,14 +1,14 @@
 import LayoutPrincipal from '@/components/Layouts/LayoutPrincipal';
-import ContactoForm from '@/components/contactoForm/ContactoForm';
-import ListaUbicaciones from '@/components/maps/ListaUbicaciones';
-import PreguntasFrecuentes from '@/components/PreguntasFrecuentes/PreguntasFrecuentes';
+import ContactoForm from '@/components/Contacto/contactoForm/ContactoForm';
+import ListaUbicaciones from '@/components/Contacto/maps/ListaUbicaciones';
+import PreguntasFrecuentes from '@/components/Contacto/preguntasFrecuentes/PreguntasFrecuentes';
 import React from 'react';
 // Página de contacto
 
 function page() {
   return (
     <LayoutPrincipal>
-      <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/backgroundImage.jpg')" }}>
+      <div className="bg-cover bg-center w-full h-auto p-10" style={{ backgroundImage: "url('/fondos/mezcal_background.png')" }}>
         <div className="mt-40 h-max relative w-full overflow-x-hidden">
 
 

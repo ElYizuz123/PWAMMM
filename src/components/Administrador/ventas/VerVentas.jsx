@@ -6,7 +6,7 @@ const VerVentas = ({ onClose, idVenta }) => {
 
     //Leer ventas individuales
     const readData =async () =>{
-        const res = await fetch('/api/ventas/read_detalles',{
+        const res = await fetch('/api/administrador/ventas/read_detalles',{
             method:'POST',
             body:idVenta
         })

@@ -70,13 +70,13 @@ const LecturaDatos = () => {
     const { RangePicker } = DatePicker
 
     const readMarcas = async () =>{
-        const res = await fetch('/api/ubicaciones/read_marcas')
+        const res = await fetch('/api/administrador/ubicaciones/read_marcas')
         const resJSON = await res.json()
         setMarcas(resJSON)
     }
 
     const readProductosList = async () =>{
-        const res = await fetch('/api/graficas/read_productos_marca',{
+        const res = await fetch('/api/administrador/graficas/read_productos_marca',{
             method:'POST',
             body: JSON.stringify(selectedMarca)   
         })
@@ -86,7 +86,7 @@ const LecturaDatos = () => {
 
     //Función para leer los productos mas vendidos
     const readProductos = async () => {
-        const res = await fetch('/api/graficas/productos')
+        const res = await fetch('/api/administrador/graficas/productos')
         const resJSON = await res.json()
         setVentasProductos(resJSON)
     }
@@ -94,7 +94,7 @@ const LecturaDatos = () => {
     //Función para leer los acompañamientos mas vendidos
 
     const readAcompanamientos = async () => {
-        const res = await fetch('/api/graficas/acompanamientos')
+        const res = await fetch('/api/administrador/graficas/acompanamientos')
         const resJSON = await res.json()
         setVentasAcompanamientos(resJSON)
     }
@@ -102,7 +102,7 @@ const LecturaDatos = () => {
     //Función para leer las ciudades con mas ventas
 
     const readCiudades = async () => {
-        const res = await fetch('/api/graficas/ciudades')
+        const res = await fetch('/api/administrador/graficas/ciudades')
         const resJSON = await res.json()
         setVentasCiudades(resJSON)
     }
@@ -121,7 +121,7 @@ const LecturaDatos = () => {
                 fechaFin: fechaFin
             }
         }
-        const res = await fetch('/api/graficas/ventas', {
+        const res = await fetch('/api/administrador/graficas/ventas', {
             method: 'POST',
             body: JSON.stringify(fechasJSON)
         })
@@ -157,7 +157,7 @@ const LecturaDatos = () => {
             producto: selectedProduct == -1 ? null:selectedProduct
         }
         
-        const res = await fetch('/api/graficas/read_ventas_ind', {
+        const res = await fetch('/api/administrador/graficas/read_ventas_ind', {
             method: 'POST',
             body: JSON.stringify(datosJSON)
         })

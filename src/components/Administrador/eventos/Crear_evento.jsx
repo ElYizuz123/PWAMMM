@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Modal from 'react-modal'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 
 const randomHexa = () => {
@@ -18,6 +19,7 @@ const Crear_evento = () => {
     const { update, setUpdate } = useContext(contexto)
     const [cEventosIsOpen, setCEventosIsOpen] = useState(false)
     const [eventoPhoto, setEventoPhoto] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
@@ -60,6 +62,7 @@ const Crear_evento = () => {
 
     //Manejar el ingreso de un evento
     const handleOnSubmit = async (data) => {
+        setIsLoading(true)
         //Manejar la fecha para su ingreso a la base de datos 
         data.fecha_fin = data.fecha_fin + ":00.000Z"
         var fotoResJSON = null
@@ -70,7 +73,7 @@ const Crear_evento = () => {
             form.set('source', "eventos")
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/upload_image', {
+            const fotoRes = await fetch('/api/administrador/upload_image', {
                 method: 'POST',
                 body: form
             })
@@ -84,7 +87,7 @@ const Crear_evento = () => {
         if (fotoResJSON != "Error") {
             data["foto"] = fotoResJSON.picUri
             data["fotoId"] = fotoResJSON.picId
-            const res = await fetch('/api/eventos/create_evento', {
+            const res = await fetch('/api/administrador/eventos/create_evento', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -126,7 +129,7 @@ const Crear_evento = () => {
                 text: "Algo salió mal!",
             });
         }
-
+        setIsLoading(false)
     }
 
     //Ingresar la fotografía en el input del form
@@ -228,9 +231,19 @@ const Crear_evento = () => {
                                         />
                                         <div className='w-full flex justify-end items-end'>
                                             <button
+                                                disabled={isLoading}
                                                 type='submit'
                                                 className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[10%]'
-                                            >Agregar
+                                            >
+                                                {!isLoading &&
+                                                    "Agregar"
+                                                }
+                                                {
+                                                    isLoading &&
+                                                    <div className='flex justify-center'>
+                                                        <AiOutlineLoading3Quarters className='animate-spin' />
+                                                    </div>
+                                                }
                                             </button>
                                         </div>
                                     </form>

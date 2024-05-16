@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Image from 'next/image';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 //Hexadecimal para evitar imagenes repetidas
 const randomHexa = () => {
@@ -13,9 +14,10 @@ const randomHexa = () => {
 }
 const Crear_Producto = ({ onClose, marcas }) => {
     const [productPhoto, setProductPhoto] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
-    const {update, setUpdate} = useContext(contexto)
+    const { update, setUpdate } = useContext(contexto)
     const hexa = randomHexa()
 
     //Crear registro de foto
@@ -33,14 +35,14 @@ const Crear_Producto = ({ onClose, marcas }) => {
 
     //Guarda el producto
     const handleOnSubmit = (async (data) => {
-        console.log(data.hexa)
         if (productPhoto) {
+            setIsLoading(true)
             const form = new FormData()
             form.set('file', productPhoto)
             form.set('source', "productos")
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/upload_image', {
+            const fotoRes = await fetch('/api/administrador/upload_image', {
                 method: 'POST',
                 body: form
             })
@@ -51,7 +53,7 @@ const Crear_Producto = ({ onClose, marcas }) => {
             if (fotoResJSON != "Error") {
                 data["foto"] = fotoResJSON.picUri
                 data["fotoId"] = fotoResJSON.picId
-                const res = await fetch('/api/producto/create_producto', {
+                const res = await fetch('/api/administrador/producto/create_producto', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -78,7 +80,7 @@ const Crear_Producto = ({ onClose, marcas }) => {
                         reset();
                     });
                 }
-                else{
+                else {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
@@ -86,7 +88,7 @@ const Crear_Producto = ({ onClose, marcas }) => {
                     });
                 }
             }
-            else{
+            else {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -94,6 +96,7 @@ const Crear_Producto = ({ onClose, marcas }) => {
                 });
             }
         }
+        setIsLoading(false)
     })
 
 
@@ -234,7 +237,7 @@ const Crear_Producto = ({ onClose, marcas }) => {
                                     className='w-full h-7 border-2 border-black rounded-lg pl-1 mt-14'
                                     placeholder='Tipo de agave'
                                 />
-                                <input 
+                                <input
                                     type='number'
                                     name='cantidad_alcohol'
                                     max={70}
@@ -258,9 +261,19 @@ const Crear_Producto = ({ onClose, marcas }) => {
                                 />
                                 <div className='w-full flex justify-end items-end'>
                                     <button
+                                        disabled={isLoading}
                                         type='submit'
                                         className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[1%]'
-                                    >Agregar
+                                    >
+                                        {!isLoading &&
+                                            "Agregar"
+                                        }
+                                        {
+                                            isLoading &&
+                                            <div className='flex justify-center'>
+                                                <AiOutlineLoading3Quarters className='animate-spin' />
+                                            </div>
+                                        }
                                     </button>
                                 </div>
                             </form>

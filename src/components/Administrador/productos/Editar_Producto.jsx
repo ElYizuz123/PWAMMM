@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Image from 'next/image';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const randomHexa = () => {
     const randomNumber = Math.floor(Math.random() * 65536);
@@ -14,6 +15,7 @@ const randomHexa = () => {
 const Editar_Producto = ({ onClose, marcas, idProducto }) => {
     const [productPhoto, setProductPhoto] = useState(null)
     const [defaultData, setDefaultData] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [producto, setProducto] = useState(null)
     const { register, handleSubmit, setValue } = useForm();
     const fileInputRef = useRef(null)
@@ -76,7 +78,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
 
     //Lectura de producto
     const readProduct = (async (data) => {
-        const res = await fetch('/api/producto/read_producto_admin', {
+        const res = await fetch('/api/administrador/producto/read_producto_admin', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -92,6 +94,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
 
     //Realizar cambio 
     const handleOnSubmit = (async (data) => {
+        setIsLoading(true)
         //Cambio la fotografía
         if (productPhoto) {
             const form = new FormData()
@@ -100,7 +103,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
             form.set('nombre', producto[0].fotoId)
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/update_image', {
+            const fotoRes = await fetch('/api/administrador/update_image', {
                 method: 'POST',
                 body: form
             })
@@ -111,7 +114,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
             if (fotoResJSON !="Error") {
                 data["foto"] = fotoResJSON.picUri
                 data["fotoId"] = fotoResJSON.picId
-                const res = await fetch('/api/producto/update_producto', {
+                const res = await fetch('/api/administrador/producto/update_producto', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -134,6 +137,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
                     })
                     const up = !update
                     setUpdate(up)
+                    onClose()
                 }
                 else {
                     Swal.fire({
@@ -146,7 +150,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
         }
         //No se cambio la fotografía
         else {
-            const res = await fetch('/api/producto/update_producto', {
+            const res = await fetch('/api/administrador/producto/update_producto', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -169,6 +173,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
                 })
                 const up = !update
                 setUpdate(up)
+                onClose()
             } else {
                 Swal.fire({
                     icon: "error",
@@ -177,6 +182,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
                 });
             }
         }
+        setIsLoading(false)
     })
 
     //Cerrado de la ventana y actualización 
@@ -353,9 +359,19 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
                                 />
                                 <div className='w-full flex justify-end items-end'>
                                     <button
+                                        disabled={isLoading}
                                         type='submit'
                                         className='bg-[#98E47D] w-48 h-10 text-2xl font-bold rounded-xl mr-3 mt-[1%]'
-                                    >Guardar cambios
+                                    >
+                                        {!isLoading &&
+                                            "Guardar cambios"
+                                        }
+                                        {
+                                            isLoading &&
+                                            <div className='flex justify-center'>
+                                                <AiOutlineLoading3Quarters className='animate-spin'/>
+                                            </div>
+                                        }
                                     </button>
                                 </div>
                             </form>

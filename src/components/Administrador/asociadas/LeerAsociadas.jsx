@@ -43,7 +43,7 @@ const LeerAsociadas = () => {
         else{
             search = page
         }
-        const res = await fetch('/api/asociadas/read_asociadas',{
+        const res = await fetch('/api/administrador/asociadas/read_asociadas',{
             method: 'POST',
             body : JSON.stringify(search)
         })
@@ -53,7 +53,7 @@ const LeerAsociadas = () => {
 
     //Conteo de asociadas para paginación 
     const countData = async () =>{
-        const res = await fetch('/api/asociadas/cont_asociadas')
+        const res = await fetch('/api/administrador/asociadas/cont_asociadas')
         const resJSON = await res.json()
         setTotalPages(Math.ceil((resJSON)/12))
     }

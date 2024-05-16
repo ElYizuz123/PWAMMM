@@ -2,15 +2,17 @@ import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const Crear_marca = ({ isOpen, onClose, asociadas }) => {
     const { register, handleSubmit, reset } = useForm();
     const {update, setUpdate} = useContext(contexto)
-    const [inputValue, setInputValue] = useState('');
+    const [isLoading, setIsLoading] = useState(false)
 
     //Crear una nueva marca
     const handleOnSubmit = async (data) => {
-        const res = await fetch('/api/marcas/create_marca', {
+        setIsLoading(true)
+        const res = await fetch('/api/administrador/marcas/create_marca', {
             method: 'POST',
             body: JSON.stringify(data)
         })
@@ -48,6 +50,7 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                 text: "Algo salió mal!",
               })
         }
+        setIsLoading(false)
     }
 
 
@@ -109,9 +112,19 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
                                 </select>
                                 <div className='w-full flex justify-end items-end'>
                                     <button
+                                        disabled={isLoading}
                                         type='submit'
                                         className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5'
-                                    >Agregar
+                                    >
+                                        {!isLoading &&
+                                            "Agregar"
+                                        }
+                                        {
+                                            isLoading &&
+                                            <div className='flex justify-center'>
+                                                <AiOutlineLoading3Quarters className='animate-spin'/>
+                                            </div>
+                                        }
                                     </button>
                                 </div>
                             </form>

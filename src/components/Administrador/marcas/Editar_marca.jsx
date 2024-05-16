@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
     const { register, handleSubmit, setValue } = useForm();
     const [marca, setMarca] = useState(null)
     const {update, setUpdate} = useContext(contexto)
     const [updated, setUpdated] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     //Ingresar datos por default a la ventana de edición 
     const setForm = (data) =>{
@@ -34,7 +36,8 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
 
     //Actualizar los datos de la marca
     const handleOnSubmit = async (data) => {
-        const res = await fetch('/api/marcas/update_marca', {
+        setIsLoading(true)
+        const res = await fetch('/api/administrador/marcas/update_marca', {
             method: 'POST',
             body: JSON.stringify(data)
         })
@@ -55,6 +58,7 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
                 const up= !update
                 setUpdate(up)
                 setUpdated(true)
+                onClose()
             });
         }
         else {
@@ -64,11 +68,12 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
                 text: "Algo salió mal!",
             });
         }
+        setIsLoading(false)
     }
 
     //Leer los datos especificos de la marca seleccionada
     const readData = async () =>{
-        const res = await fetch('/api/marcas/read_marca', {
+        const res = await fetch('/api/administrador/marcas/read_marca', {
             method: 'POST',
             body: JSON.stringify(idMarca)
         })
@@ -146,9 +151,20 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
                                 </select>
                                 <div className='w-full flex justify-end items-end'>
                                     <button
+                                        disabled={isLoading}
                                         type='submit'
                                         className='bg-[#98E47D] w-56 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5'
-                                    >Guardar cambios
+                                    >
+                                        {!isLoading &&
+                                            "Guardar cambios"
+                                        }
+                                        {
+                                            isLoading &&
+                                            <div className='flex justify-center'>
+                                                <AiOutlineLoading3Quarters className='animate-spin'/>
+                                            </div>
+                                        }
+                                        
                                     </button>
                                 </div>
                             </form>
