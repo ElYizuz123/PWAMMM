@@ -5,20 +5,15 @@ import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 import { contexto } from '../UpdateProvider'
 import Modal from 'react-modal'
-
-const randomHexa = () => {
-  const randomNumber = Math.floor(Math.random() * 65536);
-  const hexadecimalValue = randomNumber.toString(16).toUpperCase().padStart(5, '0');
-  return hexadecimalValue
-}
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 const CrearUbicacion = () => {
   const { update, setUpdate } = useContext(contexto)
   const [cUbicacionesIsOpen, setCUbicacionesIsOpen] = useState(false)
   const [marcas, setMarcas] = useState(null)
-  const { register, handleSubmit, reset, setValue } = useForm();
+  const [isLoading, setIsLoading] = useState(false)
+  const { register, handleSubmit, reset } = useForm();
   const fileInputRef = useRef(null)
-  const hexa = randomHexa()
 
 
   //Configuración de los modales
@@ -74,6 +69,7 @@ const CrearUbicacion = () => {
 
   //Manejar la creación de una nueva asociada
   const handleOnSubmit = async (data) => {
+    setIsLoading(true)
     const res = await fetch('/api/ubicaciones/create_ubicacion', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -108,13 +104,9 @@ const CrearUbicacion = () => {
         text: "Algo salió mal!",
       });
     }
-
+    setIsLoading(false)
   }
 
-  //Manejar el input de la foto 
-  const handleFileButton = () => {
-    fileInputRef.current.click();
-  }
 
   return (
     <div className='h-full'>
@@ -190,7 +182,7 @@ const CrearUbicacion = () => {
                       type='text'
                       name='ubicacion'
                       required={true}
-                      maxLength={45}
+                      maxLength={100}
                       {...register('ubicacion', {
                         required: true,
                         maxLength: 300
@@ -212,9 +204,20 @@ const CrearUbicacion = () => {
                     />
                     <div className='w-full flex justify-end items-end'>
                       <button
+                        disabled={isLoading}
                         type='submit'
                         className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-6'
-                      >Agregar
+                      >
+                        {!isLoading &&
+                          "Agregar"
+                        }
+                        {
+                          isLoading &&
+                          <div className='flex justify-center'>
+                            <AiOutlineLoading3Quarters className='animate-spin' />
+                          </div>
+                        }
+                        
                       </button>
                     </div>
                   </form>

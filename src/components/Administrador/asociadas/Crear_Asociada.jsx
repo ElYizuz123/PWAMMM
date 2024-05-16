@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 import { contexto } from '../UpdateProvider'
 import Modal from 'react-modal'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 const randomHexa = () => {
     const randomNumber = Math.floor(Math.random() * 65536);
@@ -16,30 +17,31 @@ const Crear_Asociada = () => {
     const { update, setUpdate } = useContext(contexto)
     const [cAsociadasIsOpen, setCAsociadasIsOpen] = useState(false)
     const [asociadaPhoto, setAsociadaPhoto] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
-  
+
 
     //Configuración de los modales
     const customStyles = {
         content: {
-          top: '50%',
-          left: '50%',
-          right: '60%',
-          bottom: '50%',
-          marginRight: '-50%',
-          marginBottom: '-50%',
-          height: '70%',
-          transform: 'translate(-50%, -50%)',
-          backgroundColor: '#00000000',
-          border: 'none',
-          boxShadow: 'none',
-          overflow:'auto',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
+            top: '50%',
+            left: '50%',
+            right: '60%',
+            bottom: '50%',
+            marginRight: '-50%',
+            marginBottom: '-50%',
+            height: '70%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#00000000',
+            border: 'none',
+            boxShadow: 'none',
+            overflow: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
         },
-      };
+    };
 
 
     //Establecer los campos de foto y hexadecimal en el form
@@ -62,8 +64,8 @@ const Crear_Asociada = () => {
 
     //Manejar la creación de una nueva asociada
     const handleOnSubmit = async (data) => {
-        console.log(data)
         if (asociadaPhoto) {
+            setIsLoading(true)
             const form = new FormData()
             form.set('file', asociadaPhoto)
             form.set('source', "mezcaleras")
@@ -122,6 +124,7 @@ const Crear_Asociada = () => {
                     text: "Algo salió mal!",
                 });
             }
+            setIsLoading(false)
         }
     }
 
@@ -211,9 +214,19 @@ const Crear_Asociada = () => {
                                         />
                                         <div className='w-full flex justify-end items-end'>
                                             <button
+                                                disabled={isLoading}
                                                 type='submit'
                                                 className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[3%]'
-                                            >Agregar
+                                            >
+                                                {!isLoading &&
+                                                    "Agregar"
+                                                }
+                                                {
+                                                    isLoading &&
+                                                    <div className='flex justify-center'>
+                                                        <AiOutlineLoading3Quarters className='animate-spin' />
+                                                    </div>
+                                                }
                                             </button>
                                         </div>
                                     </form>

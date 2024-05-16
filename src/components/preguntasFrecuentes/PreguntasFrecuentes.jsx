@@ -16,7 +16,7 @@ const PreguntasFrecuentes = () => {
     }, []);
 
     return (
-        <div className="mb-10 w-full lg:ml-20">
+        <div className="mb-10 w-full lg:ml-20 lg:mr-20">
             <p className="lg:mb-2 mb-1
           lg:text-6xl md:text-4xl text-3xl">
                 Preguntas Frecuentes</p>
@@ -26,7 +26,8 @@ const PreguntasFrecuentes = () => {
                 {preguntas &&
                     preguntas.map((pregunta_frecuente) => (
                         <div key={pregunta_frecuente.id_pregunta_frecuente}
-                            className="bg-[#FFFFFF] border border-black rounded-lg mb-5 flex shadow-lg w-11/12">
+                            className="bg-[#FFFFFF] border border-black rounded-lg mb-5 flex shadow-lg 
+                            bg-opacity-55 backdrop-blur-sm w-full">
                             <div class="ml-5 mt-3 mb-5 mr-5 flex flex-col">
                                 <p className="lg:text-3xl md:text-2xl text-xl font-bold">-{pregunta_frecuente.pregunta}</p>
                                 <br />

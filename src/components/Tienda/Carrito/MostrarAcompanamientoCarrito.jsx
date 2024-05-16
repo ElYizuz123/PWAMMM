@@ -35,7 +35,7 @@ const MostrarAcompanamientoCarrito = ({
       };
 
       addProductos(newProduct);
-      decrementStock(id_producto, 1)
+      decrementStock(id_producto, 1);
 
       setTimeout(() => {
         setButtonState("idle");
@@ -57,7 +57,7 @@ const MostrarAcompanamientoCarrito = ({
         <img
           className="h-12 w-12 rounded
           md:h-10 md:w-10"
-          src={`/productos/${imagen}`}
+          src={imagen}
           alt="Queso"
         />
         <div className="flex-grow px-6">

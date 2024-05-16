@@ -47,7 +47,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
     transition: opacity .4s ease, visibility .4s ease, transform .5s ease-in-out;
     visibility: hidden;
     opacity: 0;
@@ -81,7 +82,15 @@
     width: 2rem;
     height: 2rem;
     padding: 5px;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: #ffffff;
+    color: #000000;
     cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.model.open svg:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #000000;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }

@@ -1,143 +1,102 @@
 "use client";
 
-import { K2D } from "next/font/google";
+import React from "react";
 import Contador from "./Contador";
 import Image from "next/image";
 
-const k2d = K2D({
-  weight: ["400"],
-  styles: ["normal"],
-  subsets: ["latin"],
-});
-
-const Ficha_Botella = ({
+const Ficha_Acompañamiento = ({
   id_producto,
   nombre,
   marca,
   precio,
+  gr,
   foto,
   mercadoLibre,
   descripcion,
-  ml,
-  agave,
   cantidad,
-  cantidadOficial,
-  alcohol,
+  cantidadOficial
 }) => {
   return (
     <div>
       <div className="flex justify-center w-full">
         <div
-          className=" bg-white rounded-lg shadow-2xl w-[80%] h-[780px] 
-          sm:h-[865px] sm:w-[450px]
-          md:h-auto  md:w-[80%] md:-translate-x-14
+          className="flex justify-between relative bg-white w-[80%] h-[550px]  rounded-lg shadow-2xl  
+         sm:h-[750px] sm:w-[80%]
+          md:h-auto  md:w-[80%]
           lg:h-auto lg:w-[80%]
-          2xl:h-auto  2xl:w-[80%] "
+          2xl:h-auto  2xl:w-[80%]"
         >
-          {/* imagen botellas */}
-          <div className=" mt-24 flex justify-center align-middle">
+          {/*imagen acompañamientos*/}
+          <div className="mt-10">
             <Image
-              className=" rounded-md 
-              object-cover 
-               sm:mt-4 sm:w-[220px] 
-               md:-mt-10 md:ml-2 md:-translate-x-48 md:absolute  md:h-[300px] 
-               lg:-mt-24 lg:py-12  lg:-translate-x-60  lg:h-[450px] lg:absolute
+              className=" rounded-md translate-x-[40%]  absolute
+               sm:mt-4 sm:translate-x-32 sm:w-[250px] sm:absolute
+               md:mt-20 md:ml-2 md:translate-x-0 md:w-[200px]  md:h-[200px] 
+               lg:-mt-24 lg:py-12  lg:translate-x-10  lg:h-[350px] 
                2xl:-mt-20 2xl:translate-x-28 2xl:h-[350px] 2xl:ml-10"
-              src={`/productos/${foto}`}
+              src={foto}
               width={170}
               height={320}
               quality={100}
-              alt="Botellas"
+              alt="Acompañamientos"
             />
           </div>
+
           {/*información */}
           <div
-            className="w-full px-12  -translate-y-5
-             sm:translate-y-0 sm:-translate-x-20
-             md:-translate-y-20
-             lg:-translate-y-12 
+            className="w-full px-12  translate-y-[50%] 
+             sm:translate-y-[50%] 
+             md:translate-y-0  
+             lg:translate-y-0 
              2xl:translate-y-0"
           >
             <div
-              className="right-0  g-green-200 rounded-full w-auto h-20 p-4 text-center 
-                   translate-x-24    -translate-y-[360px]
-                   sm:translate-x-80 sm:-translate-y-[350px] sm:-mt-20 sm:flex
-                   md:translate-x-1 md:-translate-y-4 md:absolute
-                   lg:-translate-x-2  
-                   2xl:-translate-x-10"
-            >
-              <div
-                className=" bg-transparent rounded-full w-auto h-14 p-1 text-center
-               sm:bg-green-200 sm:p-4 sm:h-20 sm:w-auto
-               md:bg-green-200  
-               lg:bg-green-200"
-              >
-                <p
-                  className="  font-bold text-lg text-green-700
-                  sm:text-xl   sm:text-black
-                  md:text-2xl   md:text-black
-                  lg:text-2xl    lg:text-black   
-                  2xl:text-3xl   2xl:text-black"
-                >
-                  ${precio}
-                </p>
-                <p className=" font-thin text-xs">IVA INCLUIDO</p>
-              </div>
-            </div>
-
-            <div
-              className="w-full flex justify-end mt-12
-             sm:mt-36 sm:-translate-x-4
+              className="w-full flex justify-end -mt-10
+             sm:mt-10 sm:-translate-x-4
              md:translate-x-12 md:mt-20
              lg:mt-10
              2xl:-translate-x-10 2xl:-translate-y-10"
             >
-              <div className="text-black mt-0">
+              <div className="text-black mt-4">
                 <strong
                   className="text-xl 
-                sm:text-2xl 
-                md:text-3xl 
+                sm:text-xl 
+                md:text-2xl 
                 lg:text-3xl
                 2xl:text-4xl"
                 >
                   {nombre}
                   <span
-                    className=" ml-3  text-sm 
+                    className=" ml-3  text-xl 
                   sm:text-xl 
                   md:text-2xl 
                   lg:text-2xl"
                   >
-                    {ml} ml
+                    {gr} gr
                   </span>
                 </strong>
 
-                <p className=" text-xl  text-black font-light mt-5 ">
+                <p className="  font-bold text-3xl mt-2 text-green-700">
+                  ${precio}
+                </p>
+                <p className="  font-thin text-xs"> IVA INCLUIDO</p>
+
+                <p className=" text-xl  text-black font-light mt-7 ">
                   Marca:
-                  <span className=" ml-3 text-sm text-[#F70073] font-light">
+                  <span className=" ml-3 text-xl text-[#F70073] font-light">
                     {marca}
                   </span>
                 </p>
 
-                <p className=" text-xl  text-black font-light mt-2 ">
-                  Agave:
-                  <span className=" ml-3 text-sm text-[#F70073] font-light">
-                    {agave}
-                  </span>
-                </p>
-                <p className=" text-xl  text-black font-light mt-2 ">
-                  Alcohol:
-                  <span className=" ml-3 text-sm text-[#F70073] font-light">
-                    {alcohol}°
-                  </span>
-                </p>
                 <p className=" text-xl  text-black font-light mt-2">
                   Existencia:
-                  <span className=" ml-3 text-sm text-[#F70073] font-light">
+                  <span className=" ml-3 text-xl text-[#F70073] font-light">
                     {cantidadOficial}
                   </span>
                 </p>
+
                 {/*botones*/}
-                <div className=" justify-center items-center mt-5">
+                <div className=" justify-center items-center mt-2">
                   {cantidad !== 0 ? (
                     <div className=" relative flex items-center ">
                       <div>
@@ -148,7 +107,8 @@ const Ficha_Botella = ({
                           marca={marca}
                           precio={precio}
                           imagen={foto}
-                          ml={ml}
+                          mercadoLibre={mercadoLibre}
+                          ml={gr}
                         ></Contador>
                       </div>
                     </div>
@@ -185,7 +145,6 @@ const Ficha_Botella = ({
                         >
                           Comprar en mercado libre
                         </a>
-
                         <img
                           className="w-10 h-9 rounded-lg"
                           src="\emoticons\mercado_libre_logo.webp"
@@ -202,11 +161,7 @@ const Ficha_Botella = ({
       </div>
       {/*descripcion*/}
       <div className="flex justify-center w-full">
-        <div
-          className=" w-[80%] rounded-lg shadow-2xl bg-white p-4 mt-4
-        sm:w-[450px] 
-        md:w-[80%] md:-translate-x-14"
-        >
+        <div className=" w-[80%] rounded-lg shadow-2xl bg-white p-4 mt-4">
           <h3 className="text-[#F70073] font-bold">DESCRIPCIÓN</h3>
           <h3 className=" mt-2 text-justify mx-4">{descripcion}</h3>
         </div>
@@ -215,4 +170,4 @@ const Ficha_Botella = ({
   );
 };
 
-export default Ficha_Botella;
+export default Ficha_Acompañamiento;
