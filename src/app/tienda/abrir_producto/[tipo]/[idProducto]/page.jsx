@@ -1,6 +1,6 @@
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
 import Image from "next/image";
-import MostrarProductosFicha from "@/components/tienda/MostrarProductosFicha";
+import MostrarProductosFicha from "@/components/Tienda/MostrarProductosFicha";
 
 const abrir_producto = ({ params }) => {
   return (

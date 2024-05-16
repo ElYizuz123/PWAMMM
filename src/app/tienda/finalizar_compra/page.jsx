@@ -1,5 +1,5 @@
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
-import Formulario from "@/components/tienda/Formulario";
+import Formulario from "@/components/Tienda/Formulario";
 import React from "react";
 import Image from "next/image";
 
