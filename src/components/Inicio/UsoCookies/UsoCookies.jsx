@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
-import UsoCookiesCSS from '/src/components/UsoCookies/UsoCookies.css'
+import UsoCookiesCSS from '/src/components/Inicio/UsoCookies/UsoCookies.css'
 
 const UsoCookies = () => {
 

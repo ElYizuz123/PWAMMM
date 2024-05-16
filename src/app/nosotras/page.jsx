@@ -1,7 +1,7 @@
 import React from "react";
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
 import CarruselAsociadas from "@/components/CarruselAsociadas/CarruselAsociadas";
-import CardVision from "@/components/CardVision/CardVision";
+import CardVision from "@/components/Nosotras/CardVision/CardVision";
 
 
 

@@ -7,17 +7,17 @@ import { HiEnvelope } from "react-icons/hi2";
 import { BsImages } from "react-icons/bs";
 import { MdFace3 } from "react-icons/md";
 import Link from "next/link";
-import logo from "@/components/navbar/logo";
-import IconoMenu from "@/components/navbar/iconoMenu";
+import logo from "@/components/Layouts/navbar/logo";
+import IconoMenu from "@/components/Layouts/navbar/iconoMenu";
 import { Berkshire_Swash } from "next/font/google";
 import Carrito from "../tienda/Carrito";
-import Footer from "../Footer/Footer";
+import Footer from "./Footer/Footer";
 import { HiX, HiMenu } from "react-icons/hi";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import MayorEdad from "../MayorEdad/MayorEdad";
-import UsoCookies from "../UsoCookies/UsoCookies";
+import MayorEdad from "../Inicio/MayorEdad/MayorEdad";
+import UsoCookies from "../Inicio/UsoCookies/UsoCookies";
 import { CantidadProvider } from "@/context/CantidadContext";
 
 const berkshire = Berkshire_Swash({

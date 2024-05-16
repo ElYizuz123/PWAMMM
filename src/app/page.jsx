@@ -1,16 +1,16 @@
 import React, { Suspense } from "react";
 import Historia from "@/components/Historia/Historia";
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
-import Main from "@/components/Video/Main";
-import Promociones from "@/components/Promociones/Promociones";
+import Main from "@/components/Inicio/Video/Main";
+import Promociones from "@/components/Inicio/Promociones/Promociones";
 
 //import CarruselInicio from "@/components/CarruselInicio/CarruselInicio";
 //import NuestrasMarcas from "@/components/NuestrasMarcas/NuestrasMarcas";
 
 
-const CarruselInicio = React.lazy(() => import("@/components/CarruselInicio/CarruselInicio"));
+const CarruselInicio = React.lazy(() => import("@/components/Inicio/CarruselInicio/CarruselInicio"));
 //const Historia = React.lazy(() => import("@/components/Historia/Historia"));
-const NuestrasMarcas = React.lazy(() => import("@/components/NuestrasMarcas/NuestrasMarcas"));
+const NuestrasMarcas = React.lazy(() => import("@/components/Inicio/NuestrasMarcas/NuestrasMarcas"));
 
 export default function Home() {
   return (

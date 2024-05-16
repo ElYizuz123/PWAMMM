@@ -1,7 +1,7 @@
 import "./globals.css";
 import { K2D } from "next/font/google";
 import Link from "next/link";
-import Footer from "@/components/Footer/Footer";
+import Footer from "@/components/Layouts/Footer/Footer";
 import { ProductProvider } from "@/context/ProductContext";
 // import { GoogleTagManager } from '@next/third-parties/google'
 

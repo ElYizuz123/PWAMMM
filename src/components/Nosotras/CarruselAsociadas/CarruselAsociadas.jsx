@@ -17,7 +17,7 @@ import "swiper/scss";
 import Link from "next/link";
 
 //import CardCarrusel from "../CardCarruselA/CardCarrusel";
-const CardCarrusel = React.lazy(() => import('../CardCarruselA/CardCarrusel'));
+const CardCarrusel = React.lazy(() => import('../Nosotras/CardCarruselA/CardCarrusel'));
 
 const ruta = "/mezcaleras/";
 const tienda = "/tienda/";

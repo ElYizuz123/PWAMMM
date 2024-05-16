@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
-import MayorEdadCSS from '/src/components/MayorEdad/MayorEdad.css'
+import MayorEdadCSS from '/src/components/Inicio/MayorEdad/MayorEdad.css'
 import Image from 'next/image';
 
 const MayorEdad = () => {

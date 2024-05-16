@@ -1,7 +1,7 @@
 import React,{Suspense} from "react";
 import { Berkshire_Swash } from "next/font/google";
-
 import CardProcesoMezcal from "../CardProcesoMezcal/CardProcesoMezcal";
+
 
 
 
