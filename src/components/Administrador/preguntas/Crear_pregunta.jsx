@@ -5,9 +5,11 @@ import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Image from 'next/image';
 import Modal from 'react-modal'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const Crear_pregunta = () => {
     const [cPreguntaIsOpen, setCPreguntaIsOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, reset } = useForm();
     const createRef = useRef(null)
     const { update, setUpdate } = useContext(contexto)
@@ -45,6 +47,7 @@ const Crear_pregunta = () => {
 
     //Escribir pregunta en la DB
     const handleOnSubmit = async (data) => {
+        setIsLoading(true)
         const res = await fetch('/api/preguntas/create_pregunta', {
             method: 'POST',
             body: JSON.stringify(data)
@@ -73,8 +76,7 @@ const Crear_pregunta = () => {
                 text: "Algo salió mal!",
             });
         }
-
-
+        setIsLoading(false)
     }
 
     return (
@@ -127,9 +129,20 @@ const Crear_pregunta = () => {
                                             />
                                             <div className='w-full flex justify-end items-end'>
                                                 <button
+                                                    disabled={isLoading}
                                                     type='submit'
                                                     className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5'
-                                                >Agregar
+                                                >
+                                                    {!isLoading &&
+                                                        "Agregar"
+                                                    }
+                                                    {
+                                                        isLoading &&
+                                                        <div className='flex justify-center'>
+                                                            <AiOutlineLoading3Quarters className='animate-spin' />
+                                                        </div>
+                                                    }
+                                                    
                                                 </button>
                                             </div>
                                         </form>

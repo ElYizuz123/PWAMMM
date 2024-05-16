@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Image from 'next/image';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 //Hexadecimal para evitar imágenes repetidas 
 const randomHexa = () => {
@@ -13,6 +14,7 @@ const randomHexa = () => {
 }
 const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
     const [productPhoto, setProductPhoto] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, reset, setValue } = useForm();
     const fileInputRef = useRef(null)
     const {update, setUpdate} = useContext(contexto)
@@ -35,6 +37,7 @@ const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
     const handleOnSubmit = (async (data) => {
         console.log(data.hexa)
         if (productPhoto) {
+            setIsLoading(true)
             const form = new FormData()
             form.set('file', productPhoto)
             form.set('source', "productos")
@@ -94,6 +97,7 @@ const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
                 });
             }
         }
+        setIsLoading(false)
     })
 
 
@@ -236,10 +240,20 @@ const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
                                     className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-9 pt-1'
                                 />
                                 <div className='w-full flex justify-end items-end'>
-                                    <button
+                                    <button 
+                                        disabled={isLoading}
                                         type='submit'
                                         className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[1%]'
-                                    >Agregar
+                                    >
+                                        {!isLoading &&
+                                            "Agregar"
+                                        }
+                                        {
+                                            isLoading &&
+                                            <div className='flex justify-center'>
+                                                <AiOutlineLoading3Quarters className='animate-spin'/>
+                                            </div>
+                                        }
                                     </button>
                                 </div>
                             </form>

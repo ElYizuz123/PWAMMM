@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { contexto } from '../UpdateProvider'
 import Swal from 'sweetalert2'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 const randomHexa = () =>{
     const randomNumber = Math.floor(Math.random() * 65536);
@@ -15,6 +16,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
     const {update,setUpdate} = useContext(contexto)
     const [asociadaPhoto, setAsociadaPhoto] = useState(null)
     const [asociada, setAsociada] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { register, handleSubmit, setValue } = useForm()
     const fileInputRef = useRef(null)
     const hexa = randomHexa()
@@ -43,6 +45,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
 
     //Modificar imagen
     const handleOnSubmit = async (data) =>{
+        setIsLoading(true)
         if (asociadaPhoto) {
             const form = new FormData()
             form.set('file', asociadaPhoto)
@@ -80,6 +83,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                     })
                     const up = !update
                     setUpdate(up)
+                    onClose()
                 }
                 else{
                     Swal.fire({
@@ -113,6 +117,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                     timerProgressBar: true,
                     confirmButtonText: "Ok",
                 })
+                onClose()
             }else{
                 Swal.fire({
                     icon: "error",
@@ -121,6 +126,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                 });
             }
         }
+        setIsLoading(false)
     }
 
     
@@ -217,9 +223,19 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
                                 />
                                 <div className='w-full flex justify-end items-end'>
                                     <button
+                                        disabled={isLoading}
                                         type='submit'
                                         className='bg-[#98E47D] w-48 h-10 text-2xl font-bold rounded-xl mr-3 mt-[3%]'
-                                    >Guardar cambios
+                                    >
+                                        {!isLoading &&
+                                            "Guardar cambios"
+                                        }
+                                        {
+                                            isLoading &&
+                                            <div className='flex justify-center'>
+                                                <AiOutlineLoading3Quarters className='animate-spin'/>
+                                            </div>
+                                        }
                                     </button>
                                 </div>
                             </form>
