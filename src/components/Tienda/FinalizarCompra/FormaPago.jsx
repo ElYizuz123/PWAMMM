@@ -317,7 +317,7 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
                         enviarDataApi()
                         
                       }); 
-                      setPaypal(false);
+                      // setPaypal(false);
                       //AQUI DEBE DE MANDAR ALGO PARA ACEPTAR COMPRAR Y SUBIR A BD -- DESCONTAR STOCK
                     }}
                   />

@@ -97,7 +97,7 @@ export const ProductProvider = ({ children }) => {
 
   const limpiarProductos = () => {
     setProductos([]);
-    sessionStorage.setItem("productos", JSON.stringify(newProducts));
+    sessionStorage.setItem("productos", JSON.stringify(productos));
   };
 
   const enviarDataApi = async () => {
@@ -144,10 +144,7 @@ export const ProductProvider = ({ children }) => {
       const result = await response.json();
       const responseEmail = await responseData.json();
 
-      console.log(result, responseEmail);
-
-      limpiarProductos();
-      
+      console.log(result, responseEmail);      
     } catch (error) {
       console.error("Error en el proceso:", error); // Maneja cualquier error que ocurra durante el fetch
     }
@@ -176,7 +173,8 @@ export const ProductProvider = ({ children }) => {
         metodoPago,
         setMetodoPago,
         setDataFormulario,
-        enviarDataApi
+        enviarDataApi,
+        limpiarProductos
       }}
     >
       <div>{children}</div>
