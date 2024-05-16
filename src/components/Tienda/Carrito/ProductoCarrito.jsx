@@ -83,7 +83,7 @@ const ProductoCarrito = ({
             lg:h-[100px] lg:w-[70px] lg:-translate-x-8 lg:translate-y-5 lg:object-cover
             xl:w-[80px] xl:object-cover
             2xl:h-[110px] 2xl:w-[90px] 2xl:-translate-x-8 2xl:translate-y-5 2xl:object-cover"
-            src={`/productos/${imagen}`}
+            src={imagen}
             alt="Product"
             width={80}
             height={60}
@@ -170,15 +170,13 @@ const ProductoCarrito = ({
             className="  sm:block md:block lg:hidden 2xl:hidden -ml-2
            text-xs text-gray-500 -translate-x-12 translate-y-5"
           >
-            Subtotal:
+            Subtotal: 
           </p>
-          ${subtotal}
+           ${subtotal}
         </div>
         {/* BOTÓN ELIMINAR PRODUCTO CARRITO */}
-        <div
-          className="translate-x-5 w-[50px] 
-        sm:absolute sm:right-0 sm:translate-x-0"
-        >
+        <div className="translate-x-5 w-[50px] 
+        sm:absolute sm:right-0 sm:translate-x-0">
           <button class="bin-button" onClick={() => handleDelete(id_producto)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

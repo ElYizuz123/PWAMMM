@@ -62,7 +62,7 @@ h1 {
 
 .btnMayor {
   background-color: #f70073;
-  border-radius: 5px;
+  border-radius: 10px;
   color: #fff;
   display: block;
   padding: 16px;
@@ -73,6 +73,22 @@ h1 {
 }
 
 .btnMayor:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.btnCookies {
+  background-color: #f70073;
+  border-radius: 10px;
+  color: #fff;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btnCookies:hover {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }

@@ -70,7 +70,7 @@ const Carrito = () => {
                     >
                       <div className="flex">
                         <img
-                          src={`/productos/${producto.imagen}`}
+                          src={producto.imagen}
                           alt={producto.nombre}
                           className="w-20 h-20 object-cover rounded-md mr-4"
                         />

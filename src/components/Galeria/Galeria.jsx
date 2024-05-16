@@ -40,7 +40,7 @@ const Galeria = () => {
                     foto.map((foto, index) => {
                         return (
                             <div
-                                className="w-full transition-all hover:brightness-125 mb-3 hover:cursor-pointer"
+                                className="w-full transition-all hover:brightness-125 mb-3 hover:cursor-pointer animate-fade-in"
                                 key={index}
                                 onClick={() => getImg(foto.fotoUri)}
                             >

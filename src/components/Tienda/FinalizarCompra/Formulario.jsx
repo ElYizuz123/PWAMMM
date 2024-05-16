@@ -27,7 +27,6 @@ const berkshire_swash = Berkshire_Swash({
   styles: ["normal"],
   subsets: ["latin"],
 });
-
 function Formulario() {
   const {
     productos,

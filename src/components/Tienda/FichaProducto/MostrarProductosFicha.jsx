@@ -132,7 +132,6 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             <p></p>
           )}
         </div>
-        
           {botellas.filter(
             (item) =>
               item.producto.marca_id_marca === item.producto.marca.id_marca &&
