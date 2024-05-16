@@ -1,4 +1,4 @@
-import { Read_marcas } from '@/app/api/producto/read_marcas/route'
+import { Read_marcas } from '@/app/api/administrador/producto/read_marcas/route'
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Agregar_producto from '@/components/Administrador/productos/Agregar_producto'
 import Leer_productos from '@/components/Administrador/productos/Leer_productos'

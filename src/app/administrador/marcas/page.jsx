@@ -1,5 +1,5 @@
 
-import { read_asociadas } from '@/app/api/marcas/read_asociadas/read_asociadas'
+import { read_asociadas } from '@/app/api/administrador/marcas/read_asociadas/read_asociadas'
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Agregar_marca from '@/components/Administrador/marcas/Agregar_marca'
 import Leer_marcas from '@/components/Administrador/marcas/Leer_marcas'
