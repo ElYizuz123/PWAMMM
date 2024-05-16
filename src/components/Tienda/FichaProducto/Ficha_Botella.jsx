@@ -1,9 +1,8 @@
 "use client";
 
 import { K2D } from "next/font/google";
-import Contador from "./BotonesFicha";
 import Image from "next/image";
-import BotonesFicha from "./BotonesFicha";
+import BotonesFicha from "../BotonesFicha";
 
 const k2d = K2D({
   weight: ["400"],
