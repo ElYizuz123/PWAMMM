@@ -39,7 +39,7 @@ const Barra_Lateral = () => {
                 </div>
             </div>
             <div className="flex justify-center mt-5">
-                <Image width={500} height={500} alt={"MezcalerasLogoAdmin"} src="/mezcaleras_logo.png" className="w-20" />
+                <Image width={500} height={500} alt={"MezcalerasLogoAdmin"} src="/fondos/mezcaleras_logo.png" className="w-20" />
             </div>
             <div className="w-full flex flex-col justify-end items-end">
                 <Link href="/administrador/graficas" className={`w-11/12 ${buttonMap["/administrador/graficas"]} hover:bg-[#f7007365] hover:text-white flex justify-end rounded-l-full mt-6`}>

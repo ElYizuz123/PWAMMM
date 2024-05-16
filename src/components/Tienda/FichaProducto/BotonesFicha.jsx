@@ -69,11 +69,11 @@ const BotonesFicha = ({
         <div>
           <div
             className="
-        sm:w-64  sm:absolute sm:-ml-5
-        md:w-72  md:absolute md:-mt-3
-        lg:w-72  lg:absolute lg:translate-x-8
-        xl:w-72  xl:absolute xl:translate-x-8
-        2xl:w-72 2xl:absolute 2xl:translate-x-8
+        sm:w-72  sm:absolute sm:-translate-x-16
+        md:w-72  md:absolute md:-mt-3 md:-translate-x-14
+        lg:w-80  lg:absolute lg:-translate-x-14
+        xl:w-80  xl:absolute xl:-translate-x-14
+        2xl:w-[450px] 2xl:absolute 2xl:-translate-x-20 2xl:mt-10
         hidden sm:block md:block lg:block 2xl:block"
           >
             <button
@@ -91,7 +91,10 @@ const BotonesFicha = ({
               )}
             </button>
           </div>
-          <div className=" block sm:hidden md:hidden lg:hidden 2xl:hidden">
+          <div
+            className=" absolute block -translate-x-10
+          sm:hidden md:hidden lg:hidden 2xl:hidden"
+          >
             <button onClick={handleAddToCart}>
               <img
                 src="/emoticons/carrito3.png"
@@ -104,12 +107,12 @@ const BotonesFicha = ({
       ) : (
         <div>
           <div
-            className="      w-48  mt-2 bg-red-600 text-white font-semibold text-center absolute
+            className="      w-48  -translate-x-10 t-2 bg-red-600 text-white font-semibold text-center absolute
                           sm:w-64  sm:absolute sm:-ml-5 sm:text-center
                           md:w-72 md:absolute md:-ml-2 md:text-center md:-mt-3
-                           lg:w-72  lg:absolute lg:translate-x-8
-                           xl:w-72  xl:absolute xl:translate-x-8
-                           2xl:w-72 2xl:absolute 2xl:translate-x-8 "
+                           lg:w-80  lg:absolute lg:-translate-x-14
+                           xl:w-80  xl:absolute xl:-translate-x-14
+                           2xl:w-[450px] 2xl:absolute 2xl:-translate-x-20 2xl:text-center 2xl:mt-6"
           >
             SIN EXISTENCIA
           </div>
@@ -119,28 +122,30 @@ const BotonesFicha = ({
       <div className=" mt-3">
         {mercadoLibre !== "NULL" && (
           <button
-            className="btnMercadoLibre 
-                           sm:w-64  sm:absolute sm:-ml-5 sm:mt-6  sm:px-3
-                           md:w-72  md:absolute md:mt-2 md:px-2
-                           lg:w-72  lg:absolute lg:translate-x-8 lg:mt-12
-                           xl:w-72  xl:absolute xl:translate-x-8  xl:mt-12
-                           2xl:w-72 2xl:absolute 2xl:translate-x-8 2xl:mt-14"
+            className="btnMercadoLibre   translate-x-10 translate-y-16
+                           sm:w-72  sm:absolute   sm:-mt-10  sm:px-3 sm:-translate-x-16
+                           md:w-72  md:absolute md:mt-2 md:px-2 md:translate-y-0 md:-translate-x-14
+                           lg:w-80  lg:absolute lg:-translate-x-14 lg:mt-12
+                           xl:w-80  xl:absolute xl:-translate-x-14  xl:mt-12
+                          2xl:w-[450px] 2xl:absolute 2xl:-translate-x-20 2xl:mt-24 2xl:text-center"
           >
             <Link
               href={mercadoLibre}
-              className="  hidden
+              className="   hidden 
                             sm:block sm:text-sm sm:mr-5 sm:text-center sm:py-1
                             md:block md:text-sm md:mr-5 md:text-center md:py-1
-                            lg:block
+                            lg:block lg:text-sm lg:mr-5 lg:text-center lg:py-1
                             xl:block
-                            2xl:block"
+                            2xl:block 2xl:text-xl 2xl:px-16"
             >
               Comprar en mercado libre
             </Link>
 
             <img
-              className="w-10 h-9 rounded-lg
-              sm:w-7 sm:h-7 "
+              className="w-9 h-8 rounded-lg
+              
+              sm:w-7 sm:h-7 
+              2xl:w-12 2xl:h-10 2xl:-ml-8"
               src="\emoticons\mercado_libre_logo.webp"
               alt="Mercado Libre"
             />
@@ -151,13 +156,13 @@ const BotonesFicha = ({
 
       <div
         className=" flex -mt-0 
-         px-8 -translate-x-5 -translate-y-[280px]
+          translate-x-0 -translate-y-[280px]
          sm:-translate-y-72 sm:translate-x-5 
          md:-translate-y-12 md:translate-x-32 
 
          lg:translate-x-36 lg:-translate-y-12
          xl:translate-x-36 xl:-translate-y-12
-         2xl:translate-x-40 2xl:translate-y-14"
+         2xl:translate-x-60 2xl:-translate-y-14"
       >
         <button
           className="h-6 w-6 text-sm bg-[#f70073] rounded-full text-white font-semibold hover:text-gray-100  mx-3
