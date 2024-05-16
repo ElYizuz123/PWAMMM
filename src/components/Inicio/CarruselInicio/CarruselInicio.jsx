@@ -10,7 +10,6 @@ import 'swiper/scss/navigation';
 import 'swiper/scss';
 import CardCarruselnicio from "../CardCarruselInicio/CardCarruselnicio";
 
-const ruta = '/eventos/';
 
 
 
@@ -32,7 +31,7 @@ const CarruselInicio = () => {
 
 
   return (
-    <div className="relative z-1 p-8  sm:mt-0 md:mt-0 lg:mt-40 xl:sm:mt-40 2xl:mt-40 ">
+    <div className="relative  sm:mt-0 md:mt-0 lg:mt-40 xl:sm:mt-40 2xl:mt-40 ">
       <div className="w-[600px] h-[1000px] overflow-hidden absolute bottom-0 right-0 mr-0 -z-10">
           <div className=" w-[1000px] h-[1000px] rounded-full bg-[#f70073] bg-opacity-40 flex justify-center items-center absolute left-0 "></div>
         </div>
@@ -81,7 +80,7 @@ const CarruselInicio = () => {
       >
         {eventos && eventos.map((evento, index) => {
           return (
-            <div className="bg-gray-600" key={evento.id_evento}> {/*De llave se asigna el id del evento*/}
+            <div className="bg-gray-600 p-10 my-10" key={evento.id_evento}> {/*De llave se asigna el id del evento*/}
               <SwiperSlide key={evento.id_evento}>
              <CardCarruselnicio 
              nombre={evento.nombre}

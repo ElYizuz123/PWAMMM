@@ -64,7 +64,7 @@ const Historia = () => {
         ref={ref}
         className=" w-full   bg-[#f1f1f1] shadow-2xl md:max-w-2xl md:z-10 md:shadow-lg md:absolute md:top-0 md:mt-48 lg:w-3/5 lg:left-0 lg:mt-20 lg:ml-20 xl:mt-24 xl:ml-12"
       >
-        <div className="flex flex-col p-12 md:px-16">
+        <div className="flex flex-col p-8 md:px-16">
            {/*Aqui inicia la animación del título (Aparece de izquierda a derecha)*/}
           <motion.div 
             className={berkshire.className}
@@ -78,7 +78,7 @@ const Historia = () => {
             </h2>
           </motion.div>
 
-          <div className="mx-1 mt-5 sm:ml-20 lg:ml-0 xl:ml-10  text-xs sm:text-base md:text-base lg:text-xl xl:text-xl 2xl:text-xl text-justify ">
+          <div className="mx-1 mt-5 sm:ml-20 lg:ml-0 xl:ml-10  text-[13px]  sm:text-base md:text-base lg:text-xl xl:text-xl 2xl:text-xl text-justify ">
              {/*Aqui inicia la animación del texto (Va apareciendo poco a poco)*/}
             {lines.map((line, index) => (
               
@@ -93,7 +93,7 @@ const Historia = () => {
                   ease: "linear",
                 }}
                 style={{
-                  overflow: "hidden",
+                  //overflow: "hidden",
                   whiteSpace: "nowrap",
                 }}
               >

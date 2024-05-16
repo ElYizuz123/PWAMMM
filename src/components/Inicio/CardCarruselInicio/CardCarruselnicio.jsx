@@ -10,14 +10,16 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
     <div className="max-w-sm bg-white rounded overflow-hidden shadow-lg  mt-10 sm:mt-20 md:mt-20 lg:mt-20 xl:mt-20 2xl:mt-0 md:translate-x-44 -translate-y-14 ">
       {foto !== null ? (
 
-        <div className="relative w-full h-[400px] ">
+        <div className="relative w-full h-96 ">
 
 
           <Image
             className="object-cover w-full h-full"
             src={foto}
             alt={"Eventos Asociacion"+alte}
-            layout="fill"
+            width={1000}
+            height={1000}
+            objectFit="cover"
           />
         </div>
            
@@ -25,12 +27,14 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
 
 
       ) : (
-        <div className="flex items-center justify-center relative w-full h-[400px] ">
+        <div className="flex items-center justify-center relative w-full h-96 ">
           <Image
             className="object-cover w-full h-full"
             src="/multimedia/cardEvento6.png"
             alt={"Eventos "+alte}
-            layout="fill"
+            width={1000}
+            height={1000}
+            objectFit="cover"
           />
           <div className="absolute inset-0 flex flex-col justify-center items-center">
             

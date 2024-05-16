@@ -98,7 +98,7 @@ const Promociones = () => {
             return (
               <div key={producto.id} className="m-4 p-4 bg-white bg-opacity-75 rounded-lg ">
                 <Link href="\tienda">
-                  <h2 className={`font-semibold ${tamaño} animate-jump-in animate-once`}>#{index + 1}. {producto.nombre}</h2>
+                  <h2 className={`font-semibold ${tamaño} animate-jump-in animate-once text-center`}>#{index + 1}. {producto.nombre}</h2>
                 </Link>
               </div>
             );
@@ -113,7 +113,7 @@ const Promociones = () => {
           alt="Promoción"
           width={1000}
           height={1000}
-          className="max-w-full max-h-full z-50 md:w-[700px] -translate-y-6 md:translate-x-14"
+          className="max-w-full max-h-full z-50 md:w-[700px] -translate-y-14 md:translate-x-14"
         />
 
 
