@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <LayoutPrincipal>
       <Main />                                                                                   {/*Componente Video*/}
-      <div className=" w-full h-auto fondo-nosotras " >   
+      <div className=" w-full h-auto fondo-nosotras overflow-x-hidden" >   
        
       <div className="md:mb-10">
       <Promociones/> 
