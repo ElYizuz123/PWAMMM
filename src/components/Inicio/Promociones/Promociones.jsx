@@ -54,8 +54,8 @@ const Promociones = () => {
 
   return (
 
-    <div className="h-screen flex flex-col lg:flex-row ">
-      <div className="lg:w-1/2 lg:bg-transparent bg-white justify-center items-center -z-0 " ref={ref}>
+    <div className="h-screen sm:h-screen md:h-screen flex flex-col lg:flex-row ">
+      <div className="lg:w-1/2 lg:bg-transparent bg-white justify-center items-center -z-0  " ref={ref}>
         <motion.div
           className={berkshire.className}
           initial="hidden"
