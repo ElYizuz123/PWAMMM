@@ -47,11 +47,11 @@ const CarruselAsociadas = () => {
   //Efecto para cargar los datos de las asociadas y las marcas desde la BD
   useEffect(() => {
     const fetchAsociadas = async () => {
-      const response = await fetch("/api/read_asociadas"); // Se leen los datos de las asociadas de la base de datos
+      const response = await fetch("/api/nosotras/read_asociadas"); // Se leen los datos de las asociadas de la base de datos
       const data = await response.json();
       setAsociadas(data);
 
-      const responseMarca = await fetch("/api/read_marcas"); // Se leen las marcas de la base de datos
+      const responseMarca = await fetch("/api/tienda/read_marcas"); // Se leen las marcas de la base de datos
       const dataMarca = await responseMarca.json();
       setMarcas(dataMarca);
     };

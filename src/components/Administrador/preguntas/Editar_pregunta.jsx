@@ -24,7 +24,7 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
     const handleOnSubmit = async (data) => {
 
         setIsLoading(true)
-        const res = await fetch('/api/preguntas/update_pregunta', {
+        const res = await fetch('/api/administrador/preguntas/update_pregunta', {
             method: 'POST',
             body: JSON.stringify(data)
         })
@@ -56,7 +56,7 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
 
     //Leer las preguntas de la base de datos
     const readData = async () => {
-        const res = await fetch('/api/preguntas/read_pregunta', {
+        const res = await fetch('/api/administrador/preguntas/read_pregunta', {
             method: 'POST',
             body: JSON.stringify(idPregunta)
         })

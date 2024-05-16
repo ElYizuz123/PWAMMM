@@ -12,7 +12,7 @@ const Crear_marca = ({ isOpen, onClose, asociadas }) => {
     //Crear una nueva marca
     const handleOnSubmit = async (data) => {
         setIsLoading(true)
-        const res = await fetch('/api/marcas/create_marca', {
+        const res = await fetch('/api/administrador/marcas/create_marca', {
             method: 'POST',
             body: JSON.stringify(data)
         })

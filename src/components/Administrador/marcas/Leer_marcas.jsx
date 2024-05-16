@@ -13,7 +13,7 @@ const Leer_marcas = ({ asociadas }) => {
     const editarRef = useRef(null)
     //Leer marcas
     const readData = async () => {
-        const res = await fetch('/api/marcas/read_marcas_admin')
+        const res = await fetch('/api/administrador/marcas/read_marcas_admin')
         const resJSON = await res.json()
         setMarcas(JSON.parse(resJSON))
     };
@@ -63,7 +63,7 @@ const Leer_marcas = ({ asociadas }) => {
 
     //Eliminar una marca
     const deleteProduct = async (data) => {
-        const res = await fetch('/api/marcas/delete_marca', {
+        const res = await fetch('/api/administrador/marcas/delete_marca', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

@@ -12,7 +12,7 @@ const Agregar_producto = ({ marcas }) => {
 
     //Leer las marcas de las botellas
     const readMarcasBotellas =async () =>{
-        const res = await fetch('/api/producto/read_marcas',{
+        const res = await fetch('/api/administrador/producto/read_marcas',{
             method:'POST',
             body:JSON.stringify(1)
         })
@@ -22,7 +22,7 @@ const Agregar_producto = ({ marcas }) => {
 
     //Leer las marcas de los acompañamientos
     const readMarcasAcompanamientos =async () =>{
-        const res = await fetch('/api/producto/read_marcas',{
+        const res = await fetch('/api/administrador/producto/read_marcas',{
             method:'POST',
             body:JSON.stringify(2)
         })

@@ -78,7 +78,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
 
     //Lectura de producto
     const readProduct = (async (data) => {
-        const res = await fetch('/api/producto/read_producto_admin', {
+        const res = await fetch('/api/administrador/producto/read_producto_admin', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -103,7 +103,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
             form.set('nombre', producto[0].fotoId)
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/update_image', {
+            const fotoRes = await fetch('/api/administrador/update_image', {
                 method: 'POST',
                 body: form
             })
@@ -114,7 +114,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
             if (fotoResJSON !="Error") {
                 data["foto"] = fotoResJSON.picUri
                 data["fotoId"] = fotoResJSON.picId
-                const res = await fetch('/api/producto/update_producto', {
+                const res = await fetch('/api/administrador/producto/update_producto', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -150,7 +150,7 @@ const Editar_Producto = ({ onClose, marcas, idProducto }) => {
         }
         //No se cambio la fotografía
         else {
-            const res = await fetch('/api/producto/update_producto', {
+            const res = await fetch('/api/administrador/producto/update_producto', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

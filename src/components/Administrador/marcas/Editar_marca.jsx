@@ -37,7 +37,7 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
     //Actualizar los datos de la marca
     const handleOnSubmit = async (data) => {
         setIsLoading(true)
-        const res = await fetch('/api/marcas/update_marca', {
+        const res = await fetch('/api/administrador/marcas/update_marca', {
             method: 'POST',
             body: JSON.stringify(data)
         })
@@ -73,7 +73,7 @@ const Editar_marca = ({ isOpen, onClose, asociadas, idMarca }) => {
 
     //Leer los datos especificos de la marca seleccionada
     const readData = async () =>{
-        const res = await fetch('/api/marcas/read_marca', {
+        const res = await fetch('/api/administrador/marcas/read_marca', {
             method: 'POST',
             body: JSON.stringify(idMarca)
         })

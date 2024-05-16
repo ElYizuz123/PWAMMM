@@ -23,7 +23,7 @@ const Categorias = () => {
     else {
       search = page
     }
-    const res = await fetch('/api/galeria/read_fotos', {
+    const res = await fetch('/api/administrador/galeria/read_fotos', {
       method: 'POST',
       body: JSON.stringify(search)
     })
@@ -40,13 +40,13 @@ const Categorias = () => {
       "source": "galeria"
     }
     //Eliminación de imagen
-    const deletedImage = await fetch('/api/delete_image', {
+    const deletedImage = await fetch('/api/administrador/delete_image', {
       method: 'POST',
       body: JSON.stringify(data),
     })
     const resDeletedImageJSON = await deletedImage.json()
     if (resDeletedImageJSON == 'Arhivo eliminado correctamente') {
-      const res = await fetch('/api/galeria/delete_foto', {
+      const res = await fetch('/api/administrador/galeria/delete_foto', {
         method: 'POST',
         body: JSON.stringify(idFoto),
         headers: {
@@ -103,7 +103,7 @@ const Categorias = () => {
 
   //Conteo de fotografías para la paginación
   const countData =async () =>{
-    const res = await fetch('/api/galeria/count_fotos')
+    const res = await fetch('/api/administrador/galeria/count_fotos')
     const resJSON = await res.json()
     setTotalPages(Math.ceil((resJSON) / 12))
   }

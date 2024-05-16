@@ -36,7 +36,7 @@ const Leer_ventas = () => {
     };
 
     const readData = async (ord) =>{
-        const res = await fetch('/api/ventas/read_ventas')
+        const res = await fetch('/api/administrador/ventas/read_ventas')
         const resJSOn = await res.json()
         if(ord){
             setVentasOr(resJSOn)
@@ -92,7 +92,7 @@ const Leer_ventas = () => {
             statusA: stat == "Pendiente" ? "Atendida":"Pendiente",
             id: idVenta
         }
-        const res = await fetch('/api/ventas/change_status', {
+        const res = await fetch('/api/administrador/ventas/change_status', {
             method: 'POST',
             body: JSON.stringify(data)
         })

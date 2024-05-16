@@ -53,7 +53,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
             form.set('nombre', asociada[0].fotoId)
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/update_image', {
+            const fotoRes = await fetch('/api/administrador/update_image', {
                 method: 'POST',
                 body: form
             })
@@ -64,7 +64,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
             if (fotoResJSON != "Error") {
                 data["foto"] = fotoResJSON.picUri
                 data["fotoId"] = fotoResJSON.picId
-                const res = await fetch('/api/asociadas/update_asociada', {
+                const res = await fetch('/api/administrador/asociadas/update_asociada', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -98,7 +98,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
         }
         //No se cambio la fotografía
         else {
-            const res = await fetch('/api/asociadas/update_asociada', {
+            const res = await fetch('/api/administrador/asociadas/update_asociada', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -133,7 +133,7 @@ const Update_Asociada = ({onClose, isOpen, idAsociada}) => {
 
     //Leer datos de las asociadas
     const readData = async () =>{
-        const res = await fetch('/api/asociadas/read_asociada',{
+        const res = await fetch('/api/administrador/asociadas/read_asociada',{
             method:'POST',
             body:idAsociada
         })

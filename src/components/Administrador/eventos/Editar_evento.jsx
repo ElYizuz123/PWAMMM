@@ -41,7 +41,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
 
     //Lectura de eventos 
     const readData = async () => {
-        const res = await fetch('/api/eventos/read_evento', {
+        const res = await fetch('/api/administrador/eventos/read_evento', {
             method: 'POST',
             body: idEvento
         })
@@ -76,7 +76,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
             form.set('nombre', evento[0].fotoId)
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/update_image', {
+            const fotoRes = await fetch('/api/administrador/update_image', {
                 method: 'POST',
                 body: form
             })
@@ -87,7 +87,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
             if (fotoResJSON != "Error") {
                 data["foto"] = fotoResJSON.picUri
                 data["fotoId"] = fotoResJSON.picId
-                const res = await fetch('/api/eventos/update_evento', {
+                const res = await fetch('/api/administrador/eventos/update_evento', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -130,7 +130,7 @@ const Editar_evento = ({ idEvento, isOpen, onClose }) => {
             }
         } else {
             //Modificación sin fotografía
-            const res = await fetch('/api/eventos/update_evento', {
+            const res = await fetch('/api/administrador/eventos/update_evento', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

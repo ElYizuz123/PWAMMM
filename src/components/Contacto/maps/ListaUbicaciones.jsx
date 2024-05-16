@@ -17,7 +17,7 @@ function ListaUbicaciones() {
   const [ubicacion, setUbicacion] = useState(null);
   const readData = async () => {
     try {
-      const res = await fetch('/api/read_ubicaciones');
+      const res = await fetch('/api/contacto/read_ubicaciones');
       const resJSON = await res.json();
       setUbicacion(resJSON);
       console.log(resJSON);

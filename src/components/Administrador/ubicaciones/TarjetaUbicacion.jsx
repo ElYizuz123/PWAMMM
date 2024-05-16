@@ -10,7 +10,7 @@ const TarjetaUbicacion = ({ idUbicacion, marca, mapa, openEdit, foto }) => {
 
     const deleteUbicacion = async () => {
         //Elminar a la asociada de la base de datos
-        const res = await fetch('/api/ubicaciones/delete_ubicacion', {
+        const res = await fetch('/api/administrador/ubicaciones/delete_ubicacion', {
             method: 'POST',
             body: JSON.stringify(idUbicacion),
             headers: {

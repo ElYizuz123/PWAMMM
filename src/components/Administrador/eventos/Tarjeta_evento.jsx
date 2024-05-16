@@ -15,13 +15,13 @@ const Tarjeta_evento = ({ id_evento, foto, duracion, openEdit, fotoId}) => {
 
     //Manejo de la eliminación del evento
     const deleteEvento = (async () => {
-        const deletedImage = await fetch('/api/delete_image', {
+        const deletedImage = await fetch('/api/administrador/delete_image', {
             method: 'POST',
             body: JSON.stringify(data),
         })
         const resDeletedImageJSON = await deletedImage.json()
         if (resDeletedImageJSON == 'Arhivo eliminado correctamente') {
-            const res = await fetch('/api/eventos/delete_evento', {
+            const res = await fetch('/api/administrador/eventos/delete_evento', {
                 method: 'POST',
                 body: JSON.stringify(id_evento),
                 headers: {

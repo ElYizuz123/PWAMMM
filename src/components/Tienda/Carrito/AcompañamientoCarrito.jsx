@@ -10,7 +10,7 @@ const AcompañamientoCarrito = () => {
 
   useEffect(() => {
     const fetchProductos = async () => {
-      const response = await fetch("/api/read_acompanamientos");
+      const response = await fetch("/api/tienda/read_acompanamientos");
       const data = await response.json();
 
       setAcompanamientos(data);

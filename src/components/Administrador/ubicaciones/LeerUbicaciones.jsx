@@ -33,13 +33,13 @@ const LeerUbicaciones = () => {
   };
 
   const readData = async () => {
-    const res = await fetch('/api/ubicaciones/read_ubicaciones')
+    const res = await fetch('/api/administrador/ubicaciones/read_ubicaciones')
     const resJSON = await res.json()
     setUbicaciones(resJSON)
   }
 
   const readMarcas = async () =>{
-    const res = await fetch('/api/ubicaciones/read_marcas')
+    const res = await fetch('/api/administrador/ubicaciones/read_marcas')
     const resJSON = await res.json()
     setMarcas(resJSON)
   }

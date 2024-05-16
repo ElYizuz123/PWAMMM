@@ -12,7 +12,7 @@ const Categoria = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/read_marcas");
+      const response = await fetch("/api/tienda/read_marcas");
       const dataMarcas = await response.json();
 
       setMarcas(dataMarcas);

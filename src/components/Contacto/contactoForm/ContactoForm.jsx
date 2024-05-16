@@ -10,7 +10,7 @@ const ContactoForm = () => {
 
   const sendEmail = async (data) => {
     try {
-      const res = await fetch('/api/sendEmail', {
+      const res = await fetch('/api/contacto/sendEmail', {
         method: 'POST',
         body: JSON.stringify(data),
       });

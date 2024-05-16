@@ -49,9 +49,9 @@ function MostrarProductos({
   //LLAMA API PARA MOSTRAR LA INFORMACIÓN DE BOTELLAS Y ACOMPAÑAMIENTOS EN LAS TARJETAS
   useEffect(() => {
     const fetchProductos = async () => {
-      const responseBotellas = await fetch("/api/read_botellas");
+      const responseBotellas = await fetch("/api/tienda/read_botellas");
       const dataBotellas = await responseBotellas.json();
-      const responseAcompanamientos = await fetch("/api/read_acompanamientos");
+      const responseAcompanamientos = await fetch("/api/tienda/read_acompanamientos");
       const dataAcompanamientos = await responseAcompanamientos.json();
 
       if (Object.keys(stock).length === 0) {

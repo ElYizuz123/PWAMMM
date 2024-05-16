@@ -67,7 +67,7 @@ const Leer_productos = () => {
         else {
             search = page
         }
-        const res = await fetch('/api/producto/read_productos', {
+        const res = await fetch('/api/administrador/producto/read_productos', {
             method: 'POST',
             body: JSON.stringify(search)
         })
@@ -78,7 +78,7 @@ const Leer_productos = () => {
 
     //Función para contar las páginas a utilizar
     const countData = async () => {
-        const res = await fetch('/api/producto/cont_productos')
+        const res = await fetch('/api/administrador/producto/cont_productos')
         const resJSON = await res.json()
         setTotalPages(Math.ceil((resJSON) / 12))
     }
@@ -86,7 +86,7 @@ const Leer_productos = () => {
     //Función para leer las marcas de las botellas
 
     const readMarcasBotellas = async () => {
-        const res = await fetch('/api/producto/read_marcas', {
+        const res = await fetch('/api/administrador/producto/read_marcas', {
             method: 'POST',
             body: JSON.stringify(1)
         })
@@ -97,7 +97,7 @@ const Leer_productos = () => {
 
     //Función para leer las marcas de los acompañamientos
     const readMarcasAcompanamientos = async () => {
-        const res = await fetch('/api/producto/read_marcas', {
+        const res = await fetch('/api/administrador/producto/read_marcas', {
             method: 'POST',
             body: JSON.stringify(2)
         })
@@ -125,7 +125,7 @@ const Leer_productos = () => {
             busqueda: e.target[0].value,
             page: search
         }
-        const res = await fetch('/api/producto/read_producto_like', {
+        const res = await fetch('/api/administrador/producto/read_producto_like', {
             method: 'POST',
             body: JSON.stringify(data)
         })

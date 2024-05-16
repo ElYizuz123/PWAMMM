@@ -74,7 +74,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
 
     //Lectura de producto
     const readProduct = (async (data) => {
-        const res = await fetch('/api/producto/read_acompanamiento', {
+        const res = await fetch('/api/administrador/producto/read_acompanamiento', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -99,7 +99,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
             form.set('nombre', producto.fotoId)
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/update_image', {
+            const fotoRes = await fetch('/api/administrador/update_image', {
                 method: 'POST',
                 body: form
             })
@@ -110,7 +110,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
             if (fotoResJSON != "Error") {
                 data["foto"] = fotoResJSON.picUri
                 data["fotoId"] = fotoResJSON.picId
-                const res = await fetch('/api/producto/update_acompanamiento', {
+                const res = await fetch('/api/administrador/producto/update_acompanamiento', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -146,7 +146,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
         }
         //No se cambio la fotografía
         else {
-            const res = await fetch('/api/producto/update_acompanamiento', {
+            const res = await fetch('/api/administrador/producto/update_acompanamiento', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

@@ -5,7 +5,7 @@ const PreguntasFrecuentes = () => {
 
     const [preguntas, setPreguntas] = useState(null);
     const readData = async () => {
-        const res = await fetch('/api/read_preguntasFrecuentes');
+        const res = await fetch('/api/contacto/read_preguntasFrecuentes');
         const resJSON = await res.json();
         setPreguntas(JSON.parse(resJSON));
         console.log(resJSON);

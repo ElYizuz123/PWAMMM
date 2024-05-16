@@ -73,7 +73,7 @@ const Crear_evento = () => {
             form.set('source', "eventos")
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/upload_image', {
+            const fotoRes = await fetch('/api/administrador/upload_image', {
                 method: 'POST',
                 body: form
             })
@@ -87,7 +87,7 @@ const Crear_evento = () => {
         if (fotoResJSON != "Error") {
             data["foto"] = fotoResJSON.picUri
             data["fotoId"] = fotoResJSON.picId
-            const res = await fetch('/api/eventos/create_evento', {
+            const res = await fetch('/api/administrador/eventos/create_evento', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

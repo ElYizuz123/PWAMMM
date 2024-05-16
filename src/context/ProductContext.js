@@ -103,7 +103,7 @@ export const ProductProvider = ({ children }) => {
   const enviarDataApi = async () => {
     try {
       console.log(dataFormulario)
-      const response = await fetch("/api/ventas/create_venta", {
+      const response = await fetch("/api/tienda/create_venta", {
         method: "POST",
         body: JSON.stringify({ data: dataFormulario, productos: productos }),
         headers: {
@@ -116,7 +116,7 @@ export const ProductProvider = ({ children }) => {
       }
 
       // MANDA LOS DATOS NECESARIOS PARA EL CORREO
-      const responseData = await fetch("/api/send_emailVenta", {
+      const responseData = await fetch("/api/tienda/send_emailVenta", {
         method: "POST",
         body: JSON.stringify({
           nombreCliente: dataFormulario.nombre,

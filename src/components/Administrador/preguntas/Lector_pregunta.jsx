@@ -33,7 +33,7 @@ const Lector_pregunta = () => {
 
     //Manejo de eliminación de una pregunta 
     const deletePregunta = async (data) => {
-        const res = await fetch('/api/preguntas/delete_pregunta', {
+        const res = await fetch('/api/administrador/preguntas/delete_pregunta', {
             method: 'POST',
             body: data
         })
@@ -87,7 +87,7 @@ const Lector_pregunta = () => {
 
     //Leer las preguntas 
     const readData = async () => {
-        const res = await fetch('/api/preguntas/read_preguntas')
+        const res = await fetch('/api/administrador/preguntas/read_preguntas')
         const resJSON = await res.json()
         setPreguntas(JSON.parse(resJSON))
     }

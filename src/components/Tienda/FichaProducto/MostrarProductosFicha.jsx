@@ -15,9 +15,9 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
 
   useEffect(() => {
     const fetchProductos = async () => {
-      const responseBotella = await fetch("/api/read_botellas");
+      const responseBotella = await fetch("/api/tienda/read_botellas");
       const dataBotella = await responseBotella.json();
-      const responseAcompanamiento = await fetch("/api/read_acompanamientos");
+      const responseAcompanamiento = await fetch("/api/tienda/read_acompanamientos");
       const dataAcompanamiento = await responseAcompanamiento.json();
 
       setBotellas(dataBotella);

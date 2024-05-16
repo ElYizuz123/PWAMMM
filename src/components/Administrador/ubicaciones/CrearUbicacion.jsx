@@ -38,7 +38,7 @@ const CrearUbicacion = () => {
 
   //Leer las marcas
   const readMarcas = async () => {
-    const res = await fetch('/api/ubicaciones/read_marcas')
+    const res = await fetch('/api/administrador/ubicaciones/read_marcas')
     const resJSON = await res.json()
     setMarcas(resJSON)
   }
@@ -70,7 +70,7 @@ const CrearUbicacion = () => {
   //Manejar la creación de una nueva asociada
   const handleOnSubmit = async (data) => {
     setIsLoading(true)
-    const res = await fetch('/api/ubicaciones/create_ubicacion', {
+    const res = await fetch('/api/administrador/ubicaciones/create_ubicacion', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {

@@ -9,7 +9,7 @@ const Galeria = () => {
     //jalar img de la bd
     const [foto, setFoto] = useState(null);
     const readData = async () => {
-        const res = await fetch('/api/read_fotos');
+        const res = await fetch('/api/galeria/read_fotos');
         const resJSON = await res.json();
         setFoto(JSON.parse(resJSON));
         console.log(resJSON);
@@ -30,7 +30,7 @@ const Galeria = () => {
     return (
         <div>
             <div className={model ? "model open" : "model"}>
-                <Image src={tempImgSrc} width={1000} height={1000} />
+                <Image src={tempImgSrc} width={1000} height={1000} alt=""/>
                 <VscChromeClose onClick={() => setModel(false)} />
             </div>
 
@@ -48,6 +48,7 @@ const Galeria = () => {
                                     className="w-full rounded-xl"
                                     src={foto.fotoUri}
                                     style={{ width: "100%" }}
+                                    alt=""
                                 ></img>
                             </div>
                         )

@@ -36,8 +36,8 @@ const Promociones = () => {
   // Para cargar los productos más vendidos al montar el componente
   useEffect(() => {
     const readProductos = async () => {
-      const res = await fetch('/api/graficas/productos')
-      const resJSON = await res.json()
+      const res = await fetch('/api/administrador/graficas/productos')
+      const resJSON = await res.json()                                
       setVentasProductos(resJSON.slice(0, 3))
     };
     readProductos();

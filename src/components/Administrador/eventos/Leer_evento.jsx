@@ -43,7 +43,7 @@ const Leer_evento = () => {
         else {
             search = page
         }
-        const res = await fetch('/api/eventos/read_eventos', {
+        const res = await fetch('/api/administrador/eventos/read_eventos', {
             method: 'POST',
             body: JSON.stringify(search)
         })
@@ -53,7 +53,7 @@ const Leer_evento = () => {
 
     //Conteo de eventos para paginación
     const countData = async () => {
-        const res = await fetch('/api/eventos/count_eventos')
+        const res = await fetch('/api/administrador/eventos/count_eventos')
         const resJSON = await res.json()
         setTotalPages(Math.ceil((resJSON) / 12))
     }

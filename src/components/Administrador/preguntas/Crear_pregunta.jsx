@@ -48,7 +48,7 @@ const Crear_pregunta = () => {
     //Escribir pregunta en la DB
     const handleOnSubmit = async (data) => {
         setIsLoading(true)
-        const res = await fetch('/api/preguntas/create_pregunta', {
+        const res = await fetch('/api/administrador/preguntas/create_pregunta', {
             method: 'POST',
             body: JSON.stringify(data)
         })

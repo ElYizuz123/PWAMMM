@@ -21,7 +21,7 @@ const CarruselInicio = () => {
 
   useEffect(() => {
     const fetchEventos = async () => {
-      const response = await fetch("/api/read_evento");
+      const response = await fetch("/api/inicio/read_evento");
       const data = await response.json();
       setEventos(data);
     };

@@ -68,7 +68,7 @@ const Crear_foto = () => {
             form.set('source', "galeria")
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/upload_image', {
+            const fotoRes = await fetch('/api/administrador/upload_image', {
                 method: 'POST',
                 body: form
             })
@@ -79,7 +79,7 @@ const Crear_foto = () => {
             if (fotoResJSON != "Error") {
                 data["foto"] = fotoResJSON.picUri
                 data["fotoId"] = fotoResJSON.picId
-                const res = await fetch('/api/galeria/create_foto', {
+                const res = await fetch('/api/administrador/galeria/create_foto', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {

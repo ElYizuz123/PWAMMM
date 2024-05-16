@@ -292,7 +292,7 @@ function FormaPago({ transferencia, setTransferencia, paypal, setPaypal }) {
                     style={{ layout: "horizontal" }}
                     //PAGO (TOTAL)
                     createOrder={async (data, actions) => {
-                      const res = await fetch("/api/payPal", {
+                      const res = await fetch("/api/tienda/payPal", {
                         method: "POST",
                         headers: {
                           "Content-Type": "application/json",

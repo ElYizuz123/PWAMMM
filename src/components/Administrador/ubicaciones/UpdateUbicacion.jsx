@@ -50,7 +50,7 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
         setIsLoading(true)
         console.log("La imagen no cambia")
         console.log(data)
-        const res = await fetch('/api/ubicaciones/update_ubicacion', {
+        const res = await fetch('/api/administrador/ubicaciones/update_ubicacion', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -84,7 +84,7 @@ const UpdateUbicacion = ({ onClose, idUbicacion, marcas }) => {
 
     //Leer datos de las ubicaciones
     const readData = async () => {
-        const res = await fetch('/api/ubicaciones/read_ubicacion', {
+        const res = await fetch('/api/administrador/ubicaciones/read_ubicacion', {
             method: 'POST',
             body: idUbicacion
         })

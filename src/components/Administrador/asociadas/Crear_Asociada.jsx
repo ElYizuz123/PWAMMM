@@ -71,7 +71,7 @@ const Crear_Asociada = () => {
             form.set('source', "mezcaleras")
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/upload_image', {
+            const fotoRes = await fetch('/api/administrador/upload_image', {
                 method: 'POST',
                 body: form
             })
@@ -82,7 +82,7 @@ const Crear_Asociada = () => {
             if (fotoResJSON != "Error") {
                 data["foto"] = fotoResJSON.picUri
                 data["fotoId"] = fotoResJSON.picId
-                const res = await fetch('/api/asociadas/create_asociada', {
+                const res = await fetch('/api/administrador/asociadas/create_asociada', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {

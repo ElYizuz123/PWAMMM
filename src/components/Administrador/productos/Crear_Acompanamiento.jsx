@@ -43,7 +43,7 @@ const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
             form.set('source', "productos")
             form.set('modifier', data.hexa)
             //Registrar foto en el servidor
-            const fotoRes = await fetch('/api/upload_image', {
+            const fotoRes = await fetch('/api/administrador/upload_image', {
                 method: 'POST',
                 body: form
             })
@@ -54,7 +54,7 @@ const Crear_Acompanamiento = ({ isOpen, onClose, marcas }) => {
             if (fotoResJSON != "Error") {
                 data["foto"] = fotoResJSON.picUri
                 data["fotoId"] = fotoResJSON.picId
-                const res = await fetch('/api/producto/create_acompanamiento', {
+                const res = await fetch('/api/administrador/producto/create_acompanamiento', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
