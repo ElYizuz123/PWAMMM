@@ -7,7 +7,7 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
   const nombreMay = nombre.toUpperCase();
   return (
 
-    <div className="max-w-sm bg-white rounded overflow-hidden shadow-lg  mt-10 sm:mt-20 md:mt-20 lg:mt-20 xl:mt-20 2xl:mt-0 md:translate-x-44 ">
+    <div className="max-w-sm bg-white rounded overflow-hidden shadow-lg  mt-10 sm:mt-20 md:mt-20 lg:mt-20 xl:mt-20 2xl:mt-0 md:translate-x-44 -translate-y-14 ">
       {foto !== null ? (
 
         <div className="relative w-full h-[400px] ">
@@ -29,7 +29,7 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
           <Image
             className="object-cover w-full h-full"
             src="/multimedia/cardEvento6.png"
-            alt="Eventos "
+            alt={"Eventos "+alte}
             layout="fill"
           />
           <div className="absolute inset-0 flex flex-col justify-center items-center">
