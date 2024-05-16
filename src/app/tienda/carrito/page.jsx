@@ -1,9 +1,9 @@
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
 import Image from "next/image";
-import MostrarItemsCarrito from "@/components/tienda/MostrarItemsCarrito";
+import MostrarItemsCarrito from "@/components/Tienda/Carrito/MostrarItemsCarrito";
 import { K2D } from "next/font/google";
 import Link from "next/link";
-import IrFormulario from "@/components/tienda/IrFormulario";
+import IrFormulario from "@/components/Tienda/Carrito/IrFormulario";
 
 const k2d = K2D({
   weight: ["400"],

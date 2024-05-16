@@ -2,9 +2,11 @@
 import { ProductContext } from "@/context/ProductContext";
 import React, { useContext, useEffect, useState } from "react";
 import MostrarAcompanamientoCarrito from "./MostrarAcompanamientoCarrito";
+import { CantidadContext } from "@/context/CantidadContext";
 
 const AcompañamientoCarrito = () => {
   const [acompanamientos, setAcompanamientos] = useState([]);
+  const { stock } = useContext(CantidadContext);
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -28,7 +30,7 @@ const AcompañamientoCarrito = () => {
             imagen={acompanamiento.producto.fotoUri}
             ml={acompanamiento.gr}
             marca={acompanamiento.producto.marca.nombre}
-            cantidad={acompanamiento.producto.cantidad}
+            cantidad={stock[acompanamiento.producto.id_producto]}
           ></MostrarAcompanamientoCarrito>
         ))}
     </div>

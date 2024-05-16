@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Ficha_Botella from "./Ficha_Botella";
 import Ficha_Acompañamiento from "./Ficha_Acompañamiento";
-import Tarjeta_Botella from "./Tarjeta_Botella";
-import Tarjeta_Acompañamiento from "./Tarjeta_Acompañamiento";
+import Tarjeta_Botella from "../Principal/Tarjeta_Botella";
+import Tarjeta_Acompañamiento from "../Principal/Tarjeta_Acompañamiento";
 import { CantidadContext } from "@/context/CantidadContext";
 import { useContext } from "react";
 
@@ -132,7 +132,6 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             <p></p>
           )}
         </div>
-        
           {botellas.filter(
             (item) =>
               item.producto.marca_id_marca === item.producto.marca.id_marca &&

@@ -178,7 +178,7 @@ const CardVision = () => {
           variants={titleVariantsVision}
           className="flex flex-wrap items-center mt-28 p-6 bg-white rounded-lg shadow-lg"
         >
-          <div className="w-full md:w-3/5 lg:w-1/2 px-4">
+          <div className="w-full md:w-3/5 lg:w-1/2 ">
          
               <Image
                // La clave aquí es la URL de la imagen, lo que asegura que el componente se recrea en cada cambio

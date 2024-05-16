@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Image from 'next/image';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const randomHexa = () => {
     const randomNumber = Math.floor(Math.random() * 65536);
@@ -14,10 +15,11 @@ const randomHexa = () => {
 const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto }) => {
     const [productPhoto, setProductPhoto] = useState(null)
     const [defaultData, setDefaultData] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [producto, setProducto] = useState(null)
     const { register, handleSubmit, setValue } = useForm();
     const fileInputRef = useRef(null)
-    const {update, setUpdate} = useContext(contexto)
+    const { update, setUpdate } = useContext(contexto)
     const hexa = randomHexa()
 
     //Default data
@@ -88,6 +90,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
 
     //Realizar cambio 
     const handleOnSubmit = (async (data) => {
+        setIsLoading(true)
         //Cambio la fotografía
         if (productPhoto) {
             const form = new FormData()
@@ -130,6 +133,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
                     })
                     const up = !update
                     setUpdate(up)
+                    onClose()
                 }
                 else {
                     Swal.fire({
@@ -165,6 +169,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
                 })
                 const up = !update
                 setUpdate(up)
+                onClose()
             } else {
                 Swal.fire({
                     icon: "error",
@@ -173,6 +178,7 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
                 });
             }
         }
+        setIsLoading(false)
     })
 
     //Cerrado de la ventana y actualización 
@@ -328,9 +334,19 @@ const Editar_Acompanamiento = ({ isOpen, onClose, marcas, nProductos, idProducto
                                 />
                                 <div className='w-full flex justify-end items-end'>
                                     <button
+                                        disabled={isLoading}
                                         type='submit'
                                         className='bg-[#98E47D] w-48 h-10 text-2xl font-bold rounded-xl mr-3 mt-[1%]'
-                                    >Guardar cambios
+                                    >
+                                        {!isLoading &&
+                                            "Guardar cambios"
+                                        }
+                                        {
+                                            isLoading &&
+                                            <div className='flex justify-center'>
+                                                <AiOutlineLoading3Quarters className='animate-spin' />
+                                            </div>
+                                        }
                                     </button>
                                 </div>
                             </form>

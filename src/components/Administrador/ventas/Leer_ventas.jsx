@@ -35,15 +35,25 @@ const Leer_ventas = () => {
         },
     };
 
-    const readData = async () =>{
+    const readData = async (ord) =>{
         const res = await fetch('/api/ventas/read_ventas')
         const resJSOn = await res.json()
-        setVentasOr(resJSOn)
+        if(ord){
+            setVentasOr(resJSOn)
+        }
+        else{
+            setVentasOr(resJSOn.reverse())
+        }
     }
 
     useEffect(()=>{
-        readData()
-    },[])
+        if(orden == "reciente"){
+            readData(true)
+        }else{
+            readData(false)
+        }
+        
+    },[orden])
 
     //Cerrar modal de detalles
     const onClose = () => {
@@ -70,13 +80,10 @@ const Leer_ventas = () => {
     //Cambiar orden de visualización de ventas
     const handleChange = (e) => {
         if (e.target.value == "antiguo") {
-            setVentasOr(ventasOr.reverse());
             setOrden("antiguo");
-            console.log(ventasOr);
         }
         else {
             setOrden("reciente");
-            setVentasOr(ventasOr.reverse());
         }
     }
 
@@ -102,7 +109,11 @@ const Leer_ventas = () => {
                     clearInterval(timerInterval);
                 }
             }).then(() => {
-                readData()
+                if(orden == "reciente"){
+                    readData(true)
+                }else{
+                    readData(false)
+                }
             });
         }
         else {
@@ -180,7 +191,7 @@ const Leer_ventas = () => {
                                     <td className='px-4 py-2 border-b border-gray-500'>{venta.status}</td>
                                     <td className='px-4 py-2 border-b border-gray-500'>
                                         <div className='flex justify-center'>
-                                            <input type='checkbox' checked={venta.status == "Pendiente" ? false:true} className='w-5 h-5 border-b border-gray-500 flex' onClick={() => changeStatus(venta.status, venta.id_venta)} />
+                                            <input type='checkbox' defaultChecked={venta.status == "Pendiente" ? false:true} className='w-5 h-5 border-b border-gray-500 flex' onClick={() => changeStatus(venta.status, venta.id_venta)} />
                                         </div>
                                     </td>
 

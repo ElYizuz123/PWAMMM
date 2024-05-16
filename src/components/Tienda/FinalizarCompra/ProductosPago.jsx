@@ -19,7 +19,7 @@ function ProductosPago({
     <div className={k2d.className}>
       <div className="bg-white p-4 flex items-center space-x-4 shadow rounded-lg mt-4">
         <img
-          src={`/productos/${imagen}`}
+          src={imagen}
           className="h-20 w-20 object-cover rounded-full"
         />
         {/* DISEÑO TARJETAS PRODUCTOS A COMPRAR */}

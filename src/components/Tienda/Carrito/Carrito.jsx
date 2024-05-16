@@ -8,14 +8,17 @@ import { XIcon, TrashIcon } from "@heroicons/react/solid";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { EmojiSadIcon } from "@heroicons/react/outline";
+import { CantidadContext } from "@/context/CantidadContext";
 
 const Carrito = () => {
-  const { productos, total, cartCountAnimation, deleteProduct } =
-    useContext(ProductContext);
+  const { productos, total, cartCountAnimation, deleteProduct } = useContext(ProductContext);
+  const { incrementStock } = useContext(CantidadContext);
+
   const [isCartVisible, setIsCartVisible] = useState(false);
 
-  const handleDelete = (id_producto) => {
+  const handleDelete = (id_producto, cantidad) => {
     deleteProduct(id_producto);
+    incrementStock(id_producto, cantidad)
   };
 
   return (
@@ -67,7 +70,7 @@ const Carrito = () => {
                     >
                       <div className="flex">
                         <img
-                          src={`/productos/${producto.imagen}`}
+                          src={producto.imagen}
                           alt={producto.nombre}
                           className="w-20 h-20 object-cover rounded-md mr-4"
                         />
@@ -95,7 +98,7 @@ const Carrito = () => {
                         </p>
                         <TrashIcon
                           className="h-5 w-5 text-red-500 cursor-pointer transition duration-300 ease-in-out hover:text-red-700 hover:scale-110"
-                          onClick={() => handleDelete(producto.id_producto)}
+                          onClick={() => handleDelete(producto.id_producto, producto.cantidad)}
                         />
                       </div>
                     </div>
