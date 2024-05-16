@@ -82,7 +82,15 @@
     width: 2rem;
     height: 2rem;
     padding: 5px;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: #ffffff;
+    color: #000000;
     cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.model.open svg:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #000000;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
