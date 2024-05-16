@@ -38,13 +38,13 @@ const ContactoForm = () => {
           Si tienes alguna duda o algún problema con el uso de la página, llena el siguiente formulario y nos pondremos en contacto</p>
       </div>
       <div className="flex justify-center items-start w-full">
-        <div className="bg-[#F3E8E8] bg-opacity-30 backdrop-blur-sm lg:ml-20 lg:mr-20 w-full h-auto rounded-2xl shadow-lg">
+        <div className="bg-[#F3E8E8] bg-opacity-60 backdrop-blur-sm lg:ml-20 lg:mr-20 w-full h-auto rounded-2xl shadow-lg">
           <form className="ml-10 mr-10 mb-10 mt-5" onSubmit={handleSubmit(sendEmail)}>
             <div className="flex justify-center items-center">
               <input type="text" id="motivo" name="motivo" required {...register("motivo")}
                 className="lg:h-16 md:h-10 sm:h-10 p-2 mb-6 w-full lg:text-2xl md:text-xl text-lg
               appearance-none bg-transparent border-0 border-b-2"
-                placeholder="*Motivo*" />
+                placeholder="Motivo*" />
             </div>
 
             <div className="grid grid-flow-row sm:grid-flow-col lg:gap-16 md:gap-16 sm:gap-16 w-full">
@@ -53,13 +53,13 @@ const ContactoForm = () => {
               })}
                 className="lg:h-16 md:h-10 sm:h-10 p-2 mb-6 w-full lg:text-2xl md:text-xl text-lg
               appearance-none bg-transparent border-0 border-b-2"
-                placeholder="*Nombre*" />
+                placeholder="Nombre*" />
               <input type="text" id="apellidos" name="apellidos" required {...register("apellidos", {
                 required: true,
               })}
                 className="lg:h-16 md:h-10 sm:h-10 p-2 mb-6 w-full lg:text-2xl md:text-xl text-lg
               appearance-none bg-transparent border-0 border-b-2"
-                placeholder="*Apellidos*" />
+                placeholder="Apellidos*" />
             </div>
 
             <div className="grid grid-flow-row sm:grid-flow-col lg:gap-16 md:gap-16 sm:gap-16 w-full">
@@ -69,13 +69,13 @@ const ContactoForm = () => {
               })}
                 className="lg:h-16 md:h-10 sm:h-10 p-2 mb-6 w-full lg:text-2xl md:text-xl text-lg
               appearance-none bg-transparent border-0 border-b-2"
-                placeholder="*Correo*" />
+                placeholder="Correo*" />
               <input type="text" id="telefono" name="telefono" required {...register("telefono", {
                 required: true,
               })}
                 className="lg:h-16 md:h-10 sm:h-10 p-2 mb-6 w-full lg:text-2xl md:text-xl text-lg
               appearance-none bg-transparent border-0 border-b-2"
-                placeholder="*Teléfono*" />
+                placeholder="Teléfono*" />
             </div>
 
             <div className="flex w-full">

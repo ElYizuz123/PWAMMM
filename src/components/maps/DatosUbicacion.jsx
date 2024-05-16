@@ -15,7 +15,7 @@ const DatosUbicacion = ({ mapaUrl, ubi, telefono, qrImagen }) => {
                 className="rounded-lg w-full lg:h-[600px] md:h-[450px] h-[400px]" width="800" height="650" style={{ border: '0' }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         <div className="w-full lg:w-1/2 lg:mr-20 ml-2">
-          <div className="bg-[#FFFFFF] bg-opacity-55 backdrop-blur-sm rounded-lg">
+          <div className="bg-[#FFFFFF] bg-opacity-85 backdrop-blur-sm rounded-lg">
             <div className="flex mb-8 p-2">
               <div> <SlLocationPin className=" lg:w-[50px] lg:h-[50px] md:w-[40px] md:h-[40px] w-[32px] h-[32px]" />  </div>
               <p className="ml-2 lg:text-3xl md:text-3xl sm:text-xl text-xl overflow-wrap break-word">{ ubi }</p>
