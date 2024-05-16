@@ -14,7 +14,7 @@ function page() {
 
           {/* responsive hecho, a mejorar */}
           {/* FORM DE CONTACTO */}
-          <div className="w-full mb-16">
+          <div className="w-full mb-16 flex">
             <ContactoForm/>
           </div>
 
