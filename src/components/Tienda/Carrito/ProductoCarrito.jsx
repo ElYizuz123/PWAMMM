@@ -16,26 +16,23 @@ const ProductoCarrito = ({
   cantidad,
   subtotal,
 }) => {
-  const { decrementStock, stock } = useContext(CantidadContext);
+  const { decrementStock, incrementStock, stock } = useContext(CantidadContext);
   const [quantity, setQuantity] = useState(cantidad);
   const { updateQuantity, deleteProduct } = useContext(ProductContext);
 
-  let maxStock = stock[id_producto];
-
   // FUNCIÓN PARA INCREMENTAR LA CANTIDAD DE PRODUCTOS
   const incrementQuantity = () => {
-    if (quantity < (maxStock+cantidad)) {
-      const newQuantity = quantity + 1;
-      updateQuantityAndTotal(newQuantity, "SUMA");
+    if (quantity < (stock[id_producto] + cantidad)) {
+      updateQuantityAndTotal(quantity + 1, "SUMA");
       decrementStock(id_producto, 1);
-      maxStock = stock[id_producto];
     }
   };
   // FUNCIÓN PARA DECREMENTAR LA CANTIDAD DE PRODUCTOS
   const decrementQuantity = () => {
-    const newQuantity = Math.max(1, quantity - 1);
-    updateQuantityAndTotal(newQuantity, "RESTA");
-    //incrementStock(id_producto, 1);
+    if (quantity - 1 != 0) {
+      updateQuantityAndTotal(quantity - 1, "RESTA");
+      incrementStock(id_producto, 1);
+    }
   };
 
   //EDITA LA CANTIDAD DEL PRODUCTO A COMPRAR
@@ -58,6 +55,7 @@ const ProductoCarrito = ({
   //FUNCIÓN PARA ELIMINAR UN PRODUCTO
   const handleDelete = (id_producto) => {
     deleteProduct(id_producto);
+    incrementStock(id_producto, quantity);
   };
 
   return (
@@ -101,7 +99,7 @@ const ProductoCarrito = ({
                2xl:text-sm 2xl:translate-x-24"
             >
               {nombre}
-              <p >{ml}ml</p>
+              <p>{ml}ml</p>
             </div>
             <div
               className="text-xs text-gray-500

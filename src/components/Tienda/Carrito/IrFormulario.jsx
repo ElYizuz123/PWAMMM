@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext } from "react";
-import AcompañamientoCarrito from "@/components/Tienda/AcompañamientoCarrito";
+import AcompañamientoCarrito from "@/components/Tienda/Carrito/AcompañamientoCarrito";
 import { ProductContext } from "@/context/ProductContext";
 import Link from "next/link";
 

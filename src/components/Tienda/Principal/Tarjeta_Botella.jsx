@@ -32,7 +32,7 @@ const Tarjeta_Botella = ({
   const { addProductos } = useContext(ProductContext);
   const [buttonState, setButtonState] = useState("idle");
   const [showTooltip, setShowTooltip] = useState(false);
-  const existencia = cantidad !== 0;
+  const existencia = cantidadOficial !== 0;
 
   const handleAddToCart = () => {
     setButtonState("loading");

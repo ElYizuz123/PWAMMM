@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Contador from "./BotonesFicha";
+import Contador from "./Contador";
 import Image from "next/image";
 
 const Ficha_Acompañamiento = ({
@@ -14,7 +14,7 @@ const Ficha_Acompañamiento = ({
   mercadoLibre,
   descripcion,
   cantidad,
-  cantidadOficial,
+  cantidadOficial
 }) => {
   return (
     <div>

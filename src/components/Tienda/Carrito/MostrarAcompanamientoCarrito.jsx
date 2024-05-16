@@ -35,7 +35,7 @@ const MostrarAcompanamientoCarrito = ({
       };
 
       addProductos(newProduct);
-      decrementStock(id_producto, 1)
+      decrementStock(id_producto, 1);
 
       setTimeout(() => {
         setButtonState("idle");

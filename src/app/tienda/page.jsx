@@ -1,5 +1,5 @@
 import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
-import Categoria from "@/components/Tienda/Categoria";
+import Categoria from "@/components/Tienda/Principal/Categoria";
 import Image from "next/image";
 
 const Page = () => {
@@ -16,7 +16,6 @@ const Page = () => {
               className="w-full opacity-60 object-cover"
             />
           </div>
-
           <Categoria />
         </div>
       </div>

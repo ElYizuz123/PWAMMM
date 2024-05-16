@@ -4,14 +4,16 @@ import React, { useState, useEffect, createContext } from "react";
 export const CantidadContext = createContext();
 
 export const CantidadProvider = ({ children }) => {
-  const [stock, setStock] = useState(() => {
-    const savedStock = sessionStorage.getItem("stock");
-    return savedStock ? JSON.parse(savedStock) : {};
-  });
-  
+  const [stock, setStock] = useState({});
+
+  // const [stock, setStock] = useState(() => {
+  //   const savedStock = sessionStorage.getItem("stock");
+  //   return savedStock ? JSON.parse(savedStock) : {};
+  // });
+
   useEffect(() => {
     // Verifica si el código se está ejecutando en un entorno de navegador
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const savedStock = sessionStorage.getItem("stock");
       if (savedStock) {
         setStock(JSON.parse(savedStock));
@@ -46,6 +48,7 @@ export const CantidadProvider = ({ children }) => {
     <CantidadContext.Provider
       value={{
         decrementStock,
+        incrementStock,
         setStock,
         stock,
       }}

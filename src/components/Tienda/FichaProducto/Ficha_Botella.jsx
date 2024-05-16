@@ -65,7 +65,6 @@ const Ficha_Botella = ({
               <p className=" font-thin text-xs">IVA INCLUIDO</p>
             </div>
           </div>
-
           {/* imagen botellas */}
           <div className=" mt-24 flex justify-center align-middle">
             <Image
@@ -83,7 +82,6 @@ const Ficha_Botella = ({
               alt="Botellas"
             />
           </div>
-
           {/*información */}
 
           <div

@@ -3,7 +3,7 @@ import Image from "next/image";
 import MostrarItemsCarrito from "@/components/Tienda/Carrito/MostrarItemsCarrito";
 import { K2D } from "next/font/google";
 import Link from "next/link";
-import IrFormulario from "@/components/Tienda/IrFormulario";
+import IrFormulario from "@/components/Tienda/Carrito/IrFormulario";
 
 const k2d = K2D({
   weight: ["400"],
