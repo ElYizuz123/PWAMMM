@@ -31,6 +31,7 @@ const ContactoForm = () => {
   return (
     <div className="w-full">
 
+      {/* form de contacto, usa react-hook-form */}
       <div className="w-full lg:ml-20 lg:mr-20 lg:mb-2 mb-1">
         <p className="lg:text-6xl md:text-4xl text-3xl mb-2">
           Contáctanos</p>
