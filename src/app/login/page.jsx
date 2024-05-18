@@ -14,7 +14,7 @@ const Page = () => {
         <div className={berkshire_swash.className}>
           <h1 className='text-center pb-5 text-3xl'>Mujeres Mezcaleras de Michoacán</h1>
         </div>
-        <Image width={100} height={100} src="/mezcaleras_logo.png" alt="Logo" className="mx-auto mb-6" />
+        <Image width={100} height={100} src="/fondos/mezcaleras_logo.png" alt="Logo" className="mx-auto mb-6" />
         <Login />
       </div>
     </div>

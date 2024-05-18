@@ -1,7 +1,7 @@
 import LecturaDatos from '@/components/Administrador/graficas/LecturaDatos'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const Page = () => {
   return (
@@ -15,7 +15,10 @@ const Page = () => {
           <div className='absolute bottom-0 w-full -z-10'>
             <Image src="/fondos/mezcal_background.png" alt="Imagen de fondo" width={1000} height={1000} className='object-cover w-full opacity-60' />
           </div>
-          <LecturaDatos/>
+          <Suspense fallback={<div>Cargando...</div>}>
+            <LecturaDatos/>
+          </Suspense>
+          
         </div>
       </main>
     </LayoutCRUD>

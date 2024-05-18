@@ -2,6 +2,7 @@ import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image';
 import Leer_ventas from '@/components/Administrador/ventas/Leer_ventas';
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider';
+import { Suspense } from 'react';
 
 
 
@@ -20,7 +21,9 @@ const Page = async () => {
                 <p className='mt-6 ml-3 text-3xl font-bold text-[#F70073]'>Ventas</p>
               </div>
               <div className='w-full h-[720px] flex flex-col items-center mt-12'>
-                <Leer_ventas />
+                <Suspense fallback={<div>Cargando...</div>}>
+                 <Leer_ventas />
+                </Suspense>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import GraficaPastel from './GraficaPastel'
 import GraficaBarras from './GraficaBarras'
 import GraficaLineal from './GraficaLineal'
@@ -69,16 +69,16 @@ const LecturaDatos = () => {
     const [fechasInd, setFechasInd] = useState(null)
     const { RangePicker } = DatePicker
 
-    const readMarcas = async () =>{
+    const readMarcas = async () => {
         const res = await fetch('/api/administrador/ubicaciones/read_marcas')
         const resJSON = await res.json()
         setMarcas(resJSON)
     }
 
-    const readProductosList = async () =>{
-        const res = await fetch('/api/administrador/graficas/read_productos_marca',{
-            method:'POST',
-            body: JSON.stringify(selectedMarca)   
+    const readProductosList = async () => {
+        const res = await fetch('/api/administrador/graficas/read_productos_marca', {
+            method: 'POST',
+            body: JSON.stringify(selectedMarca)
         })
         const resJSON = await res.json()
         setProductos(resJSON)
@@ -114,8 +114,8 @@ const LecturaDatos = () => {
         if (fechas) {
             const fechaIni = new Date(fechas[0]['$d'])
             const fechaFin = new Date(fechas[1]['$d'])
-            fechaIni.setDate(fechaIni.getDate()-1)
-            fechaFin.setDate(fechaFin.getDate()+1)
+            fechaIni.setDate(fechaIni.getDate() - 1)
+            fechaFin.setDate(fechaFin.getDate() + 1)
             fechasJSON = {
                 fechaIni: fechaIni,
                 fechaFin: fechaFin
@@ -140,23 +140,23 @@ const LecturaDatos = () => {
         readMarcas()
     }, [])
 
-    const readVentasIndividuales = async (fechas) =>{
+    const readVentasIndividuales = async (fechas) => {
         let datosJSON = null
         let fechaIni = null
         let fechaFin = null
         if (fechas) {
             fechaIni = new Date(fechas[0]['$d'])
             fechaFin = new Date(fechas[1]['$d'])
-            fechaIni.setDate(fechaIni.getDate()-1)
-            fechaFin.setDate(fechaFin.getDate()+1)
+            fechaIni.setDate(fechaIni.getDate() - 1)
+            fechaFin.setDate(fechaFin.getDate() + 1)
         }
         datosJSON = {
             fechaIni: fechaIni,
             fechaFin: fechaFin,
-            marca: selectedMarca == -1 ? null:selectedMarca,
-            producto: selectedProduct == -1 ? null:selectedProduct
+            marca: selectedMarca == -1 ? null : selectedMarca,
+            producto: selectedProduct == -1 ? null : selectedProduct
         }
-        
+
         const res = await fetch('/api/administrador/graficas/read_ventas_ind', {
             method: 'POST',
             body: JSON.stringify(datosJSON)
@@ -166,7 +166,7 @@ const LecturaDatos = () => {
     }
 
 
-    const handleDataChangePerProduct = (e) =>{
+    const handleDataChangePerProduct = (e) => {
         setFechasInd(e)
         if (e) {
             const fechaIni = e[0]['$d']
@@ -221,74 +221,92 @@ const LecturaDatos = () => {
 
 
 
-    useEffect(()=>{
-        if(selectedMarca!=-1){
+    useEffect(() => {
+        if (selectedMarca != -1) {
             readProductosList()
-        }else{
+        } else {
             setProductos(null)
         }
     }, [selectedMarca])
 
-    useEffect(()=>{
+    useEffect(() => {
         readVentasIndividuales(fechasInd)
-    },[selectedMarca, selectedProduct])
+    }, [selectedMarca, selectedProduct])
 
 
-    const handleChangeMarca = (e) =>{
+    const handleChangeMarca = (e) => {
         setSelectedMarca(e.target.value)
         setSelectedProduct(null)
     }
 
-    const handleChangeProduct = (e) =>{
+    const handleChangeProduct = (e) => {
         setSelectedProduct(e.target.value)
     }
 
     return (
         <div className="flex flex-wrap justify-center items-center gap-10 mt-8 mb-8">
-            <div>
-                <p className='font-bold text-xl mb-3'>Productos mas vendidos</p>
-                <div className="w-96 h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaPastel productos={ventasProductos} /></div>
-            </div>
-            <div>
-                <p className='font-bold text-xl mb-3'>Acompañamientos mas vendidos</p>
-                <div className="w-96 h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaPastel productos={ventasAcompanamientos} /></div>
-            </div>
-            <div className='max-w-[780px] min-w-[500px] w-[75%]'>
-                <p className='font-bold text-xl mb-3'>Ciudades con mas ventas</p>
-                <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaBarras ventas={ventasCiudades} /></div>
-            </div>
-            <div className='max-w-[780px] min-w-[500px] w-[75%]'>
-                <p className='font-bold text-xl mb-3'>Número de ventas</p>
-                <RangePicker className='mb-3' onChange={handleDateChange} />
-                <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl">
-                    <GraficaLineal formato={formatoVentasTotales} ventas={ventasTotales} />
+            <Suspense fallback={<div>Cargando...</div>}>
+                <div>
+                    <p className='font-bold text-xl mb-3'>Productos mas vendidos</p>
+                    <div className="w-96 h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaPastel productos={ventasProductos} /></div>
                 </div>
-            </div>
-            <div className='max-w-[780px] min-w-[500px] w-[75%]'>
-                <p className='font-bold text-xl mb-3'>Número de ventas por producto</p>
-                <RangePicker id={"rangeSelecter"} className='mb-3' onChange={handleDataChangePerProduct} />
-                <div className='mb-3'>
-                    <select onChange={handleChangeMarca}>
-                        <option value={-1}>MARCA</option>
-                        {marcas &&
-                            marcas.map((marca) => (
-                                <option value={marca.id_marca} key={marca.id_marca}>{marca.nombre}</option>
-                            ))}
-                    </select>
+            </Suspense>
+            <Suspense fallback={<div>Cargando...</div>}>
+                <div>
+                    <p className='font-bold text-xl mb-3'>Acompañamientos mas vendidos</p>
+                    <div className="w-96 h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaPastel productos={ventasAcompanamientos} /></div>
                 </div>
-                <div className='mb-3'>
-                    <select onChange={handleChangeProduct}>
-                        <option value={-1}>PRODUCTO</option>
-                        {productos &&
-                            productos.map((producto) => (
-                                <option value={producto.id_producto} key={producto.id_producto}>{producto.nombre}</option>
-                            ))}
-                    </select>
+            </Suspense>
+            <Suspense fallback={<div>Cargando...</div>}>
+                <div className='max-w-[780px] min-w-[500px] w-[75%]'>
+                    <p className='font-bold text-xl mb-3'>Ciudades con mas ventas</p>
+                    <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl"><GraficaBarras ventas={ventasCiudades} /></div>
                 </div>
-                <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl">
-                    <GraficaLineal formato={formatoVentasIndividuales} ventas={ventasIndividuales} />
+            </Suspense>
+            <Suspense fallback={<div>Cargando...</div>}>
+                <div className='max-w-[780px] min-w-[500px] w-[75%]'>
+                    <p className='font-bold text-xl mb-3'>Número de ventas</p>
+                    <RangePicker className='mb-3' onChange={handleDateChange} />
+                    <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl">
+                        <GraficaLineal formato={formatoVentasTotales} ventas={ventasTotales} />
+                    </div>
                 </div>
-            </div>
+            </Suspense>
+            <Suspense fallback={<div>Cargando...</div>}>
+                <div className='max-w-[780px] min-w-[500px] w-[75%]'>
+                    <p className='font-bold text-xl mb-3'>Número de ventas por producto</p>
+                    <abbr title='Seleccione el rango de fechas en el que mostrar las ventas'>
+                        <RangePicker id={"rangeSelecter"} className='mb-3' onChange={handleDataChangePerProduct} />
+                    </abbr>
+
+                    <div className='mb-3'>
+                        <abbr title='Seleccione la marca a mostrar en la gráfica'>
+                            <select onChange={handleChangeMarca} >
+                                <option value={-1}>MARCA</option>
+                                {marcas &&
+                                    marcas.map((marca) => (
+                                        <option value={marca.id_marca} key={marca.id_marca}>{marca.nombre}</option>
+                                    ))}
+                            </select>
+                        </abbr>
+
+                    </div>
+                    <div className='mb-3'>
+                        <abbr title='Seleccione el producto a seleccionar en la gráfica'>
+                            <select onChange={handleChangeProduct}>
+                                <option value={-1}>PRODUCTO</option>
+                                {productos &&
+                                    productos.map((producto) => (
+                                        <option value={producto.id_producto} key={producto.id_producto}>{producto.nombre}</option>
+                                    ))}
+                            </select>
+                        </abbr>
+                    </div>
+                    <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl">
+                        <GraficaLineal formato={formatoVentasIndividuales} ventas={ventasIndividuales} />
+                    </div>
+                </div>
+            </Suspense>
         </div>
     )
 }
