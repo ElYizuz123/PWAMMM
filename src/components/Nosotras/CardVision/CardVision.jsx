@@ -127,15 +127,15 @@ const CardVision = () => {
           variants={titleVariantsMision}
           className="flex flex-wrap items-center mt-28 text-center p-6 bg-white rounded-lg shadow-lg "
         >
-          <div className="w-full md:w-3/5 lg:w-1/2 px-4">
-            
+          <div className="w-full sm:w-full md:w-full lg:w-full xl:w-1/2 2xl:w-1/2 px-4">
+             <div className="relative w-full sm:w-full  h-32 sm:h-32  md:h-64 lg:h-64 xl:h-80 2xl:h-80 m-auto">
             <Image src={images[cambiarImagen]} // Arreglo de imagenes, se encuentra en la sección superior
                 alt="Mujeres Mezcaleras de Michoacán"
-               width={1000}
-               height={1000}
-             
-                className="w-11/12 inline-block rounded shadow-lg border border-merino-400" // Características de la imagen.
+                layout="fill"
+                objectFit="cover"
+                className="rounded shadow-lg border border-merino-400"
           />
+          </div>
           </div>
 
           <motion.div
@@ -143,19 +143,19 @@ const CardVision = () => {
             initial="hidden" //Estado inicial: Oculto
             animate={controlsMision} // Animación - Misión
             variants={textVariantsMision}
-            className="w-full md:w-2/5 lg:w-1/2 px-4 text-center md:text-left lg:pl-12"
+            className="w-full md:w-full lg:w-full xl:w-1/2 2xl:w-1/2 px-4 text-center  "
           >
             <div
               className={berkshire.className} 
             >
-              <p className="text-center md:text-start text-4xl mx-1 md:text-6xl lg:text-6xl xl:text-7xl text-black font-bold mt-8 ml-8 md:mt-0 sm:text-5xl   "> {/*Tamaño de letra responsivo*/}
+              <p className="text-5xl sm:text-5xl md:text-5xl mt-8  text-center  lg:text-7xl xl:text-7xl 2xl:text-7xl text-black font-bold    "> {/*Tamaño de letra responsivo*/}
                 Misión
               </p>
             </div>
 
-            <hr className=" border-b-4  border-[#F70073] my-4 ml-10 mr-14 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10 2xl:ml-10" />
+            <hr className=" border-b-4  border-[#F70073] my-4 -mx-1 sm:mx-5 md:mx-5 lg:mx-8 xl:mx-8 2xl:mx-8" />
 
-            <p className="text-sm sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl text-justify"> {/* MISIÓN*/}
+            <p className="text-sm sm:text-sm md:text-sm lg:text-xl xl:text-xl 2xl:text-xl text-justify -mx-1 sm:mx-5 md:mx-5 lg:mx-8 xl:mx-8 2xl:mx-8"> {/* MISIÓN*/}
              {'"'}Proteger, regular y promover la Denominación de Origen Mezcal
               dentro de los municipios comprendidos en el estado de
               Michoacán de Ocampo. Asimismo, vigilar y observar las
@@ -178,33 +178,34 @@ const CardVision = () => {
           variants={titleVariantsVision}
           className="flex flex-wrap items-center mt-28 p-6 bg-white rounded-lg shadow-lg"
         >
-          <div className="w-full md:w-3/5 lg:w-1/2 ">
-         
+          <div className="w-full sm:w-full md:w-full lg:w-full xl:w-1/2 2xl:w-1/2 px-4 ">
+          <div className="relative w-full sm:w-full  h-32 sm:h-32  md:h-64 lg:h-64 xl:h-80 2xl:h-80 m-auto"> 
               <Image
                // La clave aquí es la URL de la imagen, lo que asegura que el componente se recrea en cada cambio
                 src={imagesVision[cambiarFoto]}
                 alt="Mujeres Mezcaleras de Michoacán Vision"
-                width={1000}
-                height={1000}
-                className="w-11/12 inline-block rounded shadow-lg border border-merino-400"
+                layout="fill"
+                objectFit="cover"
+                className="rounded shadow-lg border border-merino-400" // Características de la imagen
               />
         
+          </div>
           </div>
           <motion.div
             ref={refVision} // Utiliza la misma referencia para el texto
             initial="hidden"
             animate={controlsVision}
             variants={textVariantsVision}
-            className="w-full md:w-2/5 lg:w-1/2 px-4 md:order-first text-center md:text-left lg:pr-12"
+            className="w-full md:w-full lg:w-full xl:w-1/2 2xl:w-1/2 px-4 text-center xl:order-first"
           >
             <div className={berkshire.className}>
-              <p className="text-center md:text-start text-4xl mx-1 md:text-6xl lg:text-6xl xl:text-7xl text-black font-bold mt-8 ml-8 md:mt-0 sm:text-5xl ">
+              <p className="text-5xl sm:text-5xl md:text-5xl mt-8  text-center  lg:text-7xl xl:text-7xl 2xl:text-7xl text-black font-bold ">
                 Visión
               </p>
             </div>
-            <hr className=" border-b-4  border-[#F70073] my-4 ml-10 mr-14 sm:ml-1 sm:mr-1 md:ml-2 md:mr-2 lg:mr-4 lg:ml-4 xl:ml-8 xl:mr-8 2xl:mr-10 2xl:ml-10" />
+            <hr className=" border-b-4  border-[#F70073] my-4 -mx-1 sm:mx-5 md:mx-5 lg:mx-8 xl:mx-8 2xl:mx-8" />
 
-            <p className="text-sm sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl text-justify">
+            <p className="text-sm sm:text-sm md:text-sm lg:text-xl xl:text-xl 2xl:text-xl text-justify -mx-1 sm:mx-5 md:mx-5 lg:mx-8 xl:mx-8 2xl:mx-8">
             {'"'}Brindar a las asociadas servicios, herramientas, orientación,
               apoyo técnico y científico que les facilite su desempeño;
               buscando con ello lograr un mayor desarrollo profesional y
