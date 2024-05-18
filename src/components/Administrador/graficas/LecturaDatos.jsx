@@ -303,7 +303,7 @@ const LecturaDatos = () => {
                         </abbr>
                     </div>
                     <div className="max-w-[780px] min-w-[500px] w-full h-96 border-2 bg-white border-[#F70073] shadow-2xl">
-                        <GraficaLineal formato={formatoVentasIndividuales} ventas={ventasIndividuales} />
+                        <GraficaLineal formato={formatoVentasIndividuales} ventas={ventasIndividuales}/>
                     </div>
                 </div>
             </Suspense>
