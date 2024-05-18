@@ -16,13 +16,13 @@ export default function Home() {
   return (
     <LayoutPrincipal>
       <Main />                                                                                   {/*Componente Video*/}
-      <div className=" w-full h-auto fondo-nosotras overflow-x-hidden  " >
+      <div className=" w-full h-auto fondo-nosotras overflow-x-hidden  " >                       {/*fondo-nosotras es el fondo principal*/}
 
         <div className="md:mb-10">
           <Promociones />
         </div>
-        {/*fondo-nosotras es el fondo principal*/}
-        <div className="bg-transparent  mt-96 sm:mt-96 md:mt-56 lg:mt-10 xl:mt-20 2xl:mt-1  mb-5">                                            {/*Se aplica un efecto de desvanecido de la sección del video */}
+     
+        <div className="bg-transparent  mt-96 sm:mt-96 md:mt-56 lg:mt-10 xl:mt-20 2xl:mt-1  mb-5 ">                                            {/*Se aplica un efecto de desvanecido de la sección del video */}
 
           <Suspense fallback={<div>Cargando...</div>} >
             <CarruselInicio />
