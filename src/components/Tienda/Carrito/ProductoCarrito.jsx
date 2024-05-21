@@ -62,8 +62,8 @@ const ProductoCarrito = ({
     <div>
       <div
         className="flex items-center bg-white shadow rounded-lg p-4 my-4
-        h-60 w-80 -translate-x-5
-        sm:h-52 sm:w-[80%] sm:relative sm:translate-x-[10%] 
+        h-60 w-[330px] -translate-x-6 
+        sm:h-52 sm:w-[450px] sm:relative sm:translate-x-[10%] 
         md:w-[420px] md:translate-x-0
         lg:p-4 lg:h-32 lg:w-[630px] lg:flex 
         xl:w-[700px]

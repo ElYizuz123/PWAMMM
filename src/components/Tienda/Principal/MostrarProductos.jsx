@@ -437,6 +437,15 @@ function MostrarProductos({
         </div>
       </div>
 
+      <div className="flex flex-wrap justify-center md:justify-start gap-4 relative ">
+        {filteredBotellas.length === 0 &&
+          filteredAcompanamientos.length === 0 && (
+            <p className="text-center text-black font-bold w-full ">
+              "No se encontraron productos relacionados"
+            </p>
+          )}
+      </div>
+
       {/* LLAMA COMPOTENENTE TARJETA ENVIANDO LA INFORMACIÓN OBTENIDA EN API  */}
       <div className="flex flex-wrap gap-3 justify-center">
         {currentBotellas.map((botella) => (
