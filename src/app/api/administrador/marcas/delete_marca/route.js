@@ -18,9 +18,9 @@ export async function POST(request){
                 id_marca: data
             }
         }) 
-        
+
         if(productos){
-            productos.map(producto =>{
+            await productos.map(producto =>{
                 deleteImageFile(producto.fotoId)
             })
         }

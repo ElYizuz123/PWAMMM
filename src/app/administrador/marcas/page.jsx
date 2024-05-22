@@ -1,5 +1,4 @@
 
-import { read_asociadas } from '@/app/api/administrador/marcas/read_asociadas/read_asociadas'
 import { UpdateProvider } from '@/components/Administrador/UpdateProvider'
 import Agregar_marca from '@/components/Administrador/marcas/Agregar_marca'
 import Leer_marcas from '@/components/Administrador/marcas/Leer_marcas'
@@ -8,10 +7,6 @@ import Image from 'next/image'
 import { Suspense } from 'react'
 
 const Page = async () => {
-
-  const res = await read_asociadas()
-  const resJSON = await res.json()
-  const asociadas = (JSON.parse(resJSON))
 
   return (
     <LayoutCRUD title="Marcas">
@@ -29,13 +24,13 @@ const Page = async () => {
               <div className='w-full flex justify-center mt-4'>
                 <div className='w-10/12 flex justify-begin'>
                   <Suspense fallback={<div>Cargando...</div>}>
-                    <Agregar_marca asociadas={asociadas} />
+                    <Agregar_marca/>
                   </Suspense>
                 </div>
               </div>
               <div className='w-full h-full flex flex-col items-center mt-5'>
                 <Suspense fallback={<div>Cargando...</div>}>
-                  <Leer_marcas asociadas={asociadas} />
+                  <Leer_marcas/>
                 </Suspense>
               </div>
             </div>
