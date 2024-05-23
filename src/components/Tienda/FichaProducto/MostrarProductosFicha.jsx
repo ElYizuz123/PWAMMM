@@ -132,31 +132,33 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             <p></p>
           )}
         </div>
-        {botellas.filter(
-          (item) =>
-            item.producto.marca_id_marca === item.producto.marca.id_marca &&
-            item.id_roducto !== botellaEncontrada
-        ).length > 0 && (
-          <div
-            className=" w-96 flex translate-x-14 mt-32 
-           sm:w-[400px] sm:translate-x-40 sm:mt-20
-            md:translate-x-44
-             lg:translate-x-72 lg:flex lg:w-[1000px]
-             xl:translate-x-80 xl:flex xl:w-[1000px]
+        <div className="flex justify-center">
+          {botellas.filter(
+            (item) =>
+              item.producto.marca_id_marca === item.producto.marca.id_marca &&
+              item.id_roducto !== botellaEncontrada
+          ).length > 0 && (
+            <div
+              className=" w-96  mt-32
+              sm:w-[400px]  sm:mt-20
+              lg:w-[500px]
+              xl:w-[500px]
            "
-          >
-            <p
-              className="relative text-[#dd6c5a] text-sm font-bold bg-black px-9 rounded-lg
+            >
+              <p
+                className="text-[#dd6c5a] text-sm font-bold bg-white px-9 rounded-lg
+              
                 sm:text-xl  sm:text-center
                  md:text-2xl md:text-center
                  lg:text-3xl lg:text-center
                  xl:text-4xl xl:text-center
                  2xl:text-3xl "
-            >
-              PRODUCTOS RELACIONADOS
-            </p>
-          </div>
-        )}
+              >
+                PRODUCTOS RELACIONADOS
+              </p>
+            </div>
+          )}
+        </div>
         <div className=" relative w-full flex flex-wrap gap-10 justify-center items-center pt-11  ">
           {Number(tipo) === 1 && botellaEncontrada ? (
             botellas
