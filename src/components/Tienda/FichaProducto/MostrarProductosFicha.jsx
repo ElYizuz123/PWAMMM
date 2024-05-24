@@ -95,7 +95,7 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
           </div>
         </div>
 
-        <div className="">
+        <div>
           {Number(tipo) === 1 && botellaEncontrada ? (
             <Ficha_Botella
               key={botellaEncontrada.producto.id_producto}
@@ -132,27 +132,29 @@ const MostrarProductosFicha = ({ tipo, idProducto }) => {
             <p></p>
           )}
         </div>
-        <div className="flex justify-center">
+        <div className=" flex justify-center">
           {botellas.filter(
             (item) =>
               item.producto.marca_id_marca === item.producto.marca.id_marca &&
               item.id_roducto !== botellaEncontrada
           ).length > 0 && (
             <div
-              className=" w-96  mt-32
-              sm:w-[400px]  sm:mt-20
-              lg:w-[500px]
-              xl:w-[500px]
+              className=" w-80  mt-32
+              sm:w-[300px]  sm:mt-20
+              md:w-[300px]
+              lg:w-[400px]
+              xl:w-[400px]
+              2xl:w-[500px]
            "
             >
               <p
-                className="text-[#dd6c5a] text-sm font-bold bg-white px-9 rounded-lg
+                className="relative text-[#dd6c5a] text-sm font-bold bg-white px-9 rounded-lg
               
                 sm:text-xl  sm:text-center
-                 md:text-2xl md:text-center
-                 lg:text-3xl lg:text-center
-                 xl:text-4xl xl:text-center
-                 2xl:text-3xl "
+                 md:text-xl md:text-center
+                 lg:text-2xl lg:text-center
+                 xl:text-2xl xl:text-center
+                 2xl:text-3xl 2xl:text-center"
               >
                 PRODUCTOS RELACIONADOS
               </p>
