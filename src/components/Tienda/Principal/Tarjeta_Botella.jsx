@@ -15,6 +15,8 @@ const k2d = K2D({
   subsets: ["latin"],
 });
 
+
+
 const Tarjeta_Botella = ({
   id_producto,
   nombre,
@@ -88,6 +90,7 @@ const Tarjeta_Botella = ({
             </div>
           </div>
         </Link>
+
 
         <div className="flex justify-center items-center p-4 object-cover">
           <Image

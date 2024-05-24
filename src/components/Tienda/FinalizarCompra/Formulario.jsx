@@ -21,6 +21,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DatosPersonalesForm from "./DatosPersonalesForm";
 import DireccionForm from "./DireccionForm";
+import { FaCheckCircle, FaShoppingCart } from "react-icons/fa";
 
 const berkshire_swash = Berkshire_Swash({
   weight: ["400"],
@@ -34,8 +35,7 @@ function Formulario() {
     isEnvio,
     setDataFormulario,
     metodoPago,
-    enviarDataApi,
-    limpiarProductos,
+    enviarDataApi
   } = useContext(ProductContext);
   const [isFormVisiblePersonales, setIsFormVisiblePersonales] = useState(false);
   const [isFormVisibleDireccion, setIsFormVisibleDireccion] = useState(false);
@@ -44,6 +44,8 @@ function Formulario() {
   const [transferencia, setTransferencia] = useState(false);
   const [paypal, setPaypal] = useState(false);
   const [isDataReadyForApi, setIsDataReadyForApi] = useState(false);
+  const [confirmarTransferencia, setConfirmarTransferencia] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -53,6 +55,14 @@ function Formulario() {
     watch,
     formState: { errors },
   } = useForm({ mode: "onChange" });
+
+  const handleOpenConfirm = () => {
+    setIsDataReadyForApi(true);
+  };
+
+  const handleCloseConfirm = () => {
+    setConfirmarTransferencia(false);
+  };
 
   const toggleFormPersonales = () => {
     setIsFormVisiblePersonales(!isFormVisiblePersonales);
@@ -137,7 +147,7 @@ function Formulario() {
       setDataFormulario(data);
 
       if (metodoPago === 0) {
-        setIsDataReadyForApi(true);
+        setConfirmarTransferencia(true);
       } else {
         setPaypal(true);
       }
@@ -148,9 +158,11 @@ function Formulario() {
     const fetchData = async () => {
       if (isDataReadyForApi) {
         try {
+          setIsLoading(true); // Inicia el estado de carga
+          setConfirmarTransferencia(false);
           await enviarDataApi(); // Intenta ejecutar enviarDataApi y espera su finalización
+          setIsLoading(false);
           setTransferencia(true); // Solo se ejecuta si no hay errores
-          // limpiarProductos();  
         } catch (error) {
           console.error("Error en enviarDataApi:", error); // Maneja el error, por ejemplo, mostrando un mensaje en consola
         }
@@ -163,6 +175,15 @@ function Formulario() {
 
   return (
     <div className="relative my-[160px]">
+      <div>
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+          <div className="loading-text">Registrando pedido...</div>
+        </div>
+      )}
+      {/* El resto de tu componente */}
+    </div>
       {/* Sección del título */}
       <div id="datos-personales" className="border-b-8 border-[#F70073] py-8">
         <div className={berkshire_swash.className}>
@@ -392,6 +413,78 @@ function Formulario() {
           </div>
         </div>
       </form>
+
+      {confirmarTransferencia && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-2xl p-8 max-w-lg w-full transform transition-all scale-105">
+            <div className="flex items-center justify-center mb-6">
+              <FaShoppingCart className="text-green-500 text-4xl mr-2" />
+              <h2 className="text-3xl font-bold text-green-500">
+                ¿Listo para confirmar tu pedido?
+              </h2>
+            </div>
+            <p className="mb-6 text-gray-600 text-center">
+              Revisa los detalles de tu pedido. Si todo está correcto, haz clic
+              en "Confirmar". ¡Gracias por comprar con nosotros!
+            </p>
+            <div
+              className={`space-y-4 mb-6 ${
+                productos.length > 2 ? "overflow-y-scroll h-56" : ""
+              }`}
+            >
+              {productos.map((producto, index) => (
+                <div
+                  key={index}
+                  className="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm"
+                >
+                  <img
+                    src={producto.imagen}
+                    alt={producto.nombre}
+                    className="w-16 h-16 rounded-lg mr-4"
+                  />
+                  <div className="flex flex-col justify-between flex-1">
+                    <span className="font-bold text-gray-700">
+                      {producto.nombre}
+                    </span>
+                    <span className="text-gray-500">
+                      Cantidad: {producto.cantidad}
+                    </span>
+                  </div>
+                  <div className="font-semibold text-gray-800">
+                    ${producto.precio * producto.cantidad}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mb-6 p-4 border-t border-gray-300">
+              <div className="flex justify-between items-center font-bold text-gray-900 mb-2">
+                <span>Envío</span>
+                <span>$199</span>
+              </div>
+              <div className="flex justify-between items-center font-bold text-gray-900">
+                <span className="text-xl">Total</span>
+                <span className="text-xl text-green-500">
+                  ${isEnvio === 0 ? total : total + 199}
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={handleCloseConfirm}
+                className="bg-gray-300 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-400 focus:outline-none"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleOpenConfirm}
+                className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

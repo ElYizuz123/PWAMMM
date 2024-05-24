@@ -6,42 +6,43 @@ export const CantidadContext = createContext();
 export const CantidadProvider = ({ children }) => {
   const [stock, setStock] = useState({});
 
-  // const [stock, setStock] = useState(() => {
-  //   const savedStock = sessionStorage.getItem("stock");
-  //   return savedStock ? JSON.parse(savedStock) : {};
-  // });
-
-  useEffect(() => {
-    // Verifica si el código se está ejecutando en un entorno de navegador
-    if (typeof window !== "undefined") {
-      const savedStock = sessionStorage.getItem("stock");
-      if (savedStock) {
-        setStock(JSON.parse(savedStock));
-      }
+   // Recuperar stock de sessionStorage cuando el componente se monta
+   useEffect(() => {
+    const savedStock = sessionStorage.getItem("stock");
+    if (savedStock) {
+      setStock(JSON.parse(savedStock));
     }
   }, []);
 
-  useEffect(() => {
-    // Guardar el stock en sessionStorage cada vez que cambie
-    sessionStorage.setItem("stock", JSON.stringify(stock));
-  }, [stock]);
+  const saveStockToSession = (newStock) => {
+    sessionStorage.setItem("stock", JSON.stringify(newStock));
+  };
 
   const decrementStock = (id_producto, cantidad) => {
     setStock((prev) => {
-      return {
+      const updatedStock = {
         ...prev,
-        [id_producto]: prev[id_producto] - cantidad,
+        [id_producto]: (prev[id_producto] || 0) - cantidad,
       };
+      saveStockToSession(updatedStock);
+      return updatedStock;
     });
   };
 
   const incrementStock = (id_producto, cantidad) => {
     setStock((prev) => {
-      return {
+      const updatedStock = {
         ...prev,
-        [id_producto]: prev[id_producto] + cantidad,
+        [id_producto]: (prev[id_producto] || 0) + cantidad,
       };
+      saveStockToSession(updatedStock);
+      return updatedStock;
     });
+  };
+
+  const initializeStock = (initialStock) => {
+    setStock(initialStock);
+    saveStockToSession(initialStock);
   };
 
   return (
@@ -51,6 +52,7 @@ export const CantidadProvider = ({ children }) => {
         incrementStock,
         setStock,
         stock,
+        initializeStock,
       }}
     >
       <>{children}</>
