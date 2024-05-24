@@ -76,6 +76,7 @@ const formatVentas = (ventas, marca, producto) => {
 
     return formatedCountVentas
 }
+
 export async function POST(request) {
     try {
         let data = await request.json()
