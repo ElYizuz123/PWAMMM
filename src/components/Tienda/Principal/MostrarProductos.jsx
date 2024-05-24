@@ -448,7 +448,7 @@ function MostrarProductos({
         {filteredBotellas.length === 0 &&
           filteredAcompanamientos.length === 0 && (
             <p className="text-center text-black font-bold w-full ">
-              "No se encontraron productos relacionados"
+              {`"No se encontraron productos relacionados"`}
             </p>
           )}
       </div>

@@ -424,8 +424,8 @@ function Formulario() {
               </h2>
             </div>
             <p className="mb-6 text-gray-600 text-center">
-              Revisa los detalles de tu pedido. Si todo está correcto, haz clic
-              en "Confirmar". ¡Gracias por comprar con nosotros!
+              {`Revisa los detalles de tu pedido. Si todo está correcto, haz clic
+              en "Confirmar". ¡Gracias por comprar con nosotros!`}
             </p>
             <div
               className={`space-y-4 mb-6 ${
