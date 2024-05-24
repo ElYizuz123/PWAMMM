@@ -5,10 +5,11 @@ import Swal from 'sweetalert2';
 import { contexto } from '../UpdateProvider';
 import Modal from 'react-modal'
 
-const Leer_marcas = ({ asociadas }) => {
+const Leer_marcas = () => {
     const [marcas, setMarcas] = useState(null)
     const [uMarcasIsOpen, setUMarcasIsOpen] = useState(false)
     const [updateMarca, setUpdateMarca] = useState(null)
+    const [asociadas, setAsociadas] = useState(null)
     const { update } = useContext(contexto)
     const editarRef = useRef(null)
     //Leer marcas
@@ -17,6 +18,12 @@ const Leer_marcas = ({ asociadas }) => {
         const resJSON = await res.json()
         setMarcas(JSON.parse(resJSON))
     };
+
+    const readAsociadas = async () =>{
+        const res = await fetch('/api/administrador/marcas/read_asociadas')
+        const resJSON = await res.json()
+        setAsociadas(resJSON)
+    }
 
     //Configuración del modal
     const customStyles = {
@@ -41,6 +48,7 @@ const Leer_marcas = ({ asociadas }) => {
     //Leer datos al cargar
     useEffect(() => {
         readData()
+        readAsociadas()
     }, [update])
 
     //Alerta de borrado

@@ -95,9 +95,9 @@ const NuestrasMarcas = () => {
             <motion.div variants={gridSquareVariants} className="card-logo">
               <Link href="https://www.facebook.com/rocio.vega.12979?mibextid=ZbWKwL">
                 <Image
-                  src={"/logos/Logo-RocioVega.jpg"}
-                  width={90}
-                  height={90}
+                  src={"/logos/Logo-RocioVega1.jpg"}
+                  width={95}
+                  height={100}
                   alt=" Logo Rocio Vega"
                   className="imagen-componente"
                 />

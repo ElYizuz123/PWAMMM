@@ -12,12 +12,13 @@ import { Berkshire_Swash } from "next/font/google";
 import Carrito from "../Tienda/Carrito/Carrito";
 import { HiX, HiMenu } from "react-icons/hi";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import MayorEdad from "../Inicio/MayorEdad/MayorEdad";
 import UsoCookies from "../Inicio/UsoCookies/UsoCookies";
 import { CantidadProvider } from "@/context/CantidadContext";
 import Footer from "./Footer/Footer";
+
 
 const berkshire = Berkshire_Swash({
   weight: ["400"],
@@ -44,6 +45,7 @@ const buttonMap = {
   "/contacto": "text-black bg-[#0000000]",
 };
 const LayoutPrincipal = ({ children }) => {
+
   //animaciones del menu
   const menuVariants = {
     open: {
@@ -58,9 +60,26 @@ const LayoutPrincipal = ({ children }) => {
 
   //para el submenu de la derecha
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
+  const closeMenu = useCallback((e) => {
+    // Check if the click is outside the menu
+    if (e.target.closest('.menu')) return;
+    setIsMenuOpen(false);
+  }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.addEventListener('click', closeMenu);
+    } else {
+      document.removeEventListener('click', closeMenu);
+    }
+
+    return () => {
+      document.removeEventListener('click', closeMenu);
+    };
+  }, [isMenuOpen, closeMenu]);
 
   //para cambiar los colorcitos
   const pathName = usePathname();

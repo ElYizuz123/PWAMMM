@@ -4,9 +4,9 @@ import Crear_marca from './Crear_marca'
 import Image from 'next/image'
 import Modal from 'react-modal'
 
-const Agregar_marca = ({asociadas}) => {
+const Agregar_marca = () => {
     const [cMarcasIsOpen, setCMarcasIsOpen] = useState(false)
-
+    const [asociadas, setAsociadas] = useState(null)
     //Configuraciones del modal
     const customStyles = {
         content: {
@@ -27,6 +27,12 @@ const Agregar_marca = ({asociadas}) => {
         },
       };
 
+    const readAsociadas = async () =>{
+        const res = await fetch('/api/administrador/marcas/read_asociadas')
+        const resJSON = await res.json()
+        setAsociadas(resJSON)
+    }
+
 
     //Abrir pop-up de agregar marca
     const openCMarca = () => {
@@ -37,6 +43,9 @@ const Agregar_marca = ({asociadas}) => {
         setCMarcasIsOpen(false)
     };
 
+    useEffect(()=>{
+        readAsociadas()
+    }, [])
 
     return (
         <div>

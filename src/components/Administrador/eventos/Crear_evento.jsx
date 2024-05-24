@@ -233,7 +233,7 @@ const Crear_evento = () => {
                                             <button
                                                 disabled={isLoading}
                                                 type='submit'
-                                                className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[10%]'
+                                                className='bg-[#98E47D] w-32 h-10 text-2xl font-bold rounded-xl mr-3 mt-[10%] hover:bg-[#a6cc97]'
                                             >
                                                 {!isLoading &&
                                                     "Agregar"

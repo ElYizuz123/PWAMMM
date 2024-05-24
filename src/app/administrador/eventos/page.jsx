@@ -21,20 +21,23 @@ const Page = () => {
             </div>
             <div className='w-full h-auto relative'>
               <div className='w-full flex justify-center mt-5'>
-                <Crear_evento/>
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <Crear_evento />
+                </Suspense>
+
               </div>
               <div className='w-full flex flex-wrap gap-20 pl-44 pt-8 pb-36'>
                 <Suspense fallback={<div>Cargando...</div>}>
-                  <Leer_evento/>
+                  <Leer_evento />
                 </Suspense>
-                
+
               </div>
             </div>
             <div className='absolute bottom-5 right-0'>
-            <Suspense fallback={<div>Cargando...</div>}>
-              <Paginacion/>
-            </Suspense>
-              </div>
+              <Suspense fallback={<div>Cargando...</div>}>
+                <Paginacion />
+              </Suspense>
+            </div>
           </div>
         </main>
       </UpdateProvider>

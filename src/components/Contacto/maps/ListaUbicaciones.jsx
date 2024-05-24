@@ -31,6 +31,7 @@ function ListaUbicaciones() {
     readData();
   }, []);
 
+  // En cuanto lee los datos los asigna a las variables para mandarlas al componente con el mapa
   useEffect(() => {
     if (ubicacion) {
       setCurrentBrand(JSON.parse(ubicacion[0].json_marca).marca);
@@ -42,6 +43,7 @@ function ListaUbicaciones() {
   }, [ubicacion]);
 
 
+  // asigna los valores de la lista a las const
   const handleBrandClick = (marca, mapaUrl, ubi, telefono, qrImagen) => {
     setCurrentBrand(marca);
     setIsOpen(false);
@@ -70,6 +72,7 @@ function ListaUbicaciones() {
       <p className="lg:mb-4 mb-2 lg:text-6xl md:text-4xl text-3xl">
         Nuestras Tiendas
       </p>
+      {/* lista desplegable */}
       <button className="mb-2 bg-white border-2 border-[#D60064] active:border-black h-full shadow-lg duration-0 active:text-[#D60064] p-2 flex items-center justify-between font-bold text-lg rounded-lg tracking-wider
         lg:w-[300px] sm:w-[250px] md:w-[250px] w-[250px]"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -83,6 +86,7 @@ function ListaUbicaciones() {
       </button>
 
 
+        {/* lista desplegable abierta con las marcas, al seleccionar manda los datos para mostrar el mapa */}
       {isOpen && (
         <div className="bg-white border-2 border-[#D60064] absolute flex flex-col items-start rounded-lg p-2 shadow-2xl
             lg:w-[300px] sm:w-[250px] md:w-[250px] w-[250px]">
@@ -101,6 +105,7 @@ function ListaUbicaciones() {
             ))}
         </div>
       )}
+      {/* renderiza el mapa cuando un dato cambia */}
       {renderSelectedComponent()}
 
     </div>

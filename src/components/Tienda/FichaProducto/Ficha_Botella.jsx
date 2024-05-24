@@ -1,6 +1,7 @@
 "use client";
 
 import { K2D } from "next/font/google";
+
 import Image from "next/image";
 import BotonesFicha from "./BotonesFicha";
 

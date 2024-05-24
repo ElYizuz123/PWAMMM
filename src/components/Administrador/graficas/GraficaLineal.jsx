@@ -29,7 +29,8 @@ var options = {
     },
     plugins:{
         legend:{
-            display: false
+            display: false,
+
         }
     } 
 }

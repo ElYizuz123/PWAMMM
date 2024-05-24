@@ -1,4 +1,5 @@
 const { NextResponse } = require("next/server")
+import { deleteImageFile } from '@/libs/cloudinary';
 import db from '@/libs/db'
 
 export const revalidate = 0;
@@ -6,18 +7,23 @@ export async function POST(request){
     const data = await request.json();
     console.log(data)
     try{
-        const user = await db.$transaction([
-            db.producto.deleteMany({
-                where:{
-                    marca_id_marca: data,
-                },
-            }),
-            db.marca.delete({
-                where:{
-                    id_marca: data
-                }
-            }) 
-        ])
+        const productos =await db.producto.findMany({
+            where:{
+                marca_id_marca: data
+            }
+        })
+        
+        const marca = await db.marca.delete({
+            where:{
+                id_marca: data
+            }
+        }) 
+
+        if(productos){
+            await productos.map(producto =>{
+                deleteImageFile(producto.fotoId)
+            })
+        }
         console.log("Marca eliminada con éxito")
         return NextResponse.json("Marca eliminada con éxito");
     } catch(e){
