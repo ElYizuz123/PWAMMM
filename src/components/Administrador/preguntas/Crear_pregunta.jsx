@@ -154,7 +154,7 @@ const Crear_pregunta = () => {
                 </div>
 
             </Modal>
-            <button onClick={openCPregunta} className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#98e47dab]'>
+            <button onClick={openCPregunta} className='bg-[#98E47D] w-48 h-10 font-bold rounded-lg flex justify-between items-center hover:bg-[#a6cc97]'>
                 <Image alt="mas" layout='intrinsic' width={40} height={40} src='/emoticons/plus.png' className='w-8 ml-2' />
                 <p className='mr-3'>Agregar pregunta</p>
             </button>

@@ -23,7 +23,6 @@ export default function Home() {
         </div>
      
         <div className="bg-transparent  mt-96 sm:mt-96 md:mt-56 lg:mt-10 xl:mt-20 2xl:mt-1  mb-5 ">                                            {/*Se aplica un efecto de desvanecido de la sección del video */}
-
           <Suspense fallback={<div>Cargando...</div>} >
             <CarruselInicio />
           </Suspense>                                                                                     {/*al carrusel de eventos */}

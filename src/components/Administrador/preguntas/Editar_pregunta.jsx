@@ -118,7 +118,7 @@ const Editar_pregunta = ({ onClose, isOpen, idPregunta }) => {
                                         <button
                                             disabled={isLoading}
                                             type='submit'
-                                            className='bg-[#98E47D] w-48 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5'
+                                            className='bg-[#98E47D] w-48 h-10 text-2xl font-bold rounded-xl mr-3 mt-5 mb-5 hover:bg-[#a6cc97]'
                                         >
                                             {!isLoading &&
                                                 "Guardar cambios"

@@ -3,6 +3,7 @@ import Crear_pregunta from '@/components/Administrador/preguntas/Crear_pregunta'
 import Lector_pregunta from '@/components/Administrador/preguntas/Lector_pregunta'
 import LayoutCRUD from '@/components/Layouts/LayoutCRUD'
 import Image from 'next/image'
+import { Suspense } from 'react'
 
 const Page = () => {
   return (
@@ -24,7 +25,9 @@ const Page = () => {
                 </div>
               </div>
               <div className='w-full h-full flex flex-col items-center mt-5'>
-                <Lector_pregunta/>
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <Lector_pregunta />
+                </Suspense>
               </div>
             </div>
           </div>
