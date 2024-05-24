@@ -66,7 +66,7 @@ const page = () => {
                             </div>
                             <div className=" h-34 w-24 sm:h-34 sm:w-24 md:h-52 md:w-24 lg:h-60 lg:w-35 xl:h-60 xl:w-35 2xl:h-64 2xl:w-44 overflow-hidden rounded-lg md:block hidden md:translate-y-36 lg:translate-y-0 xl:-translate-x-0 2xl:translate-y-0">
                               
-                              <Image src="/multimedia/fondoHorno.jpg" alt="Mujeres Mezcaleras de Michoacán 5" width={300} height={600} style={{width: '100%',height: '100%', objectFit: 'cover',  objectPosition: 'center', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
+                              <Image src="/multimedia/FondoHorno.jpg" alt="Mujeres Mezcaleras de Michoacán 5" width={300} height={600} style={{width: '100%',height: '100%', objectFit: 'cover',  objectPosition: 'center', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }} />
                             </div>
                           </div>
 
