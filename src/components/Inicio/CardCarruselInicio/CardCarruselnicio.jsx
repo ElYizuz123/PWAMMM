@@ -30,7 +30,7 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
         <div className="flex items-center justify-center relative w-full h- ">
           <Image
             className="object-cover w-full h-full"
-            src="/multimedia/cardEvento.png"
+            src="/multimedia/plantillaEvento.png"
             alt={"Eventos "+alte}
             width={1000}
             height={1000}

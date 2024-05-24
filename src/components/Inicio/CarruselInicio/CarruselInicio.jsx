@@ -60,7 +60,7 @@ const CarruselInicio = () => {
             
           },
           768: {
-            slidesPerView: 1, // Mostrar 2 slides
+            slidesPerView: 1, // 
             spaceBetween: 20, // Espacio entre slides
            
           },
