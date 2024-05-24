@@ -2,8 +2,8 @@ import LayoutPrincipal from "@/components/Layouts/LayoutPrincipal";
 import Image from "next/image";
 import MostrarItemsCarrito from "@/components/Tienda/Carrito/MostrarItemsCarrito";
 import { K2D } from "next/font/google";
-import Link from "next/link";
 import IrFormulario from "@/components/Tienda/Carrito/IrFormulario";
+import { ShoppingCartIcon } from "@heroicons/react/outline";
 
 const k2d = K2D({
   weight: ["400"],
@@ -40,23 +40,17 @@ const Page = () => {
                 <div className="container mx-auto p-6  ">
                   {/* Title */}
                   <div
-                    className=" flex h-8 w-10
-                  md:ml-2
-                  sm:h-8 sm:w-10 sm:ml-16
-                  lg:mb-4 2xl:mb-4"
+                    className="flex h-8 w-10
+                    md:ml-2
+                    sm:h-8 sm:w-10 sm:ml-16
+                    lg:mb-4 2xl:mb-4"
                   >
-                    <Image
-                      src="/emoticons/carrito2.png"
-                      width={40}
-                      height={40}
-                      quality={100}
-                      alt="Fondo"
-                    ></Image>
+                    <ShoppingCartIcon className="text-[#F70073] w-9 h-9"/>
                     <h1
                       className="ml-12 text-xl font-bold text-gray-700 absolute 
-                    sm:text-xl sm:absolute sm:ml-12
-                    md:ml-12 md:text-2xl
-                    lg:text-3xl 2xl:text-3xl"
+                      sm:text-xl sm:absolute sm:ml-12
+                      md:ml-12 md:text-2xl
+                      lg:text-3xl 2xl:text-3xl"
                     >
                       BOLSA DE COMPRAS
                     </h1>

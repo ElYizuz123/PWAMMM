@@ -144,7 +144,7 @@ export const ProductProvider = ({ children }) => {
       const result = await response.json();
       const responseEmail = await responseData.json();
 
-      console.log(result, responseEmail);      
+      console.log(result, responseEmail);
     } catch (error) {
       console.error("Error en el proceso:", error); // Maneja cualquier error que ocurra durante el fetch
     }

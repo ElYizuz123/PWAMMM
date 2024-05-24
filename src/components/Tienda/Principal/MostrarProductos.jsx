@@ -22,7 +22,7 @@ function MostrarProductos({
   setSelectedMarcaNombre,
   marcas,
 }) {
-  const { stock, setStock } = useContext(CantidadContext);
+  const { stock, initializeStock } = useContext(CantidadContext);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(10);
@@ -51,30 +51,37 @@ function MostrarProductos({
     const fetchProductos = async () => {
       const responseBotellas = await fetch("/api/tienda/read_botellas");
       const dataBotellas = await responseBotellas.json();
-      const responseAcompanamientos = await fetch("/api/tienda/read_acompanamientos");
+      const responseAcompanamientos = await fetch(
+        "/api/tienda/read_acompanamientos"
+      );
       const dataAcompanamientos = await responseAcompanamientos.json();
 
-      if (Object.keys(stock).length === 0) {
+      if (!sessionStorage.getItem("stock")) {
         // Reducir botellas para crear un stock inicial
-      const stockBotellas = dataBotellas.reduce((acc, botella) => {
-        acc[botella.producto.id_producto] = botella.producto.cantidad; // Asume que cada botella tiene un 'id' y una 'cantidad'
-        return acc;
-      }, {});
+        const stockBotellas = dataBotellas.reduce((acc, botella) => {
+          acc[botella.producto.id_producto] = botella.producto.cantidad; // Asume que cada botella tiene un 'id' y una 'cantidad'
+          return acc;
+        }, {});
 
-      // Reducir acompañamientos para agregar al stock inicial
-      const stockAcompanamientos = dataAcompanamientos.reduce((acc, acompanamiento) => {
-        acc[acompanamiento.producto.id_producto] = acompanamiento.producto.cantidad; // Asume que cada acompañamiento tiene un 'id' y una 'cantidad'
-        return acc;
-      }, {});
+        // Reducir acompañamientos para agregar al stock inicial
+        const stockAcompanamientos = dataAcompanamientos.reduce(
+          (acc, acompanamiento) => {
+            acc[acompanamiento.producto.id_producto] =
+              acompanamiento.producto.cantidad; // Asume que cada acompañamiento tiene un 'id' y una 'cantidad'
+            return acc;
+          },
+          {}
+        );
 
-      // Combinar ambos stocks en uno solo y actualizar el estado
-      setStock({ ...stockBotellas, ...stockAcompanamientos });
+        const initialStock = { ...stockBotellas, ...stockAcompanamientos };
+        initializeStock(initialStock);
       }
+
       setBotellas(dataBotellas);
       setAcompanamientos(dataAcompanamientos);
     };
     fetchProductos();
-  }, []);
+  }, [initializeStock]);
 
   //FILTRAR POR BOTELLAS
   const filteredBotellas = useMemo(() => {
