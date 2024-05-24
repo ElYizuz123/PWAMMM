@@ -26,7 +26,7 @@ const UsoCookies = () => {
                 <div className="fixed bottom-4 left-4 right-4 flex items-center justify-center bg-[#f3e8e8] rounded-lg z-40 shadow-md
                                 lg:w-[500px] md:w-[450px] sm:w-[300px] w-[300px] h-auto">
                     <div className="flex p-2">
-                        <Image src={"/navbar/logo.png"} width={500} height={500} className="lg:w-32 md:w-32 sm:w-0 w-0" />
+                        <Image src={"/mezcaleras_logo.png"} width={500} height={500} className="lg:w-20 md:w-20 mr-4 sm:w-0 w-0" />
                         <div>
                             <p className="font-bold flex items-center justify-center">COOKIES</p>
                             <p className="items-center justify-center mb-2">Utilizamos cookies propias y de terceros para mejorar nuestros servicios.</p>

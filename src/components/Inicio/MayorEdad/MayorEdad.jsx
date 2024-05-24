@@ -27,7 +27,7 @@ const MayorEdad = () => {
                     <div className="bg-[#F3E8E8BF] w-svw h-svh p-5 rounded-lg flex flex-col md:flex-row items-center justify-center sm:pb-32 gap-5">
                         <div className="flex justify-center md:order-2">
                             <div className="flex">
-                                <Image src={"/navbar/logo.png"} width={1000} height={1000} className="lg:w-[520px] md:w-[520px] sm:w-64 w-64" />
+                                <Image src={"/mezcaleras_logo.png"} width={500} height={500} className="lg:w-[320px] md:w-[320px] sm:w-36 w-36 md:p-4" />
                             </div>
                         </div>
                         <div className="content-modal lg:w-2/4 lg:ml-5 lg:mr-5 lg:mb-2 md:ml-5 md:mr-5 md:mb-2 ml-1 mr-1 mb-2 md:order-1">
