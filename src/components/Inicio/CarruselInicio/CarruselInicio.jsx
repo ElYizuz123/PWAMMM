@@ -10,7 +10,6 @@ import 'swiper/scss/navigation';
 import 'swiper/scss';
 import CardCarruselnicio from "../CardCarruselInicio/CardCarruselnicio";
 
-const ruta = '/eventos/';
 
 
 
@@ -32,11 +31,11 @@ const CarruselInicio = () => {
 
 
   return (
-    <div className="relative z-1 p-8  sm:mt-0 md:mt-0 lg:mt-40 xl:sm:mt-40 2xl:mt-40 ">
-      <div className="w-[600px] h-[1000px] overflow-hidden absolute bottom-0 right-0 mr-0 -z-10">
-          <div className=" w-[1000px] h-[1000px] rounded-full bg-[#f70073] bg-opacity-40 flex justify-center items-center absolute left-0 "></div>
-        </div>
-      
+    <div className="relative  sm:mt-0 md:mt-0 lg:mt-40 xl:sm:mt-40 2xl:mt-40">
+      <div className="w-[600px] h-[1000px] overflow-hidden absolute bottom-0 right-0 mr-0 -z-10  xl:-translate-y-20 2xl:-translate-y-64">
+        <div className=" w-[1000px] h-[1000px] rounded-full bg-[#f70073] bg-opacity-40 flex justify-center items-center absolute left-0 "></div>
+      </div>
+
       <Swiper
         modules={[Navigation, Pagination, EffectCoverflow, Autoplay]}
         navigation
@@ -52,44 +51,44 @@ const CarruselInicio = () => {
         }}
         slidesPerView={3} // Por defecto se ven 3 imagenes 
         centeredSlides={true}
-        
+
         autoplay={{ delay: 3500, disableOnInteraction: false }} breakpoints={{  //Cada imagen/evento cambia cada 3.5s 
           // Cuando el ancho de la pantalla sea igual o superior a 300px
           300: {
             slidesPerView: 1, // Mostrar 2 slides
             spaceBetween: 2, // Espacio entre slides
-            
+
           },
           768: {
-            slidesPerView: 1, // Mostrar 2 slides
+            slidesPerView: 1, // 
             spaceBetween: 20, // Espacio entre slides
-           
+
           },
           // Cuando el ancho de la pantalla sea igual o superior a 1024px
           1024: {
             slidesPerView: 2, // Mostrar 3 slides
             spaceBetween: 20, // Espacio entre slides
-            
+
           },
           1280: {
             slidesPerView: 3, // Mostrar 3 slides
             spaceBetween: 20, // Espacio entre slides
-           
+
           },
         }}
 
       >
         {eventos && eventos.map((evento, index) => {
           return (
-            <div className="bg-gray-600" key={evento.id_evento}> {/*De llave se asigna el id del evento*/}
+            <div className="bg-gray-600 p-10 my-10" key={evento.id_evento}> {/*De llave se asigna el id del evento*/}
               <SwiperSlide key={evento.id_evento}>
-             <CardCarruselnicio 
-             nombre={evento.nombre}
-             descripcion={evento.descripcion}
-              foto={evento.fotoUri}
-              alte={index}
-            />
-               
+                <CardCarruselnicio
+                  nombre={evento.nombre}
+                  descripcion={evento.descripcion}
+                  foto={evento.fotoUri}
+                  alte={index}
+                />
+
               </SwiperSlide >
             </div>
           );
