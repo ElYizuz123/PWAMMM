@@ -204,10 +204,10 @@ const Crear_Asociada = () => {
                                             type='text'
                                             name='historia'
                                             required={true}
-                                            maxLength={300}
+                                            maxLength={500}
                                             {...register('historia', {
                                                 required: true,
-                                                maxLength: 300
+                                                maxLength: 500
                                             })}
                                             className='w-full h-60 border-2 border-black rounded-lg pl-1 mt-5'
                                             placeholder='Descripción'
