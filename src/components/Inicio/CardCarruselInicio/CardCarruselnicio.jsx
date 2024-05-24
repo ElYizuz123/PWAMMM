@@ -3,7 +3,7 @@ import Image from "next/image";
 
 
 
-const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
+const CardCarruselnicio = ({ nombre, descripcion, foto, alte }) => {
   const nombreMay = nombre.toUpperCase();
   return (
 
@@ -16,14 +16,14 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
           <Image
             className="object-cover w-full h-full"
             src={foto}
-            alt={"Eventos Asociacion"+alte}
+            alt={"Eventos Asociacion" + alte}
             width={1000}
             height={1000}
             objectFit="cover"
           />
         </div>
-           
-       
+
+
 
 
       ) : (
@@ -31,20 +31,20 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
           <Image
             className="object-cover w-full h-full"
             src="/multimedia/plantillaEvento.png"
-            alt={"Eventos "+alte}
+            alt={"Eventos " + alte}
             width={1000}
             height={1000}
             objectFit="cover"
           />
           <div className="absolute inset-0 flex flex-col justify-center items-center">
-            
-        <div className="font-bold text-center text-2xl mb-2">{nombreMay}</div>
-        <hr className="w-1/2 border-gray-300 my-2 shadow-sm"  />
-        <p className="text-gray-700 text-base mr-7 ml-7 text-center">
-          {descripcion}
-        </p>
-      </div>
-    </div>
+
+            <div className="font-bold text-center text-2xl mb-2">{nombreMay}</div>
+            <hr className="w-1/2 border-gray-300 my-2 shadow-sm" />
+            <p className="text-gray-700 text-base mr-7 ml-7 text-center">
+              {descripcion}
+            </p>
+          </div>
+        </div>
 
 
 
@@ -53,7 +53,7 @@ const CardCarruselnicio = ({ nombre, descripcion, foto,alte }) => {
       )
       }
 
-      
+
     </div >
   );
 }
