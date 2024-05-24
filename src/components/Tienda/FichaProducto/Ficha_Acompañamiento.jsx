@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import Contador from "./Contador";
-import Image from "next/image";
 
+import Image from "next/image";
+import BotonesFicha from "./BotonesFicha";
 const Ficha_Acompañamiento = ({
   id_producto,
   nombre,
@@ -14,145 +14,105 @@ const Ficha_Acompañamiento = ({
   mercadoLibre,
   descripcion,
   cantidad,
-  cantidadOficial
+  cantidadOficial,
 }) => {
   return (
     <div>
       <div className="flex justify-center w-full">
         <div
-          className="flex justify-between relative bg-white w-[80%] h-[550px]  rounded-lg shadow-2xl  
-         sm:h-[750px] sm:w-[80%]
-          md:h-auto  md:w-[80%]
-          lg:h-auto lg:w-[80%]
-          2xl:h-auto  2xl:w-[80%]"
+          className=" bg-white rounded-lg shadow-2xl 
+             w-[300px] h-[780px] 
+          sm:h-[865px] sm:w-[450px]
+          md:h-[400px]  md:w-[650px] 
+          lg:h-[500px]  lg:w-[800px]  
+          xl:h-[550px]  xl:w-[850px]   
+          2xl:h-[550px]   2xl:w-[1000px] "
         >
           {/*imagen acompañamientos*/}
-          <div className="mt-10">
+          <div className=" flex justify-center align-middle">
             <Image
-              className=" rounded-md translate-x-[40%]  absolute
-               sm:mt-4 sm:translate-x-32 sm:w-[250px] sm:absolute
-               md:mt-20 md:ml-2 md:translate-x-0 md:w-[200px]  md:h-[200px] 
-               lg:-mt-24 lg:py-12  lg:translate-x-10  lg:h-[350px] 
-               2xl:-mt-20 2xl:translate-x-28 2xl:h-[350px] 2xl:ml-10"
+              className=" rounded-md object-fill
+               sm:mt-10 sm:w-[220px]  sm:translate-x-5            sm:h-[300px] sm:object-fill
+               md:w-[200px]  md:-translate-x-52 md:-translate-y-5 md:h-[300px] md:object-fill
+               lg:w-[300px]  lg:-translate-x-60                    lg:h-[400px] lg:object-fill
+                xl:w-[350px]  xl:-translate-x-60                   xl:h-[450px] xl:object-fill
+               2xl:w-[320px]  2xl:-translate-x-72     2xl:mt-20             2xl:h-[400px] 2xl:object-fill "
               src={foto}
-              width={170}
-              height={320}
+              width={130}
+              height={200}
               quality={100}
-              alt="Acompañamientos"
+              alt="Botellas"
             />
           </div>
-
           {/*información */}
           <div
-            className="w-full px-12  translate-y-[50%] 
-             sm:translate-y-[50%] 
-             md:translate-y-0  
-             lg:translate-y-0 
-             2xl:translate-y-0"
+            className="w-full flex  mt-28
+               translate-x-2 justify-center
+             sm:translate-x-0 sm:justify-center sm:mt-32
+             md:translate-x-28 md:justify-center md:-translate-y-[450px]
+
+             lg:translate-x-40 lg:justify-center lg:-translate-y-[490px]
+             xl:translate-x-44 xl:justify-center xl:-translate-y-[500px]
+             2xl:translate-x-36 2xl:justify-center 2xl:-translate-y-[490px]"
           >
-            <div
-              className="w-full flex justify-end -mt-10
-             sm:mt-10 sm:-translate-x-4
-             md:translate-x-12 md:mt-20
-             lg:mt-10
-             2xl:-translate-x-10 2xl:-translate-y-10"
-            >
-              <div className="text-black mt-4">
-                <strong
-                  className="text-xl 
+            <div className="text-black mt-4">
+              <strong
+                className="text-xl 
                 sm:text-xl 
                 md:text-2xl 
                 lg:text-3xl
                 2xl:text-4xl"
-                >
-                  {nombre}
-                  <span
-                    className=" ml-3  text-xl 
+              >
+                {nombre}
+                <span
+                  className=" ml-3  text-sm 
                   sm:text-xl 
                   md:text-2xl 
                   lg:text-2xl"
-                  >
-                    {gr} gr
-                  </span>
-                </strong>
+                >
+                  {gr} gr
+                </span>
+              </strong>
 
-                <p className="  font-bold text-3xl mt-2 text-green-700">
-                  ${precio}
-                </p>
-                <p className="  font-thin text-xs"> IVA INCLUIDO</p>
+              <p className="  font-bold text-2xl mt-2 text-green-700">
+                ${precio}
+              </p>
+              <p className="  font-thin text-xs"> IVA INCLUIDO</p>
 
-                <p className=" text-xl  text-black font-light mt-7 ">
-                  Marca:
-                  <span className=" ml-3 text-xl text-[#F70073] font-light">
-                    {marca}
-                  </span>
-                </p>
+              <p className=" text-xl  text-black font-light mt-7 ">
+                Marca:
+                <span className=" ml-3 text-xl text-[#F70073] font-light">
+                  {marca}
+                </span>
+              </p>
 
-                <p className=" text-xl  text-black font-light mt-2">
-                  Existencia:
-                  <span className=" ml-3 text-xl text-[#F70073] font-light">
-                    {cantidadOficial}
-                  </span>
-                </p>
+              <p className=" text-xl  text-black font-light mt-2">
+                Existencia:
+                <span className=" ml-3 text-xl text-[#F70073] font-light">
+                  {cantidadOficial}
+                </span>
+              </p>
 
-                {/*botones*/}
-                <div className=" justify-center items-center mt-2">
-                  {cantidad !== 0 ? (
-                    <div className=" relative flex items-center ">
-                      <div>
-                        <Contador
-                          cantidad2={cantidad}
-                          id_producto={id_producto}
-                          nombre={nombre}
-                          marca={marca}
-                          precio={precio}
-                          imagen={foto}
-                          mercadoLibre={mercadoLibre}
-                          ml={gr}
-                        ></Contador>
-                      </div>
-                    </div>
-                  ) : (
-                    <p
-                      className=" relative w-48  mt-2 bg-red-600 text-white font-semibold text-center
-                           sm:w-72 sm:text-center  
-                           md:w-80 md:text-center
-                           lg:w-56 lg:text-center 
-                           2xl:w-72 "
-                    >
-                      SIN EXISTENCIA
-                    </p>
-                  )}
-
-                  <div className="relative mt-3">
-                    {mercadoLibre !== "NULL" && (
-                      <button
-                        className="bg-[#ffe500] hover:shadow-lg hover:-translate-y-0.5 text-black font-bold  
-                           translate-x-20 -translate-y-0 rounded  flex items-center 
-                           sm:py-2.5 sm:px-2 sm:translate-x-48 sm:-translate-y-[68px]
-                           md:py-0 md:px-14 md:-translate-y-1  md:translate-x-0
-                           lg:py-0 lg:px-20 lg:-translate-y-1 lg:translate-x-0
-                           2xl:py-0 2xl:px-48 2xl:-translate-y-1  2xl:translate-x-0"
-                      >
-                        <a
-                          href={mercadoLibre}
-                          target="_blank"
-                          className="font-semibold  hidden
-                            sm:block sm:text-sm
-                            md:block 
-                            lg:block
-                            2xl:block"
-                        >
-                          Comprar en mercado libre
-                        </a>
-                        <img
-                          className="w-10 h-9 rounded-lg"
-                          src="\emoticons\mercado_libre_logo.webp"
-                          alt="Mercado Libre"
-                        />
-                      </button>
-                    )}
-                  </div>
+              {/*botones*/}
+              <div
+                className="flex justify-center items-center mt-5
+                sm:justify-center
+                md:justify-center
+                lg:justify-center
+                xl:justify-center
+                2xl:justify-center"
+              >
+                <div>
+                  <BotonesFicha
+                    cantidad2={cantidad}
+                    id_producto={id_producto}
+                    nombre={nombre}
+                    marca={marca}
+                    precio={precio}
+                    imagen={foto}
+                    ml={gr}
+                    mercadoLibre={mercadoLibre}
+                  ></BotonesFicha>
                 </div>
               </div>
             </div>
@@ -161,7 +121,14 @@ const Ficha_Acompañamiento = ({
       </div>
       {/*descripcion*/}
       <div className="flex justify-center w-full">
-        <div className=" w-[80%] rounded-lg shadow-2xl bg-white p-4 mt-4">
+        <div
+          className=" w-[80%] rounded-lg shadow-2xl bg-white p-4 mt-4
+          sm:h-auto sm:w-[450px]
+          md:h-auto  md:w-[650px] 
+          lg:h-auto  lg:w-[800px]  
+          xl:h-auto xl:w-[850px] 
+          2xl:h-auto   2xl:w-[1000px]"
+        >
           <h3 className="text-[#F70073] font-bold">DESCRIPCIÓN</h3>
           <h3 className=" mt-2 text-justify mx-4">{descripcion}</h3>
         </div>
