@@ -54,26 +54,25 @@ const Promociones = () => {
 
   return (
 
-    <div className="h-screen flex flex-col lg:flex-row ">
-      <div className="lg:w-1/2 lg:bg-transparent bg-white justify-center items-center -z-0 " ref={ref}>
+    <div className="h-screen sm:h-screen md:h-screen flex flex-col lg:flex-row ">
+      <div className="lg:w-1/2 lg:bg-transparent bg-white justify-center items-center -z-0  " ref={ref}>
         <motion.div
           className={berkshire.className}
           initial="hidden"
           animate={controls}
           variants={titleVariants}
         >
-          <p className="text-[#f70073] text-4xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-7xl mt-20  text-center ">{'"'}Siente el alma de México</p>
-          <p className="text-black text-4xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-7xl  text-center ">en tu paladar{'"'}</p>
-          <div className="w-3/4 my-4 flex items-center justify-end ">
-            <hr className="m-0 border-t-4 border-black w-1/2" />
+          <p className="text-[#f70073] text-4xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-7xl mt-20  text-center mx-2 sm:mx-2 md:mx-2 lg:mx-5 xl:mx-5 2xl:mx-5 ">{'"'}Siente el alma de México</p>
+          <p className="text-black text-4xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-7xl  text-center mx-2 sm:mx-2 md:mx-2 lg:mx-5 xl:mx-5 2xl:mx-5 ">en tu paladar{'"'}</p>
+          <div className="w-full my-4 flex items-center justify-center ">
+            <hr className="m-0 border-t-4 border-black w-1/2 mx-2 sm:mx-2 md:mx-2 lg:mx-5 xl:mx-5 2xl:mx-5" />
           </div>
         </motion.div>
      
-        <p className="text-black text-base sm:text-xl md:text-xl lg:text-xl 2xl:text-xl ml-10 sm:ml-36 md:ml-56 lg:ml-20 xl:ml-52 2xl:ml-52 text-justify mt-5 animate-fade-up animate-once">Nuestros productos son el reflejo de la </p>
-        <p className="text-black text-base sm:text-xl md:text-xl lg:text-xl 2xl:text-xl ml-10 sm:ml-36 md:ml-56 lg:ml-20 xl:ml-52 2xl:ml-52 text-justify animate-fade-up animate-once ">riqueza y la diversidad de nuestra </p>
-        <p className="text-black text-base sm:text-xl md:text-xl lg:text-xl 2xl:text-xl ml-10 sm:ml-36 md:ml-56 lg:ml-20 xl:ml-52 2xl:ml-52 text-justify animate-fade-up animate-once">cultura. Descubre nuestros productos </p>
-        <p className="text-black text-base sm:text-xl md:text-xl lg:text-xl 2xl:text-xl ml-10 sm:ml-36 md:ml-56 lg:ml-20 xl:ml-52 2xl:ml-52 text-justify font-bold  animate-fade-up animate-once"> más vendidos. </p>
+        <p className="text-black text-base sm:text-xl md:text-xl lg:text-xl 2xl:text-xl mx-16 sm:mx-10 md:mx-10 lg:mx-40 xl: xl:mx-40 2xl:mx-40 text-justify mt-5 animate-fade-up animate-once ">Nuestros productos son el reflejo de la riqueza y la diversidad de nuestra cultura. Descubre nuestros productos 
 
+        <span className="font-bold"> más vendidos.</span>
+        </p>
         <Link
           href="\tienda"
           className=" mt-10 mx-auto block w-full text-center text-lg font-bold text-gray-100 bg-[#f70073] hover:bg-[#e39abd] hover:scale-105 hover:shadow-lg md:w-48 py-3 px-6 rounded-full"
@@ -98,7 +97,7 @@ const Promociones = () => {
             return (
               <div key={producto.id} className="m-4 p-4 bg-white bg-opacity-75 rounded-lg ">
                 <Link href="\tienda">
-                  <h2 className={`font-semibold ${tamaño} animate-jump-in animate-once`}>#{index + 1}. {producto.nombre}</h2>
+                  <h2 className={`font-semibold ${tamaño} animate-jump-in animate-once text-center`}>#{index + 1}. {producto.nombre}</h2>
                 </Link>
               </div>
             );
@@ -113,7 +112,7 @@ const Promociones = () => {
           alt="Promoción"
           width={1000}
           height={1000}
-          className="max-w-full max-h-full z-50 md:w-[700px] -translate-y-6 md:translate-x-14"
+          className="max-w-full max-h-full z-50 md:w-[700px] -translate-y-14 md:translate-x-14"
         />
 
 
