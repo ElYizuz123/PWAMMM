@@ -56,7 +56,7 @@ const CarruselInicio = () => {
           // Cuando el ancho de la pantalla sea igual o superior a 300px
           300: {
             slidesPerView: 1, // Mostrar 2 slides
-            spaceBetween: 2, // Espacio entre slides
+            // Espacio entre slides
 
           },
           768: {
@@ -80,7 +80,7 @@ const CarruselInicio = () => {
       >
         {eventos && eventos.map((evento, index) => {
           return (
-            <div className="bg-gray-600 p-10 my-10" key={evento.id_evento}> {/*De llave se asigna el id del evento*/}
+            <div className="bg-gray-600 p-10 my-10   " key={evento.id_evento}> {/*De llave se asigna el id del evento*/}
               <SwiperSlide key={evento.id_evento}>
                 <CardCarruselnicio
                   nombre={evento.nombre}
